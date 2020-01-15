@@ -7,18 +7,28 @@ import { AppComponent } from './app.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { ErrorComponent } from './components/error/error.component';
 import { LoginComponent } from './components/login/login.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { PbaseComponent } from './components/pbase/pbase.component';
+import { SaccesoComponent } from './components/sacceso/sacceso.component';
+import { PventaComponent } from './components/pventa/pventa.component';
+import { NavegacionComponent } from './components/navegacion/navegacion.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MenuComponent,
     ErrorComponent,
-    LoginComponent
+    LoginComponent,
+    PbaseComponent,
+    SaccesoComponent,
+    PventaComponent,
+    NavegacionComponent
   ],
   imports: [
     BrowserModule,
     routing,
-    FormsModule
+    FormsModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent, appRoutingProviders]

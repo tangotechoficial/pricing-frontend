@@ -6,12 +6,19 @@ import { Routes, RouterModule } from '@angular/router';
 import { MenuComponent } from './components/menu/menu.component';
 import { LoginComponent } from './components/login/login.component';
 import { ErrorComponent } from './components/error/error.component';
+import { PbaseComponent } from './components/pbase/pbase.component';
+import { SaccesoComponent } from './components/sacceso/sacceso.component';
+import { PventaComponent } from './components/pventa/pventa.component';
 
 /* Routes Array */
 const appRoutes: Routes = [
-    { path: '', component: LoginComponent },
+    { path: 'login', component: LoginComponent},
     { path: 'menu', component: MenuComponent},
-    { path: '**', component: ErrorComponent}
+    { path: 'pbase', component: PbaseComponent},
+    { path: 'sacceso', component: SaccesoComponent},
+    { path: 'pventa', component: PventaComponent},
+    { path: '', redirectTo: '/login', pathMatch: 'full'},
+    { path: '**', component: ErrorComponent},
 ]
 
 /* Export router module */

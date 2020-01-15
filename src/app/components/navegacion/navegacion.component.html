@@ -1,0 +1,8 @@
+<ul *ngIf="isLoggedIn">
+    <p>{{currentUrl}}</p>
+    <li><a [routerLink]="['/menu']">Inicio</a></li>
+    <li><a [routerLink]="['/pbase']">Precio Base</a></li>
+    <li><a [routerLink]="['/pventa']">Precio Venta</a></li>
+    <li><a [routerLink]="['/sacceso']">Secuencia Acceso</a></li>
+    <li><a [routerLink]="['/menu']">Grow Datalab</a></li>
+</ul>
