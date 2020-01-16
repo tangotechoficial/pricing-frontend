@@ -1,0 +1,40 @@
+.login-background {
+    background: rgb(244,245,247);
+    background: linear-gradient(186deg, rgba(244,245,247,1) 0%, rgba(223,225,227,1) 31%, rgba(201,203,206,1) 100%);
+    min-height: 100vh;
+}
+
+.button-login {
+    background:#4270C1;
+    border-color: #4270C1;
+}
+
+input::placeholder{
+    color: #4270C1;
+  }
+
+.login-title {
+    font-family: 'Raleway', sans-serif;
+    text-align: center;
+    color: #4270C1;
+}
+
+.login-header {
+    height: 150px;
+}
+
+.login-input-label {
+    color: #939495;
+    font-weight: 500;
+}
+
+.login-link {
+    color: #939495;
+    font-weight: 500;
+    text-decoration: underline;
+    text-align: center;
+}
+
+.login-center {
+    text-align: center;
+}

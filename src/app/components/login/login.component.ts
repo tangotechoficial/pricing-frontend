@@ -1,8 +1,6 @@
 /* Libraries */
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 
 /* Models */
 import { User } from '../../models/user';
@@ -16,7 +14,6 @@ import { User } from '../../models/user';
 
 /* Class definition */
 export class LoginComponent implements OnInit {
-  public faCoffee = faCoffee;
   public _user: User;
 
   constructor(
@@ -26,12 +23,12 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this._user = new User('', '');
+    this._user = new User('', '', '');
   }
 
   onSubmit(){
     /* Login form request */
-    console.log("Soy una peticion :D y te traje estos valores del formulario : ", this._user);
+    console.log({_user: this._user})
     this._router.navigate(['/menu']);
 
   }
