@@ -1,8 +1,17 @@
-<ul *ngIf="isLoggedIn">
-    <p>{{currentUrl}}</p>
-    <li><a [routerLink]="['/menu']">Inicio</a></li>
-    <li><a [routerLink]="['/pbase']">Precio Base</a></li>
-    <li><a [routerLink]="['/pventa']">Precio Venta</a></li>
-    <li><a [routerLink]="['/sacceso']">Secuencia Acceso</a></li>
-    <li><a [routerLink]="['/menu']">Grow Datalab</a></li>
-</ul>
+<div class="container">
+    <ul *ngIf="isLoggedIn">
+        <p>{{currentUrl}}</p>
+        <li><a [routerLink]="['/menu']">Inicio</a></li>
+        <li><a [routerLink]="['/pbase']">Precio Base</a></li>
+        <li><a [routerLink]="['/pventa']">Precio Venta</a></li>
+        <li><a [routerLink]="['/sacceso']">Secuencia Acceso</a></li>
+        <li><a [routerLink]="['/menu']">Grow Datalab</a></li>
+    </ul>
+    <div class="pos-f-t">
+        <nav class="navbar navbar">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </nav>
+      </div>
+</div>
