@@ -1,22 +1,37 @@
-.text {
+*:not(.fas) {
+    font-family: 'Raleway', sans-serif;
     color: #858585;
-    letter-spacing: 0.03em;
-    font-size: 0.8rem;
+}
+
+.text-header {
+    font-weight: 800;
 }
 
 .container {
     background-color: #f5f5f5;
 }
-
-input {
-    letter-spacing: 0.03em;
-    font-size: 0.8rem;
+.options-list {
+    background-color: #fff;
+}
+.list-header {
+border-bottom: 3px solid #F7F7F7;
 }
 
 ul {
     list-style: none;
-    background-color: #fff;
-    border-radius: 0.4rem;
+    max-height: 30vh;   
+}
+
+.btn-danger {
+    width: 20px;
+}
+
+i {
+    color: #fff;
+}
+
+.custom-text-muted {
+    color: #BEC0C6;
 }
 
 .custom-input {
@@ -25,11 +40,15 @@ ul {
     opacity: 0;
 }
 
-.custom-label::before {
+.custom-control {
+    padding-left: 1rem;
+}
+
+.custom-checkbox .custom-control-label::before {
     border-radius: .25rem;
 }
 
-.custom-label::before {
+.custom-control-label::before {
     position: absolute;
     top: .25rem;
     left: 0;
@@ -42,10 +61,10 @@ ul {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    background-color: #dee2e6
+    background-color: #dee2e6;
 }
 
-.custom-label::after {
+.custom-control-label::after {
     position: absolute;
     top: .25rem;
     left: 0;
@@ -56,4 +75,48 @@ ul {
     background-repeat: no-repeat;
     background-position: center center;
     background-size: 50% 50%;
+}
+
+.custom-control-input:checked~.custom-control-label::before {
+    border-color: #009966;
+    background-color: #009966;
+}
+
+.custom-checkbox .custom-control-input:checked~.custom-control-label::after {
+    background-image: none;
+}
+
+.custom-scrollbar-css {
+    height: 200px;
+  }
+  
+  
+  /* Custom Scrollbar using CSS */
+  .custom-scrollbar-css {
+    overflow-y: scroll;
+  }
+  
+  /* scrollbar width */
+  .custom-scrollbar-css::-webkit-scrollbar {
+    width: 0.8rem;
+  }
+  
+  /* scrollbar track */
+  .custom-scrollbar-css::-webkit-scrollbar-track {
+    background: #eee;
+  }
+  
+  /* scrollbar handle */
+  .custom-scrollbar-css::-webkit-scrollbar-thumb {
+    border-radius: 1rem;
+    background-color: #384461;
+  }
+
+  .button-save {
+    background:#4270C1;
+    border-color: #4270C1;
+}
+
+.btn-primary:hover {
+    color: #fff;
 }
