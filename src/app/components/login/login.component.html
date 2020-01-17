@@ -1,4 +1,7 @@
 <div class="login-background">
+    <div class="login-banner">
+        <img class="img-fluid" src="/assets/img/login-logo-banner.jpg" alt="">
+    </div>
     <div class="container">
         <div class="login-header"></div>
         <div class="row">
@@ -9,20 +12,18 @@
                         <div style="display:inline">
                             <label class="login-input-label">E-mail</label>
                             <div class="input-group">
-                                <input class="form-control" type="text" name="userName" #password="ngModel"
+                                <input class="form-control" type="text" name="userName" #userName="ngModel"
                                     [(ngModel)]="_user.userName" placeholder="&#xf1fa;"
-                                    style="font-family:Arial, FontAwesome; color: #4270C1" />
+                                    />
                             </div>
                         </div>
                     </div>
                     <div login="form-group">
                         <label class="login-input-label">Senha</label>
                         <div class="input-group">
-                            <input class="form-control" placeholder="&#xf023;"
-                                style="font-family:Arial, FontAwesome; color: #4270C1" type="password" name="password"
+                            <input class="form-control" placeholder="&#xf023;" type="password" name="password"
                                 #password="ngModel" [(ngModel)]="_user.password" />
                         </div>
-                        <i class="fal fa fa-quidditch"></i>
                     </div>
                     <br />
                     <div class="row justify-content-md-center">

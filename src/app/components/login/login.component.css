@@ -1,6 +1,7 @@
 .login-background {
-    background: rgb(244,245,247);
-    background: linear-gradient(186deg, rgba(244,245,247,1) 0%, rgba(223,225,227,1) 31%, rgba(201,203,206,1) 100%);
+    background: #F1F2F3;
+
+    /* background: linear-gradient(200deg, #F1F2F4 0%, #F1F2F4 60%, rgba(201,203,206,1) 100%); */
     min-height: 100vh;
 }
 
@@ -10,6 +11,7 @@
 }
 
 input::placeholder{
+    font-family:Arial, FontAwesome; 
     color: #4270C1;
   }
 
@@ -37,4 +39,14 @@ input::placeholder{
 
 .login-center {
     text-align: center;
+}
+
+.login-banner {
+    background: #4170C0;
+    height: 25px;
+}
+
+.login-banner img {
+    display : block;
+    margin : auto;
 }
