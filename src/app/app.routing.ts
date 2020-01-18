@@ -9,6 +9,7 @@ import { ErrorComponent } from './components/error/error.component';
 import { PbaseComponent } from './components/pbase/pbase.component';
 import { SaccesoComponent } from './components/sacceso/sacceso.component';
 import { PventaComponent } from './components/pventa/pventa.component';
+import { CondicionComponent } from './components/condicion/condicion.component';
 
 /* Routes Array */
 const appRoutes: Routes = [
@@ -17,6 +18,7 @@ const appRoutes: Routes = [
     { path: 'pbase', component: PbaseComponent},
     { path: 'sacceso', component: SaccesoComponent},
     { path: 'pventa', component: PventaComponent},
+    { path: 'condicion', component: CondicionComponent},
     { path: '', redirectTo: '/login', pathMatch: 'full'},
     { path: '**', component: ErrorComponent},
 ]
