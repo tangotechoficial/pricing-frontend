@@ -1,0 +1,18 @@
+* {
+    font-family: 'Raleway', sans-serif;
+    color: #858585;
+}
+
+body {
+    background: #F1F2F3;
+}
+
+.container {
+    height: 50vh;
+}
+
+button#dropdownMenuButton {
+    background-color: white;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+}

@@ -88,14 +88,16 @@ i {
 
 .custom-scrollbar-css {
     height: 200px;
+    /*styles for Firefox*/
+    scrollbar-color: #384461  #eee;
+    scrollbar-width: thin;
   }
-  
-  
-  /* Custom Scrollbar using CSS */
+
   .custom-scrollbar-css {
     overflow-y: scroll;
   }
   
+  /*-----styles for Chrome and Safari-----*/
   /* scrollbar width */
   .custom-scrollbar-css::-webkit-scrollbar {
     width: 0.8rem;

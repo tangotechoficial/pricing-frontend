@@ -13,6 +13,7 @@ import { SaccesoComponent } from './components/sacceso/sacceso.component';
 import { PventaComponent } from './components/pventa/pventa.component';
 import { NavegacionComponent } from './components/navegacion/navegacion.component';
 import { CondicionComponent } from './components/condicion/condicion.component';
+import { PbaseseleccionComponent } from './components/pbase/pbaseseleccion/pbaseseleccion.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { CondicionComponent } from './components/condicion/condicion.component';
     SaccesoComponent,
     PventaComponent,
     NavegacionComponent,
-    CondicionComponent
+    CondicionComponent,
+    PbaseseleccionComponent
   ],
   imports: [
     BrowserModule,
