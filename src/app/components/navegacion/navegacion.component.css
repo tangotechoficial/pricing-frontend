@@ -1,0 +1,10 @@
+.dropdown-menu.show :after {
+    position: absolute;
+    top: -15px;
+    left: 20px;
+    content: "";
+    display: block;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-bottom: 20px solid white;
+  }

@@ -1,17 +1,26 @@
 <div class="container">
-    <ul *ngIf="isLoggedIn">
+    <ul *ngIf="isLoggedIn" class="nav">
         <p>{{currentUrl}}</p>
-        <li><a [routerLink]="['/menu']">Inicio</a></li>
-        <li><a [routerLink]="['/pbase']">Precio Base</a></li>
-        <li><a [routerLink]="['/pventa']">Precio Venta</a></li>
-        <li><a [routerLink]="['/sacceso']">Secuencia Acceso</a></li>
-        <li><a [routerLink]="['/menu']">Grow Datalab</a></li>
+        <li class="nav-item">
+            <div class="dropdown">
+                <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="fas fa-bars" style="color: #4270C1" aria-hidden="true"></span>&nbsp;Menu
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" href="#">Action</a>
+                  <a class="dropdown-item" href="#">Another action</a>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+              </div>
+          <!-- <a class="btn btn-light" [routerLink]="['/menu']">
+            <span class="fas fa-bars" style="color: #4270C1" aria-hidden="true"></span>&nbsp;Menu
+          </a> -->
+        </li>
+        <li class="nav-item"><a class="nav-link" [routerLink]="['/pbase']">Precio Base</a></li>
+        <li class="nav-item"><a class="nav-link" [routerLink]="['/pventa']">Precio Venta</a></li>
+        <li class="nav-item"><a class="nav-link" [routerLink]="['/sacceso']">Secuencia Acceso</a></li>
+        <li class="nav-item"><a class="nav-link" [routerLink]="['/menu']">Grow Datalab</a></li>
     </ul>
-    <div class="pos-f-t">
-        <nav class="navbar navbar">
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-        </nav>
-      </div>
+
+    
 </div>
