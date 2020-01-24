@@ -8,13 +8,13 @@ import { MenuComponent } from './components/menu/menu.component';
 import { ErrorComponent } from './components/error/error.component';
 import { LoginComponent } from './components/login/login.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { PbaseComponent } from './components/pbase/pbase.component';
-import { SaccesoComponent } from './components/sacceso/sacceso.component';
-import { PventaComponent } from './components/pventa/pventa.component';
 import { NavegacionComponent } from './components/navegacion/navegacion.component';
+import { PbaseseleccionComponent } from './components/precio/pbaseseleccion/pbaseseleccion.component';
+import { PrecioElement } from './components/precio/precioelement/precioelement.component';
+import { PrecioBaseComponent } from './components/precio/preciobase/preciobase.component';
+import { PrecioVentaComponent } from './components/precio/precioventa/precioventa.component';
+import { SaccesoComponent } from './components/sacceso/sacceso.component';
 import { CondicionComponent } from './components/condicion/condicion.component';
-import { PbaseseleccionComponent } from './components/pbase/pbaseseleccion/pbaseseleccion.component';
-import { PbaseElement } from './components/pbase/pbaseelement/pbaseelement.component';
 
 @NgModule({
   declarations: [
@@ -22,13 +22,13 @@ import { PbaseElement } from './components/pbase/pbaseelement/pbaseelement.compo
     MenuComponent,
     ErrorComponent,
     LoginComponent,
-    PbaseComponent,
-    SaccesoComponent,
-    PventaComponent,
     NavegacionComponent,
-    CondicionComponent,
     PbaseseleccionComponent,
-    PbaseElement
+    PrecioElement,
+    PrecioBaseComponent,
+    PrecioVentaComponent,
+    SaccesoComponent,
+    CondicionComponent,
   ],
   imports: [
     BrowserModule,

@@ -6,20 +6,20 @@ import { Routes, RouterModule } from '@angular/router';
 import { MenuComponent } from './components/menu/menu.component';
 import { LoginComponent } from './components/login/login.component';
 import { ErrorComponent } from './components/error/error.component';
-import { PbaseComponent } from './components/pbase/pbase.component';
+import { PrecioBaseComponent } from './components/precio/preciobase/preciobase.component';
+import { PrecioVentaComponent } from './components/precio/precioventa/precioventa.component';
 import { SaccesoComponent } from './components/sacceso/sacceso.component';
-import { PventaComponent } from './components/pventa/pventa.component';
 import { CondicionComponent } from './components/condicion/condicion.component';
-import { PbaseseleccionComponent } from './components/pbase/pbaseseleccion/pbaseseleccion.component';
+import { PbaseseleccionComponent } from './components/precio/pbaseseleccion/pbaseseleccion.component';
 
 /* Routes Array */
 const appRoutes: Routes = [
     { path: 'login', component: LoginComponent},
     { path: 'menu', component: MenuComponent},
     { path: 'pbaseseleccion', component: PbaseseleccionComponent},
-    { path: 'pbase', component: PbaseComponent},
+    { path: 'preciobase', component: PrecioBaseComponent},
+    { path: 'precioventa', component: PrecioVentaComponent},
     { path: 'sacceso', component: SaccesoComponent},
-    { path: 'pventa', component: PventaComponent},
     { path: 'condicion', component: CondicionComponent},
     { path: '', redirectTo: '/login', pathMatch: 'full'},
     { path: '**', component: ErrorComponent},
