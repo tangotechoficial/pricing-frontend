@@ -10,6 +10,13 @@ import { Location } from "@angular/common";
 export class NavegacionComponent implements OnInit {
   public isLoggedIn: boolean = false
   public currentUrl: string;
+  private mapUrlToSection = {
+    "/menu": "Inicio",
+    "/preciobase": "Precio Base",
+    "/precioventa": "Precio Venta",
+    "/sacceso": "Sequencia de Acesso"
+  }
+  public section: string;
   constructor(
     private _router: Router,
     private _route: ActivatedRoute,
@@ -18,7 +25,7 @@ export class NavegacionComponent implements OnInit {
 
   ngOnInit() {
     this._route.url.subscribe(url => {
-      console.log(location);
+      this.section = this.mapUrlToSection[location.pathname]
       if(location.pathname != "/login"){
         this.isLoggedIn = true;
       }else{
