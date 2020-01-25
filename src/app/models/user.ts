@@ -4,9 +4,8 @@ export class User {
     constructor(
 
         /* Properties */
-        public name: string,
+        public email: string,
         public password: string,
-        public userName: string,
 
     ) { }
 }

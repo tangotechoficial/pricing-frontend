@@ -13,7 +13,7 @@
                             <label class="login-input-label">E-mail</label>
                             <div class="input-group">
                                 <input class="form-control" type="text" name="userName" #userName="ngModel"
-                                    [(ngModel)]="_user.userName" placeholder="&#xf1fa;"
+                                    [(ngModel)]="_user.email" placeholder="&#xf1fa;"
                                     />
                             </div>
                         </div>
@@ -29,7 +29,7 @@
                     <div class="row justify-content-md-center">
                         <div class="col-md-8">
                             <div class="form-group">
-                                <input type="submit" class="btn btn-primary btn-block button-login" value="Entrar">
+                                <input type="submit" (click)="onSubmit()"class="btn btn-primary btn-block button-login" value="Entrar">
                             </div>
                         </div>
                         <div class="col-md-8 login-center">
