@@ -12,9 +12,10 @@ export class NavegacionComponent implements OnInit {
   public currentUrl: string;
   private mapUrlToSection = {
     "/menu": "Inicio",
-    "/preciobase": "Precio Base",
-    "/precioventa": "Precio Venta",
-    "/sacceso": "Sequencia de Acesso"
+    "/preciobase": "Esquema de Cálculo / Precio Base",
+    "/precioventa": "Esquema de Cálculo / Precio Venta",
+    "/sacceso": "Sequencia de Acesso",
+    "/condicion": "Condicion",
   }
   public section: string;
   constructor(

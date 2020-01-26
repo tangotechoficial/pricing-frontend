@@ -7,12 +7,12 @@
         <div class="row">
             <div class="col-md-4 offset-md-4">
                 <h2 class="login-title">Simple<b>Pricing</b></h2>
-                <form #loginForm="ngForm" (ngSubmit)="onSubmit()">
+                <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
                     <div login="form-group">
                         <div style="display:inline">
                             <label class="login-input-label">E-mail</label>
                             <div class="input-group">
-                                <input class="form-control" type="text" name="userName" #userName="ngModel"
+                                <input class="form-control" type="text" name="email" #email="ngModel"
                                     [(ngModel)]="_user.email" placeholder="&#xf1fa;"
                                     />
                             </div>
@@ -32,11 +32,19 @@
                                 <input type="submit" (click)="onSubmit()"class="btn btn-primary btn-block button-login" value="Entrar">
                             </div>
                         </div>
+                        <div *ngIf="_BP" class="col-md-8 alert alert-danger" role="alert">
+                            Senha incorreta 
+                        </div>
+                        <div *ngIf="_BU" class="col-md-8 alert alert-danger" role="alert">
+                            Usuário errado
+                        </div>
                         <div class="col-md-8 login-center">
                             <a href="#" class="login-link">Esqueci minha senha</a>
                         </div>
                     </div>
                 </form>
+
+                
             </div>
         </div>
     </div>

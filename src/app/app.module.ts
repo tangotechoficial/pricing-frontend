@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import { routing, appRoutingProviders } from './app.routing';
 
@@ -33,10 +34,11 @@ import { CondicionComponent } from './components/condicion/condicion.component';
   imports: [
     BrowserModule,
     routing,
+    HttpClientModule,
     FormsModule,
     FontAwesomeModule
   ],
-  providers: [],
-  bootstrap: [AppComponent, appRoutingProviders]
+  providers: [appRoutingProviders],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
