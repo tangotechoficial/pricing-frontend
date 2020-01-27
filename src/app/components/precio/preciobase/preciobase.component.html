@@ -2,10 +2,23 @@
 <navegacion></navegacion>
 
 <!--Component Content -->
-<div class="background">
-    <precio-element titulo="CMV"></precio-element>
-    <precio-element titulo="REGULATORIO"></precio-element>
-    <precio-element titulo="OPERACIONAL"></precio-element>
-    <precio-element titulo="VERBA"></precio-element>
-    <precio-element titulo="MARGEM"></precio-element>
-</div>           
+<!-- Select-->
+<div *ngIf="!isShow">
+    <precio-seleccion></precio-seleccion>
+    <div class="d-flex justify-content-center">
+        <div class="col-2 form-group">
+            <input type="submit" (click)="goToSection()" class="btn btn-primary btn-block button-save" value="Entrar">
+        </div>
+    </div>
+</div>
+
+<!--Main view-->
+<div *ngIf="isShow">
+    <div class="background">
+        <precio-element titulo="CMV"></precio-element>
+        <precio-element titulo="REGULATORIO"></precio-element>
+        <precio-element titulo="OPERACIONAL"></precio-element>
+        <precio-element titulo="VERBA"></precio-element>
+        <precio-element titulo="MARGEM"></precio-element>
+    </div>           
+</div>

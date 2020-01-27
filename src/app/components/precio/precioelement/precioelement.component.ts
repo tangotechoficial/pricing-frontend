@@ -8,8 +8,7 @@ import { Component, Input, Renderer2, ElementRef} from '@angular/core';
 export class PrecioElement {
 
   @Input() titulo: string; 
- 
-
+  
   ngOnInit() {
     //this.getDOMElement();
   }
