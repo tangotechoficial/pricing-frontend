@@ -8,6 +8,8 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 })
 export class PrecioSeleccion implements OnInit {
 
+  public canalDeVentas: string = "Descricao"
+  public lineaDeNegocios: string = "Descricao"
 
   constructor(
     private _router: Router,
@@ -17,6 +19,14 @@ export class PrecioSeleccion implements OnInit {
   ngOnInit() {
   }
 
+  onClickLineaDeNegocio(lineaDeNegocios) {
+    console.log({lineaDeNegocios})
+    this.lineaDeNegocios = lineaDeNegocios
+  }
+
+  onClickCanalDeVentas(canalDeVentas) {
+    this.canalDeVentas = canalDeVentas
+  }
 
 
 }
