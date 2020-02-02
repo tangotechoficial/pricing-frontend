@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PrecioVentaComponent implements OnInit {
   isShow = false;
+  existNegocios: string;
+  existVentas: string;
 
   constructor() { }
 
@@ -15,6 +17,14 @@ export class PrecioVentaComponent implements OnInit {
 
   public goToSection() {
    this.isShow = !this.isShow;
+  }
+
+  parentListener($event){
+    this.existNegocios = $event
+  }
+
+  parentListenerTwo($event){
+    this.existVentas = $event
   }
 
 }

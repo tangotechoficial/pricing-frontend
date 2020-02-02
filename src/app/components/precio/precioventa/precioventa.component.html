@@ -4,10 +4,11 @@
 <!--Component Content -->
 <!-- Select-->
 <div *ngIf="!isShow">
-    <precio-seleccion></precio-seleccion>
+    <precio-seleccion (negociosOutput)="parentListener($event)"
+    (ventasOutput)="parentListenerTwo($event)"></precio-seleccion>
     <div class="d-flex justify-content-center">
         <div class="col-2 form-group">
-            <input type="submit" (click)="goToSection()" class="btn btn-primary btn-block button-save" value="Entrar">
+            <input type="submit" (click)="goToSection()" [disabled]="!existVentas || !existNegocios" class="btn btn-primary btn-block button-save" value="Entrar">
         </div>
     </div>
 </div>

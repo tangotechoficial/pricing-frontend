@@ -10,10 +10,10 @@ import { ErrorComponent } from './components/error/error.component';
 import { LoginComponent } from './components/login/login.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NavegacionComponent } from './components/navegacion/navegacion.component';
-import { PrecioSeleccion } from './components/precio/precioseleccion/precioseleccion.component';
-import { PrecioElement } from './components/precio/precioelement/precioelement.component';
 import { PrecioBaseComponent } from './components/precio/preciobase/preciobase.component';
 import { PrecioVentaComponent } from './components/precio/precioventa/precioventa.component';
+import { PrecioSeleccion } from './components/precio/precioseleccion/precioseleccion.component';
+import { PrecioElement } from './components/precio/precioelement/precioelement.component';
 import { SaccesoComponent } from './components/sacceso/sacceso.component';
 import { CondicionComponent } from './components/condicion/condicion.component';
 
@@ -24,10 +24,10 @@ import { CondicionComponent } from './components/condicion/condicion.component';
     ErrorComponent,
     LoginComponent,
     NavegacionComponent,
-    PrecioSeleccion,
-    PrecioElement,
     PrecioBaseComponent,
     PrecioVentaComponent,
+    PrecioSeleccion,
+    PrecioElement,
     SaccesoComponent,
     CondicionComponent,
   ],
