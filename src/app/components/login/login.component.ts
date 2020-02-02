@@ -8,7 +8,7 @@ import { Global } from './../../services/global';
 @Component({
   selector: 'login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
+  styleUrls: ['./login.component.scss'],
   providers: [LoginService]
 })
 

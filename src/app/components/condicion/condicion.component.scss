@@ -1,5 +1,7 @@
-*:not(.fas) {
-    font-family: 'Raleway', sans-serif;
+//@use '../../../assets/styles/global.scss';
+
+
+*:not(input){
     color: #858585;
 }
 
