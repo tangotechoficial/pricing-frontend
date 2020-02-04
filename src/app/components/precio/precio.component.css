@@ -1,6 +1,9 @@
+*:not(input){
+    color: #858585;
+}
+
 *:not(.fas) {
     font-family: 'Raleway', sans-serif;
-    color: #858585;
 }
 .fa-search {
     color: #858585;

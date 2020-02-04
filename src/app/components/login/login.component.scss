@@ -1,18 +1,19 @@
+@import "../../../assets/styles/mixins-var.scss";
+
 .login-background {
     background: #F1F2F3;
-
     /* background: linear-gradient(200deg, #F1F2F4 0%, #F1F2F4 60%, rgba(201,203,206,1) 100%); */
     min-height: 100vh;
 }
 
 .button-login {
-    background:#4270C1;
-    border-color: #4270C1;
+    background:$martinsBlue;
+    border-color: $martinsBlue;
 }
 
 input::placeholder{
     font-family:Arial, FontAwesome; 
-    color: #4270C1;
+    color: $martinsBlue;
   }
 
 .login-title {
@@ -26,23 +27,18 @@ input::placeholder{
 }
 
 .login-input-label {
-    color: #939495;
+    color: $martinsTextGrey;
     font-weight: 500;
 }
 
 .login-link {
-    color: #939495;
-    font-weight: 500;
+    color: $martinsTextGrey;
     text-decoration: underline;
-    text-align: center;
-}
-
-.login-center {
-    text-align: center;
+    @include center-bold
 }
 
 .login-banner {
-    background: #4170C0;
+    background: $martinsBlue;
     height: 25px;
 }
 

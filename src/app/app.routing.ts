@@ -10,13 +10,12 @@ import { PrecioBaseComponent } from './components/precio/preciobase/preciobase.c
 import { PrecioVentaComponent } from './components/precio/precioventa/precioventa.component';
 import { SaccesoComponent } from './components/sacceso/sacceso.component';
 import { CondicionComponent } from './components/condicion/condicion.component';
-import { PbaseseleccionComponent } from './components/precio/pbaseseleccion/pbaseseleccion.component';
 
 /* Routes Array */
 const appRoutes: Routes = [
     { path: 'login', component: LoginComponent},
     { path: 'menu', component: MenuComponent},
-    { path: 'pbaseseleccion', component: PbaseseleccionComponent},
+//    { path: 'pbaseseleccion', component: PbaseseleccionComponent},
     { path: 'preciobase', component: PrecioBaseComponent},
     { path: 'precioventa', component: PrecioVentaComponent},
     { path: 'sacceso', component: SaccesoComponent},

@@ -6,10 +6,25 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['../../precio/precio.component.css']
 })
 export class PrecioVentaComponent implements OnInit {
+  isShow = false;
+  existNegocios: string;
+  existVentas: string;
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  public goToSection() {
+   this.isShow = !this.isShow;
+  }
+
+  parentListener($event){
+    this.existNegocios = $event
+  }
+
+  parentListenerTwo($event){
+    this.existVentas = $event
   }
 
 }

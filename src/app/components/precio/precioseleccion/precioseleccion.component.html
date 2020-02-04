@@ -1,0 +1,43 @@
+    <div class="container flex-column d-flex align-items-center col-12"> 
+            <div class="row col-6 align-items-center flex-column justify-content-center">
+                <span class="text-header">Seleccione o canal de vendas</span>
+                <div class="dropdown col-6 mt-3">
+                    <button class="col-12 btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{canalDeVentas}}
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <button class="dropdown-item" (click)="onClickCanalDeVentas('Televendas')">Televendas</button>
+                        <button class="dropdown-item" (click)="onClickCanalDeVentas('B2B')">B2B</button>
+                        <button class="dropdown-item" (click)="onClickCanalDeVentas('Presencial')">Presencial</button>
+                    </div>
+                </div>
+                <!-- <label>Simple Select</label>
+                <select class="selectpicker">
+                <option>Male</option>
+                <option>Female</option>
+                </select>
+                <div class="form-group">
+                    <label for="exampleFormControlSelect1">Example select</label>
+                    <select class="form-control form-control-sm" id="exampleFormControlSelect1">
+                      <option>1</option>
+                      <option>2</option>
+                      <option>3</option>
+                      <option>4</option>
+                      <option>5</option>
+                    </select>
+                  </div> -->
+
+            </div>
+            <div class="row col-6 align-items-center flex-column justify-content-center">
+                <span class="text-header">Seleccione a linha de negocio</span>
+                <div class="dropdown col-6 mt-3">
+                    <button class="col-12 btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{lineaDeNegocios}}
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <button class="dropdown-item" (click)="onClickLineaDeNegocio('TEI')">TEI</button>
+                        <button class="dropdown-item" (click)="onClickLineaDeNegocio('ABB')">ABB</button>
+                        <button class="dropdown-item" (click)="onClickLineaDeNegocio('HBL')">HBL</button>
+                        <button class="dropdown-item" (click)="onClickLineaDeNegocio('MTC')">MTC</button>
+                    </div>
+                </div>
+            </div>
+    </div>     
