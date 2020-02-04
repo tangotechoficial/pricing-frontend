@@ -27,14 +27,15 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this._user = new User();
   }
-
-  onSubmit(form) {
+ onSubmit(form) {
     this._loginService.login(this._user)
       .subscribe(
         response => {
-          var user = response.user;
-          this._user = new User(user.sEmail, user.sPassword, user.sName, user.sToken, user.sType, user.bLoggedIn, user.sUser_id, user.iAdmin_p);
+          console.log(response);
+          //var user = response.user;
+          //this._user = new User(user.sEmail, user.sPassword, user.sName, user.sToken, user.sType, user.bLoggedIn, user.sUser_id, user.iAdmin_p);
           this._router.navigate(['/menu']);
+          localStorage.setItem("User", JSON.stringify(this._user));
         },
         error => {
           switch(error.error.error){
