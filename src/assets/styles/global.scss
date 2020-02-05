@@ -1,3 +1,19 @@
+@import './mixins-var.scss';
+
 *:not(.fas) {
     font-family: 'Raleway', sans-serif;
+}
+
+*:not(input){
+    color: $martinsTextGrey;
+}
+
+.text-header {
+    font-weight: 800;
+}
+
+button#dropdownMenuButton {
+    background-color: white;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
 }

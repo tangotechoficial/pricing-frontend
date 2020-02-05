@@ -1,0 +1,25 @@
+@import '../../../assets/styles/global.scss';
+@import '../../../assets/styles/condicion-sacceso.scss';
+@import '../../../assets/styles/mixins-var.scss';
+
+.fa-search {
+    color: $martinsTextGrey;
+    font-size: 1.2rem;
+}
+
+.background {
+    background: #F1F2F3;
+}
+
+.container.rounded {
+    background-color: white;
+}
+
+.btn-secondary {
+    width: 20px;
+}
+
+.btn-secondary:hover{
+    background-color:#dc3545;
+    border-color:#dc3545
+}
