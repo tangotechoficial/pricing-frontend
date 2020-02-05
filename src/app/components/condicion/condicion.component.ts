@@ -1,15 +1,72 @@
 import { Component, OnInit } from '@angular/core';
+import { Sacceso } from '../../models/sacceso';
+import { MetadataService } from './../../services/metadata.service';
+import { SaccesoService } from '../../services/sacceso.service';
+declare var $: any;
 
 @Component({
   selector: 'app-condicion',
   templateUrl: './condicion.component.html',
-  styleUrls: ['./condicion.component.scss']
+  styleUrls: ['./condicion.component.scss'],
+  providers: [MetadataService, SaccesoService]
 })
 export class CondicionComponent implements OnInit {
 
-  constructor() { }
+  public _sacceso: Sacceso;
+  public sequenciasAcceso: Array<any>;
+  public selectedProperties: Array<any>;
+
+  constructor(private _metadataService: MetadataService,
+    private _saccesoService: SaccesoService
+  ) { }
 
   ngOnInit() {
+    this.sequenciasAcceso = new Array<any>();
+    this.selectedProperties = new Array<any>();
+    this._sacceso = new Sacceso();
+    this._metadataService.getMetadata().map(elem => {
+      var elemModel = {
+        'tipo': elem,
+        'selected': false
+      }
+      this.sequenciasAcceso.push(elemModel);
+    })
   }
+
+  public checkValue(tipo){
+
+    this.sequenciasAcceso.map(elem => {
+      if(elem.tipo == tipo){
+        if(elem.selected){
+          elem.selected = false;
+          this.selectedProperties.forEach((elem, index) => {
+            if(elem.tipo == tipo){
+              this.selectedProperties.splice(index, 1);
+            }
+          })
+        }else{
+          elem.selected = true;
+          this.selectedProperties.push(elem);
+        }
+      }
+    })
+
+    var descripcion = '';
+    this.selectedProperties.forEach((elem, index) => {
+      if(index == 0){ 
+        descripcion = descripcion + elem.tipo;
+      }else{
+        descripcion = descripcion + '/' + elem.tipo;
+      }
+    })
+
+    this._sacceso.sDesAcceso = descripcion;
+  }
+
+  onClickRemove(){
+    debugger;
+   this.selectedProperties.splice(this.selectedProperties.findIndex(e => e.tipo === this.selectedProperties[0].tipo),1)
+   console.log(this.selectedProperties)
+}
 
 }

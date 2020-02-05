@@ -8,11 +8,14 @@
             <span class="text-header">Cod. Condicao</span>
             <input class="form-control mt-3" value="TBNC"/>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-3 p-0">
             <span class="text-header">Descricao da condicao</span>
             <input class="form-control mt-3" value="Beneficio customizado"/>
         </div>
-				<div class="col-sm-3">
+        <div class="col-sm-1 mt-5 mb-2 d-flex justify-content-center align-items-center">
+            <i class="fas fa-search"></i> 
+        </div>
+		<div class="col-sm-3">
             <span class="text-header">Descricao da seq. acceso</span>
             <div class="dropdown mt-3">
 							<button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -33,10 +36,10 @@
                 <span class="text-header">Chave de contas</span>
                 <input class="form-control mt-3" placeholder="Chave"/>
             </div>
-        <div class="col-sm-4">
+        <div class="col-sm-3 p-0">
             <span class="text-header">Descricao da chave de contas</span>
             <div class="dropdown mt-3">
-				<button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Descricao
+				<button class="col-12 btn btn-light dropdown-toggle text-left" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Descricao
 				</button>
 				<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 					<a class="dropdown-item" href="#">Testing</a>
@@ -45,11 +48,14 @@
 				</div>
 			</div>
         </div>
+        <div class="col-sm-1 mt-5 mb-2 d-flex justify-content-center align-items-center">
+            <i class="fas fa-search"></i> 
+        </div>
 		<div class="col-sm-2">
             <span class="text-header">Tipo de valor</span>
             <input class="form-control mt-3" value="TBNC"/>
         </div>
-        <div class="col-sm-2 d-flex flex-column justify-content-center align-items-center">
+        <div class="col-2 d-flex flex-column justify-content-center align-items-center">
             <span class="text-header">Escala por qtd.</span>
             <div class="custom-control custom-checkbox mt-2 mb-2">
                 <input type="checkbox" class="custom-control-input" id="checkEscala">
@@ -81,41 +87,11 @@
                 <div class="options-list rounded mt-3">
                     <div class="p-3 list-header custom-text-muted">Pesquise uma sequencia de acesso...</div>
                     <ul class="p-0 custom-scrollbar-css">
-                        <li class="p-2">
+                        <li *ngFor="let seq of sequenciasAcceso; let id = index" class="p-2">
                             <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                <label class="pl-4 custom-control-label" for="customCheck1">Cliente/QuantidadeVendas</label>
+                                <input (change)="checkValue(seq.tipo)" type="checkbox" class="custom-control-input" id="{{id}}">
+                                <label class="pl-4 custom-control-label" for="{{id}}">{{seq.tipo}}</label>
                             </div>
-                        </li>
-                        <li class="p-2">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="customCheck2">
-                                <label class="pl-4 custom-control-label" for="customCheck2">Cliente/Material/Estado</label>
-                            </div>
-                        </li>
-                        <li class="p-2">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="customCheck3">
-                                <label class="pl-4 custom-control-label" for="customCheck3">Material/QuantidadeEstoque</label>
-                            </div>
-                        </li>
-                        <li class="p-2">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="customCheck4">
-                                <label class="pl-4 custom-control-label" for="customCheck4">Material/Estado/Transferencia</label>
-                            </div>
-                        </li>
-                        <li class="p-2">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="customCheck7">
-                                <label class="pl-4 custom-control-label" for="customCheck7">test</label>
-                            </div>    
-                        </li>
-                        <li class="p-2">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="customCheck8">
-                                <label class="pl-4 custom-control-label" for="customCheck9">testing</label>
-                            </div>    
                         </li>
                     </ul>
                 </div>
@@ -126,30 +102,13 @@
                 <div class="options-list rounded mt-3">
                     <div class="p-3 list-header custom-text-muted">Pesquise uma sequencia de acceso...</div>
                     <ul class="p-0 custom-scrollbar-css">
-                        <li class="p-2 w-100 d-flex">
+                        <li *ngFor="let seq of selectedProperties" class="p-2 w-100 d-flex">
                             <div class="d-flex w-100 justify-content-between align-items-center">
-                                <label class="pl-4 mb-0">Cliente/QuantidadeVendas</label>
-                                <button type="button" class="btn btn-labeled btn-danger ml-2 p-0 d-flex flex-column align-items-center">
+                                <label class="pl-4 mb-0">{{seq.tipo}}</label>
+                                <button type="button" (click)="onClickRemove()" class="btn btn-labeled btn-danger ml-2 p-0 d-flex flex-column align-items-center">
                                     <span class="btn-label d-flex align-items-center"><i class="fas fa-times p-0"></i></span>
                                 </button>
                             </div>
-                        </li>
-                        <li class="p-2 w-100 d-flex">
-                            <div class="d-flex w-100 justify-content-between align-items-center">
-                                <label class="pl-4 mb-0">Cliente/Material/Estado</label>
-                                <button type="button" class="btn btn-labeled btn-danger ml-2 p-0 d-flex flex-column align-items-center">
-                                    <span class="btn-label d-flex align-items-center"><i class="fas fa-times p-0"></i></span>
-                                </button>
-                            </div>
-                        </li>
-                        <li class="p-2">
-                            <label class="pl-4">Material/QuantidadeEstoque</label>
-                        </li>
-                        <li class="p-2">
-                            <label class="pl-4">test</label>
-                        </li>
-                        <li class="p-2">
-                            <label class="pl-4">testing</label>
                         </li>
                     </ul>
                 </div>
