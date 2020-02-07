@@ -22,11 +22,11 @@
 								Seleccione una camada
 							</button>
 							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-								<a class="dropdown-item" href="#">CMV [base]</a>
-								<a class="dropdown-item" href="#">Regulatorio [base]</a>
-								<a class="dropdown-item" href="#">Financiero [vendas]</a>
-								<a class="dropdown-item" href="#">Verba [base]</a>
-								<a class="dropdown-item" href="#">Desconto [vendas]</a>
+								<a class="dropdown-item">CMV [base]</a>
+								<a class="dropdown-item">Regulatorio [base]</a>
+								<a class="dropdown-item">Financiero [vendas]</a>
+								<a class="dropdown-item">Verba [base]</a>
+								<a class="dropdown-item">Desconto [vendas]</a>
 						</div>
 					</div>
         </div>
@@ -89,7 +89,7 @@
                     <ul class="p-0 custom-scrollbar-css">
                         <li *ngFor="let seq of sequenciasAcceso; let id = index" class="p-2">
                             <div class="custom-control custom-checkbox">
-                                <input (change)="checkValue(seq.tipo)" type="checkbox" class="custom-control-input" id="{{id}}">
+                                <input (change)="checkValue(seq.tipo)" type="checkbox" class="sacceso-opcion custom-control-input" id="{{id}}">
                                 <label class="pl-4 custom-control-label" for="{{id}}">{{seq.tipo}}</label>
                             </div>
                         </li>

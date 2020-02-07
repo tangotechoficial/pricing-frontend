@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2} from '@angular/core';
 import { Sacceso } from '../../models/sacceso';
 import { MetadataService } from './../../services/metadata.service';
 import { SaccesoService } from '../../services/sacceso.service';
@@ -16,8 +16,10 @@ export class CondicionComponent implements OnInit {
   public sequenciasAcceso: Array<any>;
   public selectedProperties: Array<any>;
 
-  constructor(private _metadataService: MetadataService,
-    private _saccesoService: SaccesoService
+  constructor(
+    private _metadataService: MetadataService,
+    private _saccesoService: SaccesoService,
+    private renderer: Renderer2
   ) { }
 
   ngOnInit() {
@@ -61,12 +63,21 @@ export class CondicionComponent implements OnInit {
     })
 
     this._sacceso.sDesAcceso = descripcion;
+    
   }
 
   onClickRemove(){
-    debugger;
    this.selectedProperties.splice(this.selectedProperties.findIndex(e => e.tipo === this.selectedProperties[0].tipo),1)
    console.log(this.selectedProperties)
-}
+    // this.checkbox = null;
+    //this.sequenciasAcceso[0].selected = false;
+    this.removeCheckbox();
+  }
+
+  removeCheckbox(): void {
+    debugger;
+    let input = this.renderer.selectRootElement('.sacceso-opcion');
+    this.renderer.setProperty(input, 'checked', false); 
+    }
 
 }
