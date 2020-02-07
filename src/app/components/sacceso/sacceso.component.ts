@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Sacceso } from '../../models/sacceso';
 import { MetadataService } from './../../services/metadata.service';
-import { SaccesoService } from 'src/app/services/sacceso.service';
+import { SaccesoService } from './../../services/sacceso.service';
 declare var $: any;
 
 @Component({
