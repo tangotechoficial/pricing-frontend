@@ -3,7 +3,7 @@ import { Component, Input, Renderer2, ElementRef} from '@angular/core';
 @Component({
   selector: 'precio-element',
   templateUrl: './precioelement.component.html',
-  styleUrls: ['../../precio/precio.component.css']
+  styleUrls: ['../../precio/precio.component.scss']
 })
 export class PrecioElement {
 

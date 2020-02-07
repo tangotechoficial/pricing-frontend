@@ -4,7 +4,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 @Component({
   selector: 'precio-seleccion',
   templateUrl: './precioseleccion.component.html',
-  styleUrls: ['./precioseleccion.component.css']
+  styleUrls: ['./precioseleccion.component.scss']
 })
 export class PrecioSeleccion{
 

@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Sacceso } from '../../models/sacceso';
 import { MetadataService } from './../../services/metadata.service';
-import { SaccesoService } from './../../services/sacceso.service';
+import { SaccesoService } from '../../services/sacceso.service';
 declare var $: any;
 
 @Component({
   selector: 'sacceso',
   templateUrl: './sacceso.component.html',
-  styleUrls: ['./sacceso.component.css'],
+  styleUrls: ['./sacceso.component.scss'],
   providers: [MetadataService, SaccesoService]
 })
 export class SaccesoComponent implements OnInit {
