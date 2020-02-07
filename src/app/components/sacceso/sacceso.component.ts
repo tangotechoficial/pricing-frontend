@@ -22,6 +22,18 @@ export class SaccesoComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
+    /*
+      SQ Search Input
+    */
+   var values = ['Cliente', 'Personas'];
+   $('#SQSearch').autocomplete({
+     source: values,
+     onSelected: function(elem){
+       console.log(elem);
+     }
+   });
+
     this.sequenciasAcceso = new Array<any>();
     this.selectedProperties = new Array<any>();
     this._sacceso = new Sacceso();
