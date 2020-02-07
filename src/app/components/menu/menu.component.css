@@ -2,3 +2,10 @@
     background: #f8f9fa;
     height: 100vh;
 }
+
+.alert {
+    display: block;
+    width:40%;
+    margin-left: auto;
+    margin-right: auto;
+ }
