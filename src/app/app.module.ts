@@ -17,6 +17,8 @@ import { PrecioElement } from './components/precio/precioelement/precioelement.c
 import { SaccesoComponent } from './components/sacceso/sacceso.component';
 import { CondicionComponent } from './components/condicion/condicion.component';
 import { AutocompleteInputComponent } from './components/autocomplete-input/autocomplete-input.component';
+import { FilterPipe } from './pipes/filter.pipe';
+import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 
 @NgModule({
   declarations: [
@@ -32,13 +34,15 @@ import { AutocompleteInputComponent } from './components/autocomplete-input/auto
     SaccesoComponent,
     CondicionComponent,
     AutocompleteInputComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
     routing,
     HttpClientModule,
     FormsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    AutocompleteLibModule
   ],
   providers: [appRoutingProviders],
   bootstrap: [AppComponent]

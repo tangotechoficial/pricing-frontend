@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Global } from './global';
 
+
 @Injectable()
 export class MetadataService{
 
@@ -19,4 +20,9 @@ export class MetadataService{
     public getMetadata(){
         return this._aSequenciaAcceso;
     }
+
+    public searchData(value = ""){
+        return this._aSequenciaAcceso.filter(elem => elem.toLowerCase().includes(value.toLowerCase())).slice(0,3);
+    }
+
 }

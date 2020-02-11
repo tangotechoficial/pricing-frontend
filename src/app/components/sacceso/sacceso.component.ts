@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Sacceso } from '../../models/sacceso';
 import { MetadataService } from './../../services/metadata.service';
 import { SaccesoService } from '../../services/sacceso.service';
+import { fromEvent } from 'rxjs';
+import { tap, switchMap } from "rxjs/operators";
+import {AutocompleteLibModule} from 'angular-ng-autocomplete';
+
+
 declare var $: any;
 
 @Component({
@@ -10,11 +15,12 @@ declare var $: any;
   styleUrls: ['./sacceso.component.scss'],
   providers: [MetadataService, SaccesoService]
 })
-export class SaccesoComponent implements OnInit {
 
+export class SaccesoComponent implements OnInit {
   public _sacceso: Sacceso;
   public sequenciasAcceso: Array<any>;
   public selectedProperties: Array<any>;
+  public searchValues: Array<any>;
 
   constructor(
     private _metadataService: MetadataService,
@@ -22,20 +28,9 @@ export class SaccesoComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
-    /*
-      SQ Search Input
-    */
-   var values = ['Cliente', 'Personas'];
-   $('#SQSearch').autocomplete({
-     source: values,
-     onSelected: function(elem){
-       console.log(elem);
-     }
-   });
-
     this.sequenciasAcceso = new Array<any>();
     this.selectedProperties = new Array<any>();
+    this.searchValues = new Array<any>();
     this._sacceso = new Sacceso();
     this._metadataService.getMetadata().map(elem => {
       var elemModel = {
@@ -44,6 +39,24 @@ export class SaccesoComponent implements OnInit {
       }
       this.sequenciasAcceso.push(elemModel);
     })
+  }
+
+  ngAfterViewInit(){ 
+
+    const input:any = document.getElementById('SQSearch');
+    console.log(input);
+
+    const search$ = fromEvent(input, 'keyup')
+      .pipe(
+        tap(()=> this.searchValues = []),
+        switchMap(()=> this._metadataService.searchData(input.value))
+      )
+    search$.subscribe(
+      (values) => {
+        this.searchValues.push(values);
+      }
+    );
+    
   }
 
   public checkValue(tipo){
