@@ -4,7 +4,7 @@ import { MetadataService } from './../../services/metadata.service';
 import { SaccesoService } from '../../services/sacceso.service';
 import { fromEvent } from 'rxjs';
 import { tap, switchMap } from "rxjs/operators";
-import {AutocompleteLibModule} from 'angular-ng-autocomplete';
+
 
 
 declare var $: any;
