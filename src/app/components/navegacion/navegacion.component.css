@@ -69,3 +69,12 @@
     margin-top: 10px;
     margin-bottom: 10px;
 }
+
+.custom-container {
+    height: 70px;
+    margin-left: 150px;
+}
+
+.btn-text-custom {
+    font-weight: bold;
+}

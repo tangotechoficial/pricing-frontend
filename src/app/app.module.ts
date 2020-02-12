@@ -16,6 +16,8 @@ import { PrecioSeleccion } from './components/precio/precioseleccion/precioselec
 import { PrecioElement } from './components/precio/precioelement/precioelement.component';
 import { SaccesoComponent } from './components/sacceso/sacceso.component';
 import { CondicionComponent } from './components/condicion/condicion.component';
+import { PrecioBaseBusinessComponent } from './components/precio/preciobase/business/preciobase.component';
+
 
 @NgModule({
   declarations: [
@@ -30,6 +32,7 @@ import { CondicionComponent } from './components/condicion/condicion.component';
     PrecioElement,
     SaccesoComponent,
     CondicionComponent,
+    PrecioBaseBusinessComponent
   ],
   imports: [
     BrowserModule,

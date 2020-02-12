@@ -1,9 +1,9 @@
-<div class="container col-9 d-flex flex-column justify-content-center">
+<div class="container col-9 d-flex flex-column justify-content-center custom-container">
     <ul *ngIf="isLoggedIn" class="nav custom-nav">
         <li class="nav-item">
             <div class="dropdown" >
-                <button class="btn btn-light" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="fas fa-bars" style="color: #4270C1" aria-hidden="true"></span>&nbsp;Menu
+                <button class="btn btn-light btn-text-custom" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="fas fa-bars" style="color: #4270C1" aria-hidden="true"></span>&nbsp;&nbsp;&nbsp;&nbsp;Menu
                 </button>
                 
                 <div class="dropdown-menu menu-nav" aria-labelledby="dropdownMenuButton">
@@ -17,6 +17,12 @@
                       </li>
                       <li>
                         <a tabindex="-1" class="dropdown-item" [routerLink]="['/precioventa']">&nbsp;&nbsp;Precio Venta</a>
+                      </li>
+                      <li>
+                        <a tabindex="-1" class="dropdown-item" [routerLink]="['/b-preciobase']">&nbsp;&nbsp;Precio Base Business [test]</a>
+                      </li>
+                      <li>
+                        <a tabindex="-1" class="dropdown-item" [routerLink]="['/b-precioventa']">&nbsp;&nbsp;Precio Venta  Business [test]</a>
                       </li>
                     </ul>
                   </li>
