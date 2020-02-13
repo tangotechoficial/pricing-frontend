@@ -9,6 +9,7 @@ import { Location } from "@angular/common";
 })
 export class NavegacionComponent implements OnInit {
   public isLoggedIn: boolean = false
+  public userTechnical: boolean = true;
   public currentUrl: string;
   private mapUrlToSection = {
     "/menu": "Inicio",
@@ -33,7 +34,13 @@ export class NavegacionComponent implements OnInit {
         this.isLoggedIn = false;
       }
     });
-    
+  }
+
+  verifyUserLogin() {
+    const user = localStorage.User ? JSON.parse(localStorage.User) : null
+    if (user) {
+      this.userTechnical = user.type == "technical" ? true : false
+    }
   }
 
 /*   ngDoCheck() {

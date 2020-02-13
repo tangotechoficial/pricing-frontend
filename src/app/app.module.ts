@@ -18,6 +18,11 @@ import { SaccesoComponent } from './components/sacceso/sacceso.component';
 import { CondicionComponent } from './components/condicion/condicion.component';
 import { PrecioBaseBusinessComponent } from './components/precio/preciobase/business/preciobase.component';
 
+import { AutocompleteInputComponent } from './components/autocomplete-input/autocomplete-input.component';
+import { FilterPipe } from './pipes/filter.pipe';
+import {AutocompleteLibModule} from 'angular-ng-autocomplete';
+import { BusinessMenuComponent } from './components/navegacion/business-menu/business-menu.component';
+import { TechnicalMenuComponent } from './components/navegacion/technical-menu/technical-menu.component';
 
 @NgModule({
   declarations: [
@@ -32,14 +37,19 @@ import { PrecioBaseBusinessComponent } from './components/precio/preciobase/busi
     PrecioElement,
     SaccesoComponent,
     CondicionComponent,
-    PrecioBaseBusinessComponent
+    PrecioBaseBusinessComponent,
+    AutocompleteInputComponent,
+    FilterPipe,
+    BusinessMenuComponent,
+    TechnicalMenuComponent
   ],
   imports: [
     BrowserModule,
     routing,
     HttpClientModule,
     FormsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    AutocompleteLibModule
   ],
   providers: [appRoutingProviders],
   bootstrap: [AppComponent]

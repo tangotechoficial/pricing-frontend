@@ -1,0 +1,35 @@
+<div class="dropdown">
+    <button class="btn btn-light btn-text-custom" type="button"
+      id="dropdownMenuButton" data-toggle="dropdown"
+      aria-haspopup="true" aria-expanded="false">
+      <span class="fas fa-bars" style="color: #4270C1" aria-hidden="true"></span>&nbsp;&nbsp;&nbsp;&nbsp;Menu
+    </button>
+    
+    <div class="dropdown-menu menu-nav"
+      aria-labelledby="dropdownMenuButton">
+      <div class="triangle"></div>
+      <a class="dropdown-item" [routerLink]="['/menu']"><span class="fas
+          fa-home" style="color: #9FA2AB"></span>&nbsp;&nbsp;Início</a>
+      <li class="dropdown-submenu">
+        <a tabindex="-1" class="dropdown-item"><span class="fas
+            fa-hand-holding-usd" style="color: #9FA2AB"></span>&nbsp;&nbsp;Esquema
+          de Cálculo</a>
+        <ul class="dropdown-menu">
+          <li>
+            <a tabindex="-1" class="dropdown-item"
+              [routerLink]="['/b-preciobase']">&nbsp;&nbsp;Precio Base</a>
+          </li>
+          <li>
+            <a tabindex="-1" class="dropdown-item"
+              [routerLink]="['/b-precioventa']">&nbsp;&nbsp;Precio Venta</a>
+          </li>
+        </ul>
+      </li>
+      <a class="dropdown-item" [routerLink]="['/sacceso']"><span class="fas
+          fa-home" style="color: #9FA2AB"></span>&nbsp;&nbsp;Sequencia de
+        Acesso</a>
+      <a class="dropdown-item" [routerLink]="['/condicion']"><span
+          class="fas fa-clipboard-list"
+          style="color: #9FA2AB"></span>&nbsp;&nbsp;Condicao</a>
+    </div>
+  </div>
