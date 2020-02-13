@@ -1,36 +1,35 @@
 <div class="dropdown">
-    <button class="btn btn-light btn-text-custom" type="button"
+    <button class="btn btn-light font-weight-bold d-flex align-items-center" type="button"
       id="dropdownMenuButton" data-toggle="dropdown"
       aria-haspopup="true" aria-expanded="false">
-      <span class="fas fa-bars" style="color: #4270C1" aria-hidden="true"></span>&nbsp;&nbsp;&nbsp;&nbsp;Menu
+        <span class="fas fa-bars" aria-hidden="true"></span>
+        <p class="my-0 ml-2 font-weight-bold">Menu</p>
     </button>
 
-    <div class="dropdown-menu menu-nav"
+    <div class="dropdown-menu menu-nav py-3"
       aria-labelledby="dropdownMenuButton">
       <div class="triangle"></div>
-      <a class="dropdown-item" [routerLink]="['/menu']"><span class="fas
-          fa-home" style="color: #9FA2AB"></span>&nbsp;&nbsp;Início</a>
+      <a class="dropdown-item d-flex cuki flex-row align-items-center py-2" [routerLink]="['/menu']"><span class="fas
+          fa-home" ></span><p class="my-0 ml-2 font-weight-bold">Início</p></a>
       <li class="dropdown-submenu">
-        <a tabindex="-1" class="dropdown-item"><span class="fas
-            fa-hand-holding-usd" style="color: #9FA2AB"></span>&nbsp;&nbsp;Esquema
-          de Cálculo</a>
+        <a tabindex="-1" class="dropdown-item d-flex flex-row align-items-center py-2"><span class="fas
+            fa-hand-holding-usd" ></span><p class="my-0 ml-2 font-weight-bold">Esquema de Cálculo</p></a>
         <ul class="dropdown-menu">
           <li>
             <a tabindex="-1" class="dropdown-item"
-              [routerLink]="['/preciobase']">&nbsp;&nbsp;Precio Base</a>
+              [routerLink]="['/preciobase']"><p class="my-0 ml-2 font-weight-bold">Precio Base</p></a>
           </li>
           <li>
             <a tabindex="-1" class="dropdown-item"
-              [routerLink]="['/precioventa']">&nbsp;&nbsp;Precio Venta
+              [routerLink]="['/precioventa']"><p class="my-0 ml-2 font-weight-bold">Precio Venta</p>
               </a>
           </li>
         </ul>
       </li>
-      <a class="dropdown-item" [routerLink]="['/sacceso']"><span class="fas
-          fa-home" style="color: #9FA2AB"></span>&nbsp;&nbsp;Sequencia de
-        Acesso</a>
-      <a class="dropdown-item" [routerLink]="['/condicion']"><span
+      <a class="dropdown-item d-flex flex-row align-items-center py-2" [routerLink]="['/sacceso']"><span class="fas
+          fa-home" ></span><p class="my-0 ml-2 font-weight-bold">Sequencia de Acesso</p></a>
+      <a class="dropdown-item d-flex flex-row align-items-center py-2" [routerLink]="['/condicion']"><span
           class="fas fa-clipboard-list"
-          style="color: #9FA2AB"></span>&nbsp;&nbsp;Condicao</a>
+          ></span><p class="my-0 ml-2 pl-1 font-weight-bold">Condicao</p></a>
     </div>
   </div>

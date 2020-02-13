@@ -1,45 +1,54 @@
 <div class="dropdown">
-    <button class="btn btn-light btn-text-custom" type="button"
+    <button class="btn btn-light font-weight-bold d-flex align-items-center" type="button"
       id="dropdownMenuButton" data-toggle="dropdown"
       aria-haspopup="true" aria-expanded="false">
-      <span class="fas fa-bars" style="color: #4270C1" aria-hidden="true"></span>&nbsp;&nbsp;&nbsp;&nbsp;Menu
+        <span class="fas fa-bars" aria-hidden="true"></span>
+        <p class="my-0 ml-2 font-weight-bold">Menu</p>
     </button>
     
-    <div class="dropdown-menu menu-nav"
-      aria-labelledby="dropdownMenuButton">
-      <div class="triangle"></div>
-      <a class="dropdown-item" [routerLink]="['/menu']"><span class="fas
-          fa-home" style="color: #9FA2AB"></span>&nbsp;&nbsp;Início</a>
-      <li class="dropdown-submenu">
-        <a tabindex="-1" class="dropdown-item"><span class="fas
-            fa-hand-holding-usd" style="color: #9FA2AB"></span>&nbsp;&nbsp;Esquema
-          de Cálculo</a>
+  <div class="dropdown-menu menu-nav py-3" aria-labelledby="dropdownMenuButton">
+    <div class="triangle"></div>
+    <a class="dropdown-item d-flex cuki flex-row align-items-center py-2" [routerLink]="['/menu']">
+      <span class="fas fa-home"></span>
+      <p class="my-0 ml-2 font-weight-bold">Início</p>
+    </a>
+    <li class="dropdown-submenu">
+      <a tabindex="-1" class="dropdown-item d-flex flex-row align-items-center py-2">
+        <span class="fas fa-hand-holding-usd"></span>
+        <p class="my-0 ml-2 font-weight-bold">Esquema de Cálculo</p>
+      </a>
         <ul class="dropdown-menu">
           <li>
-            <a tabindex="-1" class="dropdown-item"
-              [routerLink]="['/b-preciobase']">&nbsp;&nbsp;Precio Base</a>
+              <a tabindex="-1" class="dropdown-item" [routerLink]="['/b-preciobase']">
+                <p class="my-0 ml-2 font-weight-bold">Precio Base</p>
+              </a>
           </li>
           <li>
-            <a tabindex="-1" class="dropdown-item"
-              [routerLink]="['/b-precioventa']">&nbsp;&nbsp;Precio Venta</a>
+              <a tabindex="-1" class="dropdown-item" [routerLink]="['/b-precioventa']">
+                <p class="my-0 ml-2 font-weight-bold">Precio Venta</p>
+              </a>
           </li>
         </ul>
       </li>
       <li class="dropdown-submenu">
-        <a tabindex="-1" class="dropdown-item"><span class="fas
-            fa-hand-holding-usd" style="color: #9FA2AB"></span>&nbsp;&nbsp;Growth Data Lab</a>
-        <ul class="dropdown-menu">
-          <li class="dropdown-submenu">
-            <a tabindex="-1" class="dropdown-item"><span class="fas
-                fa-hand-holding-usd" style="color: #9FA2AB"></span>&nbsp;&nbsp;Simulador de Precos</a>
-            <ul class="dropdown-menu">
-              <li>
-                <a tabindex="-1" class="dropdown-item"
-                  [routerLink]="['/datalab/diretriz-estrategica']">&nbsp;&nbsp;Diretriz Estrategica</a>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </li>
-    </div>
-  </div>
+        <a tabindex="-1" class="dropdown-item d-flex flex-row align-items-center py-2">
+          <span class="fas fa-hand-holding-usd"></span>
+          <p class="my-0 ml-2 font-weight-bold">Growth Data Lab</p>
+        </a>
+          <ul class="dropdown-menu">
+            <li class="dropdown-submenu">
+              <a tabindex="-1" class="dropdown-item dropdown-item d-flex flex-row align-items-center py-2">
+                <span class="fas fa-hand-holding-usd"></span>
+                <p class="my-0 ml-2 font-weight-bold">Simulador de Precos</p>
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a tabindex="-1" class="dropdown-item dropdown-item d-flex flex-row align-items-center py-2"[routerLink]="['/datalab/diretriz-estrategica']">
+                    <p class="my-0 ml-2 font-weight-bold">Diretriz Estrategica</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li> 
+      </div>

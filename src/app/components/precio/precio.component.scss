@@ -14,11 +14,10 @@
 
 .btn-secondary {
     width: 20px;
-}
-
-.btn-secondary:hover{
-    background-color:#dc3545;
-    border-color:#dc3545
+    &:hover {
+        background-color:#dc3545;
+        border-color:#dc3545
+      }
 }
 
 input.button-save[disabled] {
