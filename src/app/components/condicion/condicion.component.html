@@ -87,10 +87,10 @@
                 <div class="options-list rounded mt-3">
                     <div class="p-3 list-header custom-text-muted">Pesquise uma sequencia de acesso...</div>
                     <ul class="p-0 custom-scrollbar-css">
-                        <li *ngFor="let seq of sequenciasAcceso; let id = index" class="p-2">
+                        <li *ngFor="let cond of listaCondiciones; let id = index" class="p-2">
                             <div class="custom-control custom-checkbox">
                                 <input (change)="checkValue(seq.tipo)" type="checkbox" class="sacceso-opcion custom-control-input" id="{{id}}">
-                                <label class="pl-4 custom-control-label" for="{{id}}">{{seq.tipo}}</label>
+                                <label class="pl-4 custom-control-label" for="{{id}}">{{cond.tipo}}</label>
                             </div>
                         </li>
                     </ul>
