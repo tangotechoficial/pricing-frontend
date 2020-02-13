@@ -2,24 +2,27 @@
 <navegacion></navegacion>
 
 <!--Component Content -->
+<div class="container d-flex flex-column background col-12" id="precio-container">
 <!-- Select-->
-<div *ngIf="!isShow">
-    <precio-seleccion (negociosOutput)="parentListener($event)"
-    (ventasOutput)="parentListenerTwo($event)"></precio-seleccion>
-    <div class="d-flex justify-content-center">
-        <div class="col-2 form-group">
-            <input type="submit" (click)="goToSection()" [disabled]="!existVentas || !existNegocios" class="btn btn-primary btn-block button-save" value="Entrar">
+    <div *ngIf="!isShow">
+        <precio-seleccion (negociosOutput)="parentListener($event)"
+        (ventasOutput)="parentListenerTwo($event)"></precio-seleccion>
+        <div class="d-flex justify-content-center background">
+            <div class="col-2 form-group">
+                <input type="submit" (click)="goToSection()" [disabled]="!existVentas || !existNegocios" class="btn btn-primary btn-block button-save" value="Entrar">
+            </div>
         </div>
     </div>
-</div>
 
 <!--Main view-->
-<div *ngIf="isShow">
-    <div class="background">
-        <precio-element titulo="PRECO BASE"></precio-element>
-        <precio-element titulo="REGULATORIO"></precio-element>
-        <precio-element titulo="FINANCEIRO"></precio-element>
-        <precio-element titulo="DESCONTO"></precio-element>
-        <precio-element titulo="DESCONTO TRADE"></precio-element>
-    </div>
-</div>            
+    <div *ngIf="isShow">
+        <div class="background">
+            <precio-element titulo="PRECO BASE"></precio-element>
+            <precio-element titulo="REGULATORIO"></precio-element>
+            <precio-element titulo="FINANCEIRO"></precio-element>
+            <precio-element titulo="DESCONTO"></precio-element>
+            <precio-element titulo="DESCONTO TRADE"></precio-element>
+        </div>
+    </div>            
+
+</div>

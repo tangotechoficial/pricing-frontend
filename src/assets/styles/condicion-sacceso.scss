@@ -2,7 +2,7 @@
 @import './mixins-var.scss';
 
 .background { 
-    background-color: #F1F2F3; 
+    background-color: $backgroundGrey;
 }
 
 .options-list {
