@@ -32,7 +32,7 @@ export class SaccesoComponent implements OnInit {
     this.selectedProperties = new Array<any>();
     this.searchValues = new Array<any>();
     this._sacceso = new Sacceso();
-    this._metadataService.getMetadata().map(elem => {
+    this._metadataService.getMetadataSeqAcceso().map(elem => {
       var elemModel = {
         'tipo': elem,
         'selected': false

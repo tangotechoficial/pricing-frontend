@@ -26,16 +26,18 @@ export class CondicionComponent implements OnInit {
     this.listaCondiciones = new Array<any>();
     this.selectedProperties = new Array<any>();
     this._condicion = new Condicion();
-    this._metadataService.getMetadata().map(elem => {
+    this._metadataService.getMetadataCondicion().map(elem => {
       var elemModel = {
         'tipo': elem,
         'selected': false
       }
       this.listaCondiciones.push(elemModel);
     })
+    debugger;
   }
 
   public checkValue(tipo){
+    debugger;
 
     this.listaCondiciones.map(elem => {
       if(elem.tipo == tipo){
