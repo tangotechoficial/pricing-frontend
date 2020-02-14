@@ -45,8 +45,8 @@ export class SaccesoComponent implements OnInit {
     this.searchValues = new Array<any>();
   }
 
-  onSelectValue(value : string){
-    console.log(value);
+  public onSelectedValue(event, value){
+    console.log(event);
   }
 
   ngAfterViewInit(){ 
@@ -65,6 +65,23 @@ export class SaccesoComponent implements OnInit {
       }
     );
     
+  }
+
+  onDltSelection(val){
+    var selectedIndex = '';
+    this.selectedProperties.forEach((elem, index) => {
+      if(elem.tipo == val.tipo){
+        this.sequenciasAcceso.forEach((sElem, index2) => {
+          if(sElem.tipo == val.tipo){
+            selectedIndex = index2.toString();
+          }
+        })
+        this.selectedProperties.splice(index, 1);
+      }
+    })
+
+    var elem = document.getElementById(selectedIndex);
+    elem.click()
   }
 
   public checkValue(tipo){

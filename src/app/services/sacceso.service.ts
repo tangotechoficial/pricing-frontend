@@ -25,4 +25,14 @@ export class SaccesoService{
         console.log(_params);
         return this._http.post(this.url + '/sacceso', _params, {headers: {"Content-type": "application/json"}});
     }
+
+    getSaccesoList(seq: Sacceso): Observable<any>{
+        let _currUser = JSON.parse(localStorage.getItem("User"));
+        let _params = {
+            params: seq,
+            currUser: _currUser
+        }
+        console.log(_params);
+        return this._http.post(this.url + '/saccesos', _params, {headers: {"Content-type": "application/json"}});
+    }
 }
