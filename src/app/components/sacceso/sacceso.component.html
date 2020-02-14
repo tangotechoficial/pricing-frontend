@@ -6,9 +6,9 @@
     <div class="container row col-12 p-4">
         <div class="col-sm-2">
             <span class="text-header">Seq. Acceso N</span>
-            <input id="SQSearch" class="form-control mt-3" [(ngModel)]="_sacceso.sSeqAcceso"/>
-            <ul class="filter-select list-group">
-                <li *ngFor="let value of searchValues" class="filter-select-list list-group-item">
+            <input id="SQSearch" class="form-control mt-3" [(ngModel)]="_sacceso.sSeqAcceso" (blur)="onBlurSQSearch()"/>
+            <ul *ngIf="_sacceso.sSeqAcceso" class="filter-select list-group">
+                <li *ngFor="let value of searchValues" (click)="onSelectValue(value)" class="filter-select-list list-group-item">
                     {{value}}
                 </li>
             </ul>

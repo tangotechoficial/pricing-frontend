@@ -41,6 +41,14 @@ export class SaccesoComponent implements OnInit {
     })
   }
 
+  onBlurSQSearch(){
+    this.searchValues = new Array<any>();
+  }
+
+  onSelectValue(value : string){
+    console.log(value);
+  }
+
   ngAfterViewInit(){ 
 
     const input:any = document.getElementById('SQSearch');
