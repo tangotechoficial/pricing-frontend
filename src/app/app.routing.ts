@@ -11,6 +11,8 @@ import { PrecioVentaComponent } from './components/precio/precioventa/preciovent
 import { SaccesoComponent } from './components/sacceso/sacceso.component';
 import { CondicionComponent } from './components/condicion/condicion.component';
 
+import { PrecioBaseBusinessComponent } from './components/precio/preciobase/business/preciobase.component';
+
 /* Routes Array */
 const appRoutes: Routes = [
     { path: 'login', component: LoginComponent},
@@ -20,8 +22,13 @@ const appRoutes: Routes = [
     { path: 'precioventa', component: PrecioVentaComponent},
     { path: 'sacceso', component: SaccesoComponent},
     { path: 'condicion', component: CondicionComponent},
+
+    { path: 'b-preciobase', component: PrecioBaseBusinessComponent},
+    // { path: 'b-precioventa', component: PrecioBaseBusinessComponent},
+    
     { path: '', redirectTo: '/login', pathMatch: 'full'},
     { path: '**', component: ErrorComponent},
+
 ]
 
 /* Export router module */

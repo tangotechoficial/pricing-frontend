@@ -1,0 +1,77 @@
+<!-- Navigation Bar -->
+<navegacion></navegacion>
+
+<!-- Select-->
+<div *ngIf="!isShow">
+    <precio-seleccion (negociosOutput)="parentListener($event)" (ventasOutput)="parentListenerTwo($event)">
+    </precio-seleccion>
+    <div class="d-flex justify-content-center">
+        <div class="col-2 form-group">
+            <input type="submit" (click)="goToSection()" [disabled]="!existVentas || !existNegocios"
+                class="btn btn-primary btn-block button-save" value="Entrar">
+        </div>
+    </div>
+</div>
+
+<!--Main view-->
+<div *ngIf="isShow">
+    <div class="container-fluid background col-9">
+        <div class="row p-3">
+            <div class="col-sm-12 col-md-1 p-1">
+                <span class="text-header">Cod. Mat.</span>
+                <input class="form-control mt-3 hei-46" value="Cod." />
+            </div>
+            <div class="col-sm-12 col-md-3 p-1">
+                <span class="text-header">Descricao do material</span>
+                <div class="dropdown mt-3 hei-46">
+                    <button class="btn btn-secondary hei-46 dropdown-toggle btn-block" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Dropdown button
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <a class="dropdown-item" >Action</a>
+                      <a class="dropdown-item" >Another action</a>
+                      <a class="dropdown-item" >Something else here</a>
+                    </div>
+                  </div>
+                <!-- <input class="form-control mt-3 hei-46" value="Cod." /> -->
+            </div>
+            <div class="col-sm-12 col-md-1 p-1">
+                <span class="text-header">Cod. Cat.</span>
+                <input class="form-control mt-3 hei-46" value="Cod." />
+            </div>
+            <div class="col-sm-12 col-md-3 p-1">
+                <span class="text-header">Descricao da categoria</span>
+                <div class="dropdown mt-3 hei-46">
+                    <button class="btn btn-secondary hei-46 dropdown-toggle btn-block" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Dropdown button
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <a class="dropdown-item" role="button">Action</a>
+                      <a class="dropdown-item" >Another action</a>
+                      <a class="dropdown-item" >Something else here</a>
+                    </div>
+                  </div>
+            </div>
+            <div class="col-sm-12 col-md-1 p-1">
+                <span class="text-header">Cod. Sub.</span>
+                <input class="form-control mt-3 hei-46" value="Cod." />
+            </div>
+            <div class="col-sm-12 col-md-3 p-1">
+                <span class="text-header">Descricao da subcategoria</span>
+                <div class="dropdown mt-3">
+                    <button class="btn btn-secondary hei-46 dropdown-toggle btn-block" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Dropdown button
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <a class="dropdown-item" >Action</a>
+                      <a class="dropdown-item" >Another action</a>
+                      <a class="dropdown-item" >Something else here</a>
+                    </div>
+                  </div>
+            </div>
+        </div>
+        
+    </div>    
+</div>
+
+<!--Component Content -->

@@ -1,9 +1,12 @@
 @import '../../../../assets/styles/global.scss';
-
-body {
-    background: #F1F2F3;
-}
-
+@import '../../../../assets/styles/mixins-var.scss';
 .container {
     height: 50vh;
+}
+
+.dropdown-toggle:after{
+    position: relative;
+    top: 0.5rem;
+    float: right;
+    color: $martinsBlue;
 }

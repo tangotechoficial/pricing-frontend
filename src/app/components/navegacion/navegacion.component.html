@@ -1,38 +1,10 @@
-<div class="container col-9 d-flex flex-column justify-content-center">
-    <ul *ngIf="isLoggedIn" class="nav custom-nav">
-        <li class="nav-item">
-            <div class="dropdown" >
-                <button class="btn btn-light" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="fas fa-bars" style="color: #4270C1" aria-hidden="true"></span>&nbsp;Menu
-                </button>
-                
-                <div class="dropdown-menu menu-nav" aria-labelledby="dropdownMenuButton">
-                  <div class="triangle"></div>
-                  <a class="dropdown-item" [routerLink]="['/menu']"><span class="fas fa-home" style="color: #9FA2AB"></span>&nbsp;&nbsp;Início</a>
-                  <li class="dropdown-submenu">
-                    <a tabindex="-1" class="dropdown-item"><span class="fas fa-hand-holding-usd" style="color: #9FA2AB"></span>&nbsp;&nbsp;Esquema de Cálculo</a>
-                    <ul class="dropdown-menu">
-                      <li>
-                        <a tabindex="-1" class="dropdown-item" [routerLink]="['/preciobase']">&nbsp;&nbsp;Precio Base</a>
-                      </li>
-                      <li>
-                        <a tabindex="-1" class="dropdown-item" [routerLink]="['/precioventa']">&nbsp;&nbsp;Precio Venta</a>
-                      </li>
-                    </ul>
-                  </li>
-                  <a class="dropdown-item" [routerLink]="['/sacceso']"><span class="fas fa-home" style="color: #9FA2AB"></span>&nbsp;&nbsp;Sequencia de Acesso</a>
-                  <a class="dropdown-item" [routerLink]="['/condicion']"><span class="fas fa-clipboard-list" style="color: #9FA2AB"></span>&nbsp;&nbsp;Condicao</a>
-                
-                  
-                </div>
-              </div>
-          <!-- <a class="btn btn-light" [routerLink]="['/menu']">
-            <span class="fas fa-bars" style="color: #4270C1" aria-hidden="true"></span>&nbsp;Menu
-          </a> -->
-          
-        </li>
-        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">{{section}}</a>
-    </ul>
-
-    
+<div class="container col-9 d-flex justify-content-center">
+  <ul *ngIf="isLoggedIn" class="nav custom-nav col-9 p-2">
+    <li class="nav-item">
+      <app-technical-menu *ngIf="userTechnical"></app-technical-menu>
+      <app-business-menu *ngIf="!userTechnical"></app-business-menu>
+    </li>
+    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">{{section}}</a>
+  </ul>
+  <img src="../../../assets/img/logo-nav.jpg" class="col-3 py-2 ml-4"/>
 </div>

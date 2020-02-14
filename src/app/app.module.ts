@@ -16,9 +16,13 @@ import { PrecioSeleccion } from './components/precio/precioseleccion/precioselec
 import { PrecioElement } from './components/precio/precioelement/precioelement.component';
 import { SaccesoComponent } from './components/sacceso/sacceso.component';
 import { CondicionComponent } from './components/condicion/condicion.component';
+import { PrecioBaseBusinessComponent } from './components/precio/preciobase/business/preciobase.component';
+
 import { AutocompleteInputComponent } from './components/autocomplete-input/autocomplete-input.component';
 import { FilterPipe } from './pipes/filter.pipe';
 import {AutocompleteLibModule} from 'angular-ng-autocomplete';
+import { BusinessMenuComponent } from './components/navegacion/business-menu/business-menu.component';
+import { TechnicalMenuComponent } from './components/navegacion/technical-menu/technical-menu.component';
 
 @NgModule({
   declarations: [
@@ -33,8 +37,11 @@ import {AutocompleteLibModule} from 'angular-ng-autocomplete';
     PrecioElement,
     SaccesoComponent,
     CondicionComponent,
+    PrecioBaseBusinessComponent,
     AutocompleteInputComponent,
-    FilterPipe
+    FilterPipe,
+    BusinessMenuComponent,
+    TechnicalMenuComponent
   ],
   imports: [
     BrowserModule,
