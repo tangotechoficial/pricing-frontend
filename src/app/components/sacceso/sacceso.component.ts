@@ -21,6 +21,8 @@ export class SaccesoComponent implements OnInit {
   public sequenciasAcceso: Array<any>;
   public selectedProperties: Array<any>;
   public searchValues: Array<any>;
+  public selValues1: Array<any>;
+  public selValues2: Array<any>;
 
   constructor(
     private _metadataService: MetadataService,
@@ -28,9 +30,13 @@ export class SaccesoComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    
+
     this.sequenciasAcceso = new Array<any>();
     this.selectedProperties = new Array<any>();
     this.searchValues = new Array<any>();
+    this.selValues1 = new Array<any>();
+    this.selValues2 = new Array<any>();
     this._sacceso = new Sacceso();
     this._metadataService.getMetadataSeqAcceso().map(elem => {
       var elemModel = {
@@ -39,40 +45,51 @@ export class SaccesoComponent implements OnInit {
       }
       this.sequenciasAcceso.push(elemModel);
     })
+
+    $('div[contenteditable]').keydown(function (e) {
+      // trap the return key being pressed
+      if (e.keyCode === 13) {
+        // insert 2 br tags (if only one br tag is inserted the cursor won't go to the next line)
+        document.execCommand('insertHTML', false, '<br>');
+        // prevent the default behaviour of return key pressed
+        return false;
+      }
+    });
   }
 
-  onBlurSQSearch(){
+  onBlurSQSearch() {
     this.searchValues = new Array<any>();
   }
 
-  public onSelectedValue(event, value){
+  public onSelectedValue(event) {
     console.log(event);
   }
 
-  ngAfterViewInit(){ 
+  ngAfterViewInit() {
 
-    const input:any = document.getElementById('SQSearch');
-    console.log(input);
+    const input: any = document.getElementById('SQSearch');
+    const selectedElements: any = document.getElementById('saSearch1');
+    const selectedElements2: any = document.getElementById('saSearch2');
 
     const search$ = fromEvent(input, 'keyup')
       .pipe(
-        tap(()=> this.searchValues = []),
-        switchMap(()=> this._metadataService.searchData(input.value))
+        tap(() => this.searchValues = []),
+        switchMap(() => this._metadataService.searchData(input.value))
       )
     search$.subscribe(
       (values) => {
         this.searchValues.push(values);
       }
     );
-    
+
   }
 
-  onDltSelection(val){
+  onDltSelection(val) {
     var selectedIndex = '';
     this.selectedProperties.forEach((elem, index) => {
-      if(elem.tipo == val.tipo){
+      if (elem.tipo == val.tipo) {
         this.sequenciasAcceso.forEach((sElem, index2) => {
-          if(sElem.tipo == val.tipo){
+          if (sElem.tipo == val.tipo) {
             selectedIndex = index2.toString();
           }
         })
@@ -84,18 +101,18 @@ export class SaccesoComponent implements OnInit {
     elem.click()
   }
 
-  public checkValue(tipo){
+  public checkValue(tipo) {
 
     this.sequenciasAcceso.map(elem => {
-      if(elem.tipo == tipo){
-        if(elem.selected){
+      if (elem.tipo == tipo) {
+        if (elem.selected) {
           elem.selected = false;
           this.selectedProperties.forEach((elem, index) => {
-            if(elem.tipo == tipo){
+            if (elem.tipo == tipo) {
               this.selectedProperties.splice(index, 1);
             }
           })
-        }else{
+        } else {
           elem.selected = true;
           this.selectedProperties.push(elem);
         }
@@ -104,9 +121,9 @@ export class SaccesoComponent implements OnInit {
 
     var descripcion = '';
     this.selectedProperties.forEach((elem, index) => {
-      if(index == 0){ 
+      if (index == 0) {
         descripcion = descripcion + elem.tipo;
-      }else{
+      } else {
         descripcion = descripcion + '/' + elem.tipo;
       }
     })
@@ -114,14 +131,14 @@ export class SaccesoComponent implements OnInit {
     this._sacceso.sDesAcceso = descripcion;
   }
 
-  public submitSA(){
+  public submitSA() {
     this._saccesoService.postSacceso(this._sacceso)
       .subscribe(response => {
         console.log(response);
       },
-      error => {
-        console.log(error);
-      })
+        error => {
+          console.log(error);
+        })
   }
 
 }

@@ -113,3 +113,7 @@ i {
     background: $martinsBlue;
     border-color: $martinsBlue;
 }
+
+[contentEditable=true]:empty:not(:focus):before{
+    content:attr(data-text)
+}
