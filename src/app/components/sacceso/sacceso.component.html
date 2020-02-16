@@ -6,11 +6,13 @@
     <div class="container row col-12 p-4">
         <div class="col-sm-2">
             <span class="text-header">Seq. Acceso N</span>
-            <input id="SQSearch" class="form-control mt-3" [(ngModel)]="_sacceso.sSeqAcceso"/>
+            <input id="SQSearch" class="form-control mt-3" [(ngModel)]="_sacceso.sSeqAcceso" [value]="selectedValue"/>
             <ul *ngIf="_sacceso.sSeqAcceso" class="filter-select list-group" >
-                <li *ngFor="let val of searchValues" (click)="onSelectedValue(val)" class="filter-select-list list-group-item">
-                    {{val}}
-                </li>
+                <ng-container *ngIf="!existSelected">
+                    <li *ngFor="let val of searchValues" (click)="onSelectedValue(val)" class="filter-select-list list-group-item">
+                        {{val}}
+                    </li>
+                </ng-container>
             </ul>
         </div>
         <div class="col-sm-10">

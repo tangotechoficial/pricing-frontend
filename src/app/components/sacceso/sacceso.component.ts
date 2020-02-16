@@ -19,6 +19,8 @@ declare var $: any;
 export class SaccesoComponent implements OnInit {
   searchSeq;
   searchSeleccionado;
+  selectedValue: string;
+  public existSelected = false;
   public _sacceso: Sacceso;
   public sequenciasAcceso: Array<any>;
   public selectedProperties: Array<any>;
@@ -65,6 +67,12 @@ export class SaccesoComponent implements OnInit {
 
   public onSelectedValue(event) {
     console.log(event);
+    this.selectedValue = event;
+    this.existSelected = true;
+      setTimeout(function() {
+        this.existSelected = false;
+        console.log(this.existSelected);
+    }.bind(this), 3000)
   }
 
   ngAfterViewInit() {
