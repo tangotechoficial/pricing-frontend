@@ -19,8 +19,10 @@ import { CondicionComponent } from './components/condicion/condicion.component';
 import { PrecioBaseBusinessComponent } from './components/precio/preciobase/business/preciobase.component';
 
 import { AutocompleteInputComponent } from './components/autocomplete-input/autocomplete-input.component';
-import { FilterPipe } from './pipes/filter.pipe';
+import { FilterPipeSeqAcceso } from './pipes/filterseqacceso.pipe';
+import { FilterPipeSeleccionadoAcceso } from './pipes/filterseleccionado.pipe';
 import {AutocompleteLibModule} from 'angular-ng-autocomplete';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { BusinessMenuComponent } from './components/navegacion/business-menu/business-menu.component';
 import { TechnicalMenuComponent } from './components/navegacion/technical-menu/technical-menu.component';
 
@@ -39,7 +41,8 @@ import { TechnicalMenuComponent } from './components/navegacion/technical-menu/t
     CondicionComponent,
     PrecioBaseBusinessComponent,
     AutocompleteInputComponent,
-    FilterPipe,
+    FilterPipeSeqAcceso,
+    FilterPipeSeleccionadoAcceso,
     BusinessMenuComponent,
     TechnicalMenuComponent
   ],
@@ -48,6 +51,7 @@ import { TechnicalMenuComponent } from './components/navegacion/technical-menu/t
     routing,
     HttpClientModule,
     FormsModule,
+    Ng2SearchPipeModule,
     FontAwesomeModule,
     AutocompleteLibModule
   ],

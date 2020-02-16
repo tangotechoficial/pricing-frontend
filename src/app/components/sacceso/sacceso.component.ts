@@ -17,6 +17,8 @@ declare var $: any;
 })
 
 export class SaccesoComponent implements OnInit {
+  searchSeq;
+  searchSeleccionado;
   public _sacceso: Sacceso;
   public sequenciasAcceso: Array<any>;
   public selectedProperties: Array<any>;
