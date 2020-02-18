@@ -1,18 +1,20 @@
 <!-- Navigation Bar -->
 <navegacion></navegacion>
 <!-- Div usuario Business -->
-<div *ngIf="this.bBusiness" class="container menu-backgroud">
-  <!-- Aca charly -->
-</div>
-<!-- Div usuario Technical -->
 <div class="container menu-backgroud">
+  <div *ngIf="this.bBusiness">
+    
+  </div>
+  <div *ngIf="!this.bBusiness">
+    
+  </div>
+  <!-- Aca charly -->
   <div class="align-bottom" width="50px !important">
     <div class="alert alert-success alert-dismissible fade show fixed-bottom" role="alert">
-      <!-- Bemvenido <strong>{{this.sCurrentUser.name}}</strong> -->
+      Bemvenido <strong>{{this.sCurrentUser.name}}</strong>
       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
   </div>
 </div>
-<!--Component Content -->

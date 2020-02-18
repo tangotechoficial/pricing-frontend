@@ -26,6 +26,8 @@ export class NavegacionComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.userTechnical = localStorage.User.type == "technical" ? true : false;
+    console.log(this.userTechnical)
     this._route.url.subscribe(url => {
       this.section = this.mapUrlToSection[location.pathname]
       if(location.pathname != "/login"){
@@ -33,14 +35,7 @@ export class NavegacionComponent implements OnInit {
       }else{
         this.isLoggedIn = false;
       }
-    });
-  }
-
-  verifyUserLogin() {
-    const user = localStorage.User ? JSON.parse(localStorage.User) : null
-    if (user) {
-      this.userTechnical = user.type == "technical" ? true : false
-    }
+    })
   }
 
 /*   ngDoCheck() {
