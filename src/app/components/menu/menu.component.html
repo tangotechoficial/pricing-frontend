@@ -17,4 +17,47 @@
       </button>
     </div>
   </div>
+
+  <div>
+
+<!-- MODAL -->
+
+<div class="myModal" [hidden]="modalView">
+  <button type="button" class="close" aria-label="Close" (click)="cerrarBienvenida()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+
+  <div class="modalWrapper">
+
+    <div class="modalIcons"> 
+
+      <div class="circle">
+      </div>
+      <div class="exclam">
+         <i class="badgeIcon fas fa-exclamation"></i>
+      </div>         
+
+      <div class="circleNum">
+         <span class="badgeIcon">{{numeroNotificaciones}}</span>        
+      </div>
+
+ 
+    </div>
+
+    <div class="modalMsg">
+      <h3 class="msg1">Seja Bem-vindo {{this.sCurrentUser.name}}!</h3>
+      <p class="msg2">Vocé tem <span class="font-weight-bold">{{numeroNotificaciones}}</span> que precisam da sua atenção </p>      
+    </div>
+
+
+    <div class="modalBut">
+      <button  (click)="cerrarBienvenida()">Agora não</button>
+    </div>
+
+  </div>
 </div>
+
+
+  </div>
+</div>
+
