@@ -109,23 +109,25 @@ i {
     background-color: #384461;
   }
 
-  .button-save {
+  .button-save{
     background: $martinsBlue;
     border-color: $martinsBlue;
   }
 
-  button.btn.btn-primary.btn-block.button-save, button.btn.btn-primary{
-      color: white;
+  button.btn.btn-primary.btn-block.button-save, button.btn.btn-primary, button.btn.btn-secondary{
+    color: $martinsBlue;
+    font-weight: bold;
+    background: white;
+    border-color: $martinsBlue;
+    border: 3px solid;
+  }
+
+  button.btn.btn-secondary.button-save{
       background: $martinsBlue;
-      border-color: $martinsBlue;
+      color: white;
+      font-weight: normal;
+      border-radius: 5px;
   }
-
-  button.btn.btn-secondary{
-    color: white;
-    background: $martinsRed;
-    border-color: $martinsRed;
-  }
-
 
 [contentEditable=true]:empty:not(:focus):before{
     content:attr(data-text)

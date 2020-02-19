@@ -15,7 +15,7 @@ export class NavegacionComponent implements OnInit {
     "/menu": "Inicio",
     "/preciobase": "Esquema de Cálculo / Precio Base",
     "/precioventa": "Esquema de Cálculo / Precio Venta",
-    "/sacceso": "Sequencia de Acesso",
+    "/sacceso": "Sequência de acesso",
     "/condicion": "Condicion",
   }
   public section: string;
