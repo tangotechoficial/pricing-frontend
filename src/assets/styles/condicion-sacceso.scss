@@ -112,7 +112,20 @@ i {
   .button-save {
     background: $martinsBlue;
     border-color: $martinsBlue;
-}
+  }
+
+  button.btn.btn-primary.btn-block.button-save, button.btn.btn-primary{
+      color: white;
+      background: $martinsBlue;
+      border-color: $martinsBlue;
+  }
+
+  button.btn.btn-secondary{
+    color: white;
+    background: $martinsRed;
+    border-color: $martinsRed;
+  }
+
 
 [contentEditable=true]:empty:not(:focus):before{
     content:attr(data-text)

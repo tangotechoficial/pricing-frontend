@@ -24,7 +24,7 @@ import { FilterPipeSeleccionadoAcceso } from './pipes/filterseleccionado.pipe';
 import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { BusinessMenuComponent } from './components/navegacion/business-menu/business-menu.component';
-import { TechnicalMenuComponent } from './components/navegacion/technical-menu/technical-menu.component';
+import { TechnicalMenuComponent } from './components/navegacion/technical-menu/technical-menu.component'
 
 @NgModule({
   declarations: [
