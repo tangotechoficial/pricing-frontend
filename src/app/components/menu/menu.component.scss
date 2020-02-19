@@ -1,0 +1,103 @@
+$color-prim:#737373;
+$color-prim-light:lighten($color-prim , 10%);
+$color-sec:#6288CB;
+
+.menu-backgroud {
+    background: #f8f9fa;
+    height: 100vh;
+}
+
+.alert {
+    display: block;
+    width:40%;
+    margin-left: auto;
+    margin-right: auto;
+ }
+ .myModal{
+ 	background-color:whitesmoke;
+ 	height: 300px;
+ 	width: 90%;
+ 	max-width: 500px;
+ 	position: absolute;
+ 	top:50%;
+ 	left:50%;
+ 	
+ 	transform: translate(-50%,-50%);
+ 	box-shadow:  5px 8px 8px 5px rgba(100,100,100,0.5);
+ 	text-align: center;
+	.close{
+		padding:10px 15px;
+	}
+ 	.modalWrapper{
+ 		padding:50px;
+ 		.modalIcons{
+			height: 80px;
+			width: 80px;
+			margin:7px auto;
+			position: relative;
+
+
+ 			.circle{
+ 				height: 100%;
+ 				width: 100%;
+				border:5px solid $color-prim;
+				border-radius:50%;
+				position: relative;
+ 			}
+			.exclam{
+
+				position: absolute;
+				top:20%;
+				right:39%;
+	
+				
+				i{
+					font-size: 50px;
+					color:$color-prim-light;
+				}
+			}
+
+
+ 			.circleNum{
+	 				background-color: $color-sec;
+	 				border-radius:50%;
+	 				position: absolute;
+	 				height: 25px;
+	 				width: 25px;
+	 				top:-10px;
+	 				right:-7px;
+
+	 			.badgeIcon{
+					font-size: 15px;
+					color:white;
+	 			}
+ 			}
+
+ 		}
+ 		.modalMsg{
+ 			.msg1{
+ 				color:$color-prim;
+ 				font-size:24px;
+
+ 			}
+ 			.msg2{
+				color:$color-prim-light;
+ 			}
+
+ 		}
+ 		.modalBut{
+ 			button{
+ 				color:$color-sec;
+ 				background-color: transparent;
+ 				border-style: none;
+ 			}
+
+ 		}
+ 	}
+
+ }
+
+
+
+
+ 

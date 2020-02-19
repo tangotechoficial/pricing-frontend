@@ -4,11 +4,15 @@ declare var $: any;
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
-  styleUrls: ['./menu.component.css']
+  styleUrls: ['./menu.component.css' , './menu.component.scss' ]
 })
+
 export class MenuComponent implements OnInit {
   public sCurrentUser = JSON.parse(localStorage.getItem("User"));
   public bBusiness: boolean;
+  public numeroNotificaciones:number = 3;
+  public modalView:boolean =false;
+
   constructor() { }
   
   ngOnInit() {
@@ -22,6 +26,10 @@ export class MenuComponent implements OnInit {
       $('.alert').hide();
     },
     2000);
+  }
+
+  cerrarBienvenida(){
+   this.modalView = true;
   }
 
 }
