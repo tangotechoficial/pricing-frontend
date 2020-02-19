@@ -26,8 +26,8 @@ export class NavegacionComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userTechnical = localStorage.User.type == "technical" ? true : false;
-    console.log(this.userTechnical)
+    const user = JSON.parse(localStorage.User);
+    this.userTechnical = user.type == "technical" ? true : false;
     this._route.url.subscribe(url => {
       this.section = this.mapUrlToSection[location.pathname]
       if(location.pathname != "/login"){

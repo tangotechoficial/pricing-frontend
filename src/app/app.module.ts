@@ -25,6 +25,7 @@ import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { BusinessMenuComponent } from './components/navegacion/business-menu/business-menu.component';
 import { TechnicalMenuComponent } from './components/navegacion/technical-menu/technical-menu.component';
+import { CrearSaccesoComponent } from './components/sacceso/crear-sacceso/crear-sacceso.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { TechnicalMenuComponent } from './components/navegacion/technical-menu/t
     FilterPipeSeqAcceso,
     FilterPipeSeleccionadoAcceso,
     BusinessMenuComponent,
-    TechnicalMenuComponent
+    TechnicalMenuComponent,
+    CrearSaccesoComponent
   ],
   imports: [
     BrowserModule,
