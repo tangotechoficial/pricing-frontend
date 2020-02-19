@@ -3,9 +3,7 @@
 
 <!--Component Content -->
 <div class="background container col-9 d-flex flex-column justify-content-center">
-    <!-- Button trigger modal -->
     
-
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -28,6 +26,7 @@
         </div>
     </div>
     <div class="container row col-12 p-4">
+        
         <div class="col-sm-2">
             <span class="text-header">Cód. Sequência de Acesso</span>
             <input id="SQSearch" class="form-control mt-3" [(ngModel)]="_sacceso.sSeqAcceso" [value]="selectedValue" />
@@ -91,6 +90,7 @@
     <div class="container row col-12 p-4 justify-content-md-center">
         <div class="col-md-4">
             <div class="form-group">
+                <!-- Button trigger modal -->
                 <button type="button" class="btn btn-primary btn-block button-adicionar" data-toggle="modal" data-target="#exampleModal">
                     Adicionar novo campo
                 </button>
@@ -102,4 +102,5 @@
             </div>
         </div>
     </div>
+    
 </div>

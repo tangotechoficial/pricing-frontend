@@ -61,6 +61,8 @@ export class SaccesoComponent implements OnInit {
     });
   }
 
+
+
   onBlurSQSearch() {
     this.searchValues = new Array<any>();
   }
