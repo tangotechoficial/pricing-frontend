@@ -16,11 +16,14 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    ...
+                    <span class="text-header">Nome</span>
+                    <input id="input-modal-tipo" class="form-control mb-2 mt-3"/>
+                    <span class="text-header">Descrição</span>
+                    <input id="input-modal-descripcion" class="form-control mt-3" [(ngModel)]="inputDescripcion"/>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary button-close">Fechar</button>
-                    <button type="button" class="btn btn-secondary button-save" data-dismiss="modal">Salvar</button>
+                    <button type="button" class="btn btn-primary button-close" data-dismiss="modal">Fechar</button>
+                    <button type="button" id="btn-modal-save" class="btn btn-primary button-save" data-dismiss="modal" (click)="saveSAmodal(inputDescripcion)" >Salvar</button>
                 </div>
             </div>
         </div>
@@ -87,7 +90,7 @@
         </div>
     </div>
 
-    <div class="container row col-12 p-4 justify-content-md-center">
+    <div class="container row col-12 pt-4 justify-content-md-center">
         <div class="col-md-4">
             <div class="form-group">
                 <!-- Button trigger modal -->
@@ -102,5 +105,18 @@
             </div>
         </div>
     </div>
-    
+    <div class="row justify-content-md-center">
+        <div *ngIf="saveSuccess" class="col-md-8 alert alert-success" role="alert">
+            <strong>Sequência de acesso salvos com sucesso!</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+        </div>
+        <div *ngIf="saveError" class="col-md-8 alert alert-danger" role="alert">
+            <strong>Ocorreu um erro</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+        </div>
+    </div>
 </div>

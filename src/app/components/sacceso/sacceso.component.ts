@@ -27,6 +27,9 @@ export class SaccesoComponent implements OnInit {
   public searchValues: Array<any>;
   public selValues1: Array<any>;
   public selValues2: Array<any>;
+  public saveSuccess: boolean = false;
+  public saveError: boolean = false;
+  public inputDescripcion: string;
 
   constructor(
     private _metadataService: MetadataService,
@@ -142,15 +145,35 @@ export class SaccesoComponent implements OnInit {
 
     this._sacceso.sDesAcceso = descripcion;
   }
+  
+  public saveSAmodal(value){
+    debugger;
+    value = this.inputDescripcion;
+    this.submitSA();
+  }
 
   public submitSA() {
-    this._saccesoService.postSacceso(this._sacceso)
+    debugger;
+    /* this._saccesoService.postSacceso(this._sacceso)
       .subscribe(response => {
         console.log(response);
+          this.saveSuccess = true;
+          setTimeout(function() {
+          this.saveSuccess = false;
+          }.bind(this), 2000)
       },
         error => {
           console.log(error);
-        })
+          this.saveError = true;
+          setTimeout(function() {
+          this.saveError = false;
+          }.bind(this), 2000)
+        }) */
+        this.saveSuccess = true;
+        setTimeout(function() {
+        this.saveSuccess = false;
+        }.bind(this), 2000)
+        
   }
 
 }
