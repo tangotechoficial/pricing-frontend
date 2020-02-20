@@ -44,7 +44,7 @@ export class NavegacionComponent implements OnInit {
   }
 
   notifyOpen(){
-      $("#notificationPopUp").fadeToggle(200);
+      $("#notificationPopUp").fadeToggle(400);
   }
 
 /*   ngDoCheck() {

@@ -1,4 +1,6 @@
-<div class="container col-9 d-flex justify-content-center">
+
+<div class="row container">
+<div class="col-7 d-flex justify-content-center">
 
   <ul *ngIf="isLoggedIn" class="nav custom-nav col-9 p-2">
     <li class="nav-item">
@@ -11,15 +13,25 @@
 
 
   </ul>
-  <ul class="notfiConfigList nav custom-nav">
-  	<li class="bellIcon nav-item" (click)="notifyOpen()"> 
-  		<i class="menuIcon far fa-bell"></i>
-  		<div class="myBadge"><p>{{numAprob + numNotif }} </p></div>
-  	</li>
-  	<li class="configIcon nav-item">  <i class="menuIcon fas fa-cog"></i>
-  	<li class="logoIcon nav-item"><img src="../../../assets/img/logo-nav.jpg" /></li>
-  	
-  </ul>
+
+  </div>
+
+  <div class="col-5 d-flex justify-content-center">
+    <ul class="notfiConfigList nav custom-nav">
+      <li class="bellIcon nav-item" (click)="notifyOpen()"> 
+        <i class="menuIcon far fa-bell"></i>
+        <div class="myBadge"><p>{{numAprob + numNotif }} </p></div>
+      </li>
+      <li class="configIcon nav-item">  <i class="menuIcon fas fa-cog"></i>
+      <li class="logoIcon nav-item"><img src="../../../assets/img/logo-nav.jpg" /></li>
+      <li class="logoIcon2 nav-item"><img src="../../../assets/img/login-logo.jpg" /></li>
+      
+    </ul>
+  </div>
+
+</div>
+
+
 
 
 
@@ -30,10 +42,10 @@
   	</div>
 
   	
-  	  <div class="nav nav-tabs" id="nav-tab" role="tablist">
-
-  	    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true"><span class="notifTab">{{numNotif}}  </span >notificações</a>
-  	    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false"><span class="notifTab">{{numAprob}}  </span>aprovações</a>
+  	  <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+    
+  	    <a class=" itemtab nav-item nav-link active col-xs-6 " id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true"><span class="notifTab">{{numNotif}}  </span >notificações</a>
+  	    <a class=" itemtab nav-item nav-link col-xs-6" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false"><span class="notifTab">{{numAprob}}  </span>aprovações</a>
 
   	  </div>
   	
@@ -146,7 +158,6 @@
 
 
   	
-  </div>
-
+ 
 
 
