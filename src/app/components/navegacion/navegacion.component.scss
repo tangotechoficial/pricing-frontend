@@ -9,6 +9,15 @@ $mobile : 350px;
 $tablet : 770px;
 $desktop : 3000px;
 
+.isLogMenu{
+		padding-left:10px;
+}
+.barWidth{
+	width: 86%;
+	margin:0 auto;
+	margin-bottom:20px;
+}
+
 .menuIcon{
 	color:lighten($color-prim-light,10%);
 	padding:5px;
@@ -17,13 +26,16 @@ $desktop : 3000px;
 
 .notfiConfigList{
 	list-style: none;
+	// @media (min-width: $tablet) and (max-width: $desktop) {
+	//   margin-left:50px;
+	// }
 	.nav-item{
 		display: inline-block;
 		@media  (max-width: $tablet) {
 		  padding:1px;
 		}
 		i{
-			padding:18px 12px 0px 12px;
+			padding:12px 12px 0px 12px;
 			transition:1s;
 			cursor:pointer;
 		}	
@@ -57,13 +69,16 @@ $desktop : 3000px;
 			@media (min-width: $tablet) and (max-width: $desktop) {
 			  display: inline-block;
 			}
+			img{
+				height: 80%;
+			}
 
 			
 
 		}
 		&.logoIcon2{
 			display: none;
-			margin-top:12px;
+			margin-top:8px;
 			@media (min-width: 0px) and (max-width: $tablet) {
 			  display: inline-block;
 			}
@@ -92,8 +107,8 @@ $desktop : 3000px;
 	z-index:999;
 	box-shadow:  1px 5px 11px 0px rgba(100, 100, 100, 0.3);
 	position: absolute;
-	top:90px;
-	right:500px;
+	top:70px;
+	right:330px;
 	display: none;
 	width: 400px;
 	background: $color-prim-light2;
