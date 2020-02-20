@@ -1,5 +1,6 @@
 $color-prim:#737373;
-$color-prim-light:lighten($color-prim , 10%);
+$color-prim-light:#9FA2AB;
+$color-prim-light2:#E7E9F1;
 $color-sec:#6288CB;
 
 .menu-backgroud {
@@ -14,16 +15,17 @@ $color-sec:#6288CB;
     margin-right: auto;
  }
  .myModal{
- 	background-color:whitesmoke;
+ 	background-color:white;
  	height: 300px;
  	width: 90%;
  	max-width: 500px;
  	position: absolute;
  	top:50%;
  	left:50%;
+ 	transition:2s;
  	
  	transform: translate(-50%,-50%);
- 	box-shadow:  5px 8px 8px 5px rgba(100,100,100,0.5);
+ 	box-shadow:  1px 5px 11px 0px rgba(100, 100, 100, 0.3);
  	text-align: center;
 	.close{
 		padding:10px 15px;
@@ -48,7 +50,7 @@ $color-sec:#6288CB;
 
 				position: absolute;
 				top:20%;
-				right:39%;
+				right:38%;
 	
 				
 				i{

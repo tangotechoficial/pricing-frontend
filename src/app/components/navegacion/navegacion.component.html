@@ -1,10 +1,151 @@
 <div class="container col-9 d-flex justify-content-center">
-  <ul *ngIf="isLoggedIn" class="nav custom-nav col-9 p-2">
-    <li class="nav-item">
+  <ul *ngIf="isLoggedIn" class="nav custom-nav col-8 p-2">
+     <li class="nav-item">
       <app-technical-menu *ngIf="userTechnical"></app-technical-menu>
       <app-business-menu *ngIf="!userTechnical"></app-business-menu>
     </li>
+
     <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">{{section}}</a>
+
+
   </ul>
-  <img src="../../../assets/img/logo-nav.jpg" class="col-3 py-2 ml-4"/>
+  <ul class="notfiConfigList nav custom-nav">
+  	<li class="bellIcon nav-item" (click)="notifyOpen()"> 
+  		<i class="menuIcon far fa-bell"></i>
+  		<div class="myBadge"><p>{{numAprob + numNotif }} </p></div>
+  	</li>
+  	<li class="configIcon nav-item">  <i class="menuIcon fas fa-cog"></i>
+  	<li class="logoIcon nav-item"><img src="../../../assets/img/logo-nav.jpg" /></li>
+  	
+  </ul>
+
+
+
+  <div id="notificationPopUp" class="notificationPopUp">
+
+  	<div class="notificationTitle">
+  		<h4>pendências</h4>
+  	</div>
+
+  	
+  	  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+
+  	    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true"><span class="notifTab">{{numNotif}}  </span >notificações</a>
+  	    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false"><span class="notifTab">{{numAprob}}  </span>aprovações</a>
+
+  	  </div>
+  	
+
+  	<div class="tab-content" id="nav-tabContent">
+  	  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+  	  	  	<div class="notificationBody">
+
+  	  	  		<ul class="notificationlist">
+
+  	  	  			<div id="notif" aria-labelledby="nav-home-tab">
+  	  		  			<li class="notificationItem">
+  	  		  				<div class="titleMod">
+  	  		  					<div class="row">
+  	  		  						<div class="col col-lg-9">
+  	  		  							<p class="title">Rebate a Vencer <span class="complete"></span></p>
+  	  		  						</div>
+  	  		  						<div class="col col-lg-3">
+  	  		  							<p class="title2">Há 4h</p>
+  	  		  						</div>
+  	  		  					</div>
+  	  		  				</div>
+  	  		  				<div class="descriptionMod">
+  	  			  				<p class="description">ACHOC.NESCAU 2.0 ACTIG 30X400G</p>  					
+  	  		  				</div>
+  	  		  		
+  	  		  			</li>
+  	  		  			<li class="notificationItem">
+  	  		  				<div class="titleMod">
+  	  		  					<div class="row">
+  	  		  						<div class="col col-lg-9">
+  	  		  							<p class="title">Diretriz estratégica declinada <span class="complete"> 2/5</span></p> 
+  	  		  						</div>
+  	  		  						<div class="col col-lg-3">
+  	  		  							<p class="title2">Há22h</p>
+  	  		  						</div>
+  	  		  					</div>
+  	  		  				</div>
+  	  		  				<div class="descriptionMod">
+  	  			  				<p class="description">COPO AMERICANO AGUA 190ML 2010 24X1</p>  					
+  	  		  				</div>
+  	  		  		
+  	  		  			</li>
+
+  	  		  			<li class="notificationItem">
+  	  		  				<div class="titleMod">
+  	  		  					<div class="row">
+  	  		  						<div class="col col-lg-9">
+  	  		  							<p class="title">Rebate a Vencer<span class="complete"> </span></p> 
+  	  		  						</div>
+  	  		  						<div class="col col-lg-3">
+  	  		  							<p class="title2">Há 1d 8h</p>
+  	  		  						</div>
+  	  		  					</div>
+  	  		  				</div>
+  	  		  				<div class="descriptionMod">
+  	  			  				<p class="description">ACHOC. NESCAU 2.0 ACTIG 30X400G</p>  					
+  	  		  				</div>
+  	  		  		
+  	  		  			</li>
+
+  	  		  			<div class="nonotif">
+  	  		  				<p>não há mais notificações</p>
+  	  		  			</div>
+  	  	  				
+  	  	  			</div>
+
+  	  	  			
+  	  	  		</ul>
+  	  	  	</div>
+  	  </div>
+  	  <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+  	  	  	<div class="notificationBody">
+
+  	  	  		<ul class="notificationlist">
+
+  	  	  			<div id="notif" aria-labelledby="nav-home-tab">
+  	  		  			<li class="notificationItem">
+  	  		  				<div class="titleMod">
+  	  		  					<div class="row">
+  	  		  						<div class="col col-lg-9">
+  	  		  							<p class="title">Rebate a Vencer <span class="complete"></span></p>
+  	  		  						</div>
+  	  		  						<div class="col col-lg-3">
+  	  		  							<p class="title2">Há 4h</p>
+  	  		  						</div>
+  	  		  					</div>
+  	  		  				</div>
+  	  		  				<div class="descriptionMod">
+  	  			  				<p class="description">ACHOC.NESCAU 2.0 ACTIG 30X400G</p>  					
+  	  		  				</div>
+  	  		  		
+  	  		  			</li>
+
+
+  	  		  			<div class="nonotif">
+  	  		  				<p>não há mais notificações</p>
+  	  		  			</div>
+  	  	  				
+  	  	  			</div>
+
+  	  	  			
+  	  	  		</ul>
+  	  	  	</div>
+  	  </div>
+
+  	</div>
+
+
+
+
+  	
+  </div>
+
+
+
 </div>

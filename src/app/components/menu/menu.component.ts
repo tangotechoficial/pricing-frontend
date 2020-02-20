@@ -10,7 +10,7 @@ declare var $: any;
 export class MenuComponent implements OnInit {
   public sCurrentUser = JSON.parse(localStorage.getItem("User"));
   public bBusiness: boolean;
-  public numeroNotificaciones:number = 3;
+  public numTotNotif:number = 3;
   public modalView:boolean =false;
 
   constructor() { }
