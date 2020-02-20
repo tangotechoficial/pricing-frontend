@@ -1,0 +1,145 @@
+@import '../../../assets/styles/global.scss';
+@import '../../../assets/styles/condicion-sacceso.scss';
+
+.main-container {
+    height: 100vh;
+}
+
+.btn-filter-color {
+    color: white;
+}
+
+.container-tab {
+    position: relative;
+    height: 434px;
+    overflow: auto;
+    background: white;
+}
+
+
+
+.tabs { 
+    /* Makes a horizontal row */
+    float: left; 
+      
+    /* So the psueudo elements can be
+       abs. positioned inside */
+    position: relative; 
+  }
+  .tabs a { 
+    /* Make them block level
+       and only as wide as they need */
+    float: left; 
+    padding: 10px 40px; 
+    text-decoration: none;
+    
+    /* Default colors */ 
+    color: black;
+    background: #ddc385; 
+    
+    /* Only round the top corners */
+    -webkit-border-top-left-radius: 15px;
+    -webkit-border-top-right-radius: 15px;
+    -moz-border-radius-topleft: 15px;
+    -moz-border-radius-topright: 15px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px; 
+  }
+  .tabs .active {
+    /* Highest, active tab is on top */
+    z-index: 3;
+  }
+  .tabs .active a { 
+    /* Colors when tab is active */
+    background: white; 
+    color: black; 
+  }
+  .tabs:before, .tabs:after, 
+  .tabs a:before, .tabs a:after {
+    /* All pseudo elements are 
+       abs. positioned and on bottom */
+    position: absolute;
+    bottom: 0;
+  }
+  /* Only the first, last, and active
+     tabs need pseudo elements at all */
+  .tabs:last-child:after,   .tabs:last-child a:after,
+  .tabs:first-child:before, .tabs:first-child a:before,
+  .tabs .active:after,   .tabs .active:before, 
+  .tabs .active a:after, .tabs .active a:before {
+    content: "";
+  }
+  .tabs .active:before, .tabs .active:after {
+    background: white; 
+    
+    /* Squares below circles */
+    z-index: 1;
+  }
+  /* Squares */
+  .tabs:before, .tabs:after {
+    background: #ddc385;
+    width: 10px;
+    height: 10px;
+  }
+  .tabs:before {
+    left: -10px;      
+  }
+  .tabs:after { 
+    right: -10px;
+  }
+  /* Circles */
+  .tabs a:after, .tabs a:before {
+    width: 20px; 
+    height: 20px;
+    /* Circles are circular */
+    -webkit-border-radius: 10px;
+    -moz-border-radius:    10px;
+    border-radius:         10px;
+    background: $backgroundGrey;
+    
+    /* Circles over squares */
+    z-index: 2;
+  }
+  .tabs .active a:after, .tabs .active a:before {
+    background: #ddc385;
+  }
+  /* First and last tabs have different
+     outside color needs */
+  .tabs:first-child.active a:before,
+  .tabs:last-child.active a:after {
+    background: $backgroundGrey;
+  }
+  .tabs a:before {
+    left: -20px;
+  }
+  .tabs a:after {
+    right: -20px;
+  }
+
+
+
+
+//   /* Circles */
+//   .bee:after, .bee:before {
+//     width: 20px; 
+//     height: 20px;
+//     /* Circles are circular */
+//     -webkit-border-radius: 10px;
+//     -moz-border-radius:    10px;
+//     border-radius:         10px;
+//     background: $backgroundGrey;
+    
+//     /* Circles over squares */
+//     z-index: 2;
+//   }
+
+// //   .bee:first-child a:before,
+// //   .tabs:last-child.active a:after {
+// //     background: $backgroundGrey;
+// //   }
+//   .bee:before {
+//     left: -20px;
+//   }
+//   .bee:after {
+//     right: -20px;
+//   }
