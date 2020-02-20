@@ -3,17 +3,72 @@ $color-prim-light:#9FA2AB;
 $color-prim-light2:#E7E9F1;
 $color-sec:#6288CB;
 
+// GENERAL
+
 .menu-backgroud {
-    background: #f8f9fa;
+    background: #F7F8FB;
     height: 100vh;
 }
-
 .alert {
     display: block;
     width:40%;
     margin-left: auto;
     margin-right: auto;
  }
+
+ //BOOTSTRAP REPLACE
+
+ .input-group{
+ 	padding:0px 3px !important;
+
+
+ }
+
+
+// CONTAINER BUSINESS
+.businessContainer{
+	width: 100%;
+	height: 100%;
+	margin-bottom:30px;
+
+	.bcard{
+		background: white;
+		font-size: 11px;
+		box-shadow:  1px 5px 11px 0px rgba(100, 100, 100, 0.4);
+		padding:25px;
+		margin-bottom:10px;
+		border-radius:5px;
+		height: auto;
+
+		.title{
+			color:$color-prim-light;
+			padding:3px;
+			font-size: 15px !important;
+		}
+		input , button{
+			 	font-size: 11px !important;
+		}
+
+		button{
+			background: $color-sec;
+			border:0px;
+		}
+		label{
+			// width: 100%;
+			// display: block;
+		}
+		.form{
+			padding:10px;
+		}
+	}
+
+}
+
+
+
+
+// MODAL BIENVENIDA
+
  .myModal{
  	background-color:white;
  	height: 300px;
