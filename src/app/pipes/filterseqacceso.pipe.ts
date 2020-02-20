@@ -8,7 +8,7 @@ export class FilterPipeSeqAcceso implements PipeTransform {
         if (!searchSeq) return items;
         searchSeq = searchSeq.toLowerCase();
         return items.filter(it => {
-            return it.tipo.toLowerCase().includes(searchSeq);
+            return it.sDesAcceso.toLowerCase().includes(searchSeq);
         });
     }
 }

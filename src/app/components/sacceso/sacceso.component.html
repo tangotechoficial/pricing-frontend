@@ -16,14 +16,14 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <span class="text-header">Nome</span>
-                    <input id="input-modal-tipo" class="form-control mb-2 mt-3"/>
+                    <span class="text-header">Código</span>
+                    <input id="input-modal-tipo" [(ngModel)]="_newSA.sSeqAcceso" class="form-control mb-2 mt-3"/>
                     <span class="text-header">Descrição</span>
-                    <input id="input-modal-descripcion" class="form-control mt-3" [(ngModel)]="inputDescripcion"/>
+                    <input id="input-modal-descripcion" [(ngModel)]="_newSA.sDesAcceso" class="form-control mt-3"/>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary button-close" data-dismiss="modal">Fechar</button>
-                    <button type="button" id="btn-modal-save" class="btn btn-primary button-save" data-dismiss="modal" (click)="saveSAmodal(inputDescripcion)" >Salvar</button>
+                    <button type="button" id="btn-modal-save" class="btn btn-primary button-save" data-dismiss="modal" (click)="submitNewSA()" >Salvar</button>
                 </div>
             </div>
         </div>
@@ -35,9 +35,9 @@
             <input id="SQSearch" class="form-control mt-3" [(ngModel)]="_sacceso.sSeqAcceso" [value]="selectedValue" />
             <ul *ngIf="_sacceso.sSeqAcceso" class="filter-select list-group">
                 <ng-container *ngIf="!existSelected">
-                    <li *ngFor="let val of searchValues" (click)="onSelectedValue(val)"
+                    <li *ngFor="let val of sequenciasAccesoComp" (click)="onSelectedValue(val)"
                         class="filter-select-list list-group-item">
-                        {{val}}
+                        {{val.sDesAcceso}}
                     </li>
                 </ng-container>
             </ul>
@@ -59,9 +59,9 @@
                 <ul class="p-0 custom-scrollbar-css">
                     <li *ngFor="let seq of sequenciasAcceso | filterseqacceso: searchSeq ; let id = index " class="p-2">
                         <div class="custom-control custom-checkbox">
-                            <input (change)="checkValue(seq.tipo)" type="checkbox" class="custom-control-input"
+                            <input (change)="checkValue(seq)" type="checkbox" class="custom-control-input"
                                 id="{{id}}">
-                            <label class="pl-4 custom-control-label" for="{{id}}">{{seq.tipo}}</label>
+                            <label class="pl-4 custom-control-label" for="{{id}}">{{seq.getDescription()}}</label>
                         </div>
                     </li>
                 </ul>
@@ -77,7 +77,7 @@
                     <li *ngFor="let seq of selectedProperties | filterseleccionado :searchSeleccionado"
                         class="p-2 w-100 d-flex">
                         <div class="d-flex w-100 justify-content-between align-items-center">
-                            <label class="pl-4 mb-0">{{seq.tipo}}</label>
+                            <label class="pl-4 mb-0">{{seq.getDescription()}}</label>
                             <button type="button" (click)="onDltSelection(seq)"
                                 class="btn btn-labeled btn-danger ml-2 p-0 d-flex flex-column align-items-center">
                                 <span class="btn-label d-flex align-items-center"><i
@@ -107,7 +107,7 @@
     </div>
     <div class="row justify-content-md-center">
         <div *ngIf="saveSuccess" class="col-md-8 alert alert-success" role="alert">
-            <strong>Sequência de acesso salvos com sucesso!</strong>
+            <strong>Sequência de acesso {{_sacceso.sSeqAcceso}} - {{_sacceso.sDesAcceso}} salva com sucesso!</strong>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>

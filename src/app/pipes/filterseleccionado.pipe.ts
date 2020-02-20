@@ -8,7 +8,7 @@ export class FilterPipeSeleccionadoAcceso implements PipeTransform {
         if (!searchSeleccionado) return items;
         searchSeleccionado = searchSeleccionado.toLowerCase();
         return items.filter(it => {
-            return it.tipo.toLowerCase().includes(searchSeleccionado);
+            return it.sDesAcceso.toLowerCase().includes(searchSeleccionado);
         });
     }
 }

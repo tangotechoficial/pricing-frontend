@@ -22,7 +22,9 @@ export class SaccesoComponent implements OnInit {
   selectedValue: string;
   public existSelected = false;
   public _sacceso: Sacceso;
+  public _newSA: Sacceso;
   public sequenciasAcceso: Array<any>;
+  public sequenciasAccesoComp: Array<any>;
   public selectedProperties: Array<any>;
   public searchValues: Array<any>;
   public selValues1: Array<any>;
@@ -30,6 +32,7 @@ export class SaccesoComponent implements OnInit {
   public saveSuccess: boolean = false;
   public saveError: boolean = false;
   public inputDescripcion: string;
+
 
   constructor(
     private _metadataService: MetadataService,
@@ -40,11 +43,13 @@ export class SaccesoComponent implements OnInit {
     
 
     this.sequenciasAcceso = new Array<any>();
+    this.sequenciasAccesoComp = new Array<any>();
     this.selectedProperties = new Array<any>();
     this.searchValues = new Array<any>();
     this.selValues1 = new Array<any>();
     this.selValues2 = new Array<any>();
     this._sacceso = new Sacceso();
+    this._newSA = new Sacceso();
     this._metadataService.getMetadataSeqAcceso().map(elem => {
       var elemModel = {
         'tipo': elem,
@@ -71,12 +76,10 @@ export class SaccesoComponent implements OnInit {
   }
 
   public onSelectedValue(event) {
-    console.log(event);
     this.selectedValue = event;
     this.existSelected = true;
       setTimeout(function() {
         this.existSelected = false;
-        console.log(this.existSelected);
     }.bind(this), 3000)
   }
 
@@ -102,9 +105,9 @@ export class SaccesoComponent implements OnInit {
   onDltSelection(val) {
     var selectedIndex = '';
     this.selectedProperties.forEach((elem, index) => {
-      if (elem.tipo == val.tipo) {
+      if (elem.getCodigo() == val.getCodigo()) {
         this.sequenciasAcceso.forEach((sElem, index2) => {
-          if (sElem.tipo == val.tipo) {
+          if (sElem.getCodigo() == val.getCodigo()) {
             selectedIndex = index2.toString();
           }
         })
@@ -116,19 +119,18 @@ export class SaccesoComponent implements OnInit {
     elem.click()
   }
 
-  public checkValue(tipo) {
-
+  public checkValue(sa: Sacceso) {
     this.sequenciasAcceso.map(elem => {
-      if (elem.tipo == tipo) {
-        if (elem.selected) {
-          elem.selected = false;
+      if (elem.getCodigo() == sa.getCodigo()) {
+        if (elem.isSelected()){
+          elem.setSelected(false);
           this.selectedProperties.forEach((elem, index) => {
-            if (elem.tipo == tipo) {
+            if (elem.getCodigo() == sa.getCodigo()) {
               this.selectedProperties.splice(index, 1);
             }
           })
         } else {
-          elem.selected = true;
+          elem.setSelected(true);
           this.selectedProperties.push(elem);
         }
       }
@@ -137,23 +139,21 @@ export class SaccesoComponent implements OnInit {
     var descripcion = '';
     this.selectedProperties.forEach((elem, index) => {
       if (index == 0) {
-        descripcion = descripcion + elem.tipo;
+        descripcion = descripcion + elem.getDescription();
       } else {
-        descripcion = descripcion + '/' + elem.tipo;
+        descripcion = descripcion + '/' + elem.getDescription();
       }
     })
 
     this._sacceso.sDesAcceso = descripcion;
   }
-  
-  public saveSAmodal(value){
-    debugger;
-    value = this.inputDescripcion;
-    this.submitSA();
+
+  submitNewSA(){
+    this.sequenciasAcceso.push(this._newSA);
+    this._newSA = new Sacceso();
   }
 
   public submitSA() {
-    debugger;
     /* this._saccesoService.postSacceso(this._sacceso)
       .subscribe(response => {
         console.log(response);
@@ -172,7 +172,14 @@ export class SaccesoComponent implements OnInit {
         this.saveSuccess = true;
         setTimeout(function() {
         this.saveSuccess = false;
+        this._sacceso = new Sacceso()
         }.bind(this), 2000)
+        this.sequenciasAccesoComp.push(this._sacceso);
+        this.sequenciasAcceso.map((elem, index) => {
+          var domElem = document.getElementById(index.toString());
+          domElem.click()
+          elem.setSelected(false);
+        })
         
   }
 

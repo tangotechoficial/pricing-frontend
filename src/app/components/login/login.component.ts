@@ -31,7 +31,6 @@ export class LoginComponent implements OnInit {
      this._loginService.login(this._user)
       .subscribe(
         response => {
-          console.log(response);
           var user = response.user;
           this._user = new User(user.sEmail, user.sPassword, user.sName, user.sToken, user.sType, user.bLoggedIn, user.sUser_id, user.iAdmin_p);
           this._router.navigate(['/menu']);
