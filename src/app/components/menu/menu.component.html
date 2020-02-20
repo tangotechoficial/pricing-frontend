@@ -8,19 +8,10 @@
   <div *ngIf="!this.bBusiness">
     
   </div>
-  <!-- Aca charly -->
-  <div class="align-bottom" width="50px !important">
-    <div class="alert alert-success alert-dismissible fade show fixed-bottom" role="alert">
-      Bemvenido <strong>{{this.sCurrentUser.name}}</strong>
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-  </div>
 
   <div>
 
-<!-- MODAL -->
+<!-- MODAL BIENVENIDA -->
 
 <div class="myModal" [hidden]="modalView">
   <button type="button" class="close" aria-label="Close" (click)="cerrarBienvenida()">
@@ -38,7 +29,7 @@
       </div>         
 
       <div class="circleNum">
-         <span class="badgeIcon">{{numeroNotificaciones}}</span>        
+         <span class="badgeIcon">{{numTotNotif}}</span>        
       </div>
 
  

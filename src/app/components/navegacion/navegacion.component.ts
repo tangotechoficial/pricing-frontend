@@ -1,16 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from "@angular/common";
+declare var $: any;
 
 @Component({
   selector: 'navegacion',
   templateUrl: './navegacion.component.html',
-  styleUrls: ['./navegacion.component.css']
+  styleUrls: ['./navegacion.component.css' , './navegacion.component.scss']
 })
+
 export class NavegacionComponent implements OnInit {
   public isLoggedIn: boolean = false
   public userTechnical: boolean = true;
   public currentUrl: string;
+  public numNotif:number = 3 ;
+  public numAprob:number = 1;
+
   private mapUrlToSection = {
     "/menu": "Inicio",
     "/preciobase": "Esquema de Cálculo / Precio Base",
@@ -36,6 +41,10 @@ export class NavegacionComponent implements OnInit {
         this.isLoggedIn = false;
       }
     })
+  }
+
+  notifyOpen(){
+      $("#notificationPopUp").fadeToggle(200);
   }
 
 /*   ngDoCheck() {

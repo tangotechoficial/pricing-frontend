@@ -1,0 +1,134 @@
+// UNIFICAR VARIABLES EN NAVEGACION Y MENU .SCSS
+
+$color-prim:#737373;
+$color-prim-light:#9FA2AB;
+$color-prim-light2:#E7E9F1;
+$color-sec:#6288CB;
+
+
+.menuIcon{
+	color:lighten($color-prim-light,10%);
+	padding:5px;
+	font-size:24px;
+}
+
+.notfiConfigList{
+	list-style: none;
+	.nav-item{
+		display: inline-block;
+		i{
+			padding:18px 12px 0px 12px;
+			transition:1s;
+			cursor:pointer;
+		}	
+		&:hover i{
+			color:$color-sec !important;
+			transition:1s;
+		}
+		&.bellIcon{
+			position: relative;
+			.myBadge{
+				background-color: $color-sec;
+				border-radius:42%;
+				position: absolute;
+				height: 17px;
+				width: 20px;
+				top:12px;
+				right:-2px;
+				opacity:0.95;
+				p{
+					color:white;
+					text-align: center;
+					font-size: 12px;
+				}
+
+				 			
+			}
+		}
+
+	}
+}
+
+// BOOTSTRAP REPLACE
+
+
+
+.notificationPopUp{
+	box-shadow:  1px 5px 11px 0px rgba(100, 100, 100, 0.3);
+	position: absolute;
+	top:90px;
+	right:340px;
+	display: none;
+	width: 450px;
+	background: $color-prim-light2;
+	border-radius:3px;
+	.notifTab{
+		color:$color-sec;
+		font-weight: 700;
+	}
+	.notificationTitle{
+		height: 45px;
+		text-align: center;
+		padding:13px;
+		h4{
+			color:$color-prim;
+			font-weight: 700;
+			font-size:15px;
+
+		}
+	}
+
+	.notificationBody{
+		height: 100%;
+		background: white;
+		box-shadow:  1px 5px 11px 0px rgba(100, 100, 100, 0.3);
+		overflow-y: scroll;
+
+
+		.notificationlist{
+				list-style: none;
+				padding:15px;
+			.notificationItem{
+				color:$color-prim;
+				padding:10px 20px;
+				width: 100%;
+				background-color: #EAEFF8;
+				border-radius: 5px;
+				margin-right:0px !important;
+				margin-top: 10px;
+				.titleMod{
+
+					.title{
+						font-weight: 700;	
+						.complete{
+							color:$color-sec;
+							font-weight: 400;
+						}					
+					}
+					.title2{
+						font-size:12px;
+						text-align: right;
+					}
+				}
+				.descriptionMod{
+					.description{
+						text-transform: uppercase;
+						font-size:16px;
+						margin-bottom: 	0px;
+
+					}
+				}
+			}
+			.nonotif{
+				padding:20px 0px 0px 20px;
+				p{
+					color:$color-prim;
+					text-align: center;
+					margin-bottom: 0px;
+				}
+			}
+
+		}
+	}
+
+}
