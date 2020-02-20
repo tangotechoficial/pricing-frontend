@@ -114,7 +114,7 @@ i {
     border-color: $martinsBlue;
   }
 
-  button.btn.btn-primary.btn-block.button-save, button.btn.btn-primary, button.btn.btn-secondary{
+  button.btn.btn-primary.btn-block.button-save, button.btn.btn-primary{
     color: $martinsBlue;
     font-weight: bold;
     background: white;
@@ -122,11 +122,18 @@ i {
     border: 3px solid;
   }
 
-  button.btn.btn-secondary.button-save{
+  /* button.btn.btn-secondary.button-save{
       background: $martinsBlue;
       color: white;
       font-weight: normal;
       border-radius: 5px;
+  } */
+
+  #btn-modal-save {
+    background: $martinsBlue;
+    color: white;
+    font-weight: normal;
+    border: 3px solid $martinsBlue;
   }
 
 [contentEditable=true]:empty:not(:focus):before{

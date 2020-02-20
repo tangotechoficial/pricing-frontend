@@ -1,8 +1,15 @@
 <div class="container col-9 d-flex justify-content-center">
+<<<<<<< HEAD
   <ul *ngIf="isLoggedIn" class="nav custom-nav col-8 p-2">
      <li class="nav-item">
       <app-technical-menu *ngIf="userTechnical"></app-technical-menu>
       <app-business-menu *ngIf="!userTechnical"></app-business-menu>
+=======
+  <ul *ngIf="isLoggedIn" class="nav custom-nav col-9 p-2">
+    <li class="nav-item">
+      <app-technical-menu *ngIf="!userTechnical"></app-technical-menu>
+      <app-business-menu *ngIf="userTechnical"></app-business-menu>
+>>>>>>> 93f0a462ef4bcecf13fe8e36ca4403c364951936
     </li>
 
     <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">{{section}}</a>
