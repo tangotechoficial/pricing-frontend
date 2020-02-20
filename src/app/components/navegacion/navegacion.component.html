@@ -2,8 +2,8 @@
 
   <ul *ngIf="isLoggedIn" class="nav custom-nav col-9 p-2">
     <li class="nav-item">
-      <app-technical-menu *ngIf="!userTechnical"></app-technical-menu>
-      <app-business-menu *ngIf="userTechnical"></app-business-menu>
+      <app-technical-menu *ngIf="userTechnical"></app-technical-menu>
+      <app-business-menu *ngIf="!userTechnical"></app-business-menu>
 
     </li>
 
