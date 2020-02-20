@@ -3,15 +3,32 @@ import { element } from 'protractor';
 export class Sacceso {
     constructor(
         public sId: string = '',
-        public sSeqAcceso: string = 'SQ001',
+        public sSeqAcceso: string = '',
         public sDesAcceso: string = '',
-        public bCliente: boolean = false,
-        public bMaterial: boolean = false,
-        public bEstado: boolean = false,
-        public bQVendas: boolean = false,
-        public bQEstoque: boolean = false,
-        public bTrasnferencia: boolean = false,
-        public bTest: boolean = false,
-        public bTesting: boolean  = false
+        public _parents: Array<any> = new Array<any>(),
+        public selected: boolean = false
     ){}
+    
+    public setSelected(val){
+        this.selected = val;
+    }
+
+    public isSelected(){
+        return this.selected;
+    }
+
+    public setCodigo(codigo){
+        this.sSeqAcceso = codigo;
+    }
+    public getCodigo(){
+        return this.sSeqAcceso;
+    }
+
+    public setDescription(description){
+        this.sDesAcceso = description;
+    }
+
+    public getDescription(){
+        return this.sDesAcceso;
+    }
 }

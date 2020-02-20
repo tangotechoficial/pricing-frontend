@@ -13,7 +13,7 @@
 
 <!-- MODAL BIENVENIDA -->
 
-<div class="myModal" [hidden]="modalView">
+<div *ngIf="this.bBusiness" class="myModal" [hidden]="modalView">
   <button type="button" class="close" aria-label="Close" (click)="cerrarBienvenida()">
     <span aria-hidden="true">&times;</span>
   </button>
