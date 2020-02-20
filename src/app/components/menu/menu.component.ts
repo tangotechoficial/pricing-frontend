@@ -11,7 +11,7 @@ export class MenuComponent implements OnInit {
   public sCurrentUser = JSON.parse(localStorage.getItem("User"));
   public bBusiness: boolean;
   public numTotNotif:number = 3;
-  public modalView:boolean =false;//CAMBIAR A FALSE
+  public modalView:boolean =false;
 
   constructor() { }
   

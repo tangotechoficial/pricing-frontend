@@ -21,14 +21,12 @@ $desktop : 3000px;
 .menuIcon{
 	color:lighten($color-prim-light,10%);
 	padding:5px;
-	font-size:24px;
+	font-size:23px;
 }
 
 .notfiConfigList{
 	list-style: none;
-	// @media (min-width: $tablet) and (max-width: $desktop) {
-	//   margin-left:50px;
-	// }
+
 	.nav-item{
 		display: inline-block;
 		@media  (max-width: $tablet) {
