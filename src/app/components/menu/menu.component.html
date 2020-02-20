@@ -2,40 +2,100 @@
 <navegacion></navegacion>
 <!-- Div usuario Business -->
 <div class="container menu-backgroud">
-  <div *ngIf="this.bBusiness">
-    
+
+  <div class="businessContainer" *ngIf="this.bBusiness">
+
+    <div class="bcard">
+      <h5 class="title">Meu perfil</h5>
+
+      <div class="form row">
+        <div class="input-group flex-nowrap col-xs-12 col-md-3">
+          <!-- <label for="nombre">Nome</label> -->
+          <input type="text" class="form-control" placeholder="Nome" aria-label="nombre" aria-describedby="addon-wrapping">
+        </div>
+
+        <div class="input-group flex-nowrap col-xs-12 col-md-2">
+          <!-- <label for="sobrenombre">Sobrenome</label> -->
+          <input type="text" class="form-control" placeholder="Sobrenome" aria-label="sobrenombre" aria-describedby="addon-wrapping">
+        </div>
+        <div class="input-group flex-nowrap col-xs-12 col-md-3">
+          <!-- <label for="mail">E-mail</label> -->
+          <input type="mail" class="form-control" placeholder="E-mail" aria-label="mail" aria-describedby="addon-wrapping">
+        </div>
+        <div class="input-group flex-nowrap col-xs-12 col-md-2">
+          <!-- <label for="telefono">Telefone</label> -->
+          <input type="tel"  pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" class="form-control" placeholder="Telefone" aria-label="telefono" aria-describedby="addon-wrapping">
+        </div>
+        <div class="input-group flex-nowrap col-xs-12 col-md-2">
+          <button class="btn btn-info btn-block">Salvar</button>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="bcard">
+
+        <h5 class="title">Mudar Senha</h5>
+
+        <div class="form row">
+          <div class="input-group flex-nowrap col-xs-12 col-md-3">
+            <!-- <label for="nombre">Nome</label> -->
+            <input type="password" class="form-control" placeholder="Senha Atual" aria-label="contraseñaActual" aria-describedby="addon-wrapping">
+          </div>
+          
+          <div class="input-group flex-nowrap col-xs-12 col-md-3">
+            <!-- <label for="sobrenombre">Sobrenome</label> -->
+            <input type="password" class="form-control" placeholder="Senha Nova" aria-label="contraseñaNueva" aria-describedby="addon-wrapping">
+          </div>
+          <div class="input-group flex-nowrap col-xs-12 col-md-3">
+            <!-- <label for="mail">E-mail</label> -->
+            <input type="mail" class="form-control" placeholder="Senha Nova" aria-label="contraseñaNueva" aria-describedby="addon-wrapping">
+          </div>
+
+          <div class="input-group flex-nowrap col-xs-12 col-md-3">
+            <button class="btn btn-info btn-block">Salvar</button>
+          </div>
+        </div>
+
+     
+    </div>
   </div>
+
   <div *ngIf="!this.bBusiness">
-    
+
   </div>
 
   <div>
 
-<!-- MODAL BIENVENIDA -->
 
-<div class="myModal" [hidden]="modalView">
-  <button type="button" class="close" aria-label="Close" (click)="cerrarBienvenida()">
-    <span aria-hidden="true">&times;</span>
-  </button>
+</div>
+</div>
 
-  <div class="modalWrapper">
+  <!-- MODAL BIENVENIDA -->
 
-    <div class="modalIcons"> 
+  <div class="myModal" [hidden]="modalView">
+    <button type="button" class="close" aria-label="Close" (click)="cerrarBienvenida()">
+      <span aria-hidden="true">&times;</span>
+    </button>
 
-      <div class="circle">
-      </div>
-      <div class="exclam">
+    <div class="modalWrapper">
+
+      <div class="modalIcons"> 
+
+        <div class="circle">
+        </div>
+        <div class="exclam">
          <i class="badgeIcon fas fa-exclamation"></i>
-      </div>         
+       </div>         
 
-      <div class="circleNum">
+       <div class="circleNum">
          <span class="badgeIcon">{{numTotNotif}}</span>        
-      </div>
+       </div>
 
- 
-    </div>
+       
+     </div>
 
-    <div class="modalMsg">
+     <div class="modalMsg">
       <h3 class="msg1">Seja Bem-vindo {{this.sCurrentUser.name}}!</h3>
       <p class="msg2">Vocé tem <span class="font-weight-bold">{{numeroNotificaciones}}</span> que precisam da sua atenção </p>      
     </div>
@@ -49,6 +109,4 @@
 </div>
 
 
-  </div>
-</div>
 

@@ -6,8 +6,8 @@ $color-prim-light2:#E7E9F1;
 $color-sec:#6288CB;
 
 $mobile : 350px;
-$tablet : 700px;
-$desktop : 1500px;
+$tablet : 770px;
+$desktop : 1600px;
 
 .menuIcon{
 	color:lighten($color-prim-light,10%);
@@ -98,8 +98,7 @@ $desktop : 1500px;
 	width: 400px;
 	background: $color-prim-light2;
 	border-radius:3px;
-	@media  (min-width: 0px) and (max-width: $tablet){
-
+	@media  (min-width: 0px) and (max-width: 900px){
 		transition:1s;
 		left:0px;
 		width: 92%;
