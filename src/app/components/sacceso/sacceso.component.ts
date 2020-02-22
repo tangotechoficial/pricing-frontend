@@ -40,7 +40,7 @@ export class SaccesoComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    
+
 
     this.sequenciasAcceso = new Array<any>();
     this.sequenciasAccesoComp = new Array<any>();
@@ -78,8 +78,8 @@ export class SaccesoComponent implements OnInit {
   public onSelectedValue(event) {
     this.selectedValue = event;
     this.existSelected = true;
-      setTimeout(function() {
-        this.existSelected = false;
+    setTimeout(function () {
+      this.existSelected = false;
     }.bind(this), 3000)
   }
 
@@ -122,7 +122,7 @@ export class SaccesoComponent implements OnInit {
   public checkValue(sa: Sacceso) {
     this.sequenciasAcceso.map(elem => {
       if (elem.getCodigo() == sa.getCodigo()) {
-        if (elem.isSelected()){
+        if (elem.isSelected()) {
           elem.setSelected(false);
           this.selectedProperties.forEach((elem, index) => {
             if (elem.getCodigo() == sa.getCodigo()) {
@@ -148,39 +148,39 @@ export class SaccesoComponent implements OnInit {
     this._sacceso.sDesAcceso = descripcion;
   }
 
-  submitNewSA(){
+  submitNewSA() {
     this.sequenciasAcceso.push(this._newSA);
     this._newSA = new Sacceso();
   }
 
   public submitSA() {
-    /* this._saccesoService.postSacceso(this._sacceso)
+    this._saccesoService.postSacceso(this._sacceso)
       .subscribe(response => {
         console.log(response);
-          this.saveSuccess = true;
-          setTimeout(function() {
+        this.saveSuccess = true;
+        setTimeout(function () {
           this.saveSuccess = false;
-          }.bind(this), 2000)
+        }.bind(this), 2000)
       },
         error => {
           console.log(error);
           this.saveError = true;
-          setTimeout(function() {
-          this.saveError = false;
+          setTimeout(function () {
+            this.saveError = false;
           }.bind(this), 2000)
-        }) */
-        this.saveSuccess = true;
-        setTimeout(function() {
-        this.saveSuccess = false;
-        this._sacceso = new Sacceso()
-        }.bind(this), 2000)
-        this.sequenciasAccesoComp.push(this._sacceso);
-        this.sequenciasAcceso.map((elem, index) => {
-          var domElem = document.getElementById(index.toString());
-          domElem.click()
-          elem.setSelected(false);
         })
-        
+    /*         this.saveSuccess = true;
+            setTimeout(function() {
+            this.saveSuccess = false;
+            this._sacceso = new Sacceso()
+            }.bind(this), 2000)
+            this.sequenciasAccesoComp.push(this._sacceso);
+            this.sequenciasAcceso.map((elem, index) => {
+              var domElem = document.getElementById(index.toString());
+              domElem.click()
+              elem.setSelected(false);
+            }) */
+
   }
 
 }
