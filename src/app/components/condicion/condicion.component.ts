@@ -2,6 +2,11 @@ import { Component, OnInit, Renderer2} from '@angular/core';
 import { Condicion } from '../../models/condicion';
 import { MetadataService } from './../../services/metadata.service';
 import { CondicionService } from '../../services/condicion.service';
+import { fromEvent } from 'rxjs';
+import { tap, switchMap } from "rxjs/operators";
+
+
+
 declare var $: any;
 
 @Component({
@@ -14,6 +19,7 @@ export class CondicionComponent implements OnInit {
 
   public _condicion: Condicion;
   public listaCondiciones: Array<any>;
+  public listaCondicionesComp: Array<any>;
   public selectedProperties: Array<any>;
 
   constructor(
@@ -24,6 +30,7 @@ export class CondicionComponent implements OnInit {
 
   ngOnInit() {
     this.listaCondiciones = new Array<any>();
+    this.listaCondicionesComp = new Array<any>();
     this.selectedProperties = new Array<any>();
     this._condicion = new Condicion();
     this._metadataService.getMetadataCondicion().map(elem => {
