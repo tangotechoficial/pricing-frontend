@@ -8,6 +8,7 @@ $color-sec:#6288CB;
 .menu-backgroud {
     background: #F7F8FB;
     height: 100vh;
+
 }
 .alert {
     display: block;
@@ -27,7 +28,7 @@ $color-sec:#6288CB;
 .businessContainer{
 	width: 100%;
 	height: 100%;
-	margin-bottom:30px;
+	padding:30px 20px;
 
 	.bcard{
 		background: white;
@@ -51,11 +52,10 @@ $color-sec:#6288CB;
 			background: $color-sec;
 			border:0px;
 			margin-bottom: 5px;
-		}
-		label{
-			// width: 100%;
-			// display: block;
-		}
+      margin-top: 24px !important;
+      height: 34px !important;
+    }
+
 		.form{
 			padding:10px;
 		}
@@ -77,7 +77,7 @@ $color-sec:#6288CB;
  	top:50%;
  	left:50%;
  	transition:2s;
- 	
+
  	transform: translate(-50%,-50%);
  	box-shadow:  1px 5px 11px 0px rgba(100, 100, 100, 0.3);
  	text-align: center;
@@ -105,8 +105,8 @@ $color-sec:#6288CB;
 				position: absolute;
 				top:20%;
 				right:38%;
-	
-				
+
+
 				i{
 					font-size: 50px;
 					color:$color-prim-light;
@@ -152,8 +152,3 @@ $color-sec:#6288CB;
  	}
 
  }
-
-
-
-
- 
