@@ -61,8 +61,11 @@
 
       	  	  		<ul class="notificationlist">
       	  	  			<div id="notif" aria-labelledby="nav-home-tab">
-      	  		  			<li class="notificationItem">
+
+      	  		  			<li class="notificationItem" (click)="toggleDetail()">
+
                         <div class="notiWrapp">
+
       	  		  				<div class="titleMod">
       	  		  					<div class="row">
       	  		  						<div class="col col-lg-9">
@@ -73,13 +76,44 @@
       	  		  						</div>
       	  		  					</div>
       	  		  				</div>
-      	  		  				<div class="descriptionMod">
-      	  			  				<p class="description">ACHOC.NESCAU 2.0 ACTIG 30X400G</p>
+                        <div class="descriptionMod" >
+      	  			  				<p class="description" *ngIf="!showDetail" @ngIfAnimation >ACHOC.NESCAU 2.0 ACTIG 30X400G</p>
+                        <table class="table table-sm detProd borderless" *ngIf="showDetail" @ngIfAnimation >
+                            <thead>
+                              <tr>
+                                <th scope="col">Produto</th>
+                                <th scope="col">Exped.</th>
+                                <th scope="col">Fatura</th>
+                                <th scope="col">Reg.P.</th>
+                                <th scope="col">Emissão</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>1601215</td>
+                                <td>SP</td>
+                                <td>SP</td>
+                                <td>33</td>
+                                <td>31/12//2020</td>
+                              </tr>
+
+                            </tbody>
+                          </table>
 
       	  		  				</div>
+                        <div class="row" *ngIf="showDetail" @ngIfAnimation>
+                          <div class="col-xs-6 col-md-6">
+                            <button class="btn btn-info btn-block btn-md verif">Atuar</button>
+                          </div>
+                        <div class="col-xs-6 col-md-6">
+                            <button class="btn btn-info btn-block btn-md verif noline">Excluir</button>
+                          </div>
+                        </div>
                         </div>
 
+
       	  		  			</li>
+
       	  		  			<li class="notificationItem">
                         <div class="notiWrapp">
       	  		  				<div class="titleMod">
@@ -132,7 +166,7 @@
       	  	  		<ul class="notificationlist">
 
       	  	  			<div id="notif" aria-labelledby="nav-home-tab">
-      	  		  			<li class="notificationItem" (click)="toggleDetail($index)">
+      	  		  			<li class="notificationItem" (click)="toggleDetail()" >
                         <div class="notiWrapp">
       	  		  				<div class="titleMod">
       	  		  					<div class="row">
@@ -144,10 +178,10 @@
       	  		  						</div>
       	  		  					</div>
       	  		  				</div>
-      	  		  				<div class="descriptionMod">
-      	  			  				<p class="description">ACHOC.NESCAU 2.0 ACTIG 30X400G</p>
-                        <table class="table table-sm detProd borderless">
-                            <thead>
+      	  		  				<div class="descriptionMod" >
+      	  			  				<p class="description" *ngIf="!showDetail" @ngIfAnimation >ACHOC.NESCAU 2.0 ACTIG 30X400G</p>
+                        <table class="table table-sm detProd borderless" *ngIf="showDetail" @ngIfAnimation >
+                            <thead @easeInOut >
                               <tr>
                                 <th scope="col">Produto</th>
                                 <th scope="col">Exped.</th>
@@ -156,7 +190,7 @@
                                 <th scope="col">Emissão</th>
                               </tr>
                             </thead>
-                            <tbody>
+                            <tbody @easeInOut>
                               <tr>
                                 <td>1601215</td>
                                 <td>SP</td>
@@ -169,49 +203,11 @@
                           </table>
 
       	  		  				</div>
+
                         </div>
-                        <button class="btn btn-info btn-block btn-sm">Verificar</button>
+                        <button class="btn btn-info btn-block btn-sm verif" *ngIf="showDetail" @easeInOut >Verificar</button>
       	  		  			</li>
-                      <li class="notificationItem">
-                        <div class="notiWrapp">
-                        <div class="titleMod">
-                          <div class="row">
-                            <div class="col col-lg-9">
-                              <p class="title">Suzi Cristina <span class="complete">1/5</span></p>
-                            </div>
-                            <div class="col col-lg-3">
-                              <p class="title2">Há 4h</p>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="descriptionMod">
-                          <p class="description">ACHOC.NESCAU 2.0 ACTIG 30X400G</p>
-                        <table class="table table-sm detProd borderless">
-                            <thead>
-                              <tr>
-                                <th scope="col">Produto</th>
-                                <th scope="col">Exped.</th>
-                                <th scope="col">Fatura</th>
-                                <th scope="col">Reg.P.</th>
-                                <th scope="col">Emissão</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                <td>1601215</td>
-                                <td>SP</td>
-                                <td>SP</td>
-                                <td>@33</td>
-                                <td>31/12//2020</td>
-                              </tr>
 
-                            </tbody>
-                          </table>
-
-                        </div>
-                        </div>
-                        <button class="btn btn-info btn-block btn-sm">Verificar</button>
-                      </li>
 
 
       	  		  			<div class="nonotif">
