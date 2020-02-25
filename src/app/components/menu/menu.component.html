@@ -11,22 +11,22 @@
       <div class="form row">
         <div class="form-group col-xs-12 col-md-3">
             <label for="nombre" class="control-label">Nome</label>
-            <input type="text" value='' class="form-control" name="nombre" id="name" placeholder="Nome">
+            <input type="text" value='' class="form-control" name="nombre" id="nombre" placeholder="Nome">
         </div>
 
         <div class="form-group col-xs-12 col-md-3">
             <label for="sobrenombre" class="control-label">Sobrenome</label>
-            <input type="text" value='' class="form-control" name="sobrenombre" id="name" placeholder="Sobrenome">
+            <input type="text" value='' class="form-control" name="sobrenombre" id="sobrenombre" placeholder="Sobrenome">
         </div>
 
         <div class="form-group col-xs-12 col-md-2">
             <label for="email" class="control-label">E-mail</label>
-            <input type="email" value='' class="form-control" name="email" id="name" placeholder="E-mail">
+            <input type="email" value='' class="form-control" name="email" id="mail" placeholder="E-mail">
         </div>
 
         <div class="form-group col-xs-12 col-md-2">
             <label for="telefono" class="control-label">Telefone</label>
-            <input type="tel" value='' class="form-control" name="telefono" id="name" placeholder="Telefone">
+            <input type="tel" value='' class="form-control" name="telefono" id="tel" placeholder="Telefone">
         </div>
 
 
@@ -45,15 +45,15 @@
 
       <div class="form-group col-xs-12 col-md-3">
             <label for="contraAnt" class="control-label">Senha Atual</label>
-            <input type="password" value='' class="form-control" name="contraAnt" id="name" placeholder="Senha Atual">
+            <input type="password" value='' class="form-control" name="contraAnt" id="contra" placeholder="Senha Atual">
         </div>
       <div class="form-group col-xs-12 col-md-3">
             <label for="contra" class="control-label">Senha Nova</label>
-            <input type="password" value='' class="form-control" name="contra" id="name" placeholder="Senha Nova">
+            <input type="password" value='' class="form-control" name="contra" id="contranueva" placeholder="Senha Nova">
         </div>
       <div class="form-group col-xs-12 col-md-3">
             <label for="repcontra" class="control-label">Confirmar Senha</label>
-            <input type="password" value='' class="form-control" name="repcontra" id="name" placeholder="Confirmar Senha Nova">
+            <input type="password" value='' class="form-control" name="repcontra" id="contranuevarep" placeholder="Confirmar Senha Nova">
         </div>
 
 
@@ -79,7 +79,7 @@
 <!-- MODAL BIENVENIDA -->
 
 <div class="myModal" [hidden]="modalView">
-  <button type="button" class="close" aria-label="Close" (click)="cerrarBienvenida()">
+  <button type="button" class="close" aria-label="Close" (click)="closeWelcome()">
     <span aria-hidden="true">&times;</span>
   </button>
 
@@ -108,7 +108,7 @@
 
 
     <div class="modalBut">
-      <button (click)="cerrarBienvenida()">Agora não</button>
+      <button (click)="cerrarBienvenida()"><i class="fas fa-minus-square"></i> Agora não</button>
     </div>
 
   </div>

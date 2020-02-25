@@ -46,6 +46,11 @@ export class NavegacionComponent implements OnInit {
   notifyOpen(){
       $("#notificationPopUp").fadeToggle(400);
   }
+  toggleDetail(target){
+     var target = event.target || event.srcElement || event.currentTarget;
+     console.log(target)
+  }
+
 
 /*   ngDoCheck() {
     this._route.url.subscribe(url => {

@@ -1,5 +1,5 @@
 
- <div class="barWidth">  
+ <div class="barWidth">
       <div class="row justify-content-between">
 
         <div class="col-4">
@@ -17,18 +17,18 @@
         </div>
 
         <div class="col-auto"></div>
-     
+
 
         <div class="col-4">
           <ul class="notfiConfigList nav custom-nav">
-            <li class="bellIcon nav-item" (click)="notifyOpen()"> 
+            <li class="bellIcon nav-item" (click)="notifyOpen()">
               <i class="menuIcon far fa-bell"></i>
               <div class="myBadge"><p>{{numAprob + numNotif }} </p></div>
             </li>
             <li class="configIcon nav-item">  <i class="menuIcon fas fa-cog"></i>
             <li class="logoIcon nav-item"><img src="../../../assets/img/logo-nav.jpg" /></li>
             <li class="logoIcon2 nav-item"><img src="../../../assets/img/login-logo.jpg" /></li>
-            
+
           </ul>
         </div>
       </div>
@@ -46,23 +46,23 @@
       		<h4>pendências</h4>
       	</div>
 
-      	
+
       	  <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-        
+
       	    <a class=" itemtab nav-item nav-link active col-xs-6 " id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true"><span class="notifTab">{{numNotif}}  </span >notificações</a>
       	    <a class=" itemtab nav-item nav-link col-xs-6" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false"><span class="notifTab">{{numAprob}}  </span>aprovações</a>
 
       	  </div>
-      	
+
 
       	<div class="tab-content" id="nav-tabContent">
       	  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
       	  	  	<div class="notificationBody">
 
       	  	  		<ul class="notificationlist">
-
       	  	  			<div id="notif" aria-labelledby="nav-home-tab">
       	  		  			<li class="notificationItem">
+                        <div class="notiWrapp">
       	  		  				<div class="titleMod">
       	  		  					<div class="row">
       	  		  						<div class="col col-lg-9">
@@ -74,15 +74,18 @@
       	  		  					</div>
       	  		  				</div>
       	  		  				<div class="descriptionMod">
-      	  			  				<p class="description">ACHOC.NESCAU 2.0 ACTIG 30X400G</p>  					
+      	  			  				<p class="description">ACHOC.NESCAU 2.0 ACTIG 30X400G</p>
+
       	  		  				</div>
-      	  		  		
+                        </div>
+
       	  		  			</li>
       	  		  			<li class="notificationItem">
+                        <div class="notiWrapp">
       	  		  				<div class="titleMod">
       	  		  					<div class="row">
       	  		  						<div class="col col-lg-9">
-      	  		  							<p class="title">Diretriz estratégica declinada <span class="complete"> 2/5</span></p> 
+      	  		  							<p class="title">Diretriz estratégica declinada <span class="complete"> 2/5</span></p>
       	  		  						</div>
       	  		  						<div class="col col-lg-3">
       	  		  							<p class="title2">Há22h</p>
@@ -90,16 +93,17 @@
       	  		  					</div>
       	  		  				</div>
       	  		  				<div class="descriptionMod">
-      	  			  				<p class="description">COPO AMERICANO AGUA 190ML 2010 24X1</p>  					
+      	  			  				<p class="description">COPO AMERICANO AGUA 190ML 2010 24X1</p>
       	  		  				</div>
-      	  		  		
+                        </div>
       	  		  			</li>
 
       	  		  			<li class="notificationItem">
+                        <div class="notiWrapp">
       	  		  				<div class="titleMod">
       	  		  					<div class="row">
       	  		  						<div class="col col-lg-9">
-      	  		  							<p class="title">Rebate a Vencer<span class="complete"> </span></p> 
+      	  		  							<p class="title">Rebate a Vencer<span class="complete"> </span></p>
       	  		  						</div>
       	  		  						<div class="col col-lg-3">
       	  		  							<p class="title2">Há 1d 8h</p>
@@ -107,18 +111,18 @@
       	  		  					</div>
       	  		  				</div>
       	  		  				<div class="descriptionMod">
-      	  			  				<p class="description">ACHOC. NESCAU 2.0 ACTIG 30X400G</p>  					
+      	  			  				<p class="description">ACHOC. NESCAU 2.0 ACTIG 30X400G</p>
       	  		  				</div>
-      	  		  		
+                        </div>
       	  		  			</li>
 
       	  		  			<div class="nonotif">
       	  		  				<p>não há mais notificações</p>
       	  		  			</div>
-      	  	  				
+
       	  	  			</div>
 
-      	  	  			
+
       	  	  		</ul>
       	  	  	</div>
       	  </div>
@@ -128,11 +132,12 @@
       	  	  		<ul class="notificationlist">
 
       	  	  			<div id="notif" aria-labelledby="nav-home-tab">
-      	  		  			<li class="notificationItem">
+      	  		  			<li class="notificationItem" (click)="toggleDetail($index)">
+                        <div class="notiWrapp">
       	  		  				<div class="titleMod">
       	  		  					<div class="row">
       	  		  						<div class="col col-lg-9">
-      	  		  							<p class="title">Rebate a Vencer <span class="complete"></span></p>
+      	  		  							<p class="title">Suzi Cristina <span class="complete">1/5</span></p>
       	  		  						</div>
       	  		  						<div class="col col-lg-3">
       	  		  							<p class="title2">Há 4h</p>
@@ -140,29 +145,84 @@
       	  		  					</div>
       	  		  				</div>
       	  		  				<div class="descriptionMod">
-      	  			  				<p class="description">ACHOC.NESCAU 2.0 ACTIG 30X400G</p>  					
+      	  			  				<p class="description">ACHOC.NESCAU 2.0 ACTIG 30X400G</p>
+                        <table class="table table-sm detProd borderless">
+                            <thead>
+                              <tr>
+                                <th scope="col">Produto</th>
+                                <th scope="col">Exped.</th>
+                                <th scope="col">Fatura</th>
+                                <th scope="col">Reg.P.</th>
+                                <th scope="col">Emissão</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>1601215</td>
+                                <td>SP</td>
+                                <td>SP</td>
+                                <td>33</td>
+                                <td>31/12//2020</td>
+                              </tr>
+
+                            </tbody>
+                          </table>
+
       	  		  				</div>
-      	  		  		
+                        </div>
+                        <button class="btn btn-info btn-block btn-sm">Verificar</button>
       	  		  			</li>
+                      <li class="notificationItem">
+                        <div class="notiWrapp">
+                        <div class="titleMod">
+                          <div class="row">
+                            <div class="col col-lg-9">
+                              <p class="title">Suzi Cristina <span class="complete">1/5</span></p>
+                            </div>
+                            <div class="col col-lg-3">
+                              <p class="title2">Há 4h</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="descriptionMod">
+                          <p class="description">ACHOC.NESCAU 2.0 ACTIG 30X400G</p>
+                        <table class="table table-sm detProd borderless">
+                            <thead>
+                              <tr>
+                                <th scope="col">Produto</th>
+                                <th scope="col">Exped.</th>
+                                <th scope="col">Fatura</th>
+                                <th scope="col">Reg.P.</th>
+                                <th scope="col">Emissão</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>1601215</td>
+                                <td>SP</td>
+                                <td>SP</td>
+                                <td>@33</td>
+                                <td>31/12//2020</td>
+                              </tr>
+
+                            </tbody>
+                          </table>
+
+                        </div>
+                        </div>
+                        <button class="btn btn-info btn-block btn-sm">Verificar</button>
+                      </li>
 
 
       	  		  			<div class="nonotif">
       	  		  				<p>não há mais notificações</p>
       	  		  			</div>
-      	  	  				
+
       	  	  			</div>
 
-      	  	  			
+
       	  	  		</ul>
       	  	  	</div>
       	  </div>
 
   	</div>
-
-
-
-
-  	
- 
-
-
