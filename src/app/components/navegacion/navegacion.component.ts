@@ -44,6 +44,7 @@ import {
       ])
     ])
 ],
+
   styleUrls: ['./navegacion.component.css' , './navegacion.component.scss']
 })
 
@@ -88,6 +89,11 @@ export class NavegacionComponent implements OnInit {
   }
   toggleDetail(){
     this.showDetail = !this.showDetail;
+
+  }
+
+  verificarNotif(){
+    alert("verif")
   }
 
 
