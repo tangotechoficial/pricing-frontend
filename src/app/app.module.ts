@@ -26,7 +26,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { BusinessMenuComponent } from './components/navegacion/business-menu/business-menu.component';
 import { TechnicalMenuComponent } from './components/navegacion/technical-menu/technical-menu.component';
 import { DadosMestreComponent } from './components/dados-mestre/dados-mestre.component'
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,7 +55,8 @@ import { DadosMestreComponent } from './components/dados-mestre/dados-mestre.com
     FormsModule,
     Ng2SearchPipeModule,
     FontAwesomeModule,
-    AutocompleteLibModule
+    AutocompleteLibModule ,
+    BrowserAnimationsModule
   ],
   providers: [appRoutingProviders],
   bootstrap: [AppComponent]
