@@ -50,13 +50,14 @@ export class SaccesoComponent implements OnInit {
     this.selValues2 = new Array<any>();
     this._sacceso = new Sacceso();
     this._newSA = new Sacceso();
-    this._metadataService.getMetadataSeqAcceso().map(elem => {
-      var elemModel = {
-        'tipo': elem,
-        'selected': false
-      }
-      this.sequenciasAcceso.push(elemModel);
-    })
+    this._saccesoService.getSaccesoList().subscribe((values) => {
+      values.map((elem) => {
+        let seq = new Sacceso();
+        seq.setCodigo(elem.SEQCODE);
+        seq.setDescription(elem.SEQDESC);
+        this.sequenciasAcceso.push(seq);
+      });
+    });
 
     $('div[contenteditable]').keydown(function (e) {
       // trap the return key being pressed
@@ -149,7 +150,20 @@ export class SaccesoComponent implements OnInit {
   }
 
   submitNewSA() {
-    this.sequenciasAcceso.push(this._newSA);
+    this._saccesoService.postSacceso(this._newSA)
+      .subscribe(response => {
+        this.saveSuccess = true;
+        setTimeout(function (){
+          this.saveSuccess = false;
+        }.bind(this), 2000)
+      },
+        error => {
+          console.log(error);
+          this.saveError = true;
+          setTimeout(function () {
+            this.saveError = false;
+          }.bind(this), 2000)
+    });
     this._newSA = new Sacceso();
   }
 
