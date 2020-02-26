@@ -18,13 +18,15 @@ declare var $: any;
 
 export class SaccesoComponent implements OnInit {
   searchSeq;
+  searchSeqInput;
   searchSeleccionado;
   selectedValue: string;
   public existSelected = false;
   public _sacceso: Sacceso;
+  public _saMessage: Sacceso;
   public _newSA: Sacceso;
   public sequenciasAcceso: Array<any>;
-  public sequenciasAccesoComp: Array<any>;
+  public sequenciasAccesoSearch: Array<any>;
   public selectedProperties: Array<any>;
   public searchValues: Array<any>;
   public selValues1: Array<any>;
@@ -43,18 +45,20 @@ export class SaccesoComponent implements OnInit {
 
 
     this.sequenciasAcceso = new Array<any>();
-    this.sequenciasAccesoComp = new Array<any>();
+    this.sequenciasAccesoSearch = new Array<any>();
     this.selectedProperties = new Array<any>();
     this.searchValues = new Array<any>();
     this.selValues1 = new Array<any>();
     this.selValues2 = new Array<any>();
     this._sacceso = new Sacceso();
     this._newSA = new Sacceso();
+    this._saMessage = new Sacceso();
     this._saccesoService.getSaccesoList().subscribe((values) => {
       values.map((elem) => {
         let seq = new Sacceso();
         seq.setCodigo(elem.SEQCODE);
         seq.setDescription(elem.SEQDESC);
+        this.sequenciasAccesoSearch.push(seq);
         this.sequenciasAcceso.push(seq);
       });
     });
@@ -125,8 +129,8 @@ export class SaccesoComponent implements OnInit {
       if (elem.getCodigo() == sa.getCodigo()) {
         if (elem.isSelected()) {
           elem.setSelected(false);
-          this.selectedProperties.forEach((elem, index) => {
-            if (elem.getCodigo() == sa.getCodigo()) {
+          this.selectedProperties.map((elem2, index) => {
+            if (elem2.getCodigo() == sa.getCodigo()) {
               this.selectedProperties.splice(index, 1);
             }
           })
@@ -152,48 +156,41 @@ export class SaccesoComponent implements OnInit {
   submitNewSA() {
     this._saccesoService.postSacceso(this._newSA)
       .subscribe(response => {
+        console.log(this._newSA);
+        this._saMessage.setCodigo(this._newSA.getCodigo());
+        this._saMessage.setDescription(this._newSA.getDescription());
+        console.log(this._saMessage);
         this.saveSuccess = true;
         setTimeout(function (){
           this.saveSuccess = false;
+          this._newSA = new Sacceso();
         }.bind(this), 2000)
       },
         error => {
-          console.log(error);
           this.saveError = true;
           setTimeout(function () {
             this.saveError = false;
           }.bind(this), 2000)
     });
-    this._newSA = new Sacceso();
+    
   }
 
   public submitSA() {
     this._saccesoService.postSacceso(this._sacceso)
       .subscribe(response => {
-        console.log(response);
+        this._saMessage.setCodigo(this._sacceso.getCodigo());
+        this._saMessage.setDescription(this._sacceso.getDescription());
         this.saveSuccess = true;
         setTimeout(function () {
           this.saveSuccess = false;
         }.bind(this), 2000)
       },
         error => {
-          console.log(error);
           this.saveError = true;
           setTimeout(function () {
             this.saveError = false;
           }.bind(this), 2000)
         })
-    /*         this.saveSuccess = true;
-            setTimeout(function() {
-            this.saveSuccess = false;
-            this._sacceso = new Sacceso()
-            }.bind(this), 2000)
-            this.sequenciasAccesoComp.push(this._sacceso);
-            this.sequenciasAcceso.map((elem, index) => {
-              var domElem = document.getElementById(index.toString());
-              domElem.click()
-              elem.setSelected(false);
-            }) */
 
   }
 

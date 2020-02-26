@@ -20,6 +20,7 @@ import { PrecioBaseBusinessComponent } from './components/precio/preciobase/busi
 
 import { AutocompleteInputComponent } from './components/autocomplete-input/autocomplete-input.component';
 import { FilterPipeSeqAcceso } from './pipes/filterseqacceso.pipe';
+import { FilterPipeSeqSearch } from './pipes/filterseqsearch';
 import { FilterPipeSeleccionadoAcceso } from './pipes/filterseleccionado.pipe';
 import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
@@ -43,6 +44,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     PrecioBaseBusinessComponent,
     AutocompleteInputComponent,
     FilterPipeSeqAcceso,
+    FilterPipeSeqSearch,
     FilterPipeSeleccionadoAcceso,
     BusinessMenuComponent,
     TechnicalMenuComponent,
