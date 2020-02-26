@@ -82,6 +82,7 @@ export class SaccesoComponent implements OnInit {
 
   public onSelectedValue(event) {
     this.selectedValue = event;
+    this._sacceso = event;
     this.existSelected = true;
     setTimeout(function () {
       this.existSelected = false;
