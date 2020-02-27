@@ -1,5 +1,7 @@
 @import './mixins-var.scss';
 
+
+
 *:not(.fas) {
     font-family: 'Raleway', sans-serif;
 }
@@ -39,3 +41,11 @@ button#dropdownMenuButton {
     // outline: 0;
     box-shadow: 0 0 0 0.1rem rgba(66, 112, 193, 1);
 }
+
+
+.menu-background {
+    background: #F7F8FB;
+    height: 100vh;
+}
+
+

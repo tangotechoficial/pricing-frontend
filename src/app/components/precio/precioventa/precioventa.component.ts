@@ -3,10 +3,10 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'precioventa',
   templateUrl: './precioventa.component.html',
-  styleUrls: ['../../precio/precio.component.scss']
+  styleUrls: ['../../precio/precio.component.scss', '../precioventa/precioventa.component.scss']
 })
 export class PrecioVentaComponent implements OnInit {
-  isShow = false;
+  isShow:boolean = false; //default false
   existNegocios: string;
   existVentas: string;
 
