@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class DadosMestreVerbaService {
 
-  public dadosMestreVerbaUrl = "https://pricing.tangotechapp.com/api/maestreverba";
+  public dadosMestreVerbaUrl = "https://pricing.tangotechapp.com/api/dadosmestreverba";
 
   constructor(private http: HttpClient) { }
 

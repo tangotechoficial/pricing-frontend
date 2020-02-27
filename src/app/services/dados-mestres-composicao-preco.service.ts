@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class DadosMestresComposicaoPrecoService {
 
-  public dadosMestresPrecoUrl = "https://pricing.tangotechapp.com/api/dadosmaestrecomposicao"
+  public dadosMestresPrecoUrl = "https://pricing.tangotechapp.com/api/dadosmestrecomposicao"
 
   constructor (private http: HttpClient) { }
 
