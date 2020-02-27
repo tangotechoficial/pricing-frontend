@@ -11,6 +11,6 @@ export class DiretrizesEstrategicasService {
   constructor(private http: HttpClient) { }
 
   listar() {
-    return this.http.get(`${this.diretrizesUrl}`)
+    return this.http.get<any[]>(`${this.diretrizesUrl}`)
   }
 }
