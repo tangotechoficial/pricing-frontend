@@ -1,11 +1,50 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from "@angular/common";
+import {BrowserModule} from '@angular/platform-browser'
+
 declare var $: any;
+
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition,
+  query,
+  animateChild
+} from '@angular/animations';
 
 @Component({
   selector: 'navegacion',
   templateUrl: './navegacion.component.html',
+  animations: [
+  trigger('ngIfAnimation', [
+    transition(':enter, :leave', [
+      query('@*', animateChild())
+    ])
+  ]),
+
+  trigger('easeInOut', [
+    transition('void => *', [
+        style({
+            opacity: 0,
+        }),
+        animate("500ms ease-in", style({
+            opacity: 1,
+        }))
+    ]),
+    transition('* => void', [
+        style({
+            opacity: 1
+        }),
+        animate("500ms ease-in", style({
+            opacity: 0
+        }))
+      ])
+    ])
+],
+
   styleUrls: ['./navegacion.component.css' , './navegacion.component.scss']
 })
 
@@ -15,6 +54,8 @@ export class NavegacionComponent implements OnInit {
   public currentUrl: string;
   public numNotif:number = 3 ;
   public numAprob:number = 1;
+
+  public showDetail:boolean = false;
 
   private mapUrlToSection = {
     "/menu": "Inicio",
@@ -46,6 +87,15 @@ export class NavegacionComponent implements OnInit {
   notifyOpen(){
       $("#notificationPopUp").fadeToggle(400);
   }
+  toggleDetail(){
+    this.showDetail = !this.showDetail;
+
+  }
+
+  verificarNotif(){
+    alert("verif")
+  }
+
 
 /*   ngDoCheck() {
     this._route.url.subscribe(url => {

@@ -14,7 +14,7 @@ export class MenuComponent implements OnInit {
   public modalView:boolean =false;
 
   constructor() { }
-  
+
   ngOnInit() {
     if(this.sCurrentUser.type != "technical"){
       this.bBusiness = true;
@@ -28,8 +28,9 @@ export class MenuComponent implements OnInit {
     2000);
   }
 
-  cerrarBienvenida(){
+  closeWelcome(){
    this.modalView = true;
   }
+
 
 }

@@ -15,7 +15,6 @@ $desktop : 3000px;
 .barWidth{
 	width: 86%;
 	margin:0 auto;
-	margin-bottom:20px;
 }
 
 .menuIcon{
@@ -36,7 +35,7 @@ $desktop : 3000px;
 			padding:12px 12px 0px 12px;
 			transition:1s;
 			cursor:pointer;
-		}	
+		}
 		&:hover i{
 			color:$color-sec !important;
 			transition:1s;
@@ -49,21 +48,22 @@ $desktop : 3000px;
 				position: absolute;
 				height: 17px;
 				width: 20px;
-				top:12px;
-				right:-2px;
+				top:5px;
+				right:-3px;
 				opacity:0.95;
 				p{
 					color:white;
 					text-align: center;
 					font-size: 12px;
+					margin-top:-1px;
 				}
 
-				 			
+
 			}
 		}
 		&.logoIcon{
 			display: none;
-			
+
 			@media (min-width: $tablet) and (max-width: $desktop) {
 			  display: inline-block;
 			}
@@ -71,7 +71,7 @@ $desktop : 3000px;
 				height: 80%;
 			}
 
-			
+
 
 		}
 		&.logoIcon2{
@@ -106,7 +106,7 @@ $desktop : 3000px;
 	box-shadow:  1px 5px 11px 0px rgba(100, 100, 100, 0.3);
 	position: absolute;
 	top:70px;
-	right:330px;
+	right:400px;
 	display: none;
 	width: 400px;
 	background: $color-prim-light2;
@@ -135,45 +135,92 @@ $desktop : 3000px;
 	}
 
 	.notificationBody{
-		height: 100%;
+		height: auto;
 		background: white;
 		box-shadow:  1px 5px 11px 0px rgba(100, 100, 100, 0.3);
 		overflow-y: scroll;
-
 
 		.notificationlist{
 				list-style: none;
 				padding:15px;
 			.notificationItem{
+
+				.notiWrapp{
+				padding:10px 16px 0px 16px;
 				font-size: 12px;
 				color:$color-prim;
-				padding:10px 20px;
 				width: 100%;
 				background-color: #EAEFF8;
 				border-radius: 5px;
 				margin-right:0px !important;
 				margin-top: 10px;
+				cursor: pointer;
 				.titleMod{
-	
+
 					.title{
-						font-weight: 700;	
+						font-weight: 700;
+						font-size:13.5px;
 						.complete{
+							padding-left:5px;
 							color:$color-sec;
-							font-weight: 400;
-						}					
+							font-weight: 700;
+						}
 					}
 					.title2{
-						
+
 						text-align: right;
 					}
 				}
+
 				.descriptionMod{
+					position: relative;
+					padding-bottom:5px;
 					.description{
-						text-transform: uppercase;						
-						margin-bottom: 	0px;
+						text-transform: uppercase;
+						margin-bottom: 	3px;
 
 					}
+					.detProd{
+
+						padding:10px;
+						td,  th {
+						    border: none;
+								color:$color-prim;
+						}
+						th{
+							font-weight: 400;
+						}
+						tr{
+						}
+						td{
+							text-align:center;
+							border-radius:5px !important;
+							background:#F7F8FB;
+							padding:5px;
+							border-right:1px solid #E7E9F1;
+						}
+					}
 				}
+			}
+			.col-xs-6{
+					padding:0px !important ;
+			}
+			.verif{
+					background-color: $color-sec !important;
+					border:0px;
+					width: 100% !important;
+					border-radius:0px;
+					padding:5px !important;
+					font-weight: 700;
+					font-size:14px;
+					border-right:3px solid #E7E9F1;
+					&.noline{
+						border-right:0px;
+					}
+
+
+
+			}
 			}
 			.nonotif{
 				padding:20px 0px 0px 20px;

@@ -20,13 +20,15 @@ import { PrecioBaseBusinessComponent } from './components/precio/preciobase/busi
 
 import { AutocompleteInputComponent } from './components/autocomplete-input/autocomplete-input.component';
 import { FilterPipeSeqAcceso } from './pipes/filterseqacceso.pipe';
+import { FilterPipeSeqSearch } from './pipes/filterseqsearch';
 import { FilterPipeSeleccionadoAcceso } from './pipes/filterseleccionado.pipe';
 import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { BusinessMenuComponent } from './components/navegacion/business-menu/business-menu.component';
 import { TechnicalMenuComponent } from './components/navegacion/technical-menu/technical-menu.component';
 import { DadosMestreComponent } from './components/dados-mestre/dados-mestre.component'
-
+import { DiretrizEstrategicaComponent } from './components/diretriz-estrategica/diretriz-estrategica.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,10 +45,12 @@ import { DadosMestreComponent } from './components/dados-mestre/dados-mestre.com
     PrecioBaseBusinessComponent,
     AutocompleteInputComponent,
     FilterPipeSeqAcceso,
+    FilterPipeSeqSearch,
     FilterPipeSeleccionadoAcceso,
     BusinessMenuComponent,
     TechnicalMenuComponent,
-    DadosMestreComponent
+    DadosMestreComponent,
+    DiretrizEstrategicaComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +59,8 @@ import { DadosMestreComponent } from './components/dados-mestre/dados-mestre.com
     FormsModule,
     Ng2SearchPipeModule,
     FontAwesomeModule,
-    AutocompleteLibModule
+    AutocompleteLibModule ,
+    BrowserAnimationsModule
   ],
   providers: [appRoutingProviders],
   bootstrap: [AppComponent]

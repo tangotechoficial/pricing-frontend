@@ -16,23 +16,12 @@ export class SaccesoService{
         this.url = Global.url;
     }
 
-    postSacceso(seq: Sacceso): Observable <any>{
-        let _currUser = JSON.parse(localStorage.getItem("User"));
-        let _params = {
-            params: seq,
-            currUser: _currUser
-        }
-        console.log(_params);
-        return this._http.post(this.url + '/sacceso', _params, {headers: {"Content-type": "application/json"}});
+    postSacceso(seq: Sacceso){
+        console.log(seq);
+        return this._http.post(this.url + '/sacceso', { SEQCODE: seq.sSeqAcceso, SEQDESC: seq.sDesAcceso}, {headers: {"Content-type": "application/json"}});
     }
 
-    getSaccesoList(seq: Sacceso): Observable<any>{
-        let _currUser = JSON.parse(localStorage.getItem("User"));
-        let _params = {
-            params: seq,
-            currUser: _currUser
-        }
-        console.log(_params);
-        return this._http.post(this.url + '/saccesos', _params, {headers: {"Content-type": "application/json"}});
+    getSaccesoList(): Observable<any>{
+        return this._http.get(this.url + '/saccesos', {headers: {"Content-type": "application/json"}});
     }
 }
