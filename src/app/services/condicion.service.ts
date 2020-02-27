@@ -26,3 +26,4 @@ export class CondicionService{
         return this._http.post(this.url + '/condicion', _params, {headers: {"Content-type": "application/json"}});
     }
 }
+

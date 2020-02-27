@@ -40,11 +40,9 @@ export class CondicionComponent implements OnInit {
       }
       this.listaCondiciones.push(elemModel);
     })
-    debugger;
   }
 
   public checkValue(tipo){
-    debugger;
 
     this.listaCondiciones.map(elem => {
       if(elem.tipo == tipo){

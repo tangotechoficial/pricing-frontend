@@ -25,9 +25,12 @@ $desktop : 3000px;
 
 .notfiConfigList{
 	list-style: none;
+	align-items: right;
+	margin-left: 160px;
 
 	.nav-item{
 		display: inline-block;
+		margin-right: 10px;
 		@media  (max-width: $tablet) {
 		  padding:1px;
 		}
@@ -51,7 +54,7 @@ $desktop : 3000px;
 				top:5px;
 				right:-3px;
 				opacity:0.95;
-				p{
+				p {
 					color:white;
 					text-align: center;
 					font-size: 12px;
@@ -68,7 +71,7 @@ $desktop : 3000px;
 			  display: inline-block;
 			}
 			img{
-				height: 80%;
+				height: 100%;
 			}
 
 
