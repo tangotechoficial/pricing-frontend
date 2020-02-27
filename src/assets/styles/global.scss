@@ -21,7 +21,7 @@ button#dropdownMenuButton {
     border: 1px solid #D0D1D6;
     border-radius: .25rem;
 
-    &:focus {
+    &:focus:not(.list-header) {
     border: 2px solid $martinsBlue;
     }
 }
