@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DadosMestreVerbaService {
 
-  public dadosMestreVerbaUrl = "https://swapi.co/api/planets";
+  public dadosMestreVerbaUrl = "https://pricing.tangotechapp.com/api/maestreverba";
 
   constructor(private http: HttpClient) { }
 
@@ -14,4 +15,7 @@ export class DadosMestreVerbaService {
     return this.http.get<any[]>(`${this.dadosMestreVerbaUrl}`)
   }
 
+  getDadosMestresVerba(): Observable<any>{
+    return this.http.get(this.dadosMestreVerbaUrl);
+  }
 }
