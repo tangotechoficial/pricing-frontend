@@ -2,7 +2,7 @@
 <navegacion></navegacion>
 
 <!--Component Content -->
-<div class="container d-flex flex-column background col-12" id="precio-container">
+<div class="container menu-background" id="precio-container">
 
  
 
@@ -24,8 +24,24 @@
 
   <!-- BUSINESS USER -->
 
-<div class="precioVendaWrapper">
-    
+<div class="precioVendaWrapper" *ngIf="isShow" >
+
+    <div class="row">
+        <div class="col-xs-12 col-lg-12">
+<!--             <h3 class="colorca">Inputs box</h3>   
+            <p>Panel Inputs</p>     -->     
+        </div>
+        <div class="colorca col-xs-12 col-md-4 col-lg-4">
+<!--             <h3>Seleccione uma condicao</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum magni, maxime dignissimos fugit! Labore at cupiditate aut quos porro, obcaecati nulla ipsa repudiandae sed maiores suscipit blanditiis, corporis aspernatur. Unde?</p>   -->          
+        </div>
+        <div class="col-xs-12 col-md-4 col-lg-8">
+  <!--           <h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab explicabo dolor quas. Corrupti sequi eligendi, similique neque nemo illum aliquid eos, nostrum, atque illo quibusdam eum odio? Cum, error incidunt.</h3>     -->        
+        </div>
+
+
+    </div>
+
 </div>
   <!-- TECHNICAL USER -->
 <!--     <div *ngIf="isShow">
