@@ -47,7 +47,6 @@
                         <p class="label-info">Margem Bruta Martins:</p>
                         <p class="content-info"> 21%</p>
                     </div>
-
                 </div>
             </div>
           
@@ -56,7 +55,7 @@
             active" id="tab-composicao-preco2" role="tabpanel" aria-labelledby="nav-composicao-preco">
                     <table class="table">
                         <tr class="table-head">
-                            <th class="th-center table-head-row">Descrição</th>
+                            <th class="th-center table-head-row">Subcategoria</th>
                             <th></th>
                             <th class="th-center table-head-row">Fornecedor</th>
                             <th></th>
@@ -68,6 +67,19 @@
                             <th></th>
                             <th class="table-head-row" scope="col">MG Bruta (%)</th>
                             <th></th>
+                        </tr>
+                        <tr *ngFor="let items of diretrizesEstrategicas">
+                            <td>{{items.DESGRPPRD}}</td>
+                            <td></td>
+                            <td>{{items.DESDIVFRN}}</td>
+                            <td></td>
+                            <td>{{items.CODESTUNI}}</td>
+                            <td></td>
+                            <td>{{items.VLRVNDFATLIQ}}</td>
+                            <td></td>
+                            <td>{{items.VLRMRGCRB}}</td>
+                            <td></td>
+                            <td>{{items.VLRMRGBRT}}</td>
                         </tr>
                     </table>
                 </div>
