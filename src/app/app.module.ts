@@ -26,6 +26,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { BusinessMenuComponent } from './components/navegacion/business-menu/business-menu.component';
 import { TechnicalMenuComponent } from './components/navegacion/technical-menu/technical-menu.component';
 import { DadosMestreComponent } from './components/dados-mestre/dados-mestre.component'
+import { DiretrizEstrategicaComponent } from './components/diretriz-estrategica/diretriz-estrategica.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FilterPipeSeleccionadoAcceso,
     BusinessMenuComponent,
     TechnicalMenuComponent,
-    DadosMestreComponent
+    DadosMestreComponent,
+    DiretrizEstrategicaComponent
   ],
   imports: [
     BrowserModule,

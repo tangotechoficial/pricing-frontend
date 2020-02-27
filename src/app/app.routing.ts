@@ -12,7 +12,8 @@ import { SaccesoComponent } from './components/sacceso/sacceso.component';
 import { CondicionComponent } from './components/condicion/condicion.component';
 
 import { PrecioBaseBusinessComponent } from './components/precio/preciobase/business/preciobase.component';
-import { DadosMestreComponent } from './components/dados-mestre/dados-mestre.component'
+import { DadosMestreComponent } from './components/dados-mestre/dados-mestre.component';
+import { DiretrizEstrategicaComponent } from './components/diretriz-estrategica/diretriz-estrategica.component';
 /* Routes Array */
 const appRoutes: Routes = [
     { path: 'login', component: LoginComponent},
@@ -25,8 +26,8 @@ const appRoutes: Routes = [
 
     { path: 'b-preciobase', component: PrecioBaseBusinessComponent},
     // { path: 'b-precioventa', component: PrecioBaseBusinessComponent},
+    { path: 'diretriz-estrategica', component: DiretrizEstrategicaComponent},
     { path: 'datalab/dados-mestre', component: DadosMestreComponent},
-    
     { path: '', redirectTo: '/login', pathMatch: 'full'},
     { path: '**', component: ErrorComponent},
 
