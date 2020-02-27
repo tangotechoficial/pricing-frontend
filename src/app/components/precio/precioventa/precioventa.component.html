@@ -3,8 +3,13 @@
 
 <!--Component Content -->
 <div class="container d-flex flex-column background col-12" id="precio-container">
+
+ 
+
+
+  
 <!-- Select-->
-    <div *ngIf="!isShow">
+    <div *ngIf="!isShow" >
         <precio-seleccion (negociosOutput)="parentListener($event)"
         (ventasOutput)="parentListenerTwo($event)"></precio-seleccion>
         <div class="d-flex justify-content-center background">
@@ -15,7 +20,16 @@
     </div>
 
 <!--Main view-->
-    <div *ngIf="isShow">
+
+
+  <!-- BUSINESS USER -->
+
+<div class="precioVendaWrapper">
+    
+</div>
+  <!-- TECHNICAL USER -->
+<!--     <div *ngIf="isShow">
+   
         <div class="background">
             <precio-element titulo="PRECO BASE"></precio-element>
             <precio-element titulo="REGULATORIO"></precio-element>
@@ -24,5 +38,7 @@
             <precio-element titulo="DESCONTO TRADE"></precio-element>
         </div>
     </div>            
+ -->
+
 
 </div>

@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['../../precio/precio.component.scss']
 })
 export class PrecioVentaComponent implements OnInit {
-  isShow = false;
+  isShow:boolean = true; //CAMBIAR A FALSE
   existNegocios: string;
   existVentas: string;
 
