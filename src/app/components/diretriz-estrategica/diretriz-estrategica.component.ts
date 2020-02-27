@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ɵConsole } from '@angular/core';
 import { DiretrizesEstrategicasService } from '../../services/diretrizes-estrategicas.service'
+import { TechnicalMenuComponent } from '../navegacion/technical-menu/technical-menu.component';
+import { timingSafeEqual } from 'crypto';
 @Component({
   selector: 'app-diretriz-estrategica',
   templateUrl: './diretriz-estrategica.html',
@@ -8,16 +10,16 @@ import { DiretrizesEstrategicasService } from '../../services/diretrizes-estrate
 })
 export class DiretrizEstrategicaComponent implements OnInit {
 
-  diretrizesEstrategicas: Array<any>;
+  public diretrizesEstrategicas: Array<any>;
 
   constructor(
     private DiretrizesEstrategicasService: DiretrizesEstrategicasService
   ) { }
 
   ngOnInit() {
-    this.diretrizesEstrategicas = Array<any>();
-    this.DiretrizesEstrategicasService.listar().subscribe(res => this.diretrizesEstrategicas = res)
-    console.log(this.diretrizesEstrategicas)
+    this.diretrizesEstrategicas = new Array<any>();
+    this.DiretrizesEstrategicasService.getDistretriz().subscribe(elem => elem.map(data => this.diretrizesEstrategicas.push(data)));
+    console.log(this.diretrizesEstrategicas);
   }
 
 }
