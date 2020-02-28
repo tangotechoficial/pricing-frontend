@@ -4,6 +4,7 @@ import { MetadataService } from './../../services/metadata.service';
 import { SaccesoService } from '../../services/sacceso.service';
 import { fromEvent } from 'rxjs';
 import { tap, switchMap } from "rxjs/operators";
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 
 
@@ -160,7 +161,6 @@ export class SaccesoComponent implements OnInit {
         this._saMessage.setCodigo(this._newSA.getCodigo());
         this._saMessage.setDescription(this._newSA.getDescription());
         this.saveSuccess = true;
-        
         setTimeout(function (){
           this.saveSuccess = false;
           this._newSA = new Sacceso();
@@ -171,8 +171,9 @@ export class SaccesoComponent implements OnInit {
           setTimeout(function () {
             this.saveError = false;
           }.bind(this), 2000)
-    });
+    })
     
+    this.sequenciasAcceso.push(this._newSA);
   }
 
   public submitSA() {
