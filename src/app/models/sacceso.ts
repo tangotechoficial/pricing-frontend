@@ -8,6 +8,15 @@ export class Sacceso {
         public _parents: Array<any> = new Array<any>(),
         public selected: boolean = false
     ){}
+
+
+    public setId(val){
+        this.sId = val;
+    }
+
+    public getId(){
+        return this.sId;
+    }
     
     public setSelected(val){
         this.selected = val;

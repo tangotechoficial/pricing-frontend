@@ -32,7 +32,7 @@
         
         <div class="col-sm-2">
             <span class="text-header">Cód. Sequência de Acesso</span>
-            <input id="SQSearch" class="form-control mt-3" [(ngModel)]="_sacceso.sSeqAcceso" [value]="selectedValue" />
+            <input id="SQSearch" class="form-control mt-3" [(ngModel)]="_sacceso.sSeqAcceso" [value]="selectedValue" readonly/>
             <ul *ngIf="_sacceso.sSeqAcceso" class="filter-select list-group">
                 <ng-container *ngIf="!existSelected">
                     <li *ngFor="let val of sequenciasAccesoSearch | filterseqsearch: _sacceso.sSeqAcceso ;" (click)="onSelectedValue(val)"
@@ -113,7 +113,7 @@
               </button>
         </div>
         <div *ngIf="saveError" class="col-md-8 alert alert-danger" role="alert">
-            <strong>Ocorreu um erro</strong>
+            <strong>{{errDesc}}</strong>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>

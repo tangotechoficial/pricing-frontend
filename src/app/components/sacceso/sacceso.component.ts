@@ -4,7 +4,8 @@ import { MetadataService } from './../../services/metadata.service';
 import { SaccesoService } from '../../services/sacceso.service';
 import { fromEvent } from 'rxjs';
 import { tap, switchMap } from "rxjs/operators";
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { THIS_EXPR, ThrowStmt } from '@angular/compiler/src/output/output_ast';
+import { parse } from 'querystring';
 
 
 
@@ -23,9 +24,11 @@ export class SaccesoComponent implements OnInit {
   searchSeleccionado;
   selectedValue: string;
   public existSelected = false;
+  public errDesc = "";
   public _sacceso: Sacceso;
   public _saMessage: Sacceso;
   public _newSA: Sacceso;
+  public _nextVal: string;
   public sequenciasAcceso: Array<any>;
   public sequenciasAccesoSearch: Array<any>;
   public selectedProperties: Array<any>;
@@ -52,11 +55,14 @@ export class SaccesoComponent implements OnInit {
     this.selValues1 = new Array<any>();
     this.selValues2 = new Array<any>();
     this._sacceso = new Sacceso();
+    this._sacceso.setCodigo("SQ001");
     this._newSA = new Sacceso();
     this._saMessage = new Sacceso();
     this._saccesoService.getSaccesoList().subscribe((values) => {
-      values.map((elem) => {
+      console.log(values);
+      values.map((elem) => { 
         let seq = new Sacceso();
+        seq.setId(elem.ID);
         seq.setCodigo(elem.SEQCODE);
         seq.setDescription(elem.SEQDESC);
         this.sequenciasAccesoSearch.push(seq);
@@ -119,6 +125,7 @@ export class SaccesoComponent implements OnInit {
           }
         })
         this.selectedProperties.splice(index, 1);
+        this._sacceso._parents.slice(index, 1);
       }
     })
 
@@ -134,9 +141,11 @@ export class SaccesoComponent implements OnInit {
           this.selectedProperties.map((elem2, index) => {
             if (elem2.getCodigo() == sa.getCodigo()) {
               this.selectedProperties.splice(index, 1);
+              this._sacceso._parents.slice(index, 1);
             }
           })
         } else {
+          this._sacceso._parents.push(sa);
           elem.setSelected(true);
           this.selectedProperties.push(elem);
         }
@@ -178,15 +187,32 @@ export class SaccesoComponent implements OnInit {
     this._newSA = new Sacceso();
   }
 
+  public pad_with_zeroes(number, length) {
+
+    var my_string = '' + number;
+    while (my_string.length < length) {
+        my_string = '0' + my_string;
+    }
+
+    return my_string;
+
+  }
+
+  public generateNewId(response){
+    var lastNumber = response.data.substring(response.data.length-3, response.data.length);
+    var newNum = parseInt(lastNumber);
+    var addLeadingZeros = this.pad_with_zeroes(newNum+1, 3);
+    var newCode = "SQ" + addLeadingZeros;
+    return newCode;
+  }
+
+  
+
   public submitSA() {
-    this._saccesoService.postSacceso(this._sacceso)
+    this._saccesoService.postSaccesoComp(this._sacceso)
       .subscribe(response => {
-        this._saMessage.setCodigo(this._sacceso.getCodigo());
-        this._saMessage.setDescription(this._sacceso.getDescription());
+        this._nextVal = this.generateNewId(response);
         this.saveSuccess = true;
-        setTimeout(function () {
-          this.saveSuccess = false;
-        }.bind(this), 2000)
       },
         error => {
           this.saveError = true;
@@ -194,9 +220,25 @@ export class SaccesoComponent implements OnInit {
             this.saveError = false;
           }.bind(this), 2000)
         })
+    setTimeout(function () {
+      this.saveSuccess = false;
+      this._sacceso.setCodigo(this._nextVal);
+      this.selectedProperties.map(elem => {
+      this.onDltSelection(elem);
+    })
+    }.bind(this), 2000)
+    this._saMessage.setCodigo(this._sacceso.getCodigo());
+    this._saMessage.setDescription(this._sacceso.getDescription());
+    this._sacceso = new Sacceso();
+    this.selectedProperties.map(elem => {
+      this.onDltSelection(elem);
+    })
+    this.selectedProperties.map(elem => {
+      this.onDltSelection(elem);
+    })
     
+    
+
   }
-
-
 
 }
