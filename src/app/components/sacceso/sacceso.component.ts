@@ -75,7 +75,7 @@ export class SaccesoComponent implements OnInit {
     });
   }
 
-  
+
 
   public onBlurSQSearch() {
     this.searchValues = new Array<any>();
@@ -90,7 +90,7 @@ export class SaccesoComponent implements OnInit {
     }.bind(this), 3000)
   }
 
-  ngAfterViewInit(){
+  ngAfterViewInit() {
 
     const input: any = document.getElementById('SQSearch');
     const selectedElements: any = document.getElementById('saSearch1');
@@ -158,22 +158,24 @@ export class SaccesoComponent implements OnInit {
   submitNewSA() {
     this._saccesoService.postSacceso(this._newSA)
       .subscribe(response => {
-        this._saMessage.setCodigo(this._newSA.getCodigo());
-        this._saMessage.setDescription(this._newSA.getDescription());
+
         this.saveSuccess = true;
-        setTimeout(function (){
-          this.saveSuccess = false;
-          this._newSA = new Sacceso();
-        }.bind(this), 2000)
       },
         error => {
           this.saveError = true;
           setTimeout(function () {
             this.saveError = false;
           }.bind(this), 2000)
-    })
-    
+        })
+
+    this._saMessage.setCodigo(this._newSA.getCodigo());
+    this._saMessage.setDescription(this._newSA.getDescription());
+
+    setTimeout(function () {
+      this.saveSuccess = false;
+    }.bind(this), 2000)
     this.sequenciasAcceso.push(this._newSA);
+    this._newSA = new Sacceso();
   }
 
   public submitSA() {
@@ -192,7 +194,9 @@ export class SaccesoComponent implements OnInit {
             this.saveError = false;
           }.bind(this), 2000)
         })
-
+    
   }
+
+
 
 }
