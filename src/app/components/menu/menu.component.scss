@@ -1,11 +1,12 @@
  @import '../../../assets/styles/global.scss';
 
+// GENERAL
+// reemplazar por mixins
 $color-prim:#737373;
 $color-prim-light:#9FA2AB;
 $color-prim-light2:#E7E9F1;
 $color-sec:#6288CB;
 
-// GENERAL
 
 
 .alert {
@@ -31,23 +32,19 @@ $color-sec:#6288CB;
 	.bcard{
 		background: white;
 		font-size: 11px;
-		box-shadow:  1px 5px 11px 0px rgba(100, 100, 100, 0.4);
+		box-shadow: 0px 0px 6px 0px rgba(9, 9, 10, 0.1);
 		padding:30px;
 		margin-bottom:20px;
 		border-radius:5px;
 		height: auto;
 
-		.title{
-			color:$color-prim-light;
-			padding:3px;
-			font-size: 17px !important;
-		}
+
 		input , button{
 			 	font-size: 11px !important;
 		}
 
 		button{
-			background: $color-sec;
+			background: $martinsBlue;
 			color:white !important;
 			border:0px;
 			margin-bottom: 5px;
@@ -78,7 +75,7 @@ $color-sec:#6288CB;
  	transition:2s;
 
  	transform: translate(-50%,-50%);
- 	box-shadow:  1px 5px 11px 0px rgba(100, 100, 100, 0.3);
+ 	box-shadow: 0px 0px 6px 0px rgba(9, 9, 10, 0.3);
  	text-align: center;
 	.close{
 		padding:10px 15px;
@@ -114,7 +111,7 @@ $color-sec:#6288CB;
 
 
  			.circleNum{
-	 				background-color: $color-sec;
+	 				background-color: $martinsBlue;
 	 				border-radius:50%;
 	 				position: absolute;
 	 				height: 25px;
@@ -142,7 +139,7 @@ $color-sec:#6288CB;
  		}
  		.modalBut{
  			button{
- 				color:$color-sec;
+ 				color:$martinsBlue;
  				background-color: transparent;
  				border-style: none;
  			}

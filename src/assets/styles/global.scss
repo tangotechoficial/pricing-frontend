@@ -1,7 +1,6 @@
 @import './mixins-var.scss';
 
 
-
 *:not(.fas) {
     font-family: 'Raleway', sans-serif;
 }
@@ -28,6 +27,17 @@ button#dropdownMenuButton {
     }
 }
 
+.dropdown-toggle:after{
+    position: relative;
+    top: 0.5rem;
+    float: right;
+    color: $martinsBlue;
+}
+
+.dropdown-menu {
+    min-width: 100%;
+}
+
 #precio-container {
     height: 100vh;
 }
@@ -44,11 +54,49 @@ button#dropdownMenuButton {
 
 
 .menu-background {
-    background: #F7F8FB;
+    background: $backgroundGrey;
     height: 100vh;
     padding:0px;
 }
 
 
+.title{
+    color:$navMenuTextGrey;
+    padding:3px;
+    font-size: 17px !important;
+}
 
+.subtitlab{
+    color:$navMenuIconGrey;
+    padding:0px;
+    font-size: 14px !important;
+    font-weight: 700;
+    &.darkbl{
+        color:$martinsDarkBlue;        
+    }
+    &.darkgr{
+        color:$martinsTextGrey;        
+    }
+    &.lightbl{
+        color:$martinsBlue;        
+    }
+}
+.martinsText{
+   color:$navMenuIconGrey;
+   padding:3px;
+   font-size: 13.5px !important; 
+   margin-bottom: 0px;
+}
+
+.buttonOutline{
+    margin:5px 0px;
+    padding:10px 60px;
+    border:2px solid $martinsBlue;
+    color:$martinsBlue;
+    font-size: 14px;
+    font-weight: 700;
+    &:hover{
+        background-color: transparent;
+    };
+}
 
