@@ -26,13 +26,18 @@ $desktop : 3000px;
 .notfiConfigList{
 	list-style: none;
 	align-items: right;
-	margin-left: 160px;
+	margin-left: 100px;
+	@media (min-width: 0px) and (max-width: 1000px) {
+	  margin-left: 10px;
+	}
+
 
 	.nav-item{
 		display: inline-block;
 		margin-right: 10px;
 		@media  (max-width: $tablet) {
 		  padding:1px;
+		  margin-right:0px;
 		}
 		i{
 			padding:12px 12px 0px 12px;
@@ -67,11 +72,12 @@ $desktop : 3000px;
 		&.logoIcon{
 			display: none;
 
+
 			@media (min-width: $tablet) and (max-width: $desktop) {
 			  display: inline-block;
 			}
 			img{
-				height: 100%;
+				width: 140px;
 			}
 
 
@@ -79,9 +85,11 @@ $desktop : 3000px;
 		}
 		&.logoIcon2{
 			display: none;
+			margin:0px;
 			margin-top:8px;
 			@media (min-width: 0px) and (max-width: $tablet) {
 			  display: inline-block;
+
 			}
 			img{
 				width: 40px;
