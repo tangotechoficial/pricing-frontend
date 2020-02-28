@@ -27,7 +27,7 @@ const appRoutes: Routes = [
     { path: 'b-preciobase', component: PrecioBaseBusinessComponent},
     { path: 'b-precioventa', component: PrecioVentaComponent},
     { path: 'diretriz-estrategica', component: DiretrizEstrategicaComponent},
-    { path: 'datalab/dados-mestre', component: DadosMestreComponent},
+    { path: 'dados-mestre', component: DadosMestreComponent},
     { path: '', redirectTo: '/login', pathMatch: 'full'},
     { path: '**', component: ErrorComponent},
 
