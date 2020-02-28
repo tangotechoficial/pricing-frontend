@@ -4,6 +4,7 @@ import { MetadataService } from './../../services/metadata.service';
 import { SaccesoService } from '../../services/sacceso.service';
 import { fromEvent } from 'rxjs';
 import { tap, switchMap } from "rxjs/operators";
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 
 
@@ -76,7 +77,7 @@ export class SaccesoComponent implements OnInit {
 
 
 
-  onBlurSQSearch() {
+  public onBlurSQSearch() {
     this.searchValues = new Array<any>();
   }
 
@@ -157,23 +158,24 @@ export class SaccesoComponent implements OnInit {
   submitNewSA() {
     this._saccesoService.postSacceso(this._newSA)
       .subscribe(response => {
-        console.log(this._newSA);
-        this._saMessage.setCodigo(this._newSA.getCodigo());
-        this._saMessage.setDescription(this._newSA.getDescription());
-        console.log(this._saMessage);
+
         this.saveSuccess = true;
-        setTimeout(function (){
-          this.saveSuccess = false;
-          this._newSA = new Sacceso();
-        }.bind(this), 2000)
       },
         error => {
           this.saveError = true;
           setTimeout(function () {
             this.saveError = false;
           }.bind(this), 2000)
-    });
-    
+        })
+
+    this._saMessage.setCodigo(this._newSA.getCodigo());
+    this._saMessage.setDescription(this._newSA.getDescription());
+
+    setTimeout(function () {
+      this.saveSuccess = false;
+    }.bind(this), 2000)
+    this.sequenciasAcceso.push(this._newSA);
+    this._newSA = new Sacceso();
   }
 
   public submitSA() {
@@ -192,7 +194,9 @@ export class SaccesoComponent implements OnInit {
             this.saveError = false;
           }.bind(this), 2000)
         })
-
+    
   }
+
+
 
 }
