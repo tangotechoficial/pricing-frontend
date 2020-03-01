@@ -129,8 +129,23 @@ export class SaccesoComponent implements OnInit {
       }
     })
 
-    var elem = document.getElementById(selectedIndex);
-    elem.click()
+   /* var elem = document.getElementById(selectedIndex);
+    if (elem) {
+      elem.click()
+    } else { */
+      const elements = document.getElementsByClassName("custom-control-input");
+      const aElems = Array.prototype.slice.call(elements) 
+      for (var i = 0; i < aElems.length; i++) {
+         const elemLabels = aElems[i].labels
+         
+        if (elemLabels[0].innerText === val.getDescription()) {
+          aElems[i].click();
+        }
+        //const filtered = aElems.filter(aElems[i].innerText === val.getDescription())
+        //filtered.click() 
+        }
+    // }
+    
   }
 
   public checkValue(sa: Sacceso) {
