@@ -88,15 +88,27 @@ button#dropdownMenuButton {
    margin-bottom: 0px;
 }
 
-.buttonOutline{
-    margin:5px 0px;
-    padding:10px 60px;
-    border:2px solid $martinsBlue;
-    color:$martinsBlue;
-    font-size: 14px;
-    font-weight: 700;
-    &:hover{
-        background-color: transparent;
-    };
+/**--buttons--*/ 
+
+@mixin inverted-btn {
+    background-color: transparent;
+    color: $martinsBlue;
+    border: 3px solid;
 }
 
+.btn.bg-standard {
+    background-color: $martinsBlue;
+    color: white;
+    border: 3px solid $martinsBlue;
+    &[disabled]{
+        @include inverted-btn;
+    }
+}
+
+.btn.bg-inverted{
+    @include inverted-btn;
+}
+
+.btn-pventa{
+    font-size: 14px;
+}

@@ -1,5 +1,6 @@
 // @import "../../../assets/styles/mixins-var.scss";
 @import './mixins-var.scss';
+@import './global.scss';
 
 .background { 
     background-color: $backgroundGrey;
@@ -114,28 +115,6 @@ i {
     border-color: $martinsBlue;
     padding-left:40px;
     padding-right: 40px;
-  }
-
-  button.btn.btn-primary.btn-block.button-save, button.btn.btn-primary{
-    color: $martinsBlue;
-    font-weight: bold;
-    background: white;
-    border-color: $martinsBlue;
-    border: 3px solid;
-  }
-
-  /* button.btn.btn-secondary.button-save{
-      background: $martinsBlue;
-      color: white;
-      font-weight: normal;
-      border-radius: 5px;
-  } */
-
-  #btn-modal-save {
-    background: $martinsBlue;
-    color: white;
-    font-weight: normal;
-    border: 3px solid $martinsBlue;
   }
 
 [contentEditable=true]:empty:not(:focus):before{

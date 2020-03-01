@@ -21,6 +21,7 @@ export class CondicionComponent implements OnInit {
   public listaCondiciones: Array<any>;
   public listaCondicionesComp: Array<any>;
   public selectedProperties: Array<any>;
+  IsSaving: boolean = false;
 
   constructor(
     private _metadataService: MetadataService,
@@ -29,6 +30,7 @@ export class CondicionComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    $('#myModal').modal('show')
     this.listaCondiciones = new Array<any>();
     this.listaCondicionesComp = new Array<any>();
     this.selectedProperties = new Array<any>();
@@ -40,6 +42,11 @@ export class CondicionComponent implements OnInit {
       }
       this.listaCondiciones.push(elemModel);
     })
+  }
+
+  Save(){
+    $('#myModal').modal('hide')
+    this.IsSaving = true;
   }
 
   public checkValue(tipo){
