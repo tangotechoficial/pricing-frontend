@@ -2,12 +2,12 @@
             <div class="col-9 align-items-center d-flex flex-column justify-content-end pt-5">
                 <span class="text-header col-md-7 col-lg-5 d-flex align-items-end">Seleccione o canal de vendas</span>
                 <div class="dropdown col-md-7 col-lg-5 mt-2">
-                    <button class="col-12 btn btn-light dropdown-toggle text-left px-4 py-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{canalDeVentas}}
+                    <button class="dropdownMenuButton col-12 btn btn-light dropdown-toggle text-left px-4 py-2" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{canalDeVentas}}
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <button class="dropdown-item" (click)="onClickCanalDeVentas('Televendas')">Televendas</button>
-                        <button class="dropdown-item" (click)="onClickCanalDeVentas('B2B')">B2B</button>
-                        <button class="dropdown-item" (click)="onClickCanalDeVentas('Presencial')">Presencial</button>
+                        <button class="dropdown-item martinsText" (click)="onClickCanalDeVentas('Televendas')">Televendas</button>
+                        <button class="dropdown-item martinsText" (click)="onClickCanalDeVentas('B2B')">B2B</button>
+                        <button class="dropdown-item martinsText" (click)="onClickCanalDeVentas('Presencial')">Presencial</button>
                     </div>
                 </div>
                 <!-- <label>Simple Select</label>
@@ -41,13 +41,13 @@
             <div class="col-9 align-items-center d-flex flex-column justify-content-start pt-3 pb-5">
                 <span class="text-header col-md-7 col-lg-5 d-flex align-items-end">Seleccione a linha de negocio</span>
                 <div class="dropdown col-md-7 col-lg-5 mt-2">
-                    <button class="col-12 btn btn-light dropdown-toggle text-left px-4 py-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{lineaDeNegocios}}
+                    <button class="dropdownMenuButton col-12 btn btn-light dropdown-toggle text-left px-4 py-2" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{lineaDeNegocios}}
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <button class="dropdown-item" (click)="onClickLineaDeNegocio('TEI')">TEI</button>
-                        <button class="dropdown-item" (click)="onClickLineaDeNegocio('ABB')">ABB</button>
-                        <button class="dropdown-item" (click)="onClickLineaDeNegocio('HBL')">HBL</button>
-                        <button class="dropdown-item" (click)="onClickLineaDeNegocio('MTC')">MTC</button>
+                        <button class="dropdown-item martinsText" (click)="onClickLineaDeNegocio('TEI')">TEI</button>
+                        <button class="dropdown-item martinsText" (click)="onClickLineaDeNegocio('ABB')">ABB</button>
+                        <button class="dropdown-item martinsText" (click)="onClickLineaDeNegocio('HBL')">HBL</button>
+                        <button class="dropdown-item martinsText" (click)="onClickLineaDeNegocio('MTC')">MTC</button>
                     </div>
                 </div>
             </div>

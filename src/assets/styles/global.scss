@@ -7,6 +7,7 @@
 
 *:not(input){
     color: $martinsTextGrey;
+
 }
 
 .text-header {
@@ -17,15 +18,16 @@
     background: $backgroundGrey;
 }
 
-button#dropdownMenuButton {
+button.dropdownMenuButton {
     background-color: white;
     border: 1px solid #D0D1D6;
-    border-radius: .25rem;
-
+    border-radius: .40rem;
+    font-size:13px;
     &:focus:not(.list-header) {
     border: 2px solid $martinsBlue;
     }
 }
+
 
 .dropdown-toggle:after{
     position: relative;
@@ -37,9 +39,21 @@ button#dropdownMenuButton {
 .dropdown-menu {
     min-width: 100%;
 }
+.dropdown-item {
+    padding: .25rem 1.5rem !important;
+}
 
 #precio-container {
     height: 100vh;
+}
+
+.form-control{
+     border-radius: .35rem !important;
+     font-size:13px;  
+
+}
+.form-group{
+    padding: 0px 5px !important;   
 }
 
 .form-control:focus,
@@ -48,6 +62,7 @@ button#dropdownMenuButton {
     background-color: #fff; */
     border-color: $martinsBlue;
     border: 1px solid $martinsBlue;
+
     // outline: 0;
     box-shadow: 0 0 0 0.1rem rgba(66, 112, 193, 1);
 }
@@ -88,12 +103,19 @@ button#dropdownMenuButton {
    margin-bottom: 0px;
 }
 
+.martinsLabel{
+    color:$navMenuTextGrey;
+    padding:0px;
+    font-size: 12.5px !important;
+    font-weight: 700;
+}
+
 /**--buttons--*/ 
 
 @mixin inverted-btn {
     background-color: transparent;
     color: $martinsBlue;
-    border: 3px solid;
+    border: 1.5px solid;
 }
 
 .btn.bg-standard {
@@ -110,5 +132,12 @@ button#dropdownMenuButton {
 }
 
 .btn-pventa{
-    font-size: 14px;
+    font-size: 13px;
+}
+
+.btn-labeled{
+  
+    margin-top: 30px !important;
+    height: 30px;
+    padding: 2px;
 }

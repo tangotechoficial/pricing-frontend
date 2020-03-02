@@ -2,10 +2,6 @@
 
 // GENERAL
 // reemplazar por mixins
-$color-prim:#737373;
-$color-prim-light:#9FA2AB;
-$color-prim-light2:#E7E9F1;
-$color-sec:#6288CB;
 
 
 
@@ -16,11 +12,7 @@ $color-sec:#6288CB;
     margin-right: auto;
  }
 
- //BOOTSTRAP REPLACE
 
- .input-group{
- 	padding:0px 3px !important;
- }
 
 
 // CONTAINER BUSINESS
@@ -38,19 +30,6 @@ $color-sec:#6288CB;
 		border-radius:5px;
 		height: auto;
 
-
-		input , button{
-			 	font-size: 11px !important;
-		}
-
-		button{
-			background: $martinsBlue;
-			color:white !important;
-			border:0px;
-			margin-bottom: 5px;
-		    margin-top: 24px !important;
-		    height: 34px !important;
-    }
 
 		.form{
 			padding:10px;
@@ -92,7 +71,7 @@ $color-sec:#6288CB;
  			.circle{
  				height: 100%;
  				width: 100%;
-				border:5px solid $color-prim;
+				border:5px solid $martinsTextGrey;
 				border-radius:50%;
 				position: relative;
  			}
@@ -105,7 +84,7 @@ $color-sec:#6288CB;
 
 				i{
 					font-size: 50px;
-					color:$color-prim-light;
+					color:$navMenuIconGrey;
 				}
 			}
 
@@ -128,12 +107,12 @@ $color-sec:#6288CB;
  		}
  		.modalMsg{
  			.msg1{
- 				color:$color-prim;
+ 				color:$martinsTextGrey;
  				font-size:24px;
 
  			}
  			.msg2{
-				color:$color-prim-light;
+				color:$navMenuIconGrey;
  			}
 
  		}
