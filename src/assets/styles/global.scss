@@ -49,11 +49,11 @@ button.dropdownMenuButton {
 
 .form-control{
      border-radius: .35rem !important;
-     font-size:13px;  
+     font-size:13px;
 
 }
 .form-group{
-    padding: 0px 5px !important;   
+    padding: 0px 5px !important;
 }
 
 .form-control:focus,
@@ -87,19 +87,19 @@ button.dropdownMenuButton {
     font-size: 14px !important;
     font-weight: 700;
     &.darkbl{
-        color:$martinsDarkBlue;        
+        color:$martinsDarkBlue;
     }
     &.darkgr{
-        color:$martinsTextGrey;        
+        color:$martinsTextGrey;
     }
     &.lightbl{
-        color:$martinsBlue;        
+        color:$martinsBlue;
     }
 }
 .martinsText{
    color:$navMenuIconGrey;
    padding:3px;
-   font-size: 13.5px !important; 
+   font-size: 13.5px !important;
    margin-bottom: 0px;
 }
 
@@ -110,7 +110,7 @@ button.dropdownMenuButton {
     font-weight: 700;
 }
 
-/**--buttons--*/ 
+/**--buttons--*/
 
 @mixin inverted-btn {
     background-color: transparent;
@@ -136,8 +136,12 @@ button.dropdownMenuButton {
 }
 
 .btn-labeled{
-  
+
     margin-top: 30px !important;
     height: 30px;
     padding: 2px;
+}
+
+.btn-grey{
+  color:$martinsTextGrey !important;
 }

@@ -4,8 +4,15 @@ hr{
 	background-color:$navMenuIconGrey;
 	margin:5px 0px;
 }
-.precioVendaWrapper{
-	height: 100vh;
+
+.menu-background{
+    overflow-y: scroll;
+    &::-webkit-scrollbar {
+    display: none;
+  }
+}
+.precioWrapper{
+
 	padding:30px 40px;
 
 	.modGeneral{
@@ -13,6 +20,10 @@ hr{
 		padding:30px;
 		border-radius: 5px;
 		color:red;
+    height: 100%;
+    h5{
+      margin:0px;
+    }
 	}
 
 	.modInput{
@@ -24,7 +35,7 @@ hr{
 		height: 100vh;
 		overflow-y: scroll;
 		i{
-			font-size:20px;			
+			font-size:20px;
 		}
 		.itemCond{
 			margin-top:20px;
@@ -35,7 +46,7 @@ hr{
 
 			}
 		}
-		
+
 	}
 	.modCondSelect{
 		box-shadow: 0px 0px 6px 0px rgba(9, 9, 10, 0.1);
@@ -52,7 +63,7 @@ hr{
 		.compliance{
 			border-radius: 5px;
 			border:1px solid $navMenuIconGrey;
-			height: 200px;
+			height: 250px;
 		}
 	}
 }

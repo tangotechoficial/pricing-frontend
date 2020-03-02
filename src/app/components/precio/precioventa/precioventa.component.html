@@ -1,13 +1,9 @@
 <!-- Navigation Bar -->
 <navegacion></navegacion>
 
-<!--Component Content -->
+
 <div class="container menu-background" id="precio-container">
 
- 
-
-
-  
 <!-- Select-->
     <div *ngIf="!isShow" >
         <precio-seleccion (negociosOutput)="parentListener($event)"
@@ -21,14 +17,13 @@
 
 <!--Main view-->
 
-
   <!-- BUSINESS USER -->
 
-<div class="precioVendaWrapper" *ngIf="isShow" >
+<div class="precioWrapper" *ngIf="isShow" >
 
     <div class="row">
         <div class=" col-xs-12 col-lg-12 ">
-            <div class="modInput">                 
+            <div class="modInput">
 
                   <div class="form row">
                     <div class="form-group col-xs-12 col-md-1">
@@ -66,8 +61,8 @@
                     </div>
 
                     <div class="form-group col-xs-12 col-md-3">
-                        <label for="desmaterial" class="martinsLabel control-label">Descricao da categoria</label>
-                        <input type="text" value='' class="form-control" name="desmaterial" id="desmaterial" placeholder="Seleccione">
+                        <label for="desSub" class="martinsLabel control-label">Descricao da subcategoria</label>
+                        <input type="text" value='' class="form-control" name="desSub" id="desmaterial" placeholder="Seleccione">
                     </div>
 
                     <div class="form-group col-xs-12 col-md-1">
@@ -81,7 +76,7 @@
                       <button class="col-12 btn btn-light dropdown-toggle dropdownMenuButton text-left  px-12 py-12" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Selecione
                       </button>
-        
+
 
                       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                           <button class="dropdown-item martinsText" >Opt1</button>
@@ -113,7 +108,7 @@
 
 
                     <div class="dropdown form-group col-xs-12 col-md-1">
-                        <label for="filialExp" class="martinsLabel control-label">Estado</label>
+                        <label for="estado" class="martinsLabel control-label">Estado</label>
                       <button class="col-12 btn btn-light dropdown-toggle dropdownMenuButton text-left  px-12 py-12" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         UF
                       </button>
@@ -127,7 +122,7 @@
 
 
                     <div class="dropdown form-group col-xs-12 col-md-2">
-                        <label for="filialExp" class="martinsLabel control-label">Região de preço</label>
+                        <label for="reg" class="martinsLabel control-label">Região de preço</label>
                       <button class="col-12 btn btn-light dropdown-toggle dropdownMenuButton text-left  px-12 py-12" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Cód
                       </button>
@@ -143,141 +138,141 @@
                         <input type="submit" class="btn bg-inverted btn-labeled btn-block btn-md btn-pventa " value="Salvar">
                     </div>
                     <div class="form-group col-xs-12 col-md-1 ">
-                        <input type="submit" class="btn bg-inverted btn-labeled btn-block btn-md btn-pventa" value="Limpar">
+                        <input type="submit" class="btn bg-inverted btn-labeled btn-block btn-md btn-pventa btn-grey" value="Limpar">
                     </div>
 
                   </div>
 
                 </div>
-            
+
         </div>
 
         <div class="modCond  modGeneral col-xs-12 col-md-4 col-lg-4">
-            <h4 class="subtitlab lightbl">Seleccione uma condicão  <i class="fas fa-info-circle"></i></h4>
-            
+            <h4 class="subtitlab darkbl">Seleccione uma condicão  <i class="fas fa-info-circle"></i></h4>
+
             <div class="itemCond">
                 <h5 class="subtitlab darkbl">CMV</h5>
-                
+
                 <div class="row subItemCond">
                     <div class="col col-xs-3">
-                        <p class="martinsText">CMV</p>         
+                        <p class="martinsText">CMV</p>
                     </div>
                     <div class="col col-xs-9">
-                        <p class="martinsText text-right">+106,41</p>  
+                        <p class="martinsText text-right">+106,41</p>
                     </div>
-                </div>  
+                </div>
 
                 <hr>
 
                 <div class="row subItemCond">
                     <div class="col col-xs-3">
-                        <p class="martinsText subtitlab darkbl">Subtotal</p>         
+                        <p class="martinsText subtitlab darkbl">Subtotal</p>
                     </div>
                     <div class="col col-xs-9">
-                        <p class="martinsText text-right font-weight-bold">+106,41</p>  
+                        <p class="martinsText text-right font-weight-bold">+106,41</p>
                     </div>
-                </div>  
+                </div>
 
-            </div> 
+            </div>
 
             <div class="itemCond">
                 <h5 class="subtitlab darkbl">REGULATORIO</h5>
-                
-                <div class="row subItemCond">
-                    <div class="col col-xs-3">
-                        <p class="martinsText">ICMS</p>         
-                    </div>
-                    <div class="col col-xs-9">
-                        <p class="martinsText text-right">+25,00</p>  
-                    </div>
-                </div>  
 
                 <div class="row subItemCond">
                     <div class="col col-xs-3">
-                        <p class="martinsText">PIS</p>         
+                        <p class="martinsText">IPI</p>
                     </div>
                     <div class="col col-xs-9">
-                        <p class="martinsText text-right">+5,00</p>  
+                        <p class="martinsText text-right">+25,00</p>
                     </div>
-                </div>  
-
+                </div>
 
                 <div class="row subItemCond">
                     <div class="col col-xs-3">
-                        <p class="martinsText">COFINS</p>         
+                        <p class="martinsText">ST</p>
                     </div>
                     <div class="col col-xs-9">
-                        <p class="martinsText text-right">+6,76</p>  
+                        <p class="martinsText text-right">+5,00</p>
                     </div>
-                </div>  
-                
+                </div>
+
+
                 <hr>
                 <div class="row subItemCond">
                     <div class="col col-xs-3">
-                        <p class="martinsText subtitlab darkbl">Subtotal</p>         
+                        <p class="martinsText subtitlab darkbl">Subtotal</p>
                     </div>
                     <div class="col col-xs-9">
-                        <p class="martinsText text-right font-weight-bold">+36,76</p>  
+                        <p class="martinsText text-right font-weight-bold">+36,76</p>
                     </div>
-                </div>  
+                </div>
 
-            </div>  
+            </div>
 
 
             <div class="itemCond">
                 <h5 class="subtitlab darkbl">OPERACIONAL</h5>
-                
+
                 <div class="row subItemCond">
                     <div class="col col-xs-3">
-                        <p class="martinsText">devolução</p>         
+                        <p class="martinsText">Fraccionamiento</p>
                     </div>
                     <div class="col col-xs-9">
-                        <p class="martinsText text-right">+6,76</p>  
+                        <p class="martinsText text-right">+5,00</p>
                     </div>
-                </div>  
-                
+                </div>
+
                 <hr>
                 <div class="row subItemCond">
                     <div class="col col-xs-3">
-                        <p class="martinsText subtitlab darkbl">Subtotal</p>         
+                        <p class="martinsText subtitlab darkbl">Subtotal</p>
                     </div>
                     <div class="col col-xs-9">
-                        <p class="martinsText text-right font-weight-bold">+6,76</p>  
+                        <p class="martinsText text-right font-weight-bold">+5,00</p>
                     </div>
-                </div>  
+                </div>
 
-            </div>  
+            </div>
 
             <div class="itemCond">
-                <h5 class="subtitlab darkbl">VERBA</h5>
-                
+                <h5 class="subtitlab darkbl">FINANCIERO</h5>
+
                 <div class="row subItemCond">
                     <div class="col col-xs-3">
-                        <p class="martinsText">Rebate</p>         
+                        <p class="martinsText">Condição de pag.</p>
                     </div>
                     <div class="col col-xs-9">
-                        <p class="martinsText text-right">-20,39</p>  
+                        <p class="martinsText text-right">0</p>
                     </div>
-                </div>  
-                
+                </div>
+
+              <div class="row subItemCond">
+                    <div class="col col-xs-3">
+                        <p class="martinsText">Margen por seg.</p>
+                    </div>
+                    <div class="col col-xs-9">
+                        <p class="martinsText text-right">0</p>
+                    </div>
+                </div>
+
                 <hr>
                 <div class="row subItemCond">
                     <div class="col col-xs-3">
-                        <p class="martinsText subtitlab darkbl">Subtotal</p>         
+                        <p class="martinsText subtitlab darkbl">Subtotal</p>
                     </div>
                     <div class="col col-xs-9">
-                        <p class="martinsText text-right font-weight-bold">-20,39</p>  
+                        <p class="martinsText text-right font-weight-bold">-20,39</p>
                     </div>
-                </div>  
+                </div>
 
-            </div>  
+            </div>
 
         </div>
 
         <div class="col-xs-12 col-offset-col-md-4 col-lg-8">
-            <div class="modCondSelect modGeneral">                
-            
-            <h4 class="subtitlab">Condição selecionada </h4>  
+            <div class="modCondSelect modGeneral">
+
+            <h4 class="subtitlab">Condição selecionada </h4>
             <h4 class="subtitlab darkgr">Selecione uma sequência de acesso</h4>
 
             <div class="dropdown col-12 mt-2">
@@ -295,13 +290,13 @@
 
             <div class="compliance">
 
-                
+
             </div>
             <div class="text-center">
                 <input type="submit" class="btn bg-inverted btn-md btn-pventa font-weight-bold mt-4 py-2 px-5" value="Salvar">
             </div>
 
-   
+
 
         </div>
     </div>
@@ -310,7 +305,7 @@
 
   <!-- TECHNICAL USER -->
 <!--     <div *ngIf="isShow">
-   
+
         <div class="background">
             <precio-element titulo="PRECO BASE"></precio-element>
             <precio-element titulo="REGULATORIO"></precio-element>
@@ -318,7 +313,7 @@
             <precio-element titulo="DESCONTO"></precio-element>
             <precio-element titulo="DESCONTO TRADE"></precio-element>
         </div>
-    </div>            
+    </div>
  -->
 
 

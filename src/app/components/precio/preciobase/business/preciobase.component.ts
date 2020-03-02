@@ -6,23 +6,24 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./preciobase.component.scss"]
 })
 export class PrecioBaseBusinessComponent implements OnInit {
-  isShow = true;
+  isShow:boolean = false; //default false
   existNegocios: string;
   existVentas: string;
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   public goToSection() {
-    this.isShow = !this.isShow;
+   this.isShow = !this.isShow;
   }
 
-  parentListener($event) {
-    this.existNegocios = $event;
+  parentListener($event){
+    this.existNegocios = $event
   }
 
-  parentListenerTwo($event) {
-    this.existVentas = $event;
+  parentListenerTwo($event){
+    this.existVentas = $event
   }
 }
