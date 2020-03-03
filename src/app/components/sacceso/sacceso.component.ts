@@ -55,8 +55,9 @@ export class SaccesoComponent implements OnInit {
     this.selValues1 = new Array<any>();
     this.selValues2 = new Array<any>();
     this._sacceso = new Sacceso();
-    this._sacceso.setCodigo("SQ001");
+    this._sacceso.setCodigo("SQ000");
     this._newSA = new Sacceso();
+    this._newSA.setCodigo("SQ000");
     this._saMessage = new Sacceso();
     this._saccesoService.getSaccesoList().subscribe((values) => {
       console.log(values);
@@ -179,10 +180,10 @@ export class SaccesoComponent implements OnInit {
     this._sacceso.sDesAcceso = descripcion;
   }
 
-  submitNewSA() {
+  submitNewSA(){
     this._saccesoService.postSacceso(this._newSA)
       .subscribe(response => {
-
+        this._nextVal = this.generateNewId(response);
         this.saveSuccess = true;
       },
         error => {
@@ -197,9 +198,11 @@ export class SaccesoComponent implements OnInit {
 
     setTimeout(function () {
       this.saveSuccess = false;
+      this._newSA.setCodigo(this._nextVal);
     }.bind(this), 2000)
     this.sequenciasAcceso.push(this._newSA);
     this._newSA = new Sacceso();
+   
   }
 
   public pad_with_zeroes(number, length) {
@@ -214,7 +217,8 @@ export class SaccesoComponent implements OnInit {
   }
 
   public generateNewId(response){
-    var lastNumber = response.data.substring(response.data.length-3, response.data.length);
+    console.log(response.LASTSEQ);
+    var lastNumber = response.LASTSEQ.substring(response.LASTSEQ.length-3, response.LASTSEQ.length);
     var newNum = parseInt(lastNumber);
     var addLeadingZeros = this.pad_with_zeroes(newNum+1, 3);
     var newCode = "SQ" + addLeadingZeros;
@@ -251,9 +255,6 @@ export class SaccesoComponent implements OnInit {
     this.selectedProperties.map(elem => {
       this.onDltSelection(elem);
     })
-    
-    
-
   }
 
 }
