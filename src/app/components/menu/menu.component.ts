@@ -8,15 +8,16 @@ declare var $: any;
 })
 
 export class MenuComponent implements OnInit {
+  isShowMenu = false;
   public sCurrentUser = JSON.parse(localStorage.getItem("User"));
   public bBusiness: boolean;
   public numTotNotif:number = 3;
-  public modalView:boolean =false;
+  public modalView:boolean = false;
 
   constructor() { }
 
   ngOnInit() {
-    if(this.sCurrentUser.type != "technical"){
+    if(this.sCurrentUser.type !== "technical"){
       this.bBusiness = true;
     }else{
       this.bBusiness = false;
@@ -31,6 +32,12 @@ export class MenuComponent implements OnInit {
   closeWelcome(){
    this.modalView = true;
   }
+
+  parentListenerNavbar($event){
+    this.isShowMenu = $event
+  }
+
+  
 
 
 }
