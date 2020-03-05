@@ -1,0 +1,8 @@
+@import '../../../assets/styles/global.scss';
+@import '../../../assets/styles/condicion-sacceso.scss';
+
+.list-group {
+    position: absolute;
+    z-index: 9999;
+    width: inherit;
+}

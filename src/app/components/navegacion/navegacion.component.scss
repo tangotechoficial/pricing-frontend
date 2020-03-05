@@ -1,0 +1,249 @@
+// UNIFICAR VARIABLES EN NAVEGACION Y MENU .SCSS
+
+$color-prim:#737373;
+$color-prim-light:#9FA2AB;
+$color-prim-light2:#E7E9F1;
+$color-sec:#6288CB;
+
+$mobile : 350px;
+$tablet : 770px;
+$desktop : 3000px;
+
+.isLogMenu{
+		padding-left:10px;
+}
+.barWidth{
+	width: 86%;
+	margin:0 auto;
+}
+
+.menuIcon{
+	color:lighten($color-prim-light,10%);
+	padding:5px;
+	font-size:23px;
+}
+
+.notfiConfigList{
+	list-style: none;
+	align-items: right;
+	margin-left: 100px;
+	@media (min-width: 0px) and (max-width: 1000px) {
+	  margin-left: 10px;
+	}
+
+
+	.nav-item{
+		display: inline-block;
+		margin-right: 10px;
+		@media  (max-width: $tablet) {
+		  padding:1px;
+		  margin-right:0px;
+		}
+		i{
+			padding:12px 12px 0px 12px;
+			transition:1s;
+			cursor:pointer;
+		}
+		&:hover i{
+			color:$color-sec !important;
+			transition:1s;
+		}
+		&.bellIcon{
+			position: relative;
+			.myBadge{
+				background-color: $color-sec;
+				border-radius:42%;
+				position: absolute;
+				height: 17px;
+				width: 20px;
+				top:5px;
+				right:-3px;
+				opacity:0.95;
+				p {
+					color:white;
+					text-align: center;
+					font-size: 12px;
+					margin-top:-1px;
+				}
+
+
+			}
+		}
+		&.logoIcon{
+			display: none;
+
+
+			@media (min-width: $tablet) and (max-width: $desktop) {
+			  display: inline-block;
+			}
+			img{
+				width: 140px;
+			}
+
+
+
+		}
+		&.logoIcon2{
+			display: none;
+			margin:0px;
+			margin-top:8px;
+			@media (min-width: 0px) and (max-width: $tablet) {
+			  display: inline-block;
+
+			}
+			img{
+				width: 40px;
+			}
+
+
+
+		}
+
+	}
+}
+
+// BOOTSTRAP REPLACE
+
+
+	.itemtab{
+		font-size: 14px !important;
+		color:$color-prim;
+	}
+
+
+
+.notificationPopUp{
+	z-index:999;
+	box-shadow:  1px 5px 11px 0px rgba(100, 100, 100, 0.3);
+	position: absolute;
+	top:70px;
+	right:330px;
+	display: none;
+	width: 400px;
+	background: $color-prim-light2;
+	border-radius:3px;
+	@media  (min-width: 0px) and (max-width: 900px){
+		transition:1s;
+		left:0px;
+		width: 92%;
+		margin:25px;
+
+	}
+	.notifTab{
+		color:$color-sec;
+		font-weight: 700;
+	}
+	.notificationTitle{
+		height: 45px;
+		text-align: center;
+		padding:13px;
+		h4{
+			color:$color-prim;
+			font-weight: 700;
+			font-size:15px;
+
+		}
+	}
+
+	.notificationBody{
+		height: auto;
+		background: white;
+		box-shadow:  1px 5px 11px 0px rgba(100, 100, 100, 0.3);
+		overflow-y: scroll;
+
+		.notificationlist{
+				list-style: none;
+				padding:15px;
+			.notificationItem{
+
+				.notiWrapp{
+				padding:10px 16px 0px 16px;
+				font-size: 12px;
+				color:$color-prim;
+				width: 100%;
+				background-color: #EAEFF8;
+				border-radius: 5px;
+				margin-right:0px !important;
+				margin-top: 10px;
+				cursor: pointer;
+				.titleMod{
+
+					.title{
+						font-weight: 700;
+						font-size:13.5px;
+						.complete{
+							padding-left:5px;
+							color:$color-sec;
+							font-weight: 700;
+						}
+					}
+					.title2{
+
+						text-align: right;
+					}
+				}
+
+				.descriptionMod{
+					position: relative;
+					padding-bottom:5px;
+					.description{
+						text-transform: uppercase;
+						margin-bottom: 	3px;
+
+					}
+					.detProd{
+
+						padding:10px;
+						td,  th {
+						    border: none;
+								color:$color-prim;
+						}
+						th{
+							font-weight: 400;
+						}
+						tr{
+						}
+						td{
+							text-align:center;
+							border-radius:5px !important;
+							background:#F7F8FB;
+							padding:5px;
+							border-right:1px solid #E7E9F1;
+						}
+					}
+				}
+			}
+			.col-xs-6{
+					padding:0px !important ;
+			}
+			.verif{
+					background-color: $color-sec !important;
+					border:0px;
+					width: 100% !important;
+					border-radius:0px;
+					padding:5px !important;
+					font-weight: 700;
+					font-size:14px;
+					border-right:3px solid #E7E9F1;
+					&.noline{
+						border-right:0px;
+					}
+
+
+
+			}
+			}
+			.nonotif{
+				padding:20px 0px 0px 20px;
+				p{
+					font-size: 12px;
+					color:$color-prim;
+					text-align: center;
+					margin-bottom: 0px;
+				}
+			}
+
+		}
+	}
+
+}
