@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
     this._user = new User();
   }
  onSubmit() {
-     this._loginService.login(this._user)
+     /* this._loginService.login(this._user)
       .subscribe(
         response => {
           var user = response.user;
@@ -49,6 +49,8 @@ export class LoginComponent implements OnInit {
           }
           
         }
-      );
+      ); */
+
+      this._router.navigate(['/menu']);
   }
 }

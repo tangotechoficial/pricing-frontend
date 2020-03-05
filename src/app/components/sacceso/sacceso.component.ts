@@ -55,9 +55,11 @@ export class SaccesoComponent implements OnInit {
     this.selValues1 = new Array<any>();
     this.selValues2 = new Array<any>();
     this._sacceso = new Sacceso();
+    //CODE SEQUENCIA
     this._sacceso.setCodigo("SQ000");
     this._newSA = new Sacceso();
-    this._newSA.setCodigo("SQ000");
+    //CAMPO SEQUENCIA
+    this._newSA.setCodigo("SF000");
     this._saMessage = new Sacceso();
     this._saccesoService.getSaccesoList().subscribe((values) => {
       console.log(values);
@@ -232,6 +234,9 @@ export class SaccesoComponent implements OnInit {
       .subscribe(response => {
         this._nextVal = this.generateNewId(response);
         this.saveSuccess = true;
+        this._saccesoService.getSaccesoList().subscribe(response => {
+          console.log(response);
+        })
       },
         error => {
           this.saveError = true;
