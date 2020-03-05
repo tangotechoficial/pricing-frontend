@@ -1,0 +1,14 @@
+
+.custom-nav{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.custom-container {
+    height: 70px;
+    margin-left: 150px;
+}
+
+.nav-link.disabled{
+    color: #9FA2AB;
+}

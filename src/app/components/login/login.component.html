@@ -1,0 +1,52 @@
+
+<div class="login-background">
+    <div class="login-banner">
+        <img class="img-fluid" src="/assets/img/login-logo-banner.jpg" alt="">
+    </div>
+    <div class="container">
+        <div class="login-header"></div>
+        <div class="row">
+            <div class="col-md-4 offset-md-4">
+                <h2 class="login-title">Simple<b>Pricing</b></h2>
+                <form #loginForm="ngForm" (ngSubmit)="onSubmit()">
+                    <div login="form-group">
+                        <div style="display:inline">
+                            <label class="login-input-label">E-mail</label>
+                            <div class="input-group">
+                                <input class="form-control" type="text" name="email" #email="ngModel"
+                                    [(ngModel)]="_user.email" placeholder="&#xf1fa;"
+                                    />
+                            </div>
+                        </div>
+                    </div>
+                    <div login="form-group">
+                        <label class="login-input-label">Senha</label>
+                        <div class="input-group">
+                            <input class="form-control" placeholder="&#xf023;" type="password" name="password"
+                                #password="ngModel" [(ngModel)]="_user.password" />
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row justify-content-md-center">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <input type="submit" (click)="onSubmit()"class="btn btn-primary btn-block button-login" value="Entrar">
+                            </div>
+                        </div>
+                        <div *ngIf="_BL" class="col-md-8 alert alert-danger" role="alert">
+                            Erro de credencial 
+                        </div>
+                        <div *ngIf="_SE" class="col-md-8 alert alert-danger" role="alert">
+                            Erro no servidor
+                        </div>
+                        <div class="col-md-8 d-flex justify-content-center">
+                            <a href="#" class="login-link">Esqueci minha senha</a>
+                        </div>
+                    </div>
+                </form>
+
+                
+            </div>
+        </div>
+    </div>
+</div>

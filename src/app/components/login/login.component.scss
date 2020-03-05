@@ -1,0 +1,48 @@
+@import "../../../assets/styles/mixins-var.scss";
+
+.login-background {
+    background: #F1F2F3;
+    /* background: linear-gradient(200deg, #F1F2F4 0%, #F1F2F4 60%, rgba(201,203,206,1) 100%); */
+    min-height: 100vh;
+}
+
+.button-login {
+    background:$martinsBlue;
+    border-color: $martinsBlue;
+}
+
+input::placeholder{
+    font-family:Arial, FontAwesome; 
+    color: $martinsBlue;
+  }
+
+.login-title {
+    font-family: 'Raleway', sans-serif;
+    text-align: center;
+    color: #384461;
+}
+
+.login-header {
+    height: 150px;
+}
+
+.login-input-label {
+    color: $martinsTextGrey;
+    font-weight: 500;
+}
+
+.login-link {
+    color: $martinsTextGrey;
+    text-decoration: underline;
+    @include center-bold
+}
+
+.login-banner {
+    background: $martinsBlue;
+    height: 25px;
+}
+
+.login-banner img {
+    display : block;
+    margin : auto;
+}
