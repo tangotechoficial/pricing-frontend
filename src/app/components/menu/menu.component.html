@@ -1,10 +1,9 @@
 <!-- Navigation Bar -->
-<navegacion></navegacion>
+<navegacion (navOutput)="parentListenerNavbar($event)"></navegacion>
 <!-- Div usuario Business -->
 <div class="container menu-background">
 
-  <div class="businessContainer" *ngIf="this.bBusiness">
-
+  <div class="businessContainer" *ngIf="bBusiness && isShowMenu">
     <div class="bcard">
       <h5 class="title">Meu perfil</h5>
 
@@ -78,7 +77,7 @@
 
 <!-- MODAL BIENVENIDA -->
 
-<div class="myModal" [hidden]="modalView">
+<div class="modalBienvenida" [hidden]="modalView" *ngIf="!bBusiness">
   <button type="button" class="close" aria-label="Close" (click)="closeWelcome()">
     <span aria-hidden="true">&times;</span>
   </button>

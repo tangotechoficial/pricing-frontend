@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from "@angular/common";
 import {BrowserModule} from '@angular/platform-browser'
@@ -54,6 +54,7 @@ export class NavegacionComponent implements OnInit {
   public currentUrl: string;
   public numNotif:number = 3 ;
   public numAprob:number = 1;
+  public showBMenu: boolean = false;
 
   public showDetail:boolean = false;
 
@@ -65,6 +66,7 @@ export class NavegacionComponent implements OnInit {
     "/condicion": "Condicion",
   }
   public section: string;
+  @Output() navOutput = new EventEmitter<boolean>()
   constructor(
     private _router: Router,
     private _route: ActivatedRoute,
@@ -94,6 +96,11 @@ export class NavegacionComponent implements OnInit {
 
   verificarNotif(){
     alert("verif")
+  }
+
+  triggerShowBMenu() {
+    this.showBMenu = true;
+    this.navOutput.emit(this.showBMenu)
   }
 
 
