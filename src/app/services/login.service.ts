@@ -14,8 +14,10 @@ export class LoginService{
     }
 
     login(user: User): Observable <any>{
+        console.log(user);
         let params = JSON.stringify(user);
         let headers = new HttpHeaders().set('Content-type', 'application/json');
-        return this._http.post(this.url + '/login', params, {headers: headers});
+        //this._http.post(this.url + '/login', params, {headers: headers});
+        return 
     }
 }

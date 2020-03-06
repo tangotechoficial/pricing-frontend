@@ -28,7 +28,11 @@ export class LoginComponent implements OnInit {
     this._user = new User();
   }
  onSubmit() {
-    this._user = new User("ivan.lynch@osh-pro.com", "Senha", "Iván Lynch", "Token", "technical", true, "103", 1);
+    if(this._user.email == "suzi.campahna@tangotech.com.br"){
+      this._user = new User("suzi.campahna@tangotech.com.br", "12345678", "Suzi Campahna", "Token", "technical", true, "103", 1);
+    }else{
+      this._user = new User("ana.senko@tangotech.com.br", "12345678", "Ana Senko", "Token", "business", true, "103", 1);
+    }
     this._router.navigate(['/menu']);
     localStorage.setItem("User", JSON.stringify(this._user));
      /* this._loginService.login(this._user)
