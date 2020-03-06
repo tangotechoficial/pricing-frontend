@@ -43,7 +43,17 @@ export class SaccesoComponent implements OnInit {
     private _saccesoService: SaccesoService
   ) { }
 
+  public closePopUp(){
+    $('#myModal').modal('hide')
+  }
+
+  public openPop(){
+   
+  }
+
   ngOnInit() {
+    
+
     this.sequenciasAcceso = new Array<any>();
     this.sequenciasAccesoSearch = new Array<any>();
     this.selectedProperties = new Array<any>();
@@ -241,6 +251,7 @@ export class SaccesoComponent implements OnInit {
     this._saccesoService.postSaccesoComp(this._sacceso)
       .subscribe(response => {
         this.saveSuccess = true;
+        $('#myModal').modal('show');
         this.getLastSequencia();
       },
       error => {
@@ -257,6 +268,12 @@ export class SaccesoComponent implements OnInit {
     this._saMessage.setCodigo(this._sacceso.getCodigo());
     this._saMessage.setDescription(this._sacceso.getDescription());
     this._sacceso = new Sacceso();
+    this.selectedProperties.map(elem => {
+      this.onDltSelection(elem);
+    })
+    this.selectedProperties.forEach(elem => {
+      this.onDltSelection(elem);
+    })
     this.selectedProperties.map(elem => {
       this.onDltSelection(elem);
     })
