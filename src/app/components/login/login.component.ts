@@ -28,6 +28,10 @@ export class LoginComponent implements OnInit {
     this._user = new User();
   }
  onSubmit() {
+  // Usuário precisa ser bussines para menu funcionar
+    this._user = new User("ivan.lynch@osh-pro.com", "Senha", "Iván Lynch", "Token", "business", true, "103", 1);
+    this._router.navigate(['/menu']);
+    localStorage.setItem("User", JSON.stringify(this._user));
      /* this._loginService.login(this._user)
       .subscribe(
         response => {
@@ -50,7 +54,5 @@ export class LoginComponent implements OnInit {
           
         }
       ); */
-
-      this._router.navigate(['/menu']);
   }
 }

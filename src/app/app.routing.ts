@@ -23,10 +23,14 @@ const appRoutes: Routes = [
     { path: 'login', component: LoginComponent},
     { path: 'menu', component: MenuComponent},
 //    { path: 'pbaseseleccion', component: PbaseseleccionComponent},
-    { path: 'preciobase', component: PrecioBaseComponent},
-    { path: 'precioventa', component: PrecioVentaComponent},
-    { path: 'sacceso', component: SaccesoComponent},
-    { path: 'condicion', component: CondicionComponent},
+    // { path: 'preciobase', component: PrecioBaseComponent}, Comentado por Eurico Cruz, 6/3
+    { path: 'preco-base', component: PrecioBaseComponent}, 
+    // { path: 'precioventa', component: PrecioVentaComponent}, Comentado por Eurico Cruz, 6/3
+    { path: 'preco-venda', component: PrecioVentaComponent},
+    // { path: 'sacceso', component: SaccesoComponent}, Comentado por Eurico Cruz, 6/3
+    { path: 'acesso', component: SaccesoComponent},
+    // { path: 'condicion', component: CondicionComponent}, Comentado por Eurico Cruz, 6/3
+    { path: 'condicao', component: CondicionComponent},
     { path: 'plano-compra', component: PlanoCompraComponent},
     { path: 'simulador', component: SimuladorComponent},
     { path: 'execucao', component: ExecucaoComponent},
