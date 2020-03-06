@@ -7,8 +7,6 @@ import { tap, switchMap } from "rxjs/operators";
 import { THIS_EXPR, ThrowStmt } from '@angular/compiler/src/output/output_ast';
 import { parse } from 'querystring';
 
-
-
 declare var $: any;
 
 @Component({
@@ -46,8 +44,6 @@ export class SaccesoComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
-
     this.sequenciasAcceso = new Array<any>();
     this.sequenciasAccesoSearch = new Array<any>();
     this.selectedProperties = new Array<any>();
@@ -55,39 +51,88 @@ export class SaccesoComponent implements OnInit {
     this.selValues1 = new Array<any>();
     this.selValues2 = new Array<any>();
     this._sacceso = new Sacceso();
-    //CODE SEQUENCIA
-    this._sacceso.setCodigo("SQ000");
     this._newSA = new Sacceso();
-    //CAMPO SEQUENCIA
-    this._newSA.setCodigo("SF000");
     this._saMessage = new Sacceso();
-    this._saccesoService.getSaccesoList().subscribe((values) => {
-      console.log(values);
-      values.map((elem) => { 
-        let seq = new Sacceso();
-        seq.setId(elem.ID);
-        seq.setCodigo(elem.SEQCODE);
-        seq.setDescription(elem.SEQDESC);
-        this.sequenciasAccesoSearch.push(seq);
-        this.sequenciasAcceso.push(seq);
-      });
-    });
+
+    //Update SeqCampo elements
+    this.updateSeqCampo()
+
+    //Updates the _newSA with the last Cod_Campo
+    this.getLastSeqCampo()
+
+    //Updates the _sacceso with the last Cod_Sequencia
+    this.getLastSequencia()
 
     $('div[contenteditable]').keydown(function (e) {
-      // trap the return key being pressed
       if (e.keyCode === 13) {
-        // insert 2 br tags (if only one br tag is inserted the cursor won't go to the next line)
         document.execCommand('insertHTML', false, '<br>');
-        // prevent the default behaviour of return key pressed
         return false;
       }
     });
   }
 
 
+  /* Iván Lynch - 06/03/2020 
+     Input: null 
+     Output: null
+     This function updates the SeqCampo elements
+  */
+  public updateSeqCampo() {
+    //Get values from SeqCampo
+    this.sequenciasAcceso = new Array<any>();
+    this._saccesoService.getSaccesoList().subscribe((values) => {
+      values.map((elem) => {
+        let seq = new Sacceso();
+        seq.setId(elem.id);
+        seq.setCodigo(elem.Cod_Campo);
+        seq.setDescription(elem.Nome_Campo);
+        this.sequenciasAccesoSearch.push(seq);
+        this.sequenciasAcceso.push(seq);
+      });
+    });
+  }
 
-  public onBlurSQSearch() {
-    this.searchValues = new Array<any>();
+  /* Iván Lynch - 06/03/2020 
+     Input: null 
+     Output: null
+     This function updates the _newSA Object
+  */
+  public getLastSeqCampo() {
+    this._saccesoService.getLastSeqCampo().subscribe((value) => {
+      var parsedValue;
+      parsedValue = value;
+      var oldCode = parsedValue.Cod_Campo;
+      this._newSA.setCodigo(this.evaluateNextSA(oldCode));
+    });
+  }
+
+  /* Iván Lynch - 06/03/2020 
+     Input: null 
+     Output: null
+     This function updates the _sacceso Object
+  */
+  public getLastSequencia() {
+    this._saccesoService.getLastSequencia().subscribe((value) => {
+      var parsedValue;
+      parsedValue = value;
+      var oldCode = parsedValue.Cod_Sequencia;
+      this._sacceso.setCodigo(this.evaluateNextSA(oldCode));
+    });
+  }
+
+  /* Iván Lynch - 05/03/2020 
+     Input: String Code 
+     Output: String Code + 1 
+     ie: 
+        Input: CP001
+        Output: CP002 
+  */
+  public evaluateNextSA(code: String) {
+    let codeString = code.substr(0, 2);
+    let codeNumer = parseInt(code.substr(code.length - 2, code.length));
+    let nextValue = codeNumer + 1;
+    let nextCode = codeString + this.pad_with_zeroes(nextValue, 3);
+    return nextCode;
   }
 
   public onSelectedValue(event) {
@@ -97,25 +142,6 @@ export class SaccesoComponent implements OnInit {
     setTimeout(function () {
       this.existSelected = false;
     }.bind(this), 3000)
-  }
-
-  ngAfterViewInit() {
-
-    const input: any = document.getElementById('SQSearch');
-    const selectedElements: any = document.getElementById('saSearch1');
-    const selectedElements2: any = document.getElementById('saSearch2');
-
-    const search$ = fromEvent(input, 'keyup')
-      .pipe(
-        tap(() => this.searchValues = []),
-        switchMap(() => this._metadataService.searchData(input.value))
-      )
-    search$.subscribe(
-      (values) => {
-        this.searchValues.push(values);
-      }
-    );
-
   }
 
   onDltSelection(val) {
@@ -132,23 +158,15 @@ export class SaccesoComponent implements OnInit {
       }
     })
 
-   /* var elem = document.getElementById(selectedIndex);
-    if (elem) {
-      elem.click()
-    } else { */
-      const elements = document.getElementsByClassName("custom-control-input");
-      const aElems = Array.prototype.slice.call(elements) 
-      for (var i = 0; i < aElems.length; i++) {
-         const elemLabels = aElems[i].labels
-         
-        if (elemLabels[0].innerText === val.getDescription()) {
-          aElems[i].click();
-        }
-        //const filtered = aElems.filter(aElems[i].innerText === val.getDescription())
-        //filtered.click() 
-        }
-    // }
-    
+    const elements = document.getElementsByClassName("custom-control-input");
+    const aElems = Array.prototype.slice.call(elements)
+    for (var i = 0; i < aElems.length; i++) {
+      const elemLabels = aElems[i].labels
+
+      if (elemLabels[0].innerText === val.getDescription()) {
+        aElems[i].click();
+      }
+    }
   }
 
   public checkValue(sa: Sacceso) {
@@ -178,15 +196,14 @@ export class SaccesoComponent implements OnInit {
         descripcion = descripcion + '/' + elem.getDescription();
       }
     })
-
     this._sacceso.sDesAcceso = descripcion;
   }
 
-  submitNewSA(){
+  submitNewSA() {
     this._saccesoService.postSacceso(this._newSA)
       .subscribe(response => {
-        this._nextVal = this.generateNewId(response);
         this.saveSuccess = true;
+        this.updateSeqCampo();
       },
         error => {
           this.saveError = true;
@@ -200,56 +217,42 @@ export class SaccesoComponent implements OnInit {
 
     setTimeout(function () {
       this.saveSuccess = false;
-      this._newSA.setCodigo(this._nextVal);
+      this.getLastSeqCampo();
     }.bind(this), 2000)
-    this.sequenciasAcceso.push(this._newSA);
     this._newSA = new Sacceso();
-   
+
   }
 
   public pad_with_zeroes(number, length) {
 
     var my_string = '' + number;
     while (my_string.length < length) {
-        my_string = '0' + my_string;
+      my_string = '0' + my_string;
     }
 
     return my_string;
 
   }
 
-  public generateNewId(response){
-    console.log(response.LASTSEQ);
-    var lastNumber = response.LASTSEQ.substring(response.LASTSEQ.length-3, response.LASTSEQ.length);
-    var newNum = parseInt(lastNumber);
-    var addLeadingZeros = this.pad_with_zeroes(newNum+1, 3);
-    var newCode = "SQ" + addLeadingZeros;
-    return newCode;
-  }
 
-  
+
 
   public submitSA() {
     this._saccesoService.postSaccesoComp(this._sacceso)
       .subscribe(response => {
-        this._nextVal = this.generateNewId(response);
         this.saveSuccess = true;
-        this._saccesoService.getSaccesoList().subscribe(response => {
-          console.log(response);
-        })
+        this.getLastSequencia();
       },
-        error => {
-          this.saveError = true;
-          setTimeout(function () {
-            this.saveError = false;
-          }.bind(this), 2000)
-        })
+      error => {
+        this.saveError = true;
+        setTimeout(function () {
+          this.saveError = false;
+        }.bind(this), 2000)
+      })
+
     setTimeout(function () {
       this.saveSuccess = false;
-      this._sacceso.setCodigo(this._nextVal);
-      this.selectedProperties.map(elem => {
-      this.onDltSelection(elem);
-    })
+      
     }.bind(this), 2000)
     this._saMessage.setCodigo(this._sacceso.getCodigo());
     this._saMessage.setDescription(this._sacceso.getDescription());

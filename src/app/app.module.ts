@@ -29,6 +29,8 @@ import { TechnicalMenuComponent } from './components/navegacion/technical-menu/t
 import { DadosMestreComponent } from './components/dados-mestre/dados-mestre.component'
 import { DiretrizEstrategicaComponent } from './components/diretriz-estrategica/diretriz-estrategica.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PreciobbaseComponent } from './components/precio/preciobbase/preciobbase.component';
+import { PreciobvendasComponent } from './components/precio/preciobvendas/preciobvendas.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,7 +52,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BusinessMenuComponent,
     TechnicalMenuComponent,
     DadosMestreComponent,
-    DiretrizEstrategicaComponent
+    DiretrizEstrategicaComponent,
+    PreciobbaseComponent,
+    PreciobvendasComponent,
+    PreciobbaseComponent,
+    PreciobvendasComponent
   ],
   imports: [
     BrowserModule,

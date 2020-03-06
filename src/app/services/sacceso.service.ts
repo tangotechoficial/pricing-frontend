@@ -19,7 +19,7 @@ export class SaccesoService{
     }
 
     postSacceso(seq: Sacceso){
-        return this._http.post(this.url + '/sacceso', { SEQCODE: seq.sSeqAcceso, SEQDESC: seq.sDesAcceso}, {headers: {"Content-type": "application/json"}});
+        return this._http.post(this.url + '/seqcampo/', { Cod_Campo: seq.sSeqAcceso, Nome_Campo: seq.sDesAcceso}, {headers: {"Content-type": "application/json"}});
     }
 
     postSaccesoComp(seq: Sacceso){
@@ -27,10 +27,18 @@ export class SaccesoService{
         var aId = [];
         seq._parents.map(elem => aId.push(elem.getId()));
         console.log(aId);
-        return this._http.post(this.url + '/sacceso_comp', { SEQCODE: seq.sSeqAcceso, SEQDESC: seq.sDesAcceso, SEQPARE: aId}, {headers: {"Content-type": "application/json"}});
+        return this._http.post(this.url + '/sequencia/', { Cod_Sequencia: seq.sSeqAcceso, Nome_Sequencia: seq.sDesAcceso}, {headers: {"Content-type": "application/json"}});
     }
 
-    getSaccesoList(): Observable<any>{
-        return this._http.get(this.url + '/saccesos', {headers: {"Content-type": "application/json"}});
+    getSaccesoList(): Observable <any>{
+        return this._http.get(this.url + '/seqcampo/', {headers: {"Content-type": "application/json"}});
+    }
+
+    getLastSeqCampo(){
+        return this._http.get(this.url + '/seqcampo/last/', {headers: {"Content-type": "application/json"}});
+    }
+
+    getLastSequencia(): Observable<any>{
+        return this._http.get(this.url + '/sequencia/last/', {headers: {"Content-type": "application/json"}});
     }
 }
