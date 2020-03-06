@@ -59,11 +59,11 @@ export class NavegacionComponent implements OnInit {
   public showDetail:boolean = false;
 
   private mapUrlToSection = {
-    "/menu": "Inicio",
-    "/preciobase": "Esquema de Cálculo / Precio Base",
-    "/precioventa": "Esquema de Cálculo / Precio Venta",
-    "/sacceso": "Sequência de acesso",
-    "/condicion": "Condicion",
+    "/menu": "Início",
+    "/preco-base": "Esquema de Cálculo / Preço Base",
+    "/preco-venda": "Esquema de Cálculo / Preço Venda",
+    "/acesso": "Sequência de acesso",
+    "/condicao": "Condição",
   }
   public section: string;
   @Output() navOutput = new EventEmitter<boolean>()
