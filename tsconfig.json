@@ -21,6 +21,9 @@
       "@models/*": [
         "app/models/*",
       ],
+      "@helpers/*": [
+        "app/helpers/*",
+      ],
       "@services/*": [
         "app/services/*",
       ],
