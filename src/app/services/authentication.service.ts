@@ -16,11 +16,11 @@ export class AuthenticationService {
   }
 
   login(email: string, password: string) {
+
     return this.httpClient.post<any>(
       `${environment.apiUrl}/login/`,
       {'username': email, 'password': password}
     ).pipe(map(response => {
-      debugger;
       localStorage.setItem('token', JSON.stringify(response['token']));
       this.currentTokenSubject.next(response['token']);
       return response['token'];
