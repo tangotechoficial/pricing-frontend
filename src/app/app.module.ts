@@ -1,9 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {HttpClientModule} from '@angular/common/http';
-import {FormsModule} from '@angular/forms';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
+import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 import { routing, appRoutingProviders } from './app.routing';
-
+import { JWTInterceptorHelper } from '@helpers/jwt.interceptor'
 import { AppComponent } from './app.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { ErrorComponent } from './components/error/error.component';
@@ -53,7 +53,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BusinessMenuComponent,
     TechnicalMenuComponent,
     DadosMestreComponent,
-    DiretrizEstrategicaComponent, 
+    DiretrizEstrategicaComponent,
     PlanoCompraComponent,
     ExecucaoComponent,
     SimuladorComponent
@@ -62,13 +62,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserModule,
     routing,
     HttpClientModule,
+    ReactiveFormsModule,
     FormsModule,
     Ng2SearchPipeModule,
     FontAwesomeModule,
     AutocompleteLibModule ,
     BrowserAnimationsModule
   ],
-  providers: [appRoutingProviders],
+  providers: [
+    appRoutingProviders,
+    {provide: HTTP_INTERCEPTORS, useClass: JWTInterceptorHelper, multi: true},
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
