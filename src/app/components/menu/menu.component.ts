@@ -17,12 +17,11 @@ export class MenuComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    if(this.sCurrentUser.type !== "technical"){
-      this.bBusiness = true;
-    }else{
-      this.bBusiness = false;
-    }
-    console.log(this.sCurrentUser);
+    // if(this.sCurrentUser.type !== "technical"){
+    //   this.bBusiness = true;
+    // }else{
+    //   this.bBusiness = false;
+    // }
     setTimeout(function(){
       $('.alert').hide();
     },
@@ -37,7 +36,7 @@ export class MenuComponent implements OnInit {
     this.isShowMenu = $event
   }
 
-  
+
 
 
 }
