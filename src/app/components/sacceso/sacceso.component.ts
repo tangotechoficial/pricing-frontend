@@ -179,17 +179,32 @@ export class SaccesoComponent implements OnInit {
   }
 
   public checkValue(sa: Sacceso) {
+    //Iterate over SEQ_CAMPOS
     this.sequenciasAcceso.map(elem => {
-      if (elem.getCodigo() == sa.getCodigo()) {
+      
+      //If selected elemement sa is equal to current element in the array loop
+      if (elem.getId() == sa.getId()) {
+        console.log("Selected element is equal to current elem", elem, sa);
+
+        //Check if current element is already selected
         if (elem.isSelected()) {
+
+          //Unselect current element
           elem.setSelected(false);
+          console.log("Current selected item", elem);
+
+          //Iterate over selected properties to remove current selected item
           this.selectedProperties.map((elem2, index) => {
-            if (elem2.getCodigo() == sa.getCodigo()) {
+
+            //If current selected item exist on the the array
+            if (elem2.getId() == elem.getId()) {
+              console.log("SelectedProperties array items :", elem2, elem)
+
+              //Remove elem from array
               this.selectedProperties.splice(index, 1);
-              let array = this._sacceso._parents.filter((obj) => {
+              this._sacceso._parents = this._sacceso._parents.filter((obj) => {
                 return obj.getCodigo() !== sa.getCodigo()
               })
-              console.log(array);
             }
           })
         } else {
@@ -253,7 +268,6 @@ export class SaccesoComponent implements OnInit {
     console.log(this._sacceso)
     this.spinner.show();
     if (this._sacceso._parents.length < 2) {
-      
       this.errDesc = "Selecione mais de um campo"
       this.saveError = true;
       this.spinner.hide()
