@@ -16,14 +16,17 @@ export class CondicionService{
         this.url = Global.url;
     }
 
-    postSacceso(seq: Condicion): Observable <any>{
-        let _currUser = JSON.parse(localStorage.getItem("User"));
-        let _params = {
-            params: seq,
-            currUser: _currUser
-        }
-        console.log(_params);
-        return this._http.post(this.url + '/condicion', _params, {headers: {"Content-type": "application/json"}});
+    getCamadas(){
+        return this._http.get(this.url + '/camada/', {headers: {"Content-type": "application/json"}})
+    }
+    getChaveContas(){
+        return this._http.get(this.url + '/chavecontas/', {headers: {"Content-type": "application/json"}})
+    }
+    getTiposValor(){
+        return this._http.get(this.url + '/tipovalor/', {headers: {"Content-type": "application/json"}})
+    }
+    getSequenciasAcesso(){
+        return this._http.get(this.url + '/sequencia/', {headers: {"Content-type": "application/json"}})
     }
 }
 

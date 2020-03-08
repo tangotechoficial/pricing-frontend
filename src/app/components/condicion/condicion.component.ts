@@ -18,7 +18,7 @@ declare var $: any;
 export class CondicionComponent implements OnInit {
 
   public _condicion: Condicion;
-  public listaCondiciones: Array<any>;
+  public sequencias: Array<any>;
   public listaCondicionesComp: Array<any>;
   public selectedProperties: Array<any>;
   IsSaving: boolean = false;
@@ -31,17 +31,19 @@ export class CondicionComponent implements OnInit {
 
   ngOnInit() {
     $('#myModal').modal('show')
-    this.listaCondiciones = new Array<any>();
+    this.sequencias = new Array<any>();
     this.listaCondicionesComp = new Array<any>();
     this.selectedProperties = new Array<any>();
     this._condicion = new Condicion();
-    this._metadataService.getMetadataCondicion().map(elem => {
-      var elemModel = {
-        'tipo': elem,
-        'selected': false
+    this._condicionService.getSequenciasAcesso().subscribe(
+      response => {
+        this.sequencias.push(response);
+        console.log(this.sequencias)
+      },
+      error => {
+
       }
-      this.listaCondiciones.push(elemModel);
-    })
+    )
   }
 
   Save(){
@@ -51,7 +53,7 @@ export class CondicionComponent implements OnInit {
 
   public checkValue(tipo){
 
-    this.listaCondiciones.map(elem => {
+    this.sequencias.map(elem => {
       if(elem.tipo == tipo){
         if(elem.selected){
           elem.selected = false;
