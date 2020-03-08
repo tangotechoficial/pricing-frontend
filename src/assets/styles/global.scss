@@ -145,3 +145,7 @@ button.dropdownMenuButton {
 .btn-grey{
   color:$martinsTextGrey !important;
 }
+
+input[type="checkbox"]:not(:checked).custom-control-input + label::before {
+    border: 2px #009966 solid !important;
+}

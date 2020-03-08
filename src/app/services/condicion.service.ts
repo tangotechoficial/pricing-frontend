@@ -8,7 +8,7 @@ import { Condicion } from '../models/condicion';
 export class CondicionService{
 
     public url: string;
-    public _aCondicion: Array<any>;
+    public _Condicion: Array<any>;
 
     constructor(
         private _http: HttpClient,
@@ -19,8 +19,8 @@ export class CondicionService{
     getCamadas(){
         return this._http.get(this.url + '/camada/', {headers: {"Content-type": "application/json"}})
     }
-    getChaveContas(){
-        return this._http.get(this.url + '/chavecontas/', {headers: {"Content-type": "application/json"}})
+    getChaveContas(): Promise<any>{
+        return this._http.get(this.url + '/chavecontas/', {headers: {"Content-type": "application/json"}}).toPromise()
     }
     getTiposValor(){
         return this._http.get(this.url + '/tipovalor/', {headers: {"Content-type": "application/json"}})

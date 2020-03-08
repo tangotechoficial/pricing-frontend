@@ -21,18 +21,20 @@
     </div>
   </div>
 <!--Component Content -->
+<button class="btn btn-dark btn-sm" (click)="getModel()">getmodel</button>
 <div *ngIf="IsSaving" class="container background col-9">
     <div class="container row col-12 p-4">
         <div class="col-sm-2">
+
             <span class="text-header">Cod. Condicao</span>
-            <input class="form-control mt-3" value="TBNC"/>
+            <input class="form-control mt-3" value="TBNC" [(ngModel)]="_condicion.sId" (keydown.Tab)="updateCondDescription(_condicion.sId)" />
         </div>
         <div class="col-sm-3 p-0">
             <span class="text-header">Descricao da condicao</span>
             <input class="form-control mt-3" value="Beneficio customizado"/>
         </div>
         <div class="col-sm-1 mt-5 mb-2 d-flex justify-content-center align-items-center">
-            <i class="fas fa-search"></i> 
+            <i class="fas fa-search"></i>
         </div>
 		<div class="col-sm-3">
             <span class="text-header">Descricao da seq. acceso</span>
@@ -68,7 +70,7 @@
 			</div>
         </div>
         <div class="col-sm-1 mt-5 mb-2 d-flex justify-content-center align-items-center">
-            <i class="fas fa-search"></i> 
+            <i class="fas fa-search"></i>
         </div>
 		<div class="col-sm-2">
             <span class="text-header">Tipo de valor</span>
@@ -97,9 +99,9 @@
                         <label class="pl-4 custom-control-label" for="checkNegativo" id="checkNegativoLabel"></label>
                     </div>
                 </div>
-            </div>    
-        </div>    
-	</div>	
+            </div>
+        </div>
+	</div>
     <div class="container row col-12 p-4">
         <div class="col-sm-6">
             <span class="text-header">Adicionar sequencias de acceso</span>
@@ -140,5 +142,5 @@
                     <input type="submit" class="btn bg-standard btn-block font-weight-bold" value="Salvar">
                 </div>
         </div>
-    </div>    
+    </div>
 </div>

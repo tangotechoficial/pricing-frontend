@@ -5,16 +5,22 @@ export class Condicion {
         public sId: string = '',
         public sCodCondicion: string = '',
         public sDesCondicion: string = '',
-        public _parents: Array<any> = new Array<any>(),
-        public selected: boolean = false
+        public aSequencias: Array<any> = new Array<any>(),
+        public bEscalaQtde: boolean = false,
+        public bPos: boolean = false,
+        public bNeg: boolean = false,
+        public sCodTipoValor: string = '',
+        public sCodChaveContas: string = '',
+        public sCodCamada: string = ''
+
     ){}
     
-    public setSelected(val){
-        this.selected = val;
+    public setEscalaQtde(val){
+        this.bEscalaQtde = val;
     }
 
-    public isSelected(){
-        return this.selected;
+    public getEscalaQtde(){
+        return this.bEscalaQtde;
     }
 
     public setCodigo(codigo){

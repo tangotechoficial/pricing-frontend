@@ -18,23 +18,30 @@ declare var $: any;
 export class CondicionComponent implements OnInit {
 
   public _condicion: Condicion;
+  public _chaveContas: Array<any>;
   public sequencias: Array<any>;
   public listaCondicionesComp: Array<any>;
   public selectedProperties: Array<any>;
   IsSaving: boolean = false;
 
-  constructor(
+   constructor(
     private _metadataService: MetadataService,
     private _condicionService: CondicionService,
     private renderer: Renderer2
   ) { }
 
   ngOnInit() {
+
     $('#myModal').modal('show')
+    this._chaveContas = new Array<any>();
     this.sequencias = new Array<any>();
     this.listaCondicionesComp = new Array<any>();
     this.selectedProperties = new Array<any>();
     this._condicion = new Condicion();
+
+    this._condicionService.getChaveContas().then(
+      result => this._chaveContas.push(result)
+    )
     this._condicionService.getSequenciasAcesso().subscribe(
       response => {
         this.sequencias.push(response);
@@ -45,6 +52,61 @@ export class CondicionComponent implements OnInit {
       }
     )
   }
+
+  //Test Function , remove when finish
+
+  getModel(){
+    console.log(this._condicion)
+  }
+
+    /* Charlie Minnelli - 08/03/2020
+     Input: null
+     Output: null
+     This function updates the condition description
+  */
+  public updateCondDescription(idCond) {
+    // console.log("pasando parametro ID COND a API: " + idCond);
+    // this._condicionService.getCondicao().subscribe((values) => {
+    //   this._condicion.sDesCondicion = values.des // check how returns json data
+    // });
+  }
+
+    /* Charlie Minnelli - 08/03/2020
+     Input: null
+     Output: null
+     This function updates the condition account key
+  */
+
+public updateCondChave() {
+  /* this._condicionService.getCondChave().subscribe((values) => {
+    console.log(values)
+  }); */
+}
+    /* Charlie Minnelli - 08/03/2020
+     Input: null
+     Output: null
+     This function updates the condition of layer
+  */
+
+public updateCondCamada() {
+  /* this._condicionService.getCondCamada().subscribe((values) => {
+    console.log(values)
+  }); */
+}
+
+    /* Charlie Minnelli - 08/03/2020
+     Input: null
+     Output: null
+     This function updates the condition type value
+  */
+
+public updateCondVal() {
+  /* this._condicionService.getCondVal().subscribe((values) => {
+    console.log(values)
+  }); */
+}
+
+
 
   Save(){
     $('#myModal').modal('hide')
@@ -71,7 +133,7 @@ export class CondicionComponent implements OnInit {
 
     var descripcion = '';
     this.selectedProperties.forEach((elem, index) => {
-      if(index == 0){ 
+      if(index == 0){
         descripcion = descripcion + elem.tipo;
       }else{
         descripcion = descripcion + '/' + elem.tipo;
@@ -79,7 +141,7 @@ export class CondicionComponent implements OnInit {
     })
 
    // this._condicion.sDesAcceso = descripcion;
-    
+
   }
 
   onClickRemove(){
@@ -93,7 +155,7 @@ export class CondicionComponent implements OnInit {
   removeCheckbox(): void {
     debugger;
     let input = this.renderer.selectRootElement('.sacceso-opcion');
-    this.renderer.setProperty(input, 'checked', false); 
+    this.renderer.setProperty(input, 'checked', false);
     }
 
 }

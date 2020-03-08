@@ -1,7 +1,9 @@
 @import '../../../../assets/styles/global.scss';
 @import '../../../../assets/styles/mixins-var.scss';
+
 .container {
     height: 50vh;
+    margin-top: 0px !important;
 }
 
 .dropdown-toggle:after{
@@ -12,9 +14,5 @@
 }
 
 .dropdown-menu {
-    min-width: 100%;
-}
-
-.container{
-	margin-top:0px !important;
+    min-width: 90%;
 }
