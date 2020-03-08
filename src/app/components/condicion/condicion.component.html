@@ -21,7 +21,6 @@
     </div>
   </div>
 <!--Component Content -->
-<button class="btn btn-dark btn-sm" (click)="getModel()">getmodel</button>
 <div *ngIf="IsSaving" class="container background col-9">
     <div class="container row col-12 p-4">
         <div class="col-sm-2">
@@ -63,9 +62,7 @@
 				<button class="col-12 btn btn-light dropdown-toggle text-left" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Descricao
 				</button>
 				<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-					<a class="dropdown-item" href="#">Testing</a>
-					<a class="dropdown-item" href="#">tester</a>
-					<a class="dropdown-item" href="#">test</a>
+					<a *ngFor="let cc of _chaveContas ; let id = index" class="dropdown-item" href="#">cc.Desc_ChaveContas</a>
 				</div>
 			</div>
         </div>
@@ -108,10 +105,10 @@
                 <div class="options-list rounded mt-3">
                     <div class="p-3 list-header custom-text-muted">Pesquise uma sequencia de acesso...</div>
                     <ul class="p-0 custom-scrollbar-css">
-                        <li *ngFor="let cond of listaCondicionesComp ; let id = index" class="p-2">
+                        <li *ngFor="let sequencia of _sequencias ; let id = index" class="p-2">
                             <div class="custom-control custom-checkbox">
                                 <input (change)="checkValue(cond.tipo)" type="checkbox" class="sacceso-opcion custom-control-input" id="{{id}}">
-                                <label class="pl-4 custom-control-label" for="{{id}}">{{cond.getDescripcion()}}</label>
+                                <label class="pl-4 custom-control-label" for="{{id}}">{{sequencia[id].Nome_Sequencia}}</label>
                             </div>
                         </li>
                     </ul>

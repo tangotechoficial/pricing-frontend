@@ -18,8 +18,10 @@ declare var $: any;
 export class CondicionComponent implements OnInit {
 
   public _condicion: Condicion;
+  public _sequencias: Array<any>;
   public _chaveContas: Array<any>;
-  public sequencias: Array<any>;
+  public _tipoValor: Array<any>;
+  public _camadas: Array<any>;
   public listaCondicionesComp: Array<any>;
   public selectedProperties: Array<any>;
   IsSaving: boolean = false;
@@ -33,24 +35,30 @@ export class CondicionComponent implements OnInit {
   ngOnInit() {
 
     $('#myModal').modal('show')
+    this._sequencias = new Array<any>();
     this._chaveContas = new Array<any>();
-    this.sequencias = new Array<any>();
+    this._tipoValor = new Array<any>();
+    this._camadas = new Array<any>();
     this.listaCondicionesComp = new Array<any>();
     this.selectedProperties = new Array<any>();
     this._condicion = new Condicion();
 
-    this._condicionService.getChaveContas().then(
-      result => this._chaveContas.push(result)
+    this._condicionService.getSequenciasAcesso().then(
+      result => result.map(sa => this._tipoValor.push(sa))
     )
-    this._condicionService.getSequenciasAcesso().subscribe(
-      response => {
-        this.sequencias.push(response);
-        console.log(this.sequencias)
-      },
-      error => {
 
-      }
+    this._condicionService.getChaveContas().then(
+      result => result.map(cc => this._tipoValor.push(cc))
     )
+    
+    this._condicionService.getTiposValor().then(
+      result => result.map(tv => this._tipoValor.push(tv))
+    )
+
+    this._condicionService.getCamadas().then(
+      result => result.map(ca => this._tipoValor.push(ca))
+    )
+    
   }
 
   //Test Function , remove when finish
@@ -115,7 +123,7 @@ public updateCondVal() {
 
   public checkValue(tipo){
 
-    this.sequencias.map(elem => {
+    this._sequencias.map(elem => {
       if(elem.tipo == tipo){
         if(elem.selected){
           elem.selected = false;

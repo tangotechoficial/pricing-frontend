@@ -16,17 +16,17 @@ export class CondicionService{
         this.url = Global.url;
     }
 
-    getCamadas(){
-        return this._http.get(this.url + '/camada/', {headers: {"Content-type": "application/json"}})
+    getCamadas(): Promise<any>{
+        return this._http.get(this.url + '/camada/', {headers: {"Content-type": "application/json"}}).toPromise()
     }
     getChaveContas(): Promise<any>{
         return this._http.get(this.url + '/chavecontas/', {headers: {"Content-type": "application/json"}}).toPromise()
     }
-    getTiposValor(){
-        return this._http.get(this.url + '/tipovalor/', {headers: {"Content-type": "application/json"}})
+    getTiposValor(): Promise<any>{
+        return this._http.get(this.url + '/tipovalor/', {headers: {"Content-type": "application/json"}}).toPromise()
     }
-    getSequenciasAcesso(){
-        return this._http.get(this.url + '/sequencia/', {headers: {"Content-type": "application/json"}})
+    getSequenciasAcesso(): Promise<any>{
+        return this._http.get(this.url + '/sequencia/', {headers: {"Content-type": "application/json"}}).toPromise()
     }
 }
 
