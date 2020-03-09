@@ -22,7 +22,7 @@ export class PrecioVentaComponent implements OnInit {
   parentListener($event){
     this.existNegocios = $event
   }
-
+  
   parentListenerTwo($event){
     this.existVentas = $event
   }

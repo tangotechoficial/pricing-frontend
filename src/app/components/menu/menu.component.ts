@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from '@services/authentication.service';
+import {jwt_decode } from 'jwt-decode';
 declare var $: any;
 
 @Component({
@@ -9,14 +11,28 @@ declare var $: any;
 
 export class MenuComponent implements OnInit {
   isShowMenu = false;
-  public sCurrentUser = JSON.parse(localStorage.getItem("User"));
+  private token: string;
+  public sCurrentUser: any;
   public bBusiness: boolean;
   public numTotNotif:number = 3;
   public modalView:boolean = false;
 
-  constructor() { }
+  constructor(private authenticationService: AuthenticationService) { }
+
+  private setUserInfo() {
+    try{
+       return JSON.parse(jwt_decode(this.token));
+    } catch( Error ) {
+        return {
+          username: 'Guest'
+        }
+    }
+  }
 
   ngOnInit() {
+    this.token = this.authenticationService.currentTokenValue;
+    this.sCurrentUser = this.setUserInfo()
+
     // if(this.sCurrentUser.type !== "technical"){
     //   this.bBusiness = true;
     // }else{
@@ -31,11 +47,6 @@ export class MenuComponent implements OnInit {
   closeWelcome(){
    this.modalView = true;
   }
-
-  parentListenerNavbar($event){
-    this.isShowMenu = $event
-  }
-
 
 
 
