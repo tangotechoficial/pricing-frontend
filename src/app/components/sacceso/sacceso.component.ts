@@ -51,8 +51,6 @@ export class SaccesoComponent implements OnInit {
 
   ngOnInit() {
 
-
-
     this.sequenciasAcceso = new Array<any>();
     this.sequenciasAccesoSearch = new Array<any>();
     this.selectedProperties = new Array<any>();

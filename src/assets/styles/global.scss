@@ -149,3 +149,7 @@ button.dropdownMenuButton {
 input[type="checkbox"]:not(:checked).custom-control-input + label::before {
     border: 2px #009966 solid !important;
 }
+
+i.fas.fa-search.disabledSearch {
+    color: gray;
+}

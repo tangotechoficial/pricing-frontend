@@ -9,10 +9,9 @@ export class Condicion {
         public bEscalaQtde: boolean = false,
         public bPos: boolean = false,
         public bNeg: boolean = false,
-        public sCodTipoValor: string = '',
-        public sCodChaveContas: string = '',
-        public sCodCamada: string = ''
-
+        public oTipoValor: any = null,
+        public oChaveContas: any = null,
+        public oCamada: any = null
     ){}
     
     public setEscalaQtde(val){

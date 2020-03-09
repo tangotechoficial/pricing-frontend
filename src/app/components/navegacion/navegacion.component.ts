@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input ,Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from "@angular/common";
 import {BrowserModule} from '@angular/platform-browser'
@@ -55,18 +55,17 @@ export class NavegacionComponent implements OnInit {
   public numNotif:number = 3 ;
   public numAprob:number = 1;
   public showBMenu: boolean = false;
-
   public showDetail:boolean = false;
-
+  public section: string;
+  @Input() cMode: boolean;
+  @Output() navOutput = new EventEmitter<boolean>()
   private mapUrlToSection = {
     "/menu": "Inicio",
     "/preciobase": "Esquema de Cálculo / Precio Base",
     "/precioventa": "Esquema de Cálculo / Precio Venta",
     "/sacceso": "Sequência de acesso",
-    "/condicion": "Condicion",
+    "/condicion": "Criar nova condição",
   }
-  public section: string;
-  @Output() navOutput = new EventEmitter<boolean>()
   constructor(
     private _router: Router,
     private _route: ActivatedRoute,
@@ -86,6 +85,15 @@ export class NavegacionComponent implements OnInit {
     })
 
 
+  }
+
+  ngDoCheck() {
+    this.navOutput.next(this.cMode);
+    if(!this.cMode){
+      this.section = "Alterar condição";
+    }else{
+      this.section = "Criar nova condição";
+    }
   }
 
   notifyOpen(){
