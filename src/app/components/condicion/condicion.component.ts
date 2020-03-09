@@ -166,16 +166,16 @@ export class CondicionComponent implements OnInit {
         this.selectedProperties.push(sa);
       }
     }
-    
-    
   }
 
-  onClickRemove() {
-    this.selectedProperties.splice(this.selectedProperties.findIndex(e => e.tipo === this.selectedProperties[0].tipo), 1)
-    console.log(this.selectedProperties)
-    // this.checkbox = null;
-    //this.listaCondiciones[0].selected = false;
-    this.removeCheckbox();
+  public onDltSelection(sel: any){
+    this._sequencias.map((elem, index) => {
+      if(sel.id == elem.id){
+        var selElem = document.getElementById(index.toString());
+        selElem.click()
+      }
+    })
+    
   }
 
   removeCheckbox(): void {

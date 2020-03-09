@@ -123,7 +123,7 @@
                 <ul class="p-0 custom-scrollbar-css">
                     <li *ngFor="let sequencia of _sequencias ; let id = index" class="p-2">
                         <div class="custom-control custom-checkbox">
-                            <input (change)="checkValue(sequencia)" type="checkbox"
+                            <input (click)="checkValue(sequencia)" type="checkbox"
                                 class="sacceso-opcion custom-control-input" id="{{id}}">
                             <label class="pl-4 custom-control-label" for="{{id}}">{{sequencia.Nome_Sequencia}}</label>
                         </div>
