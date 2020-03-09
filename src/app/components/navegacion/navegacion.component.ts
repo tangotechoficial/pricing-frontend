@@ -21,7 +21,7 @@ import {
   animations: [
   trigger('ngIfAnimation', [
     transition(':enter, :leave', [
-      query('@*', animateChild())
+      query('@*', animateChild(), { optional: true })
     ])
   ]),
 

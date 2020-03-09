@@ -35,11 +35,12 @@ export class DadosMestreComponent implements OnInit {
       data =>
       data.results.map(
         row => {
-          debugger
+          //debuger 
           this.masterDataMoney.push(row);
         }
       ),
       err => console.log(err)
     )
   }
+
 }

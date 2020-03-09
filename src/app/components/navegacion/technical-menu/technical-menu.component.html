@@ -29,6 +29,26 @@
           </li>
         </ul>
       </li>
+
+      <li class="dropdown-submenu">
+        <a tabindex="-1" class="dropdown-item d-flex flex-row align-items-center py-2">
+          <span class="fas fa-chart-line" ></span>
+            <p class="my-0 ml-2 font-weight-bold">Growth Data Lab</p>
+            <i class="pl-3 fas fa-angle-right"></i>
+          </a>
+          <ul class="dropdown-menu">
+            <li>
+              <a tabindex="-1" class="dropdown-item"
+                [routerLink]="['/dados-mestre']"><p class="my-0 ml-2 font-weight-bold">Dados Mestre</p></a>
+            </li>
+            <li>
+              <a tabindex="-1" class="dropdown-item"
+                [routerLink]="['/diretriz-estrategica']"><p class="my-0 ml-2 font-weight-bold">Diretriz Estratégica</p>
+                </a>
+            </li>
+          </ul>
+      </li>
+
       <a class="dropdown-item d-flex flex-row align-items-center py-2" [routerLink]="['/sacceso']"><span class="fas
           fa-home" ></span><p class="my-0 ml-2 font-weight-bold">Sequência de Acesso</p></a>
       <a class="dropdown-item d-flex flex-row align-items-center py-2" [routerLink]="['/condicion']"><span

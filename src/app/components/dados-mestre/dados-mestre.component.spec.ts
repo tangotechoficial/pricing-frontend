@@ -99,14 +99,14 @@ fdescribe('DadosMestreComponent', () => {
   /**
   it('table price composition should have data', () => {
     const table = element.query(By.css('[id="priceComposition"]'))
-    debugger
+    //debuger 
   })
 
   it('table verba info should have data', () => {
       component.ngOnInit()
       fixture.detectChanges()
       const table = element.query(By.css('[id="verbaInfo"]'))
-      debugger
+      //debuger 
     }
   );
   **/
