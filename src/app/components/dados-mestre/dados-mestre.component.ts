@@ -36,7 +36,6 @@ export class DadosMestreComponent implements OnInit {
       data =>
       data.results.map(
         row => {
-          debugger;
           this.masterDataMoney.push(row);
         }
       ),
