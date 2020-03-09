@@ -70,11 +70,14 @@ export class NavegacionComponent implements OnInit {
     private _router: Router,
     private _route: ActivatedRoute,
     location: Location
-  ) { }
+  ) {}
 
   ngOnInit() {
     const user = JSON.parse(localStorage.User);
     this.userTechnical = user.type == "technical" ? true : false;
+    this._router.routeReuseStrategy.shouldReuseRoute = function () {
+      return false;
+    };
     this._route.url.subscribe(url => {
       this.section = this.mapUrlToSection[location.pathname]
       if(location.pathname != "/login"){
@@ -112,29 +115,5 @@ export class NavegacionComponent implements OnInit {
     this.showBMenu = true;
     this.navOutput.emit(this.showBMenu)
   }
-
-
-/*   ngDoCheck() {
-    this._route.url.subscribe(url => {
-      console.log(location)
-      if(url[0].path != ""){
-        this.isLoggedIn = true;
-      }else{
-        this.isLoggedIn = false;
-      }
-    });
-  }
-
-  ngAfterContentInit() {
-    this._route.url.subscribe(url => {
-      console.log(url[0])
-      if(url[0].path != ""){
-        this.isLoggedIn = true;
-      }else{
-        this.isLoggedIn = false;
-      }
-    });
-  } */
-
 
 }

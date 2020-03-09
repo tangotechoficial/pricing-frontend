@@ -7,11 +7,14 @@ export class Condicion {
         public sDesCondicion: string = '',
         public aSequencias: Array<any> = new Array<any>(),
         public bEscalaQtde: boolean = false,
+        public TIP_BASE_VENDAS: string = '',
         public bPos: boolean = false,
         public bNeg: boolean = false,
         public oTipoValor: any = null,
         public oChaveContas: any = null,
-        public oCamada: any = null
+        public oCamada: any = null,
+        public MANDATORIA: number = 0,
+        public ESTATISTICA: number = 0
     ){}
     
     public setEscalaQtde(val){

@@ -1,6 +1,6 @@
 <!-- Navigation Bar -->
 <navegacion [cMode]="bCreateMode"></navegacion>
-
+<ngx-spinner></ngx-spinner>
 <!--Modal-->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -28,8 +28,7 @@
         <div class="col-sm-2">
 
             <span class="text-header">Cód. Condição</span>
-            <input class="form-control mt-3" value="TBNC" [(ngModel)]="_condicion.sCodCondicion"
-                (keydown.Tab)="updateCondDescription(_condicion.sId)" />
+            <input class="form-control mt-3" value="TBNC" [(ngModel)]="_condicion.sCodCondicion"/>
         </div>
         <div class="col-sm-3 p-0">
             <span class="text-header">Descrição da condição</span>
@@ -39,7 +38,7 @@
             <i class="fas fa-search disabledSearch"></i>
         </div>
         <div *ngIf="!bCreateMode" class="col-sm-1 mt-5 mb-2 d-flex justify-content-center align-items-center">
-            <i class="fas fa-search"></i>
+            <i (click)="getCondicaoByCode()" class="fas fa-search"></i>
         </div>
         <div class="col-sm-3">
             <span class="text-header">Atribua à camada</span>
@@ -158,8 +157,22 @@
     <div class="container row col-12 p-4 justify-content-md-center">
         <div class="col-md-4">
             <div class="form-group">
-                <input type="submit" class="btn bg-standard btn-block font-weight-bold" value="Salvar">
+                <input type="submit" (click)="onSubmitCondicao()" class="btn bg-standard btn-block font-weight-bold" value="Salvar">
             </div>
+        </div>
+    </div>
+    <div class="row justify-content-md-center">
+        <div *ngIf="_saveSucess" class="col-md-8 alert alert-success" role="alert">
+            <strong>{{this._message.sucMessage}}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+        </div>
+        <div *ngIf="_saveError" class="col-md-8 alert alert-danger" role="alert">
+            <strong>{{this._message.errMessage}}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
         </div>
     </div>
 </div>
