@@ -1,9 +1,9 @@
 <!-- Navigation Bar -->
-<navegacion (navOutput)="parentListenerNavbar($event)"></navegacion>
+<navegacion></navegacion>
 
 <!--Component Content -->
 <div class="background container col-9 d-flex flex-column justify-content-center">
-    
+
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -29,7 +29,7 @@
         </div>
     </div>
     <div class="container row col-12 p-4">
-        
+
         <div class="col-sm-2">
             <span class="text-header">Cód. Sequência de Acesso</span>
             <input id="SQSearch" class="form-control mt-3" [(ngModel)]="_sacceso.sSeqAcceso" [value]="selectedValue" readonly/>
