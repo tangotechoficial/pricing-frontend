@@ -1,0 +1,94 @@
+<div class="dropdown">
+  <button class="btn btn-light font-weight-bold d-flex align-items-center"
+    type="button"
+    id="dropdownMenuButton" data-toggle="dropdown"
+    aria-haspopup="true" aria-expanded="false">
+    <span class="fas fa-bars" aria-hidden="true"></span>
+    <p class="my-0 ml-2 font-weight-bold">Menu</p>
+  </button>
+
+  <div class="dropdown-menu menu-nav py-3" aria-labelledby="dropdownMenuButton">
+    <div class="triangle"></div>
+    <a class="dropdown-item d-flex cuki flex-row align-items-center py-2"
+      [routerLink]="['/menu']">
+      <span class="fas fa-home"></span>
+      <p class="my-0 ml-2 font-weight-bold">Início</p>
+    </a>
+    <li class="dropdown-submenu">
+      <a tabindex="-1" class="dropdown-item d-flex flex-row align-items-center
+        py-2">
+        <span class="fas fa-hand-holding-usd"></span>
+        <p class="my-0 ml-2 font-weight-bold">Esquema de Cálculo</p>
+        <i class="pl-3 fas fa-angle-right"></i>
+      </a>
+      <ul class="dropdown-menu">
+        <li>
+          <a tabindex="-1" class="dropdown-item"
+            [routerLink]="['/b-preciobase']">
+            <p class="my-0 ml-2 font-weight-bold">Precio Base</p>
+          </a>
+        </li>
+        <li>
+          <a tabindex="-1" class="dropdown-item"
+            [routerLink]="['/b-precioventa']">
+            <p class="my-0 ml-2 font-weight-bold">Precio Venta</p>
+          </a>
+        </li>
+      </ul>
+    </li>
+    <li class="dropdown-submenu">
+      <a tabindex="-1" class="dropdown-item d-flex flex-row align-items-center
+        py-2">
+        <span class="fas fa-chart-line"></span>
+        <p class="my-0 ml-2 font-weight-bold">Growth Data Lab</p>
+        <i class="pl-3 fas fa-angle-right"></i>
+      </a>
+      <ul class="dropdown-menu">
+        <li class="dropdown-submenu">
+          <a tabindex="-2" class="dropdown-item dropdown-item d-flex flex-row
+            align-items-center py-2 ">
+            <p class="my-0 ml-2 font-weight-bold">Simulador de Precos</p>
+            <i class="pl-3 fas fa-angle-right"></i>
+          </a>
+          <ul class="dropdown-menu">
+            <li>
+              <a tabindex="-1" class="dropdown-item dropdown-item d-flex
+                flex-row align-items-center py-2"
+                [routerLink]="['/dados-mestre']">
+                <p class="my-0 ml-2 font-weight-bold">Dados Mestre</p>
+              </a>
+            </li>
+
+            <li>
+              <a tabindex="-1" class="dropdown-item dropdown-item d-flex
+                flex-row align-items-center py-2"
+                [routerLink]="['/diretriz-estrategica']">
+                <p class="my-0 ml-2 font-weight-bold">Diretriz Estrategica</p>
+              </a>
+            </li>
+            <li>
+              <a tabindex="-1" class="dropdown-item dropdown-item d-flex
+                flex-row align-items-center py-2"
+                [routerLink]="['/datalab/plano-compras']">
+                <p class="my-0 ml-2 font-weight-bold">Plano de Compras</p>
+              </a>
+            </li>
+            <li>
+              <a tabindex="-1" class="dropdown-item dropdown-item d-flex
+                flex-row align-items-center py-2"
+                [routerLink]="['/datalab/execucao']">
+                <p class="my-0 ml-2 font-weight-bold">Execucao</p>
+              </a>
+            </li>
+            <li>
+              <a tabindex="-1" class="dropdown-item dropdown-item d-flex
+                flex-row align-items-center py-2"
+                [routerLink]="['/datalab/simulador']">
+                <p class="my-0 ml-2 font-weight-bold">Simulador</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </div>

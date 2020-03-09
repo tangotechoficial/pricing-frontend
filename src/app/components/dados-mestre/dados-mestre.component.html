@@ -1,0 +1,202 @@
+<!-- Navigation Bar -->
+<navegacion (navOutput)="parentListenerNavbar($event)"></navegacion>
+<div class="background">
+
+    <div class="container col-9 main-container">
+        <div class="container row col-12 p-4">
+            <button type="button" class="btn button-save btn-filter-color"><i
+                    class="fas fa-filter btn-filter-color"></i>&nbsp;Filtro</button>
+        </div>
+        <ul class="tabs">
+            <li class="active"><a data-toggle="tab" href="#tab-composicao-preco2" role="tab">Composição de Preço</a>
+            </li>
+            <li><a data-toggle="tab" href="#tab-verba2" role="tab">Verba</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane container-tab custom-scrollbar-css fade show
+            active" id="tab-composicao-preco2" role="tabpanel" aria-labelledby="nav-composicao-preco">
+
+                <table class="table">
+                    <tr class="table-head">
+                        <th class="th-center table-head-row">Cód.Produto</th>
+                        <th></th>
+                        <th class="th-center table-head-row">Produto</th>
+                        <th></th>
+                        <th class="table-head-row" scope="col">ABC</th>
+                        <th></th>
+                        <th class="table-head-row" scope="col">Sens. a Rebate</th>
+                        <th></th>
+                        <th class="table-head-row" scope="col">Expedição</th>
+                        <th></th>
+                        <th class="table-head-row" scope="col">Faturamento</th>
+                        <th></th>
+                        <th class="table-head-row" scope="col">UF Dest.</th>
+                        <th></th>
+                        <th class="table-head-row" scope="col">Cod. Região</th>
+                        <th></th>
+                        <th class="table-head-row" scope="col">CMV</th>
+                        <th></th>
+                        <th class="table-head-row" scope="col">ICMS</th>
+                        <th></th>
+                        <th class="table-head-row" scope="col">PIS COFINS</th>
+                        <th></th>
+                        <th class="th-center table-head-row">Margem Bruta</th>
+                        <th></th>
+                        <th class="table-head-row" scope="col">Margem Bruta Calc</th>
+                        <th></th>
+                        <th class="table-head-row" scope="col">Verba Preço</th>
+                        <th></th>
+                        <th class="table-head-row" scope="col">Funding</th>
+                        <th></th>
+                        <th class="table-head-row" scope="col">Rebate</th>
+                        <th></th>
+                        <th class="table-head-row" scope="col">Devolução</th>
+                        <th></th>
+                        <th class="table-head-row" scope="col">Target</th>
+                        <th></th>
+                        <th class="table-head-row" scope="col">Flex</th>
+                        <th></th>
+                        <th class="table-head-row" scope="col">Bonificado</th>
+                        <th></th>
+                        <th class="table-head-row" scope="col">Complemento</th>
+                        <th></th>
+                        <th class="table-head-row" scope="col">Preço Base</th>
+                        <th></th>
+
+
+                        <!-- <th class="table-head-row" scope="col">Cred. ICMS</th>
+
+                        <th></th>
+                        <th class="table-head-row" scope="col">Vir. STB</th>
+                        <th></th>
+                        <th class="table-head-row" scope="col">Cred. Suframa</th>
+                        <th></th>
+                        <th class="table-head-row" scope="col">Estoque</th>
+                        <th></th>
+                        <th class="table-head-row" scope="col">Preço Mercado</th>
+                        <th></th>
+                        <th class="table-head-row" scope="col">Competitividade</th>
+                        <th></th>
+                        <th class="table-head-row" scope="col">Bonificação</th>
+                        <th></th>
+                        <th class="table-head-row" scope="col">Rebate</th>
+                        <th></th>
+                        <th class="table-head-row" scope="col">Verba para Resultado</th>
+                        <th></th>
+                        <th class="table-head-row" scope="col">Margem/Custo</th>
+                        <th></th>
+                        <th class="table-head-row" scope="col">% Flexivel</th>
+                        <th></th>
+                        <th class="table-head-row" scope="col">Receita Liquida</th>
+                        <th></th>
+                        <th class="table-head-row" scope="col">% M. Bruta</th>
+                        <th></th>
+                        <th class="table-head-row" scope="col">Preço Base</th> -->
+                    </tr>
+                    <tr *ngFor="let items of dadosMestresComposicaoPreco">
+                        <td>{{items.CODPRD}}</td>
+                        <td></td>
+                        <td>{{items.DESPRD}}</td>
+                        <td></td>
+                        <td>{{items.ABC}}</td>
+                        <td></td>
+                        <td>{{items.SENSIVEL_REBATE}}</td>
+                        <td></td>
+                        <td>{{items.CODFILEMP}}</td>
+                        <td></td>
+                        <td>{{items.CODFILFAT}}</td>
+                        <td></td>
+                        <td>{{items.CODESTUNI}}</td>
+                        <td></td>
+                        <td>{{items.CODEDEREG}}</td>
+                        <td></td>
+                        <td>{{items.CMV}}</td>
+                        <td></td>
+                        <td>{{items.ICMS}}</td>
+                        <td></td>
+                        <td>{{items.PIS_COFINS}}</td>
+                        <td></td>
+                        <td>{{items.MB}}</td>
+                        <td></td>
+                        <td>{{items.MB_CALCULADA}}</td>
+                        <td></td>
+                        <td>{{items.VERBA_PRECO}}</td>
+                        <td></td>
+                        <td>{{items.FUND_PRECO}}</td>
+                        <td></td>
+                        <td>{{items.REBATE}}</td>
+                        <td></td>
+                        <td>{{items.DEVOLUCAO}}</td>
+                        <td></td>
+                        <td>{{items.TARGET}}</td>
+                        <td></td>
+                        <td>{{items.FLEX}}</td>
+                        <td></td>
+                        <td>{{items.BONIFICADO}}</td>
+                        <td></td>
+                        <td>{{items.COMPLEMENTO}}</td>
+                        <td></td>
+                        <td>{{items.PRECOBASE}}</td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+            <!-- <div class="tab-pane container-tab custom-scrollbar-css fade show
+                active" id="tab-verba2" role="tabpanel" aria-labelledby="nav-composicao-preco">
+
+                <table class="table">
+                    <tr class="table-head">
+                        <th></th>
+                        <th class="th-center table-head-row">Data</th>
+                        <th></th>
+                        <th class="th-center table-head-row">Cód. Produto</th>
+                        <th></th>
+                        <th class="th-center table-head-row">Produto</th>
+                        <th></th>
+                        <th class="table-head-row" scope="col">Cód. Filial Expedição</th>
+                        <th></th>
+                        <th class="table-head-row" scope="col">Cód. Divisão Fornecedor</th>
+                        <th></th>
+                        <th class="table-head-row" scope="col">Valor Preço Saldo</th>
+                        <th></th>
+                        <th class="table-head-row" scope="col">Valor Preço Crédito</th>
+                        <th></th>
+                        <th class="table-head-row" scope="col">Valor Preço Débito</th>
+                        <th></th>
+                        <th class="table-head-row" scope="col">Valor Margem Saldo</th>
+                        <th></th>
+                        <th class="table-head-row" scope="col">Valor Margem Crédito</th>
+                        <th></th>
+                        <th class="table-head-row" scope="col">Valor Margem Débito</th>
+                    </tr>
+                    <tr *ngFor="let items of dadosMestreVerba">
+                        <td></td>
+                        <td>{{items.NUMANOMES}}</td>
+                        <td></td>
+                        <td>{{items.CODPRD}}</td>
+                        <td></td>
+                        <td>{{items.DESPRD}}</td>
+                        <td></td>
+                        <td>{{items.CODFILEPD}}</td>
+                        <td></td>
+                        <td>{{items.CODDIVFRN}}</td>
+                        <td></td>
+                        <td>{{items.VLRPRECOSALDOMESANTERIOR}}</td>
+                        <td></td>
+                        <td>{{items.VLRPRECOCREDITO}}</td>
+                        <td></td>
+                        <td>{{items.VLRPRECODEBITO}}</td>
+                        <td></td>
+                        <td>{{items.VLRMARGEMSALDOMESANTERIOR}}</td>
+                        <td></td>
+                        <td>{{items.VLRMARGEMCREDITO}}</td>
+                        <td></td>
+                        <td>{{items.VLRMARGEMDEBITO}}</td>
+                    </tr>
+                </table>
+
+            </div> -->
+        </div>
+
+    </div>
+</div>
