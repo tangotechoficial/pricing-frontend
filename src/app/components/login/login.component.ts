@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
       password: ['', Validators.required]
     });
     const paramKey = 'returnUrl';
-    this.returnUrl = this._route.snapshot.queryParams[paramKey] || '/';
+    this.returnUrl = this._route.snapshot.queryParams[paramKey] || '/menu';
   }
 
   get form() {
