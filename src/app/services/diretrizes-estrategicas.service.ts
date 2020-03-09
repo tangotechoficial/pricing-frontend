@@ -11,10 +11,10 @@ export class DiretrizesEstrategicasService {
   constructor(private http: HttpClient) { }
 
   listar() {
-    return this.http.get(`${environment.apiUrl}/diretrizestrategica`)
+    return this.http.get(`${environment.apiUrl}/diretrizesestrategica`)
   }
 
-  getDistretriz(): Observable<any>{
-    return this.http.get(`${environment.apiUrl}/diretrizestrategica`);
+  public get diretrizesEstrategicas(): Observable<any>{
+    return this.http.get(`${environment.apiUrl}/diretrizesestrategica`);
   }
 }
