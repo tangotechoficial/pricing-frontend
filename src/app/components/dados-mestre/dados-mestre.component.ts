@@ -22,20 +22,20 @@ export class DadosMestreComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.priceCompositionService.dadosMestresPreco.subscribe(
-    //   data =>
-    //     data.results.map(
-    //       row => {
-    //         debugger
-    //         this.masterDataPriceComposition.push(row);
-    //       }
-    //     ),
-    //   err => console.log(err)
-    // )
+    this.priceCompositionService.dadosMestresPreco.subscribe(
+      data =>
+        data.results.map(
+          row => {
+            this.masterDataPriceComposition.push(row);
+          }
+        ),
+      err => console.log(err)
+    )
     this.moneyService.dadosMestresVerba.subscribe(
       data =>
       data.results.map(
         row => {
+          debugger
           this.masterDataMoney.push(row);
         }
       ),

@@ -8,12 +8,11 @@ import { environment } from '@env/environment';
 })
 export class DadosMestreVerbaService {
 
-  public dadosMestreVerbaUrl = `${environment.apiUrl}/dadosmestre`;
+  public dadosMestreVerbaUrl = `${environment.apiUrl}/dadosmestreverba`;
 
   constructor(private http: HttpClient) { }
 
   listar() {
-    debugger;
     return this.http.get<any[]>(this.dadosMestreVerbaUrl)
   }
 
