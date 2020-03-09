@@ -11,7 +11,6 @@ import { PrecioVentaComponent } from './components/precio/precioventa/preciovent
 import { SaccesoComponent } from './components/sacceso/sacceso.component';
 import { CondicionComponent } from './components/condicion/condicion.component';
 
-import { PrecioBaseBusinessComponent } from './components/precio/preciobase/business/preciobase.component';
 import { DadosMestreComponent } from './components/dados-mestre/dados-mestre.component';
 import { DiretrizEstrategicaComponent } from './components/diretriz-estrategica/diretriz-estrategica.component';
 import { PreciobbaseComponent } from './components/precio/preciobbase/preciobbase.component';
