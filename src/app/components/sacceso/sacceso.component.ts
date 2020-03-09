@@ -2,10 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Sacceso } from '../../models/sacceso';
 import { MetadataService } from './../../services/metadata.service';
 import { SaccesoService } from '../../services/sacceso.service';
-import { fromEvent } from 'rxjs';
-import { tap, switchMap } from "rxjs/operators";
-import { THIS_EXPR, ThrowStmt } from '@angular/compiler/src/output/output_ast';
-import { parse } from 'querystring';
+import { NgxSpinnerService } from "ngx-spinner";
 
 declare var $: any;
 
@@ -13,7 +10,7 @@ declare var $: any;
   selector: 'sacceso',
   templateUrl: './sacceso.component.html',
   styleUrls: ['./sacceso.component.scss'],
-  providers: [MetadataService, SaccesoService]
+  providers: [MetadataService, SaccesoService, NgxSpinnerService]
 })
 
 export class SaccesoComponent implements OnInit {
@@ -40,19 +37,19 @@ export class SaccesoComponent implements OnInit {
 
   constructor(
     private _metadataService: MetadataService,
-    private _saccesoService: SaccesoService
+    private _saccesoService: SaccesoService,
+    private spinner: NgxSpinnerService
   ) { }
 
-  public closePopUp(){
+  public closePopUp() {
     $('#myModal').modal('hide')
   }
 
-  public openPop(){
-   
+  public openPop() {
+
   }
 
   ngOnInit() {
-    
 
     this.sequenciasAcceso = new Array<any>();
     this.sequenciasAccesoSearch = new Array<any>();
@@ -122,12 +119,12 @@ export class SaccesoComponent implements OnInit {
      This function updates the _sacceso Object
   */
   public getLastSequencia() {
-    this._saccesoService.getLastSequencia().subscribe((value) => {
-      var parsedValue;
-      parsedValue = value;
-      var oldCode = parsedValue.Cod_Sequencia;
-      this._sacceso.setCodigo(this.evaluateNextSA(oldCode));
-    });
+    this.spinner.show();
+    this._saccesoService.getLastSequencia()
+      .then((result: any) => {
+        this._sacceso.setCodigo(this.evaluateNextSA(result.Cod_Sequencia))
+        this.spinner.hide()
+      })
   }
 
   /* Iván Lynch - 05/03/2020 
@@ -180,18 +177,37 @@ export class SaccesoComponent implements OnInit {
   }
 
   public checkValue(sa: Sacceso) {
+    //Iterate over SEQ_CAMPOS
     this.sequenciasAcceso.map(elem => {
-      if (elem.getCodigo() == sa.getCodigo()) {
+      
+      //If selected elemement sa is equal to current element in the array loop
+      if (elem.getId() == sa.getId()) {
+        console.log("Selected element is equal to current elem", elem, sa);
+
+        //Check if current element is already selected
         if (elem.isSelected()) {
+
+          //Unselect current element
           elem.setSelected(false);
+          console.log("Current selected item", elem);
+
+          //Iterate over selected properties to remove current selected item
           this.selectedProperties.map((elem2, index) => {
-            if (elem2.getCodigo() == sa.getCodigo()) {
+
+            //If current selected item exist on the the array
+            if (elem2.getId() == elem.getId()) {
+              console.log("SelectedProperties array items :", elem2, elem)
+
+              //Remove elem from array
               this.selectedProperties.splice(index, 1);
-              this._sacceso._parents.slice(index, 1);
+              this._sacceso._parents = this._sacceso._parents.filter((obj) => {
+                return obj.getCodigo() !== sa.getCodigo()
+              })
             }
           })
         } else {
           this._sacceso._parents.push(sa);
+          console.log(this._sacceso._parents);
           elem.setSelected(true);
           this.selectedProperties.push(elem);
         }
@@ -216,6 +232,8 @@ export class SaccesoComponent implements OnInit {
         this.updateSeqCampo();
       },
         error => {
+          console.log(error.error.Nome_Campo[0] == "se q_campo with this Nome Campo already exists.");
+          this.errDesc = "O campo já existe"
           this.saveError = true;
           setTimeout(function () {
             this.saveError = false;
@@ -244,42 +262,72 @@ export class SaccesoComponent implements OnInit {
 
   }
 
-
-
-
   public submitSA() {
-    this._saccesoService.postSaccesoComp(this._sacceso)
-      .subscribe(response => {
+    console.log(this._sacceso)
+    this.spinner.show();
+    if (this._sacceso._parents.length < 2) {
+      this.errDesc = "Selecione mais de um campo"
+      this.saveError = true;
+      this.spinner.hide()
+      setTimeout(function () {
+        this.saveError = false;
+      }.bind(this), 2000)
+
+    } else {
+      this._saccesoService.postSaccesoComp(this._sacceso)
+        .then(data => {
+          this.saveSuccess = true;
+          $('#myModal').modal('show');
+          this.spinner.hide()
+          this.getLastSequencia();
+          setTimeout(function () {
+            this.saveSuccess = false;
+          }.bind(this), 2000)
+          this._saMessage.setCodigo(this._sacceso.getCodigo());
+          this._saMessage.setDescription(this._sacceso.getDescription());
+          this._sacceso = new Sacceso();
+          this.selectedProperties.map(elem => {
+            this.onDltSelection(elem);
+          })
+          this.selectedProperties.forEach(elem => {
+            this.onDltSelection(elem);
+          })
+          this.selectedProperties.map(elem => {
+            this.onDltSelection(elem);
+          })
+          this.selectedProperties.map(elem => {
+            this.onDltSelection(elem);
+          })
+        })
+        .catch((err) => {
+          console.log(err)
+          if (err.error.Nome_Sequencia[0] == "sequencia with this Nome Sequencia already exists.") {
+            this.errDesc = "A sequência de acesso já existe."
+            this.saveError = true;
+            this.spinner.hide()
+            setTimeout(function () {
+              this.saveError = false;
+            }.bind(this), 2000)
+          }
+        })
+    }
+
+    /* this._saccesoService.postSaccesoComp(this._sacceso)
+      .subscribe((response: any) => {
         this.saveSuccess = true;
         $('#myModal').modal('show');
         this.getLastSequencia();
       },
       error => {
+        console.log(error.error.Nome_Sequencia[0] == "sequencia with this Nome Sequencia already exists.");
+        this.errDesc = "A sequência de acesso já existe."
         this.saveError = true;
         setTimeout(function () {
           this.saveError = false;
         }.bind(this), 2000)
-      })
+      }) */
 
-    setTimeout(function () {
-      this.saveSuccess = false;
-      
-    }.bind(this), 2000)
-    this._saMessage.setCodigo(this._sacceso.getCodigo());
-    this._saMessage.setDescription(this._sacceso.getDescription());
-    this._sacceso = new Sacceso();
-    this.selectedProperties.map(elem => {
-      this.onDltSelection(elem);
-    })
-    this.selectedProperties.forEach(elem => {
-      this.onDltSelection(elem);
-    })
-    this.selectedProperties.map(elem => {
-      this.onDltSelection(elem);
-    })
-    this.selectedProperties.map(elem => {
-      this.onDltSelection(elem);
-    })
+
   }
 
 }

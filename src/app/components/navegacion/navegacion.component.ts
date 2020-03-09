@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input ,Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from "@angular/common";
 import {BrowserModule} from '@angular/platform-browser'
@@ -55,27 +55,29 @@ export class NavegacionComponent implements OnInit {
   public numNotif:number = 3 ;
   public numAprob:number = 1;
   public showBMenu: boolean = false;
-
   public showDetail:boolean = false;
-
+  public section: string;
+  @Input() cMode: boolean;
+  @Output() navOutput = new EventEmitter<boolean>()
   private mapUrlToSection = {
     "/menu": "Inicio",
     "/preciobase": "Esquema de Cálculo / Precio Base",
     "/precioventa": "Esquema de Cálculo / Precio Venta",
     "/sacceso": "Sequência de acesso",
-    "/condicion": "Condicion",
+    "/condicion": "Criar nova condição",
   }
-  public section: string;
-  @Output() navOutput = new EventEmitter<boolean>()
   constructor(
     private _router: Router,
     private _route: ActivatedRoute,
     location: Location
-  ) { }
+  ) {}
 
   ngOnInit() {
     const user = JSON.parse(localStorage.User);
     this.userTechnical = user.type == "technical" ? true : false;
+    this._router.routeReuseStrategy.shouldReuseRoute = function () {
+      return false;
+    };
     this._route.url.subscribe(url => {
       this.section = this.mapUrlToSection[location.pathname]
       if(location.pathname != "/login"){
@@ -86,6 +88,15 @@ export class NavegacionComponent implements OnInit {
     })
 
 
+  }
+
+  ngDoCheck() {
+    this.navOutput.next(this.cMode);
+    if(!this.cMode){
+      this.section = "Alterar condição";
+    }else{
+      this.section = "Criar nova condição";
+    }
   }
 
   notifyOpen(){
@@ -104,29 +115,5 @@ export class NavegacionComponent implements OnInit {
     this.showBMenu = true;
     this.navOutput.emit(this.showBMenu)
   }
-
-
-/*   ngDoCheck() {
-    this._route.url.subscribe(url => {
-      console.log(location)
-      if(url[0].path != ""){
-        this.isLoggedIn = true;
-      }else{
-        this.isLoggedIn = false;
-      }
-    });
-  }
-
-  ngAfterContentInit() {
-    this._route.url.subscribe(url => {
-      console.log(url[0])
-      if(url[0].path != ""){
-        this.isLoggedIn = true;
-      }else{
-        this.isLoggedIn = false;
-      }
-    });
-  } */
-
 
 }

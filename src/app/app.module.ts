@@ -30,6 +30,7 @@ import { DiretrizEstrategicaComponent } from './components/diretriz-estrategica/
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PreciobbaseComponent } from './components/precio/preciobbase/preciobbase.component';
 import { PreciobvendasComponent } from './components/precio/preciobvendas/preciobvendas.component';
+import { NgxSpinnerModule } from "ngx-spinner";
 @NgModule({
   declarations: [
     AppComponent,
@@ -64,7 +65,8 @@ import { PreciobvendasComponent } from './components/precio/preciobvendas/precio
     Ng2SearchPipeModule,
     FontAwesomeModule,
     AutocompleteLibModule ,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NgxSpinnerModule
   ],
   providers: [appRoutingProviders],
   bootstrap: [AppComponent]

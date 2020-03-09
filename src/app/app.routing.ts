@@ -23,7 +23,7 @@ const appRoutes: Routes = [
     { path: 'preciobase', component: PrecioBaseComponent},
     { path: 'precioventa', component: PrecioVentaComponent},
     { path: 'sacceso', component: SaccesoComponent},
-    { path: 'condicion', component: CondicionComponent},
+    { path: 'condicion', component: CondicionComponent, runGuardsAndResolvers: 'always'},
     { path: 'b-preciobase', component: PreciobbaseComponent},
     { path: 'b-precioventa', component: PreciobvendasComponent},
     { path: 'diretriz-estrategica', component: DiretrizEstrategicaComponent},
@@ -35,4 +35,4 @@ const appRoutes: Routes = [
 
 /* Export router module */
 export const appRoutingProviders: any[] = [];
-export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
+export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes, { onSameUrlNavigation: 'reload'});

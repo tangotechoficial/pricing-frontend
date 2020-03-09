@@ -1,85 +1,95 @@
 <!-- Navigation Bar -->
-<navegacion></navegacion>
+<navegacion [cMode]="bCreateMode"></navegacion>
+<ngx-spinner></ngx-spinner>
 <!--Modal-->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header bg-light border-bottom-0">
-          <h5 class="modal-title" id="exampleModalLabel">Condicao</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+        <div class="modal-content">
+            <div class="modal-header bg-light border-bottom-0">
+                <h5 class="modal-title" id="exampleModalLabel">Condição</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Criar nova condição ou alterar já existente?
+            </div>
+            <div class="modal-footer d-flex justify-content-center border-top-0">
+                <button type="button" class="btn bg-standard" (click)="isCreateMode()">Criar</button>
+                <button type="button" class="btn bg-standard" (click)="isEditMode()">Alterar</button>
+            </div>
         </div>
-        <div class="modal-body">
-          Criar nova condicao ou alterar ja existente?
-        </div>
-        <div class="modal-footer d-flex justify-content-center border-top-0">
-          <button type="button" class="btn bg-standard" (click)="Save()">Criar</button>
-          <button type="button" class="btn bg-standard" (click)="Save()">Alterar</button>
-        </div>
-      </div>
     </div>
-  </div>
+</div>
+
 <!--Component Content -->
-<button class="btn btn-dark btn-sm" (click)="getModel()">getmodel</button>
-<div *ngIf="IsSaving" class="container background col-9">
+<div class="container background col-9">
     <div class="container row col-12 p-4">
         <div class="col-sm-2">
 
-            <span class="text-header">Cod. Condicao</span>
-            <input class="form-control mt-3" value="TBNC" [(ngModel)]="_condicion.sId" (keydown.Tab)="updateCondDescription(_condicion.sId)" />
+            <span class="text-header">Cód. Condição</span>
+            <input class="form-control mt-3" value="TBNC" [(ngModel)]="_condicion.sCodCondicion"/>
         </div>
         <div class="col-sm-3 p-0">
-            <span class="text-header">Descricao da condicao</span>
-            <input class="form-control mt-3" value="Beneficio customizado"/>
+            <span class="text-header">Descrição da condição</span>
+            <input class="form-control mt-3" [(ngModel)]="_condicion.sDesCondicion" value="Beneficio customizado" />
         </div>
-        <div class="col-sm-1 mt-5 mb-2 d-flex justify-content-center align-items-center">
-            <i class="fas fa-search"></i>
+        <div *ngIf="bCreateMode" class="col-sm-1 mt-5 mb-2 d-flex justify-content-center align-items-center">
+            <i class="fas fa-search disabledSearch"></i>
         </div>
-		<div class="col-sm-3">
-            <span class="text-header">Descricao da seq. acceso</span>
+        <div *ngIf="!bCreateMode" class="col-sm-1 mt-5 mb-2 d-flex justify-content-center align-items-center">
+            <i (click)="getCondicaoByCode()" class="fas fa-search"></i>
+        </div>
+        <div class="col-sm-3">
+            <span class="text-header">Atribua à camada</span>
             <div class="dropdown mt-3">
-							<button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								Seleccione una camada
-							</button>
-							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-								<a class="dropdown-item">CMV [base]</a>
-								<a class="dropdown-item">Regulatorio [base]</a>
-								<a class="dropdown-item">Financiero [vendas]</a>
-								<a class="dropdown-item">Verba [base]</a>
-								<a class="dropdown-item">Desconto [vendas]</a>
-						</div>
-					</div>
+                <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{this._condicion.oCamada ? this._condicion.oCamada.Nome_Camada : this.sSeleccionPlaceholder}}
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a *ngFor="let ca of _camadas ; let id = index" class="dropdown-item" (click)="getSelectedCamada(ca)">{{ca.Nome_Camada}}</a>
+                </div>
+            </div>
         </div>
     </div>
-		<div class="container row col-12 p-4">
-			<div class="col-sm-2">
-                <span class="text-header">Chave de contas</span>
-                <input class="form-control mt-3" placeholder="Chave"/>
-            </div>
+    <div class="container row col-12 p-4">
+        <div class="col-sm-2">
+            <span class="text-header">Chave de contas</span>
+            <input *ngIf="_condicion.oChaveContas" [(ngModel)]="_condicion.oChaveContas.Cod_ChaveContas" class="form-control mt-3" placeholder="Chave"/>
+            <input *ngIf="!_condicion.oChaveContas" class="form-control mt-3" placeholder="Chave"/>
+        </div>
         <div class="col-sm-3 p-0">
-            <span class="text-header">Descricao da chave de contas</span>
+            <span class="text-header">Descrição da chave de contas</span>
             <div class="dropdown mt-3">
-				<button class="col-12 btn btn-light dropdown-toggle text-left" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Descricao
-				</button>
-				<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-					<a class="dropdown-item" href="#">Testing</a>
-					<a class="dropdown-item" href="#">tester</a>
-					<a class="dropdown-item" href="#">test</a>
-				</div>
-			</div>
+                <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{this._condicion.oChaveContas ? this._condicion.oChaveContas.Desc_ChaveContas : this.sSeleccionPlaceholder}}
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a *ngFor="let cc of _chaveContas ; let id = index" class="dropdown-item" (click)="getSelectedChaveContas(cc)">{{cc.Desc_ChaveContas}}</a>
+                </div>
+            </div>
         </div>
         <div class="col-sm-1 mt-5 mb-2 d-flex justify-content-center align-items-center">
             <i class="fas fa-search"></i>
         </div>
-		<div class="col-sm-2">
+        <div class="col-sm-2">
             <span class="text-header">Tipo de valor</span>
-            <input class="form-control mt-3" value="TBNC"/>
+            <div class="dropdown mt-3">
+                <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{this._condicion.oTipoValor ? this._condicion.oTipoValor.Desc_TipoValor : this.sSeleccionPlaceholder}}
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a *ngFor="let tp of _tipoValor ; let id = index" class="dropdown-item" (click)="getSelectedTipoValor(tp)">{{tp.Desc_TipoValor}}</a>
+                </div>
+            </div>
         </div>
         <div class="col-2 d-flex flex-column justify-content-center align-items-center">
             <span class="text-header">Escala por qtd.</span>
             <div class="custom-control custom-checkbox mt-2 mb-2">
-                <input type="checkbox" class="custom-control-input" id="checkEscala">
+                <input type="checkbox" [(ngModel)]="this._condicion.bEscalaQtde" class="custom-control-input" id="checkEscala">
                 <label class="pl-4 custom-control-label" for="checkEscala" id="checkEscalaLabel"></label>
             </div>
         </div>
@@ -88,60 +98,81 @@
                 <div class="col-6 d-flex flex-column justify-content-center align-items-center">
                     <span class="text-header">Positivo</span>
                     <div class="custom-control custom-checkbox mb-2">
-                        <input type="checkbox" class="custom-control-input" id="checkPositivo">
+                        <input type="checkbox" [(ngModel)]="this._condicion.bPos" (click)="checkPosNeg($event)" class="custom-control-input" id="checkPositivo">
                         <label class="pl-4 custom-control-label" for="checkPositivo" id="checkPositivoLabel"></label>
                     </div>
                 </div>
                 <div class="col-6 d-flex flex-column justify-content-center align-items-center">
                     <span class="text-header">Negativo</span>
                     <div class="custom-control custom-checkbox mb-2">
-                        <input type="checkbox" class="custom-control-input" id="checkNegativo">
+                        <input type="checkbox" [(ngModel)]="this._condicion.bNeg" (click)="checkPosNeg($event)" class="custom-control-input" id="checkNegativo">
                         <label class="pl-4 custom-control-label" for="checkNegativo" id="checkNegativoLabel"></label>
                     </div>
                 </div>
             </div>
         </div>
-	</div>
+    </div>
     <div class="container row col-12 p-4">
         <div class="col-sm-6">
-            <span class="text-header">Adicionar sequencias de acceso</span>
-                <div class="options-list rounded mt-3">
-                    <div class="p-3 list-header custom-text-muted">Pesquise uma sequencia de acesso...</div>
-                    <ul class="p-0 custom-scrollbar-css">
-                        <li *ngFor="let cond of listaCondicionesComp ; let id = index" class="p-2">
-                            <div class="custom-control custom-checkbox">
-                                <input (change)="checkValue(cond.tipo)" type="checkbox" class="sacceso-opcion custom-control-input" id="{{id}}">
-                                <label class="pl-4 custom-control-label" for="{{id}}">{{cond.getDescripcion()}}</label>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+            <span class="text-header pb-3">Adicionar sequências de acesso</span>
+            <div class="options-list rounded mt-3">
+                <input id="saSearch2"
+                    class="form-control border-top-0 border-right-0 border-left-0 p-4 list-header custom-text-muted"
+                    [(ngModel)]="searchSeleccionado" placeholder="Pesquise o tipo de condição..." />
+                <ul class="p-0 custom-scrollbar-css">
+                    <li *ngFor="let sequencia of _sequencias ; let id = index" class="p-2">
+                        <div class="custom-control custom-checkbox">
+                            <input (click)="checkValue(sequencia)" type="checkbox"
+                                class="sacceso-opcion custom-control-input" id="{{id}}">
+                            <label class="pl-4 custom-control-label" for="{{id}}">{{sequencia.Nome_Sequencia}}</label>
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </div>
 
         <div class="col-sm-6">
-            <span class="text-header pb-3">Sequencias de acceso ja cadastradas</span>
-                <div class="options-list rounded mt-3">
-                    <div class="p-3 list-header custom-text-muted">Pesquise uma sequencia de acceso...</div>
-                    <ul class="p-0 custom-scrollbar-css">
-                        <li *ngFor="let cond of selectedProperties" class="p-2 w-100 d-flex">
-                            <div class="d-flex w-100 justify-content-between align-items-center">
-                                <label class="pl-4 mb-0">{{cond.tipo}}</label>
-                                <button type="button" (click)="onClickRemove()" class="btn btn-labeled btn-danger ml-2 p-0 d-flex flex-column align-items-center">
-                                    <span class="btn-label d-flex align-items-center"><i class="fas fa-times p-0"></i></span>
-                                </button>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+            <span class="text-header pb-3">Sequências de acceso já cadastradas</span>
+            <div class="options-list rounded mt-3">
+                <input id="saSearch2"
+                    class="form-control border-top-0 border-right-0 border-left-0 p-4 list-header custom-text-muted"
+                    [(ngModel)]="searchSeleccionado" placeholder="Pesquise o tipo de condição..." />
+                <ul class="p-0 custom-scrollbar-css">
+                    <li *ngFor="let seq of selectedProperties ; let id = index " class="p-2">
+                        <div class="d-flex w-100 justify-content-between align-items-center">
+                            <label class="pl-4 mb-0">{{seq.Nome_Sequencia}}</label>
+                            <button type="button" (click)="onDltSelection(seq)"
+                                class="btn btn-danger ml-2 p-0 d-flex flex-column align-items-center">
+                                <span class="btn-label d-flex align-items-center"><i
+                                        class="fas fa-times p-0"></i></span>
+                            </button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </div>
 
     </div>
 
     <div class="container row col-12 p-4 justify-content-md-center">
         <div class="col-md-4">
-                <div class="form-group">
-                    <input type="submit" class="btn bg-standard btn-block font-weight-bold" value="Salvar">
-                </div>
+            <div class="form-group">
+                <input type="submit" (click)="onSubmitCondicao()" class="btn bg-standard btn-block font-weight-bold" value="Salvar">
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-md-center">
+        <div *ngIf="_saveSucess" class="col-md-8 alert alert-success" role="alert">
+            <strong>{{this._message.sucMessage}}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+        </div>
+        <div *ngIf="_saveError" class="col-md-8 alert alert-danger" role="alert">
+            <strong>{{this._message.errMessage}}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
         </div>
     </div>
 </div>

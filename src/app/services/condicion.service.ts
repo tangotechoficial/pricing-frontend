@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Global } from './global';
 import { Condicion } from '../models/condicion';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class CondicionService{
@@ -16,35 +17,51 @@ export class CondicionService{
         this.url = Global.url;
     }
 
+    getCamadas(): Promise<any>{
+        return this._http.get(this.url + '/camada/', {headers: {"Content-type": "application/json"}}).toPromise()
+    }
+    getChaveContas(): Promise<any>{
+        return this._http.get(this.url + '/chavecontas/', {headers: {"Content-type": "application/json"}}).toPromise()
+    }
+    getTiposValor(): Promise<any>{
+        return this._http.get(this.url + '/tipovalor/', {headers: {"Content-type": "application/json"}}).toPromise()
+    }
+    getSequenciasAcesso(): Promise<any>{
+        return this._http.get(this.url + '/sequencia/', {headers: {"Content-type": "application/json"}}).toPromise()
+    }
 
-  postCondiction(cond: Condicion){
-      return this._http.post(this.url + '/condicion/' /*,  {Cod_Campo: seq.sSeqAcceso, Nome_Campo: seq.sDesAcceso} */, {headers: {"Content-type": "application/json"}});
-      //define data to post
-  }
+    postCondicao(co: Condicion): Promise<any>{
+        return this._http.post(this.url + '/condicao/', {
+            "Cod_Condicao": co.sCodCondicion,
+            "Desc_Condicao": co.sDesCondicion,
+            "Escala_Qtde": co.bEscalaQtde ? 1 : 0,
+            "POS_NEG": co.bNeg ? "N" : "P",
+            "TIP_BASE_VENDAS": co.oCamada.TIPO_BASE_VENDAS,
+            "MANDATORIA": 0,
+            "ESTATISTICA": 0,
+            "id_Camada": co.oCamada.id,
+            "id_ChaveContas": co.oChaveContas.id,
+            "id_TipoValor": co.oTipoValor.id
+        }, {headers: {"Content-type": "application/json"}})
+         .pipe(
+             map((elem: any) => 
+                co.aSequencias.forEach(campo => {
+                    this.postCondicaoSequencia(elem.id, campo.id).subscribe();
+                }))
+         ).toPromise()
+    }
 
-  getCondDescription(): Observable <any>{
-      return this._http.get(this.url + '/condicao/descriptions/', {headers: {"Content-type": "application/json"}});
-  }
-  getCondChave(){
-      return this._http.get(this.url + '/condicao/chavecontas/', {headers: {"Content-type": "application/json"}});
-  }
+    postCondicaoSequencia(condId :any, seqId: any){
+        return this._http.post(this.url + '/condicaosequencia/', {
+            "id_Condicao": condId,
+            "id_Sequencia": seqId
+        }, {headers: {"Content-type": "application/json"}})
+    }
 
-  getCondCamada(): Observable<any>{
-      return this._http.get(this.url + '/condicao/camada/', {headers: {"Content-type": "application/json"}});
-  }
-
-  getCondVal(): Observable<any>{
-    return this._http.get(this.url + '/condicao/tipovalor/', {headers: {"Content-type": "application/json"}});
-}
-
-    postSacceso(seq: Condicion): Observable <any>{
-        let _currUser = JSON.parse(localStorage.getItem("User"));
-        let _params = {
-            params: seq,
-            currUser: _currUser
-        }
-        console.log(_params);
-        return this._http.post(this.url + '/condicion', _params, {headers: {"Content-type": "application/json"}});
+    public getCondicaoByCode(): Promise<any>{
+        return this._http.get(this.url + '/condicao/', {headers: {"Content-type": "application/json"}}).toPromise();
     }
 }
+
+
 
