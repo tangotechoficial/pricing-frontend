@@ -1,6 +1,6 @@
 import { Component, Input, Renderer2, ElementRef } from "@angular/core";
 
-interface element {
+interface IElement {
   id: number;
   codCondicao: number;
   desCondicao: String;
@@ -17,25 +17,17 @@ interface element {
 
 export class PrecioElement {
   @Input() titulo: string;
+  elements: Array<IElement> = [];
 
-  elements = [{
-    id: 0,
-    codCondicao: 0,
-    desCondicao: "DESC",
-    typeValue: "T",
-    mandatoria: true,
-    estadistica: false
-  }]
-  
-
-  
 
   ngOnInit() {
     //this.getDOMElement();
+    // traer via servicio los elementos segun tipo
+
   }
 
   add() {
-
+    
     const element = {
       id: 0,
       codCondicao: 0,
