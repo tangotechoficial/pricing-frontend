@@ -63,7 +63,7 @@ export class CondicionService {
     }
 
     public getCondicao(): Promise<any>{
-        return this._http.get(this.url + '/condicao/', {headers: {"Content-type": "application/json"}}).toPromise();
+        return this.http.get(this.url + '/condicao/', {headers: {"Content-type": "application/json"}}).toPromise();
     }
 }
 
