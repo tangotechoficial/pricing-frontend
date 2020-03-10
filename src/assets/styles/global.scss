@@ -153,3 +153,11 @@ input[type="checkbox"]:not(:checked).custom-control-input + label::before {
 i.fas.fa-search.disabledSearch {
     color: gray;
 }
+
+.martins-color {
+    color: $martinsBlue
+}
+
+.martins-pointer {
+    cursor: pointer;
+}

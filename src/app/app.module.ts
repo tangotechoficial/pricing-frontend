@@ -16,7 +16,6 @@ import { PrecioSeleccion } from './components/precio/precioseleccion/precioselec
 import { PrecioElement } from './components/precio/precioelement/precioelement.component';
 import { SaccesoComponent } from './components/sacceso/sacceso.component';
 import { CondicionComponent } from './components/condicion/condicion.component';
-import { PrecioBaseBusinessComponent } from './components/precio/preciobase/business/preciobase.component';
 
 import { AutocompleteInputComponent } from './components/autocomplete-input/autocomplete-input.component';
 import { FilterPipeSeqAcceso } from './pipes/filterseqacceso.pipe';
@@ -45,7 +44,6 @@ import { NgxSpinnerModule } from "ngx-spinner";
     PrecioElement,
     SaccesoComponent,
     CondicionComponent,
-    PrecioBaseBusinessComponent,
     AutocompleteInputComponent,
     FilterPipeSeqAcceso,
     FilterPipeSeqSearch,
