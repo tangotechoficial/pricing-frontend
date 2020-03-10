@@ -21,7 +21,7 @@ export class MenuComponent implements OnInit {
 
   private setUserInfo() {
     try{
-       return JSON.parse(jwt_decode(this.token));
+       return JSON.parse(this.authenticationService.currentUserValue);
     } catch( Error ) {
         return {
           username: 'Guest'
