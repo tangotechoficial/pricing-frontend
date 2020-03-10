@@ -1,28 +1,23 @@
 <!-- Navigation Bar -->
 <navegacion></navegacion>
 
-<!--Component Content -->
-<div class="container d-flex flex-column background col-12 justify-content-center pb-5">
-<!-- Select-->
-    <div *ngIf="!isShow">
-        <precio-seleccion (negociosOutput)="parentListener($event)"
-        (ventasOutput)="parentListenerTwo($event)"></precio-seleccion>
-        <div class="d-flex justify-content-center background">
-            <div class="col-2 form-group">
-                <input type="submit" (click)="goToSection()" [disabled]="!existVentas || !existNegocios" class="btn bg-standard btn-block font-weight-bold" value="Entrar">
-            </div>
-        </div>
-    </div>
-
+<!--Component Content
+<div class="container d-flex flex-column background col-12 justify-content-center pb-5"> -->
+<div class="container menu-background">
 <!--Main view-->
-    <div *ngIf="isShow">
+    <!-- BUSINESS USER -->
+    <div *ngIf="bBusiness">
+        <precio-business></precio-business>
+    </div>
+    <!-- TECHNICAL USER -->    
+    <div *ngIf="!bBusiness">
         <div class="background">
-            <precio-element titulo="CMV"></precio-element>
-            <precio-element titulo="REGULATORIO"></precio-element>
-            <precio-element titulo="OPERACIONAL"></precio-element>
-            <precio-element titulo="VERBA"></precio-element>
-            <precio-element titulo="MARGEM"></precio-element>
+            <precio-technical titulo="CMV"></precio-technical>
+            <precio-technical titulo="REGULATORIO"></precio-technical>
+            <precio-technical titulo="OPERACIONAL"></precio-technical>
+            <precio-technical titulo="VERBA"></precio-technical>
+            <precio-technical titulo="MARGEM"></precio-technical>
         </div>
     </div>
-
 </div>
+

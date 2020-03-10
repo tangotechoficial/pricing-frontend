@@ -4,7 +4,7 @@ import { MetadataService } from './../../services/metadata.service';
 import { CondicionService } from '../../services/condicion.service';
 import { fromEvent } from 'rxjs';
 import { tap, switchMap } from "rxjs/operators";
-import { NgxSpinnerService } from "ngx-spinner";
+import { NgxSpinnerService } from 'ngx-spinner';
 
 
 
