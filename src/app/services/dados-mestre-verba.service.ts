@@ -7,15 +7,15 @@ import { Observable } from 'rxjs';
 })
 export class DadosMestreVerbaService {
 
-  public dadosMestreVerbaUrl = "https://pricing.tangotechapp.com/api/dadosmestreverba";
+  public dadosMestreVerbaUrl = 'https://pricing.tangotechapp.com/api/dadosmestreverba';
 
   constructor(private http: HttpClient) { }
 
   listar() {
-    return this.http.get<any[]>(`${this.dadosMestreVerbaUrl}`)
+    return this.http.get<any[]>(`${this.dadosMestreVerbaUrl}`);
   }
 
-  getDadosMestresVerba(): Observable<any>{
+  getDadosMestresVerba(): Observable<any> {
     return this.http.get(this.dadosMestreVerbaUrl);
   }
 }

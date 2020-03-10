@@ -1,12 +1,8 @@
-import { Component, OnInit, Renderer2 } from '@angular/core';
+import { Component, OnInit, Renderer2, ElementRef } from '@angular/core';
 import { Condicion } from '../../models/condicion';
 import { MetadataService } from './../../services/metadata.service';
 import { CondicionService } from '../../services/condicion.service';
-import { fromEvent } from 'rxjs';
-import { tap, switchMap } from "rxjs/operators";
-import { NgxSpinnerService } from "ngx-spinner";
-
-
+import { NgxSpinnerService } from 'ngx-spinner';
 
 declare var $: any;
 
@@ -18,215 +14,207 @@ declare var $: any;
 })
 export class CondicionComponent implements OnInit {
 
-  public _condicion: Condicion;
-  public _sequencias: Array<any>;
-  public _chaveContas: Array<any>;
-  public _tipoValor: Array<any>;
-  public _camadas: Array<any>;
+  public condicion: Condicion;
+  public sequencias: Array<any>;
+  public chaveContas: Array<any>;
+  public tipoValor: Array<any>;
+  public camadas: Array<any>;
   public listaCondicionesComp: Array<any>;
   public selectedProperties: Array<any>;
-  public bCreateMode: boolean = true;
-  public sSeleccionPlaceholder: string = "Selecione uma opção";
-  public _saveSucess: boolean;
-  public _saveError: boolean;
-  public _message: any;
+  public bCreateMode: boolean;
+  public sSeleccionPlaceholder = 'Selecione uma opção';
+  public saveSucess: boolean;
+  public saveError: boolean;
+  public message: any;
 
   constructor(
-    private _metadataService: MetadataService,
-    private _condicionService: CondicionService,
-    private renderer: Renderer2,
+    private condicionService: CondicionService,
     private spinner: NgxSpinnerService
   ) { }
 
   ngOnInit() {
     /* Initialized message local object */
-    this._message = {};
-    this._message.sCodCondicion = "CO001";
-    this._message.sDesCondicion = "Condicion 1";
-    $('#myModal').modal('show')
-    this._sequencias = new Array<any>();
-    this._chaveContas = new Array<any>();
-    this._tipoValor = new Array<any>();
-    this._camadas = new Array<any>();
+    this.message = {};
+    this.message.sCodCondicion = 'CO001';
+    this.message.sDesCondicion = 'Condicion 1';
+    $('#myModal').modal('show');
     this.selectedProperties = new Array<any>();
-    this._condicion = new Condicion();
+    this.condicion = new Condicion();
   }
-
-
   /*
     Iván Lynch 09/03/2020
     Output: Return master values
   */
-  public updateMasterData(){
+  public updateMasterData() {
     this.spinner.show();
-    this._sequencias = new Array<any>();
-    this._tipoValor = new Array<any>();
-    this._camadas = new Array<any>();
-    this._chaveContas = new Array<any>();
-
+    this.sequencias = new Array<any>();
+    this.tipoValor = new Array<any>();
+    this.camadas = new Array<any>();
+    this.chaveContas = new Array<any>();
     Promise.all([
-      this._condicionService.getSequenciasAcesso().then(result => result.map(sa => this._sequencias.push(sa))),
-      this._condicionService.getChaveContas().then(result => result.map(cc => this._chaveContas.push(cc))),
-      this._condicionService.getTiposValor().then(result => result.map(tv => this._tipoValor.push(tv))),
-      this._condicionService.getCamadas().then(result => result.map(ca => this._camadas.push(ca)))
-    ]).then(()=>{
+      this.condicionService.getSequenciasAcesso().then(result => result.map(sa => this.sequencias.push(sa))),
+      this.condicionService.getChaveContas().then(result => result.map(cc => this.chaveContas.push(cc))),
+      this.condicionService.getTiposValor().then(result => result.map(tv => this.tipoValor.push(tv))),
+      this.condicionService.getCamadas().then(result => result.map(ca => this.camadas.push(ca)))
+    ]).then(() => {
       this.spinner.hide();
-    })
-  }
+    });
 
+    console.log(this.camadas);
+  }
   /*
     Iván Lynch 09/03/2020
     Output: Return selected condicao
   */
-  public getCondicaoByCode(){
+  public getCondicaoByCode() {
     this.spinner.show();
     let flag = false;
-    this._condicionService.getCondicaoByCode()
-      .then((result: any)=>{
+    this.condicionService.getCondicaoByCode()
+      .then((result: any) => {
         console.log(result);
-        console.log(this._condicion.sCodCondicion);
-        result.map((cond: any)=>{
-          
-          if(cond.Cod_Condicao == this._condicion.sCodCondicion){
+        console.log(this.condicion.sCodCondicion);
+        result.map((cond: any) => {
+          if (cond.Cod_Condicao === this.condicion.sCodCondicion) {
             flag = true;
-            this._condicion.sDesCondicion = cond.Desc_Condicao;
-            this._condicion.bEscalaQtde = cond.Escala_Qtde == 1 ? true : false;
-            this._condicion.bNeg = cond.POS_NEG == "N" ? true : false;
-            this._condicion.bPos = cond.POS_NEG == "P" ? true : false;
-            this._condicion.MANDATORIA = cond.MANDATORIA;
-            this._condicion.ESTATISTICA = cond.ESTATISTICA;
-            this._camadas.map(elems=>{
-              if(elems.id == cond.id_Camada){
-                this._condicion.oCamada = elems;
+            this.condicion.sDesCondicion = cond.Desc_Condicao;
+            this.condicion.bEscalaQtde = cond.Escala_Qtde === 1 ? true : false;
+            this.condicion.bNeg = cond.POS_NEG === 'N' ? true : false;
+            this.condicion.bPos = cond.POS_NEG === 'P' ? true : false;
+            this.condicion.MANDATORIA = cond.MANDATORIA;
+            this.condicion.ESTATISTICA = cond.ESTATISTICA;
+            this.camadas.map(elems => {
+              if (elems.id === cond.id_Camada) {
+                this.condicion.oCamada = elems;
               }
-            })
-            this._chaveContas.map(elems=>{
-              if(elems.id == cond.id_ChaveContas){
-                this._condicion.oChaveContas = elems;
+            });
+            this.chaveContas.map(elems => {
+              if (elems.id === cond.id_ChaveContas) {
+                this.condicion.oChaveContas = elems;
               }
-            })
-            this._tipoValor.map(elems=>{
-              if(elems.id == cond.id_TipoValor){
-                this._condicion.oTipoValor = elems;
+            });
+            this.tipoValor.map(elems => {
+              if (elems.id === cond.id_TipoValor) {
+                this.condicion.oTipoValor = elems;
               }
-            })
-            this._condicion.TIP_BASE_VENDAS = this._condicion.oCamada.TIPO_BASE_VENDAS;
+            });
+            this.condicion.TIP_BASE_VENDAS = this.condicion.oCamada.TIPO_BASE_VENDAS;
+            this.condicionService.getSequenciasByCondicao()
+              .then(elems => {
+                // Filter elements by CONDICAO ID
+                elems = elems.filter((obj: any) => {
+                  return obj.id_Condicao === cond.id;
+                });
+                elems.map((seq: any) => {
+                  this.sequencias.map((bseq: any, index: any) => {
+                    if (seq.id_Sequencia === bseq.id) {
+                        const elem = document.getElementById(index.toString());
+                        elem.click();
+                    }
+                  });
+                });
+              });
             this.spinner.hide();
           }
-        })
-        if(!flag){
+        });
+        if (!flag) {
           this.spinner.hide();
-          this._message.errMessage = "A condição não existe";
-          this._saveError = true;
-          setTimeout(()=>{
-            this._saveError = false;
-            
-          }, 2000)
+          this.message.errMessage = 'A condição não existe';
+          this.saveError = true;
+          setTimeout(() => {
+            this.saveError = false;
+          }, 2000);
         }
-      })
+      });
   }
-
   /*
     Iván Lynch 08/03/2020
     Input: Selected Camada Item from dropdown
     Output: Update this._condicao.oCamada
   */
   public getSelectedCamada(val: any) {
-    this._condicion.oCamada = val;
+    this.condicion.oCamada = val;
   }
-
   /*
     Iván Lynch 08/03/2020
     Input: Selected Camada Item from dropdown
     Output: Update this._condicao.oCamada
   */
   public getSelectedChaveContas(val: any) {
-    this._condicion.oChaveContas = val;
+    this.condicion.oChaveContas = val;
   }
-
   /*
     Iván Lynch 08/03/2020
     Input: Selected TipoValor Item from dropdown
     Output: Update this._condicao.oTipoValor
   */
   public getSelectedTipoValor(val: any) {
-    this._condicion.oTipoValor = val;
+    this.condicion.oTipoValor = val;
   }
-
   /*
     Iván Lynch 08/03/2020
     Output: Return true if the user clicks on Criar condiçao
   */
   public isCreateMode() {
-    $('#myModal').modal('hide')
+    $('#myModal').modal('hide');
     this.bCreateMode = true;
     this.updateMasterData();
   }
-
   /*
     Iván Lynch 08/03/2020
     Output: Return false if the user clicks on Alterar condiçao
   */
   public isEditMode() {
-    $('#myModal').modal('hide')
+    $('#myModal').modal('hide');
     this.bCreateMode = false;
     this.updateMasterData();
   }
-
   /*
     Iván Lynch 08/03/2020
     Output: Uncheck Pos and Neg checkbox if the other is active
   */
-  public checkPosNeg(e: any){
-    var checkPos, checkNeg;
-    checkPos = document.getElementById('checkPositivo');
-    checkNeg = document.getElementById('checkNegativo');
-    
-    if(e.target.id == "checkNegativo" && checkPos.checked){
-      checkPos.click()
+  public checkPosNeg(e: any) {
+    const checkPos: any = document.getElementById('checkPositivo');
+    const checkNeg: any = document.getElementById('checkNegativo');
+    if (e.target.id === 'checkNegativo' && checkPos.checked) {
+      checkPos.click();
     }
-
-    if(e.target.id == "checkPositivo" && checkNeg.checked){
-      checkNeg.click()
+    if (e.target.id === 'checkPositivo' && checkNeg.checked) {
+      checkNeg.click();
     }
-    
   }
-
   /*
     Iván Lynch 08/03/2020
     Input: Object, Array
     Output: Return true if exists in the array or false if doesn't exist
   */
   public elemExist(obj, list) {
-    var i;
-    for (i = 0; i < list.length; i++) {
-        if (list[i] === obj) {
-            return true;
-        }
+    for (const row of list) {
+      if (row === obj) {
+        return true;
+      }
     }
     return false;
   }
-  
   /*
     Iván Lynch 08/03/2020
     Input: Object
     Output: Push the object to selectedProperties array if the element is not in the array or delete them
   */
   public checkValue(sa: any) {
-    if(this.selectedProperties.length < 1){
+    if (this.selectedProperties.length < 1) {
       this.selectedProperties.push(sa);
-      this._condicion.aSequencias.push(sa);
-    }else{
-      if(this.elemExist(sa, this.selectedProperties)){
+      this.condicion.aSequencias.push(sa);
+    } else {
+      if (this.elemExist(sa, this.selectedProperties)) {
         this.selectedProperties = this.selectedProperties.filter((obj) => {
-          return obj.id !== sa.id
-        })
-        this._condicion.aSequencias = this._condicion.aSequencias.filter((seq) => {
-          return seq.id !== sa.id
-        })
-      }else{
+          return obj.id !== sa.id;
+        });
+        this.condicion.aSequencias = this.condicion.aSequencias.filter((seq) => {
+          return seq.id !== sa.id;
+        });
+      } else {
         this.selectedProperties.push(sa);
-        this._condicion.aSequencias.push(sa);
+        this.condicion.aSequencias.push(sa);
       }
     }
   }
@@ -234,43 +222,39 @@ export class CondicionComponent implements OnInit {
   /*
     Iván Lynch 08/03/2020
     Input: Object
-    Output: Uncheck selected object from _sequencias
+    Output: Uncheck selected object from sequencias
   */
-  public onDltSelection(sel: any){
-    this._sequencias.map((elem, index) => {
-      if(sel.id == elem.id){
-        var selElem = document.getElementById(index.toString());
-        selElem.click()
+  public onDltSelection(sel: any) {
+    this.sequencias.map((elem, index) => {
+      if (sel.id === elem.id) {
+        const selElem = document.getElementById(index.toString());
+        selElem.click();
       }
-    })
-    
+    });
   }
-
   /*
     Iván Lynch 09/03/2020
     Input: null
     Output: null
   */
-  public onSubmitCondicao(){
-    this._condicionService.postCondicao(this._condicion)
-    .then(elem => {
-      this._saveSucess = true;
-      this._message.sucMessage = "Condição "+ this._condicion.sCodCondicion +" - "+ this._condicion.sDesCondicion +" salva com sucesso!"
-      setTimeout(()=>{
-        this._saveSucess = false;
-        this._condicion = new Condicion();
-      }, 2000)
-    })
-    .catch((error: any) => {
-      if(error.error.Cod_Condicao[0] == "condicao with this Cod Condicao already exists."){
-        this._message.errMessage = "O código de condição já existe"
-        this._saveError = true;
-      }
-      setTimeout(()=>{
-        this._saveError = false;
-      }, 2000)
-    });
+  public onSubmitCondicao() {
+    this.condicionService.postCondicao(this.condicion)
+      .then(elem => {
+        this.saveSucess = true;
+        this.message.sucMessage = 'Condição ' + this.condicion.sCodCondicion + ' - ' + this.condicion.sDesCondicion + ' salva com sucesso!';
+        setTimeout(() => {
+          this.saveSucess = false;
+          this.condicion = new Condicion();
+        }, 2000);
+      })
+      .catch((error: any) => {
+        if (error.error.Cod_Condicao[0] === 'condicao with this Cod Condicao already exists.') {
+          this.message.errMessage = 'O código de condição já existe';
+          this.saveError = true;
+        }
+        setTimeout(() => {
+          this.saveError = false;
+        }, 2000);
+      });
   }
-
-
 }
