@@ -22,7 +22,7 @@ export class CondicionComponent implements OnInit {
   public listaCondicionesComp: Array<any>;
   public selectedProperties: Array<any>;
   public bCreateMode: boolean;
-  public sSeleccionPlaceholder: 'Selecione uma opção';
+  public sSeleccionPlaceholder = 'Selecione uma opção';
   public saveSucess: boolean;
   public saveError: boolean;
   public message: any;
@@ -38,15 +38,9 @@ export class CondicionComponent implements OnInit {
     this.message.sCodCondicion = 'CO001';
     this.message.sDesCondicion = 'Condicion 1';
     $('#myModal').modal('show');
-    this.sequencias = new Array<any>();
-    this.chaveContas = new Array<any>();
-    this.tipoValor = new Array<any>();
-    this.camadas = new Array<any>();
     this.selectedProperties = new Array<any>();
     this.condicion = new Condicion();
   }
-
-
   /*
     Iván Lynch 09/03/2020
     Output: Return master values
@@ -57,7 +51,6 @@ export class CondicionComponent implements OnInit {
     this.tipoValor = new Array<any>();
     this.camadas = new Array<any>();
     this.chaveContas = new Array<any>();
-
     Promise.all([
       this.condicionService.getSequenciasAcesso().then(result => result.map(sa => this.sequencias.push(sa))),
       this.condicionService.getChaveContas().then(result => result.map(cc => this.chaveContas.push(cc))),
@@ -66,8 +59,9 @@ export class CondicionComponent implements OnInit {
     ]).then(() => {
       this.spinner.hide();
     });
-  }
 
+    console.log(this.camadas);
+  }
   /*
     Iván Lynch 09/03/2020
     Output: Return selected condicao
@@ -94,16 +88,31 @@ export class CondicionComponent implements OnInit {
               }
             });
             this.chaveContas.map(elems => {
-              if (elems.id === cond.idchaveContas) {
+              if (elems.id === cond.id_ChaveContas) {
                 this.condicion.oChaveContas = elems;
               }
             });
             this.tipoValor.map(elems => {
-              if (elems.id === cond.idtipoValor) {
+              if (elems.id === cond.id_TipoValor) {
                 this.condicion.oTipoValor = elems;
               }
             });
             this.condicion.TIP_BASE_VENDAS = this.condicion.oCamada.TIPO_BASE_VENDAS;
+            this.condicionService.getSequenciasByCondicao()
+              .then(elems => {
+                // Filter elements by CONDICAO ID
+                elems = elems.filter((obj: any) => {
+                  return obj.id_Condicao === cond.id;
+                });
+                elems.map((seq: any) => {
+                  this.sequencias.map((bseq: any, index: any) => {
+                    if (seq.id_Sequencia === bseq.id) {
+                        const elem = document.getElementById(index.toString());
+                        elem.click();
+                    }
+                  });
+                });
+              });
             this.spinner.hide();
           }
         });
@@ -117,7 +126,6 @@ export class CondicionComponent implements OnInit {
         }
       });
   }
-
   /*
     Iván Lynch 08/03/2020
     Input: Selected Camada Item from dropdown
@@ -126,7 +134,6 @@ export class CondicionComponent implements OnInit {
   public getSelectedCamada(val: any) {
     this.condicion.oCamada = val;
   }
-
   /*
     Iván Lynch 08/03/2020
     Input: Selected Camada Item from dropdown
@@ -135,7 +142,6 @@ export class CondicionComponent implements OnInit {
   public getSelectedChaveContas(val: any) {
     this.condicion.oChaveContas = val;
   }
-
   /*
     Iván Lynch 08/03/2020
     Input: Selected TipoValor Item from dropdown
@@ -144,7 +150,6 @@ export class CondicionComponent implements OnInit {
   public getSelectedTipoValor(val: any) {
     this.condicion.oTipoValor = val;
   }
-
   /*
     Iván Lynch 08/03/2020
     Output: Return true if the user clicks on Criar condiçao
@@ -154,7 +159,6 @@ export class CondicionComponent implements OnInit {
     this.bCreateMode = true;
     this.updateMasterData();
   }
-
   /*
     Iván Lynch 08/03/2020
     Output: Return false if the user clicks on Alterar condiçao
@@ -164,7 +168,6 @@ export class CondicionComponent implements OnInit {
     this.bCreateMode = false;
     this.updateMasterData();
   }
-
   /*
     Iván Lynch 08/03/2020
     Output: Uncheck Pos and Neg checkbox if the other is active
@@ -179,17 +182,16 @@ export class CondicionComponent implements OnInit {
       checkNeg.click();
     }
   }
-
   /*
     Iván Lynch 08/03/2020
     Input: Object, Array
     Output: Return true if exists in the array or false if doesn't exist
   */
   public elemExist(obj, list) {
-    for (const row of list.length) {
-        if (row === obj) {
-            return true;
-        }
+    for (const row of list) {
+      if (row === obj) {
+        return true;
+      }
     }
     return false;
   }
@@ -230,7 +232,6 @@ export class CondicionComponent implements OnInit {
       }
     });
   }
-
   /*
     Iván Lynch 09/03/2020
     Input: null
@@ -238,24 +239,22 @@ export class CondicionComponent implements OnInit {
   */
   public onSubmitCondicao() {
     this.condicionService.postCondicao(this.condicion)
-    .then(elem => {
-      this.saveSucess = true;
-      this.message.sucMessage = 'Condição ' + this.condicion.sCodCondicion + ' - ' + this.condicion.sDesCondicion + ' salva com sucesso!';
-      setTimeout(() => {
-        this.saveSucess = false;
-        this.condicion = new Condicion();
-      }, 2000);
-    })
-    .catch((error: any) => {
-      if (error.error.Cod_Condicao[0] === 'condicao with this Cod Condicao already exists.') {
-        this.message.errMessage = 'O código de condição já existe';
-        this.saveError = true;
-      }
-      setTimeout(() => {
-        this.saveError = false;
-      }, 2000);
-    });
+      .then(elem => {
+        this.saveSucess = true;
+        this.message.sucMessage = 'Condição ' + this.condicion.sCodCondicion + ' - ' + this.condicion.sDesCondicion + ' salva com sucesso!';
+        setTimeout(() => {
+          this.saveSucess = false;
+          this.condicion = new Condicion();
+        }, 2000);
+      })
+      .catch((error: any) => {
+        if (error.error.Cod_Condicao[0] === 'condicao with this Cod Condicao already exists.') {
+          this.message.errMessage = 'O código de condição já existe';
+          this.saveError = true;
+        }
+        setTimeout(() => {
+          this.saveError = false;
+        }, 2000);
+      });
   }
-
-
 }
