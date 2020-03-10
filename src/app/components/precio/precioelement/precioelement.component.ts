@@ -19,7 +19,8 @@ interface IElement {
 
 export class PrecioElement implements OnInit{
   @Input() titulo: string;
-  elements: Array<IElement> = [];
+  @Input() idCamada: string;
+  condicaos: Array<IElement> = [];
 
   constructor (
     private _condicionService: CondicionService
@@ -28,8 +29,12 @@ export class PrecioElement implements OnInit{
   ngOnInit() {
     //this.getDOMElement();
     // traer via servicio los elementos segun tipo
-    this._condicionService.getCamadas()
-      .then(data => console.log(data))
+    this._condicionService.getCondicao()
+      .then(data => {
+        this.condicaos = data.filter(e => e.id_Camada == this.idCamada)
+        console.log({data})
+        console.log({condicaos: this.condicaos})
+      })
       .catch(err => alert(err))
 
   }
@@ -48,7 +53,7 @@ export class PrecioElement implements OnInit{
       mandatoria: true,
       estadistica: false
     }
-    this.elements.push(element)
+    this.condicaos.push(element)
   }
   
 

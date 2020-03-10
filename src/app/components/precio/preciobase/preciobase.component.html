@@ -19,7 +19,7 @@
     <!--Main view-->
     <div *ngIf="isShow">
         <div *ngFor="let element of elements" class="background">
-            <precio-element titulo="{{element.Nome_Camada}}"></precio-element>
+            <precio-element titulo="{{element.Nome_Camada}}" idCamada="{{element.id}}"></precio-element>
         </div>
     </div>
 
