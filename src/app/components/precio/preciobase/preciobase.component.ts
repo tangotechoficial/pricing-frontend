@@ -11,7 +11,7 @@ export class PrecioBaseComponent implements OnInit {
   public sCurrentUser = JSON.parse(localStorage.getItem("User"));
   public bBusiness: boolean;
 
-  elements = [];
+  camadas = [];
   isShow: boolean;
   existNegocios: any;
   existVentas: any;
@@ -23,7 +23,7 @@ export class PrecioBaseComponent implements OnInit {
   ngOnInit() {
     // traer por servicio cada condicion
     this._condicionService.getCamadas()
-    .then(data => this.elements = this.parseResponseCamada(data))
+    .then(data => this.camadas = this.parseResponseCamada(data))
     .catch(err => alert(err))
   }
 
@@ -31,7 +31,7 @@ export class PrecioBaseComponent implements OnInit {
     return data.filter(e => e.TIPO_BASE_VENDAS === "B")
   }
 
-  public goToSection() {
+  goToSection() {
     //this._router.navigate(['/pbase']);
     this.isShow = !this.isShow;
   }
