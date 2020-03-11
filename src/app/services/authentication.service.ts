@@ -34,7 +34,11 @@ export class AuthenticationService {
   }
 
   public get currentTokenValue() {
-    return this.currentTokenSubject.value.replace(/^"(.*)"$/, '$1')
+    let token = this.currentTokenSubject.value
+    if (token) {
+      token = token.replace(/^"(.*)"$/, '$1')
+    }
+    return token
   }
   public get currentUserValue() {
     return this.currentUserSubject.value
