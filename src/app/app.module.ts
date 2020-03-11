@@ -32,6 +32,7 @@ import { TechnicalMenuComponent } from './components/navegacion/technical-menu/t
 import { DadosMestreComponent } from './components/dados-mestre/dados-mestre.component'
 import { DiretrizEstrategicaComponent } from './components/diretriz-estrategica/diretriz-estrategica.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FilterModalComponent } from './components/filter-modal/filter-modal.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,13 +57,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     DiretrizEstrategicaComponent,
     PlanoCompraComponent,
     ExecucaoComponent,
-    SimuladorComponent
+    SimuladorComponent,
+    FilterModalComponent
   ],
   imports: [
     BrowserModule,
     routing,
     HttpClientModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
     FormsModule,
     Ng2SearchPipeModule,
     FontAwesomeModule,
