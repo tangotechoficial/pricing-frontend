@@ -1,30 +1,42 @@
 import { Component, OnInit } from '@angular/core';
+import { SaccesoService } from '../../../services/sacceso.service';
+import { Sequencia } from '../../../models/sequencia';
 
 @Component({
-  selector: 'preciobbase',
+  selector: 'app-preciobbase',
   templateUrl: './preciobbase.component.html',
-  styleUrls: ['../../precio/precio.component.scss', '../precioventa/precioventa.component.scss']
+  styleUrls: ['../../precio/precio.component.scss', '../precioventa/precioventa.component.scss'],
+  providers: [SaccesoService]
 })
 export class PreciobbaseComponent implements OnInit {
-
-  isShow:boolean = false; //default false
+  isShow = false;
   existNegocios: string;
   existVentas: string;
+  sequencias: Sequencia[] = [];
+  selectedSequencia: Sequencia;
 
-  constructor() { }
+  constructor(private readonly saccesoService: SaccesoService) {
+  }
 
   ngOnInit() {
+    this.saccesoService.getSequencias().subscribe((sequencias: Sequencia[]) => {
+      this.sequencias = sequencias;
+    });
   }
 
   public goToSection() {
    this.isShow = !this.isShow;
   }
 
-  parentListener($event){
-    this.existNegocios = $event
+  parentListener($event: string) {
+    this.existNegocios = $event;
   }
 
-  parentListenerTwo($event){
-    this.existVentas = $event
+  parentListenerTwo($event: string) {
+    this.existVentas = $event;
+  }
+
+  getSelectedSequencia(sequenciaValue: Sequencia): void {
+    this.selectedSequencia = sequenciaValue;
   }
 }
