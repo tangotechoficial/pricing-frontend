@@ -11,6 +11,8 @@ import { LoginComponent } from './components/login/login.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NavegacionComponent } from './components/navegacion/navegacion.component';
 import { PrecioBaseComponent } from './components/precio/preciobase/preciobase.component';
+import { PreciobbaseComponent } from './components/precio/preciobbase/preciobbase.component';
+import { PreciobvendasComponent } from './components/precio/preciobvendas/preciobvendas.component';
 import { PrecioVentaComponent } from './components/precio/precioventa/precioventa.component';
 import { PrecioSeleccion } from './components/precio/precioseleccion/precioseleccion.component';
 import { PrecioElement } from './components/precio/precioelement/precioelement.component';
@@ -41,6 +43,8 @@ import { FilterModalComponent } from './components/filter-modal/filter-modal.com
     LoginComponent,
     NavegacionComponent,
     PrecioBaseComponent,
+    PreciobbaseComponent,
+    PreciobvendasComponent,
     PrecioVentaComponent,
     PrecioSeleccion,
     PrecioElement,

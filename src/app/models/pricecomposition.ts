@@ -23,7 +23,7 @@ export class PriceComposition implements Deserializable {
   bonificado: number;
   complemento: number;
   precobase: number;
-  data_preco: date;
+  data_preco: Date;
   codestuni: any;
   preco_livro: number;
 

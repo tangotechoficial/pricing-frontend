@@ -13,7 +13,7 @@ export class FilterModalComponent implements OnInit {
 
   filterForm: FormGroup;
   filterModel: Filter = new Filter();
-
+  filterParentScreen: string = "";
   //some fake Data
   filterData = {
     line: ['abb', 'hbl', 'tei', 'mtc'],
@@ -48,6 +48,7 @@ export class FilterModalComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.filterForm = this.formBuilder.group({
       line: [null],
       category: [null],
@@ -64,7 +65,7 @@ export class FilterModalComponent implements OnInit {
   }
 
   submit() {
-    //pass filterModel to filterService and DataProviderService instance
+    //pass filterModel to filterService and a DataProviderService instance
     $('#modalFilter').modal('hide')
   }
 
