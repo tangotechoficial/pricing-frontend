@@ -3,6 +3,7 @@ import { HttpClient} from '@angular/common/http';
 import { Global } from './global';
 import { Condicion } from '../models/condicion';
 import { map } from 'rxjs/operators';
+import { ModelCondicao } from 'app/models/condicion.model';
 
 @Injectable()
 export class CondicionService {
@@ -64,6 +65,10 @@ export class CondicionService {
 
     public getCondicao(): Promise<any>{
         return this.http.get(this.url + '/condicao/', {headers: {"Content-type": "application/json"}}).toPromise();
+    }
+
+    public postCondicaoTest(modelCondicao: ModelCondicao): Promise<any>{
+        return this.http.post(this.url + '/condicao/', modelCondicao,{headers: {"Content-type": "application/json"}}).toPromise();
     }
 }
 

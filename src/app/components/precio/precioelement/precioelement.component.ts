@@ -1,6 +1,6 @@
 import { Component, Input, Renderer2, ElementRef, OnInit } from "@angular/core";
 import { CondicionService } from "../../../services/condicion.service";
-import { ModelCondicao } from "../../../models/condicion.model"
+import { ModelCondicao } from "../../../models/condicion.model";
 
 interface IElement {
   id: number;
@@ -10,7 +10,6 @@ interface IElement {
   mandatoria: boolean;
   estadistica: boolean;
 }
-
 
 @Component({
   selector: "precio-element",
@@ -39,7 +38,6 @@ export class PrecioElement implements OnInit {
       .catch(err => alert(err));
   }
 
-
   add() {
     console.log({ condicaos: this.condicaos });
     this.condicaos.push(new ModelCondicao({}));
@@ -48,19 +46,33 @@ export class PrecioElement implements OnInit {
 
   remove(id) {
     // remove only in array
-    this.condicaos = this.condicaos.filter(e => e.id != id)
+    this.condicaos = this.condicaos.filter(e => e.id != id);
 
     //remove from api
   }
 
   saveNew() {
-    const newCondicao = this.condicaos.filter(e => e.id == undefined)[0]
-    newCondicao.id_Camada = this.idCamada
-    console.log({newCondicao})
+    const newCondicao = this.condicaos.filter(e => e.id == undefined)[0];
+    newCondicao.id_Camada = this.idCamada;
+    newCondicao.MANDATORIA = newCondicao.MANDATORIA ? 1 : 0;
+    newCondicao.ESTATISTICA = newCondicao.ESTATISTICA ? 1 : 0;
+    
+    newCondicao.Escala_Qtde = 1;
+    newCondicao.POS_NEG = "P";
+    newCondicao.TIP_BASE_VENDAS = "B";
+    newCondicao.id_ChaveContas = 1
+    
+
+    console.log({ newCondicao });
+    this._condicionService
+      .postCondicaoTest(newCondicao)
+      .then(data => console.log({ data }))
+      .catch(err => alert(JSON.stringify(err)));
+    this.isEditNew = false;
   }
 
   cancel() {
-    this.condicaos = this.condicaos.filter(e => e.id != undefined)
+    this.condicaos = this.condicaos.filter(e => e.id != undefined);
     this.isEditNew = false;
   }
 }
