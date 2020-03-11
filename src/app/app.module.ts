@@ -1,9 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {HttpClientModule} from '@angular/common/http';
-import {FormsModule} from '@angular/forms';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
+import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 import { routing, appRoutingProviders } from './app.routing';
-
+import { JWTInterceptorHelper } from '@helpers/jwt.interceptor'
 import { AppComponent } from './app.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { ErrorComponent } from './components/error/error.component';
@@ -11,6 +11,8 @@ import { LoginComponent } from './components/login/login.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NavegacionComponent } from './components/navegacion/navegacion.component';
 import { PrecioBaseComponent } from './components/precio/preciobase/preciobase.component';
+import { PreciobbaseComponent } from './components/precio/preciobbase/preciobbase.component';
+import { PreciobvendasComponent } from './components/precio/preciobvendas/preciobvendas.component';
 import { PrecioVentaComponent } from './components/precio/precioventa/precioventa.component';
 import { PrecioSeleccion } from './components/precio/precioseleccion/precioseleccion.component';
 import { PrecioElement } from './components/precio/precioelement/precioelement.component';
@@ -32,6 +34,7 @@ import { TechnicalMenuComponent } from './components/navegacion/technical-menu/t
 import { DadosMestreComponent } from './components/dados-mestre/dados-mestre.component'
 import { DiretrizEstrategicaComponent } from './components/diretriz-estrategica/diretriz-estrategica.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FilterModalComponent } from './components/filter-modal/filter-modal.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,6 +43,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     LoginComponent,
     NavegacionComponent,
     PrecioBaseComponent,
+    PreciobbaseComponent,
+    PreciobvendasComponent,
     PrecioVentaComponent,
     PrecioSeleccion,
     PrecioElement,
@@ -53,22 +58,27 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BusinessMenuComponent,
     TechnicalMenuComponent,
     DadosMestreComponent,
-    DiretrizEstrategicaComponent, 
+    DiretrizEstrategicaComponent,
     PlanoCompraComponent,
     ExecucaoComponent,
-    SimuladorComponent
+    SimuladorComponent,
+    FilterModalComponent
   ],
   imports: [
     BrowserModule,
     routing,
     HttpClientModule,
+    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
     FormsModule,
     Ng2SearchPipeModule,
     FontAwesomeModule,
     AutocompleteLibModule ,
     BrowserAnimationsModule
   ],
-  providers: [appRoutingProviders],
+  providers: [
+    appRoutingProviders,
+    {provide: HTTP_INTERCEPTORS, useClass: JWTInterceptorHelper, multi: true},
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

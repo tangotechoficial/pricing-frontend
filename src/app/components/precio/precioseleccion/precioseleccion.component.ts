@@ -29,8 +29,4 @@ export class PrecioSeleccion{
     this.ventasOutput.emit(this.canalDeVentas)
   }
 
- /*  exampleMethodChild() {
-    this.exampleOutput.emit(this.exampleChild)
-    
-  } */
 }

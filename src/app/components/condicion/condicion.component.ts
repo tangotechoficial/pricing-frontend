@@ -89,7 +89,7 @@ export class CondicionComponent implements OnInit {
   }
 
   removeCheckbox(): void {
-    debugger;
+    //debuger ;
     let input = this.renderer.selectRootElement('.sacceso-opcion');
     this.renderer.setProperty(input, 'checked', false); 
     }

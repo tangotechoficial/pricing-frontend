@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from '@services/authentication.service';
+
 declare var $: any;
 
 @Component({
@@ -9,20 +11,33 @@ declare var $: any;
 
 export class MenuComponent implements OnInit {
   isShowMenu = false;
-  public sCurrentUser = JSON.parse(localStorage.getItem("User"));
+  private token: string;
+  public sCurrentUser: any;
   public bBusiness: boolean;
   public numTotNotif:number = 3;
   public modalView:boolean = false;
 
-  constructor() { }
+  constructor(private authenticationService: AuthenticationService) { }
+
+  private setUserInfo() {
+    try{
+       return JSON.parse(this.authenticationService.currentUserValue);
+    } catch( Error ) {
+        return {
+          username: 'Guest'
+        }
+    }
+  }
 
   ngOnInit() {
-    if(this.sCurrentUser.type !== "technical"){
-      this.bBusiness = true;
-    }else{
-      this.bBusiness = false;
-    }
-    console.log(this.sCurrentUser);
+    this.token = this.authenticationService.currentTokenValue;
+    this.sCurrentUser = this.setUserInfo()
+
+    // if(this.sCurrentUser.type !== "technical"){
+    //   this.bBusiness = true;
+    // }else{
+    //   this.bBusiness = false;
+    // }
     setTimeout(function(){
       $('.alert').hide();
     },
@@ -33,11 +48,6 @@ export class MenuComponent implements OnInit {
    this.modalView = true;
   }
 
-  parentListenerNavbar($event){
-    this.isShowMenu = $event
-  }
-
-  
 
 
 }

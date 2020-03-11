@@ -21,7 +21,7 @@ import {
   animations: [
   trigger('ngIfAnimation', [
     transition(':enter, :leave', [
-      query('@*', animateChild())
+      query('@*', animateChild(), { optional: true })
     ])
   ]),
 
@@ -74,8 +74,8 @@ export class NavegacionComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    const user = JSON.parse(localStorage.User);
-    this.userTechnical = user.type == "technical" ? true : false;
+    // const user = JSON.parse(localStorage.User);
+    // this.userTechnical = user.type == "technical" ? true : false;
     this._route.url.subscribe(url => {
       this.section = this.mapUrlToSection[location.pathname]
       if(location.pathname != "/login"){

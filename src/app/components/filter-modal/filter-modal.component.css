@@ -1,0 +1,18 @@
+.modal {
+  top: 60%;
+  transform: translateY(-50%);
+}
+.modal-dialog{
+  min-width: 50%
+}
+.modal-body select:nth-child(n+1) {
+  margin-right: 1em;
+}
+.modal-body .flex-row:nth-child(n+1) {
+  margin-top: 1em
+}
+
+.modal-dialog .modal-footer  {
+  align-items: flex-start;
+  justify-content:space-between;
+}

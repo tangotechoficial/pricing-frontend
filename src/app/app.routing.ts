@@ -2,6 +2,8 @@
 import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import {AuthenticationGuard} from '@helpers/auth.guard';
+
 /* Components */
 import { MenuComponent } from './components/menu/menu.component';
 import { LoginComponent } from './components/login/login.component';
@@ -21,20 +23,20 @@ import { SimuladorComponent } from './components/simulador/simulador.component';
 /* Routes Array */
 const appRoutes: Routes = [
     { path: 'login', component: LoginComponent},
-    { path: 'menu', component: MenuComponent},
+    { path: 'menu', component: MenuComponent,  canActivate: [AuthenticationGuard]},
 //    { path: 'pbaseseleccion', component: PbaseseleccionComponent},
-    { path: 'preciobase', component: PrecioBaseComponent},
-    { path: 'precioventa', component: PrecioVentaComponent},
-    { path: 'sacceso', component: SaccesoComponent},
-    { path: 'condicion', component: CondicionComponent},
-    { path: 'plano-compra', component: PlanoCompraComponent},
-    { path: 'simulador', component: SimuladorComponent},
-    { path: 'execucao', component: ExecucaoComponent},
+    { path: 'preciobase', component: PrecioBaseComponent,  canActivate: [AuthenticationGuard]},
+    { path: 'precioventa', component: PrecioVentaComponent,  canActivate: [AuthenticationGuard]},
+    { path: 'sacceso', component: SaccesoComponent,  canActivate: [AuthenticationGuard]},
+    { path: 'condicion', component: CondicionComponent,  canActivate: [AuthenticationGuard]},
+    { path: 'plano-compra', component: PlanoCompraComponent,  canActivate: [AuthenticationGuard]},
+    { path: 'simulador', component: SimuladorComponent,  canActivate: [AuthenticationGuard]},
+    { path: 'execucao', component: ExecucaoComponent,  canActivate: [AuthenticationGuard]},
 
-    { path: 'b-preciobase', component: PrecioBaseBusinessComponent},
-    { path: 'b-precioventa', component: PrecioVentaComponent},
-    { path: 'diretriz-estrategica', component: DiretrizEstrategicaComponent},
-    { path: 'dados-mestre', component: DadosMestreComponent},
+    { path: 'b-preciobase', component: PrecioBaseBusinessComponent,  canActivate: [AuthenticationGuard]},
+    { path: 'b-precioventa', component: PrecioVentaComponent,  canActivate: [AuthenticationGuard]},
+    { path: 'diretriz-estrategica', component: DiretrizEstrategicaComponent,  canActivate: [AuthenticationGuard]},
+    { path: 'dados-mestre', component: DadosMestreComponent,  canActivate: [AuthenticationGuard]},
     { path: '', redirectTo: '/login', pathMatch: 'full'},
     { path: '**', component: ErrorComponent},
 
