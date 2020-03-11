@@ -277,13 +277,13 @@
 
             <div class="dropdown col-12 mt-2">
               <button class="dropdownMenuButton col-12 btn btn-light dropdown-toggle text-left  px-12 py-12" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Selecione uma opção
+                {{ selectedSequencia ? selectedSequencia.Nome_Sequencia : 'Selecione uma opção' }}
               </button>
 
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <button class="dropdown-item martinsText" >Opt1</button>
-                  <button class="dropdown-item martinsText" >Opt2</button>
-                  <button class="dropdown-item martinsText" >Opt3</button>
+                  <button class="dropdown-item martinsText"
+                    *ngFor="let sequencia of sequencias" (click)="getSelectedSequencia(sequencia)">{{ sequencia.Nome_Sequencia }}
+                </button>
               </div>
             </div>
             <h4 class="subtitlab darkgr">Preencher condições</h4>
