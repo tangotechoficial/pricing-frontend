@@ -34,9 +34,9 @@
                 </div>
                 <div class="modal-body">
                     <span class="text-header">Código</span>
-                    <input id="input-modal-tipo" [(ngModel)]="_newSA.sSeqAcceso" class="form-control mb-2 mt-3" readonly/>
+                    <input id="input-modal-tipo" [(ngModel)]="newSA.sSeqAcceso" class="form-control mb-2 mt-3" readonly/>
                     <span class="text-header">Descrição</span>
-                    <input id="input-modal-descripcion" [(ngModel)]="_newSA.sDesAcceso" class="form-control mt-3"/>
+                    <input id="input-modal-descripcion" [(ngModel)]="newSA.sDesAcceso" class="form-control mt-3"/>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn bg-inverted font-weight-bold" data-dismiss="modal">Fechar</button>
@@ -49,10 +49,10 @@
         
         <div class="col-sm-2">
             <span class="text-header">Cód. Sequência</span>
-            <input id="SQSearch" class="form-control mt-3" [(ngModel)]="_sacceso.sSeqAcceso" [value]="selectedValue" readonly/>
-            <ul *ngIf="_sacceso.sSeqAcceso" class="filter-select list-group">
+            <input id="SQSearch" class="form-control mt-3" [(ngModel)]="sacceso.sSeqAcceso" [value]="selectedValue" readonly/>
+            <ul *ngIf="sacceso.sSeqAcceso" class="filter-select list-group">
                 <ng-container *ngIf="!existSelected">
-                    <li *ngFor="let val of sequenciasAccesoSearch | filterseqsearch: _sacceso.sSeqAcceso ;" (click)="onSelectedValue(val)"
+                    <li *ngFor="let val of sequenciasAccesoSearch | filterseqsearch: sacceso.sSeqAcceso ;" (click)="onSelectedValue(val)"
                         class="filter-select-list list-group-item">
                         {{val.sDesAcceso}}
                     </li>
@@ -61,7 +61,7 @@
         </div>
         <div class="col-sm-10">
             <span class="text-header">Descrição da Sequência de acesso</span>
-            <input class="form-control mt-3" [(ngModel)]="_sacceso.sDesAcceso" readonly />
+            <input class="form-control mt-3" [(ngModel)]="sacceso.sDesAcceso" readonly />
         </div>
     </div>
     <ul>
@@ -124,7 +124,7 @@
     </div>
     <div class="row justify-content-md-center">
         <div *ngIf="saveSuccess" class="col-md-8 alert alert-success" role="alert">
-            <strong>Sequência de acesso {{_saMessage.sSeqAcceso}} - {{_saMessage.sDesAcceso}} salva com sucesso!</strong>
+            <strong>Sequência de acesso {{saMessage.sSeqAcceso}} - {{saMessage.sDesAcceso}} salva com sucesso!</strong>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
