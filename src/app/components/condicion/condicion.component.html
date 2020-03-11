@@ -1,6 +1,9 @@
 <!-- Navigation Bar -->
 <navegacion [cMode]="bCreateMode"></navegacion>
+<popupmenu *ngIf="bpopMenu" ></popupmenu>
+
 <ngx-spinner></ngx-spinner>
+
 <!--Modal-->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -23,6 +26,7 @@
 </div>
 <!--Component Content -->
 <div class="container background col-9">
+
     <div class="container row col-12 p-4">
         <div class="col-sm-2">
             <span class="text-header">Cód. Condição</span>
@@ -32,7 +36,7 @@
             <span class="text-header">Descrição da condição</span>
             <input class="form-control mt-3" [(ngModel)]="condicion.sDesCondicion" value="Beneficio customizado" />
         </div>
-        <div *ngIf="bCreateMode" class="col-sm-1 mt-5 mb-2 d-flex justify-content-center align-items-center">
+        <div *ngIf="bCreateMode"  class="col-sm-1 mt-5 mb-2 d-flex justify-content-center align-items-center">
             <i class="fas fa-search disabledSearch"></i>
         </div>
         <div *ngIf="!bCreateMode" class="col-sm-1 mt-5 mb-2 d-flex justify-content-center align-items-center">
