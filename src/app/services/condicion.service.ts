@@ -63,12 +63,12 @@ export class CondicionService {
         return this.http.get(this.url + '/condicao/', {headers: {'Content-type': 'application/json'}}).toPromise();
     }
 
-    public getCondicao(): Promise<any>{
-        return this.http.get(this.url + '/condicao/', {headers: {"Content-type": "application/json"}}).toPromise();
+    public getCondicao(): Promise<any> {
+        return this.http.get(this.url + '/condicao/', {headers: {'Content-type': 'application/json'}}).toPromise();
     }
 
-    public postCondicaoTest(modelCondicao: ModelCondicao): Promise<any>{
-        return this.http.post(this.url + '/condicao/', modelCondicao,{headers: {"Content-type": "application/json"}}).toPromise();
+    public postCondicaoTest(modelCondicao: ModelCondicao): Promise<any> {
+        return this.http.post(this.url + '/condicao/', modelCondicao, {headers: {'Content-type': 'application/json'}}).toPromise();
     }
 }
 
