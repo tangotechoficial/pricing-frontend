@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '@services/authentication.service';
-import {jwt_decode } from 'jwt-decode';
+
 declare var $: any;
 
 @Component({

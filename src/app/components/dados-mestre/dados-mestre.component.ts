@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { DadosMestresComposicaoPrecoService} from '../../services/dados-mestres-composicao-preco.service'
 import { DadosMestreVerbaService} from '../../services/dados-mestre-verba.service'
+import { PriceComposition } from '@models/pricecomposition';
+import { MasterDataMoney } from '@models/masterdatamoney'
+declare var $: any;
 
 @Component({
   selector: 'app-dados-mestre',
@@ -26,7 +29,8 @@ export class DadosMestreComponent implements OnInit {
       data =>
         data.results.map(
           row => {
-            this.masterDataPriceComposition.push(row);
+
+            this.masterDataPriceComposition.push(new PriceComposition().deserialize(row));
           }
         ),
       err => console.log(err)
@@ -35,12 +39,15 @@ export class DadosMestreComponent implements OnInit {
       data =>
       data.results.map(
         row => {
-          //debuger 
-          this.masterDataMoney.push(row);
+          this.masterDataMoney.push(new MasterDataMoney().deserialize(row));
         }
       ),
       err => console.log(err)
     )
+  }
+
+  filter() {
+    $('#modalFilter').modal('show')
   }
 
 }
