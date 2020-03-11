@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2, ElementRef } from '@angular/core';
+import { Component, OnInit, Renderer2, ElementRef , Input } from '@angular/core';
 import { Condicion } from '../../models/condicion';
 import { MetadataService } from './../../services/metadata.service';
 import { CondicionService } from '../../services/condicion.service';
@@ -26,6 +26,7 @@ export class CondicionComponent implements OnInit {
   public saveSucess: boolean;
   public saveError: boolean;
   public message: any;
+  public bpopMenu:boolean;
 
   constructor(
     private condicionService: CondicionService,
@@ -34,6 +35,7 @@ export class CondicionComponent implements OnInit {
 
   ngOnInit() {
     /* Initialized message local object */
+    this.bpopMenu = false;
     this.message = {};
     this.message.sCodCondicion = 'CO001';
     this.message.sDesCondicion = 'Condicion 1';
@@ -41,6 +43,9 @@ export class CondicionComponent implements OnInit {
     this.selectedProperties = new Array<any>();
     this.condicion = new Condicion();
   }
+
+
+
   /*
     Iván Lynch 09/03/2020
     Output: Return master values
@@ -68,6 +73,7 @@ export class CondicionComponent implements OnInit {
   */
   public getCondicaoByCode() {
     this.spinner.show();
+    this.bpopMenu = true;
     let flag = false;
     this.condicionService.getCondicaoByCode()
       .then((result: any) => {

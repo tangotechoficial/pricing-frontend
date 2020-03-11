@@ -29,6 +29,7 @@ import { DadosMestreComponent } from './components/dados-mestre/dados-mestre.com
 import { DiretrizEstrategicaComponent } from './components/diretriz-estrategica/diretriz-estrategica.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { PopupmenuComponent } from './components/popupmenu/popupmenu.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     BusinessMenuComponent,
     TechnicalMenuComponent,
     DadosMestreComponent,
-    DiretrizEstrategicaComponent
+    DiretrizEstrategicaComponent,
+    PopupmenuComponent
   ],
   imports: [
     BrowserModule,
