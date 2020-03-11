@@ -1,5 +1,6 @@
 import { Component, Input, Renderer2, ElementRef, OnInit } from "@angular/core";
-import { CondicionService } from "../../../services/condicion.service"
+import { CondicionService } from "../../../services/condicion.service";
+import { ModelCondicao } from "../../../models/condicion.model"
 
 interface IElement {
   id: number;
@@ -10,56 +11,56 @@ interface IElement {
   estadistica: boolean;
 }
 
+
 @Component({
   selector: "precio-element",
   templateUrl: "./precioelement.component.html",
   styleUrls: ["../../precio/precio.component.scss"],
   providers: [CondicionService]
 })
-
-export class PrecioElement implements OnInit{
+export class PrecioElement implements OnInit {
   @Input() titulo: string;
   @Input() idCamada: string;
-  condicaos: Array<IElement> = [];
+  condicaos: Array<ModelCondicao> = [];
+  isEditNew = false;
 
-  constructor (
-    private _condicionService: CondicionService
-  ) {}
-  
+  constructor(private _condicionService: CondicionService) {}
+
   ngOnInit() {
     //this.getDOMElement();
     // traer via servicio los elementos segun tipo
-    this._condicionService.getCondicao()
+    this._condicionService
+      .getCondicao()
       .then(data => {
-        this.condicaos = data.filter(e => e.id_Camada == this.idCamada)
-        console.log({data})
-        console.log({condicaos: this.condicaos})
+        this.condicaos = data
+          .filter(e => e.id_Camada == this.idCamada)
+          .map(e => new ModelCondicao(e));
       })
-      .catch(err => alert(err))
-
+      .catch(err => alert(err));
   }
 
-  parseData(data) {
-    return 
-  }
 
   add() {
-    
-    const element = {
-      id: 0,
-      codCondicao: 0,
-      desCondicao: "desc",
-      typeValue: "A",
-      mandatoria: true,
-      estadistica: false
-    }
-    this.condicaos.push(element)
+    console.log({ condicaos: this.condicaos });
+    this.condicaos.push(new ModelCondicao({}));
+    this.isEditNew = true;
   }
-  
 
-  getDOMElement(): void {
-    /* let el = this.renderer.selectRootElement('.custom-control-input');
-    console.log(el);
-    this.renderer.setAttribute(el, 'alt', 'pepe'); */
+  remove(id) {
+    // remove only in array
+    this.condicaos = this.condicaos.filter(e => e.id != id)
+
+    //remove from api
+  }
+
+  saveNew() {
+    const newCondicao = this.condicaos.filter(e => e.id == undefined)[0]
+    newCondicao.id_Camada = this.idCamada
+    console.log({newCondicao})
+  }
+
+  cancel() {
+    this.condicaos = this.condicaos.filter(e => e.id != undefined)
+    this.isEditNew = false;
   }
 }
