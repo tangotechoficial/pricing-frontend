@@ -1,25 +1,4 @@
-<!-- Navigation Bar -->
-<navegacion></navegacion>
-
-
-<div class="container menu-background" id="precio-container">
-
-<!-- Select-->
-    <div *ngIf="!isShow" >
-        <precio-seleccion (negociosOutput)="parentListener($event)"
-        (ventasOutput)="parentListenerTwo($event)"></precio-seleccion>
-        <div class="d-flex justify-content-center background">
-            <div class="col-2 form-group">
-                <input type="submit" (click)="goToSection()" [disabled]="!existVentas || !existNegocios" class="btn bg-standard btn-block" value="Entrar">
-            </div>
-        </div>
-    </div>
-
-<!--Main view-->
-
-  <!-- BUSINESS USER -->
-
-<div class="precioWrapper" *ngIf="isShow" >
+<div class="precioWrapper">
 
     <div class="row">
         <div class=" col-xs-12 col-lg-12 ">
@@ -277,13 +256,13 @@
 
             <div class="dropdown col-12 mt-2">
               <button class="dropdownMenuButton col-12 btn btn-light dropdown-toggle text-left  px-12 py-12" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Selecione uma opção
+                {{ selectedSequencia ? selectedSequencia.Nome_Sequencia : 'Selecione uma opção' }}
               </button>
 
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <button class="dropdown-item martinsText" >Opt1</button>
-                  <button class="dropdown-item martinsText" >Opt2</button>
-                  <button class="dropdown-item martinsText" >Opt3</button>
+                  <button class="dropdown-item martinsText"
+                    *ngFor="let sequencia of sequencias" (click)="getSelectedSequencia(sequencia)">{{ sequencia.Nome_Sequencia }}
+                </button>
               </div>
             </div>
             <h4 class="subtitlab darkgr">Preencher condições</h4>
@@ -302,19 +281,5 @@
     </div>
 
 </div>
-
-  <!-- TECHNICAL USER -->
-<!--     <div *ngIf="isShow">
-
-        <div class="background">
-            <precio-element titulo="PRECO BASE"></precio-element>
-            <precio-element titulo="REGULATORIO"></precio-element>
-            <precio-element titulo="FINANCEIRO"></precio-element>
-            <precio-element titulo="DESCONTO"></precio-element>
-            <precio-element titulo="DESCONTO TRADE"></precio-element>
-        </div>
-    </div>
- -->
-
 
 </div>

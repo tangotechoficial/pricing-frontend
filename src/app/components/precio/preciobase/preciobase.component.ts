@@ -8,11 +8,13 @@ import { CondicionService } from "../../../services/condicion.service"
   providers: [CondicionService]
 })
 export class PrecioBaseComponent implements OnInit {
-  isShow = false;
-  existNegocios: string;
-  existVentas: string;
+  public sCurrentUser = JSON.parse(localStorage.getItem("User"));
+  public bBusiness: boolean;
 
   elements = [];
+  isShow: boolean;
+  existNegocios: any;
+  existVentas: any;
   
   constructor(
     private _condicionService: CondicionService

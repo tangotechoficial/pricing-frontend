@@ -3,28 +3,20 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'precioventa',
   templateUrl: './precioventa.component.html',
-  styleUrls: ['../../precio/precio.component.scss', '../precioventa/precioventa.component.scss']
+  styleUrls: ['../../precio/precio.component.scss']
 })
 export class PrecioVentaComponent implements OnInit {
-  isShow:boolean = false; //default false
-  existNegocios: string;
-  existVentas: string;
+  public sCurrentUser = JSON.parse(localStorage.getItem("User"));
+  public bBusiness: boolean;
 
   constructor() { }
 
   ngOnInit() {
+    if(this.sCurrentUser.type !== "technical"){
+      this.bBusiness = true;
+    }else{
+      this.bBusiness = false;
+    }
   }
-
-  public goToSection() {
-   this.isShow = !this.isShow;
-  }
-
-  parentListener($event){
-    this.existNegocios = $event
-  }
-
-  parentListenerTwo($event){
-    this.existVentas = $event
-  }
-
+  
 }

@@ -12,8 +12,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NavegacionComponent } from './components/navegacion/navegacion.component';
 import { PrecioBaseComponent } from './components/precio/preciobase/preciobase.component';
 import { PrecioVentaComponent } from './components/precio/precioventa/precioventa.component';
-import { PrecioSeleccion } from './components/precio/precioseleccion/precioseleccion.component';
-import { PrecioElement } from './components/precio/precioelement/precioelement.component';
+import { PrecioTechnical } from './components/precio/precio-technical/precio-technical.component';
+import { PrecioBusiness } from './components/precio/precio-business/precio-business.component';
 import { SaccesoComponent } from './components/sacceso/sacceso.component';
 import { CondicionComponent } from './components/condicion/condicion.component';
 
@@ -28,9 +28,8 @@ import { TechnicalMenuComponent } from './components/navegacion/technical-menu/t
 import { DadosMestreComponent } from './components/dados-mestre/dados-mestre.component'
 import { DiretrizEstrategicaComponent } from './components/diretriz-estrategica/diretriz-estrategica.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { PreciobbaseComponent } from './components/precio/preciobbase/preciobbase.component';
-import { PreciobvendasComponent } from './components/precio/preciobvendas/preciobvendas.component';
-import { NgxSpinnerModule } from "ngx-spinner";
+import { NgxSpinnerModule } from 'ngx-spinner';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,8 +39,8 @@ import { NgxSpinnerModule } from "ngx-spinner";
     NavegacionComponent,
     PrecioBaseComponent,
     PrecioVentaComponent,
-    PrecioSeleccion,
-    PrecioElement,
+    PrecioTechnical,
+    PrecioBusiness,
     SaccesoComponent,
     CondicionComponent,
     AutocompleteInputComponent,
@@ -51,11 +50,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
     BusinessMenuComponent,
     TechnicalMenuComponent,
     DadosMestreComponent,
-    DiretrizEstrategicaComponent,
-    PreciobbaseComponent,
-    PreciobvendasComponent,
-    PreciobbaseComponent,
-    PreciobvendasComponent
+    DiretrizEstrategicaComponent
   ],
   imports: [
     BrowserModule,

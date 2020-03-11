@@ -13,8 +13,6 @@ import { CondicionComponent } from './components/condicion/condicion.component';
 
 import { DadosMestreComponent } from './components/dados-mestre/dados-mestre.component';
 import { DiretrizEstrategicaComponent } from './components/diretriz-estrategica/diretriz-estrategica.component';
-import { PreciobbaseComponent } from './components/precio/preciobbase/preciobbase.component';
-import { PreciobvendasComponent } from './components/precio/preciobvendas/preciobvendas.component';
 /* Routes Array */
 const appRoutes: Routes = [
     { path: 'login', component: LoginComponent},
@@ -24,8 +22,6 @@ const appRoutes: Routes = [
     { path: 'precioventa', component: PrecioVentaComponent},
     { path: 'sacceso', component: SaccesoComponent},
     { path: 'condicion', component: CondicionComponent, runGuardsAndResolvers: 'always'},
-    { path: 'b-preciobase', component: PreciobbaseComponent},
-    { path: 'b-precioventa', component: PreciobvendasComponent},
     { path: 'diretriz-estrategica', component: DiretrizEstrategicaComponent},
     { path: 'dados-mestre', component: DadosMestreComponent},
     { path: '', redirectTo: '/login', pathMatch: 'full'},
