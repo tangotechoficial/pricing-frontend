@@ -22,7 +22,7 @@ export class SaccesoService {
 
     postSaccesoComp(seq: Sacceso): Promise<any> {
          return this.http.post(this.url + '/sequencia/', { Cod_Sequencia: seq.sSeqAcceso, Nome_Sequencia: seq.sDesAcceso}, this.header)
-         .pipe(
+            .pipe(
              map((elem: any) =>
                 seq._parents.forEach(campo => {
                     this.postSeqAux(elem.id, campo.sId).subscribe();

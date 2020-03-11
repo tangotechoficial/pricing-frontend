@@ -1,4 +1,5 @@
-import { Component, Input, Renderer2, ElementRef } from "@angular/core";
+import { Component, Input, Renderer2, ElementRef, OnInit } from "@angular/core";
+import { CondicionService } from "../../../services/condicion.service"
 
 interface IElement {
   id: number;
@@ -12,18 +13,34 @@ interface IElement {
 @Component({
   selector: "precio-element",
   templateUrl: "./precioelement.component.html",
-  styleUrls: ["../../precio/precio.component.scss"]
+  styleUrls: ["../../precio/precio.component.scss"],
+  providers: [CondicionService]
 })
 
-export class PrecioElement {
+export class PrecioElement implements OnInit{
   @Input() titulo: string;
-  elements: Array<IElement> = [];
+  @Input() idCamada: string;
+  condicaos: Array<IElement> = [];
 
-
+  constructor (
+    private _condicionService: CondicionService
+  ) {}
+  
   ngOnInit() {
     //this.getDOMElement();
     // traer via servicio los elementos segun tipo
+    this._condicionService.getCondicao()
+      .then(data => {
+        this.condicaos = data.filter(e => e.id_Camada == this.idCamada)
+        console.log({data})
+        console.log({condicaos: this.condicaos})
+      })
+      .catch(err => alert(err))
 
+  }
+
+  parseData(data) {
+    return 
   }
 
   add() {
@@ -36,7 +53,7 @@ export class PrecioElement {
       mandatoria: true,
       estadistica: false
     }
-    this.elements.push(element)
+    this.condicaos.push(element)
   }
   
 

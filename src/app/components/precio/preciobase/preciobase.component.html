@@ -3,28 +3,23 @@
 
 <!--Component Content -->
 <div class="container menu-background">
-<!-- Select-->
+    <!-- Select-->
     <div *ngIf="!isShow">
         <precio-seleccion (negociosOutput)="parentListener($event)"
-        (ventasOutput)="parentListenerTwo($event)"></precio-seleccion>
+            (ventasOutput)="parentListenerTwo($event)"></precio-seleccion>
         <div class="d-flex justify-content-center background">
             <div class="col-2 form-group">
-                <input type="submit" (click)="goToSection()" [disabled]="!existVentas || !existNegocios" class="btn bg-standard btn-block font-weight-bold" value="Entrar">
+                <input type="submit" (click)="goToSection()"
+                    [disabled]="!existVentas || !existNegocios" class="btn
+                    bg-standard btn-block font-weight-bold" value="Entrar">
             </div>
         </div>
     </div>
 
-<!--Main view-->
+    <!--Main view-->
     <div *ngIf="isShow">
-        <div class="background">
-                <!-- <div *ngFor="let element of elements" titulo="CMV">
-                        <precio-element titulo="{{element.title}}" [element.]=""></precio-element>  
-                </div> -->
-            <precio-element titulo="CMV"></precio-element>
-            <precio-element titulo="REGULATORIO"></precio-element>
-            <precio-element titulo="OPERACIONAL"></precio-element>
-            <precio-element titulo="VERBA"></precio-element>
-            <precio-element titulo="MARGEM"></precio-element>
+        <div *ngFor="let element of elements" class="background">
+            <precio-element titulo="{{element.Nome_Camada}}" idCamada="{{element.id}}"></precio-element>
         </div>
     </div>
 
