@@ -38,20 +38,13 @@
     <div class="container row col-12 p-4">
         <div class="col-sm-2">
             <span class="text-header">Chave de contas</span>
-            <input *ngIf="condicion.oChaveContas" [(ngModel)]="condicion.oChaveContas.Cod_ChaveContas" class="form-control mt-3" placeholder="Chave"/>
-            <input *ngIf="!condicion.oChaveContas" class="form-control mt-3" placeholder="Chave"/>
+            <input *ngIf="condicion.oChaveContas" [(ngModel)]="condicion.oChaveContas.Cod_ChaveContas" class="form-control mt-3" placeholder="Chave" readonly/>
+            <input *ngIf="!condicion.oChaveContas" class="form-control mt-3" readonly/>
         </div>
         <div class="col-sm-3 p-0">
             <span class="text-header">Descrição da chave de contas</span>
-            <div class="dropdown mt-3">
-                <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {{this.condicion.oChaveContas ? this.condicion.oChaveContas.Desc_ChaveContas : this.sSeleccionPlaceholder}}
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a *ngFor="let cc of chaveContas ; let id = index" class="dropdown-item" (click)="getSelectedChaveContas(cc)">{{cc.Desc_ChaveContas}}</a>
-                </div>
-            </div>
+            <input *ngIf="condicion.oChaveContas" [(ngModel)]="condicion.oChaveContas.Desc_ChaveContas" class="form-control mt-3" readonly/>
+            <input *ngIf="!condicion.oChaveContas" class="form-control mt-3" readonly/>
         </div>
         <div class="col-sm-1 mt-5 mb-2 d-flex justify-content-center align-items-center">
             <i (click)="onSearchChaveContas()" class="fas fa-search"></i>
