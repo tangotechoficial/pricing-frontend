@@ -7,11 +7,8 @@ import { Component, OnInit , Input } from '@angular/core';
 })
 export class PopupmenuComponent implements OnInit {
   @Input() dataList: Array<any>;
-
-  constructor() { }
-
+  constructor() {}
   ngOnInit() {
-    console.log(this.dataList)
   }
 
 

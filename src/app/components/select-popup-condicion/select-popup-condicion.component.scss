@@ -1,0 +1,47 @@
+@import '../../../assets/styles/global.scss';
+
+$selectGrey:#F2F2F2;
+
+.popupmenu{
+	position: absolute;
+	z-index: 100;
+	background-color: white;
+	top:50%;
+	left:50%;
+	transform: translate(-50%,-50%);
+	height: 500px;
+	width: 400px;
+	box-shadow: 0px 0px 6px 0px rgba(9, 9, 10, 0.3);
+	border-radius: 10px;
+	.pheader{
+		height: 45px;
+		background-color: $selectGrey ;
+		width: 100%;
+	}
+	.pbody{
+		width: 100%;
+		.bodyBord{
+			border-radius:10px;
+			border:1px solid darken($selectGrey,30%);
+			height: 310px;
+			overflow-y: scroll;
+
+		}
+		.table{
+			border:1px solid $selectGrey !important;
+			border-radius: 10px;			
+		}
+
+		td{
+			padding:5px !important;
+		}
+		.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+		  background-color: $martinsBlue;
+		  color:white;
+		  transition: 0.4s;
+		  cursor: pointer;
+		}
+
+	}
+}
+

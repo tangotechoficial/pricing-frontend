@@ -20,7 +20,7 @@ export class CondicionComponent implements OnInit {
   public chaveContas: Array<any>;
   public tipoValor: Array<any>;
   public camadas: Array<any>;
-  public listaCondicionesComp: Array<any>;
+  public condicaos: Array<any>;
   public selectedProperties: Array<any>;
   public bCreateMode: boolean;
   public sSeleccionPlaceholder = 'Selecione uma opção';
@@ -28,6 +28,7 @@ export class CondicionComponent implements OnInit {
   public saveError: boolean;
   public message: any;
   public bpopMenu = false;
+  public bSelectCondicao = false;
 
   constructor(
     private condicionService: CondicionService,
@@ -50,10 +51,39 @@ export class CondicionComponent implements OnInit {
     this.message.sDesCondicion = 'Condicion 1';
     this.selectedProperties = new Array<any>();
     this.condicion = new Condicion();
+    this.condicaos = new Array<any>();
+
   }
 
   public onSearchChaveContas() {
     this.bpopMenu = true;
+  }
+
+  /*
+    Iván Lynch 12/03/2020
+    Output: Open condicao seleccion popup
+  */
+  public onSearchCondicao() {
+    this.bSelectCondicao = true;
+  }
+
+  /*
+    Iván Lynch 12/03/2020
+    Input: Boolean from child component
+    Output: Close condicao popup
+  */
+  public onCloseCondicaoPopUp(val: any) {
+    this.bSelectCondicao = val;
+  }
+
+  /*
+    Iván Lynch 12/03/2020
+    Input: Boolean from child component
+    Output: Selected condicao object
+  */
+  public getSelectedCondicao(val: any) {
+    this.condicion = val;
+    this.updateCondicaoByCode();
   }
 
   /*
@@ -70,7 +100,8 @@ export class CondicionComponent implements OnInit {
       this.condicionService.getSequenciasAcesso().then(result => result.map(sa => this.sequencias.push(sa))),
       this.condicionService.getChaveContas().then(result => result.map(cc => this.chaveContas.push(cc))),
       this.condicionService.getTiposValor().then(result => result.map(tv => this.tipoValor.push(tv))),
-      this.condicionService.getCamadas().then(result => result.map(ca => this.camadas.push(ca)))
+      this.condicionService.getCamadas().then(result => result.map(ca => this.camadas.push(ca))),
+      this.condicionService.getCondicaos().then(result => result.map(co => this.condicaos.push(co)))
     ]).then(() => {
       this.spinner.hide();
     });
@@ -79,9 +110,9 @@ export class CondicionComponent implements OnInit {
     Iván Lynch 09/03/2020
     Output: Return selected condicao
   */
-  public getCondicaoByCode() {
+  public updateCondicaoByCode() {
+    this.bSelectCondicao = false;
     this.spinner.show();
-    this.bpopMenu = true;
     let flag = false;
     this.condicionService.getCondicaoByCode()
       .then((result: any) => {
@@ -114,7 +145,6 @@ export class CondicionComponent implements OnInit {
             this.condicion.TIP_BASE_VENDAS = this.condicion.oCamada.TIPO_BASE_VENDAS;
             this.condicionService.getSequenciasByCondicao()
               .then(elems => {
-                // Filter elements by CONDICAO ID
                 elems = elems.filter((obj: any) => {
                   return obj.id_Condicao === cond.id;
                 });
@@ -123,11 +153,11 @@ export class CondicionComponent implements OnInit {
                     if (seq.id_Sequencia === bseq.id) {
                         const elem = document.getElementById(index.toString());
                         elem.click();
+                        this.spinner.hide();
                     }
                   });
                 });
               });
-            this.spinner.hide();
           }
         });
         if (!flag) {

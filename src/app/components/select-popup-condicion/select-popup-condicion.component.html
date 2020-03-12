@@ -1,0 +1,42 @@
+<div class="popupmenu container">
+	<div class="row">
+		<div class="col-xs-12 pheader px-4 py-2 ">
+			<button type="button" class="close" (click)="onClosePopup()" aria-label="Close">
+			  <span aria-hidden="true">&times;</span>
+			</button>
+			<h5 class="title text-header mb-0">Buscar Condicao</h5>
+		</div>
+
+			<div class="pbody col-xs-12 p-4">
+				<div class="bodyBord p-2">
+
+					<div class="myTable table-responsive table-hover">
+						<table class="table table-striped ">
+						  <thead>
+						    <tr>
+						      <th class="text-center" scope="col">Codigo</th>
+						      <th scope="col">Descricao</th>
+						    </tr>
+						  </thead>
+
+						  <tbody>
+ 						    <tr *ngFor="let r of dataList" (click)="getSelectedCondicao(r)">
+						      <td class="text-center font-weight-bold">{{r.Cod_Condicao}}</td>
+						      <td>{{r.Desc_Condicao}}</td>
+						    </tr>
+						  </tbody>
+						</table>
+					</div>
+				</div>
+		</div>
+
+		<div class="row col-12 p-3 justify-content-md-center">
+		    <div class="col-md-8">
+		        <div class="form-group">
+		            <input type="submit" class="btn bg-standard btn-block font-weight-bold" (click)="onSelectObject()" value="Confirmar">
+		        </div>
+		    </div>
+		</div>
+
+	</div>
+</div>
