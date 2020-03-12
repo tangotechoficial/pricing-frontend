@@ -1,8 +1,122 @@
-.temporary {
-  margin-top: 100px;
+
+@import 'assets/styles/global.scss';
+@import 'assets/styles/condicion-sacceso.scss';
+
+
+.main-container {
+  height: 190vh;
   display: flex;
-  justify-content: center;
-  h1 {
-    font-size: 100px;
-  }
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.chart-placeholder {
+  min-height: 30vh
+}
+.shadowed {
+  border-radius: 10px 10px 10px 10px;
+  border: 0px solid #000000;
+  box-shadow: 0px 0px 16px -1px rgba(0,0,0,0.20);
+  position: relative;
+}
+.badge-secondary {
+  color: white
+}
+.btn-filter-color {
+    color: white;
+}
+
+.badges {
+  width: 100%;
+  align-items: flex-start;
+  justify-content:space-between;
+}
+.row.with-overflow {
+  overflow-x: visible;
+}
+.workflow-table tr.approved td {
+  color: #4270C1;
+}
+
+.workflow-table tr.disapproved td {
+  color: #f86060;
+}
+.workflow-table tr td:first-child {
+  border: 0
+}
+
+.workflow-table tr.approved td:first-child:after{
+  background-color: #4270C1;
+  content: "";
+  position: absolute;
+  left: calc(12.2% - 2px);
+  width: 4px;
+  height: 15%;
+  z-index: 1;
+}
+
+.workflow-table tbody tr.approved td:first-child:before {
+   position:absolute;
+   left: calc(11.8% - 1px);
+   content: '';
+   display: inline-block;
+   width: 15px;
+   height: 15px;
+   -moz-border-radius: 7.5px;
+   -webkit-border-radius: 7.5px;
+   border-radius: 7.5px;
+   background-color: #4270C1;
+}
+
+.workflow-table tbody tr.disapproved td:first-child:before {
+   position:absolute;
+   content: '';
+   left: calc(11.8% - 1px);
+   display: inline-block;
+   width: 15px;
+   height: 15px;
+   -moz-border-radius: 7.5px;
+   -webkit-border-radius: 7.5px;
+   border-radius: 7.5px;
+   background-color: #f86060;
+
+}
+.workflow-table tr.disapproved td:first-child:after{
+  background-color: #f86060;
+  content: "";
+  position: absolute;
+  left: calc(12.2% - 2px);
+  width: 4px;
+  height: 20%;
+}
+
+.workflow-table tbody tr.waiting td:first-child:before {
+   position:absolute;
+   content: '';
+   left: calc(11.8% - 1px);
+   display: inline-block;
+   width: 15px;
+   height: 15px;
+   -moz-border-radius: 7.5px;
+   -webkit-border-radius: 7.5px;
+   border-radius: 7.5px;
+   background-color: #9FA2AB;
+
+}
+.workflow-table tr.waiting td:first-child:after{
+  background-color: #9FA2AB;
+  content: "";
+  position: absolute;
+  left: calc(12.2% - 2px);
+  width: 4px;
+  height: 20%;
+}
+
+.workflow-table tr.waiting:last-child td:first-child:after{
+  background-color: #9FA2AB;
+  content: "";
+  position: absolute;
+  left: calc(12.2% - 1px);
+  width: 4px;
+  height: 1%;
 }

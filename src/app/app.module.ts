@@ -3,7 +3,8 @@ import { NgModule } from '@angular/core';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 import { routing, appRoutingProviders } from './app.routing';
-import { JWTInterceptorHelper } from '@helpers/jwt.interceptor'
+import { JWTInterceptorHelper } from '@helpers/jwt.interceptor';
+import { FakeDataProviderInterceptor } from '@helpers/fake.dataprovider.interceptor';
 import { AppComponent } from './app.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { ErrorComponent } from './components/error/error.component';
@@ -35,6 +36,8 @@ import { DadosMestreComponent } from './components/dados-mestre/dados-mestre.com
 import { DiretrizEstrategicaComponent } from './components/diretriz-estrategica/diretriz-estrategica.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FilterModalComponent } from './components/filter-modal/filter-modal.component';
+import { TabbedChartsComponent } from './components/plano-compra/tabbed-charts/tabbed-charts.component';
+import { SellingCompositionChartsComponent } from './components/plano-compra/selling-composition-charts/selling-composition-charts.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -62,7 +65,9 @@ import { FilterModalComponent } from './components/filter-modal/filter-modal.com
     PlanoCompraComponent,
     ExecucaoComponent,
     SimuladorComponent,
-    FilterModalComponent
+    FilterModalComponent,
+    TabbedChartsComponent,
+    SellingCompositionChartsComponent
   ],
   imports: [
     BrowserModule,
@@ -76,8 +81,10 @@ import { FilterModalComponent } from './components/filter-modal/filter-modal.com
     BrowserAnimationsModule
   ],
   providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: FakeDataProviderInterceptor, multi: true},
     appRoutingProviders,
-    {provide: HTTP_INTERCEPTORS, useClass: JWTInterceptorHelper, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: JWTInterceptorHelper, multi: true}
+
   ],
   bootstrap: [AppComponent]
 })
