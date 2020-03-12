@@ -2,6 +2,13 @@
 
 $selectGrey:#F2F2F2;
 
+.mySelect{
+    background-color: $martinsBlue !important;
+    td{
+        color:white !important;
+    }    
+}
+
 .popupmenu{
 	position: absolute;
 	z-index: 100;

@@ -1,5 +1,7 @@
 import { Component, OnInit , Input, Output, EventEmitter } from '@angular/core';
 
+declare var $: any;
+
 @Component({
   // tslint:disable-next-line: component-selector
   selector: 'popupmenu',
@@ -25,9 +27,15 @@ export class PopupmenuComponent implements OnInit {
     this.closePopup.emit(false);
   }
 
-  getSelectedChaveContas(val: any) {
-    this.currenObject = val;
+  getSelectedChaveContas(val: any , i:number) {
+    this.currenObject = val; 
+    this.selectItemColor(i);   
   }
 
+  selectItemColor(item:number){
+    $("tr").removeClass("mySelect")
+    $("tr").eq(item + 1).addClass("mySelect")
+   }
+   
 
 }
