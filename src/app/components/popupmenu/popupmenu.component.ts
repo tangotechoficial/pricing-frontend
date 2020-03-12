@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , Input } from '@angular/core';
 
 @Component({
   selector: 'popupmenu',
@@ -6,13 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./popupmenu.component.scss']
 })
 export class PopupmenuComponent implements OnInit {
-public references:Array<any>;
+  @Input() dataList: Array<any>;
 
   constructor() { }
 
   ngOnInit() {
-  	this.references = [{"cond": "TCMV" , "des":"CMV"} , {"cond": "TICM" , "des":"ICMS"} , {"cond": "TBCN" , "des":"Beneficio customizabel"}]
-  	console.log(this.references)
+    console.log("pop up service")
+
   }
 
 

@@ -14,6 +14,7 @@ declare var $: any;
 })
 export class CondicionComponent implements OnInit {
 
+  public dbCondition:Array<any>
   public condicion: Condicion;
   public sequencias: Array<any>;
   public chaveContas: Array<any>;
@@ -34,6 +35,28 @@ export class CondicionComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
+    console.log("arrancando db condicion");
+    this.dbCondition = new Array<any>();
+    this.bpopMenu = false;
+
+    // check function - error in binding result with dbCondition
+    this.condicionService.getCondicaoByCode().then(function(result){
+      console.log(result);
+      result.map(function(cond){
+        this.dbCondition.push(cond);
+       })
+    })
+
+    // Import database hardcode
+    this.dbCondition = [{id: 1, Cod_Condicao: "COND1", Desc_Condicao: "Condicion", Escala_Qtde: 1, POS_NEG: "P"},
+    {id: 2, Cod_Condicao: "COND2", Desc_Condicao: "Condicion 2", Escala_Qtde: 1, POS_NEG: "P"},
+    {id: 3, Cod_Condicao: "COND3", Desc_Condicao: "Condicion 3", Escala_Qtde: 1, POS_NEG: "P"},
+    {id: 4, Cod_Condicao: "Con2", Desc_Condicao: "Probando", Escala_Qtde: 1, POS_NEG: "P"},
+    {id: 5, Cod_Condicao: "COD1", Desc_Condicao: "Descripcion", Escala_Qtde: 1, POS_NEG: "P"}]
+
+
+
     /* Initialized message local object */
     this.bpopMenu = false;
     this.message = {};
