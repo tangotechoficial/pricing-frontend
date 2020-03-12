@@ -29,6 +29,55 @@ export class PrecioBaseComponent implements OnInit {
       this.loading = false
     })
     .catch(err => alert(err))
+
+    
+    const camadas =  this._condicionService.getCamadas()
+    const camadaEsquemas = this._condicionService.getCamadaEsquema();
+    const condicaoCamadas = this._condicionService.getCondicaoCamada();
+    const condicaos = this._condicionService.getCondicaoByCode();
+    const promisesFetch = [camadas, camadaEsquemas, condicaoCamadas, condicaos];
+
+    Promise.all(promisesFetch).then(
+      ([camadas, camadaEsquemas, condicaoCamadas, condicaos]) => {
+        camadas = camadas.filter(e => e.TIPO_BASE_VENDAS === "B")
+        const camadasFullData = camadas.map(camada => {
+          let condicaoCamadasFilter = camadaEsquemas.map(camadaEsquema => {
+            return condicaoCamadas.filter(
+              condCamada => condCamada.id == camadaEsquema.id_Condicao_Camada
+            )[0];
+          });
+  
+          let condicaosFilter = condicaoCamadasFilter.map(condCamada => {
+            return condicaos.filter(cond => cond.id == condCamada.id_Condicao)[0];
+          });
+  
+          let condicaosByCamadaFilter = condicaosFilter.filter(cond => cond.id_Camada == camada.id)
+  
+          let condicaosAllow = condicaoCamadas.filter(condCam => condCam.id_Camada == camada.id).map(condCamada => {
+            return condicaos.filter(cond => cond.id == condCamada.id_Condicao)[0];
+          })
+  
+          
+          return {
+            camada,
+            condicaosAllow,
+            condicaos: condicaosByCamadaFilter
+          }
+        })
+
+        this.camadas = camadasFullData
+        // Mock data CAMADA_ESQUEMA
+        // camadaEsquemas = [{
+        //   id: 1,
+        //   id_Condicao_Camada: 1,
+        //   id_Esquema: 1
+        // }]
+
+
+
+        
+      }
+    );
   }
 
   parseResponseCamada(data) {
