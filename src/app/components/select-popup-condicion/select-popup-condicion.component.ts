@@ -29,8 +29,15 @@ export class SelectPopupCondicionComponent implements OnInit {
     this.closePopup.emit(false);
   }
 
-  getSelectedCondicao(val: any) {
+  getSelectedCondicao(val: any , i:any) {
     this.currenObject.sCodCondicion = val.Cod_Condicao;
+    this.selectItemColor(i);
   }
+
+  selectItemColor(item:number){
+    $("tr").css({"background-color": "white"})
+    $("tr").eq(item + 1).css({"background-color": "cornflowerblue", "transition": "1s"})
+    $("td").eq(item + 1).css({"color":"black !important"})
+   }
 
 }

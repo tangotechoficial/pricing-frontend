@@ -2,6 +2,7 @@
 
 $selectGrey:#F2F2F2;
 
+
 .popupmenu{
 	position: absolute;
 	z-index: 100;
@@ -27,17 +28,22 @@ $selectGrey:#F2F2F2;
 			overflow-y: scroll;
 
 		}
+
 		.table{
 			border:1px solid $selectGrey !important;
 			border-radius: 10px;			
+		}
+		
+		tr{
+			transition: 0.5s;
 		}
 
 		td{
 			padding:5px !important;
 		}
 		.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
-		  background-color: $martinsBlue;
-		  color:white;
+		  background-color: $selectGrey;
+		  color:$martinsTextGrey;
 		  transition: 0.4s;
 		  cursor: pointer;
 		}
