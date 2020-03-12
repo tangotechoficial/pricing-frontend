@@ -22,4 +22,5 @@ export class SelectCondicionComponent implements OnInit {
     $('#myModal').modal('hide');
   }
 
+
 }

@@ -118,6 +118,7 @@ export class CondicionComponent implements OnInit {
       this.condicionService.getCondicaos().then(result => result.map(co => this.condicaos.push(co)))
     ]).then(() => {
       this.spinner.hide();
+      console.log(this.chaveContas)
     });
   }
 

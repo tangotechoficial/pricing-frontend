@@ -29,7 +29,11 @@ export class SelectPopupCondicionComponent implements OnInit {
     this.closePopup.emit(false);
   }
 
+<<<<<<< HEAD
   getSelectedCondicao(val: any , i: any) {
+=======
+  getSelectedCondicao(val: any , i:number) {
+>>>>>>> be6a855ad442b082384320b66463b4a33a83a1ec
     this.currenObject.sCodCondicion = val.Cod_Condicao;
     this.selectItemColor(i);
   }
