@@ -13,6 +13,7 @@ import { CondicionComponent } from './components/condicion/condicion.component';
 
 import { DadosMestreComponent } from './components/dados-mestre/dados-mestre.component';
 import { DiretrizEstrategicaComponent } from './components/diretriz-estrategica/diretriz-estrategica.component';
+import { SelectCondicionComponent } from './components/select-condicion/select-condicion.component';
 /* Routes Array */
 const appRoutes: Routes = [
     { path: 'login', component: LoginComponent},
@@ -21,7 +22,8 @@ const appRoutes: Routes = [
     { path: 'preciobase', component: PrecioBaseComponent},
     { path: 'precioventa', component: PrecioVentaComponent},
     { path: 'sacceso', component: SaccesoComponent},
-    { path: 'condicion', component: CondicionComponent, runGuardsAndResolvers: 'always'},
+    { path: 'selectcondicao', component: SelectCondicionComponent},
+    { path: 'condicion/:param', component: CondicionComponent, runGuardsAndResolvers: 'always'},
     { path: 'diretriz-estrategica', component: DiretrizEstrategicaComponent},
     { path: 'dados-mestre', component: DadosMestreComponent},
     { path: '', redirectTo: '/login', pathMatch: 'full'},

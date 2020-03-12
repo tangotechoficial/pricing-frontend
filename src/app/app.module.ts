@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import { routing, appRoutingProviders } from './app.routing';
-
 import { AppComponent } from './app.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { ErrorComponent } from './components/error/error.component';
@@ -16,7 +15,6 @@ import { PrecioTechnical } from './components/precio/precio-technical/precio-tec
 import { PrecioBusiness } from './components/precio/precio-business/precio-business.component';
 import { SaccesoComponent } from './components/sacceso/sacceso.component';
 import { CondicionComponent } from './components/condicion/condicion.component';
-
 import { AutocompleteInputComponent } from './components/autocomplete-input/autocomplete-input.component';
 import { FilterPipeSeqAcceso } from './pipes/filterseqacceso.pipe';
 import { FilterPipeSeqSearch } from './pipes/filterseqsearch';
@@ -30,6 +28,7 @@ import { DiretrizEstrategicaComponent } from './components/diretriz-estrategica/
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { PopupmenuComponent } from './components/popupmenu/popupmenu.component';
+import { SelectCondicionComponent } from './components/select-condicion/select-condicion.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +51,8 @@ import { PopupmenuComponent } from './components/popupmenu/popupmenu.component';
     TechnicalMenuComponent,
     DadosMestreComponent,
     DiretrizEstrategicaComponent,
-    PopupmenuComponent
+    PopupmenuComponent,
+    SelectCondicionComponent
   ],
   imports: [
     BrowserModule,

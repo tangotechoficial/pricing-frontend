@@ -34,12 +34,20 @@ export class CondicionComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
+    if (window.location.pathname.endsWith('criar')) {
+      this.bCreateMode = true;
+    } else {
+      this.bCreateMode = false;
+    }
+
+    this.updateMasterData();
+
     /* Initialized message local object */
     this.bpopMenu = false;
     this.message = {};
     this.message.sCodCondicion = 'CO001';
     this.message.sDesCondicion = 'Condicion 1';
-    $('#myModal').modal('show');
     this.selectedProperties = new Array<any>();
     this.condicion = new Condicion();
   }
@@ -64,8 +72,6 @@ export class CondicionComponent implements OnInit {
     ]).then(() => {
       this.spinner.hide();
     });
-
-    console.log(this.camadas);
   }
   /*
     Iván Lynch 09/03/2020
@@ -156,24 +162,7 @@ export class CondicionComponent implements OnInit {
   public getSelectedTipoValor(val: any) {
     this.condicion.oTipoValor = val;
   }
-  /*
-    Iván Lynch 08/03/2020
-    Output: Return true if the user clicks on Criar condiçao
-  */
-  public isCreateMode() {
-    $('#myModal').modal('hide');
-    this.bCreateMode = true;
-    this.updateMasterData();
-  }
-  /*
-    Iván Lynch 08/03/2020
-    Output: Return false if the user clicks on Alterar condiçao
-  */
-  public isEditMode() {
-    $('#myModal').modal('hide');
-    this.bCreateMode = false;
-    this.updateMasterData();
-  }
+
   /*
     Iván Lynch 08/03/2020
     Output: Uncheck Pos and Neg checkbox if the other is active
