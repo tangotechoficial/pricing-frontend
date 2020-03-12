@@ -29,6 +29,7 @@ export class CondicionComponent implements OnInit {
   public message: any;
   public bpopMenu = false;
   public bSelectCondicao = false;
+  
 
   constructor(
     private condicionService: CondicionService,
