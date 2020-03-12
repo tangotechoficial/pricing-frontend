@@ -20,7 +20,7 @@
 						  </thead>
 
 						  <tbody>
- 						    <tr *ngFor="let r of dataList" (click)="getSelectedCondicao(r)">
+ 						    <tr *ngFor="let r of dataList; let i = index" (click)="getSelectedCondicao(r)">
 						      <td class="text-center font-weight-bold">{{r.Cod_Condicao}}</td>
 						      <td>{{r.Desc_Condicao}}</td>
 						    </tr>

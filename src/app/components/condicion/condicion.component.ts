@@ -153,10 +153,10 @@ export class CondicionComponent implements OnInit {
                     if (seq.id_Sequencia === bseq.id) {
                         const elem = document.getElementById(index.toString());
                         elem.click();
-                        this.spinner.hide();
-                    }
+                      }
                   });
                 });
+                this.spinner.hide();
               });
           }
         });

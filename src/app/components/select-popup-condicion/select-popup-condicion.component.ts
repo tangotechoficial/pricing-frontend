@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Condicion } from 'app/models/condicion';
 
+declare var $: any;
+
 @Component({
   // tslint:disable-next-line: component-selector
   selector: 'select-popup-condicion',
