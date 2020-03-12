@@ -1,5 +1,290 @@
 <!-- Navigation Bar -->
 <navegacion></navegacion>
-<div class="temporary">
-  <h1>Plano Compra</h1>
+<div class="background">
+  <div class="container col-9 main-container">
+    <div class="row">
+      <div class="container col-12 p-4 d-flex justify-content-start">
+          <button type="button" class="btn button-save btn-filter-color" (click)="filter()"><i
+                  class="fas fa-filter btn-filter-color"></i>&nbsp;Filtro</button>
+          <div class="applied-filters"></div>
+      </div>
+    </div>
+    <div class="row shadowed">
+      <div class="container col-12 p-4 d-flex justify-content-start">
+          <div class="chart-placeholder">
+              <tabbed-charts></tabbed-charts>
+          </div>
+      </div>
+    </div>
+    <div class="row shadowed">
+      <div class="container col-12 p-4">
+        <div class="row d-flex flex-row badges">
+            <div>
+            <span class="badge badge-secondary p-2">11/03/2020</span>
+            <span class="badge badge-secondary p-2">Semana 2</span>
+            </div>
+          <button class="btn btn-outline-primary p-1">Elasticidade</button>
+        </div>
+        <div class="row with-overflow">
+          <table class="table">
+            <col>
+            <colgroup span=3></colgroup>
+            <tr>
+              <td rowspan="2"></td>
+              <th scope="colgroup" colspan="3">Semana 1</th>
+              <th scope="colgroup" colspan="3">Semana 2</th>
+              <th scope="colgroup" colspan="3">Semana 3</th>
+              <th scope="colgroup" colspan="3">Semana 4</th>
+            </tr>
+            <tr>
+              <th scope="col">Sugerido</th>
+              <th scope="col">Planejado</th>
+              <th scope="col">Realizado</th>
+              <th scope="col">Sugerido</th>
+              <th scope="col">Planejado</th>
+              <th scope="col">Realizado</th>
+              <th scope="col">Sugerido</th>
+              <th scope="col">Planejado</th>
+              <th scope="col">Realizado</th>
+              <th scope="col">Sugerido</th>
+              <th scope="col">Planejado</th>
+              <th scope="col">Realizado</th>
+            </tr>
+            <tr>
+              <th scope="row">Vendas (R$)</th>
+              <td>2.500,00</td>
+              <td>2.500,00</td>
+              <td></td>
+              <td>2.500,00</td>
+              <td>2.500,00</td>
+              <td></td>
+              <td>2.500,00</td>
+              <td>2.500,00</td>
+              <td></td>
+              <td>2.500,00</td>
+              <td>2.500,00</td>
+              <td></td>
+            </tr>
+            <tr>
+              <th scope="row">Margem (%)</th>
+              <td>21</td>
+              <td>21</td>
+              <td></td>
+              <td>21</td>
+              <td>21</td>
+              <td></td>
+              <td>21</td>
+              <td>21</td>
+              <td></td>
+              <td>21</td>
+              <td>21</td>
+              <td></td>
+            </tr>
+            <tr>
+              <th scope="row">Competitividade (%)</th>
+              <td>91</td>
+              <td>91</td>
+              <td></td>
+              <td>91</td>
+              <td>91</td>
+              <td></td>
+              <td>91</td>
+              <td>91</td>
+              <td></td>
+              <td>91</td>
+              <td>91</td>
+              <td></td>
+            </tr>
+            <tr>
+              <th scope="row">Preço Mercado (R$)</th>
+              <td>200,00</td>
+              <td>200,00</td>
+              <td></td>
+              <td>200,00</td>
+              <td>200,00</td>
+              <td></td>
+              <td>200,00</td>
+              <td>200,00</td>
+              <td></td>
+              <td>200,00</td>
+              <td>200,00</td>
+              <td></td>
+            </tr>
+            <tr>
+              <th scope="row">Preço Venda (R$)</th>
+              <td>200,00</td>
+              <td>200,00</td>
+              <td></td>
+              <td>200,00</td>
+              <td>200,00</td>
+              <td></td>
+              <td>200,00</td>
+              <td>200,00</td>
+              <td></td>
+              <td>200,00</td>
+              <td>200,00</td>
+              <td></td>
+            </tr>
+            <tr>
+              <th scope="row">Custos (R$)</th>
+              <td>200,00</td>
+              <td>200,00</td>
+              <td></td>
+              <td>200,00</td>
+              <td>200,00</td>
+              <td></td>
+              <td>200,00</td>
+              <td>200,00</td>
+              <td></td>
+              <td>200,00</td>
+              <td>200,00</td>
+              <td></td>
+            </tr>
+            <tr>
+              <th scope="row">Impostos (R$)</th>
+              <td>200,00</td>
+              <td>200,00</td>
+              <td></td>
+              <td>200,00</td>
+              <td>200,00</td>
+              <td></td>
+              <td>200,00</td>
+              <td>200,00</td>
+              <td></td>
+              <td>200,00</td>
+              <td>200,00</td>
+              <td></td>
+            </tr>
+            <tr>
+              <th scope="row">Operacional (R$)</th>
+              <td>200,00</td>
+              <td>200,00</td>
+              <td></td>
+              <td>200,00</td>
+              <td>200,00</td>
+              <td></td>
+              <td>200,00</td>
+              <td>200,00</td>
+              <td></td>
+              <td>200,00</td>
+              <td>200,00</td>
+              <td></td>
+            </tr>
+            <tr>
+              <th scope="row">Margem Bruta (R$)</th>
+              <td>200,00</td>
+              <td>200,00</td>
+              <td></td>
+              <td>200,00</td>
+              <td>200,00</td>
+              <td></td>
+              <td>200,00</td>
+              <td>200,00</td>
+              <td></td>
+              <td>200,00</td>
+              <td>200,00</td>
+              <td></td>
+            </tr>
+            <tr>
+              <th scope="row">Verba (R$)</th>
+              <td>200,00</td>
+              <td>200,00</td>
+              <td></td>
+              <td>200,00</td>
+              <td>200,00</td>
+              <td></td>
+              <td>200,00</td>
+              <td>200,00</td>
+              <td></td>
+              <td>200,00</td>
+              <td>200,00</td>
+              <td></td>
+            </tr>
+            <tr>
+              <th scope="row">CMV (R$)</th>
+              <td>200,00</td>
+              <td>200,00</td>
+              <td></td>
+              <td>200,00</td>
+              <td>200,00</td>
+              <td></td>
+              <td>200,00</td>
+              <td>200,00</td>
+              <td></td>
+              <td>200,00</td>
+              <td>200,00</td>
+              <td></td>
+            </tr>
+          </table>
+
+        </div>
+      </div>
+    </div>
+    <div class="row shadowed">
+        <div class="chart-placeholder">
+          <selling-composition-charts></selling-composition-charts>
+        </div>
+    </div>
+    <div class="row shadowed">
+      Workflow de aprovação
+      <div class="chart-placeholder">
+          <table class="table workflow-table">
+            <thead>
+              <tr>
+                <th></th>
+                <th>Etapa</th>
+                <th>Nome do Responsável</th>
+                <th>Status</th>
+                <th>Data do Status</th>
+                <th>Observações</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="content approved">
+                <td></td>
+                <td>Comprador Responsável</td>
+                <td>Suzy Campanha</td>
+                <td>Aprovado</td>
+                <td>16 de Fevereiro, 2020 às 13h21</td>
+                <td>-</td>
+              </tr>
+              <tr class="content disapproved">
+                <td></td>
+                <td>Aprovação Pricing</td>
+                <td>Josimar Sousa</td>
+                <td>Reprovado</td>
+                <td>20 de Fevereiro, 2020 às 11h02</td>
+                <td>Problema com competitividade - <a href="#">Ver mais</a></td>
+              </tr>
+              <tr class="content waiting">
+                <td></td>
+                <td>Aprovação controladoria</td>
+                <td>Maurício Nascimento</td>
+                <td>No aguardo</td>
+                <td>No aguardo</td>
+                <td>No aguardo</td>
+              </tr>
+              <tr class="content waiting">
+                <td></td>
+                <td>Aprovação Gerencial</td>
+                <td>Jessica Ferreira</td>
+                <td>No aguardo</td>
+                <td>No aguardo</td>
+                <td>No aguardo</td>
+              </tr>
+              <tr class="content waiting">
+                <td></td>
+                <td>Aprovação Executiva</td>
+                <td>Vandré Oliveira</td>
+                <td>No aguardo</td>
+                <td>No aguardo</td>
+                <td>No aguardo</td>
+              </tr>
+            </tbody>
+          </table>
+
+      </div>
+    </div>
+  </div>
 </div>
+<filter-modal></filter-modal>
