@@ -1,6 +1,6 @@
 <!-- Navigation Bar -->
 <navegacion [cMode]="bCreateMode"></navegacion>
-<popupmenu *ngIf="bpopMenu" [dataList]="this.chaveContas" ></popupmenu>
+<popupmenu *ngIf="bpopMenu" (closePopup)="onCloseChaveContasPopUp($event)" (selectedObject)="getSelectedChaveContas($event)" [dataList]="this.chaveContas" ></popupmenu>
 <select-popup-condicion *ngIf="bSelectCondicao" (closePopup)="onCloseCondicaoPopUp($event)" (selectedObject)="getSelectedCondicao($event)" [dataList]="this.condicaos"></select-popup-condicion>
 
 <ngx-spinner></ngx-spinner>

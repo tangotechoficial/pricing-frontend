@@ -76,6 +76,10 @@ export class CondicionComponent implements OnInit {
     this.bSelectCondicao = val;
   }
 
+  onCloseChaveContasPopUp(val: any){
+    this.bpopMenu = val;
+  }
+
   /*
     Iván Lynch 12/03/2020
     Input: Boolean from child component
@@ -184,7 +188,9 @@ export class CondicionComponent implements OnInit {
     Output: Update this._condicao.oCamada
   */
   public getSelectedChaveContas(val: any) {
+    console.log(val);
     this.condicion.oChaveContas = val;
+    this.bpopMenu = false;
   }
   /*
     Iván Lynch 08/03/2020
