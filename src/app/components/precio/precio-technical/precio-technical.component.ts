@@ -29,6 +29,13 @@ export class PrecioTechnical {
     Promise.all(promisesFetch).then(
       ([camadaEsquemas, condicaoCamadas, condicaos]) => {
 
+        // Mock data CAMADA_ESQUEMA
+        // camadaEsquemas = [{
+        //   id: 1,
+        //   id_Condicao_Camada: 1,
+        //   id_Esquema: 1
+        // }]
+
         let condicaoCamadasFilter = camadaEsquemas.map(camadaEsquema => {
           return condicaoCamadas.filter(
             condCamada => condCamada.id == camadaEsquema.id_Condicao_Camada
@@ -60,7 +67,6 @@ export class PrecioTechnical {
 
   cancel() {
     this.condicaos.pop() 
-    
   }
 
   findCondicao() {

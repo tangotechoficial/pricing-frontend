@@ -1,6 +1,6 @@
 <!-- Navigation Bar -->
 <navegacion [cMode]="bCreateMode"></navegacion>
-<popupmenu *ngIf="bpopMenu" ></popupmenu>
+<popupmenu *ngIf="bpopMenu" [dataList]="this.chaveContas" ></popupmenu>
 
 <ngx-spinner></ngx-spinner>
 
@@ -53,7 +53,7 @@
             </div>
         </div>
         <div class="col-sm-1 mt-5 mb-2 d-flex justify-content-center align-items-center">
-            <i class="fas fa-search"></i>
+            <i (click)="onSearchChaveContas()" class="fas fa-search"></i>
         </div>
         <div class="col-sm-2">
             <span class="text-header">Tipo de valor</span>

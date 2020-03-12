@@ -14,6 +14,7 @@ declare var $: any;
 })
 export class CondicionComponent implements OnInit {
 
+  public dbCondition: Array<any>;
   public condicion: Condicion;
   public sequencias: Array<any>;
   public chaveContas: Array<any>;
@@ -26,7 +27,7 @@ export class CondicionComponent implements OnInit {
   public saveSucess: boolean;
   public saveError: boolean;
   public message: any;
-  public bpopMenu: boolean;
+  public bpopMenu = false;
 
   constructor(
     private condicionService: CondicionService,
@@ -44,12 +45,15 @@ export class CondicionComponent implements OnInit {
     this.updateMasterData();
 
     /* Initialized message local object */
-    this.bpopMenu = false;
     this.message = {};
     this.message.sCodCondicion = 'CO001';
     this.message.sDesCondicion = 'Condicion 1';
     this.selectedProperties = new Array<any>();
     this.condicion = new Condicion();
+  }
+
+  public onSearchChaveContas() {
+    this.bpopMenu = true;
   }
 
   /*
