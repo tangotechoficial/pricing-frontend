@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
 
 declare var $: any;
 
@@ -12,12 +11,15 @@ declare var $: any;
 export class SelectCondicionComponent implements OnInit {
 
   constructor(
-    private router: Router,
-    private route: ActivatedRoute,
   ) { }
 
   ngOnInit() {
     $('#myModal').modal('show');
+  }
+
+  // tslint:disable-next-line: use-lifecycle-interface
+  ngOnDestroy() {
+    $('#myModal').modal('hide');
   }
 
 }

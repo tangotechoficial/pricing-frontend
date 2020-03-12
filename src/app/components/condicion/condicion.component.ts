@@ -26,7 +26,7 @@ export class CondicionComponent implements OnInit {
   public saveSucess: boolean;
   public saveError: boolean;
   public message: any;
-  public bpopMenu:boolean;
+  public bpopMenu: boolean;
 
   constructor(
     private condicionService: CondicionService,
@@ -51,8 +51,6 @@ export class CondicionComponent implements OnInit {
     this.selectedProperties = new Array<any>();
     this.condicion = new Condicion();
   }
-
-
 
   /*
     Iván Lynch 09/03/2020

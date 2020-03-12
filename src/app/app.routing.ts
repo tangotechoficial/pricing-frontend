@@ -29,7 +29,7 @@ const appRoutes: Routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full'},
     { path: '**', component: ErrorComponent},
 
-]
+];
 
 /* Export router module */
 export const appRoutingProviders: any[] = [];
