@@ -1,28 +1,28 @@
 
 <div class="container col-9 d-flex flex-column justify-content-center px-4
     py-4">
+    <!-- <div *ngIf="loading" class="container p-0 rounded border col-12">
+        <div class="col-12 p-3 border-bottom">
+            <span class="text-header">{{camadaU.Nome_Camada}} . . .</span>
+        </div>
+    </div> -->
+
     <div *ngIf="loading" class="container p-0 rounded border col-12">
         <div class="col-12 p-3 border-bottom">
-            <span class="text-header">{{camada.Nome_Camada}} . . .</span>
-        </div>
-    </div>
-
-    <div *ngIf="!loading" class="container p-0 rounded border col-12">
-        <div class="col-12 p-3 border-bottom">
-            <span class="text-header">{{camada.Nome_Camada}}</span>
+            <span class="text-header">{{camadaU.Nome_Camada}}</span>
         </div>
         <div class="row col-12 p-4" *ngFor="let condicao of condicaos; let i=
             index">
             <div class="col-2">
                 <span class="text-header">Cod. Condicao</span>
                 <input (focusout)="findCondicao()" class="form-control mt-3"
-                    name="{{camada.id}}Cod_Condicao{{i}}"
+                    name="{{camadaU.id}}Cod_Condicao{{i}}"
                     [(ngModel)]="condicao.Cod_Condicao" />
             </div>
             <div class="col-3">
                 <span class="text-header">Descricao de condicao</span>
                 <input class="form-control mt-3" disabled
-                    name="{{camada.id}}Desc_Condicao{{i}}"
+                    name="{{camadaU.id}}Desc_Condicao{{i}}"
                     [(ngModel)]="condicao.Desc_Condicao" />
             </div>
             <div class="col-1 mb-2 col-1 d-flex flex-column justify-content-end
@@ -32,7 +32,7 @@
             <div class="col-2">
                 <span class="text-header">Tipo de valor</span>
                 <input class="form-control mt-3" disabled
-                    name="{{camada.id}}id_TipoValor{{i}}"
+                    name="{{camadaU.id}}id_TipoValor{{i}}"
                     [(ngModel)]="condicao.id_TipoValor" />
             </div>
             <div class="col-2 d-flex flex-column justify-content-center
@@ -40,10 +40,10 @@
                 <span class="text-header">Mandatoria</span>
                 <div class="custom-control custom-checkbox mt-2 mb-2">
                     <input type="checkbox" class="custom-control-input"
-                        id="{{camada.id}}MANDATORIA{{i}}"
+                        id="{{camadaU.id}}MANDATORIA{{i}}"
                         [(ngModel)]="condicao.MANDATORIA">
                     <label class="pl-4 custom-control-label"
-                        for="{{camada.id}}MANDATORIA{{i}}"
+                        for="{{camadaU.id}}MANDATORIA{{i}}"
                         id="checkMandatoriaLabel"></label>
                 </div>
             </div>
@@ -52,10 +52,10 @@
                 <span class="text-header">Estadistica</span>
                 <div class="custom-control custom-checkbox mt-2 mb-2">
                     <input type="checkbox" class="custom-control-input"
-                        id="{{camada.id}}ESTATISTICA{{i}}"
+                        id="{{camadaU.id}}ESTATISTICA{{i}}"
                         [(ngModel)]="condicao.ESTATISTICA">
                     <label class="pl-4 custom-control-label"
-                        for="{{camada.id}}ESTATISTICA{{i}}"
+                        for="{{camadaU.id}}ESTATISTICA{{i}}"
                         id="checkEstatisticaLabel"></label>
                 </div>
             </div>

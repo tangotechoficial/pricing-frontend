@@ -12,6 +12,8 @@ export class PrecioTechnical {
   @Input() titulo: string;
   @Input() camada: any;
 
+  camadaU: any;
+
   condicaos: Array<ModelCondicao> = [];
   condicaosAllow: Array<ModelCondicao> = [];
   isEditNew: boolean = false
@@ -21,42 +23,51 @@ export class PrecioTechnical {
   constructor(private _condicionService: CondicionService) {}
 
   ngOnInit() {
-    const camadaEsquemas = this._condicionService.getCamadaEsquema();
-    const condicaoCamadas = this._condicionService.getCondicaoCamada();
-    const condicaos = this._condicionService.getCondicaoByCode();
-    const promisesFetch = [camadaEsquemas, condicaoCamadas, condicaos];
+    // {
+    //   camada,
+    //   condicaosAllow,
+    //   condicaos
+    // }
+    this.condicaos = this.camada.condicaos
+    this.condicaosAllow = this.camada.condicaosAllow
+    this.camadaU = this.camada.camada
+    console.log(this.camada)
+    // const camadaEsquemas = this._condicionService.getCamadaEsquema();
+    // const condicaoCamadas = this._condicionService.getCondicaoCamada();
+    // const condicaos = this._condicionService.getCondicaoByCode();
+    // const promisesFetch = [camadaEsquemas, condicaoCamadas, condicaos];
 
-    Promise.all(promisesFetch).then(
-      ([camadaEsquemas, condicaoCamadas, condicaos]) => {
+    // Promise.all(promisesFetch).then(
+    //   ([camadaEsquemas, condicaoCamadas, condicaos]) => {
 
-        // Mock data CAMADA_ESQUEMA
-        // camadaEsquemas = [{
-        //   id: 1,
-        //   id_Condicao_Camada: 1,
-        //   id_Esquema: 1
-        // }]
+    //     // Mock data CAMADA_ESQUEMA
+    //     // camadaEsquemas = [{
+    //     //   id: 1,
+    //     //   id_Condicao_Camada: 1,
+    //     //   id_Esquema: 1
+    //     // }]
 
-        let condicaoCamadasFilter = camadaEsquemas.map(camadaEsquema => {
-          return condicaoCamadas.filter(
-            condCamada => condCamada.id == camadaEsquema.id_Condicao_Camada
-          )[0];
-        });
+    //     let condicaoCamadasFilter = camadaEsquemas.map(camadaEsquema => {
+    //       return condicaoCamadas.filter(
+    //         condCamada => condCamada.id == camadaEsquema.id_Condicao_Camada
+    //       )[0];
+    //     });
 
-        let condicaosFilter = condicaoCamadasFilter.map(condCamada => {
-          return condicaos.filter(cond => cond.id == condCamada.id_Condicao)[0];
-        });
+    //     let condicaosFilter = condicaoCamadasFilter.map(condCamada => {
+    //       return condicaos.filter(cond => cond.id == condCamada.id_Condicao)[0];
+    //     });
 
-        let condicaosByCamadaFilter = condicaosFilter.filter(cond => cond.id_Camada == this.camada.id)
+    //     let condicaosByCamadaFilter = condicaosFilter.filter(cond => cond.id_Camada == this.camada.id)
 
-        let condicaosAllow = condicaoCamadas.filter(condCam => condCam.id_Camada == this.camada.id).map(condCamada => {
-          return condicaos.filter(cond => cond.id == condCamada.id_Condicao)[0];
-        })
+    //     let condicaosAllow = condicaoCamadas.filter(condCam => condCam.id_Camada == this.camada.id).map(condCamada => {
+    //       return condicaos.filter(cond => cond.id == condCamada.id_Condicao)[0];
+    //     })
 
-        this.condicaosAllow = condicaosAllow;
-        this.condicaos = condicaosByCamadaFilter;
-        this.loading = false
-      }
-    );
+    //     this.condicaosAllow = condicaosAllow;
+    //     this.condicaos = condicaosByCamadaFilter;
+    //     this.loading = false
+    //   }
+    // );
   }
 
   add() {
