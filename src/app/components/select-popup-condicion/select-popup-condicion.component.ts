@@ -29,14 +29,14 @@ export class SelectPopupCondicionComponent implements OnInit {
     this.closePopup.emit(false);
   }
 
-  getSelectedCondicao(val: any , i:any) {
+  getSelectedCondicao(val: any , i: any) {
     this.currenObject.sCodCondicion = val.Cod_Condicao;
     this.selectItemColor(i);
   }
 
-  selectItemColor(item:number){
-    $("tr").removeClass("mySelect")
-    $("tr").eq(item + 1).addClass("mySelect")
+  selectItemColor(item: number) {
+    $('tr').removeClass('mySelect');
+    $('tr').eq(item + 1).addClass('mySelect');
    }
 
 }
