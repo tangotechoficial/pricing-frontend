@@ -29,6 +29,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { PopupmenuComponent } from './components/popupmenu/popupmenu.component';
 import { SelectCondicionComponent } from './components/select-condicion/select-condicion.component';
+import { SelectPopupCondicionComponent } from './components/select-popup-condicion/select-popup-condicion.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { SelectCondicionComponent } from './components/select-condicion/select-c
     DadosMestreComponent,
     DiretrizEstrategicaComponent,
     PopupmenuComponent,
-    SelectCondicionComponent
+    SelectCondicionComponent,
+    SelectPopupCondicionComponent
   ],
   imports: [
     BrowserModule,
