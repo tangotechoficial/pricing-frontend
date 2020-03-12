@@ -60,13 +60,14 @@ export class PrecioTechnical {
 
   cancel() {
     this.condicaos.pop() 
-    this.isEditNew = false;
+    
   }
 
   findCondicao() {
     const modelCondicaoFind = this.condicaosAllow.filter(cond => cond.Cod_Condicao == this.modelCondicao.Cod_Condicao)[0]
     if (modelCondicaoFind) {
       this.modelCondicao.set(modelCondicaoFind)
+      this.isEditNew = false;
     } else {
       const condAll = this.condicaosAllow.map(e => e.Cod_Condicao).toString()
       const condMsgHelp = condAll.length > 0 ? condAll : "NO HAY CONDICION RELACIONADA CON LA CAMADA"

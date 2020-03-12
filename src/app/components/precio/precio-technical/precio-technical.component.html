@@ -78,7 +78,9 @@
         <div class="row col-12 p-4">
             <span *ngIf="!isEditNew" class="martins-color martins-pointer"
                 (click)="add()"><i class="fas fa-plus-circle martins-color"></i>
-                Agregar</span>
+                Adicionar tipo de condição</span>
+            <span *ngIf="isEditNew" class="btn-grey"><i class="fas fa-plus-circle btn-grey"></i>
+                Adicionar tipo de condição</span>
             <!-- <span *ngIf="isEditNew" class="martins-color martins-pointer"
                 (click)="cancel()"> Cancelar</span> -->
         </div>
