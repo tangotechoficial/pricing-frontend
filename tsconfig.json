@@ -29,8 +29,12 @@
       ],
       "@env/*": [
         "environments/*",
+      ],
+      "@datasources/*": [
+        "assets/datasources/*"
       ]
     },
+    "resolveJsonModule": true,
     "lib": [
       "es2018",
       "dom"
