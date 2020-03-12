@@ -41,16 +41,15 @@ $selectGrey:#F2F2F2;
 		}
 		
 		tr{
-			transition: 0.5s;
+			transition: none;
 		}
 
 		td{
 			padding:5px !important;
 		}
 		.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
-		  background-color: $selectGrey;
+		  background-color: $martinsBlue;
 		  color:black !important;
-		  transition: 0.4s;
 		  cursor: pointer;
 		}
 	}

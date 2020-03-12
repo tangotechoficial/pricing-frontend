@@ -29,7 +29,6 @@ export class CondicionComponent implements OnInit {
   public message: any;
   public bpopMenu = false;
   public bSelectCondicao = false;
-  
 
   constructor(
     private condicionService: CondicionService,
@@ -121,7 +120,7 @@ export class CondicionComponent implements OnInit {
       this.spinner.hide();
     });
   }
-  
+
   /*
     Iván Lynch 09/03/2020
     Output: Return selected condicao
