@@ -4,16 +4,19 @@
 <!--Component Content
 <div class="container d-flex flex-column background col-12 justify-content-center pb-5"> -->
 <div class="container menu-background">
-<!--Main view-->
+    <!--Main view-->
     <!-- BUSINESS USER -->
     <div *ngIf="bBusiness">
         <precio-business></precio-business>
     </div>
-    <!-- TECHNICAL USER -->    
+    <!-- TECHNICAL USER -->
     <div *ngIf="!bBusiness">
-        <div class="background" *ngFor="let camada of camadas">
-            <precio-technical [camada]="camada"></precio-technical>
+        <div *ngIf="!loading" class="background">
+            <div *ngFor="let camada of camadas">
+                <precio-technical [camada]="camada"></precio-technical>
+            </div>
+            <div class="text-center">
+                <button class="btn btn-lg btn-primary">Salvar</button>
+            </div>
         </div>
     </div>
-</div>
-
