@@ -55,6 +55,11 @@ export class CondicionComponent implements OnInit {
 
   }
 
+  /*
+    Iván Lynch 12/03/2020
+    Input: Boolean from child component
+    Output: Open search chave de contas popup
+  */
   public onSearchChaveContas() {
     this.bpopMenu = true;
   }
@@ -76,7 +81,12 @@ export class CondicionComponent implements OnInit {
     this.bSelectCondicao = val;
   }
 
-  onCloseChaveContasPopUp(val: any){
+  /*
+    Iván Lynch 12/03/2020
+    Input: Boolean from child component
+    Output: Close chave de contas popup
+  */
+  onCloseChaveContasPopUp(val: any) {
     this.bpopMenu = val;
   }
 
@@ -110,6 +120,7 @@ export class CondicionComponent implements OnInit {
       this.spinner.hide();
     });
   }
+  
   /*
     Iván Lynch 09/03/2020
     Output: Return selected condicao
