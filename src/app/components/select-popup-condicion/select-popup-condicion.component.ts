@@ -35,9 +35,8 @@ export class SelectPopupCondicionComponent implements OnInit {
   }
 
   selectItemColor(item:number){
-    $("tr").css({"background-color": "white"})
-    $("tr").eq(item + 1).css({"background-color": "cornflowerblue", "transition": "1s"})
-    // $("td").eq(item + 1).css({"color":"black !important"})
+    $("tr").removeClass("mySelect")
+    $("tr").eq(item + 1).addClass("mySelect")
    }
 
 }
