@@ -15,6 +15,7 @@ export class PrecioBaseComponent implements OnInit {
   isShow: boolean;
   existNegocios: any;
   existVentas: any;
+  loading: boolean = true;
   
   constructor(
     private _condicionService: CondicionService
@@ -23,7 +24,10 @@ export class PrecioBaseComponent implements OnInit {
   ngOnInit() {
     // traer por servicio cada condicion
     this._condicionService.getCamadas()
-    .then(data => this.camadas = this.parseResponseCamada(data))
+    .then(data => {
+      this.camadas = this.parseResponseCamada(data)
+      this.loading = false
+    })
     .catch(err => alert(err))
   }
 

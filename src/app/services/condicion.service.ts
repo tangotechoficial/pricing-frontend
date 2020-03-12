@@ -66,6 +66,10 @@ export class CondicionService {
     public getCondicaoCamada(): Promise<any> {
         return this.http.get(this.url + '/condicaocamada/', {headers: {'Content-type': 'application/json'}}).toPromise();
     }
+
+    public getCamadaEsquema(): Promise<any> {
+        return this.http.get(this.url + '/camadaesquema/', {headers: {'Content-type': 'application/json'}}).toPromise();
+    }
 }
 
 
