@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2, ElementRef , Input } from '@angular/core';
+import { Component, OnInit, Renderer2, ElementRef, Input } from '@angular/core';
 import { Condicion } from '../../models/condicion';
 import { MetadataService } from './../../services/metadata.service';
 import { CondicionService } from '../../services/condicion.service';
@@ -110,6 +110,7 @@ export class CondicionComponent implements OnInit {
     this.tipoValor = new Array<any>();
     this.camadas = new Array<any>();
     this.chaveContas = new Array<any>();
+    this.selectedProperties = new Array<any>();
     Promise.all([
       this.condicionService.getSequenciasAcesso().then(result => result.map(sa => this.sequencias.push(sa))),
       this.condicionService.getChaveContas().then(result => result.map(cc => this.chaveContas.push(cc))),
@@ -118,7 +119,6 @@ export class CondicionComponent implements OnInit {
       this.condicionService.getCondicaos().then(result => result.map(co => this.condicaos.push(co)))
     ]).then(() => {
       this.spinner.hide();
-      console.log(this.chaveContas)
     });
   }
 
@@ -132,11 +132,10 @@ export class CondicionComponent implements OnInit {
     let flag = false;
     this.condicionService.getCondicaoByCode()
       .then((result: any) => {
-        console.log(result);
-        console.log(this.condicion.sCodCondicion);
         result.map((cond: any) => {
           if (cond.Cod_Condicao === this.condicion.sCodCondicion) {
             flag = true;
+            this.condicion.sId = cond.id;
             this.condicion.sDesCondicion = cond.Desc_Condicao;
             this.condicion.bEscalaQtde = cond.Escala_Qtde === 1 ? true : false;
             this.condicion.bNeg = cond.POS_NEG === 'N' ? true : false;
@@ -167,9 +166,9 @@ export class CondicionComponent implements OnInit {
                 elems.map((seq: any) => {
                   this.sequencias.map((bseq: any, index: any) => {
                     if (seq.id_Sequencia === bseq.id) {
-                        const elem = document.getElementById(index.toString());
-                        elem.click();
-                      }
+                      const elem = document.getElementById(index.toString());
+                      elem.click();
+                    }
                   });
                 });
                 this.spinner.hide();
@@ -227,6 +226,7 @@ export class CondicionComponent implements OnInit {
       checkNeg.click();
     }
   }
+
   /*
     Iván Lynch 08/03/2020
     Input: Object, Array
@@ -240,6 +240,7 @@ export class CondicionComponent implements OnInit {
     }
     return false;
   }
+
   /*
     Iván Lynch 08/03/2020
     Input: Object
@@ -277,12 +278,13 @@ export class CondicionComponent implements OnInit {
       }
     });
   }
+
   /*
-    Iván Lynch 09/03/2020
+    Iván Lynch 12/03/2020
     Input: null
-    Output: null
+    Output: Create new Condicao
   */
-  public onSubmitCondicao() {
+  public postCondicao() {
     this.condicionService.postCondicao(this.condicion)
       .then(elem => {
         this.saveSucess = true;
@@ -290,6 +292,7 @@ export class CondicionComponent implements OnInit {
         setTimeout(() => {
           this.saveSucess = false;
           this.condicion = new Condicion();
+          this.cleanSelections();
         }, 2000);
       })
       .catch((error: any) => {
@@ -301,5 +304,68 @@ export class CondicionComponent implements OnInit {
           this.saveError = false;
         }, 2000);
       });
+  }
+
+  public cleanSelections() {
+    this.condicion.aSequencias.map(elem => {
+      this.sequencias.map((seq, index) => {
+        if (elem.id === seq.id) {
+          const domElem = document.getElementById(index.toString());
+          domElem.click();
+        }
+      });
+    });
+  }
+
+  /*
+    Iván Lynch 12/03/2020
+    Input: null
+    Output: Edit Condicao
+  */
+  public putCondicao() {
+    this.spinner.show();
+    this.condicionService.deleteCondicaoSequencia(this.condicion.sId);
+    this.condicionService.editCondicao(this.condicion)
+      .then(elem => {
+        this.saveSucess = true;
+        this.message.sucMessage = 'Condição ' + this.condicion.sCodCondicion + ' - ' + this.condicion.sDesCondicion + ' salva com sucesso!';
+        this.condicion = new Condicion();
+        setTimeout(() => {
+          this.saveSucess = false;
+        }, 2000);
+      })
+      .then(elem => {
+        // Actualizo los codigos de condiciones
+        this.condicaos = new Array<any>();
+        this.condicionService.getCondicaos()
+          .then(result => {
+            result.map(co => this.condicaos.push(co));
+            this.spinner.hide();
+          });
+      })
+      .catch((error: any) => {
+        if (error.error.Cod_Condicao[0] === 'condicao with this Cod Condicao already exists.') {
+          this.message.errMessage = 'O código de condição já existe';
+          this.saveError = true;
+        }
+        setTimeout(() => {
+          this.saveError = false;
+        }, 2000);
+      });
+  }
+
+  /*
+    Iván Lynch 09/03/2020
+    Input: null
+    Output: null
+  */
+  public onSubmitCondicao() {
+    if (this.bCreateMode) {
+      this.postCondicao();
+      this.updateMasterData();
+    } else {
+      this.putCondicao();
+      this.updateMasterData();
+    }
   }
 }
