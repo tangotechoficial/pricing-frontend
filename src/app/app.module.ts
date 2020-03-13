@@ -38,6 +38,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FilterModalComponent } from './components/filter-modal/filter-modal.component';
 import { TabbedChartsComponent } from './components/plano-compra/tabbed-charts/tabbed-charts.component';
 import { SellingCompositionChartsComponent } from './components/plano-compra/selling-composition-charts/selling-composition-charts.component';
+import { PlanningTableComponent } from './components/plano-compra/planning-table/planning-table.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -67,7 +68,8 @@ import { SellingCompositionChartsComponent } from './components/plano-compra/sel
     SimuladorComponent,
     FilterModalComponent,
     TabbedChartsComponent,
-    SellingCompositionChartsComponent
+    SellingCompositionChartsComponent,
+    PlanningTableComponent
   ],
   imports: [
     BrowserModule,
