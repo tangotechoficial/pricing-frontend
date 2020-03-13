@@ -6,10 +6,12 @@ import { Component } from '@angular/core';
   styleUrls: ['../../precio/precio.component.scss']
 })
 export class PrecioBusiness {
-
-  
+  public sequencias;
+  public selectedSequencia;
   ngOnInit() {
   }
+
+  getSelectedSequencia(val: any){}
 
  
 }

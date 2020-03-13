@@ -74,7 +74,7 @@ export class PrecioVentaComponent implements OnInit {
   }
 
   parseResponseCamada(data) {
-    return data.filter(e => e.TIPO_BASE_VENDAS === "B")
+    return data.filter(e => e.TIPO_BASE_VENDAS === "V")
   }
 
   goToSection() {
