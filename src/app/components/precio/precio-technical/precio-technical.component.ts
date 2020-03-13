@@ -20,11 +20,13 @@ export class PrecioTechnical {
   modelCondicao: ModelCondicao;
   bSelectCondicao = false;
   globalIndex = 0;
+  tipoValor: Array<any>;
 
-  constructor() {}
+  constructor( private condicionService: CondicionService){}
 
   ngOnInit() {
-    console.log(this.camada);
+    this.tipoValor = new Array<any>();
+    this.condicionService.getTiposValor().then(result => result.map(tv => this.tipoValor.push(tv)))
     this.condicaos = this.camada.condicaos;
     this.condicaosAllow = this.camada.condicaosAllow;
     this.camadaU = this.camada.camada;
@@ -37,6 +39,14 @@ export class PrecioTechnical {
     this.isEditNew = true;
   }
 
+  remove(val: any) {
+    this.condicaos.map((elem, index) => {
+      if (elem.id === val) {
+        this.condicaos.splice(index, 1);
+      }
+    });
+  }
+
   cancel() {
     this.condicaos.pop();
   }
@@ -45,9 +55,9 @@ export class PrecioTechnical {
   }
 
   findCondicao(val: any) {
-    
     this.bSelectCondicao = true;
     this.isEditNew = false;
+
     this.condicaos[this.globalIndex].set({
       id: val.sId,
       Cod_Condicao: val.sCodCondicion,
@@ -55,8 +65,14 @@ export class PrecioTechnical {
       Escala_Qtde: val.bEscalaQtde,
       POS_NEG: val.sPos ? 'P' : 'N',
       TIP_BASE_VENDAS: val.TIP_BASE_VENDAS,
-      MANDATORIA: val.MANDATORIA,
-      ESTATISTICA: val.ESTATISTICA
+      MANDATORIA: val.MANDATORIA === 0 ? false : true,
+      ESTATISTICA: val.ESTATISTICA === 0 ? false : true
+    });
+
+    this.tipoValor.map(elem => {
+      if (elem.id_TipoValor === val.id_TipoValor){
+        this.condicaos[this.globalIndex].id_TipoValor = elem;
+      }
     });
   }
 }
