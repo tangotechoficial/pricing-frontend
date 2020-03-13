@@ -73,7 +73,7 @@
                 <input id="saSearch1"
                     class="form-control border-top-0 border-right-0 border-left-0 p-4 list-header custom-text-muted"
                     [(ngModel)]="searchSeq" placeholder="Pesquise o tipo de condição..." />
-                <ul class="p-0 custom-scrollbar-css">
+                <ul class="p-0 martins-scrollbar">
                     <li *ngFor="let seq of sequenciasAcceso | filterseleccionado: searchSeq ; let id = index " class="p-2">
                         <div class="custom-control custom-checkbox">
                             <input (change)="checkValue(seq)" type="checkbox" class="custom-control-input"
@@ -90,7 +90,7 @@
                 <input id="saSearch2"
                     class="form-control border-top-0 border-right-0 border-left-0 p-4 list-header custom-text-muted"
                     [(ngModel)]="searchSeleccionado" placeholder="Pesquise o tipo de condição..." />
-                <ul class="p-0 custom-scrollbar-css">
+                <ul class="p-0 martins-scrollbar">
                     <li *ngFor="let seq of selectedProperties | filterseleccionado :searchSeleccionado"
                         class="p-2 w-100 d-flex">
                         <div class="d-flex w-100 justify-content-between align-items-center">

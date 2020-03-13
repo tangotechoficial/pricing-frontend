@@ -22,6 +22,16 @@ export class PrecioBaseComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    /*
+    Pablo Gerez 12/03/2020
+    Gets type of user to validate
+    which component will be shown
+  */
+    if(this.sCurrentUser.type !== "technical"){
+      this.bBusiness = true;
+    }else{
+      this.bBusiness = false;
+    }
     // traer por servicio cada condicion
     this._condicionService.getCamadas()
     .then(data => {

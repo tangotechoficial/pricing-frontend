@@ -174,3 +174,35 @@ i.fas.fa-search.disabledSearch {
 .martins-pointer {
     cursor: pointer;
 }
+
+// ----- custom scrollbar for whole app ------- 
+// change 'height' as needed
+// in the styles of the corresponding component
+
+.martins-scrollbar {
+   // height: 200px;
+    /*styles for Firefox*/
+    scrollbar-color: #384461  #eee;
+    scrollbar-width: thin;
+  }
+
+  .martins-scrollbar {
+    overflow-y: scroll;
+  }
+  
+    /*-----styles for Chrome and Safari-----*/
+  /* scrollbar width */
+  .martins-scrollbar::-webkit-scrollbar {
+    width: 0.8rem;
+  }
+  
+  /* scrollbar track */
+  .martins-scrollbar::-webkit-scrollbar-track {
+    background: #eee;
+  }
+  
+  /* scrollbar handle */
+  .martins-scrollbar::-webkit-scrollbar-thumb {
+    border-radius: 1rem;
+    background-color: #384461;
+  }

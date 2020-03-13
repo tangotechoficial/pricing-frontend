@@ -1,135 +1,140 @@
-<div class="precioWrapper">
+<div class="precioWrapper px-5 py-4">
 
     <div class="row">
         <div class=" col-xs-12 col-lg-12 ">
-            <div class="modInput">
+            <div class="mb-3">
                 <div class="form row">
-                    <div class="form-group col-xs-12 col-md-1">
-                        <label for="nombre" class="martinsLabel control-label">Cod.Mat</label>
-                        <input type="text" value='' class="form-control" name="nombre" id="nombre" placeholder="Cod.">
-                    </div>
-                    <div class="dropdown form-group col-xs-12 col-md-3">
-                        <label for="nombre" class="martinsLabel control-label">Descrição do material</label>
-                        <button class="col-12 btn btn-light dropdown-toggle dropdownMenuButton text-left  px-12 py-12"
-                            type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Selecione
-                        </button>
+                    <div class="row">
+                        <div class="form-group col-xs-12 col-md-1">
+                            <label for="nombre" class="martinsLabel control-label">Cod.Mat</label>
+                            <input type="text" value='' class="form-control" name="nombre" id="nombre" placeholder="Cod.">
+                        </div>
+                        <div class="dropdown form-group col-xs-12 col-md-3">
+                            <label for="nombre" class="martinsLabel control-label">Descrição do material</label>
+                            <button class="col-12 btn btn-light dropdown-toggle dropdownMenuButton text-left  px-12 py-12"
+                                type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Selecione
+                            </button>
 
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <button class="dropdown-item martinsText">Opt1</button>
-                            <button class="dropdown-item martinsText">Opt2</button>
-                            <button class="dropdown-item martinsText">Opt3</button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <button class="dropdown-item martinsText">Opt1</button>
+                                <button class="dropdown-item martinsText">Opt2</button>
+                                <button class="dropdown-item martinsText">Opt3</button>
+                            </div>
+                        </div>
+                        <div class="form-group col-xs-12 col-md-1">
+                            <label for="codCat" class="martinsLabel control-label">Cod.Cat</label>
+                            <input type="text" value='' class="form-control" name="codCat" id="codCat" placeholder="Cod.">
+                        </div>
+                        <div class="form-group col-xs-12 col-md-3">
+                            <label for="desmaterial" class="martinsLabel control-label">Descrição da categoria</label>
+                            <input type="text" value='' class="form-control" name="desmaterial" id="desmaterial"
+                                placeholder="Seleccione">
+                        </div>
+                        <div class="form-group col-xs-12 col-md-1">
+                            <label for="codSub" class="martinsLabel control-label">Cod.Sub</label>
+                            <input type="text" value='' class="form-control" name="codSub" id="codSub" placeholder="Cod.">
+                        </div>
+                        <div class="form-group col-xs-12 col-md-3">
+                            <label for="desSub" class="martinsLabel control-label">Descrição da subcategoria</label>
+                            <input type="text" value='' class="form-control" name="desSub" id="desmaterial"
+                                placeholder="Seleccione">
                         </div>
                     </div>
-                    <div class="form-group col-xs-12 col-md-1">
-                        <label for="codCat" class="martinsLabel control-label">Cod.Cat</label>
-                        <input type="text" value='' class="form-control" name="codCat" id="codCat" placeholder="Cod.">
-                    </div>
-                    <div class="form-group col-xs-12 col-md-3">
-                        <label for="desmaterial" class="martinsLabel control-label">Descrição da categoria</label>
-                        <input type="text" value='' class="form-control" name="desmaterial" id="desmaterial"
-                            placeholder="Seleccione">
-                    </div>
-                    <div class="form-group col-xs-12 col-md-1">
-                        <label for="codSub" class="martinsLabel control-label">Cod.Sub</label>
-                        <input type="text" value='' class="form-control" name="codSub" id="codSub" placeholder="Cod.">
-                    </div>
-                    <div class="form-group col-xs-12 col-md-3">
-                        <label for="desSub" class="martinsLabel control-label">Descricao da subcategoria</label>
-                        <input type="text" value='' class="form-control" name="desSub" id="desmaterial"
-                            placeholder="Seleccione">
-                    </div>
-                    <div class="form-group col-xs-12 col-md-1">
-                        <label for="codFe" class="martinsLabel control-label">Cod.FE</label>
-                        <input type="text" value='' class="form-control" name="codFe" id="codFe" placeholder="Cod.">
-                    </div>
-                    <div class="dropdown form-group col-xs-12 col-md-2">
-                        <label for="filialExp" class="martinsLabel control-label">Filial de expedição</label>
-                        <button class="col-12 btn btn-light dropdown-toggle dropdownMenuButton text-left  px-12 py-12"
-                            type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Selecione
-                        </button>
-
-
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <button class="dropdown-item martinsText">Opt1</button>
-                            <button class="dropdown-item martinsText">Opt2</button>
-                            <button class="dropdown-item martinsText">Opt3</button>
+                    <div class="row">  
+                        <div class="form-group col-xs-12 col-md-1">
+                            <label for="codFe" class="martinsLabel control-label">Cod.FE</label>
+                            <input type="text" value='' class="form-control" name="codFe" id="codFe" placeholder="Cod.">
                         </div>
-                    </div>
-                    <!-- SEGUNDA -->
-                    <div class="form-group col-xs-12 col-md-1">
-                        <label for="codFat" class="martinsLabel control-label">Cod.FAT</label>
-                        <input type="text" value='' class="form-control" name="codFat" id="codFat" placeholder="Cod.">
-                    </div>
+                        <div class="dropdown form-group col-xs-12 col-md-3">
+                            <label for="filialExp" class="martinsLabel control-label">Filial de expedição</label>
+                            <button class="col-12 btn btn-light dropdown-toggle dropdownMenuButton text-left  px-12 py-12"
+                                type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Selecione
+                            </button>
 
 
-                    <div class="dropdown form-group col-xs-12 col-md-2">
-                        <label for="filialFat" class="martinsLabel control-label">Filial de faturamento</label>
-                        <button class="col-12 btn btn-light dropdown-toggle dropdownMenuButton text-left  px-12 py-12"
-                            type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Selecione
-                        </button>
-
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <button class="dropdown-item martinsText">Opt1</button>
-                            <button class="dropdown-item martinsText">Opt2</button>
-                            <button class="dropdown-item martinsText">Opt3</button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <button class="dropdown-item martinsText">Opt1</button>
+                                <button class="dropdown-item martinsText">Opt2</button>
+                                <button class="dropdown-item martinsText">Opt3</button>
+                            </div>
                         </div>
-                    </div>
-
-
-                    <div class="dropdown form-group col-xs-12 col-md-1">
-                        <label for="estado" class="martinsLabel control-label">Estado</label>
-                        <button class="col-12 btn btn-light dropdown-toggle dropdownMenuButton text-left  px-12 py-12"
-                            type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            UF
-                        </button>
-
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <button class="dropdown-item martinsText">Opt1</button>
-                            <button class="dropdown-item martinsText">Opt2</button>
-                            <button class="dropdown-item martinsText">Opt3</button>
+                        <!-- SEGUNDA -->
+                        <div class="form-group col-xs-12 col-md-1">
+                            <label for="codFat" class="martinsLabel control-label">Cod.FAT</label>
+                            <input type="text" value='' class="form-control" name="codFat" id="codFat" placeholder="Cod.">
                         </div>
-                    </div>
 
 
-                    <div class="dropdown form-group col-xs-12 col-md-2">
-                        <label for="reg" class="martinsLabel control-label">Região de preço</label>
-                        <button class="col-12 btn btn-light dropdown-toggle dropdownMenuButton text-left  px-12 py-12"
-                            type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Cód
-                        </button>
+                        <div class="dropdown form-group col-xs-12 col-md-2">
+                            <label for="filialFat" class="martinsLabel control-label">Filial de faturamento</label>
+                            <button class="col-12 btn btn-light dropdown-toggle dropdownMenuButton text-left  px-12 py-12"
+                                type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Selecione
+                            </button>
 
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <button class="dropdown-item martinsText">Opt1</button>
-                            <button class="dropdown-item martinsText">Opt2</button>
-                            <button class="dropdown-item martinsText">Opt3</button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <button class="dropdown-item martinsText">Opt1</button>
+                                <button class="dropdown-item martinsText">Opt2</button>
+                                <button class="dropdown-item martinsText">Opt3</button>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-group col-xs-12 col-md-2">
-                        <input type="submit" class="btn bg-inverted btn-labeled btn-block btn-md btn-pventa "
-                            value="Salvar">
-                    </div>
-                    <div class="form-group col-xs-12 col-md-1 ">
-                        <input type="submit" class="btn bg-inverted btn-labeled btn-block btn-md btn-pventa btn-grey"
-                            value="Limpar">
-                    </div>
 
+                        <div class="dropdown form-group col-xs-12 col-md-1">
+                            <label for="estado" class="martinsLabel control-label">Estado</label>
+                            <button class="col-12 btn btn-light dropdown-toggle dropdownMenuButton text-left  px-12 py-12"
+                                type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                UF
+                            </button>
+
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <button class="dropdown-item martinsText">Opt1</button>
+                                <button class="dropdown-item martinsText">Opt2</button>
+                                <button class="dropdown-item martinsText">Opt3</button>
+                            </div>
+                        </div>
+
+
+                        <div class="dropdown form-group col-xs-12 col-md-2">
+                            <label for="reg" class="martinsLabel control-label">Região de preço</label>
+                            <button class="col-12 btn btn-light dropdown-toggle dropdownMenuButton text-left  px-12 py-12"
+                                type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Cód
+                            </button>
+
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <button class="dropdown-item martinsText">Opt1</button>
+                                <button class="dropdown-item martinsText">Opt2</button>
+                                <button class="dropdown-item martinsText">Opt3</button>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-xs-12 col-md-1">
+                            <input type="submit" class="btn bg-inverted btn-labeled btn-block btn-md btn-pventa "
+                                value="Abrir">
+                        </div>
+                        <div class="form-group col-xs-12 col-md-1 ">
+                            <input type="submit" class="btn bg-inverted btn-labeled btn-block btn-md btn-pventa btn-grey"
+                                value="Limpar">
+                        </div>
+                    </div>  
                 </div>
 
             </div>
 
         </div>
 
-        <div class="modCond  modGeneral col-xs-12 col-md-4 col-lg-4">
-            <h4 class="subtitlab darkbl">Seleccione uma condicão <i class="fas fa-info-circle"></i></h4>
+        <div class="modCond modGeneral col-xs-12 col-md-4 col-lg-4 bg-white rounded martins-scrollbar p-4">
+            <div class="d-flex flex-row">
+                <h4 class="subtitlab darkbl col-md-8">Seleccione uma condição</h4>
+                <i class="fas fa-info-circle col-md-4 text-right"></i>
+            </div>
+            <div class="mt-3">
+                <h5 class="subtitlab darkbl m-0">CMV</h5>
 
-            <div class="itemCond">
-                <h5 class="subtitlab darkbl">CMV</h5>
-
-                <div class="row subItemCond">
+                <div class="row submt-3">
                     <div class="col col-xs-3">
                         <p class="martinsText">CMV</p>
                     </div>
@@ -140,7 +145,7 @@
 
                 <hr>
 
-                <div class="row subItemCond">
+                <div class="row submt-3">
                     <div class="col col-xs-3">
                         <p class="martinsText subtitlab darkbl">Subtotal</p>
                     </div>
@@ -151,10 +156,10 @@
 
             </div>
 
-            <div class="itemCond">
-                <h5 class="subtitlab darkbl">REGULATORIO</h5>
+            <div class="mt-3">
+                <h5 class="subtitlab darkbl m-0">REGULATÓRIO</h5>
 
-                <div class="row subItemCond">
+                <div class="row submt-3">
                     <div class="col col-xs-3">
                         <p class="martinsText">IPI</p>
                     </div>
@@ -163,7 +168,7 @@
                     </div>
                 </div>
 
-                <div class="row subItemCond">
+                <div class="row submt-3">
                     <div class="col col-xs-3">
                         <p class="martinsText">ST</p>
                     </div>
@@ -174,7 +179,7 @@
 
 
                 <hr>
-                <div class="row subItemCond">
+                <div class="row submt-3">
                     <div class="col col-xs-3">
                         <p class="martinsText subtitlab darkbl">Subtotal</p>
                     </div>
@@ -186,12 +191,12 @@
             </div>
 
 
-            <div class="itemCond">
-                <h5 class="subtitlab darkbl">OPERACIONAL</h5>
+            <div class="mt-3">
+                <h5 class="subtitlab darkbl m-0">OPERACIONAL</h5>
 
-                <div class="row subItemCond">
+                <div class="row submt-3">
                     <div class="col col-xs-3">
-                        <p class="martinsText">Fraccionamiento</p>
+                        <p class="martinsText">Devolução</p>
                     </div>
                     <div class="col col-xs-9">
                         <p class="martinsText text-right">+5,00</p>
@@ -199,7 +204,7 @@
                 </div>
 
                 <hr>
-                <div class="row subItemCond">
+                <div class="row submt-3">
                     <div class="col col-xs-3">
                         <p class="martinsText subtitlab darkbl">Subtotal</p>
                     </div>
@@ -210,10 +215,10 @@
 
             </div>
 
-            <div class="itemCond">
-                <h5 class="subtitlab darkbl">FINANCIERO</h5>
+            <div class="mt-3">
+                <h5 class="subtitlab darkbl m-0">FINANCIERO</h5>
 
-                <div class="row subItemCond">
+                <div class="row submt-3">
                     <div class="col col-xs-3">
                         <p class="martinsText">Condição de pag.</p>
                     </div>
@@ -222,7 +227,7 @@
                     </div>
                 </div>
 
-                <div class="row subItemCond">
+                <div class="row submt-3">
                     <div class="col col-xs-3">
                         <p class="martinsText">Margen por seg.</p>
                     </div>
@@ -232,7 +237,7 @@
                 </div>
 
                 <hr>
-                <div class="row subItemCond">
+                <div class="row submt-3">
                     <div class="col col-xs-3">
                         <p class="martinsText subtitlab darkbl">Subtotal</p>
                     </div>
@@ -246,12 +251,12 @@
         </div>
 
         <div class="col-xs-12 col-offset-col-md-4 col-lg-8">
-            <div class="modCondSelect modGeneral">
+            <div class="modCondSelect modGeneral bg-white rounded p-4">
 
-                <h4 class="subtitlab">Condição selecionada </h4>
-                <h4 class="subtitlab darkgr">Selecione uma sequência de acesso</h4>
+                <h4 class="pb-2 subtitlab">Condição selecionada </h4>
+                <h4 class="pb-2 subtitlab darkgr">Selecione uma sequência de acesso</h4>
 
-                <div class="dropdown col-12 mt-2">
+                <div class="dropdown col-12 mt-2 mb-4 p-0">
                     <button class="dropdownMenuButton col-12 btn btn-light dropdown-toggle text-left  px-12 py-12"
                         type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {{ selectedSequencia ? selectedSequencia.Nome_Sequencia : 'Selecione uma opção' }}
@@ -265,9 +270,10 @@
                 </div>
                 <h4 class="subtitlab darkgr">Preencher condições</h4>
 
-                <div class="compliance">
+                <div class="compliance border rounded martins-scrollbar">
 
-
+                    <!--agrego clase 'martins-scrollbar' porque al momento que haya elementos
+                    dentro de este div, aparecera el scrollbar segun el AdobeXD-->
                 </div>
                 <div class="text-center">
                     <input type="submit" class="btn bg-inverted btn-md btn-pventa font-weight-bold mt-4 py-2 px-5"
