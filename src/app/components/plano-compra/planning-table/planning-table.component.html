@@ -1,1 +1,190 @@
-<p>planning-table works!</p>
+{{data}}
+<div class="row d-flex flex-row badges">
+    <div>
+    <span class="badge badge-secondary p-2">11/03/2020</span>
+    <span class="badge badge-secondary p-2">Semana 2</span>
+    </div>
+  <button class="btn btn-outline-primary p-1">Elasticidade</button>
+</div>
+<div class="row with-overflow">
+  <table class="table">
+    <col>
+    <colgroup span=3></colgroup>
+    <tr>
+      <td rowspan="2"></td>
+      <th scope="colgroup" *ngFor="let item of data; let weekCount=index" colspan="3">Semana {{weekCount +1 }}</th>
+    </tr>
+    <tr>
+      <ng-container *ngFor="let item of data">
+        <th scope="col">Sugerido</th>
+        <th scope="col">Planejado</th>
+        <th scope="col">Realizado</th>
+      </ng-container>
+    </tr>
+    <tr>
+      <th scope="row">Vendas (R$)</th>
+      <ng-container *ngFor="let item of data">
+        <td>{{ item.meta_venda_sugerido| number: "1.2-2" }}</td>
+        <td>{{ item.meta_venda_planejado| number: "1.2-2" }}</td>
+        <td></td>
+      </ng-container>
+    </tr>
+    <tr>
+      <th scope="row">Margem (%)</th>
+      <ng-container *ngFor="let item of data">
+        <td>{{ item.margem_bruta_planejado| number: "1.2-2" }}</td>
+        <td>{{ item.margem_bruta_planejado| number: "1.2-2" }}</td>
+        <td></td>
+      </ng-container>
+    </tr>
+    <tr>
+      <th scope="row">Competitividade (%)</th>
+      <ng-container *ngFor="let item of data">
+        <td>{{ item.competitividade_sugerido| number: "1.2-2" }}</td>
+        <td>{{ item.competitividade_planejado| number: "1.2-2" }}</td>
+        <td></td>
+      </ng-container>
+    </tr>
+    <tr>
+      <th scope="row">Preço Mercado (R$)</th> <!-- child from competitividade row -->
+      <ng-container *ngFor="let item of data">
+        <td>{{ item.preco_venda_bruta_sugerido| number: "1.2-2" }}</td>
+        <td>{{ item.preco_base_planejado| number: "1.2-2" }}</td>
+        <td></td>
+      </ng-container>
+    </tr>
+    <tr>
+      <th scope="row">Preço Venda (R$)</th>
+      <ng-container *ngFor="let item of data">
+        <td>{{ item.preco_venda_liquido_sugerido| number: "1.2-2" }}</td>
+        <td>{{ item.preco_venda_liquido_planejado| number: "1.2-2" }}</td>
+        <td></td>
+      </ng-container>
+    </tr>
+    <tr>
+      <th scope="row">Custos (R$)</th>
+      <ng-container *ngFor="let item of data">
+        <td>{{ item.impostos| number: "1.2-2" }}</td>
+        <td>{{ item.impostos| number: "1.2-2" }}</td>
+        <td></td>
+      </ng-container>
+    </tr>
+    <tr>
+      <th scope="row">Impostos (R$)</th>
+      <ng-container *ngFor="let item of data">
+      <td>{{ (item.icms_sugerido + item.pis_cofins_sugerido + item.ipi_sugerido + item.st_sugerido)| number: "1.2-2" }}</td>
+      <td>{{ (item.icms_planejado + item.pis_cofins_planejado + item.ipi_planejado + item.st_planejado)| number: "1.2-2" }}</td>
+      <td></td>
+      </ng-container>
+    </tr>
+    <!-- start Impostos children -->
+    <tr>
+      <th scope="row">ICMS (R$)</th>
+      <ng-container *ngFor="let item of data">
+      <td>{{ item.icms_sugerido| number: "1.2-2" }}</td>
+      <td>{{ item.icms_planejado| number: "1.2-2" }}</td>
+      <td></td>
+      </ng-container>
+    </tr>
+    <tr>
+      <th scope="row">PIS/COFINS (R$)</th>
+      <ng-container *ngFor="let item of data">
+      <td>{{ item.pis_cofins_sugerido| number: "1.2-2" }}</td>
+      <td>{{ item.pis_cofins_planejado| number: "1.2-2" }}</td>
+      <td></td>
+      </ng-container>
+    </tr>
+    <tr>
+      <th scope="row">IPI (R$)</th>
+      <ng-container *ngFor="let item of data">
+      <td>{{ item.ipi_sugerido| number: "1.2-2" }}</td>
+      <td>{{ item.ipi_planejado| number: "1.2-2" }}</td>
+      <td></td>
+      </ng-container>
+    </tr>
+    <tr>
+      <th scope="row">ST (R$)</th>
+      <ng-container *ngFor="let item of data">
+      <td>{{ item.st_sugerido| number: "1.2-2" }}</td>
+      <td>{{ item.st_planejado| number: "1.2-2" }}</td>
+      <td></td>
+      </ng-container>
+    </tr>
+    <!-- // End Impostos children -->
+    <tr>
+      <th scope="row">Operacional (R$)</th>
+      <ng-container *ngFor="let item of data">
+      <td>{{ (item.operacional_devolucao_sugerido + item.operacional_logistica_sugerido| number: "1.2-2") }}</td>
+      <td>{{ (item.operacional_devolucao_planejado + item.operacional_logistica_planejado| number: "1.2-2") }}</td>
+      <td></td>
+      </ng-container>
+    </tr>
+    <tr>
+      <th scope="row">Devolução (R$)</th> <!-- Operacional's child -->
+      <ng-container *ngFor="let item of data">
+      <td>{{ item.operacional_devolucao_sugerido| number: "1.2-2" }}</td>
+      <td>{{ item.operacional_devolucao_planejado| number: "1.2-2" }}</td>
+      <td></td>
+      </ng-container>
+    </tr>
+    <tr>
+      <th scope="row">Logística (R$)</th> <!-- Operacional's child -->
+      <ng-container *ngFor="let item of data">
+      <td>{{ item.operacional_logistica_sugerido| number: "1.2-2" }}</td>
+      <td>{{ item.operacional_logistica_planejado| number: "1.2-2" }}</td>
+      <td></td>
+      </ng-container>
+    </tr>
+    <tr>
+      <th scope="row">Margem Bruta (R$)</th>
+      <ng-container *ngFor="let item of data">
+      <td></td>
+      <td>{{ item.margem_bruta_planejado| number: "1.2-2"}}</td>
+      <td></td>
+      </ng-container>
+    </tr>
+    <tr>
+      <th scope="row">Verba (R$)</th>
+      <ng-container *ngFor="let item of data">
+      <td>{{ item.verba_sugerido| number: "1.2-2" }}</td>
+      <td>{{ item.verba_planejado| number: "1.2-2" }}</td>
+      <td></td>
+      </ng-container>
+    </tr>
+    <!-- Verba's children start -->
+    <tr>
+      <th scope="row">Rebate (R$)</th>
+      <ng-container *ngFor="let item of data">
+      <td>{{ item.rebate_sugerido| number: "1.2-2" }}</td>
+      <td>{{ item.rebate_planejado| number: "1.2-2" }}</td>
+      <td></td>
+      </ng-container>
+    </tr>
+    <tr>
+      <th scope="row">Bonificação (R$)</th>
+      <ng-container *ngFor="let item of data">
+      <td>{{ item.bonificacao_sugerido| number: "1.2-2" }}</td>
+      <td>{{ item.bonificacao_planejado| number: "1.2-2" }}</td>
+      <td></td>
+      </ng-container>
+    </tr>
+    <tr>
+      <th scope="row">Verba em Dinheiro (R$)</th>
+      <ng-container *ngFor="let item of data">
+      <td>{{ item.verba_especie_sugerido| number: "1.2-2" }}</td>
+      <td>{{ item.verba_especie_planejado| number: "1.2-2" }}</td>
+      <td></td>
+      </ng-container>
+    </tr>
+    <!-- // Verba's children end -->
+    <tr>
+      <th scope="row">CMV (R$)</th>
+      <ng-container *ngFor="let item of data">
+      <td>{{ item.cmv_sugerido| number: "1.2-2" }}</td>
+      <td>{{ item.cmv_planejado| number: "1.2-2" }}</td>
+      <td></td>
+      </ng-container>
+    </tr>
+  </table>
+
+</div>
