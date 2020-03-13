@@ -90,14 +90,14 @@ export class NavegacionComponent implements OnInit {
 
   }
 
-  ngDoCheck() {
+  /* ngDoCheck() {
     this.navOutput.next(this.cMode);
     if(!this.cMode){
       this.section = "Alterar condição";
     }else{
       this.section = "Criar nova condição";
     }
-  }
+  } */
 
   notifyOpen(){
       $("#notificationPopUp").fadeToggle(400);
