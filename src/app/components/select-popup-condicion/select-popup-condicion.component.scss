@@ -10,9 +10,8 @@ $selectGrey:#F2F2F2;
 }
 
 .popupmenu{
-	position: absolute;
-	z-index: 100;
-	background-color: white;
+	position: fixed;
+	z-index: 9999;
 	top:50%;
 	left:50%;
 	transform: translate(-50%,-50%);
@@ -23,10 +22,8 @@ $selectGrey:#F2F2F2;
 	.pheader{
 		height: 45px;
 		background-color: $selectGrey ;
-		width: 100%;
 	}
 	.pbody{
-		width: 100%;
 		.bodyBord{
 			border-radius:10px;
 			border:1px solid darken($selectGrey,30%);
