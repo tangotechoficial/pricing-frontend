@@ -23,14 +23,6 @@ export class PrecioVentaComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // traer por servicio cada condicion
-    this._condicionService.getCamadas()
-    .then(data => {
-      this.camadas = this.parseResponseCamada(data)
-      this.loading = false
-    })
-    .catch(err => alert(err))
-
     
     const camadas =  this._condicionService.getCamadas()
     const camadaEsquemas = this._condicionService.getCamadaEsquema();
@@ -58,7 +50,7 @@ export class PrecioVentaComponent implements OnInit {
             return condicaos.filter(cond => cond.id == condCamada.id_Condicao)[0];
           })
   
-          
+          this.loading = false
           return {
             camada,
             condicaosAllow,
