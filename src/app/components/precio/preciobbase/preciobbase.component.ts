@@ -5,7 +5,7 @@ import { Sequencia } from '../../../models/sequencia';
 @Component({
   selector: 'app-preciobbase',
   templateUrl: './preciobbase.component.html',
-  styleUrls: ['../../precio/precio.component.scss', '../precioventa/precioventa.component.scss'],
+  styleUrls: ["../../precio/precio.component.scss"],
   providers: [SaccesoService]
 })
 export class PreciobbaseComponent implements OnInit {
