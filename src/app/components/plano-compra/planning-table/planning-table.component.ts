@@ -1,15 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Input, Component, OnInit } from '@angular/core';
+
 
 @Component({
-  selector: 'app-planning-table',
+  selector: 'planning-table',
   templateUrl: './planning-table.component.html',
   styleUrls: ['./planning-table.component.css']
 })
 export class PlanningTableComponent implements OnInit {
-
+  @Input() data;
   constructor() { }
 
   ngOnInit() {
+
   }
+
 
 }
