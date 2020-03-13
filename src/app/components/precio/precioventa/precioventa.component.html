@@ -1,22 +1,24 @@
 <!-- Navigation Bar -->
 <navegacion></navegacion>
 
-<!--Main view-->
-<div class="container menu-background" id="precio-container">
-  <!-- BUSINESS USER -->
-  <div *ngIf="bBusiness">
+<!--Component Content
+<div class="container d-flex flex-column background col-12 justify-content-center pb-5"> -->
+<div class="container menu-background">
+    <!--Main view-->
+    <!-- BUSINESS USER -->
+    <div *ngIf="bBusiness">
         <precio-business></precio-business>
-  </div>
-
-  <!-- TECHNICAL USER -->
-    <div *ngIf="!bBusiness">
-        <div class="background">
-            <precio-technical titulo="PRECO BASE"></precio-technical>
-            <precio-technical titulo="REGULATORIO"></precio-technical>
-            <precio-technical titulo="FINANCEIRO"></precio-technical>
-            <precio-technical titulo="DESCONTO"></precio-technical>
-            <precio-technical titulo="DESCONTO TRADE"></precio-technical>
-        </div>
     </div>
-
-</div>
+    <!-- TECHNICAL USER -->
+    <div *ngIf="!bBusiness">
+        <div *ngIf="!loading" class="background">
+            <div *ngFor="let camada of camadas">
+                <precio-technical [camada]="camada"></precio-technical>
+            </div>
+            <div class="text-center">
+                <button class="btn btn-lg bg-standard">Salvar</button>
+            </div>
+            <br/>
+                <br/>
+                </div>
+            </div>

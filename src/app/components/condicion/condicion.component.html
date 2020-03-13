@@ -69,7 +69,7 @@
             </div>
         </div>
         <div class="d-flex justify-content-between border rounded col-2 p-0">
-            <div class="col-12 d-flex justify-content-center p-0">
+            <div class="col-12 d-flex justify-content-center p-0 bg-white">
                 <div class="col-6 d-flex flex-column justify-content-center align-items-center">
                     <span class="text-header">Positivo</span>
                     <div class="custom-control custom-checkbox mb-2">
@@ -94,7 +94,7 @@
                 <input id="saSearch4"
                     class="form-control border-top-0 border-right-0 border-left-0 p-4 list-header custom-text-muted"
                     [(ngModel)]="searchSeleccionado" placeholder="Pesquise o tipo de condição..." />
-                <ul class="p-0 custom-scrollbar-css">
+                <ul class="p-0 martins-scrollbar">
                     <li *ngFor="let sequencia of sequencias ; let id = index" class="p-2">
                         <div class="custom-control custom-checkbox">
                             <input (click)="checkValue(sequencia)" type="checkbox"
@@ -112,7 +112,7 @@
                 <input id="saSearch2"
                     class="form-control border-top-0 border-right-0 border-left-0 p-4 list-header custom-text-muted"
                     [(ngModel)]="searchSeleccionado" placeholder="Pesquise o tipo de condição..." />
-                <ul class="p-0 custom-scrollbar-css">
+                <ul class="p-0 martins-scrollbar">
                     <li *ngFor="let seq of selectedProperties ; let id = index " class="p-2">
                         <div class="d-flex w-100 justify-content-between align-items-center">
                             <label class="pl-4 mb-0">{{seq.Nome_Sequencia}}</label>

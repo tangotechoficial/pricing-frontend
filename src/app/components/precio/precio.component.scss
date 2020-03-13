@@ -1,15 +1,14 @@
 @import '../../../assets/styles/global.scss';
-@import '../../../assets/styles/condicion-sacceso.scss';
+//@import '../../../assets/styles/condicion-sacceso.scss';
 @import '../../../assets/styles/mixins-var.scss';
 
+.menu-background {
+	height: auto;
+}
 
 .fa-search {
     color: $martinsTextGrey;
     font-size: 1.2rem;
-}
-
-.container.rounded {
-    background-color: white;
 }
 
 .btn-secondary {
@@ -20,12 +19,6 @@
       }
 }
 
-input.button-save[disabled] {
-    background-color: transparent;
-    color: $martinsBlue;
-    border: 2px solid;
-}
-
 /*---precioventa styles---*/
 
 hr{
@@ -34,45 +27,21 @@ hr{
 }
 
 .menu-background{
-    overflow-y: scroll;
     &::-webkit-scrollbar {
     display: none;
   }
 }
 .precioWrapper{
 
-	padding:30px 40px;
-
 	.modGeneral{
-		background-color: white;
-		padding:30px;
-		border-radius: 5px;
-		color:red;
-    height: 100%;
-    h5{
-      margin:0px;
-    }
-	}
-
-	.modInput{
-		margin-bottom: 12px;
+    	height: 100%;
 	}
 
 	.modCond{
 		box-shadow: 0px 0px 6px 0px rgba(9, 9, 10, 0.1);
-		height: 100vh;
-		overflow-y: scroll;
-		i{
+		height: 25rem;
+		i {
 			font-size:20px;
-		}
-		.itemCond{
-			margin-top:20px;
-			.subItemCond{
-				p{
-					padding-left:10px;
-				}
-
-			}
 		}
 
 	}
@@ -80,18 +49,12 @@ hr{
 		box-shadow: 0px 0px 6px 0px rgba(9, 9, 10, 0.1);
 		width: 99%;
 		margin:0 auto;
-		h4{
-			padding-bottom:10px;
-		}
+		height: 25rem;
 
-		.dropdown{
-			margin-bottom: 20px !important;
-			padding:0px;
-		}
 		.compliance{
-			border-radius: 5px;
-			border:1px solid $navMenuIconGrey;
-			height: 250px;
+			height: 50%;
+			border-color: $navMenuIconGrey !important;
+			height: 10rem;
 		}
 	}
 }
