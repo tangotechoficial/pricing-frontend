@@ -1,5 +1,5 @@
 <select-popup-condicion *ngIf="bSelectCondicao" (closePopup)="onCloseCondicaoPopUp($event)" (selectedObject)="findCondicao($event)" [dataList]="this.condicaosAllow"></select-popup-condicion>
-<div class="container col-9 d-flex flex-column justify-content-center px-4 py-4">
+<div class="container col-12 d-flex flex-column justify-content-center px-4 py-4">
     <div *ngIf="loading" class="container p-0 rounded border col-12 bg-white">
         <div class="col-12 p-3 border-bottom">
             <span class="text-header">{{camadaU.Nome_Camada}}</span>
@@ -54,16 +54,16 @@
             </div>
             <div class="col-1 d-flex flex-column justify-content-center
                 align-items-center">
-                <div class="mt-2 ml-4">
+                <div class="mt-1 ml-4">
                     <span class="pb-3 mt-2 text-header">Remover</span>
                 </div>
                 <div class="w-100 h-100 d-flex justify-content-center
-                    align-items-center mb-2">
+                    align-items-center mb-1">
                     <button (click)="remove(condicao.id)" type="button"
                         class="btn btn-secondary p-0 ml-4 d-flex flex-column
                         align-items-center justify-content-center">
                         <span class="btn-label d-flex align-items-center"><i
-                                class="fas fa-times p-0"></i></span>
+                                class="fas fa-times p-0 text-white"></i></span>
                     </button>
                 </div>
             </div>
