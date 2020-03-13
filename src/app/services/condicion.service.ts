@@ -52,7 +52,7 @@ export class CondicionService {
          ).toPromise();
     }
 
-    postCondicaoSequencia(condId, seqId) {
+    public postCondicaoSequencia(condId, seqId) {
         return this.http.post(this.url + '/condicaosequencia/', {
             id_Condicao: condId,
             id_Sequencia: seqId

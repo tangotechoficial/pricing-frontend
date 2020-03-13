@@ -67,7 +67,7 @@ export class PrecioBaseComponent implements OnInit {
             return condicaos.filter(cond => cond.id == condCamada.id_Condicao)[0];
           })
   
-          
+          this.loading = false
           return {
             camada,
             condicaosAllow,
