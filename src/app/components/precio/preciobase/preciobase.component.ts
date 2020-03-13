@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { CondicionService } from '../../../services/condicion.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   // tslint:disable-next-line: component-selector
   selector: 'preciobase',
   templateUrl: './preciobase.component.html',
   styleUrls: ['../../precio/precio.component.scss'],
-  providers: [CondicionService]
+  providers: [CondicionService, NgxSpinnerService]
 })
 export class PrecioBaseComponent implements OnInit {
   public sCurrentUser = JSON.parse(localStorage.getItem('User'));
@@ -17,12 +18,17 @@ export class PrecioBaseComponent implements OnInit {
   existNegocios: any;
   existVentas: any;
   loading = true;
+  public condicao: Array<any>;
 
   constructor(
-    private condicionService: CondicionService
+    private condicionService: CondicionService,
+    private spinner: NgxSpinnerService
   ) { }
 
   ngOnInit() {
+
+    this.spinner.show();
+
     /*
       Pablo Gerez 12/03/2020
       Gets type of user to validate
@@ -33,7 +39,7 @@ export class PrecioBaseComponent implements OnInit {
     } else {
       this.bBusiness = false;
     }
-    // traer por servicio cada condicion
+
     const camadas = this.condicionService.getCamadas();
     const camadaEsquemas = this.condicionService.getCamadaEsquema();
     const condicaoCamadas = this.condicionService.getCondicaoCamada();
@@ -56,7 +62,6 @@ export class PrecioBaseComponent implements OnInit {
           const condicaosAllow = condicaoCamadasRes.filter((condCam: any) => condCam.id_Camada === camada.id).map(condCamada => {
             return condicaosRes.filter((cond: any) => cond.id === condCamada.id_Condicao)[0];
           });
-
           this.loading = false;
           return {
             camada,
@@ -66,6 +71,7 @@ export class PrecioBaseComponent implements OnInit {
         });
 
         this.camadas = camadasFullData;
+        this.spinner.hide();
       }
     );
   }

@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input, Output } from "@angular/core";
 import { CondicionService } from "../../../services/condicion.service";
 import { ModelCondicao } from "app/models/condicion.model";
 
@@ -13,84 +13,50 @@ export class PrecioTechnical {
   @Input() camada: any;
 
   camadaU: any;
-
   condicaos: Array<ModelCondicao> = [];
   condicaosAllow: Array<ModelCondicao> = [];
-  isEditNew: boolean = false
-  loading: boolean = true
+  isEditNew = false;
+  loading = true;
   modelCondicao: ModelCondicao;
+  bSelectCondicao = false;
+  globalIndex = 0;
 
-  constructor(private _condicionService: CondicionService) {}
+  constructor() {}
 
   ngOnInit() {
-    // {
-    //   camada,
-    //   condicaosAllow,
-    //   condicaos
-    // }
-    this.condicaos = this.camada.condicaos
-    this.condicaosAllow = this.camada.condicaosAllow
-    this.camadaU = this.camada.camada
-    console.log(this.camada)
-    // const camadaEsquemas = this._condicionService.getCamadaEsquema();
-    // const condicaoCamadas = this._condicionService.getCondicaoCamada();
-    // const condicaos = this._condicionService.getCondicaoByCode();
-    // const promisesFetch = [camadaEsquemas, condicaoCamadas, condicaos];
-
-    // Promise.all(promisesFetch).then(
-    //   ([camadaEsquemas, condicaoCamadas, condicaos]) => {
-
-    //     // Mock data CAMADA_ESQUEMA
-    //     // camadaEsquemas = [{
-    //     //   id: 1,
-    //     //   id_Condicao_Camada: 1,
-    //     //   id_Esquema: 1
-    //     // }]
-
-    //     let condicaoCamadasFilter = camadaEsquemas.map(camadaEsquema => {
-    //       return condicaoCamadas.filter(
-    //         condCamada => condCamada.id == camadaEsquema.id_Condicao_Camada
-    //       )[0];
-    //     });
-
-    //     let condicaosFilter = condicaoCamadasFilter.map(condCamada => {
-    //       return condicaos.filter(cond => cond.id == condCamada.id_Condicao)[0];
-    //     });
-
-    //     let condicaosByCamadaFilter = condicaosFilter.filter(cond => cond.id_Camada == this.camada.id)
-
-    //     let condicaosAllow = condicaoCamadas.filter(condCam => condCam.id_Camada == this.camada.id).map(condCamada => {
-    //       return condicaos.filter(cond => cond.id == condCamada.id_Condicao)[0];
-    //     })
-
-    //     this.condicaosAllow = condicaosAllow;
-    //     this.condicaos = condicaosByCamadaFilter;
-    //     this.loading = false
-    //   }
-    // );
+    console.log(this.camada);
+    this.condicaos = this.camada.condicaos;
+    this.condicaosAllow = this.camada.condicaosAllow;
+    this.camadaU = this.camada.camada;
   }
 
   add() {
-    this.modelCondicao = new ModelCondicao({})
+    this.modelCondicao = new ModelCondicao({});
+    this.globalIndex = this.condicaos.length;
     this.condicaos.push(this.modelCondicao);
     this.isEditNew = true;
   }
 
   cancel() {
-    this.condicaos.pop() 
+    this.condicaos.pop();
+  }
+  onCloseCondicaoPopUp(val: any) {
+    this.bSelectCondicao = val;
   }
 
-  findCondicao() {
-    const modelCondicaoFind = this.condicaosAllow.filter(cond => cond.Cod_Condicao == this.modelCondicao.Cod_Condicao)[0]
-    if (modelCondicaoFind) {
-      this.modelCondicao.set(modelCondicaoFind)
-      this.isEditNew = false;
-    } else {
-      const condAll = this.condicaosAllow.map(e => e.Cod_Condicao).toString()
-      const condMsgHelp = condAll.length > 0 ? condAll : "NO HAY CONDICION RELACIONADA CON LA CAMADA"
-      const msg = `Cod Condicao "${this.modelCondicao.Cod_Condicao}" no esta cargado para esta camada. Probá con ${condMsgHelp}`
-      alert(msg)
-    }
+  findCondicao(val: any) {
     
+    this.bSelectCondicao = true;
+    this.isEditNew = false;
+    this.condicaos[this.globalIndex].set({
+      id: val.sId,
+      Cod_Condicao: val.sCodCondicion,
+      Desc_Condicao: val.sDesCondicion,
+      Escala_Qtde: val.bEscalaQtde,
+      POS_NEG: val.sPos ? 'P' : 'N',
+      TIP_BASE_VENDAS: val.TIP_BASE_VENDAS,
+      MANDATORIA: val.MANDATORIA,
+      ESTATISTICA: val.ESTATISTICA
+    });
   }
 }

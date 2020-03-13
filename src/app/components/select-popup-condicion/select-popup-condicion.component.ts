@@ -21,6 +21,7 @@ export class SelectPopupCondicionComponent implements OnInit {
   }
 
   onSelectObject() {
+    console.log(this.currenObject);
     this.selectedObject.emit(this.currenObject);
     this.closePopup.emit(false);
   }
@@ -30,7 +31,14 @@ export class SelectPopupCondicionComponent implements OnInit {
   }
 
   getSelectedCondicao(val: any , i: any) {
+    this.currenObject.sId = val.id;
     this.currenObject.sCodCondicion = val.Cod_Condicao;
+    this.currenObject.sDesCondicion = val.Desc_Condicao;
+    this.currenObject.bEscalaQtde = val.Escala_Qtde === 1 ? true : false;
+    this.currenObject.bNeg = val.POS_NEG === 'N' ? true : false;
+    this.currenObject.bPos = val.POS_NEG === 'P' ? true : false;
+    this.currenObject.MANDATORIA = val.MANDATORIA;
+    this.currenObject.ESTATISTICA = val.ESTATISTICA;
     this.selectItemColor(i);
   }
 
