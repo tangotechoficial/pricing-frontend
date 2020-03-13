@@ -39,6 +39,7 @@ export class CondicionComponent implements OnInit {
 
     if (window.location.pathname.endsWith('criar')) {
       this.bCreateMode = true;
+      this.getLastCondicao();
     } else {
       this.bCreateMode = false;
     }
@@ -292,6 +293,7 @@ export class CondicionComponent implements OnInit {
         setTimeout(() => {
           this.saveSucess = false;
           this.condicion = new Condicion();
+          this.getLastCondicao();
           this.cleanSelections();
         }, 2000);
       })
@@ -355,7 +357,7 @@ export class CondicionComponent implements OnInit {
   }
 
   /*
-    Iván Lynch 09/03/2020
+    Iván Lynch 12/03/2020
     Input: null
     Output: null
   */
@@ -367,5 +369,50 @@ export class CondicionComponent implements OnInit {
       this.putCondicao();
       this.updateMasterData();
     }
+  }
+
+  /* Iván Lynch - 12/03/2020
+     Input: String Code
+     Output: String Code + 1
+     ie:
+        Input: CP001
+        Output: CP002
+  */
+  public getLastCondicao() {
+    this.condicionService.getLastCondicao()
+      .then((result: any) => {
+        this.condicion.setCodigo(this.evaluateNextSA(result.Cod_Condicao));
+      });
+  }
+
+  /* Iván Lynch - 12/03/2020
+     Input: String Code
+     Output: String Code + 1
+     ie:
+        Input: CP001
+        Output: CP002
+  */
+  public evaluateNextSA(code: any) {
+    const codeString = code.substr(0, 2);
+    // tslint:disable-next-line: radix
+    const codeNumer = parseInt(code.substr(code.length - 2, code.length));
+    const nextValue = codeNumer + 1;
+    const nextCode = 'CO' + this.pad_with_zeroes(nextValue, 3);
+    return nextCode;
+  }
+
+  /* Iván Lynch - 12/03/2020
+     Input: String Code
+     Output: String Code + 1
+     ie:
+        Input: CP001
+        Output: CP002
+  */
+  public pad_with_zeroes(num, length) {
+    let myString = '' + num;
+    while (myString.length < length) {
+      myString = '0' + myString;
+    }
+    return myString;
   }
 }

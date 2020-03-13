@@ -25,13 +25,12 @@ export class PrecioBaseComponent implements OnInit {
     // traer por servicio cada condicion
     this._condicionService.getCamadas()
     .then(data => {
-      this.camadas = this.parseResponseCamada(data)
-      this.loading = false
+      this.camadas = this.parseResponseCamada(data);
+      this.loading = false;
     })
-    .catch(err => alert(err))
+    .catch(err => alert(err));
 
-    
-    const camadas =  this._condicionService.getCamadas()
+    const camadas =  this._condicionService.getCamadas();
     const camadaEsquemas = this._condicionService.getCamadaEsquema();
     const condicaoCamadas = this._condicionService.getCondicaoCamada();
     const condicaos = this._condicionService.getCondicaoByCode();
@@ -46,18 +45,14 @@ export class PrecioBaseComponent implements OnInit {
               condCamada => condCamada.id == camadaEsquema.id_Condicao_Camada
             )[0];
           });
-  
           let condicaosFilter = condicaoCamadasFilter.map(condCamada => {
             return condicaos.filter(cond => cond.id == condCamada.id_Condicao)[0];
           });
-  
           let condicaosByCamadaFilter = condicaosFilter.filter(cond => cond.id_Camada == camada.id)
-  
           let condicaosAllow = condicaoCamadas.filter(condCam => condCam.id_Camada == camada.id).map(condCamada => {
             return condicaos.filter(cond => cond.id == condCamada.id_Condicao)[0];
-          })
-  
-          
+          });
+
           return {
             camada,
             condicaosAllow,
@@ -65,17 +60,7 @@ export class PrecioBaseComponent implements OnInit {
           }
         })
 
-        this.camadas = camadasFullData
-        // Mock data CAMADA_ESQUEMA
-        // camadaEsquemas = [{
-        //   id: 1,
-        //   id_Condicao_Camada: 1,
-        //   id_Esquema: 1
-        // }]
-
-
-
-        
+        this.camadas = camadasFullData;
       }
     );
   }
@@ -85,7 +70,6 @@ export class PrecioBaseComponent implements OnInit {
   }
 
   goToSection() {
-    //this._router.navigate(['/pbase']);
     this.isShow = !this.isShow;
   }
 
