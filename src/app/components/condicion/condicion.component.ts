@@ -13,7 +13,7 @@ declare var $: any;
   providers: [MetadataService, CondicionService, NgxSpinnerService]
 })
 export class CondicionComponent implements OnInit {
-
+  public searchSeleccionado;
   public dbCondition: Array<any>;
   public condicion: Condicion;
   public sequencias: Array<any>;
