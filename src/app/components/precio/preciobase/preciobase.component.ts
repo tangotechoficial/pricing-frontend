@@ -1,16 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { CondicionService } from '../../../services/condicion.service';
-import { NgxSpinnerService } from 'ngx-spinner';
+import { Component, OnInit } from "@angular/core";
+import { CondicionService } from "../../../services/condicion.service";
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   // tslint:disable-next-line: component-selector
-  selector: 'preciobase',
-  templateUrl: './preciobase.component.html',
-  styleUrls: ['../../precio/precio.component.scss'],
+  selector: "preciobase",
+  templateUrl: "./preciobase.component.html",
+  styleUrls: ["../../precio/precio.component.scss"],
   providers: [CondicionService, NgxSpinnerService]
 })
 export class PrecioBaseComponent implements OnInit {
-  public sCurrentUser = JSON.parse(localStorage.getItem('User'));
+  public sCurrentUser = JSON.parse(localStorage.getItem("User"));
   public bBusiness: boolean;
 
   camadas = [];
@@ -23,10 +23,9 @@ export class PrecioBaseComponent implements OnInit {
   constructor(
     private condicionService: CondicionService,
     private spinner: NgxSpinnerService
-  ) { }
+  ) {}
 
   ngOnInit() {
-
     this.spinner.show();
 
     /*
@@ -34,50 +33,26 @@ export class PrecioBaseComponent implements OnInit {
       Gets type of user to validate
       which component will be shown
     */
-    if (this.sCurrentUser.type !== 'technical') {
+    if (this.sCurrentUser.type !== "technical") {
       this.bBusiness = true;
     } else {
       this.bBusiness = false;
     }
 
-    const camadas = this.condicionService.getCamadas();
-    const camadaEsquemas = this.condicionService.getCamadaEsquema();
-    const condicaoCamadas = this.condicionService.getCondicaoCamada();
-    const condicaos = this.condicionService.getCondicaoByCode();
-    const promisesFetch = [camadas, camadaEsquemas, condicaoCamadas, condicaos];
-
-    Promise.all(promisesFetch).then(
-      ([camadasRes, camadaEsquemasRes, condicaoCamadasRes, condicaosRes]) => {
-        camadasRes = camadasRes.filter((e: any) => e.TIPO_BASE_VENDAS === 'B');
-        const camadasFullData = camadasRes.map((camada: any) => {
-          const condicaoCamadasFilter = camadaEsquemasRes.map((camadaEsquema: any) => {
-            return condicaoCamadasRes.filter(
-              (condCamada: any) => condCamada.id === camadaEsquema.id_Condicao_Camada
-            )[0];
-          });
-          const condicaosFilter = condicaoCamadasFilter.map((condCamada: any) => {
-            return condicaosRes.filter(cond => cond.id === condCamada.id_Condicao)[0];
-          });
-          const condicaosByCamadaFilter = condicaosFilter.filter((cond: any) => cond.id_Camada === camada.id);
-          const condicaosAllow = condicaoCamadasRes.filter((condCam: any) => condCam.id_Camada === camada.id).map(condCamada => {
-            return condicaosRes.filter((cond: any) => cond.id === condCamada.id_Condicao)[0];
-          });
-          this.loading = false;
-          return {
-            camada,
-            condicaosAllow,
-            condicaos: condicaosByCamadaFilter
-          };
-        });
-
-        this.camadas = camadasFullData;
+    this.condicionService
+      .getCondicaoCamadaByCamadaEsquema("B")
+      .then(data => {
+        this.camadas = data;
         this.spinner.hide();
-      }
-    );
+      })
+      .catch(err => {
+        this.spinner.hide(); 
+        alert(err)
+      });
   }
 
   parseResponseCamada(data) {
-    return data.filter(e => e.TIPO_BASE_VENDAS === 'B');
+    return data.filter(e => e.TIPO_BASE_VENDAS === "B");
   }
 
   goToSection() {
