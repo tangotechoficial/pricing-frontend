@@ -46,8 +46,6 @@ export class PurchasePlan implements Deserializable {
 
   deserialize(data: any) {
     Object.assign(this, data);
-    console.log(data);
-    console.log(this)
     return this
   }
 
