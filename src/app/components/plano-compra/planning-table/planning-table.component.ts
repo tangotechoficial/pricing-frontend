@@ -8,10 +8,17 @@ import { Input, Component, OnInit } from '@angular/core';
 })
 export class PlanningTableComponent implements OnInit {
   @Input() data;
+
+  editable: boolean = false;
+
   constructor() { }
 
   ngOnInit() {
 
+  }
+
+  trackByProd(index, item) {
+    return item.codprd
   }
 
 

@@ -170,8 +170,8 @@
     </tr>
     <tr>
       <th scope="row">Verba em Dinheiro (R$)</th>
-      <ng-container *ngFor="let item of data">
-      <td>{{ item.verba_especie_sugerido| number: "1.2-2" }}</td>
+      <ng-container *ngFor="let item of data; trackBy:item?.codprd">
+      <td><span (click)="editable = !editable" [contentEditable]="editable" [ngClass]="{'mirrorInput': editable}">{{ item.verba_especie_sugerido| number: "1.2-2" }}</span></td>
       <td>{{ item.verba_especie_planejado| number: "1.2-2" }}</td>
       <td></td>
       </ng-container>
@@ -179,8 +179,8 @@
     <!-- // Verba's children end -->
     <tr>
       <th scope="row">CMV (R$)</th>
-      <ng-container *ngFor="let item of data">
-      <td>{{ item.cmv_sugerido| number: "1.2-2" }}</td>
+      <ng-container *ngFor="let item of data; trackBy:item?.codprd">
+      <td><span (click)="editable = !editable" [contentEditable]="editable" [ngClass]="{'mirrorInput': editable}">{{ item.cmv_sugerido| number: "1.2-2" }}</span></td>
       <td>{{ item.cmv_planejado| number: "1.2-2" }}</td>
       <td></td>
       </ng-container>
