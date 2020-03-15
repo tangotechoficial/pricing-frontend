@@ -1,3 +1,10 @@
 .table td {
   text-align: right
 }
+
+.mirrorInput {
+  outline: 1px solid #4270C1;
+  box-sizing: border-box;
+  padding: .4em
+
+}
