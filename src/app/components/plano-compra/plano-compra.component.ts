@@ -8,14 +8,14 @@ declare var $: any;
   selector: 'app-plano-compra',
   templateUrl: './plano-compra.component.html',
   styleUrls: ['./plano-compra.component.scss'],
-  providers: [ PurchasePlanningService ]
+  providers: [ PurchasePlanningService],
 })
 export class PlanoCompraComponent implements OnInit {
-  public planningData: Array<any>;
+  public planningData: Array<any> = new Array<any>();
   constructor(
     private planningDataService: PurchasePlanningService
   ) {
-    this.planningData = new Array<any>();
+
   }
 
   ngOnInit() {
