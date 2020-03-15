@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 import { routing, appRoutingProviders } from './app.routing';
@@ -39,6 +39,15 @@ import { FilterModalComponent } from './components/filter-modal/filter-modal.com
 import { TabbedChartsComponent } from './components/plano-compra/tabbed-charts/tabbed-charts.component';
 import { SellingCompositionChartsComponent } from './components/plano-compra/selling-composition-charts/selling-composition-charts.component';
 import { PlanningTableComponent } from './components/plano-compra/planning-table/planning-table.component';
+import { InlineEditComponent } from './components/shared/inline-edit/inline-edit.component';
+import { ViewModeDirective } from './components/shared/viewmode.directive';
+import { EditModeDirective } from './components/shared/editmode.directive';
+import { EditableOnEnterDirective } from './components/shared/editableonenter.directive';
+
+import { registerLocaleData }  from '@angular/common'
+import localePt from '@angular/common/locales/pt';
+registerLocaleData(localePt, 'pt',);
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -69,7 +78,11 @@ import { PlanningTableComponent } from './components/plano-compra/planning-table
     FilterModalComponent,
     TabbedChartsComponent,
     SellingCompositionChartsComponent,
-    PlanningTableComponent
+    PlanningTableComponent,
+    InlineEditComponent,
+    ViewModeDirective,
+    EditModeDirective,
+    EditableOnEnterDirective
   ],
   imports: [
     BrowserModule,
@@ -85,7 +98,8 @@ import { PlanningTableComponent } from './components/plano-compra/planning-table
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: FakeDataProviderInterceptor, multi: true},
     appRoutingProviders,
-    {provide: HTTP_INTERCEPTORS, useClass: JWTInterceptorHelper, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: JWTInterceptorHelper, multi: true},
+    {provide: LOCALE_ID, useValue: "pt"}
 
   ],
   bootstrap: [AppComponent]
