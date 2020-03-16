@@ -12,21 +12,21 @@ export class PrecioTechnical {
   @Input() titulo: string;
   @Input() camada: any;
 
-  camadaU: any;
-  condicaos: Array<ModelCondicao> = [];
-  condicaosAllow: Array<ModelCondicao> = [];
-  isEditNew = false;
-  loading = true;
-  modelCondicao: ModelCondicao;
-  bSelectCondicao = false;
-  globalIndex = 0;
-  tipoValor: Array<any>;
+  public camadaU: any;
+  public condicaos: Array<any> = [];
+  public condicaosAllow: Array<any> = [];
+  public isEditNew = false;
+  public loading = true;
+  public modelCondicao: ModelCondicao;
+  public bSelectCondicao = false;
+  public globalIndex = 0;
+  public tipoValor: Array<any>;
 
   constructor( private condicionService: CondicionService){}
 
   ngOnInit() {
     this.tipoValor = new Array<any>();
-    this.condicionService.getTiposValor().then(result => result.map(tv => this.tipoValor.push(tv)))
+    this.condicionService.getTiposValor().then(result => result.map(tv => this.tipoValor.push(tv)));
     this.condicaos = this.camada.condicaos;
     this.condicaosAllow = this.camada.condicaosAllow;
     this.camadaU = this.camada.camada;
@@ -41,7 +41,7 @@ export class PrecioTechnical {
 
   remove(val: any) {
     this.condicaos.map((elem, index) => {
-      if (elem.id === val) {
+      if (elem.Cod_Condicao === val) {
         this.condicaos.splice(index, 1);
       }
     });
@@ -55,6 +55,7 @@ export class PrecioTechnical {
   }
 
   findCondicao(val: any) {
+    console.log(val);
     this.bSelectCondicao = true;
     this.isEditNew = false;
 
@@ -70,8 +71,8 @@ export class PrecioTechnical {
     });
 
     this.tipoValor.map(elem => {
-      if (elem.id_TipoValor === val.id_TipoValor){
-        this.condicaos[this.globalIndex].id_TipoValor = elem;
+      if (elem.Cod_TipoValor === val.Cod_TipoValor) {
+        this.condicaos[this.globalIndex].Cod_TipoValor = elem;
       }
     });
   }

@@ -10,14 +10,17 @@ import { NgxSpinnerService } from 'ngx-spinner';
   providers: [CondicionService, NgxSpinnerService]
 })
 export class PrecioBaseComponent implements OnInit {
+
   public sCurrentUser = JSON.parse(localStorage.getItem('User'));
   public bBusiness: boolean;
-
-  camadas = [];
-  isShow: boolean;
-  existNegocios: any;
-  existVentas: any;
-  loading = true;
+  public camadas: Array<any>;
+  public condicaos: Array<any>;
+  public tipoValor: Array<any>;
+  public camadasFullData: any;
+  public isShow: boolean;
+  public existNegocios: any;
+  public existVentas: any;
+  public loading = true;
   public condicao: Array<any>;
 
   constructor(
@@ -26,9 +29,7 @@ export class PrecioBaseComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
-    this.spinner.show();
-
+    this.updateMasterData();
     /*
       Pablo Gerez 12/03/2020
       Gets type of user to validate
@@ -39,41 +40,29 @@ export class PrecioBaseComponent implements OnInit {
     } else {
       this.bBusiness = false;
     }
+  }
 
-    const camadas = this.condicionService.getCamadas();
-    const camadaEsquemas = this.condicionService.getCamadaEsquema();
-    const condicaoCamadas = this.condicionService.getCondicaoCamada();
-    const condicaos = this.condicionService.getCondicaoByCode();
-    const promisesFetch = [camadas, camadaEsquemas, condicaoCamadas, condicaos];
-
-    Promise.all(promisesFetch).then(
-      ([camadasRes, camadaEsquemasRes, condicaoCamadasRes, condicaosRes]) => {
-        camadasRes = camadasRes.filter((e: any) => e.TIPO_BASE_VENDAS === 'B');
-        const camadasFullData = camadasRes.map((camada: any) => {
-          const condicaoCamadasFilter = camadaEsquemasRes.map((camadaEsquema: any) => {
-            return condicaoCamadasRes.filter(
-              (condCamada: any) => condCamada.id === camadaEsquema.id_Condicao_Camada
-            )[0];
-          });
-          const condicaosFilter = condicaoCamadasFilter.map((condCamada: any) => {
-            return condicaosRes.filter(cond => cond.id === condCamada.id_Condicao)[0];
-          });
-          const condicaosByCamadaFilter = condicaosFilter.filter((cond: any) => cond.id_Camada === camada.id);
-          const condicaosAllow = condicaoCamadasRes.filter((condCam: any) => condCam.id_Camada === camada.id).map(condCamada => {
-            return condicaosRes.filter((cond: any) => cond.id === condCamada.id_Condicao)[0];
-          });
-          this.loading = false;
-          return {
-            camada,
-            condicaosAllow,
-            condicaos: condicaosByCamadaFilter
-          };
+  updateMasterData() {
+    this.spinner.show();
+    this.camadasFullData = new Array<any>();
+    this.camadas = new Array<any>();
+    this.condicaos = new Array<any>();
+    this.tipoValor = new Array<any>();
+    return Promise.all([
+      this.condicionService.getTiposValor().then(result => result.map(tv => this.tipoValor.push(tv))),
+      this.condicionService.getCamadas().then(result => result.map(ca => this.camadas.push(ca))),
+      this.condicionService.getCondicaos().then(result => result.map(co => this.condicaos.push(co)))
+    ]).then(result => {
+      this.camadas = this.camadas.filter((e: any) => e.TIPO_BASE_VENDAS === 'B');
+      this.camadas.map(elem => {
+        this.camadasFullData.push({
+          camada: elem,
+          condicaos: this.condicaos,
+          condicaosAllow: this.condicaos.filter((cond: any) => cond.Cod_Camada === elem.Cod_Camada)
         });
-
-        this.camadas = camadasFullData;
-        this.spinner.hide();
-      }
-    );
+      });
+      this.spinner.hide();
+    });
   }
 
   parseResponseCamada(data) {

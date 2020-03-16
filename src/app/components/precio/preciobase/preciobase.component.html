@@ -12,7 +12,7 @@
     <!-- TECHNICAL USER -->
     <div *ngIf="!bBusiness">
         <div *ngIf="!loading" class="background">
-            <div *ngFor="let camada of camadas">
+            <div *ngFor="let camada of camadasFullData">
                 <precio-technical [camada]="camada"></precio-technical>
             </div>
             <div class="text-center">

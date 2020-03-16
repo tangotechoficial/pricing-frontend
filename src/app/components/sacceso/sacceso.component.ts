@@ -90,7 +90,6 @@ export class SaccesoComponent implements OnInit {
     this.saccesoService.getSaccesoList().subscribe((values) => {
       values.map((elem) => {
         const seq = new Sacceso();
-        seq.setId(elem.id);
         seq.setCodigo(elem.Cod_Campo);
         seq.setDescription(elem.Nome_Campo);
         this.sequenciasAccesoSearch.push(seq);
@@ -179,7 +178,7 @@ export class SaccesoComponent implements OnInit {
     this.sequenciasAcceso.map(elem => {
 
       // If selected elemement sa is equal to current element in the array loop
-      if (elem.getId() === sa.getId()) {
+      if (elem.getCodigo() === sa.getCodigo()) {
 
         // Check if current element is already selected
         if (elem.isSelected()) {
@@ -191,7 +190,7 @@ export class SaccesoComponent implements OnInit {
           this.selectedProperties.map((elem2, index) => {
 
             // If current selected item exist on the the array
-            if (elem2.getId() === elem.getId()) {
+            if (elem2.getCodigo() === elem.getCodigo()) {
               // Remove elem from array
               this.selectedProperties.splice(index, 1);
               this.sacceso._parents = this.sacceso._parents.filter((obj) => {

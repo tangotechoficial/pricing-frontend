@@ -26,9 +26,8 @@ export class PrecioVentaComponent implements OnInit {
     
     const camadas =  this._condicionService.getCamadas()
     const camadaEsquemas = this._condicionService.getCamadaEsquema();
-    const condicaoCamadas = this._condicionService.getCondicaoCamada();
     const condicaos = this._condicionService.getCondicaoByCode();
-    const promisesFetch = [camadas, camadaEsquemas, condicaoCamadas, condicaos];
+    const promisesFetch = [camadas, camadaEsquemas, condicaos];
 
     Promise.all(promisesFetch).then(
       ([camadas, camadaEsquemas, condicaoCamadas, condicaos]) => {
