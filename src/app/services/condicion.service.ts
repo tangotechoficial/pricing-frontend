@@ -36,7 +36,6 @@ export class CondicionService {
     }
 
     postCondicao(co: Condicion): Promise<any> {
-        console.log(co);
         return this.http.post(this.url + '/condicao/', {
             Cod_Condicao: co.sCodCondicion,
             Desc_Condicao: co.sDesCondicion,
@@ -58,7 +57,6 @@ export class CondicionService {
     }
 
     editCondicao(co: Condicion): Promise<any> {
-        console.log(co);
         return this.http.put(this.url + '/condicao/' + co.sCodCondicion + '/', {
             Cod_Condicao: co.sCodCondicion,
             Desc_Condicao: co.sDesCondicion,
@@ -73,7 +71,6 @@ export class CondicionService {
         }, { headers: { 'Content-type': 'application/json' } })
             .pipe(
                 map((elem: any) => {
-                    console.log(elem);
                     co.aSequencias.forEach(campo => {
                         this.postCondicaoSequencia(elem.Cod_Condicao, campo.Cod_Sequencia).subscribe();
                     });

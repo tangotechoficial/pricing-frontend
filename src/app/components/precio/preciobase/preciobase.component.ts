@@ -10,18 +10,19 @@ import { NgxSpinnerService } from 'ngx-spinner';
   providers: [CondicionService, NgxSpinnerService]
 })
 export class PrecioBaseComponent implements OnInit {
-
   public sCurrentUser = JSON.parse(localStorage.getItem('User'));
   public bBusiness: boolean;
-  public camadas: Array<any>;
-  public condicaos: Array<any>;
-  public tipoValor: Array<any>;
-  public camadasFullData: any;
-  public isShow: boolean;
-  public existNegocios: any;
-  public existVentas: any;
-  public loading = true;
+
+  camadas = [];
+  isShow: boolean;
+  existNegocios: any;
+  existVentas: any;
+  loading = true;
   public condicao: Array<any>;
+  tipoValor: any[];
+  condicaos: any[];
+  camdasFullData: any[];
+  camadasFullData: any[];
 
   constructor(
     private condicionService: CondicionService,
@@ -29,7 +30,9 @@ export class PrecioBaseComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.updateMasterData();
+
+    this.spinner.show();
+
     /*
       Pablo Gerez 12/03/2020
       Gets type of user to validate
@@ -40,28 +43,29 @@ export class PrecioBaseComponent implements OnInit {
     } else {
       this.bBusiness = false;
     }
-  }
-
-  updateMasterData() {
-    this.spinner.show();
-    this.camadasFullData = new Array<any>();
+    this.loading = true;
+    this.tipoValor = new Array<any>();
     this.camadas = new Array<any>();
     this.condicaos = new Array<any>();
-    this.tipoValor = new Array<any>();
-    return Promise.all([
+    this.camadasFullData = Array<any>();
+
+    Promise.all([
       this.condicionService.getTiposValor().then(result => result.map(tv => this.tipoValor.push(tv))),
       this.condicionService.getCamadas().then(result => result.map(ca => this.camadas.push(ca))),
       this.condicionService.getCondicaos().then(result => result.map(co => this.condicaos.push(co)))
     ]).then(result => {
-      this.camadas = this.camadas.filter((e: any) => e.TIPO_BASE_VENDAS === 'B');
-      this.camadas.map(elem => {
+      this.camadas = this.camadas.filter((camada: any) => camada.TIPO_BASE_VENDAS === 'B');
+      this.camadas.forEach(elem => {
         this.camadasFullData.push({
           camada: elem,
           condicaos: this.condicaos,
           condicaosAllow: this.condicaos.filter((cond: any) => cond.Cod_Camada === elem.Cod_Camada)
         });
+        if (this.camadas.length === this.camadasFullData.length){
+          this.loading = false;
+          this.spinner.hide();
+        }
       });
-      this.spinner.hide();
     });
   }
 

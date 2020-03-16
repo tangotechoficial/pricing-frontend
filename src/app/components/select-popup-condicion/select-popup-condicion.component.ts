@@ -21,7 +21,6 @@ export class SelectPopupCondicionComponent implements OnInit {
   }
 
   onSelectObject() {
-    console.log(this.currenObject);
     this.selectedObject.emit(this.currenObject);
     this.closePopup.emit(false);
   }
