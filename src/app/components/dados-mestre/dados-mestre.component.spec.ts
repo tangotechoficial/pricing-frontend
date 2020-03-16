@@ -1,11 +1,16 @@
 import { async, ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
-import { DebugElement } from '@angular/core';
+import { DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { By } from '@angular/platform-browser';
 import { DadosMestreComponent } from './dados-mestre.component';
 import { of } from  'rxjs';
 import { DadosMestreVerbaService} from '@services/dados-mestre-verba.service';
 import {DadosMestresComposicaoPrecoService } from '@services/dados-mestres-composicao-preco.service';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations'
+import { RouterTestingModule } from '@angular/router/testing';
+import { NavegacionComponent } from '@app/components/navegacion/navegacion.component';
+import { TechnicalMenuComponent } from '@app/components/navegacion/technical-menu/technical-menu.component';
+import { BusinessMenuComponent } from '@app/components/navegacion/business-menu/business-menu.component';
 
 fdescribe('DadosMestreComponent', () => {
   let component: DadosMestreComponent;
@@ -64,12 +69,13 @@ fdescribe('DadosMestreComponent', () => {
       )
     }
     TestBed.configureTestingModule({
-      declarations: [ DadosMestreComponent ],
+      declarations: [ DadosMestreComponent, NavegacionComponent, TechnicalMenuComponent, BusinessMenuComponent],
+      imports: [ HttpClientModule, RouterTestingModule, NoopAnimationsModule ],
+      schemas: [ NO_ERRORS_SCHEMA ],
       providers: [
         {provide: DadosMestresComposicaoPrecoService, useValue: priceCompositinonServiceStub },
         {provide: DadosMestreVerbaService, useValue: moneyServiceStub}
       ],
-      imports: [ HttpClientModule ]
     })
     .compileComponents();
 
@@ -99,14 +105,14 @@ fdescribe('DadosMestreComponent', () => {
   /**
   it('table price composition should have data', () => {
     const table = element.query(By.css('[id="priceComposition"]'))
-    //debuger 
+    //debuger
   })
 
   it('table verba info should have data', () => {
       component.ngOnInit()
       fixture.detectChanges()
       const table = element.query(By.css('[id="verbaInfo"]'))
-      //debuger 
+      //debuger
     }
   );
   **/
