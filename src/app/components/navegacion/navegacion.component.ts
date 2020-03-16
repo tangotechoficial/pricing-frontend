@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from "@angular/common";
 import {BrowserModule} from '@angular/platform-browser'
+import { AuthenticationService } from '@services/authentication.service'
 
 declare var $: any;
 
@@ -68,6 +69,7 @@ export class NavegacionComponent implements OnInit {
   public section: string;
   @Output() navOutput = new EventEmitter<boolean>()
   constructor(
+    private authService: AuthenticationService,
     private _router: Router,
     private _route: ActivatedRoute,
     location: Location
@@ -103,6 +105,10 @@ export class NavegacionComponent implements OnInit {
     this.navOutput.emit(this.showBMenu)
   }
 
+  logout() {
+    this.authService.logout()
+    window.location.reload()
+  }
 
 /*   ngDoCheck() {
     this._route.url.subscribe(url => {
