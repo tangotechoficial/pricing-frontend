@@ -14,10 +14,10 @@
     <div *ngIf="!bBusiness">
         <div *ngIf="!loading" class="background">
             <div *ngFor="let camada of camadasFullData">
-                <precio-technical [camada]="camada"></precio-technical>
+                <precio-technical [camada]="camada" (selectedObject)="updateCamada($event)"></precio-technical>
             </div>
             <div class="text-center">
-                <button class="btn btn-lg bg-standard">Salvar</button>
+                <button (click)="submiteEsquema()" class="btn btn-lg bg-standard">Salvar</button>
             </div>
             <br/>
                 <br/>

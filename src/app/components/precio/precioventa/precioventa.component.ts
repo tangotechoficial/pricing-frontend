@@ -2,13 +2,14 @@
 import { Component, OnInit } from '@angular/core';
 import { CondicionService } from '../../../services/condicion.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { EsquemasService } from 'app/services/esquemas.service';
 
 @Component({
   // tslint:disable-next-line: component-selector
   selector: 'precioventa',
   templateUrl: './precioventa.component.html',
   styleUrls: ['../../precio/precio.component.scss'],
-  providers: [CondicionService, NgxSpinnerService]
+  providers: [CondicionService, NgxSpinnerService, EsquemasService]
 })
 export class PrecioVentaComponent implements OnInit {
   public sCurrentUser = JSON.parse(localStorage.getItem('User'));
@@ -22,10 +23,13 @@ export class PrecioVentaComponent implements OnInit {
   tipoValor: any[];
   condicaos: any[];
   camadasFullData: any[];
+  public postPrecoVenda: any[];
+  public precoVendaCamadas: any;
 
   constructor(
     private condicionService: CondicionService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private esquemasService: EsquemasService
   ) {}
 
   ngOnInit() {
@@ -66,6 +70,29 @@ export class PrecioVentaComponent implements OnInit {
         }
       });
     });
+  }
+
+  submiteEsquema() {
+    this.postPrecoVenda = new Array<any>();
+    this.precoVendaCamadas.map(elem => {
+      elem.condicaos.forEach(cond => {
+        const obj = {
+          ESQ: 'EC000',
+          CAM: '',
+          CON: ''
+        };
+        obj.CAM = elem.Cod_Camada;
+        obj.CON = cond.Cod_Condicao;
+        this.postPrecoVenda.push(obj);
+      });
+    });
+    this.postPrecoVenda.forEach(elem => {
+      this.esquemasService.postEsquema(elem);
+    });
+  }
+
+  updateCamada(val: any) {
+    console.log(val);
   }
 
   parseResponseCamada(data) {

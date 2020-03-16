@@ -1,4 +1,4 @@
-import { Component, Input, Output } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CondicionService } from '../../../services/condicion.service';
 import { ModelCondicao } from 'app/models/condicion.model';
 
@@ -13,7 +13,7 @@ import { ModelCondicao } from 'app/models/condicion.model';
 export class PrecioTechnical {
   @Input() titulo: string;
   @Input() camada: any;
-
+  @Output() selectedObject: EventEmitter<any> = new EventEmitter<any>();
   public camadaU: any;
   public condicaos: Array<any> = [];
   public condicaosAllow: Array<any> = [];
@@ -39,6 +39,8 @@ export class PrecioTechnical {
     this.modelCondicao = new ModelCondicao({});
     this.globalIndex = this.condicaos.length;
     this.condicaos.push(this.modelCondicao);
+    this.camadaU.condicaos = new Array<any>();
+    this.camadaU.condicaos = this.condicaos;
     this.isEditNew = true;
   }
 
@@ -80,6 +82,7 @@ export class PrecioTechnical {
             this.condicaos[this.globalIndex].Desc_TipoValor = tipoValor.Desc_TipoValor;
           }
         });
+        this.selectedObject.emit(this.camadaU);
       }
     });
   }
