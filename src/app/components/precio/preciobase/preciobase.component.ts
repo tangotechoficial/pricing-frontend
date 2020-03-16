@@ -61,7 +61,7 @@ export class PrecioBaseComponent implements OnInit {
           condicaos: this.condicaos,
           condicaosAllow: this.condicaos.filter((cond: any) => cond.Cod_Camada === elem.Cod_Camada)
         });
-        if (this.camadas.length === this.camadasFullData.length){
+        if (this.camadas.length === this.camadasFullData.length) {
           this.loading = false;
           this.spinner.hide();
         }
