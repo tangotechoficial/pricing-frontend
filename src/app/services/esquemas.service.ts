@@ -30,6 +30,22 @@ export class EsquemasService {
             this.condicionService.getCondicaos()
         ]);
     }
+
+    getFilial(): Promise<any> {
+        return this.http.get(this.url + '/filial/', { headers: { 'Content-type': 'application/json' } }).toPromise();
+    }
+
+    getFaturamento(): Promise<any> {
+        return this.http.get(this.url + '/faturamento/', { headers: { 'Content-type': 'application/json' } }).toPromise();
+    }
+
+    getEstado(): Promise<any> {
+        return this.http.get(this.url + '/estado/', { headers: { 'Content-type': 'application/json' } }).toPromise();
+    }
+
+    getRegion(): Promise<any> {
+        return this.http.get(this.url + '/region/', { headers: { 'Content-type': 'application/json' } }).toPromise();
+    }
 }
 
 

@@ -49,12 +49,8 @@
                                 type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Selecione
                             </button>
-
-
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <button class="dropdown-item martinsText">Opt1</button>
-                                <button class="dropdown-item martinsText">Opt2</button>
-                                <button class="dropdown-item martinsText">Opt3</button>
+                            <div class="dropdown-menu"  aria-labelledby="dropdownMenuButton">
+                                <a *ngFor="let fili of filial; let id = index" id="{{id}}" class="dropdown-item martinsText">{{fili.Desc_Filial}}</a>
                             </div>
                         </div>
                         <!-- SEGUNDA -->
