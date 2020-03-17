@@ -16,9 +16,6 @@ export class PrecioVentaComponent implements OnInit {
   public bBusiness: boolean;
 
   camadas = [];
-  isShow: boolean;
-  existNegocios: any;
-  existVentas: any;
   loading = true;
   tipoValor: any[];
   condicaos: any[];
@@ -97,17 +94,5 @@ export class PrecioVentaComponent implements OnInit {
 
   parseResponseCamada(data) {
     return data.filter(e => e.TIPO_BASE_VENDAS === 'V');
-  }
-
-  goToSection() {
-    this.isShow = !this.isShow;
-  }
-
-  parentListener($event) {
-    this.existNegocios = $event;
-  }
-
-  parentListenerTwo($event) {
-    this.existVentas = $event;
   }
 }
