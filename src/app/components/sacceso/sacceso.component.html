@@ -76,7 +76,7 @@
                 <ul class="p-0 martins-scrollbar">
                     <li *ngFor="let seq of sequenciasAcceso | filterseleccionado: searchSeq ; let id = index " class="p-2">
                         <div class="custom-control custom-checkbox">
-                            <input (change)="checkValue(seq)" type="checkbox" class="custom-control-input"
+                            <input (click)="checkValue(seq)" type="checkbox" class="custom-control-input"
                                 id="{{id}}">
                             <label class="pl-4 custom-control-label" for="{{id}}">{{seq.getDescription()}}</label>
                         </div>

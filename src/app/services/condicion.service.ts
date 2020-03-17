@@ -3,7 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { Global } from "./global";
 import { Condicion } from "../models/condicion";
 import { map } from "rxjs/operators";
-import { reject } from "q";
+
 
 @Injectable()
 export class CondicionService {

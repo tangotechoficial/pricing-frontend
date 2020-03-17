@@ -12,12 +12,14 @@ import { NgxSpinnerService } from "ngx-spinner";
 export class PrecioBaseComponent implements OnInit {
   public sCurrentUser = JSON.parse(localStorage.getItem("User"));
   public bBusiness: boolean;
-
-  camadas = [];
-  isShow: boolean;
-  existNegocios: any;
-  existVentas: any;
-  loading = true;
+  public camadas: Array<any>;
+  public condicaos: Array<any>;
+  public tipoValor: Array<any>;
+  public camadasFullData: any;
+  public isShow: boolean;
+  public existNegocios: any;
+  public existVentas: any;
+  public loading = true;
   public condicao: Array<any>;
 
   constructor(
@@ -26,8 +28,7 @@ export class PrecioBaseComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.spinner.show();
-
+    this.updateMasterData();
     /*
       Pablo Gerez 12/03/2020
       Gets type of user to validate
@@ -38,6 +39,7 @@ export class PrecioBaseComponent implements OnInit {
     } else {
       this.bBusiness = false;
     }
+  }
 
     this.condicionService
       .getCondicaoCamadaByCamadaEsquema("B")

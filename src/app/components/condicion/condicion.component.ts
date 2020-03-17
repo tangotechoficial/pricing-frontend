@@ -144,17 +144,17 @@ export class CondicionComponent implements OnInit {
             this.condicion.MANDATORIA = cond.MANDATORIA;
             this.condicion.ESTATISTICA = cond.ESTATISTICA;
             this.camadas.map(elems => {
-              if (elems.id === cond.id_Camada) {
+              if (elems.Cod_Camada === cond.Cod_Camada) {
                 this.condicion.oCamada = elems;
               }
             });
             this.chaveContas.map(elems => {
-              if (elems.id === cond.id_ChaveContas) {
+              if (elems.Cod_ChaveContas === cond.Cod_ChaveContas) {
                 this.condicion.oChaveContas = elems;
               }
             });
             this.tipoValor.map(elems => {
-              if (elems.id === cond.id_TipoValor) {
+              if (elems.Cod_TipoValor === cond.Cod_TipoValor) {
                 this.condicion.oTipoValor = elems;
               }
             });
@@ -162,11 +162,11 @@ export class CondicionComponent implements OnInit {
             this.condicionService.getSequenciasByCondicao()
               .then(elems => {
                 elems = elems.filter((obj: any) => {
-                  return obj.id_Condicao === cond.id;
+                  return obj.Cod_Condicao === cond.Cod_Condicao;
                 });
                 elems.map((seq: any) => {
                   this.sequencias.map((bseq: any, index: any) => {
-                    if (seq.id_Sequencia === bseq.id) {
+                    if (seq.Cod_Sequencia === bseq.Cod_Sequencia) {
                       const elem = document.getElementById(index.toString());
                       elem.click();
                     }
@@ -254,10 +254,10 @@ export class CondicionComponent implements OnInit {
     } else {
       if (this.elemExist(sa, this.selectedProperties)) {
         this.selectedProperties = this.selectedProperties.filter((obj) => {
-          return obj.id !== sa.id;
+          return obj.Cod_Sequencia !== sa.Cod_Sequencia;
         });
         this.condicion.aSequencias = this.condicion.aSequencias.filter((seq) => {
-          return seq.id !== sa.id;
+          return seq.Cod_Sequencia !== sa.Cod_Sequencia;
         });
       } else {
         this.selectedProperties.push(sa);
@@ -273,7 +273,7 @@ export class CondicionComponent implements OnInit {
   */
   public onDltSelection(sel: any) {
     this.sequencias.map((elem, index) => {
-      if (sel.id === elem.id) {
+      if (sel.Cod_Sequencia === elem.Cod_Sequencia) {
         const selElem = document.getElementById(index.toString());
         selElem.click();
       }
@@ -298,6 +298,7 @@ export class CondicionComponent implements OnInit {
         }, 2000);
       })
       .catch((error: any) => {
+        console.log(error);
         if (error.error.Cod_Condicao[0] === 'condicao with this Cod Condicao already exists.') {
           this.message.errMessage = 'O código de condição já existe';
           this.saveError = true;
@@ -326,7 +327,7 @@ export class CondicionComponent implements OnInit {
   */
   public putCondicao() {
     this.spinner.show();
-    this.condicionService.deleteCondicaoSequencia(this.condicion.sId);
+    this.condicionService.deleteCondicaoSequencia(this.condicion.sCodCondicion);
     this.condicionService.editCondicao(this.condicion)
       .then(elem => {
         this.saveSucess = true;
@@ -334,16 +335,15 @@ export class CondicionComponent implements OnInit {
         this.condicion = new Condicion();
         setTimeout(() => {
           this.saveSucess = false;
+          this.condicaos = new Array<any>();
+          this.condicionService.getCondicaos()
+            .then(result => {
+              result.map(co => this.condicaos.push(co));
+              setTimeout(() => {
+                this.spinner.hide();
+              }, 2000);
+            });
         }, 2000);
-      })
-      .then(elem => {
-        // Actualizo los codigos de condiciones
-        this.condicaos = new Array<any>();
-        this.condicionService.getCondicaos()
-          .then(result => {
-            result.map(co => this.condicaos.push(co));
-            this.spinner.hide();
-          });
       })
       .catch((error: any) => {
         if (error.error.Cod_Condicao[0] === 'condicao with this Cod Condicao already exists.') {

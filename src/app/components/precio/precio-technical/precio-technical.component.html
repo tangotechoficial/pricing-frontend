@@ -4,7 +4,7 @@
         <div class="col-12 p-3 border-bottom">
             <span class="text-header">{{camadaU.Nome_Camada}}</span>
         </div>
-        <div class="row col-12 p-4" *ngFor="let condicao of condicaos; let i=
+        <div class="row col-12 p-4" *ngFor="let selectedCondiciones of condicaos; let i=
             index">
             <div class="col-2">
                 <span class="text-header">Cod. Condicao</span>
@@ -20,13 +20,13 @@
             </div>
             <div class="col-1 mb-2 col-1 d-flex flex-column justify-content-end
                 align-items-center">
-                <i class="fas fa-search" (click)="findCondicao(camadaU.id)"></i>
+                <i class="fas fa-search" (click)="findCondicao(camadaU)"></i>
             </div>
             <div class="col-2">
                 <span class="text-header">Tipo de valor</span>
                 <input class="form-control mt-3" disabled
                     name="{{camadaU.id}}id_TipoValor{{i}}"
-                    [(ngModel)]="condicao.id_TipoValor.Desc_TipoValor" />
+                    [(ngModel)]="condicao.Cod_TipoValor.Desc_TipoValor" />
             </div>
             <div class="col-2 d-flex flex-column justify-content-center
                 align-items-center">
@@ -59,7 +59,7 @@
                 </div>
                 <div class="w-100 h-100 d-flex justify-content-center
                     align-items-center mb-1">
-                    <button (click)="remove(condicao.id)" type="button"
+                    <button (click)="remove(condicao.Cod_Condicao)" type="button"
                         class="btn btn-secondary p-0 ml-4 d-flex flex-column
                         align-items-center justify-content-center">
                         <span class="btn-label d-flex align-items-center"><i
