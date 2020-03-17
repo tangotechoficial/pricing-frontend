@@ -1,4 +1,5 @@
 @import '../styles/mixins-var.scss';
+@import '../styles/global.scss';
 
 .dropdown-menu.menu-nav a{
     color: $navMenuTextGrey;
@@ -72,8 +73,4 @@ a > span.fas {
     -webkit-border-radius: 6px 0 6px 6px;
     -moz-border-radius: 6px 0 6px 6px;
     border-radius: 6px 0 6px 6px;
-}
-
-span.fas.fa-bars{
-    color: $martinsBlue;
 }
