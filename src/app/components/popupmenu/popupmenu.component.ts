@@ -13,6 +13,7 @@ export class PopupmenuComponent implements OnInit {
   @Output() selectedObject: EventEmitter<any> = new EventEmitter<any>();
   @Input() dataList: Array<any>;
   public currenObject: any;
+  selectedItem: boolean = false;
 
   constructor() {}
   ngOnInit() {
@@ -30,6 +31,7 @@ export class PopupmenuComponent implements OnInit {
   getSelectedChaveContas(val: any, i: any) {
     this.currenObject = val;
     this.selectItemColor(i);
+    this.selectedItem = true;
   }
 
   selectItemColor(item: number) {

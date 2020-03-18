@@ -59,11 +59,6 @@ ul {
     background-size: 50% 50%;
 }
 
-.custom-control-input:checked~.custom-control-label::before {
-    border-color: #009966;
-    background-color: #009966;
-}
-
 .custom-checkbox .custom-control-input:checked~.custom-control-label::after{
     background-image: none;
 }

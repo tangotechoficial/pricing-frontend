@@ -1,7 +1,5 @@
  @import '../../../assets/styles/global.scss';
 
- $selectGrey:#F2F2F2;
-
  .mySelect{
 	 background-color: $martinsBlue !important;
 	 td{
@@ -22,30 +20,29 @@
 	 border-radius: 10px;
 	 .pheader{
 		 height: 45px;
-		 background-color: $selectGrey ;
+		 background-color: $backgroundGrey ;
 		 width: 100%;
+		 .close > span {
+			color: $martinsRed;
+		}
 	 }
 	 .pbody{
 		 width: 100%;
 		 .bodyBord{
 			 border-radius:10px;
-			 border:1px solid darken($selectGrey,30%);
+			 border:1px solid darken($backgroundGrey,20%);
 			 height: 310px;
 			 overflow-y: scroll;
  
 		 }
  
 		 .table{
-			 border:1px solid $selectGrey !important;
+			 border:1px solid $backgroundGrey !important;
 			 border-radius: 10px;			
 		 }
 		 
 		 tr{
 			 transition: none;
-		 }
- 
-		 td{
-			 padding:5px !important;
 		 }
 		 .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
 		   background-color: $martinsBlue;

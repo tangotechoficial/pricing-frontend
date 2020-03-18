@@ -30,6 +30,7 @@
     color: $martinsDarkBlue;
 }
 /*------------*/
+
 button.dropdownMenuButton {
     background-color: white;
     border: 1px solid #D0D1D6;
@@ -119,7 +120,7 @@ button.dropdownMenuButton {
     font-weight: 700;
 }
 
-/**--buttons--*/
+/*---buttons---*/
 
 @mixin inverted-btn {
     background-color: transparent;
@@ -155,18 +156,36 @@ button.dropdownMenuButton {
   color:$martinsTextGrey !important;
 }
 
-/* input[type="checkbox"]:not(:checked).custom-control-input + label::before {
-    border: 2px #009966 solid !important;
-} */
+.martins-pointer {
+    cursor: pointer;
+}
 
 i.fas.fa-search.disabledSearch {
     color: gray;
 }
 
-.martins-pointer {
-    cursor: pointer;
+.fas.fa-search:hover{
+    @extend .color-martins-blue;
+    @extend .martins-pointer;
 }
 
+/*---green checkbox for condicion, sacceso, pventa, preciobase---*/
+.custom-control-input:checked~.custom-control-label::before {
+    border-color: #009966;
+    background-color: #009966;
+}
+
+.custom-checkbox .custom-control-label::before {
+    border: 2px solid #009966 !important;
+}
+/*---table borders for popupmenu & selectpopupcondicion---*/
+.table-border-right {
+    border-radius: 0 10px 10px 0; border: 2px solid transparent;
+}
+
+.table-border-left {
+    border-radius: 10px 0 0 10px; border: 2px solid transparent;
+}
 // ----- custom scrollbar for whole app ------- 
 // change 'height' as needed
 // in the styles of the corresponding component
