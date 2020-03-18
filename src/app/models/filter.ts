@@ -1,16 +1,17 @@
 import { Deserializable } from '@app/interfaces'
 
 export class Filter implements Deserializable{
-  line: string = null;
-  category: string = null;
-  subCategory: string = null;
-  provider: string = null;
-  fe: number = null;
-  uf: string = null;
-  material: string = null;
+  linha_negocio: string = null;
+  descgrpprd: string = null;
+  desctgprd: string = null;
+  desdivfrn: string = null;
+  codfilfat: number = null;
+  codestuni: string = null;
+  desprd: string = null;
 
   deserialize(data: any) {
     Object.assign(this, data);
     return this
   }
+
 }

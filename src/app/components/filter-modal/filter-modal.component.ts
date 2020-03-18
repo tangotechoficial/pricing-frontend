@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Filter} from '@models/filter'
 // jQuery
@@ -14,7 +14,8 @@ export class FilterModalComponent implements OnInit {
   filterForm: FormGroup;
   filterModel: Filter = new Filter();
   filterParentScreen: string = "";
-  //some fake Data
+  @Output('update') outputFilter: EventEmitter<Filter> = new EventEmitter<Filter>();
+
   filterData = {
     line: ['abb', 'hbl', 'tei', 'mtc'],
     fe: [1, 41, 52, 64, 462],
@@ -38,9 +39,10 @@ export class FilterModalComponent implements OnInit {
       'nescau ball actig.45x350g',
       'nesquick actig 45x350g',
       'leite ninho actig.30x400g',
-      'nescau 2.0 actig.30400g'
+      'nescau 2.0 actibootsg.30400g'
     ]
   }
+
   constructor(
     private formBuilder: FormBuilder
   ) {
@@ -50,22 +52,30 @@ export class FilterModalComponent implements OnInit {
   ngOnInit() {
 
     this.filterForm = this.formBuilder.group({
-      line: [null],
-      category: [null],
-      subCategory: [null],
-      provider: [null],
-      fe: [null],
-      uf: [null],
-      material: [null],
+      linha_negocio: [Validators.required],
+      descgrpprd: [Validators.required],
+      desctgprd: [Validators.required],
+      desdivfrn: [Validators.required],
+      codfilfat: [Validators.required],
+      codestuni: [Validators.required],
+      desprd: [Validators.required]
     })
+  }
+
+  private get form() {
+    return this.filterForm;
   }
 
   reset() {
     this.filterModel = new Filter();
+    this.outputFilter.emit(this.filterModel)
   }
 
   submit() {
-    //pass filterModel to filterService and a DataProviderService instance
+    this.filterModel.deserialize(this.form.value);
+    debugger;
+    this.outputFilter.emit(this.filterModel);
+
     $('#modalFilter').modal('hide')
   }
 
