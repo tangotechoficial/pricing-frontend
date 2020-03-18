@@ -28,11 +28,20 @@ export class PrecioTechnical {
 
   // tslint:disable-next-line: use-lifecycle-interface
   ngOnInit() {
+
+    
     this.tipoValor = new Array<any>();
     this.condicionService.getTiposValor().then(result => result.map(tv => this.tipoValor.push(tv)));
+
     this.condicaos = new Array<any>();
     this.condicaosAllow = this.camada.condicaosAllow;
     this.camadaU = this.camada.camada;
+    
+    const condicaos = this.camada.condicaos.map(cond => {
+      return new ModelCondicao(cond)
+    })
+    this.condicaos = condicaos
+    console.log({camada: this.camada})
   }
 
   add() {
@@ -82,7 +91,9 @@ export class PrecioTechnical {
             this.condicaos[this.globalIndex].Desc_TipoValor = tipoValor.Desc_TipoValor;
           }
         });
-        this.selectedObject.emit(this.camadaU);
+        // this.selectedObject.emit(this.camadaU);
+        this.selectedObject.emit({camada: this.camadaU, condicaos: this.condicaos});
+
       }
     });
   }

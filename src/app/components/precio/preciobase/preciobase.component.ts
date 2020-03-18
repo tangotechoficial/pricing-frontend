@@ -3,6 +3,9 @@ import { CondicionService } from '../../../services/condicion.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { EsquemasService } from '../../../services/esquemas.service';
 
+
+
+
 @Component({
   // tslint:disable-next-line: component-selector
   selector: 'preciobase',
@@ -21,6 +24,8 @@ export class PrecioBaseComponent implements OnInit {
   condicaos: any[];
   camdasFullData: any[];
   camadasFullData: any[];
+
+
   public precoBaseCamadas: Array<any>;
   public postPrecoBase: Array<any>;
 
@@ -34,6 +39,11 @@ export class PrecioBaseComponent implements OnInit {
 
     this.spinner.show();
     this.getCamadasValues();
+
+    this.esquemasService.getEsquemaRelation()
+      .then(data => {
+        console.log({data})
+      })
     /*
       Pablo Gerez 12/03/2020
       Gets type of user to validate
@@ -54,19 +64,27 @@ export class PrecioBaseComponent implements OnInit {
     Promise.all([
       this.condicionService.getTiposValor().then(result => result.map(tv => this.tipoValor.push(tv))),
       this.condicionService.getCamadas().then(result => result.map(ca => this.camadas.push(ca))),
-      this.condicionService.getCondicaos().then(result => result.map(co => this.condicaos.push(co)))
-    ]).then(result => {
+      this.condicionService.getCondicaos().then(result => result.map(co => this.condicaos.push(co))),
+      this.esquemasService.getEsquemaRelation()
+    ]).then(([a,b,c, esquemaRelations]) => {
+      console.log({esquemaRelations})
+
       this.camadas = this.camadas.filter((camada: any) => camada.TIPO_BASE_VENDAS === 'B');
       this.camadas.forEach(elem => {
+        const esquemaRelationsFiltered = esquemaRelations.filter(esqRel => esqRel.Cod_Camada === elem.Cod_Camada)
+        
+        const condicaosFiltered = esquemaRelationsFiltered.map(esqRel => this.condicaos.filter(cond => cond.Cod_Condicao == esqRel.Cod_Condicao)[0])
+        
         this.camadasFullData.push({
           camada: elem,
-          condicaos: this.condicaos,
+          condicaos: condicaosFiltered,
           condicaosAllow: this.condicaos.filter((cond: any) => cond.Cod_Camada === elem.Cod_Camada)
         });
         if (this.camadas.length === this.camadasFullData.length) {
           this.loading = false;
           this.spinner.hide();
         }
+
       });
     });
   }
@@ -81,15 +99,16 @@ export class PrecioBaseComponent implements OnInit {
   }
 
   updateCamada(val: any) {
-    if (this.precoBaseCamadas.length < 1) {
-      this.precoBaseCamadas.push(val);
-    } else {
-      this.precoBaseCamadas = this.precoBaseCamadas.filter((obj: any) => {
-        return obj.Cod_Camada !== val.Cod_Camada;
-      });
-      console.log(this.precoBaseCamadas);
-      this.precoBaseCamadas.push(val);
-    }
+    console.log(val)
+    // if (this.precoBaseCamadas.length < 1) {
+    //   this.precoBaseCamadas.push(val);
+    // } else {
+    //   this.precoBaseCamadas = this.precoBaseCamadas.filter((obj: any) => {
+    //     return obj.Cod_Camada !== val.Cod_Camada;
+    //   });
+    //   console.log(this.precoBaseCamadas);
+    //   this.precoBaseCamadas.push(val);
+    // }
   }
 
   getCamadasValues() {
@@ -120,6 +139,7 @@ export class PrecioBaseComponent implements OnInit {
         this.postPrecoBase.push(obj);
       });
     });
+    console.log({postPrecoBase: this.postPrecoBase})
     this.postPrecoBase.forEach(elem => {
       this.esquemasService.postEsquema(elem);
     });
