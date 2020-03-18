@@ -1,0 +1,6 @@
+<div class="col-12">
+  <ng-container *ngFor="let item of filterModel|keyvalue">
+    <span *ngIf="item.value" class="badge badge-secondary">{{ item.value }}
+    </span>
+  </ng-container>
+</div>
