@@ -69,13 +69,13 @@
     <div class="container row col-12 p-4">
         <div class="col-sm-6">
             <span class="text-header">Todos os campos</span>
-            <div class="options-list rounded mt-3">
+            <div class="bg-white rounded mt-3">
                 <input id="saSearch1"
                     class="form-control border-top-0 border-right-0 border-left-0 p-4 list-header custom-text-muted"
                     [(ngModel)]="searchSeq" placeholder="Pesquise o tipo de condição..." />
                 <ul class="p-0 martins-scrollbar">
                     <li *ngFor="let seq of sequenciasAcceso | filterseleccionado: searchSeq ; let id = index " class="p-2">
-                        <div class="custom-control custom-checkbox">
+                        <div class="custom-control pl-3custom-checkbox">
                             <input (click)="checkValue(seq)" type="checkbox" class="custom-control-input"
                                 id="{{id}}">
                             <label class="pl-4 custom-control-label" for="{{id}}">{{seq.getDescription()}}</label>
@@ -86,7 +86,7 @@
         </div>
         <div class="col-sm-6">
             <span class="text-header pb-3">Campos Selecionados</span>
-            <div class="options-list rounded mt-3">
+            <div class="bg-white rounded mt-3">
                 <input id="saSearch2"
                     class="form-control border-top-0 border-right-0 border-left-0 p-4 list-header custom-text-muted"
                     [(ngModel)]="searchSeleccionado" placeholder="Pesquise o tipo de condição..." />

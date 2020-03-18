@@ -1,13 +1,7 @@
 //@import './mixins-var.scss';
 @import './global.scss';
 
-.background { 
-    background-color: $backgroundGrey;
-}
 
-.options-list {
-    background-color: #fff;
-}
 .list-header {
 border-bottom: 3px solid #F7F7F7;
 }
@@ -21,9 +15,6 @@ ul {
     width: 20px;
 }
 
-i {
-    color: #fff;
-}
 
 .custom-text-muted::placeholder {
     color: #BEC0C6;
@@ -33,10 +24,6 @@ i {
     position: absolute;
     z-index: -1;
     opacity: 0;
-}
-
-.custom-control {
-    padding-left: 1rem;
 }
 
 .custom-checkbox .custom-control-label::before {
@@ -72,11 +59,6 @@ i {
     background-size: 50% 50%;
 }
 
-.custom-control-input:checked~.custom-control-label::before {
-    border-color: #009966;
-    background-color: #009966;
-}
-
 .custom-checkbox .custom-control-input:checked~.custom-control-label::after{
     background-image: none;
 }
@@ -84,13 +66,6 @@ i {
 .martins-scrollbar {
     height: 200px;
 }
-
-  .button-save{
-    background: $martinsBlue;
-    border-color: $martinsBlue;
-    padding-left:40px;
-    padding-right: 40px;
-  }
 
 [contentEditable=true]:empty:not(:focus):before{
     content:attr(data-text)

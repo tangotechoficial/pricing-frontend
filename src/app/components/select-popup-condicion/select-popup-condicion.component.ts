@@ -14,6 +14,7 @@ export class SelectPopupCondicionComponent implements OnInit {
   @Output() selectedObject: EventEmitter<any> = new EventEmitter<any>();
   @Input() dataList: Array<any>;
   public currenObject: Condicion = new Condicion();
+  selectedItem: boolean = false;
 
   constructor() {}
 
@@ -39,6 +40,7 @@ export class SelectPopupCondicionComponent implements OnInit {
     this.currenObject.MANDATORIA = val.MANDATORIA;
     this.currenObject.ESTATISTICA = val.ESTATISTICA;
     this.selectItemColor(i);
+    this.selectedItem = true;
   }
 
   selectItemColor(item: number) {

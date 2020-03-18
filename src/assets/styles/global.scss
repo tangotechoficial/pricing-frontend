@@ -13,9 +13,23 @@
     font-weight: 800;
 }
 
+/*----global color styles----*/
 .background {
     background: $backgroundGrey;
 }
+
+.bg-martins-blue {
+    background-color: $martinsBlue;
+}
+
+.color-martins-blue {
+    color: $martinsBlue;
+}
+
+.color-martins-darkblue {
+    color: $martinsDarkBlue;
+}
+/*------------*/
 
 button.dropdownMenuButton {
     background-color: white;
@@ -42,17 +56,10 @@ button.dropdownMenuButton {
     padding: .25rem 1.5rem !important;
 }
 
-#precio-container {
-    height: 100vh;
-}
-
 .form-control{
      border-radius: .35rem !important;
      font-size:13px;
 
-}
-.form-group{
-    padding: 0px 5px !important;
 }
 
 .form-control:focus,
@@ -110,7 +117,7 @@ button.dropdownMenuButton {
     font-weight: 700;
 }
 
-/**--buttons--*/
+/*---buttons---*/
 
 @mixin inverted-btn {
     background-color: transparent;
@@ -146,28 +153,41 @@ button.dropdownMenuButton {
   color:$martinsTextGrey !important;
 }
 
-/* input[type="checkbox"]:not(:checked).custom-control-input + label::before {
-    border: 2px #009966 solid !important;
-} */
+.martins-pointer {
+    cursor: pointer;
+}
 
 i.fas.fa-search.disabledSearch {
     color: gray;
 }
 
-.martins-color {
-    color: $martinsBlue
+.fas.fa-search:hover{
+    @extend .color-martins-blue;
+    @extend .martins-pointer;
 }
 
-.martins-pointer {
-    cursor: pointer;
+/*---green checkbox for condicion, sacceso, pventa, preciobase---*/
+.custom-control-input:checked~.custom-control-label::before {
+    border-color: #009966;
+    background-color: #009966;
 }
 
+.custom-checkbox .custom-control-label::before {
+    border: 2px solid #009966 !important;
+}
+/*---table borders for popupmenu & selectpopupcondicion---*/
+.table-border-right {
+    border-radius: 0 10px 10px 0; border: 2px solid transparent;
+}
+
+.table-border-left {
+    border-radius: 10px 0 0 10px; border: 2px solid transparent;
+}
 // ----- custom scrollbar for whole app ------- 
 // change 'height' as needed
 // in the styles of the corresponding component
 
 .martins-scrollbar {
-   // height: 200px;
     /*styles for Firefox*/
     scrollbar-color: #384461  #eee;
     scrollbar-width: thin;

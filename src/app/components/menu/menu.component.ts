@@ -4,7 +4,7 @@ declare var $: any;
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
-  styleUrls: ['./menu.component.css' , './menu.component.scss' ]
+  styleUrls: ['./menu.component.scss']
 })
 
 export class MenuComponent implements OnInit {

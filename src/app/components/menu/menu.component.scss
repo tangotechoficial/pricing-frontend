@@ -1,9 +1,6 @@
- @import '../../../assets/styles/global.scss';
-
+@import '../../../assets/styles/global.scss';
+@import '../../../assets/styles/mixins-var.scss';
 // GENERAL
-// reemplazar por mixins
-
-
 
 .alert {
     display: block;
@@ -12,28 +9,17 @@
     margin-right: auto;
  }
 
-
-
-
 // CONTAINER BUSINESS
 .businessContainer{
-	width: 100%;
 	height: 100%;
-	padding:30px 20px;
 
-	.bcard{
-		background: white;
+	.bcard {
 		font-size: 11px;
 		box-shadow: 0px 0px 6px 0px rgba(9, 9, 10, 0.1);
 		padding:30px;
 		margin-bottom:20px;
 		border-radius:5px;
 		height: auto;
-
-
-		.form{
-			padding:10px;
-		}
 	}
 
 }
@@ -44,44 +30,29 @@
 // MODAL BIENVENIDA
 
  .modalBienvenida{
- 	background-color:white;
- 	height: 300px;
  	width: 90%;
  	max-width: 500px;
  	position: absolute;
  	top:50%;
  	left:50%;
  	transition:2s;
-
  	transform: translate(-50%,-50%);
  	box-shadow: 0px 0px 6px 0px rgba(9, 9, 10, 0.3);
- 	text-align: center;
-	.close{
-		padding:10px 15px;
-	}
+
  	.modalWrapper{
- 		padding:50px;
  		.modalIcons{
 			height: 80px;
 			width: 80px;
-			margin:7px auto;
 			position: relative;
-
-
  			.circle{
  				height: 100%;
- 				width: 100%;
 				border:5px solid $martinsTextGrey;
-				border-radius:50%;
 				position: relative;
  			}
 			.exclam{
-
 				position: absolute;
 				top:20%;
 				right:38%;
-
-
 				i{
 					font-size: 50px;
 					color:$navMenuIconGrey;
@@ -90,7 +61,6 @@
 
 
  			.circleNum{
-	 				background-color: $martinsBlue;
 	 				border-radius:50%;
 	 				position: absolute;
 	 				height: 25px;
@@ -118,9 +88,7 @@
  		}
  		.modalBut{
  			button{
- 				color:$martinsBlue;
  				background-color: transparent;
- 				border-style: none;
  			}
 
  		}
