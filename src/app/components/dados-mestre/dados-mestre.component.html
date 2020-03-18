@@ -7,6 +7,7 @@
         <div class="container row col-12 p-4">
             <button type="button" class="btn button-save btn-filter-color" (click)="showFilterModal()" ><i
                     class="fas fa-filter btn-filter-color"></i>&nbsp;Filtro</button>
+            <filter-tag [filterModel]="dataFilter"></filter-tag>
         </div>
         <nav>
           <div class="nav nav-tabs" id="tabs" role="tablist">

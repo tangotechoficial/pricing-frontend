@@ -33,7 +33,7 @@ export class GenericDadaFilterPipe implements PipeTransform {
       if (filterDefault) {
         return items.filter(item =>
           keys.reduce((x, key) =>{
-            (x && new RegExp(args[key.toLowerCase()], 'gi').test(item[key])) || args[key.toLowerCase()] == ""
+            return (x && new RegExp(args[key.toLowerCase()], 'gi').test(item[key])) || args[key.toLowerCase()] == ""
           }, true))
       }
       return items.filter(item => {

@@ -73,9 +73,7 @@ export class FilterModalComponent implements OnInit {
 
   submit() {
     this.filterModel.deserialize(this.form.value);
-    debugger;
     this.outputFilter.emit(this.filterModel);
-
     $('#modalFilter').modal('hide')
   }
 
