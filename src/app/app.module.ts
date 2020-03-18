@@ -43,6 +43,7 @@ import { InlineEditComponent } from './components/shared/inline-edit/inline-edit
 import { ViewModeDirective } from './components/shared/viewmode.directive';
 import { EditModeDirective } from './components/shared/editmode.directive';
 import { EditableOnEnterDirective } from './components/shared/editableonenter.directive';
+import { GenericDadaFilterPipe } from '@app/pipes/generic-data-filter.pipe'
 
 import { registerLocaleData }  from '@angular/common'
 import localePt from '@angular/common/locales/pt';
@@ -82,7 +83,8 @@ registerLocaleData(localePt, 'pt',);
     InlineEditComponent,
     ViewModeDirective,
     EditModeDirective,
-    EditableOnEnterDirective
+    EditableOnEnterDirective,
+    GenericDadaFilterPipe
   ],
   imports: [
     BrowserModule,
