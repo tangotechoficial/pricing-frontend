@@ -3,18 +3,20 @@ import { DadosMestresComposicaoPrecoService} from '../../services/dados-mestres-
 import { DadosMestreVerbaService} from '../../services/dados-mestre-verba.service'
 import { PriceComposition } from '@models/pricecomposition';
 import { MasterDataMoney } from '@models/masterdatamoney'
+import { GenericDadaFilterPipe } from '@app/pipes/generic-data-filter.pipe'
 declare var $: any;
 
 @Component({
   selector: 'app-dados-mestre',
   templateUrl: './dados-mestre.component.html',
   styleUrls: ['./dados-mestre.component.scss'],
-  providers: [ DadosMestresComposicaoPrecoService, DadosMestreVerbaService ]
+  providers: [ DadosMestresComposicaoPrecoService, DadosMestreVerbaService]
 })
 export class DadosMestreComponent implements OnInit {
 
   public masterDataPriceComposition: Array<any>;
   public masterDataMoney: Array<any>;
+  dataFilter: any;
 
   constructor(
     private priceCompositionService : DadosMestresComposicaoPrecoService,
@@ -29,7 +31,6 @@ export class DadosMestreComponent implements OnInit {
       data =>
         data.results.map(
           row => {
-
             this.masterDataPriceComposition.push(new PriceComposition().deserialize(row));
           }
         ),
@@ -46,7 +47,11 @@ export class DadosMestreComponent implements OnInit {
     )
   }
 
-  filter() {
+  filter(evtResult) {
+    this.dataFilter = evtResult
+  }
+
+  showFilterModal() {
     $('#modalFilter').modal('show')
   }
 
