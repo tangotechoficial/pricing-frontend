@@ -14,7 +14,7 @@ export class PlanningTableComponent implements AfterViewInit {
   editable: boolean = false;
   formGroups: FormArray;
   dataFilter: any;
-  
+
   constructor() {
 
   }
@@ -68,7 +68,9 @@ export class PlanningTableComponent implements AfterViewInit {
       })
     }
   }
-
+  captureChanges(evt) {
+    return;
+  }
   filter(evtResult) {
     this.dataFilter = evtResult
   }

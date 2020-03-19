@@ -7,7 +7,7 @@ import { Pipe, PipeTransform, Injectable } from '@angular/core'
 @Injectable()
 export class GenericDadaFilterPipe implements PipeTransform {
 
-  transform(items: any[], args: any, filterDefault: boolean): any[] {
+  transform(items: any[], args: any, filterDefault: boolean=false): any[] {
 
       if (!items) {
         return []

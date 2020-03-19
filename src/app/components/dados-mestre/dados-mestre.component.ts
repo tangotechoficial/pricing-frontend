@@ -3,7 +3,8 @@ import { DadosMestresComposicaoPrecoService} from '../../services/dados-mestres-
 import { DadosMestreVerbaService} from '../../services/dados-mestre-verba.service'
 import { PriceComposition } from '@models/pricecomposition';
 import { MasterDataMoney } from '@models/masterdatamoney'
-import { GenericDadaFilterPipe } from '@app/pipes/generic-data-filter.pipe'
+import { Filter } from '@models/filter'
+
 declare var $: any;
 
 @Component({
@@ -16,7 +17,7 @@ export class DadosMestreComponent implements OnInit {
 
   public masterDataPriceComposition: Array<any>;
   public masterDataMoney: Array<any>;
-  dataFilter: any;
+  dataFilter: Filter = new Filter()
 
   constructor(
     private priceCompositionService : DadosMestresComposicaoPrecoService,
