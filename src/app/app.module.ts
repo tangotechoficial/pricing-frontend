@@ -32,7 +32,7 @@ import { SelectCondicionComponent } from './components/select-condicion/select-c
 import { SelectPopupCondicionComponent } from './components/select-popup-condicion/select-popup-condicion.component';
 import { SelectPopupMaterialComponent } from './components/select-popup-material/select-popup-material.component';
 import { SelectPopupExpedicaoComponent } from './components/select-popup-expedicao/select-popup-expedicao.component';
-import { SelectPopupFilialComponent } from './components/select-popup-filial/select-popup-filial.component';
+import { SelectPopupFaturamentoComponent } from './components/select-popup-faturamento/select-popup-faturamento.component';
 import { SelectPopupRegiaoComponent } from './components/select-popup-regiao/select-popup-regiao.component';
 
 @NgModule({
@@ -61,7 +61,7 @@ import { SelectPopupRegiaoComponent } from './components/select-popup-regiao/sel
     SelectPopupCondicionComponent,
     SelectPopupMaterialComponent,
     SelectPopupExpedicaoComponent,
-    SelectPopupFilialComponent,
+    SelectPopupFaturamentoComponent,
     SelectPopupRegiaoComponent
   ],
   imports: [

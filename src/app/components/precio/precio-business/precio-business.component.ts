@@ -22,7 +22,7 @@ export class PrecioBusiness implements OnInit {
   public dataListPreencher :Array <any>;
   public bSelectMaterial:boolean;
   public bSelectExpedicao:boolean;
-  public bSelectFilial:boolean;
+  public bSelectFacturamento:boolean;
   public bSelectRegiao:boolean;
 
   constructor(
@@ -32,8 +32,10 @@ export class PrecioBusiness implements OnInit {
   ngOnInit() {
     this.bSelectMaterial = false;
     this.bSelectExpedicao = false;
-    this.bSelectFilial = false;
+    this.bSelectFacturamento = false;
     this.bSelectRegiao = false;
+
+
     this.updateMasterData();
 
     this.dataListPreencher = [{"idCliente":51 , "tipo":"Consum Final" , "valor":"$R30" , "valdesd":"12/04/2019" , "valate":"99/99/9999"},
@@ -50,7 +52,7 @@ export class PrecioBusiness implements OnInit {
     } else if(tp == "material"){
       this.bSelectMaterial = true;
     } else if(tp == "filial"){
-      this.bSelectFilial = true;
+      this.bSelectFacturamento = true;
     } else if(tp == "regiao"){
       this.bSelectRegiao = true;
     }
@@ -63,7 +65,7 @@ export class PrecioBusiness implements OnInit {
     } else if(tp == "material"){
       this.bSelectMaterial = false;
     } else if(tp == "filial"){
-      this.bSelectFilial = false;
+      this.bSelectFacturamento = false;
     } else if(tp == "regiao"){
       this.bSelectRegiao = false;
     }
@@ -84,7 +86,8 @@ export class PrecioBusiness implements OnInit {
     ]).then(rs => {
       this.isLoading = false;
       console.log("test filiales filieales")
-      console.log(this.filial)
+      this.faturamento = [{"Cod_Filial":123 , "Desc_Filial":"descripcion mi filial"}]
+      console.log(this.faturamento)
       this.faturamento.map(elem => {
         console.log(elem)
       })
