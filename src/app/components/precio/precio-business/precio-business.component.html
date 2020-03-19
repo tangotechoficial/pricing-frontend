@@ -251,10 +251,34 @@
                 </div>
                 <h4 class="subtitlab darkgr">Preencher condições</h4>
 
-                <div class="compliance border rounded martins-scrollbar">
+                <div class="compliance border rounded martins-scrollbar px-3 py-2">
 
-                    <!--agrego clase 'martins-scrollbar' porque al momento que haya elementos
-                    dentro de este div, aparecera el scrollbar segun el AdobeXD-->
+                  <div class="myTable table-responsive table-hover p-">
+                    <table class="table table-striped ">
+                      <thead>
+                        <tr>
+                          <th class="p-1 text-center border-top-0 color-martins-blue font-weight-bold" scope="col">Cod. Cliente</th>
+                          <th scope="col" class="p-1 border-top-0 color-martins-blue font-weight-bold">Tipo Cliente</th>
+                          <th scope="col" class="p-1 border-top-0 color-martins-blue font-weight-bold">Valor</th>
+                          <th scope="col" class="p-1 border-top-0 color-martins-blue font-weight-bold">Válido de</th>
+                          <th scope="col" class="p-1 border-top-0 color-martins-blue font-weight-bold">Válido até</th>
+                        </tr>
+                      </thead>
+
+                      <tbody class="">
+                         <tr class="" *ngFor="let r of dataList; let i = index" (click)="getSelectedCondicao(r , i)">
+                          <td class="p-1 text-center font-weight-bold ">{{r.idCliente}}</td>
+                          <td class="p-1 text-left font-weight-bold ">{{r.tipo}}</td>
+                          <td class="p-1 text-left font-weight-bold ">{{r.valor}}</td>
+                          <td class="p-1 text-left font-weight-bold ">{{r.valdesd}}</td>
+                          <td class="p-1 text-left font-weight-bold ">{{r.valate}}</td>
+                        </tr>
+
+
+                      </tbody>
+                    </table>
+                  </div>
+
                 </div>
                 <div class="text-center">
                     <input type="submit" class="btn bg-inverted btn-md btn-pventa font-weight-bold mt-4 py-2 px-5"
