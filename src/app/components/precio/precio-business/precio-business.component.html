@@ -1,5 +1,10 @@
 <div class="precioWrapper px-5 py-4">
 
+  <select-popup-material *ngIf="bSelectMaterial"></select-popup-material>
+  <select-popup-expedicao *ngIf="bSelectExpedicao"></select-popup-expedicao>
+  <select-popup-filial *ngIf="bSelectFilial"></select-popup-filial>
+  <select-popup-regiao *ngIf="bSelectRegiao"></select-popup-regiao>
+
     <div class="row">
         <div class=" col-xs-12 col-lg-12 ">
             <div class="mb-3">
@@ -16,7 +21,7 @@
                             <input type="text" value='' class="form-control" name="desmaterial" id="desmaterial"
                                 placeholder="Seleccione" readonly>
                         </div>
-                        <div class="col-xs-12 col-md-1 d-flex justify-content-center align-items-center mt-3">
+                        <div class="col-xs-12 col-md-1 d-flex justify-content-center align-items-center mt-3" (click)="openPopUp('material')" >
                             <i class="fas fa-search"></i>
                         </div>
 
@@ -36,7 +41,7 @@
                                     class="dropdown-item martinsText">{{fili.Desc_Filial}}</a>
                             </div>
                         </div>
-                        <div class="col-xs-12 col-md-1 d-flex justify-content-center align-items-center mt-3">
+                        <div class="col-xs-12 col-md-1 d-flex justify-content-center align-items-center mt-3" (click)="openPopUp('expedicao')" >
                             <i class="fas fa-search"></i>
                         </div>
                     </div>
@@ -63,7 +68,7 @@
                             </div>
                         </div>
 
-                        <div class="col-xs-12 col-md-1 d-flex justify-content-center align-items-center mt-3">
+                        <div class="col-xs-12 col-md-1 d-flex justify-content-center align-items-center mt-3" (click)="openPopUp('regiao')">
                             <i class="fas fa-search"></i>
                         </div>
 
@@ -273,7 +278,7 @@
                       </thead>
 
                       <tbody class="">
-                         <tr class="" *ngFor="let r of dataList; let i = index" (click)="getSelectedCondicao(r , i)">
+                         <tr class="" *ngFor="let r of dataListPreencher; let i = index" (click)="getSelectedCondicao(r , i)">
                           <td class="p-1 text-center font-weight-bold ">{{r.idCliente}}</td>
                           <td class="p-1 text-left font-weight-bold ">{{r.tipo}}</td>
                           <td class="p-1 text-left font-weight-bold ">{{r.valor}}</td>

@@ -36,7 +36,7 @@ export class PrecioBaseComponent implements OnInit {
 
   ngOnInit() {
 
-    this.spinner.show();
+    // this.spinner.show();
     this.getCamadasValues();
 
     this.esquemasService.getEsquemaRelation()

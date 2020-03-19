@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { EsquemasService } from 'app/services/esquemas.service';
 
 declare var $: any;
+
 @Component({
   // tslint:disable-next-line: component-selector
   selector: 'precio-business',
@@ -18,21 +19,45 @@ export class PrecioBusiness implements OnInit {
   public estado: Array<any>;
   public region: Array<any>;
   public isLoading = false;
-  public dataList :Array <any>;
+  public dataListPreencher :Array <any>;
+  public bSelectMaterial:boolean;
+  public bSelectExpedicao:boolean;
+  public bSelectFilial:boolean;
+  public bSelectRegiao:boolean;
+
+
+
 
   constructor(
     private esquemaService: EsquemasService
   ) {}
 
   ngOnInit() {
+    this.bSelectMaterial = false;
+    this.bSelectExpedicao = false;
+    this.bSelectFilial = false;
+    this.bSelectRegiao = false;
     this.updateMasterData();
-    this.dataList = [{"idCliente":51 , "tipo":"Consum Final" , "valor":"$R30" , "valdesd":"12/04/2019" , "valate":"99/99/9999"},
+    this.dataListPreencher = [{"idCliente":51 , "tipo":"Consum Final" , "valor":"$R30" , "valdesd":"12/04/2019" , "valate":"99/99/9999"},
     {"idCliente":52 , "tipo":"Consum Final" , "valor":"$R120" , "valdesd":"12/04/2020" , "valate":"99/99/9999"},
     {"idCliente":51 , "tipo":"Consum Final" , "valor":"$R320" , "valdesd":"12/02/2019" , "valate":"99/99/9999"},
     {"idCliente":51 , "tipo":"Consum Final" , "valor":"$R320" , "valdesd":"12/02/2019" , "valate":"99/99/9999"}
 
   ]
   }
+
+  openPopUp(tp:string){
+    if (tp == "expedicao"){
+      this.bSelectExpedicao = true;
+    } else if(tp == "material"){
+      this.bSelectMaterial = true;
+    } else if(tp == "filial"){
+      this.bSelectFilial = true;
+    } else if(tp == "regiao"){
+      this.bSelectRegiao = true;
+    }
+  }
+
 
   updateMasterData() {
     this.isLoading = true;
