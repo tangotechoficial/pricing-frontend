@@ -22,22 +22,15 @@
 
                         <div class="px-1 mb-3 col-xs-12 col-md-1">
                             <label for="codFe" class="martinsLabel control-label">Cod.FE</label>
-                            <input type="text" value='' class="form-control" name="codFe" id="codFe" placeholder="Cod.">
+                            <input readonly type="text" value='' class="form-control" name="codFe" id="codFe" placeholder="Cod.">
                         </div>
                         <div class="dropdown px-1 mb-3 col-xs-12 col-md-4">
                             <label for="filialExp" class="martinsLabel control-label">Filial de expedição</label>
-                            <button
-                                class="col-12 btn btn-light dropdown-toggle dropdownMenuButton text-left  px-12 py-12"
-                                type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Selecione
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a *ngFor="let fili of filial; let id = index" id="{{id}}"
-                                    class="dropdown-item martinsText">{{fili.Desc_Filial}}</a>
-                            </div>
+                            <input type="text" value='' class="form-control" name="desmaterial" id="desmaterial"
+                                placeholder="Seleccione" readonly>
                         </div>
                         <div class="col-xs-12 col-md-1 d-flex justify-content-center align-items-center mt-3">
-                            <i class="fas fa-search"></i>
+                            <i class="fas fa-search color-martins-blue"></i>
                         </div>
                     </div>
                     <div class="row">
@@ -64,7 +57,7 @@
                         </div>
 
                         <div class="col-xs-12 col-md-1 d-flex justify-content-center align-items-center mt-3">
-                            <i class="fas fa-search"></i>
+                            <i class="fas fa-search color-martins-blue"></i>
                         </div>
 
                         <div class="dropdown px-1 mb-3 col-xs-12 col-md-1">
