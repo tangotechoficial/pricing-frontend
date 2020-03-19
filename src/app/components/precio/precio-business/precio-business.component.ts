@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EsquemasService } from 'app/services/esquemas.service';
 
+declare var $: any;
 @Component({
   // tslint:disable-next-line: component-selector
   selector: 'precio-business',
@@ -17,6 +18,7 @@ export class PrecioBusiness implements OnInit {
   public estado: Array<any>;
   public region: Array<any>;
   public isLoading = false;
+  public dataList :Array <any>;
 
   constructor(
     private esquemaService: EsquemasService
@@ -24,6 +26,12 @@ export class PrecioBusiness implements OnInit {
 
   ngOnInit() {
     this.updateMasterData();
+    this.dataList = [{"idCliente":51 , "tipo":"Consum Final" , "valor":"$R30" , "valdesd":"12/04/2019" , "valate":"99/99/9999"},
+    {"idCliente":52 , "tipo":"Consum Final" , "valor":"$R120" , "valdesd":"12/04/2020" , "valate":"99/99/9999"},
+    {"idCliente":51 , "tipo":"Consum Final" , "valor":"$R320" , "valdesd":"12/02/2019" , "valate":"99/99/9999"},
+    {"idCliente":51 , "tipo":"Consum Final" , "valor":"$R320" , "valdesd":"12/02/2019" , "valate":"99/99/9999"}
+
+  ]
   }
 
   updateMasterData() {
@@ -45,7 +53,17 @@ export class PrecioBusiness implements OnInit {
     });
   }
 
-  getSelectedSequencia(val: any) {}
+  // getSelectedSequencia(val: any) {}
+
+  getSelectedCondicao(val: any , i: any) {
+    this.selectItemColor(i);
+  }
+
+  selectItemColor(item: number) {
+    $('tr').removeClass('mySelect');
+    $('tr').eq(item + 1).addClass('mySelect');
+   }
+
 
 }
 
