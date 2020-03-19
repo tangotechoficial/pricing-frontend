@@ -7,63 +7,51 @@
                     <div class="row">
                         <div class="px-1 mb-3 col-xs-12 col-md-1">
                             <label for="nombre" class="martinsLabel control-label">Cod.Mat</label>
-                            <input type="text" value='' class="form-control" name="nombre" id="nombre" placeholder="Cod." readonly>
+                            <input type="text" value='' class="form-control" name="nombre" id="nombre"
+                                placeholder="Cod." readonly>
                         </div>
 
-                        <div class="px-1 mb-3 col-xs-12 col-md-3">
-                            <label for="desmaterial" class="martinsLabel control-label" >Descrição do material</label>
+                        <div class="px-1 mb-3 col-xs-12 col-md-4">
+                            <label for="desmaterial" class="martinsLabel control-label">Descrição do material</label>
                             <input type="text" value='' class="form-control" name="desmaterial" id="desmaterial"
-                                placeholder="Seleccione" readonly> 
+                                placeholder="Seleccione" readonly>
                         </div>
                         <div class="col-xs-12 col-md-1 d-flex justify-content-center align-items-center mt-3">
                             <i class="fas fa-search"></i>
-                        </div>  
-                        <div class="px-1 mb-3 col-xs-12 col-md-1">
-                            <label for="codCat" class="martinsLabel control-label">Cod.Cat</label>
-                            <input type="text" value='' class="form-control" name="codCat" id="codCat" placeholder="Cod." readonly>
                         </div>
-                        <div class="px-1 mb-3 col-xs-12 col-md-3">
-                            <label for="descategoria" class="martinsLabel control-label" >Descrição da categoria</label>
-                            <input type="text" value='' class="form-control" name="descategoria" id="descategoria"
-                                placeholder="Seleccione" readonly>
-                        </div>
-                        <div class="px-1 mb-3 col-xs-12 col-md-1">
-                            <label for="codSub" class="martinsLabel control-label">Cod.Sub</label>
-                            <input type="text" value='' class="form-control" name="codSub" id="codSub" placeholder="Cod." readonly>
-                        </div>
-                        <div class="px-1 mb-3 col-xs-12 col-md-2">
-                            <label for="desSub" class="martinsLabel control-label">Descrição da subcategoria</label>
-                            <input type="text" value='' class="form-control" name="desSub" id="desSub"
-                                placeholder="Seleccione" readonly>
-                        </div>
-                    </div>
-                    <div class="row">  
+
                         <div class="px-1 mb-3 col-xs-12 col-md-1">
                             <label for="codFe" class="martinsLabel control-label">Cod.FE</label>
                             <input type="text" value='' class="form-control" name="codFe" id="codFe" placeholder="Cod.">
                         </div>
-                        <div class="dropdown px-1 mb-3 col-xs-12 col-md-3">
+                        <div class="dropdown px-1 mb-3 col-xs-12 col-md-4">
                             <label for="filialExp" class="martinsLabel control-label">Filial de expedição</label>
-                            <button class="col-12 btn btn-light dropdown-toggle dropdownMenuButton text-left  px-12 py-12"
+                            <button
+                                class="col-12 btn btn-light dropdown-toggle dropdownMenuButton text-left  px-12 py-12"
                                 type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Selecione
                             </button>
-                            <div class="dropdown-menu"  aria-labelledby="dropdownMenuButton">
-                                <a *ngFor="let fili of filial; let id = index" id="{{id}}" class="dropdown-item martinsText">{{fili.Desc_Filial}}</a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a *ngFor="let fili of filial; let id = index" id="{{id}}"
+                                    class="dropdown-item martinsText">{{fili.Desc_Filial}}</a>
                             </div>
                         </div>
                         <div class="col-xs-12 col-md-1 d-flex justify-content-center align-items-center mt-3">
                             <i class="fas fa-search"></i>
-                        </div> 
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="px-1 mb-3 col-xs-12 col-md-1">
                             <label for="codFat" class="martinsLabel control-label">Cod.FAT</label>
-                            <input type="text" value='' class="form-control" name="codFat" id="codFat" placeholder="Cod.">
+                            <input type="text" value='' class="form-control" name="codFat" id="codFat"
+                                placeholder="Cod.">
                         </div>
 
 
-                        <div class="dropdown px-1 mb-3 col-xs-12 col-md-2">
+                        <div class="dropdown px-1 mb-3 col-xs-12 col-md-3">
                             <label for="filialFat" class="martinsLabel control-label">Filial de faturamento</label>
-                            <button class="col-12 btn btn-light dropdown-toggle dropdownMenuButton text-left  px-12 py-12"
+                            <button
+                                class="col-12 btn btn-light dropdown-toggle dropdownMenuButton text-left  px-12 py-12"
                                 type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Selecione
                             </button>
@@ -77,11 +65,12 @@
 
                         <div class="col-xs-12 col-md-1 d-flex justify-content-center align-items-center mt-3">
                             <i class="fas fa-search"></i>
-                        </div> 
+                        </div>
 
                         <div class="dropdown px-1 mb-3 col-xs-12 col-md-1">
                             <label for="estado" class="martinsLabel control-label">Estado</label>
-                            <button class="col-12 btn btn-light dropdown-toggle dropdownMenuButton text-left  px-12 py-12"
+                            <button
+                                class="col-12 btn btn-light dropdown-toggle dropdownMenuButton text-left  px-12 py-12"
                                 type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 UF
                             </button>
@@ -92,11 +81,10 @@
                                 <button class="dropdown-item martinsText">Opt3</button>
                             </div>
                         </div>
-
-
-                        <div class="dropdown px-1 mb-3 col-xs-12 col-md-2">
+                        <div class="dropdown px-1 mb-3 col-xs-12 col-md-3">
                             <label for="reg" class="martinsLabel control-label">Região de preço</label>
-                            <button class="col-12 btn btn-light dropdown-toggle dropdownMenuButton text-left  px-12 py-12"
+                            <button
+                                class="col-12 btn btn-light dropdown-toggle dropdownMenuButton text-left  px-12 py-12"
                                 type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Cód
                             </button>
@@ -107,21 +95,23 @@
                                 <button class="dropdown-item martinsText">Opt3</button>
                             </div>
                         </div>
-                    </div>
-                    <div class="row col-12 d-flex justify-content-center">
-                        <div class="px-1 mb-3 col-xs-12 col-md-1">
-                            <input type="submit" class="btn bg-inverted btn-labeled btn-block btn-md btn-pventa "
-                                value="Abrir">
+                        <div class="col-xs-12 col-md-1 d-flex justify-content-center align-items-center mt-3">
+                            <i class="fas fa-search"></i>
                         </div>
-                        <div class="px-1 mb-3 col-xs-12 col-md-1 ">
-                            <input type="submit" class="btn bg-inverted btn-labeled btn-block btn-md btn-pventa btn-grey"
-                                value="Limpar">
+                        <div class="px-1 col-12 col-md-2 d-flex justify-content-center">
+                            <div class="px-1 mb-3 col-xs-12 col-md-6">
+                                <input type="submit" class="btn bg-inverted btn-labeled btn-block btn-md btn-pventa "
+                                value="Abrir">
+                            </div>
+                            <div class="px-1 mb-3 col-xs-12 col-md-6">
+                                <input type="submit"
+                                    class="btn bg-inverted btn-labeled btn-block btn-md btn-pventa btn-grey"
+                                    value="Limpar">
+                            </div>
                         </div>
                     </div>
                 </div>
-
             </div>
-
         </div>
 
         <div class="modCond modGeneral col-xs-12 col-md-4 col-lg-4 bg-white rounded martins-scrollbar p-4">
