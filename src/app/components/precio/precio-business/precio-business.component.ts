@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,Input , Output } from '@angular/core';
 import { EsquemasService } from 'app/services/esquemas.service';
 
 declare var $: any;
@@ -38,6 +38,7 @@ export class PrecioBusiness implements OnInit {
     this.bSelectFilial = false;
     this.bSelectRegiao = false;
     this.updateMasterData();
+
     this.dataListPreencher = [{"idCliente":51 , "tipo":"Consum Final" , "valor":"$R30" , "valdesd":"12/04/2019" , "valate":"99/99/9999"},
     {"idCliente":52 , "tipo":"Consum Final" , "valor":"$R120" , "valdesd":"12/04/2020" , "valate":"99/99/9999"},
     {"idCliente":51 , "tipo":"Consum Final" , "valor":"$R320" , "valdesd":"12/02/2019" , "valate":"99/99/9999"},
@@ -58,6 +59,19 @@ export class PrecioBusiness implements OnInit {
     }
   }
 
+  closeOutput(val:any ,tp:string){
+    if (tp == "expedicao"){
+      // alert("ex[erocap")
+      this.bSelectExpedicao = false;
+    } else if(tp == "material"){
+      this.bSelectMaterial = false;
+    } else if(tp == "filial"){
+      this.bSelectFilial = false;
+    } else if(tp == "regiao"){
+      this.bSelectRegiao = false;
+    }
+  }
+
 
   updateMasterData() {
     this.isLoading = true;
@@ -72,6 +86,7 @@ export class PrecioBusiness implements OnInit {
       this.esquemaService.getRegion().then(re => re.map(reElem => this.region.push(reElem)))
     ]).then(rs => {
       this.isLoading = false;
+      console.log(this.filial)
       this.faturamento.map(elem => {
         console.log(elem)
       })
