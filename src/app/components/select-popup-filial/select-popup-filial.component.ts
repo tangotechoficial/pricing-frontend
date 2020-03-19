@@ -12,6 +12,7 @@ export class SelectPopupFilialComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.dataFilial = [{"Cod_Filial":123 , "Desc_Filial":"descripcion mi filial"}]
   }
 
   onClosePopup() {

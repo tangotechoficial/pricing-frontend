@@ -1,10 +1,12 @@
 <div class="precioWrapper px-5 py-4">
 
-  <select-popup-material *ngIf="bSelectMaterial" (closePopup)="closeOutput($event, 'material')"></select-popup-material>
-  <select-popup-expedicao *ngIf="bSelectExpedicao" (closePopup)="closeOutput($event , 'expedicao')"></select-popup-expedicao>
-  <select-popup-filial [dataFilial] = "filial" *ngIf="bSelectFilial" (closePopup)="closeOutput($event , 'filial')"></select-popup-filial>
-  <select-popup-regiao *ngIf="bSelectRegiao" (closePopup)="closeOutput($event , 'regiao')"></select-popup-regiao>
-  {{filial}}
+  <select-popup-material *ngIf="bSelectMaterial"   (closePopup)="closeOutput($event, 'material')"></select-popup-material>
+  <select-popup-expedicao *ngIf="bSelectExpedicao" [dataExpedicao] = "expedicao"  (closePopup)="closeOutput($event , 'expedicao')"></select-popup-expedicao>
+  <select-popup-filial *ngIf="bSelectFilial" [dataFilial] = "filial"  (closePopup)="closeOutput($event , 'filial')"></select-popup-filial>
+  <select-popup-regiao *ngIf="bSelectRegiao" [dataRegiao] = "region"  (closePopup)="closeOutput($event , 'regiao')"></select-popup-regiao>
+
+
+
     <div class="row">
         <div class=" col-xs-12 col-lg-12 ">
             <div class="mb-3">

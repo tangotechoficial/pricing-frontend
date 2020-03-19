@@ -25,9 +25,6 @@ export class PrecioBusiness implements OnInit {
   public bSelectFilial:boolean;
   public bSelectRegiao:boolean;
 
-
-
-
   constructor(
     private esquemaService: EsquemasService
   ) {}
@@ -86,6 +83,7 @@ export class PrecioBusiness implements OnInit {
       this.esquemaService.getRegion().then(re => re.map(reElem => this.region.push(reElem)))
     ]).then(rs => {
       this.isLoading = false;
+      console.log("test filiales filieales")
       console.log(this.filial)
       this.faturamento.map(elem => {
         console.log(elem)
