@@ -67,7 +67,7 @@ export class PrecioBaseComponent implements OnInit {
       this.condicionService.getCondicaos().then(result => result.map(co => this.condicaos.push(co))),
       this.esquemasService.getEsquemaRelation()
     ]).then(([a,b,c, esquemaRelations]) => {
-      console.log({esquemaRelations})
+      
 
       this.camadas = this.camadas.filter((camada: any) => camada.TIPO_BASE_VENDAS === 'B');
       this.camadas.forEach(elem => {
@@ -82,7 +82,8 @@ export class PrecioBaseComponent implements OnInit {
         this.camadasFullData.push({
           camada: elem,
           condicaos: condicaosFiltered,
-          condicaosAllow: this.condicaos.filter((cond: any) => cond.Cod_Camada === elem.Cod_Camada)
+          condicaosAllow: this.condicaos.filter((cond: any) => cond.Cod_Camada === elem.Cod_Camada),
+          tipoValor: this.tipoValor
         });
         if (this.camadas.length === this.camadasFullData.length) {
           this.loading = false;

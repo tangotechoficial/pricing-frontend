@@ -33,16 +33,26 @@ export class PrecioTechnical {
 
     
     this.tipoValor = new Array<any>();
-    this.condicionService.getTiposValor().then(result => result.map(tv => this.tipoValor.push(tv)));
-
+    
     this.condicaos = new Array<any>();
     this.condicaosAllow = this.camada.condicaosAllow;
     this.camadaU = this.camada.camada;
-    
+    this.tipoValor = this.camada.tipoValor
+
     const condicaos = this.camada.condicaos.map(cond => {
+      const tipValor = this.tipoValor.filter(tipoValor => tipoValor.Cod_TipoValor === cond.Cod_TipoValor)[0]
+      cond.Desc_TipoValor = tipValor.Desc_TipoValor
       return new ModelCondicao(cond)
     })
     this.condicaos = condicaos
+
+    // this.condicionService.getTiposValor()
+    //   .then(data => { 
+    //     this.tipoValor = data
+
+        
+    //   });
+    
     
   }
 
@@ -85,6 +95,8 @@ export class PrecioTechnical {
 
   addCondicao(val){
     const modelcondicao = this.camada.condicaosAllow.filter(cond => cond.Cod_Condicao === val.sCodCondicion)[0]
+    const tipValor = this.tipoValor.filter(tipoValor => tipoValor.Cod_TipoValor === modelcondicao.Cod_TipoValor)[0]
+    modelcondicao.Desc_TipoValor = tipValor.Desc_TipoValor
     this.condicaos[this.condicaos.length - 1].set(modelcondicao)
     this.selectedObject.emit({action: 'ADD', camada: this.camadaU, condicaos: modelcondicao});
     this.isEditNew = false;
@@ -94,6 +106,8 @@ export class PrecioTechnical {
 
   updateCondicao(val){
     const modelcondicao = this.camada.condicaosAllow.filter(cond => cond.Cod_Condicao === val.sCodCondicion)[0]
+    const tipValor = this.tipoValor.filter(tipoValor => tipoValor.Cod_TipoValor === modelcondicao.Cod_TipoValor)[0]
+    modelcondicao.Desc_TipoValor = tipValor.Desc_TipoValor
     this.condicaos.forEach(cond => {
       if (cond.Cod_Condicao === this.condicaoUpdateCod) {
         cond.set(modelcondicao)
@@ -106,6 +120,36 @@ export class PrecioTechnical {
     this.isEditCondicao = condicao.Cod_Condicao ? true : false
     this.condicaoUpdateCod = condicao.Cod_Condicao ? condicao.Cod_Condicao : null
     this.bSelectCondicao = true;
+  }
+
+  findCondicao(val: any) {
+    this.bSelectCondicao = true;
+    this.isEditNew = false;
+    this.camada.condicaos.map(elem => {
+      if (val.sCodCondicion === elem.Cod_Condicao) {
+        this.condicaos[this.globalIndex].set({
+          Cod_Condicao: elem.Cod_Condicao,
+          Desc_Condicao: elem.Desc_Condicao,
+          Escala_Qtde: elem.Escala_Qtde,
+          POS_NEG: elem.POS_NEG,
+          TIP_BASE_VENDAS: elem.TIP_BASE_VENDAS,
+          MANDATORIA: elem.MANDATORIA,
+          ESTATISTICA: elem.ESTATISTICA,
+          Cod_Camada: elem.Cod_Camada,
+          Cod_ChaveContas: elem.Cod_ChaveContas,
+          Cod_TipoValor: elem.Cod_TipoValor,
+          Desc_TipoValor: ''
+        });
+        this.tipoValor.map(tipoValor => {
+          if (tipoValor.Cod_TipoValor === this.condicaos[this.globalIndex].Cod_TipoValor) {
+            this.condicaos[this.globalIndex].Desc_TipoValor = tipoValor.Desc_TipoValor;
+          }
+        });
+        // this.selectedObject.emit(this.camadaU);
+        this.selectedObject.emit({camada: this.camadaU, condicaos: this.condicaos});
+
+      }
+    });
   }
 
 }

@@ -16,6 +16,7 @@ export class ModelCondicao {
   // tslint:disable-next-line: variable-name
   Cod_TipoValor: any;
   idCondicaoCamadaEsquema: any;
+  Desc_TipoValor: any;
 
   constructor(obj) {
     this.Cod_Condicao = obj.Cod_Condicao;
@@ -29,6 +30,7 @@ export class ModelCondicao {
     this.Cod_ChaveContas = obj.Cod_ChaveContas;
     this.Cod_TipoValor = obj.Cod_TipoValor;
     this.idCondicaoCamadaEsquema = obj.idCondicaoCamadaEsquema;
+    this.Desc_TipoValor = obj.Desc_TipoValor;
   }
 
   set(obj: any) {
@@ -43,6 +45,7 @@ export class ModelCondicao {
     this.Cod_ChaveContas = obj.Cod_ChaveContas;
     this.Cod_TipoValor = obj.Cod_TipoValor;
     this.idCondicaoCamadaEsquema = obj.idCondicaoCamadaEsquema;
+    this.Desc_TipoValor = obj.Desc_TipoValor;
   }
 }
 
