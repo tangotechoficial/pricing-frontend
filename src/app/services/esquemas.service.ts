@@ -15,9 +15,9 @@ export class EsquemasService {
         this.url = Global.url;
     }
 
-    postEsquema(obj: any): Promise<any> {
+    postEsquema({Cod_Esquema_Calculo, Cod_Condicao, Cod_Camada}: any): Promise<any> {
         // tslint:disable-next-line: max-line-length
-        return this.http.post(this.url + '/condicaocamadaesquema/', { Cod_Camada: obj.CAM, Cod_Esquema_Calculo: obj.ESQ }, { headers: { 'Content-type': 'application/json' } }).toPromise();
+        return this.http.post(this.url + '/condicaocamadaesquema/', {Cod_Esquema_Calculo, Cod_Condicao, Cod_Camada}, { headers: { 'Content-type': 'application/json' } }).toPromise();
     }
 
     getEsquemaRelation(): Promise<any> {

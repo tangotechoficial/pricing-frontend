@@ -22,7 +22,7 @@ export class PrecioBaseComponent implements OnInit {
   public condicao: Array<any>;
   tipoValor: any[];
   condicaos: any[];
-  camdasFullData: any[];
+  camadasUpdate = { "ADD": {}, "UPDATE": {}, "REMOVE": {}};
   camadasFullData: any[];
 
 
@@ -73,7 +73,11 @@ export class PrecioBaseComponent implements OnInit {
       this.camadas.forEach(elem => {
         const esquemaRelationsFiltered = esquemaRelations.filter(esqRel => esqRel.Cod_Camada === elem.Cod_Camada)
         
-        const condicaosFiltered = esquemaRelationsFiltered.map(esqRel => this.condicaos.filter(cond => cond.Cod_Condicao == esqRel.Cod_Condicao)[0])
+        const condicaosFiltered = esquemaRelationsFiltered.map(esqRel => {
+          const condicaoWithIdRelation = this.condicaos.filter(cond => cond.Cod_Condicao == esqRel.Cod_Condicao)[0]
+          condicaoWithIdRelation.idCondicaoCamadaEsquema = esqRel.id
+          return condicaoWithIdRelation
+        })
         
         this.camadasFullData.push({
           camada: elem,
@@ -98,17 +102,13 @@ export class PrecioBaseComponent implements OnInit {
     return false;
   }
 
-  updateCamada(val: any) {
-    console.log(val)
-    // if (this.precoBaseCamadas.length < 1) {
-    //   this.precoBaseCamadas.push(val);
-    // } else {
-    //   this.precoBaseCamadas = this.precoBaseCamadas.filter((obj: any) => {
-    //     return obj.Cod_Camada !== val.Cod_Camada;
-    //   });
-    //   console.log(this.precoBaseCamadas);
-    //   this.precoBaseCamadas.push(val);
-    // }
+  updateCamada({camada, condicaos, action}) {
+    // this.camadasUpdate[action][camada.Cod_Camada] = [].concat([...[this.camadasUpdate[action][camada.Cod_Camada]],[condicaos]])
+    
+    console.log({camada, condicaos, action})
+    this.camadasUpdate[action][camada.Cod_Camada] ? this.camadasUpdate[action][camada.Cod_Camada].push(condicaos) : this.camadasUpdate[action][camada.Cod_Camada] = [condicaos]
+
+  
   }
 
   getCamadasValues() {
@@ -126,23 +126,45 @@ export class PrecioBaseComponent implements OnInit {
   }
 
   submiteEsquema() {
-    this.postPrecoBase = new Array<any>();
-    this.precoBaseCamadas.map(elem => {
-      elem.condicaos.forEach(cond => {
-        const obj = {
-          ESQ: 'EC000',
-          CAM: '',
-          CON: ''
-        };
-        obj.CAM = elem.Cod_Camada;
-        obj.CON = cond.Cod_Condicao;
-        this.postPrecoBase.push(obj);
-      });
-    });
-    console.log({postPrecoBase: this.postPrecoBase})
-    this.postPrecoBase.forEach(elem => {
-      this.esquemasService.postEsquema(elem);
-    });
+    console.log({camadasUpdate: this.camadasUpdate})
+
+    let promisesAddCondCamadaEsq: Array<any> = Object.keys(this.camadasUpdate["ADD"]).map(codCamada => {
+      return this.camadasUpdate["ADD"][codCamada].map(cond => {
+          // new relations
+          const objCondCamadaEsq = {
+            Cod_Esquema_Calculo: "EC000",
+            Cod_Condicao: cond.Cod_Condicao,
+            Cod_Camada: codCamada
+          }
+         return this.esquemasService.postEsquema(objCondCamadaEsq)
+        
+      })
+    })
+
+    let promisesRemoveCondCamadaEsq: Array<any> = Object.keys(this.camadasUpdate["REMOVE"]).map(codCamada => {
+      return this.camadasUpdate["REMOVE"][codCamada].map(cond => {
+          // new relations
+          const objCondCamadaEsq = {
+            Cod_Esquema_Calculo: "EC000",
+            Cod_Condicao: cond.Cod_Condicao,
+            Cod_Camada: codCamada
+          }
+         return this.esquemasService.postEsquema(objCondCamadaEsq)
+        
+      })
+    })
+
+    const promisesCondCamadaEsq = [].concat(...[promisesAddCondCamadaEsq, promisesRemoveCondCamadaEsq]);
+
+    Promise.all(promisesCondCamadaEsq)
+      .then(data => {
+        console.log("oks")
+      })
+      .catch(err => {
+        console.log(err)
+      })
+
+  this.camadasUpdate = { "ADD": {}, "UPDATE": {}, "REMOVE": {}}
   }
 
   parseResponseCamada(data) {
