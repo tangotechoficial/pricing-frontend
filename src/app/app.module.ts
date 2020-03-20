@@ -30,6 +30,10 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { PopupmenuComponent } from './components/popupmenu/popupmenu.component';
 import { SelectCondicionComponent } from './components/select-condicion/select-condicion.component';
 import { SelectPopupCondicionComponent } from './components/select-popup-condicion/select-popup-condicion.component';
+import { SelectPopupMaterialComponent } from './components/select-popup-material/select-popup-material.component';
+import { SelectPopupExpedicaoComponent } from './components/select-popup-expedicao/select-popup-expedicao.component';
+import { SelectPopupFaturamentoComponent } from './components/select-popup-faturamento/select-popup-faturamento.component';
+import { SelectPopupRegiaoComponent } from './components/select-popup-regiao/select-popup-regiao.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +58,11 @@ import { SelectPopupCondicionComponent } from './components/select-popup-condici
     DiretrizEstrategicaComponent,
     PopupmenuComponent,
     SelectCondicionComponent,
-    SelectPopupCondicionComponent
+    SelectPopupCondicionComponent,
+    SelectPopupMaterialComponent,
+    SelectPopupExpedicaoComponent,
+    SelectPopupFaturamentoComponent,
+    SelectPopupRegiaoComponent
   ],
   imports: [
     BrowserModule,

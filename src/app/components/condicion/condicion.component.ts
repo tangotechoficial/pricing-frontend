@@ -23,6 +23,7 @@ export class CondicionComponent implements OnInit {
   public condicaos: Array<any>;
   public selectedProperties: Array<any>;
   public bCreateMode: boolean;
+  public sSeleccionCamadaPlaceholder = 'Selecione uma camada';
   public sSeleccionPlaceholder = 'Selecione uma opção';
   public saveSucess: boolean;
   public saveError: boolean;

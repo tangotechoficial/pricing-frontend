@@ -6,7 +6,7 @@
 <ngx-spinner></ngx-spinner>
 
 <!--Component Content -->
-<div class="container background col-9">
+<div class="container background p-0">
     <div class="container row col-12 p-4">
         <div class="col-sm-2">
             <span class="text-header">Cód. Condição</span>
@@ -17,17 +17,17 @@
             <input class="form-control mt-3" [(ngModel)]="condicion.sDesCondicion" value="Beneficio customizado" />
         </div>
         <div *ngIf="bCreateMode"  class="col-sm-1 mt-5 mb-2 d-flex justify-content-center align-items-center">
-            <i class="fas fa-search color-martins-blue disabledSearch"></i>
+            <i class="fas fa-search disabledSearch"></i>
         </div>
         <div *ngIf="!bCreateMode" class="col-sm-1 mt-5 mb-2 d-flex justify-content-center align-items-center">
-            <i (click)="onSearchCondicao()" class="fas fa-search color-martins-blue"></i>
+            <i (click)="onSearchCondicao()" class="fas fa-search"></i>
         </div>
         <div class="col-sm-3">
             <span class="text-header">Atribua à camada</span>
-            <div class="dropdown mt-3">
-                <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton"
+            <div class="dropdown col-10 p-0 mt-3">
+                <button class="col-12 d-flex justify-content-between align-items-center btn btn-light dropdown-toggle bg-white border rounded" type="button" id="dropdownMenuButton"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {{this.condicion.oCamada ? this.condicion.oCamada.Nome_Camada : this.sSeleccionPlaceholder}}
+                    {{this.condicion.oCamada ? this.condicion.oCamada.Nome_Camada : this.sSeleccionCamadaPlaceholder}}
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <a *ngFor="let ca of camadas ; let id = index" class="dropdown-item" (click)="getSelectedCamada(ca)">{{ca.Nome_Camada}}</a>
@@ -47,12 +47,12 @@
             <input *ngIf="!condicion.oChaveContas" class="form-control mt-3" readonly/>
         </div>
         <div class="col-sm-1 mt-5 mb-2 d-flex justify-content-center align-items-center">
-            <i (click)="onSearchChaveContas()" class="fas fa-search color-martins-blue"></i>
+            <i (click)="onSearchChaveContas()" class="fas fa-search"></i>
         </div>
         <div class="col-sm-2">
             <span class="text-header">Tipo de valor</span>
             <div class="dropdown mt-3">
-                <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton"
+                <button class="d-flex justify-content-between align-items-center btn btn-light dropdown-toggle valor-dropdown bg-white border rounded" type="button" id="dropdownMenuButton"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     {{this.condicion.oTipoValor ? this.condicion.oTipoValor.Desc_TipoValor : this.sSeleccionPlaceholder}}
                 </button>
@@ -63,7 +63,7 @@
         </div>
         <div class="col-2 d-flex flex-column justify-content-center align-items-center">
             <span class="text-header">Escala por qtd.</span>
-            <div class="custom-control pl-3custom-checkbox mt-2 mb-2">
+            <div class="custom-control pl-3 custom-checkbox mt-2 mb-2">
                 <input type="checkbox" [(ngModel)]="this.condicion.bEscalaQtde" class="custom-control-input" id="checkEscala">
                 <label class="pl-4 custom-control-label" for="checkEscala" id="checkEscalaLabel"></label>
             </div>
@@ -72,14 +72,14 @@
             <div class="col-12 d-flex justify-content-center p-0 bg-white">
                 <div class="col-6 d-flex flex-column justify-content-center align-items-center">
                     <span class="text-header">Positivo</span>
-                    <div class="custom-control pl-3custom-checkbox mb-2">
+                    <div class="custom-control pl-3 custom-checkbox mb-2">
                         <input type="checkbox" [(ngModel)]="this.condicion.bPos" (click)="checkPosNeg($event)" class="custom-control-input" id="checkPositivo">
                         <label class="pl-4 custom-control-label" for="checkPositivo" id="checkPositivoLabel"></label>
                     </div>
                 </div>
                 <div class="col-6 d-flex flex-column justify-content-center align-items-center">
                     <span class="text-header">Negativo</span>
-                    <div class="custom-control pl-3custom-checkbox mb-2">
+                    <div class="custom-control pl-3 custom-checkbox mb-2">
                         <input type="checkbox" [(ngModel)]="this.condicion.bNeg" (click)="checkPosNeg($event)" class="custom-control-input" id="checkNegativo">
                         <label class="pl-4 custom-control-label" for="checkNegativo" id="checkNegativoLabel"></label>
                     </div>
@@ -96,7 +96,7 @@
                     [(ngModel)]="searchSeleccionado" placeholder="Pesquise o tipo de condição..." />
                 <ul class="p-0 martins-scrollbar">
                     <li *ngFor="let sequencia of sequencias ; let id = index" class="p-2">
-                        <div class="custom-control pl-3custom-checkbox">
+                        <div class="custom-control pl-3 custom-checkbox">
                             <input (click)="checkValue(sequencia)" type="checkbox"
                                 class="sacceso-opcion custom-control-input" id="{{id}}">
                             <label class="pl-4 custom-control-label" for="{{id}}">{{sequencia.Nome_Sequencia}}</label>
@@ -119,7 +119,7 @@
                             <button type="button" (click)="onDltSelection(seq)"
                                 class="btn btn-danger ml-2 p-0 d-flex flex-column align-items-center">
                                 <span class="btn-label d-flex align-items-center"><i
-                                        class="fas fa-times p-0"></i></span>
+                                        class="fas fa-times p-0 text-white"></i></span>
                             </button>
                         </div>
                     </li>
