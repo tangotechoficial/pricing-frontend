@@ -21,7 +21,13 @@ export class GenericDadaFilterPipe implements PipeTransform {
       if(isEmpty){
         return items
       }
+
       const i = items[0]
+      
+      if(!i) {
+        return items;
+      }
+      
       const kargs = Object.keys(args).map((str) => { return str.toUpperCase() })
       const keys = kargs.filter(
         (key) => {

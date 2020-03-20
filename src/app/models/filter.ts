@@ -14,4 +14,8 @@ export class Filter implements Deserializable{
     return this
   }
 
+  nullify(field) {
+    this[field] = null
+  }
+
 }

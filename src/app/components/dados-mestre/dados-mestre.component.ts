@@ -17,7 +17,7 @@ export class DadosMestreComponent implements OnInit {
 
   public masterDataPriceComposition: Array<any>;
   public masterDataMoney: Array<any>;
-  dataFilter: Filter = new Filter()
+  dataFilter: Filter;
 
   constructor(
     private priceCompositionService : DadosMestresComposicaoPrecoService,
@@ -49,6 +49,7 @@ export class DadosMestreComponent implements OnInit {
   }
 
   filter(evtResult) {
+    console.log(evtResult)
     this.dataFilter = evtResult
   }
 

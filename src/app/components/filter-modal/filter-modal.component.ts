@@ -136,6 +136,7 @@ export class FilterModalComponent implements OnInit {
   }
 
   loadCategory() {
+    
     this.categories = this.filterData['category'][this.filter.linha_negocio]
   }
   loadSubCategory() {
