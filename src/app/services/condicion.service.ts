@@ -54,6 +54,7 @@ export class CondicionService {
   }
 
   postCondicao(co: Condicion): Promise<any> {
+    console.log(co);
     return this.http
       .post(
         this.url + "/condicao/",
@@ -65,16 +66,16 @@ export class CondicionService {
           TIP_BASE_VENDAS: co.oCamada.TIPO_BASE_VENDAS,
           MANDATORIA: 0,
           ESTATISTICA: 0,
-          id_Camada: co.oCamada.id,
-          id_ChaveContas: co.oChaveContas.id,
-          id_TipoValor: co.oTipoValor.id
+          Cod_Camada: co.oCamada.Cod_Camada,
+          Cod_ChaveContas: co.oChaveContas.Cod_ChaveContas,
+          Cod_TipoValor: co.oTipoValor.Cod_TipoValor
         },
         { headers: { "Content-type": "application/json" } }
       )
       .pipe(
         map((elem: any) =>
           co.aSequencias.forEach(campo => {
-            this.postCondicaoSequencia(elem.id, campo.id).subscribe();
+            this.postCondicaoSequencia(elem.Cod_Condicao, campo.Cod_Sequencia).subscribe();
           })
         )
       )
@@ -93,16 +94,16 @@ export class CondicionService {
           TIP_BASE_VENDAS: co.oCamada.TIPO_BASE_VENDAS,
           MANDATORIA: 0,
           ESTATISTICA: 0,
-          id_Camada: co.oCamada.id,
-          id_ChaveContas: co.oChaveContas.id,
-          id_TipoValor: co.oTipoValor.id
+          Cod_Camada: co.oCamada.Cod_Camada,
+          Cod_ChaveContas: co.oChaveContas.Cod_ChaveContas,
+          Cod_TipoValor: co.oTipoValor.Cod_TipoValor
         },
         { headers: { "Content-type": "application/json" } }
       )
       .pipe(
         map((elem: any) =>
           co.aSequencias.forEach(campo => {
-            this.postCondicaoSequencia(elem.id, campo.id).subscribe();
+            this.postCondicaoSequencia(elem.Cod_Condicao, campo.Cod_Sequencia).subscribe();
           })
         )
       )
@@ -148,8 +149,8 @@ export class CondicionService {
     return this.http.post(
       this.url + "/condicaosequencia/",
       {
-        id_Condicao: condId,
-        id_Sequencia: seqId
+        Cod_Condicao: condId,
+        Cod_Sequencia: seqId
       },
       { headers: { "Content-type": "application/json" } }
     );

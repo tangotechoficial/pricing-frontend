@@ -36,6 +36,11 @@ export class CondicionComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    /* Initialized message local object */
+    this.message = {};
+    this.selectedProperties = new Array<any>();
+    this.condicion = new Condicion();
+
 
     if (window.location.pathname.endsWith('criar')) {
       this.bCreateMode = true;
@@ -45,14 +50,6 @@ export class CondicionComponent implements OnInit {
     }
 
     this.updateMasterData();
-
-    /* Initialized message local object */
-    this.message = {};
-    this.message.sCodCondicion = 'CO001';
-    this.message.sDesCondicion = 'Condicion 1';
-    this.selectedProperties = new Array<any>();
-    this.condicion = new Condicion();
-    this.condicaos = new Array<any>();
 
   }
 
@@ -108,6 +105,7 @@ export class CondicionComponent implements OnInit {
   public updateMasterData() {
     this.spinner.show();
     this.sequencias = new Array<any>();
+    this.condicaos = new Array<any>();
     this.tipoValor = new Array<any>();
     this.camadas = new Array<any>();
     this.chaveContas = new Array<any>();
@@ -133,6 +131,7 @@ export class CondicionComponent implements OnInit {
     let flag = false;
     this.condicionService.getCondicaoByCode()
       .then((result: any) => {
+        console.log(result)
         result.map((cond: any) => {
           if (cond.Cod_Condicao === this.condicion.sCodCondicion) {
             flag = true;

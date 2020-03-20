@@ -19,6 +19,7 @@ export class SelectPopupCondicionComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
+    console.log(this.dataList)
   }
 
   onSelectObject() {
