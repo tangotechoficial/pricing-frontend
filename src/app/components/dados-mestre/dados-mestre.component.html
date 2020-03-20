@@ -18,7 +18,7 @@
         <div class="tab-content">
             <div class="tab-pane container-tab custom-scrollbar-css fade show active" id="tab-composicao-preco" role="tabpanel" aria-labelledby="nav-composicao-preco">
 
-                <table class="table" id="priceComposition">
+                <table class="table price-composition-table" id="priceComposition">
                     <thead>
                       <tr class="table-head">
                           <th class="th-center table-head-row">Cód.Produto</th>
@@ -65,10 +65,7 @@
                           <th></th>
                           <th class="table-head-row" scope="col">Preço Base</th>
                           <th></th>
-
-
-                          <th class="table-head-row" scope="col">Cred. ICMS</th>
-
+                          <!-- |number:2.2-2<th class="table-head-row" scope="col">Cred. ICMS</th>
                           <th></th>
                           <th class="table-head-row" scope="col">Vir. STB</th>
                           <th></th>
@@ -94,7 +91,7 @@
                           <th></th>
                           <th class="table-head-row" scope="col">% M. Bruta</th>
                           <th></th>filter: dataFilter
-                          <th class="table-head-row" scope="col">Preço Base</th>
+                          <th class="table-head-row" scope="col">Preço Base</th> -->
                       </tr>
                     </thead>
                     <tbody>
@@ -117,7 +114,7 @@
                           <td></td>
                           <td>{{item.CMV}}</td>
                           <td></td>
-                          <td>{{item.ICMS}}</td>
+                          <td>{{item.ICMS| number:'1.2-2'}}</td>
                           <td></td>
                           <td>{{item.PIS_COFINS}}</td>
                           <td></td>
@@ -129,7 +126,7 @@
                           <td></td>
                           <td>{{item.FUND_PRECO}}</td>
                           <td></td>
-                          <td>{{item.REBATE}}</td>
+                          <td>{{item.REBATE| number:'1.2-3'}}</td>
                           <td></td>
                           <td>{{item.DEVOLUCAO}}</td>
                           <td></td>
