@@ -1,8 +1,8 @@
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { Global } from "./global";
-import { Condicion } from "../models/condicion";
-import { map } from "rxjs/operators";
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Global } from './global';
+import { Condicion } from '../models/condicion';
+import { map } from 'rxjs/operators';
 
 
 @Injectable()
@@ -15,40 +15,40 @@ export class CondicionService {
 
   getCamadas(): Promise<any> {
     return this.http
-      .get(this.url + "/camada/", {
-        headers: { "Content-type": "application/json" }
+      .get(this.url + '/camada/', {
+        headers: { 'Content-type': 'application/json' }
       })
       .toPromise();
   }
 
   getChaveContas(): Promise<any> {
     return this.http
-      .get(this.url + "/chavecontas/", {
-        headers: { "Content-type": "application/json" }
+      .get(this.url + '/chavecontas/', {
+        headers: { 'Content-type': 'application/json' }
       })
       .toPromise();
   }
 
   getTiposValor(): Promise<any> {
     return this.http
-      .get(this.url + "/tipovalor/", {
-        headers: { "Content-type": "application/json" }
+      .get(this.url + '/tipovalor/', {
+        headers: { 'Content-type': 'application/json' }
       })
       .toPromise();
   }
 
   getSequenciasAcesso(): Promise<any> {
     return this.http
-      .get(this.url + "/sequencia/", {
-        headers: { "Content-type": "application/json" }
+      .get(this.url + '/sequencia/', {
+        headers: { 'Content-type': 'application/json' }
       })
       .toPromise();
   }
 
   getSequenciasByCondicao(): Promise<any> {
     return this.http
-      .get(this.url + "/condicaosequencia/", {
-        headers: { "Content-type": "application/json" }
+      .get(this.url + '/condicaosequencia/', {
+        headers: { 'Content-type': 'application/json' }
       })
       .toPromise();
   }
@@ -57,12 +57,12 @@ export class CondicionService {
     console.log(co);
     return this.http
       .post(
-        this.url + "/condicao/",
+        this.url + '/condicao/',
         {
           Cod_Condicao: co.sCodCondicion,
           Desc_Condicao: co.sDesCondicion,
           Escala_Qtde: co.bEscalaQtde ? 1 : 0,
-          POS_NEG: co.bNeg ? "N" : "P",
+          POS_NEG: co.bNeg ? 'N' : 'P',
           TIP_BASE_VENDAS: co.oCamada.TIPO_BASE_VENDAS,
           MANDATORIA: 0,
           ESTATISTICA: 0,
@@ -70,7 +70,7 @@ export class CondicionService {
           Cod_ChaveContas: co.oChaveContas.Cod_ChaveContas,
           Cod_TipoValor: co.oTipoValor.Cod_TipoValor
         },
-        { headers: { "Content-type": "application/json" } }
+        { headers: { 'Content-type': 'application/json' } }
       )
       .pipe(
         map((elem: any) =>
@@ -85,12 +85,12 @@ export class CondicionService {
   editCondicao(co: Condicion): Promise<any> {
     return this.http
       .put(
-        this.url + "/condicao/" + co.sId + "/",
+        this.url + '/condicao/' + co.sCodCondicion + '/',
         {
           Cod_Condicao: co.sCodCondicion,
           Desc_Condicao: co.sDesCondicion,
           Escala_Qtde: co.bEscalaQtde ? 1 : 0,
-          POS_NEG: co.bNeg ? "N" : "P",
+          POS_NEG: co.bNeg ? 'N' : 'P',
           TIP_BASE_VENDAS: co.oCamada.TIPO_BASE_VENDAS,
           MANDATORIA: 0,
           ESTATISTICA: 0,
@@ -98,7 +98,7 @@ export class CondicionService {
           Cod_ChaveContas: co.oChaveContas.Cod_ChaveContas,
           Cod_TipoValor: co.oTipoValor.Cod_TipoValor
         },
-        { headers: { "Content-type": "application/json" } }
+        { headers: { 'Content-type': 'application/json' } }
       )
       .pipe(
         map((elem: any) =>
@@ -112,16 +112,16 @@ export class CondicionService {
 
   async deleteRelation(id: any) {
     await this.http
-      .delete(this.url + "/condicaosequencia/" + id + "/", {
-        headers: { "Content-type": "application/json" }
+      .delete(this.url + '/condicaosequencia/' + id + '/', {
+        headers: { 'Content-type': 'application/json' }
       })
       .toPromise();
   }
 
   getLastCondicao(): Promise<any> {
     return this.http
-      .get(this.url + "/condicao/last/", {
-        headers: { "Content-type": "application/json" }
+      .get(this.url + '/condicao/last/', {
+        headers: { 'Content-type': 'application/json' }
       })
       .toPromise();
   }
@@ -129,8 +129,8 @@ export class CondicionService {
   deleteCondicaoSequencia(id: any) {
     const arr: any = [];
     const getSequenciasCondicao = this.http
-      .get(this.url + "/condicaosequencia/", {
-        headers: { "Content-type": "application/json" }
+      .get(this.url + '/condicaosequencia/', {
+        headers: { 'Content-type': 'application/json' }
       })
       .toPromise();
     getSequenciasCondicao.then((elems: any) => {
@@ -147,43 +147,43 @@ export class CondicionService {
 
   postCondicaoSequencia(condId, seqId) {
     return this.http.post(
-      this.url + "/condicaosequencia/",
+      this.url + '/condicaosequencia/',
       {
         Cod_Condicao: condId,
         Cod_Sequencia: seqId
       },
-      { headers: { "Content-type": "application/json" } }
+      { headers: { 'Content-type': 'application/json' } }
     );
   }
 
-  public getCondicaoByCode(): Promise<any> {
+  public getCondicaoByCode(val: any): Promise<any> {
     return this.http
-      .get(this.url + "/condicao/", {
-        headers: { "Content-type": "application/json" }
+      .get(this.url + '/condicao/' + val + '/', {
+        headers: { 'Content-type': 'application/json' }
       })
       .toPromise();
   }
 
   public getCondicaos(): Promise<any> {
     return this.http
-      .get(this.url + "/condicao/", {
-        headers: { "Content-type": "application/json" }
+      .get(this.url + '/condicao/', {
+        headers: { 'Content-type': 'application/json' }
       })
       .toPromise();
   }
 
   public getCondicaoCamada(): Promise<any> {
     return this.http
-      .get(this.url + "/condicaocamada/", {
-        headers: { "Content-type": "application/json" }
+      .get(this.url + '/condicaocamada/', {
+        headers: { 'Content-type': 'application/json' }
       })
       .toPromise();
   }
 
   public getCamadaEsquema(): Promise<any> {
     return this.http
-      .get(this.url + "/camadaesquema/", {
-        headers: { "Content-type": "application/json" }
+      .get(this.url + '/camadaesquema/', {
+        headers: { 'Content-type': 'application/json' }
       })
       .toPromise();
   }
@@ -199,7 +199,7 @@ export class CondicionService {
       const camadas = this.getCamadas();
       const camadaEsquemas = this.getCamadaEsquema();
       const condicaoCamadas = this.getCondicaoCamada();
-      const condicaos = this.getCondicaoByCode();
+      const condicaos = this.getCondicaos();
       return [camadas, camadaEsquemas, condicaoCamadas, condicaos];
     };
 

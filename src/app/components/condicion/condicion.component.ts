@@ -127,55 +127,57 @@ export class CondicionComponent implements OnInit {
     Output: Return selected condicao
   */
   public updateCondicaoByCode() {
+    this.selectedProperties.map(elem => {
+      this.sequencias.map((seq, index) => {
+        if (seq.Cod_Sequencia === elem.Cod_Sequencia){
+          const domElem = document.getElementById(index.toString());
+          domElem.click();
+        }
+      });
+    });
     this.bSelectCondicao = false;
     this.spinner.show();
     let flag = false;
-    this.condicionService.getCondicaoByCode()
+    this.condicionService.getCondicaoByCode(this.condicion.sCodCondicion)
       .then((result: any) => {
-        console.log(result)
-        result.map((cond: any) => {
-          if (cond.Cod_Condicao === this.condicion.sCodCondicion) {
-            flag = true;
-            this.condicion.sId = cond.id;
-            this.condicion.sDesCondicion = cond.Desc_Condicao;
-            this.condicion.bEscalaQtde = cond.Escala_Qtde === 1 ? true : false;
-            this.condicion.bNeg = cond.POS_NEG === 'N' ? true : false;
-            this.condicion.bPos = cond.POS_NEG === 'P' ? true : false;
-            this.condicion.MANDATORIA = cond.MANDATORIA;
-            this.condicion.ESTATISTICA = cond.ESTATISTICA;
-            this.camadas.map(elems => {
-              if (elems.Cod_Camada === cond.Cod_Camada) {
-                this.condicion.oCamada = elems;
-              }
-            });
-            this.chaveContas.map(elems => {
-              if (elems.Cod_ChaveContas === cond.Cod_ChaveContas) {
-                this.condicion.oChaveContas = elems;
-              }
-            });
-            this.tipoValor.map(elems => {
-              if (elems.Cod_TipoValor === cond.Cod_TipoValor) {
-                this.condicion.oTipoValor = elems;
-              }
-            });
-            this.condicion.TIP_BASE_VENDAS = this.condicion.oCamada.TIPO_BASE_VENDAS;
-            this.condicionService.getSequenciasByCondicao()
-              .then(elems => {
-                elems = elems.filter((obj: any) => {
-                  return obj.Cod_Condicao === cond.Cod_Condicao;
-                });
-                elems.map((seq: any) => {
-                  this.sequencias.map((bseq: any, index: any) => {
-                    if (seq.Cod_Sequencia === bseq.Cod_Sequencia) {
-                      const elem = document.getElementById(index.toString());
-                      elem.click();
-                    }
-                  });
-                });
-                this.spinner.hide();
-              });
+        flag = true;
+        this.condicion.sDesCondicion = result.Desc_Condicao;
+        this.condicion.bEscalaQtde = result.Escala_Qtde === 1 ? true : false;
+        this.condicion.bNeg = result.POS_NEG === 'N' ? true : false;
+        this.condicion.bPos = result.POS_NEG === 'P' ? true : false;
+        this.condicion.MANDATORIA = result.MANDATORIA;
+        this.condicion.ESTATISTICA = result.ESTATISTICA;
+        this.camadas.map(elems => {
+          if (elems.Cod_Camada === result.Cod_Camada) {
+            this.condicion.oCamada = elems;
           }
         });
+        this.chaveContas.map(elems => {
+          if (elems.Cod_ChaveContas === result.Cod_ChaveContas) {
+            this.condicion.oChaveContas = elems;
+          }
+        });
+        this.tipoValor.map(elems => {
+          if (elems.Cod_TipoValor === result.Cod_TipoValor) {
+            this.condicion.oTipoValor = elems;
+          }
+        });
+        this.condicion.TIP_BASE_VENDAS = this.condicion.oCamada.TIPO_BASE_VENDAS;
+        this.condicionService.getSequenciasByCondicao()
+          .then(elems => {
+            elems = elems.filter((obj: any) => {
+              return obj.Cod_Condicao === result.Cod_Condicao;
+            });
+            elems.map((seq: any) => {
+              this.sequencias.map((bseq: any, index: any) => {
+                if (seq.Cod_Sequencia === bseq.Cod_Sequencia) {
+                  const elem = document.getElementById(index.toString());
+                  elem.click();
+                }
+              });
+            });
+            this.spinner.hide();
+          });
         if (!flag) {
           this.spinner.hide();
           this.message.errMessage = 'A condição não existe';
@@ -200,7 +202,6 @@ export class CondicionComponent implements OnInit {
     Output: Update this._condicao.oCamada
   */
   public getSelectedChaveContas(val: any) {
-    console.log(val);
     this.condicion.oChaveContas = val;
     this.bpopMenu = false;
   }
@@ -298,7 +299,6 @@ export class CondicionComponent implements OnInit {
         }, 2000);
       })
       .catch((error: any) => {
-        console.log(error);
         if (error.error.Cod_Condicao[0] === 'condicao with this Cod Condicao already exists.') {
           this.message.errMessage = 'O código de condição já existe';
           this.saveError = true;
