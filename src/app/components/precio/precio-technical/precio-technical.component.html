@@ -34,7 +34,7 @@
                 <div class="custom-control custom-checkbox mt-2 ml-5 mb-2 p-0">
                     <input type="checkbox" class="custom-control-input"
                         id="{{camadaU.id}}MANDATORIA{{i}}"
-                        [(ngModel)]="condicao.MANDATORIA">
+                        [(ngModel)]="condicao.MANDATORIA" (change)="updateMandatoria(condicao)">
                     <label class="pl-4 custom-control-label"
                         for="{{camadaU.id}}MANDATORIA{{i}}"
                         id="checkMandatoriaLabel"></label>
@@ -46,7 +46,7 @@
                 <div class="custom-control custom-checkbox mt-2 ml-5 mb-2 p-0">
                     <input type="checkbox" class="custom-control-input"
                         id="{{camadaU.id}}ESTATISTICA{{i}}"
-                        [(ngModel)]="condicao.ESTATISTICA">
+                        [(ngModel)]="condicao.ESTATISTICA" (change)="updateEstadistica(condicao)">
                     <label class="pl-4 custom-control-label"
                         for="{{camadaU.id}}ESTATISTICA{{i}}"
                         id="checkEstatisticaLabel"></label>

@@ -45,7 +45,7 @@ export class PrecioTechnical {
       return new ModelCondicao(cond)
     })
     this.condicaos = condicaos
-
+    // console.log({condicao: this.condicaos})
     // this.condicionService.getTiposValor()
     //   .then(data => { 
     //     this.tipoValor = data
@@ -69,7 +69,7 @@ export class PrecioTechnical {
     this.condicaos.map((elem, index) => {
       if (elem.Cod_Condicao === val) {
         this.condicaos.splice(index, 1);
-        this.selectedObject.emit({action: 'REMOVE', camada: this.camadaU, condicaos: [val]});
+        this.selectedObject.emit({action: 'REMOVE', camada: this.camadaU, condicaos: elem});
       }
     });
   }
@@ -83,7 +83,7 @@ export class PrecioTechnical {
   }
 
   selectCondicao(val, isEditNew) {
-    console.log({val, isEditNew})
+    // console.log({val, isEditNew})
     if (isEditNew && !this.isEditCondicao) {
       this.addCondicao(val)
     } else {
@@ -122,34 +122,13 @@ export class PrecioTechnical {
     this.bSelectCondicao = true;
   }
 
-  findCondicao(val: any) {
-    this.bSelectCondicao = true;
-    this.isEditNew = false;
-    this.camada.condicaos.map(elem => {
-      if (val.sCodCondicion === elem.Cod_Condicao) {
-        this.condicaos[this.globalIndex].set({
-          Cod_Condicao: elem.Cod_Condicao,
-          Desc_Condicao: elem.Desc_Condicao,
-          Escala_Qtde: elem.Escala_Qtde,
-          POS_NEG: elem.POS_NEG,
-          TIP_BASE_VENDAS: elem.TIP_BASE_VENDAS,
-          MANDATORIA: elem.MANDATORIA,
-          ESTATISTICA: elem.ESTATISTICA,
-          Cod_Camada: elem.Cod_Camada,
-          Cod_ChaveContas: elem.Cod_ChaveContas,
-          Cod_TipoValor: elem.Cod_TipoValor,
-          Desc_TipoValor: ''
-        });
-        this.tipoValor.map(tipoValor => {
-          if (tipoValor.Cod_TipoValor === this.condicaos[this.globalIndex].Cod_TipoValor) {
-            this.condicaos[this.globalIndex].Desc_TipoValor = tipoValor.Desc_TipoValor;
-          }
-        });
-        // this.selectedObject.emit(this.camadaU);
-        this.selectedObject.emit({camada: this.camadaU, condicaos: this.condicaos});
-
-      }
-    });
+  updateMandatoria(condicao) {
+    // console.log({condicao})
+    this.selectedObject.emit({action: 'UPDATE', camada: this.camadaU, condicaos: condicao});
   }
 
+  updateEstadistica(condicao) {
+    // console.log({condicao})
+    this.selectedObject.emit({action: 'UPDATE', camada: this.camadaU, condicaos: condicao});
+  }
 }

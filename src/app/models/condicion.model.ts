@@ -24,8 +24,8 @@ export class ModelCondicao {
     this.Escala_Qtde = obj.Escala_Qtde;
     this.POS_NEG = obj.POS_NEG;
     this.TIP_BASE_VENDAS = obj.TIP_BASE_VENDAS;
-    this.MANDATORIA = obj.MANDATORIA === "1" ? true : false;
-    this.ESTATISTICA = obj.ESTATISTICA === "1" ? true : false;
+    this.MANDATORIA = obj.MANDATORIA == "1" ? true : false;
+    this.ESTATISTICA = obj.ESTATISTICA == "1" ? true : false;
     this.Cod_Camada = obj.Cod_Camada;
     this.Cod_ChaveContas = obj.Cod_ChaveContas;
     this.Cod_TipoValor = obj.Cod_TipoValor;
@@ -39,8 +39,8 @@ export class ModelCondicao {
     this.Escala_Qtde = obj.Escala_Qtde;
     this.POS_NEG = obj.POS_NEG;
     this.TIP_BASE_VENDAS = obj.TIP_BASE_VENDAS;
-    this.MANDATORIA = obj.MANDATORIA === "1" ? true : false;
-    this.ESTATISTICA = obj.ESTATISTICA === "1" ? true : false;
+    this.MANDATORIA = obj.MANDATORIA == "1" ? true : false;
+    this.ESTATISTICA = obj.ESTATISTICA == "1" ? true : false;
     this.Cod_Camada = obj.Cod_Camada;
     this.Cod_ChaveContas = obj.Cod_ChaveContas;
     this.Cod_TipoValor = obj.Cod_TipoValor;
