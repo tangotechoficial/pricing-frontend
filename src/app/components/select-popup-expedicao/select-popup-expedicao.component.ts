@@ -6,7 +6,7 @@ import { Component, OnInit ,Input, Output , EventEmitter} from '@angular/core';
   styleUrls: ['../select-popup-condicion/select-popup-condicion.component.scss']
 })
 export class SelectPopupExpedicaoComponent implements OnInit {
-  @Input() dataExpedicao: Array <any>
+  @Input() dataExpedicao: Array <any>;
   @Output() closePopup: EventEmitter<any> = new EventEmitter<any>();
 
   constructor() { }
@@ -17,6 +17,8 @@ export class SelectPopupExpedicaoComponent implements OnInit {
   onClosePopup() {
     this.closePopup.emit(false);
   }
+  getSelectedExpedicao(val: any, index: any) {
 
+  }
 
 }

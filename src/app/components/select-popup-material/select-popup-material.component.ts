@@ -18,5 +18,8 @@ export class SelectPopupMaterialComponent implements OnInit {
     this.closePopup.emit(false);
   }
 
+  getSelectedMaterial(val: any, index: any) {
+
+  }
 
 }

@@ -14,6 +14,10 @@ export class SelectPopupRegiaoComponent implements OnInit {
   ngOnInit() {
   }
 
+  getSelectedRegiao(val: any, index: any) {
+
+  }
+
   onClosePopup() {
     this.closePopup.emit(false);
   }

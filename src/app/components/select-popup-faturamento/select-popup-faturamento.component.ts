@@ -8,13 +8,20 @@ import { Component, OnInit ,Input, Output , EventEmitter} from '@angular/core';
 export class SelectPopupFaturamentoComponent implements OnInit {
   @Input() dataFaturamento: Array <any>
   @Output() closePopup: EventEmitter<any> = new EventEmitter<any>();
-
+  public selectedItem = false;
   constructor() { }
 
   ngOnInit() {
 
   }
 
+  getSelectedFaturamento(vañ: any, index: any) {
+
+  }
+
+  onSelectObject() {
+
+  }
   onClosePopup() {
     this.closePopup.emit(false);
   }

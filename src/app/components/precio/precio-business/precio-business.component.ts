@@ -24,6 +24,7 @@ export class PrecioBusiness implements OnInit {
   public bSelectExpedicao:boolean;
   public bSelectFacturamento:boolean;
   public bSelectRegiao:boolean;
+  public expedicao: boolean;
 
   constructor(
     private esquemaService: EsquemasService
