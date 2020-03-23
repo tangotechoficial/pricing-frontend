@@ -1,4 +1,4 @@
-<select-popup-condicion *ngIf="bSelectCondicao" (closePopup)="onCloseCondicaoPopUp($event)" (selectedObject)="findCondicao($event)" [dataList]="this.condicaosAllow"></select-popup-condicion>
+<select-popup-condicion *ngIf="bSelectCondicao" (closePopup)="onCloseCondicaoPopUp($event)" (selectedObject)="selectCondicao($event, isEditNew)" [dataList]="this.condicaosAllow"></select-popup-condicion>
 <div class="container col-12 d-flex flex-column justify-content-center px-4 py-4">
     <div *ngIf="loading" class="container p-0 rounded border col-12 bg-white">
         <div class="col-12 p-3 border-bottom">
@@ -20,7 +20,7 @@
             </div>
             <div class="col-1 mb-2 col-1 d-flex flex-column justify-content-end
                 align-items-center">
-                <i class="fas fa-search" (click)="findCondicao(camadaU)"></i>
+                <i class="fas fa-search" (click)="launchModal(condicao)"></i>
             </div>
             <div class="col-2">
                 <span class="text-header">Tipo de valor</span>
@@ -34,7 +34,7 @@
                 <div class="custom-control custom-checkbox mt-2 ml-5 mb-2 p-0">
                     <input type="checkbox" class="custom-control-input"
                         id="{{camadaU.id}}MANDATORIA{{i}}"
-                        [(ngModel)]="condicao.MANDATORIA">
+                        [(ngModel)]="condicao.MANDATORIA" (change)="updateMandatoria(condicao)">
                     <label class="pl-4 custom-control-label"
                         for="{{camadaU.id}}MANDATORIA{{i}}"
                         id="checkMandatoriaLabel"></label>
@@ -46,7 +46,7 @@
                 <div class="custom-control custom-checkbox mt-2 ml-5 mb-2 p-0">
                     <input type="checkbox" class="custom-control-input"
                         id="{{camadaU.id}}ESTATISTICA{{i}}"
-                        [(ngModel)]="condicao.ESTATISTICA">
+                        [(ngModel)]="condicao.ESTATISTICA" (change)="updateEstadistica(condicao)">
                     <label class="pl-4 custom-control-label"
                         for="{{camadaU.id}}ESTATISTICA{{i}}"
                         id="checkEstatisticaLabel"></label>
