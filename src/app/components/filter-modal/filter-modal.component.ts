@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, OnChanges } from '@angular/core';
 import {FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Filter} from '@models/filter'
 // jQuery
@@ -9,7 +9,7 @@ declare var $: any;
   templateUrl: './filter-modal.component.html',
   styleUrls: ['./filter-modal.component.css']
 })
-export class FilterModalComponent implements OnInit {
+export class FilterModalComponent implements OnInit, OnChanges {
 
   filterForm: FormGroup;
   filter: Filter = new Filter();
@@ -116,6 +116,10 @@ export class FilterModalComponent implements OnInit {
     })
   }
 
+  ngOnChanges() {
+    this.outputFilter.emit(this.filter);
+  }
+
   private get form() {
     return this.filterForm;
   }
@@ -136,7 +140,7 @@ export class FilterModalComponent implements OnInit {
   }
 
   loadCategory() {
-    
+
     this.categories = this.filterData['category'][this.filter.linha_negocio]
   }
   loadSubCategory() {

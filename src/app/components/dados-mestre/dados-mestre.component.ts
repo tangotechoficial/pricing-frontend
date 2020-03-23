@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges, Input, SimpleChanges} from '@angular/core';
 import { DadosMestresComposicaoPrecoService} from '../../services/dados-mestres-composicao-preco.service'
 import { DadosMestreVerbaService} from '../../services/dados-mestre-verba.service'
 import { PriceComposition } from '@models/pricecomposition';
@@ -13,11 +13,12 @@ declare var $: any;
   styleUrls: ['./dados-mestre.component.scss'],
   providers: [ DadosMestresComposicaoPrecoService, DadosMestreVerbaService]
 })
-export class DadosMestreComponent implements OnInit {
+export class DadosMestreComponent implements OnChanges, OnInit{
 
   public masterDataPriceComposition: Array<any>;
   public masterDataMoney: Array<any>;
   dataFilter: Filter;
+  changeLog: string[] = [];
 
   constructor(
     private priceCompositionService : DadosMestresComposicaoPrecoService,
@@ -48,10 +49,31 @@ export class DadosMestreComponent implements OnInit {
     )
   }
 
-  filter(evtResult) {
-    console.log(evtResult)
-    this.dataFilter = evtResult
+  ngOnChanges(changes: SimpleChanges) {
+    debugger
+    let log: string[] = [];
+
+    for (let propName in changes) {
+      let changedProp = changes[propName];
+      let to = JSON.stringify(changedProp.currentValue);
+      if (changedProp.isFirstChange()) {
+        log.push(`Initial value of ${propName} set to ${to}`);
+      } else {
+        let from = JSON.stringify(changedProp.previousValue);
+        log.push(`${propName} changed from ${from} to ${to}`);
+      }
+    }
+    this.changeLog.push(log.join(', '));
+
+    console.log(this.changeLog)
   }
+
+  getFilter(filter: Filter) {
+    debugger
+    this.dataFilter = filter
+  }
+
+
 
   showFilterModal() {
     $('#modalFilter').modal('show')
