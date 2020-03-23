@@ -3,6 +3,8 @@ import { CondicionService } from '../../../services/condicion.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { EsquemasService } from '../../../services/esquemas.service';
 
+declare var $: any;
+
 @Component({
   // tslint:disable-next-line: component-selector
   selector: 'preciobase',
@@ -67,8 +69,7 @@ export class PrecioBaseComponent implements OnInit {
       this.camadas = this.camadas.filter((camada: any) => camada.TIPO_BASE_VENDAS === 'B');
       
       this.camadas.forEach(elem => {
-        const esquemaRelationsFiltered = esquemaRelations.filter(esqRel => esqRel.Cod_Camada === elem.Cod_Camada)
-        
+        const esquemaRelationsFiltered = esquemaRelations.filter(esqRel => esqRel.Cod_Camada === elem.Cod_Camada)   
         const condicaosFiltered = esquemaRelationsFiltered.map(esqRel => {
           const condicaoWithIdRelation = this.condicaos.filter(cond => cond.Cod_Condicao == esqRel.Cod_Condicao)[0]
           condicaoWithIdRelation.idCondicaoCamadaEsquema = esqRel.id
@@ -144,4 +145,6 @@ export class PrecioBaseComponent implements OnInit {
   parseResponseCamada(data) {
     return data.filter(e => e.TIPO_BASE_VENDAS === "B");
   }
+
+
 }

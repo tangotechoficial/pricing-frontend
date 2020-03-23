@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,Input , Output } from '@angular/core';
 import { EsquemasService } from 'app/services/esquemas.service';
+
+declare var $: any;
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -17,14 +19,58 @@ export class PrecioBusiness implements OnInit {
   public estado: Array<any>;
   public region: Array<any>;
   public isLoading = false;
+  public dataListPreencher :Array <any>;
+  public bSelectMaterial:boolean;
+  public bSelectExpedicao:boolean;
+  public bSelectFacturamento:boolean;
+  public bSelectRegiao:boolean;
 
   constructor(
     private esquemaService: EsquemasService
   ) {}
 
   ngOnInit() {
+    this.bSelectMaterial = false;
+    this.bSelectExpedicao = false;
+    this.bSelectFacturamento = false;
+    this.bSelectRegiao = false;
+
+
     this.updateMasterData();
+
+    this.dataListPreencher = [{"idCliente":51 , "tipo":"Consum Final" , "valor":"$R30" , "valdesd":"12/04/2019" , "valate":"99/99/9999"},
+    {"idCliente":52 , "tipo":"Consum Final" , "valor":"$R120" , "valdesd":"12/04/2020" , "valate":"99/99/9999"},
+    {"idCliente":51 , "tipo":"Consum Final" , "valor":"$R320" , "valdesd":"12/02/2019" , "valate":"99/99/9999"},
+    {"idCliente":51 , "tipo":"Consum Final" , "valor":"$R320" , "valdesd":"12/02/2019" , "valate":"99/99/9999"}
+
+  ]
   }
+
+  openPopUp(tp:string){
+    if (tp == "expedicao"){
+      this.bSelectExpedicao = true;
+    } else if(tp == "material"){
+      this.bSelectMaterial = true;
+    } else if(tp == "filial"){
+      this.bSelectFacturamento = true;
+    } else if(tp == "regiao"){
+      this.bSelectRegiao = true;
+    }
+  }
+
+  closeOutput(val:any ,tp:string){
+    if (tp == "expedicao"){
+      // alert("ex[erocap")
+      this.bSelectExpedicao = false;
+    } else if(tp == "material"){
+      this.bSelectMaterial = false;
+    } else if(tp == "filial"){
+      this.bSelectFacturamento = false;
+    } else if(tp == "regiao"){
+      this.bSelectRegiao = false;
+    }
+  }
+
 
   updateMasterData() {
     this.isLoading = true;
@@ -39,13 +85,26 @@ export class PrecioBusiness implements OnInit {
       this.esquemaService.getRegion().then(re => re.map(reElem => this.region.push(reElem)))
     ]).then(rs => {
       this.isLoading = false;
+      console.log("test filiales filieales")
+      this.faturamento = [{"Cod_Filial":123 , "Desc_Filial":"descripcion mi filial"}]
+      console.log(this.faturamento)
       this.faturamento.map(elem => {
         console.log(elem)
       })
     });
   }
 
-  getSelectedSequencia(val: any) {}
+  // getSelectedSequencia(val: any) {}
+
+  getSelectedCondicao(val: any , i: any) {
+    this.selectItemColor(i);
+  }
+
+  selectItemColor(item: number) {
+    $('tr').removeClass('mySelect');
+    $('tr').eq(item + 1).addClass('mySelect');
+   }
+
 
 }
 

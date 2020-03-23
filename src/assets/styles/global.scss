@@ -43,9 +43,9 @@ button.dropdownMenuButton {
 
 
 .dropdown-toggle:after{
-    position: relative;
+    /* position: relative;
     top: 0.5rem;
-    float: right;
+    float: right; */
     color: $martinsBlue;
 }
 
@@ -174,6 +174,7 @@ i.fas.fa-search.disabledSearch {
 
 .custom-checkbox .custom-control-label::before {
     border: 2px solid #009966 !important;
+    background-color: transparent;
 }
 /*---table borders for popupmenu & selectpopupcondicion---*/
 .table-border-right {
@@ -183,7 +184,7 @@ i.fas.fa-search.disabledSearch {
 .table-border-left {
     border-radius: 10px 0 0 10px; border: 2px solid transparent;
 }
-// ----- custom scrollbar for whole app ------- 
+// ----- custom scrollbar for whole app -------
 // change 'height' as needed
 // in the styles of the corresponding component
 
@@ -196,20 +197,30 @@ i.fas.fa-search.disabledSearch {
   .martins-scrollbar {
     overflow-y: scroll;
   }
-  
+
     /*-----styles for Chrome and Safari-----*/
   /* scrollbar width */
   .martins-scrollbar::-webkit-scrollbar {
     width: 0.8rem;
   }
-  
+
   /* scrollbar track */
   .martins-scrollbar::-webkit-scrollbar-track {
     background: #eee;
   }
-  
+
   /* scrollbar handle */
   .martins-scrollbar::-webkit-scrollbar-thumb {
     border-radius: 1rem;
     background-color: #384461;
   }
+
+
+   /* click popup menu and table */
+  .mySelect{
+    background-color: $martinsBlue !important;
+      td{
+          color:white !important;
+      }
+  }
+

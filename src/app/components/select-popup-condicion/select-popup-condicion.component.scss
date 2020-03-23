@@ -1,15 +1,11 @@
 @import '../../../assets/styles/global.scss';
 
-.mySelect{
-	background-color: $martinsBlue !important;
-    td{
-        color:white !important;
-    }    
-}
+
 
 .popupmenu{
-	position: fixed;
-	z-index: 9999;
+  position: fixed;
+  background-color: white;
+	z-index: 999999;
 	top:50%;
 	left:50%;
 	transform: translate(-50%,-50%);
@@ -35,9 +31,9 @@
 
 		.table{
 			border:1px solid $backgroundGrey !important;
-			border-radius: 10px;			
+			border-radius: 10px;
 		}
-		
+
 		tr{
 			transition: none;
 		}
