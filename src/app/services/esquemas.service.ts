@@ -53,37 +53,61 @@ export class EsquemasService {
         return this.http.get(this.url + '/region/', { headers: { 'Content-type': 'application/json' } }).toPromise();
     }
 
-    // editCondicao(co: Condicion): Promise<any> {
-    //     return this.http
-    //       .put(
-    //         this.url + "/condicao/" + co.sId + "/",
-    //         {
-    //           Cod_Condicao: co.sCodCondicion,
-    //           Desc_Condicao: co.sDesCondicion,
-    //           Escala_Qtde: co.bEscalaQtde ? 1 : 0,
-    //           POS_NEG: co.bNeg ? "N" : "P",
-    //           TIP_BASE_VENDAS: co.oCamada.TIPO_BASE_VENDAS,
-    //           MANDATORIA: 0,
-    //           ESTATISTICA: 0,
-    //           id_Camada: co.oCamada.id,
-    //           id_ChaveContas: co.oChaveContas.id,
-    //           id_TipoValor: co.oTipoValor.id
-    //         },
-    //         { headers: { "Content-type": "application/json" } }
-    //       )
-    //       .pipe(
-    //         map((elem: any) =>
-    //           co.aSequencias.forEach(campo => {
-    //             this.postCondicaoSequencia(elem.id, campo.id).subscribe();
-    //           })
-    //         )
-    //       )
-    //       .toPromise();
-    //   }
-
     updateCondicao(cond): Promise<any> {
         console.log({cond})
         return this.http.put(this.url + "/condicao/" + cond.Cod_Condicao + "/",cond,{ headers: { "Content-type": "application/json" } }).toPromise()
+    }
+    
+    /*
+      Andrés Atencio 23/03/2020
+      Get data and make relations
+    */
+    fetchCondicaoCamadaEsquema(tipoBaseVendas: string) {
+        
+        let dataCondicaoCamadaEsquema = []
+
+        return new Promise((resolve, reject) => {
+
+            // Fetch data
+            Promise.all([
+                this.condicionService.getTiposValor(),
+                this.condicionService.getCamadas(),
+                this.condicionService.getCondicaos(),
+                this.getEsquemaRelation()
+              ]).then(([tipoValor,camadas,condicaos, esquemaRelations]) => {
+
+                // Filter camadas by TIPO_BASE_VENDAS
+                camadas = camadas.filter((camada: any) => camada.TIPO_BASE_VENDAS === tipoBaseVendas);
+
+                // Relations
+                camadas.forEach(elem => {
+
+                    const esquemaRelationsFiltered = esquemaRelations.filter(esqRel => esqRel.Cod_Camada === elem.Cod_Camada)
+                    const condicaosFiltered = esquemaRelationsFiltered.map(esqRel => {
+                        const condicaoWithIdRelation = condicaos.filter(cond => cond.Cod_Condicao == esqRel.Cod_Condicao)[0]
+                        condicaoWithIdRelation.idCondicaoCamadaEsquema = esqRel.id
+                        return condicaoWithIdRelation
+                    })
+                    
+                    const data = {
+                        camada: elem,
+                        condicaos: condicaosFiltered,
+                        condicaosAllow: condicaos.filter((cond: any) => cond.Cod_Camada === elem.Cod_Camada),
+                        tipoValor: tipoValor
+                    }
+
+                    dataCondicaoCamadaEsquema.push(data)
+                })
+
+                resolve(dataCondicaoCamadaEsquema)
+
+              })
+              .catch(err => {
+                  reject({err, msg: "Error fetchCondicaoCamadaEsquema"})
+              })
+
+
+        })
     }
 }
 

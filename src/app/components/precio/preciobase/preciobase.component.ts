@@ -17,16 +17,9 @@ export class PrecioBaseComponent implements OnInit {
   camadasUpdate = { "ADD": {}, "UPDATE": {}, "REMOVE": {}};
   camadasFullData: any = [];
   bBusiness: boolean;
-
-  condicao: any = [];
-  tipoValor: any = [];
-  condicaos: any = [];
-  camadas = [];
   loading = true;
+  typeBaseVendasDesc = ""
 
-
-  // public precoBaseCamadas: Array<any>;
-  // public postPrecoBase: Array<any>;
 
   constructor(
     private condicionService: CondicionService,
@@ -49,45 +42,26 @@ export class PrecioBaseComponent implements OnInit {
       this.bBusiness = false;
     }
     this.loading = true;
-    this.tipoValor = new Array<any>();
-    this.camadas = new Array<any>();
-    this.condicaos = new Array<any>();
-    this.camadasFullData = new Array<any>();
-    // this.precoBaseCamadas = new Array<any>();
 
-    Promise.all([
-      this.condicionService.getTiposValor(),
-      this.condicionService.getCamadas(),
-      this.condicionService.getCondicaos(),
-      this.esquemasService.getEsquemaRelation()
-    ]).then(([tipoValor,camadas,condicaos, esquemaRelations]) => {
-      
-      this.tipoValor = tipoValor
-      this.camadas = camadas
-      this.condicaos = condicaos
+    const typeBaseVendas = window.location.pathname === '/preciobase' ? "B" : "v"
+    this.typeBaseVendasDesc = typeBaseVendas == "B" ? "Base" : "Vendas"
 
-      this.camadas = this.camadas.filter((camada: any) => camada.TIPO_BASE_VENDAS === 'B');
-      
-      this.camadas.forEach(elem => {
-        const esquemaRelationsFiltered = esquemaRelations.filter(esqRel => esqRel.Cod_Camada === elem.Cod_Camada)   
-        const condicaosFiltered = esquemaRelationsFiltered.map(esqRel => {
-          const condicaoWithIdRelation = this.condicaos.filter(cond => cond.Cod_Condicao == esqRel.Cod_Condicao)[0]
-          condicaoWithIdRelation.idCondicaoCamadaEsquema = esqRel.id
-          return condicaoWithIdRelation
-        })
-        
-        this.camadasFullData.push({
-          camada: elem,
-          condicaos: condicaosFiltered,
-          condicaosAllow: this.condicaos.filter((cond: any) => cond.Cod_Camada === elem.Cod_Camada),
-          tipoValor: this.tipoValor
-        });
-        if (this.camadas.length === this.camadasFullData.length) {
-          this.loading = false;
-          this.spinner.hide();
-        }
-      });
-    });
+    this.esquemasService
+      .fetchCondicaoCamadaEsquema(typeBaseVendas)
+      .then(camadasFullData => {
+        this.stopLoading();
+        this.camadasFullData = camadasFullData
+      })
+      .catch(err => {
+        this.stopLoading();
+        console.log(err)
+      })
+  
+  }
+
+  stopLoading() {
+    this.loading = false;
+    this.spinner.hide();
   }
 
   updateCamada({camada, condicaos, action}) {
@@ -97,7 +71,7 @@ export class PrecioBaseComponent implements OnInit {
 
   submiteEsquema() {
     // console.log({camadasUpdate: this.camadasUpdate})
-
+    $('#myModalPrecioBase').modal('show');
     let promisesAddCondCamadaEsq: Array<any> = Object.keys(this.camadasUpdate["ADD"]).map(codCamada => {
       return this.camadasUpdate["ADD"][codCamada].map(cond => {
           // new relations
@@ -128,15 +102,16 @@ export class PrecioBaseComponent implements OnInit {
       })
     })
 
-    // const promisesCondCamadaEsq = [].concat(...[promisesUpdateCondCamadaEsq]);
     const promisesCondCamadaEsq = [].concat(...[promisesAddCondCamadaEsq, promisesRemoveCondCamadaEsq, promisesUpdateCondCamadaEsq]);
 
     Promise.all(promisesCondCamadaEsq)
       .then(data => {
         console.log("oks")
+        $('#myModalPrecioBase').modal('hide');
       })
       .catch(err => {
         console.log(err)
+        $('#myModalPrecioBase').modal('hide');
       })
 
     this.camadasUpdate = { "ADD": {}, "UPDATE": {}, "REMOVE": {}}
@@ -144,6 +119,10 @@ export class PrecioBaseComponent implements OnInit {
 
   parseResponseCamada(data) {
     return data.filter(e => e.TIPO_BASE_VENDAS === "B");
+  }
+
+  closePopUp() {
+    $('#myModalPrecioBase').modal('hide');
   }
 
 

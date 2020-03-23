@@ -11,14 +11,35 @@
     </div>
     <!-- TECHNICAL USER -->
     <div *ngIf="!bBusiness">
+            <div class="modal fade" id="myModalPrecioBase" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header bg-light border-bottom-0">
+                          <h5 class="modal-title" id="exampleModalLabel">Precio {{typeBaseVendasDesc}}</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                            Precio {{typeBaseVendasDesc}} salva com sucesso!
+                        </div>
+                        <div class="modal-footer d-flex justify-content-center border-top-0">
+                          <button type="button" class="btn bg-standard" (click)="closePopUp()">Ok</button>
+                        </div>
+                      </div>
+                    </div>
+                </div>
         <div *ngIf="!loading" class="background">
             <div *ngFor="let camada of camadasFullData">
-                <precio-technical [camada]="camada" (selectedObject)="updateCamada($event)"></precio-technical>
+                <precio-technical [camada]="camada"
+                    (selectedObject)="updateCamada($event)"></precio-technical>
             </div>
             <div class="text-center">
-                <button (click)="submiteEsquema()" class="btn btn-lg bg-standard">Salvar</button>
+                <button (click)="submiteEsquema()" class="btn btn-lg
+                    bg-standard">Salvar</button>
             </div>
             <br/>
                 <br/>
                 </div>
             </div>
+        </div>

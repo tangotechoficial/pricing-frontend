@@ -20,7 +20,7 @@ const appRoutes: Routes = [
     { path: 'menu', component: MenuComponent},
 //    { path: 'pbaseseleccion', component: PbaseseleccionComponent},
     { path: 'preciobase', component: PrecioBaseComponent},
-    { path: 'precioventa', component: PrecioVentaComponent},
+    { path: 'precioventa', component: PrecioBaseComponent},
     { path: 'sacceso', component: SaccesoComponent},
     { path: 'selectcondicao', component: SelectCondicionComponent},
     { path: 'condicion/:param', component: CondicionComponent, runGuardsAndResolvers: 'always'},
