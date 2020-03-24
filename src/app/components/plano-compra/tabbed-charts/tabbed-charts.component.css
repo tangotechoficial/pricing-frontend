@@ -1,0 +1,7 @@
+#placeholder {
+  box-sizing: content-box;
+  width: 70vw;
+  min-height: 29vh;
+  background-image: url('/assets/img/placeholders/tabbed-charts.png');
+  background-size: cover;
+}
