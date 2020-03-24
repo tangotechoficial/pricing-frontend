@@ -22,4 +22,5 @@ describe('FilterModalComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
 });

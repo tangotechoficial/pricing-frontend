@@ -1,0 +1,17 @@
+.badge {
+  padding: .5em;
+  font-size: 1em;
+}
+
+.badge span {
+  margin-right: 1em;
+  vertical-align: middle;
+}
+
+.badge .close {
+	margin-left: 1rem;
+	color: #fff;
+	font-size: 80%;
+	text-shadow: 0 1px 0 rgba(#000, .5);
+  vertical-align:middle;
+}

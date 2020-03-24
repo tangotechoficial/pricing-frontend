@@ -29,12 +29,17 @@
       ],
       "@env/*": [
         "environments/*",
+      ],
+      "@datasources/*": [
+        "assets/datasources/*"
       ]
     },
+    "resolveJsonModule": true,
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "allowSyntheticDefaultImports": true
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,

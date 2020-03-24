@@ -1,5 +1,90 @@
 <!-- Navigation Bar -->
 <navegacion></navegacion>
-<div class="temporary">
-  <h1>Plano Compra</h1>
+<div class="background">
+  <div class="container col-9 main-container">
+    <div class="row">
+      <div class="container col-12 p-4 d-flex justify-content-start">
+          <button type="button" class="btn button-save btn-filter-color" (click)="filter()"><i
+                  class="fas fa-filter btn-filter-color"></i>&nbsp;Filtro</button>
+          <div class="applied-filters"></div>
+      </div>
+    </div>
+    <div class="row shaded">
+      <div class="container col-12 p-4 d-flex justify-content-start">
+          <div class="chart-placeholder">
+              <tabbed-charts></tabbed-charts>
+          </div>
+      </div>
+    </div>
+    <div class="row shaded">
+      <div class="container col-12 p-4">
+        <planning-table [data]="planningData"></planning-table>
+      </div>
+    </div>
+    <div class="row shaded">
+        <div class="chart-placeholder">
+          <selling-composition-charts></selling-composition-charts>
+        </div>
+    </div>
+    <div class="row shaded">
+      Workflow de aprovação
+      <div class="chart-placeholder">
+          <table class="table workflow-table">
+            <thead>
+              <tr>
+                <th></th>
+                <th>Etapa</th>
+                <th>Nome do Responsável</th>
+                <th>Status</th>
+                <th>Data do Status</th>
+                <th>Observações</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="content approved">
+                <td></td>
+                <td>Comprador Responsável</td>
+                <td>Suzy Campanha</td>
+                <td>Aprovado</td>
+                <td>16 de Fevereiro, 2020 às 13h21</td>
+                <td>-</td>
+              </tr>
+              <tr class="content disapproved">
+                <td></td>
+                <td>Aprovação Pricing</td>
+                <td>Josimar Sousa</td>
+                <td>Reprovado</td>
+                <td>20 de Fevereiro, 2020 às 11h02</td>
+                <td>Problema com competitividade - <a href="#">Ver mais</a></td>
+              </tr>
+              <tr class="content waiting">
+                <td></td>
+                <td>Aprovação controladoria</td>
+                <td>Maurício Nascimento</td>
+                <td>No aguardo</td>
+                <td>No aguardo</td>
+                <td>No aguardo</td>
+              </tr>
+              <tr class="content waiting">
+                <td></td>
+                <td>Aprovação Gerencial</td>
+                <td>Jessica Ferreira</td>
+                <td>No aguardo</td>
+                <td>No aguardo</td>
+                <td>No aguardo</td>
+              </tr>
+              <tr class="content waiting">
+                <td></td>
+                <td>Aprovação Executiva</td>
+                <td>Vandré Oliveira</td>
+                <td>No aguardo</td>
+                <td>No aguardo</td>
+                <td>No aguardo</td>
+              </tr>
+            </tbody>
+          </table>
+
+      </div>
+    </div>
+  </div>
 </div>

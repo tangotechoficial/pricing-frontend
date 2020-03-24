@@ -3457,6 +3457,11 @@ function-bind@^1.1.1:
   resolved "https://registry.yarnpkg.com/function-bind/-/function-bind-1.1.1.tgz#a56899d3ea3c9bab874bb9773b7c5ede92f4895d"
   integrity sha512-yIovAzMX49sF8Yl58fSCWJ5svSLuaibPxXQJFLmBObTuCr0Mf1KiPopGM9NiFjiYBCbfaa2Fh6breQ6ANVTI0A==
 
+fuse.js@^5.0.3-beta:
+  version "5.0.3-beta"
+  resolved "https://registry.yarnpkg.com/fuse.js/-/fuse.js-5.0.3-beta.tgz#d55902991668c35f02a0bde3716e77d9ccdd7ddb"
+  integrity sha512-qFwkphslMolmTkA8uQgC5FVfuVKvTapfsrSYXgRS0PJGBvIYAh+vj6wyoA29I8PEIpdXJPHztBLznsmMtvE7CA==
+
 genfun@^5.0.0:
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/genfun/-/genfun-5.0.0.tgz#9dd9710a06900a5c4a5bf57aca5da4e52fe76537"
@@ -5147,6 +5152,13 @@ ng2-search-filter@^0.4.7:
   version "0.4.7"
   resolved "https://registry.yarnpkg.com/ng2-search-filter/-/ng2-search-filter-0.4.7.tgz#1a12d741c9e784296684b7743c3063d5331701fa"
   integrity sha512-l49diVMfN3d6BTbFBtgpvywLTHYW63/XSPpmmrfSlGP+WbxoVbbqqbG6zK/ivLvwmWWdvDAqw+b+lyhqMAkSLw==
+
+ngx-take-until-destroy@^5.4.0:
+  version "5.4.0"
+  resolved "https://registry.yarnpkg.com/ngx-take-until-destroy/-/ngx-take-until-destroy-5.4.0.tgz#6c8606ee956584dc947e2eb609c48b8f98b09900"
+  integrity sha512-e+VfCrHbLybdKWoQ8prdhmVzWI6vTnedr/9cVGQTkfepMdLz5D++VDk+Wnbs7mru6S9C+kIpNWUlh2YMPl928Q==
+  dependencies:
+    tslib "^1.9.0"
 
 nice-try@^1.0.4:
   version "1.0.5"
