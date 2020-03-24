@@ -1,9 +1,9 @@
 <div class="precioWrapper px-5 py-4">
 
-  <select-popup-material *ngIf="bSelectMaterial" [dataMaterial]='mercadoria' (closePopup)="closeOutput($event, 'material')"></select-popup-material>
-  <select-popup-expedicao *ngIf="bSelectExpedicao" [dataExpedicao] = "filial"  (selectedMaterial)="getSelectedMaterial($event)" (closePopup)="closeOutput($event , 'expedicao')"></select-popup-expedicao>
-  <select-popup-faturamento *ngIf="bSelectFacturamento" [dataFaturamento] = "faturamento"  (closePopup)="closeOutput($event , 'filial')"></select-popup-faturamento>
-  <select-popup-regiao *ngIf="bSelectRegiao" [dataRegiao] = "region"  (closePopup)="closeOutput($event , 'regiao')"></select-popup-regiao>
+  <select-popup-material *ngIf="bSelectMaterial" [dataMaterial]='mercadoria' (selectedMaterial)="getSelectedMaterial($event)" (closePopup)="closeOutput($event, 'material')"></select-popup-material>
+  <select-popup-expedicao *ngIf="bSelectExpedicao" [dataExpedicao] = "filial"  (selectedExpedicao)="getSelectedExpedicao($event)" (closePopup)="closeOutput($event , 'expedicao')"></select-popup-expedicao>
+  <select-popup-faturamento *ngIf="bSelectFacturamento" [dataFaturamento] = "faturamento"  (selectedFaturamento)="getSelectedFaturamento($event)" (closePopup)="closeOutput($event , 'filial')"></select-popup-faturamento>
+  <select-popup-regiao *ngIf="bSelectRegiao" [dataRegiao] = "region" (selectedRegiao)="getSelectedRegiao($event)" (closePopup)="closeOutput($event , 'regiao')"></select-popup-regiao>
 
 
 
@@ -15,13 +15,13 @@
                         <div class="px-1 mb-3 col-xs-12 col-md-1">
                             <label for="nombre" class="martinsLabel control-label">Cod.Mat</label>
                             <input type="text" value='' class="form-control" name="nombre" id="nombre"
-                                placeholder="Cod." readonly>
+                                placeholder="Cod." [(ngModel)]="precoBaseMaterial.material.CODPRD" readonly>
                         </div>
 
                         <div class="px-1 mb-3 col-xs-12 col-md-4">
                             <label for="desmaterial" class="martinsLabel control-label">Descrição do material</label>
                             <input type="text" value='' class="form-control" name="desmaterial" id="desmaterial"
-                                placeholder="Seleccione" readonly>
+                                placeholder="Seleccione" [(ngModel)]="precoBaseMaterial.material.DESPRD" readonly>
                         </div>
                         <div class="col-xs-12 col-md-1 d-flex justify-content-center align-items-center mt-3" (click)="openPopUp('material')" >
                             <i class="fas fa-search"></i>
@@ -29,11 +29,11 @@
 
                         <div class="px-1 mb-3 col-xs-12 col-md-1">
                             <label for="codFe" class="martinsLabel control-label">Cod.FE</label>
-                            <input readonly type="text" value='' class="form-control" name="codFe" id="codFe" placeholder="Cod.">
+                            <input readonly type="text" value='' [(ngModel)]="precoBaseMaterial.filialExpedicao.Cod_Filial" class="form-control" name="codFe" id="codFe" placeholder="Cod.">
                         </div>
                         <div class="dropdown px-1 mb-3 col-xs-12 col-md-4">
                             <label for="filialExp" class="martinsLabel control-label">Filial de expedição</label>
-                            <input type="text" value='' class="form-control" name="desmaterial" id="desmaterial"
+                            <input type="text" value='' class="form-control" [(ngModel)]="precoBaseMaterial.filialExpedicao.Desc_Filial" name="desmaterial" id="desmaterial"
                                 placeholder="Seleccione" readonly>
                         </div>
                         <div class="col-xs-12 col-md-1 d-flex justify-content-center align-items-center mt-3" (click)="openPopUp('expedicao')" >
@@ -43,14 +43,14 @@
                     <div class="row col-md-12">
                         <div class="px-1 mb-3 col-xs-12 col-md-1">
                             <label for="codFat" class="martinsLabel control-label">Cod.FAT</label>
-                            <input type="text" value='' class="form-control" name="codFat" id="codFat"
+                            <input type="text" value='' class="form-control" [(ngModel)]="precoBaseMaterial.filialFaturamento.Cod_Faturamento" name="codFat" id="codFat"
                                 placeholder="Cod." readonly>
                         </div>
 
 
                         <div class="dropdown px-1 mb-3 col-xs-12 col-md-3">
                             <label for="filialExp" class="martinsLabel control-label">Filial de faturamento</label>
-                            <input type="text" value='' class="form-control" name="desmaterial" id="desmaterial"
+                            <input type="text" value='' [(ngModel)]="precoBaseMaterial.filialFaturamento.Desc_Faturamento" class="form-control" name="desmaterial" id="desmaterial"
                                 placeholder="Seleccione" readonly>
                         </div>
 
@@ -63,28 +63,17 @@
                             <button
                                 class="col-12 btn btn-light dropdown-toggle dropdownMenuButton text-left  px-12 py-12"
                                 type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                UF
+                                {{precoBaseMaterial.estado.Cod_Estado}}
                             </button>
 
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <button class="dropdown-item martinsText">Opt1</button>
-                                <button class="dropdown-item martinsText">Opt2</button>
-                                <button class="dropdown-item martinsText">Opt3</button>
+                                <button *ngFor="let e of estado" (click)="onSelectEstado(e)" class="dropdown-item martinsText">{{e.Cod_Estado}} - {{e.Desc_Estado}}</button>
                             </div>
                         </div>
                         <div class="dropdown px-1 mb-3 col-xs-12 col-md-3">
                             <label for="reg" class="martinsLabel control-label">Região de preço</label>
-                            <button
-                                class="col-12 btn btn-light dropdown-toggle dropdownMenuButton text-left  px-12 py-12"
-                                type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Cód
-                            </button>
-
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <button class="dropdown-item martinsText">Opt1</button>
-                                <button class="dropdown-item martinsText">Opt2</button>
-                                <button class="dropdown-item martinsText">Opt3</button>
-                            </div>
+                            <input type="text" value='' [(ngModel)]="precoBaseMaterial.regiaoPreco.Tipo_Region" class="form-control" name="desmaterial" id="desmaterial"
+                                placeholder="Seleccione região" readonly>
                         </div>
                         <div class="col-xs-12 col-md-1 d-flex justify-content-center align-items-center mt-3" (click)="openPopUp('regiao')">
                             <i class="fas fa-search"></i>

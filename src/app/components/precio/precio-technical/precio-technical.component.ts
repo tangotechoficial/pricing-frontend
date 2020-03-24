@@ -31,17 +31,15 @@ export class PrecioTechnical {
   // tslint:disable-next-line: use-lifecycle-interface
   ngOnInit() {
 
-    
     this.tipoValor = new Array<any>();
-    
     this.condicaos = new Array<any>();
     this.condicaosAllow = this.camada.condicaosAllow;
     this.camadaU = this.camada.camada;
-    this.tipoValor = this.camada.tipoValor
+    this.tipoValor = this.camada.tipoValor;
 
     const condicaos = this.camada.condicaos.map(cond => {
       const tipValor = this.tipoValor.filter(tipoValor => tipoValor.Cod_TipoValor === cond.Cod_TipoValor)[0]
-      cond.Desc_TipoValor = tipValor.Desc_TipoValor
+      cond.Desc_TipoValor = tipValor.Desc_TipoValor;
       return new ModelCondicao(cond)
     })
     this.condicaos = condicaos

@@ -9,22 +9,25 @@ import { Component, OnInit, Input, Output , EventEmitter} from '@angular/core';
 export class SelectPopupExpedicaoComponent implements OnInit {
   @Input() dataExpedicao: Array <any>;
   @Output() closePopup: EventEmitter<any> = new EventEmitter<any>();
+  @Output() selectedExpedicao: EventEmitter<any> = new EventEmitter<any>();
+  public currentExpedicao: any;
 
   constructor() { }
 
   ngOnInit() {
-    console.log(this.dataExpedicao);
+
   }
 
   onSelectExpedicao() {
-
+    this.selectedExpedicao.emit(this.currentExpedicao);
+    this.closePopup.emit(false);
   }
 
   onClosePopup() {
     this.closePopup.emit(false);
   }
   getSelectedExpedicao(val: any, index: any) {
-
+    this.currentExpedicao = val;
   }
 
 }

@@ -8,14 +8,21 @@ import { Component, OnInit ,Input, Output , EventEmitter} from '@angular/core';
 export class SelectPopupRegiaoComponent implements OnInit {
   @Input() dataRegiao: Array <any>
   @Output() closePopup: EventEmitter<any> = new EventEmitter<any>();
+  @Output() selectedRegiao: EventEmitter<any> = new EventEmitter<any>();
+  public currentRegiao: any;
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  getSelectedRegiao(val: any, index: any) {
+  onSelectedRegiao() {
+    this.selectedRegiao.emit(this.currentRegiao);
+    this.closePopup.emit(false);
+  }
 
+  getSelectedRegiao(val: any, index: any) {
+    this.currentRegiao = val;
   }
 
   onClosePopup() {

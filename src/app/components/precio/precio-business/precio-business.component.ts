@@ -26,12 +26,42 @@ export class PrecioBusiness implements OnInit {
   public bSelectFacturamento = false;
   public bSelectRegiao = false;
   public expedicao: boolean;
+  public precoBaseMaterial: any;
 
   constructor(
     private esquemaService: EsquemasService
   ) {}
 
   ngOnInit() {
+
+    this.precoBaseMaterial = {
+      material: { CODPRD: '',
+                  DESPRD: '',
+                  CODGRPPRD: '',
+                  CODCLSPRD: '',
+                  DESCLSPRD: '',
+                  CODSUBCTGPRD: '',
+                  DESSUBCTGPRD: '',
+                  CODSMR: '',
+                  DESSMR: ''},
+      filialExpedicao: {
+        Cod_Filial: '',
+        Desc_Filial: ''
+      },
+      filialFaturamento: {
+        Cod_Faturamento: '',
+        Desc_Faturamento: ''
+      },
+      estado: {
+        Cod_Estado: 'SP',
+        Desc_Estado: ''
+      },
+      regiaoPreco: {
+        Cod_Region: '',
+        Tipo_Region: '',
+        Desc_Region: ''
+      }
+    };
 
     this.updateMasterData();
 
@@ -43,33 +73,52 @@ export class PrecioBusiness implements OnInit {
   ]
   }
 
-  openPopUp(tp:string){
-    if (tp == 'expedicao'){
+  openPopUp(tp: string){
+    if (tp === 'expedicao') {
       this.bSelectExpedicao = true;
-    } else if(tp == 'material'){
+    } else if (tp === 'material') {
       this.bSelectMaterial = true;
-    } else if(tp == 'filial'){
+    } else if (tp === 'filial') {
       this.bSelectFacturamento = true;
-    } else if(tp == 'regiao'){
+    } else if (tp === 'regiao') {
       this.bSelectRegiao = true;
     }
   }
 
-  closeOutput(val:any ,tp:string){
-    if (tp == 'expedicao'){
-      // alert("ex[erocap")
+  closeOutput(val: any, tp: string) {
+    if (tp === 'expedicao') {
       this.bSelectExpedicao = false;
-    } else if(tp == 'material'){
+    } else if (tp === 'material') {
       this.bSelectMaterial = false;
-    } else if(tp == 'filial'){
+    } else if (tp === 'filial') {
       this.bSelectFacturamento = false;
-    } else if(tp == 'regiao'){
+    } else if (tp === 'regiao') {
       this.bSelectRegiao = false;
     }
   }
 
   getSelectedMaterial(val: any) {
-    console.log(val);
+    this.precoBaseMaterial.material = val;
+  }
+
+  getSelectedExpedicao(val: any) {
+    this.precoBaseMaterial.filialExpedicao = val;
+  }
+
+  getSelectedFaturamento(val: any) {
+    this.precoBaseMaterial.filialFaturamento = val;
+  }
+
+  getSelectedRegiao(val: any) {
+    this.precoBaseMaterial.regiaoPreco = val;
+  }
+
+  onSelectEstado(val: any) {
+    this.precoBaseMaterial.estado = val;
+  }
+
+  postPrecioBaseForMaterial() {
+
   }
 
   updateMasterData() {
@@ -87,8 +136,6 @@ export class PrecioBusiness implements OnInit {
       this.esquemaService.getMercadoria().then(mer => mer.map(merElem => this.mercadoria.push(merElem)))
     ]).then(rs => {
       this.isLoading = false;
-      console.log(this.filial);
-      console.log()
     });
   }
 
