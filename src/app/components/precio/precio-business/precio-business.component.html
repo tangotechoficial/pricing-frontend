@@ -1,7 +1,7 @@
 <div class="precioWrapper px-5 py-4">
 
-  <select-popup-material *ngIf="bSelectMaterial"   (closePopup)="closeOutput($event, 'material')"></select-popup-material>
-  <select-popup-expedicao *ngIf="bSelectExpedicao" [dataExpedicao] = "expedicao"  (closePopup)="closeOutput($event , 'expedicao')"></select-popup-expedicao>
+  <select-popup-material *ngIf="bSelectMaterial" [dataMaterial]='mercadoria' (closePopup)="closeOutput($event, 'material')"></select-popup-material>
+  <select-popup-expedicao *ngIf="bSelectExpedicao" [dataExpedicao] = "filial"  (selectedMaterial)="getSelectedMaterial($event)" (closePopup)="closeOutput($event , 'expedicao')"></select-popup-expedicao>
   <select-popup-faturamento *ngIf="bSelectFacturamento" [dataFaturamento] = "faturamento"  (closePopup)="closeOutput($event , 'filial')"></select-popup-faturamento>
   <select-popup-regiao *ngIf="bSelectRegiao" [dataRegiao] = "region"  (closePopup)="closeOutput($event , 'regiao')"></select-popup-regiao>
 

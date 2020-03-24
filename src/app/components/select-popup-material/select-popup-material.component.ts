@@ -6,12 +6,21 @@ import { Component, OnInit ,Input, Output , EventEmitter} from '@angular/core';
   styleUrls: ['../select-popup-condicion/select-popup-condicion.component.scss']
 })
 export class SelectPopupMaterialComponent implements OnInit {
-  @Input() dataMaterial: Array <any>
+  @Input() dataMaterial: Array <any>;
   @Output() closePopup: EventEmitter<any> = new EventEmitter<any>();
+  @Output() selectedMaterial: EventEmitter<any> = new EventEmitter<any>();
+  public currentMaterial: any;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
+
+  }
+
+  onSelectedMaterial() {
+    console.log(this.currentMaterial);
+    this.selectedMaterial.emit(this.currentMaterial);
+    this.closePopup.emit(false);
   }
 
   onClosePopup() {
@@ -19,7 +28,7 @@ export class SelectPopupMaterialComponent implements OnInit {
   }
 
   getSelectedMaterial(val: any, index: any) {
-
+    this.currentMaterial = val;
   }
 
 }

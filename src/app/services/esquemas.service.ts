@@ -15,6 +15,10 @@ export class EsquemasService {
         this.url = Global.url;
     }
 
+    getMercadoria(): Promise<any> {
+        return this.http.get(this.url + '/mercadoria/', { headers: { 'Content-type': 'application/json' } }).toPromise();
+    }
+
     postEsquema({Cod_Esquema_Calculo, Cod_Condicao, Cod_Camada}: any): Promise<any> {
         // tslint:disable-next-line: max-line-length
         return this.http.post(this.url + '/condicaocamadaesquema/', {Cod_Esquema_Calculo, Cod_Condicao, Cod_Camada}, { headers: { 'Content-type': 'application/json' } }).toPromise();
@@ -57,7 +61,6 @@ export class EsquemasService {
         console.log({cond})
         return this.http.put(this.url + "/condicao/" + cond.Cod_Condicao + "/",cond,{ headers: { "Content-type": "application/json" } }).toPromise()
     }
-    
     /*
       Andrés Atencio 23/03/2020
       Get data and make relations

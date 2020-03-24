@@ -18,12 +18,13 @@ export class PrecioBusiness implements OnInit {
   public faturamento: Array<any>;
   public estado: Array<any>;
   public region: Array<any>;
+  public mercadoria: Array<any>;
   public isLoading = false;
-  public dataListPreencher :Array <any>;
-  public bSelectMaterial:boolean;
-  public bSelectExpedicao:boolean;
-  public bSelectFacturamento:boolean;
-  public bSelectRegiao:boolean;
+  public dataListPreencher: Array <any>;
+  public bSelectMaterial = false;
+  public bSelectExpedicao = false;
+  public bSelectFacturamento = false;
+  public bSelectRegiao = false;
   public expedicao: boolean;
 
   constructor(
@@ -31,47 +32,45 @@ export class PrecioBusiness implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.bSelectMaterial = false;
-    this.bSelectExpedicao = false;
-    this.bSelectFacturamento = false;
-    this.bSelectRegiao = false;
-
 
     this.updateMasterData();
 
-    this.dataListPreencher = [{"idCliente":51 , "tipo":"Consum Final" , "valor":"$R30" , "valdesd":"12/04/2019" , "valate":"99/99/9999"},
-    {"idCliente":52 , "tipo":"Consum Final" , "valor":"$R120" , "valdesd":"12/04/2020" , "valate":"99/99/9999"},
-    {"idCliente":51 , "tipo":"Consum Final" , "valor":"$R320" , "valdesd":"12/02/2019" , "valate":"99/99/9999"},
-    {"idCliente":51 , "tipo":"Consum Final" , "valor":"$R320" , "valdesd":"12/02/2019" , "valate":"99/99/9999"}
+    this.dataListPreencher = [{'idCliente':51 , 'tipo':'Consum Final' , 'valor':'$R30' , 'valdesd':'12/04/2019' , 'valate':'99/99/9999'},
+    {'idCliente':52 , 'tipo':'Consum Final' , 'valor':'$R120' , 'valdesd':'12/04/2020' , 'valate':'99/99/9999'},
+    {'idCliente':51 , 'tipo':'Consum Final' , 'valor':'$R320' , 'valdesd':'12/02/2019' , 'valate':'99/99/9999'},
+    {'idCliente':51 , 'tipo':'Consum Final' , 'valor':'$R320' , 'valdesd':'12/02/2019' , 'valate':'99/99/9999'}
 
   ]
   }
 
   openPopUp(tp:string){
-    if (tp == "expedicao"){
+    if (tp == 'expedicao'){
       this.bSelectExpedicao = true;
-    } else if(tp == "material"){
+    } else if(tp == 'material'){
       this.bSelectMaterial = true;
-    } else if(tp == "filial"){
+    } else if(tp == 'filial'){
       this.bSelectFacturamento = true;
-    } else if(tp == "regiao"){
+    } else if(tp == 'regiao'){
       this.bSelectRegiao = true;
     }
   }
 
   closeOutput(val:any ,tp:string){
-    if (tp == "expedicao"){
+    if (tp == 'expedicao'){
       // alert("ex[erocap")
       this.bSelectExpedicao = false;
-    } else if(tp == "material"){
+    } else if(tp == 'material'){
       this.bSelectMaterial = false;
-    } else if(tp == "filial"){
+    } else if(tp == 'filial'){
       this.bSelectFacturamento = false;
-    } else if(tp == "regiao"){
+    } else if(tp == 'regiao'){
       this.bSelectRegiao = false;
     }
   }
 
+  getSelectedMaterial(val: any) {
+    console.log(val);
+  }
 
   updateMasterData() {
     this.isLoading = true;
@@ -79,23 +78,19 @@ export class PrecioBusiness implements OnInit {
     this.faturamento = new Array<any>();
     this.estado = new Array<any>();
     this.region = new Array<any>();
+    this.mercadoria = new Array<any>();
     Promise.all([
       this.esquemaService.getFilial().then(fi => fi.map(fiElem => this.filial.push(fiElem))),
       this.esquemaService.getFaturamento().then(fa => fa.map(faElem => this.faturamento.push(faElem))),
       this.esquemaService.getEstado().then(es => es.map(esElem => this.estado.push(esElem))),
-      this.esquemaService.getRegion().then(re => re.map(reElem => this.region.push(reElem)))
+      this.esquemaService.getRegion().then(re => re.map(reElem => this.region.push(reElem))),
+      this.esquemaService.getMercadoria().then(mer => mer.map(merElem => this.mercadoria.push(merElem)))
     ]).then(rs => {
       this.isLoading = false;
-      console.log("test filiales filieales")
-      this.faturamento = [{"Cod_Filial":123 , "Desc_Filial":"descripcion mi filial"}]
-      console.log(this.faturamento)
-      this.faturamento.map(elem => {
-        console.log(elem)
-      })
+      console.log(this.filial);
+      console.log()
     });
   }
-
-  // getSelectedSequencia(val: any) {}
 
   getSelectedCondicao(val: any , i: any) {
     this.selectItemColor(i);
