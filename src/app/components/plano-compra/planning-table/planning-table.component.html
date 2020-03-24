@@ -1,4 +1,4 @@
-{{data}}
+
 <div class="row d-flex flex-row badges">
     <div>
     <span class="badge badge-secondary p-2">11/03/2020</span>
@@ -32,16 +32,16 @@
     <tr>
       <th scope="row">Margem (%)</th>
       <ng-container *ngFor="let item of data">
-        <td>{{ item.margem_bruta_planejado|currency:'BRL'}}</td>
-        <td>{{ item.margem_bruta_planejado|currency:'BRL'}}</td>
+        <td>{{ item.margem_bruta_sugerido|number:'1.2-2'}}</td>
+        <td>{{ item.margem_bruta_planejado|number:'1.2-2'}}</td>
         <td></td>
       </ng-container>
     </tr>
     <tr>
       <th scope="row">Competitividade (%)</th>
       <ng-container *ngFor="let item of data">
-        <td>{{ item.competitividade_sugerido|currency:'BRL'}}</td>
-        <td>{{ item.competitividade_planejado|currency:'BRL'}}</td>
+        <td>{{ item.competitividade_sugerido|number:'1.2-2'}}</td>
+        <td>{{ item.competitividade_planejado|number:'1.2-2'}}</td>
         <td></td>
       </ng-container>
     </tr>
@@ -114,8 +114,8 @@
     <tr>
       <th scope="row">Operacional (R$)</th>
       <ng-container *ngFor="let item of data">
-      <td>{{ (item.operacional_devolucao_sugerido + item.operacional_logistica_sugerido) }}</td>
-      <td>{{ (item.operacional_devolucao_planejado + item.operacional_logistica_planejado) }}</td>
+      <td>{{ (item.operacional_devolucao_sugerido + item.operacional_logistica_sugerido)|currency:'BRL' }}</td>
+      <td>{{ (item.operacional_devolucao_planejado + item.operacional_logistica_planejado)|currency:'BRL' }} </td>
       <td></td>
       </ng-container>
     </tr>
@@ -139,7 +139,7 @@
       <th scope="row">Margem Bruta (R$)</th>
       <ng-container *ngFor="let item of data">
       <td></td>
-      <td>{{ item.margem_bruta_planejado| currency}}</td>
+      <td>{{ item.margem_bruta_planejado|currency:'BRL'}}</td>
       <td></td>
       </ng-container>
     </tr>
@@ -186,11 +186,11 @@
     <!-- // Verba's children end -->
     <tr>
       <th scope="row">CMV (R$)</th>
-      <ng-container *ngFor="let item of data;">
-      <td>{{ item.cmv_sugerido|currency}}</td>
+      <ng-container *ngFor="let item of data; index as index">
+      <td>{{ item.cmv_sugerido|currency:'BRL'}}</td>
       <td>
         <inline-edit (update)="updateField(index, 'cmv_planejado')" editableOnEnter>
-          <ng-template viewMode>{{ item.cmv_planejado|currency}}</ng-template>
+          <ng-template viewMode>{{ item.cmv_planejado|currency:'BRL'}}</ng-template>
           <ng-template editMode>
             <input class="w-50"[formControl]="getControl(index, 'cmv_planejado')" (ngModelChange)="captureChanges($event)" size="8" type="text" [(ngModel)]="item.cmv_planejado">
           </ng-template>
@@ -200,5 +200,5 @@
       </ng-container>
     </tr>
   </table>
-
 </div>
+<filter-modal (update)="filter($event)"></filter-modal>

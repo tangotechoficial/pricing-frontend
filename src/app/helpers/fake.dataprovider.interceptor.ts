@@ -9,12 +9,11 @@ export class FakeDataProviderInterceptor implements HttpInterceptor{
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const {url, method, headers, body } = request;
-    console.log(url);
     return of(null)
-    .pipe(mergeMap(handleRoute))
-    .pipe(materialize())
-    .pipe(delay(800))
-    .pipe(dematerialize())
+      .pipe(mergeMap(handleRoute))
+      .pipe(materialize())
+      .pipe(delay(500))
+      .pipe(dematerialize());
 
     function handleRoute() {
       if (url.endsWith('/api/planodecompras')) {

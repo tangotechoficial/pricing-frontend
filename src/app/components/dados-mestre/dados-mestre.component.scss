@@ -17,6 +17,21 @@
     padding-left:30px;
     padding-right:30px;
 }
+
+.price-composition-table {
+  thead {
+    th:nth-child(2n) {
+      background: transparent;
+      border: 0
+    }
+  }
+  tbody {
+    td:nth-child(2n) {
+      background: transparent;
+      border: 0
+    }
+  }
+}
 .th-center {
   text-align: center;
 }
@@ -37,17 +52,17 @@
 .table-head-row:after {
     content: '';
     position: absolute;
-    
+
   }
 
-  
+
 .nav-custom {
 
   .nav:after,
   .nav:before {
     content:"";
     display: table;
-  } 
+  }
   .nav:after {
     clear:both;
     overflow:hidden;
@@ -71,7 +86,7 @@
     content:"";
     position: absolute;
     bottom:0;
-  
+
   }
   .nav li:before,
   .nav li:after {
@@ -97,7 +112,7 @@
     background: rgba(0, 0, 0, 0.589);
     color:#232323;
   }
-  
+
   .nav  a:before,
   .nav  a:after {
     width: 20px;
@@ -111,7 +126,7 @@
     background: #FFF;
   }
   .nav  a:before {
-    left:-20px; 
+    left:-20px;
   }
   .nav  a:after {
     right: -20px;
@@ -202,7 +217,7 @@
             border-radius: 10px 10px 0 0;
         }
     }
-    
+
 }
 table {
     border-top: 3px solid transparent;

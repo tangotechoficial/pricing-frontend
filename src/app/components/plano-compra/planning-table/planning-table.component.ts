@@ -2,6 +2,7 @@ import { Input, Component, AfterViewInit } from '@angular/core';
 import {FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 
 
+
 @Component({
   selector: 'planning-table',
   templateUrl: './planning-table.component.html',
@@ -12,6 +13,7 @@ export class PlanningTableComponent implements AfterViewInit {
 
   editable: boolean = false;
   formGroups: FormArray;
+  dataFilter: any;
 
   constructor() {
 
@@ -65,6 +67,12 @@ export class PlanningTableComponent implements AfterViewInit {
         return row
       })
     }
+  }
+  captureChanges(evt) {
+    return;
+  }
+  filter(evtResult) {
+    this.dataFilter = evtResult
   }
 
 }

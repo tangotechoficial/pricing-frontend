@@ -1,12 +1,13 @@
 <!-- Navigation Bar -->
 <navegacion></navegacion>
-
+<filter-modal (update)="getFilter($event)"></filter-modal>
 <div class="background">
 
     <div class="container col-9 main-container">
         <div class="container row col-12 p-4">
-            <button type="button" class="btn button-save btn-filter-color" (click)="filter()"><i
+            <button type="button" class="btn button-save btn-filter-color" (click)="showFilterModal()" ><i
                     class="fas fa-filter btn-filter-color"></i>&nbsp;Filtro</button>
+            <!-- <filter-tag [filter]="dataFilter"></filter-tag> -->
         </div>
         <nav>
           <div class="nav nav-tabs" id="tabs" role="tablist">
@@ -17,7 +18,7 @@
         <div class="tab-content">
             <div class="tab-pane container-tab custom-scrollbar-css fade show active" id="tab-composicao-preco" role="tabpanel" aria-labelledby="nav-composicao-preco">
 
-                <table class="table" id="priceComposition">
+                <table class="table price-composition-table" id="priceComposition">
                     <thead>
                       <tr class="table-head">
                           <th class="th-center table-head-row">Cód.Produto</th>
@@ -64,10 +65,7 @@
                           <th></th>
                           <th class="table-head-row" scope="col">Preço Base</th>
                           <th></th>
-
-
-                          <th class="table-head-row" scope="col">Cred. ICMS</th>
-
+                          <!-- |number:2.2-2<th class="table-head-row" scope="col">Cred. ICMS</th>
                           <th></th>
                           <th class="table-head-row" scope="col">Vir. STB</th>
                           <th></th>
@@ -92,12 +90,12 @@
                           <th class="table-head-row" scope="col">Receita Liquida</th>
                           <th></th>
                           <th class="table-head-row" scope="col">% M. Bruta</th>
-                          <th></th>
-                          <th class="table-head-row" scope="col">Preço Base</th>
+                          <th></th>filter: dataFilter
+                          <th class="table-head-row" scope="col">Preço Base</th> -->
                       </tr>
                     </thead>
                     <tbody>
-                      <tr *ngFor="let item of masterDataPriceComposition">
+                      <tr *ngFor="let item of masterDataPriceComposition|filter:dataFilter">
                           <td>{{item.CODPRD}}</td>
                           <td></td>
                           <td>{{item.DESPRD}}</td>
@@ -116,7 +114,7 @@
                           <td></td>
                           <td>{{item.CMV}}</td>
                           <td></td>
-                          <td>{{item.ICMS}}</td>
+                          <td>{{item.ICMS| number:'1.2-2'}}</td>
                           <td></td>
                           <td>{{item.PIS_COFINS}}</td>
                           <td></td>
@@ -128,7 +126,7 @@
                           <td></td>
                           <td>{{item.FUND_PRECO}}</td>
                           <td></td>
-                          <td>{{item.REBATE}}</td>
+                          <td>{{item.REBATE| number:'1.2-3'}}</td>
                           <td></td>
                           <td>{{item.DEVOLUCAO}}</td>
                           <td></td>
@@ -173,7 +171,7 @@
                         <th></th>
                         <th class="table-head-row" scope="col">Valor Margem Débito</th>
                     </tr>
-                    <tr *ngFor="let item of masterDataMoney">
+                    <tr *ngFor="let item of masterDataMoney|filter:dataFilter">
                         <td></td>
                         <td>{{item.NUMANOMES}}</td>
                         <td></td>
@@ -204,4 +202,3 @@
 
     </div>
 </div>
-<filter-modal></filter-modal>
