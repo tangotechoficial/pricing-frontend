@@ -1,3 +1,9 @@
 $color-prim:#737373;
 $color-prim-light:lighten($color-prim , 10%);
 $color-sec:#6288CB;
+
+
+html, body {
+  height: 90%;
+  width: 90%;
+}
