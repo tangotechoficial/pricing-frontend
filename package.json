@@ -7,7 +7,9 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+
+    "test:pbase": "ng test --include src/app/components/precio/preciobase/*.spec.ts"
   },
   "private": true,
   "dependencies": {

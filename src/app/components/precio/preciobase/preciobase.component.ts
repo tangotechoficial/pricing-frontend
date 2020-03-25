@@ -19,12 +19,13 @@ export class PrecioBaseComponent implements OnInit {
   bBusiness: boolean;
   loading = true;
   typeBaseVendasDesc = ""
+  typeBaseVendas = ""
 
 
   constructor(
-    private condicionService: CondicionService,
+    public condicionService: CondicionService,
     private spinner: NgxSpinnerService,
-    private esquemasService: EsquemasService
+    public esquemasService: EsquemasService
   ) { }
 
   ngOnInit() {
@@ -36,18 +37,24 @@ export class PrecioBaseComponent implements OnInit {
       Gets type of user to validate
       which component will be shown
     */
-    if (this.sCurrentUser.type !== "technical") {
-      this.bBusiness = true;
-    } else {
-      this.bBusiness = false;
-    }
     this.loading = true;
+    this.checkTypeUser()
+    this.checkTypeBaseVendas()
+    this.fetchData();
+  }
 
-    const typeBaseVendas = window.location.pathname === '/preciobase' ? "B" : "v"
-    this.typeBaseVendasDesc = typeBaseVendas == "B" ? "Base" : "Vendas"
+  checkTypeUser() {
+    this.bBusiness = this.sCurrentUser.type !== "technical" ? true : false
+  }
 
+  checkTypeBaseVendas() {
+    this.typeBaseVendas = window.location.pathname === '/preciobase' ? "B" : "v"
+    this.typeBaseVendasDesc = this.typeBaseVendas == "B" ? "Base" : "Vendas"
+  }
+
+  fetchData() {
     this.esquemasService
-      .fetchCondicaoCamadaEsquema(typeBaseVendas)
+      .fetchCondicaoCamadaEsquema(this.typeBaseVendas)
       .then(camadasFullData => {
         this.stopLoading();
         this.camadasFullData = camadasFullData
@@ -56,7 +63,6 @@ export class PrecioBaseComponent implements OnInit {
         this.stopLoading();
         console.log(err)
       })
-  
   }
 
   stopLoading() {
@@ -76,7 +82,7 @@ export class PrecioBaseComponent implements OnInit {
       return this.camadasUpdate["ADD"][codCamada].map(cond => {
           // new relations
           const objCondCamadaEsq = {
-            Cod_Esquema_Calculo: "EC000",
+            Cod_Esquema_Calculo: "EC000", //CAMBIAR PARA VENTAS
             Cod_Condicao: cond.Cod_Condicao,
             Cod_Camada: codCamada
           }
@@ -104,17 +110,30 @@ export class PrecioBaseComponent implements OnInit {
 
     const promisesCondCamadaEsq = [].concat(...[promisesAddCondCamadaEsq, promisesRemoveCondCamadaEsq, promisesUpdateCondCamadaEsq]);
 
+
     Promise.all(promisesCondCamadaEsq)
+      .then(this.verifyErrorFetchData)
       .then(data => {
         console.log("oks")
-        $('#myModalPrecioBase').modal('hide');
+        console.log({data})
       })
       .catch(err => {
+        $('#myModalPrecioBaseError').modal('show');
         console.log(err)
-        $('#myModalPrecioBase').modal('hide');
       })
 
     this.camadasUpdate = { "ADD": {}, "UPDATE": {}, "REMOVE": {}}
+  }
+
+  verifyErrorFetchData(data) {
+    
+    const error = data[0][0].__zone_symbol__value ? data[0][0].__zone_symbol__value : false
+    console.log({error})
+    if (error) {
+      throw error.name
+    } else {
+      return data
+    }
   }
 
   parseResponseCamada(data) {
@@ -123,6 +142,7 @@ export class PrecioBaseComponent implements OnInit {
 
   closePopUp() {
     $('#myModalPrecioBase').modal('hide');
+    $('#myModalPrecioBaseError').modal('hide');
   }
 
 
