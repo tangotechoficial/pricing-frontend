@@ -16,10 +16,14 @@ export class FakeDataProviderInterceptor implements HttpInterceptor{
       .pipe(dematerialize());
 
     function handleRoute() {
-      if (url.endsWith('/api/planodecompras')) {
-        return loadTableData()
+      switch(true) {
+        case url.endsWith('/api/planodecompras') && method === 'GET':
+          return loadTableData()
+        case url.endsWith('/api/execucao') && method === 'GET':
+          return loadTableData()
+        default:
+          return next.handle(request);
       }
-      return next.handle(request);
     }
 
     function loadTableData() {
