@@ -11,6 +11,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { NavegacionComponent } from '@app/components/navegacion/navegacion.component';
 import { TechnicalMenuComponent } from '@app/components/navegacion/technical-menu/technical-menu.component';
 import { BusinessMenuComponent } from '@app/components/navegacion/business-menu/business-menu.component';
+import { mockPipe } from '@app/pipes/mock.pipe'
 
 fdescribe('DadosMestreComponent', () => {
   let component: DadosMestreComponent;
@@ -69,7 +70,13 @@ fdescribe('DadosMestreComponent', () => {
       )
     }
     TestBed.configureTestingModule({
-      declarations: [ DadosMestreComponent, NavegacionComponent, TechnicalMenuComponent, BusinessMenuComponent],
+      declarations: [
+        DadosMestreComponent,
+        NavegacionComponent,
+        TechnicalMenuComponent,
+        BusinessMenuComponent,
+        mockPipe({name: 'filter'})
+      ],
       imports: [ HttpClientModule, RouterTestingModule, NoopAnimationsModule ],
       schemas: [ NO_ERRORS_SCHEMA ],
       providers: [
