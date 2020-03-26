@@ -20,6 +20,7 @@ export class PrecioBaseComponent implements OnInit {
   loading = true;
   typeBaseVendasDesc = ""
   typeBaseVendas = ""
+  typeBase;
 
 
   constructor(
@@ -50,6 +51,7 @@ export class PrecioBaseComponent implements OnInit {
   checkTypeBaseVendas() {
     this.typeBaseVendas = window.location.pathname === '/preciobase' ? "B" : "v"
     this.typeBaseVendasDesc = this.typeBaseVendas == "B" ? "Base" : "Vendas"
+    this.typeBase = window.location.pathname === '/preciobase' ? true : false
   }
 
   fetchData() {

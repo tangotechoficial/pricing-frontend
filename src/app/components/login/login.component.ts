@@ -33,6 +33,7 @@ export class LoginComponent implements OnInit {
     }else{
       this._user = new User("ana.senko@tangotech.com.br", "12345678", "Ana Senko", "Token", "business", true, "103", 1);
     }
+    
     this._router.navigate(['/menu']);
     localStorage.setItem("User", JSON.stringify(this._user));
      /* this._loginService.login(this._user)

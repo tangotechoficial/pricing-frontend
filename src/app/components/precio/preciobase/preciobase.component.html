@@ -7,7 +7,14 @@
     <!--Main view-->
     <!-- BUSINESS USER -->
     <div *ngIf="bBusiness">
-        <precio-business [isVenta]="1"></precio-business>
+        <div *ngIf="!typeBase">
+           <!-- 0 venta -->
+            <precio-business [isVenta]="0"></precio-business>
+        </div>
+        <div *ngIf="typeBase">
+            <!-- 1 base -->
+            <precio-business [isVenta]="1"></precio-business>
+        </div>
     </div>
     <!-- TECHNICAL USER -->
     <div *ngIf="!bBusiness">
