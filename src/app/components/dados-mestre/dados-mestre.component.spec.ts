@@ -126,13 +126,12 @@ fdescribe('DadosMestreComponent', () => {
   
   it('should call the right function when clicked', async(() => {
     let button = fixture.debugElement.nativeElement.querySelector('button.btn-filter-color');
-    spyOn(button, 'showFilterModal');
+    spyOn(component, 'showFilterModal');
     button.click();
     fixture.whenStable().then(() => {
-    expect(button.showFilterModal).toHaveBeenCalled();
+    expect(component.showFilterModal).toHaveBeenCalled();
     });
   }))
-
   
 
   /**

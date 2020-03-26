@@ -59,6 +59,13 @@ fdescribe('DiretrizEstrategicaComponent', () => {
     expect(containers.childNodes.length).toBe(3)
   })
 
+  it('filter should contain 4 options', () => {
+    const containers = element.query(By.css('.filter-columns'))
+    expect(containers.childNodes.length).toBe(4)
+  })
+
+
+
   
 
 });
