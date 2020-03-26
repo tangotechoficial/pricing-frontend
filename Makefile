@@ -17,19 +17,27 @@ help:
 # target: start - Starts angular dev server
 start:
 	$(ANGULAR) serve --open
+
+# target: clean - Remove old builds
+clean: 
+	rm -rf $(DIST_DIR)/$(PROJECT)
+
 # target: build - Build application with development configuration settings
 
 build:
+	$(MAKE) clean
 	$(ANGULAR) build
 	$(MAKE) pack ENV="testing"
 
 # target: staging - Build application with staging configurations
 staging:
+	$(MAKE) clean
 	$(ANGULAR) build --configuration=staging
 	$(MAKE) pack ENV="staging"
 
 # target: prod - Build application with production settings
 prod:
+	$(MAKE) clean
 	$(ANGULAR) build --prod
 	$(MAKE) pack ENV="prod"
 
