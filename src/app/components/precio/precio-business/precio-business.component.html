@@ -1,9 +1,16 @@
 <div class="precioWrapper px-5 py-4">
 
-  <select-popup-material *ngIf="bSelectMaterial" [dataMaterial]='mercadoria' (selectedMaterial)="getSelectedMaterial($event)" (closePopup)="closeOutput($event, 'material')"></select-popup-material>
-  <select-popup-expedicao *ngIf="bSelectExpedicao" [dataExpedicao] = "filial"  (selectedExpedicao)="getSelectedExpedicao($event)" (closePopup)="closeOutput($event , 'expedicao')"></select-popup-expedicao>
-  <select-popup-faturamento *ngIf="bSelectFacturamento" [dataFaturamento] = "faturamento"  (selectedFaturamento)="getSelectedFaturamento($event)" (closePopup)="closeOutput($event , 'filial')"></select-popup-faturamento>
-  <select-popup-regiao *ngIf="bSelectRegiao" [dataRegiao] = "region" (selectedRegiao)="getSelectedRegiao($event)" (closePopup)="closeOutput($event , 'regiao')"></select-popup-regiao>
+    <select-popup-material *ngIf="bSelectMaterial" [dataMaterial]='mercadoria'
+        (selectedMaterial)="getSelectedMaterial($event)" (closePopup)="closeOutput($event, 'material')">
+    </select-popup-material>
+    <select-popup-expedicao *ngIf="bSelectExpedicao" [dataExpedicao]="filial"
+        (selectedExpedicao)="getSelectedExpedicao($event)" (closePopup)="closeOutput($event , 'expedicao')">
+    </select-popup-expedicao>
+    <select-popup-faturamento *ngIf="bSelectFacturamento" [dataFaturamento]="faturamento"
+        (selectedFaturamento)="getSelectedFaturamento($event)" (closePopup)="closeOutput($event , 'filial')">
+    </select-popup-faturamento>
+    <select-popup-regiao *ngIf="bSelectRegiao" [dataRegiao]="region" (selectedRegiao)="getSelectedRegiao($event)"
+        (closePopup)="closeOutput($event , 'regiao')"></select-popup-regiao>
 
 
 
@@ -23,38 +30,46 @@
                             <input type="text" value='' class="form-control" name="desmaterial" id="desmaterial"
                                 placeholder="Seleccione" [(ngModel)]="precoBaseMaterial.material.DESPRD" readonly>
                         </div>
-                        <div class="col-xs-12 col-md-1 d-flex justify-content-center align-items-center mt-3" (click)="openPopUp('material')" >
+                        <div class="col-xs-12 col-md-1 d-flex justify-content-center align-items-center mt-3"
+                            (click)="openPopUp('material')">
                             <i class="fas fa-search"></i>
                         </div>
 
                         <div class="px-1 mb-3 col-xs-12 col-md-1">
                             <label for="codFe" class="martinsLabel control-label">Cod.FE</label>
-                            <input readonly type="text" value='' [(ngModel)]="precoBaseMaterial.filialExpedicao.Cod_Filial" class="form-control" name="codFe" id="codFe" placeholder="Cod.">
+                            <input readonly type="text" value=''
+                                [(ngModel)]="precoBaseMaterial.filialExpedicao.Cod_Filial" class="form-control"
+                                name="codFe" id="codFe" placeholder="Cod.">
                         </div>
                         <div class="dropdown px-1 mb-3 col-xs-12 col-md-4">
                             <label for="filialExp" class="martinsLabel control-label">Filial de expedição</label>
-                            <input type="text" value='' class="form-control" [(ngModel)]="precoBaseMaterial.filialExpedicao.Desc_Filial" name="desmaterial" id="desmaterial"
-                                placeholder="Seleccione" readonly>
+                            <input type="text" value='' class="form-control"
+                                [(ngModel)]="precoBaseMaterial.filialExpedicao.Desc_Filial" name="desmaterial"
+                                id="desmaterial" placeholder="Seleccione" readonly>
                         </div>
-                        <div class="col-xs-12 col-md-1 d-flex justify-content-center align-items-center mt-3" (click)="openPopUp('expedicao')" >
+                        <div class="col-xs-12 col-md-1 d-flex justify-content-center align-items-center mt-3"
+                            (click)="openPopUp('expedicao')">
                             <i class="fas fa-search"></i>
                         </div>
                     </div>
                     <div class="row col-md-12">
                         <div class="px-1 mb-3 col-xs-12 col-md-1">
                             <label for="codFat" class="martinsLabel control-label">Cod.FAT</label>
-                            <input type="text" value='' class="form-control" [(ngModel)]="precoBaseMaterial.filialFaturamento.Cod_Faturamento" name="codFat" id="codFat"
-                                placeholder="Cod." readonly>
+                            <input type="text" value='' class="form-control"
+                                [(ngModel)]="precoBaseMaterial.filialFaturamento.Cod_Faturamento" name="codFat"
+                                id="codFat" placeholder="Cod." readonly>
                         </div>
 
 
                         <div class="dropdown px-1 mb-3 col-xs-12 col-md-3">
                             <label for="filialExp" class="martinsLabel control-label">Filial de faturamento</label>
-                            <input type="text" value='' [(ngModel)]="precoBaseMaterial.filialFaturamento.Desc_Faturamento" class="form-control" name="desmaterial" id="desmaterial"
-                                placeholder="Seleccione" readonly>
+                            <input type="text" value=''
+                                [(ngModel)]="precoBaseMaterial.filialFaturamento.Desc_Faturamento" class="form-control"
+                                name="desmaterial" id="desmaterial" placeholder="Seleccione" readonly>
                         </div>
 
-                        <div class="col-xs-12 col-md-1 d-flex justify-content-center align-items-center mt-3" (click)="openPopUp('filial')">
+                        <div class="col-xs-12 col-md-1 d-flex justify-content-center align-items-center mt-3"
+                            (click)="openPopUp('filial')">
                             <i class="fas fa-search"></i>
                         </div>
 
@@ -67,21 +82,24 @@
                             </button>
 
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <button *ngFor="let e of estado" (click)="onSelectEstado(e)" class="dropdown-item martinsText">{{e.Cod_Estado}} - {{e.Desc_Estado}}</button>
+                                <button *ngFor="let e of estado" (click)="onSelectEstado(e)"
+                                    class="dropdown-item martinsText">{{e.Cod_Estado}} - {{e.Desc_Estado}}</button>
                             </div>
                         </div>
                         <div class="dropdown px-1 mb-3 col-xs-12 col-md-3">
                             <label for="reg" class="martinsLabel control-label">Região de preço</label>
-                            <input type="text" value='' [(ngModel)]="precoBaseMaterial.regiaoPreco.Tipo_Region" class="form-control" name="desmaterial" id="desmaterial"
-                                placeholder="Seleccione região" readonly>
+                            <input type="text" value='' [(ngModel)]="precoBaseMaterial.regiaoPreco.Tipo_Region"
+                                class="form-control" name="desmaterial" id="desmaterial" placeholder="Seleccione região"
+                                readonly>
                         </div>
-                        <div class="col-xs-12 col-md-1 d-flex justify-content-center align-items-center mt-3" (click)="openPopUp('regiao')">
+                        <div class="col-xs-12 col-md-1 d-flex justify-content-center align-items-center mt-3"
+                            (click)="openPopUp('regiao')">
                             <i class="fas fa-search"></i>
                         </div>
                         <div class="px-1 col-12 col-md-2 d-flex justify-content-center">
                             <div class="px-1 mb-3 col-xs-12 col-md-6">
                                 <input type="submit" class="btn bg-inverted btn-labeled btn-block btn-md btn-pventa "
-                                value="Abrir">
+                                    value="Abrir">
                             </div>
                             <div class="px-1 mb-3 col-xs-12 col-md-6">
                                 <input type="submit"
@@ -99,123 +117,29 @@
                 <h4 class="subtitlab darkbl col-md-8">Seleccione uma condição</h4>
                 <i class="fas fa-info-circle col-md-4 text-right"></i>
             </div>
-            <div class="mt-3">
-                <h5 class="subtitlab darkbl m-0">CMV</h5>
-
-                <div class="row mt-3">
-                    <div class="col col-xs-3">
-                        <p class="martinsText">CMV</p>
+            <!-- Camadas/Condiçaos -->
+            <div *ngFor="let camada of camadas" class="mt-3">
+                <div *ngIf="camada.condicaos.length != 0">
+                    <h5 class="subtitlab darkbl m-0">{{camada.Nome_Camada}}</h5>
+                    <div class="row mt-3">
+                        <div *ngFor="let condicao of camada.condicaos" class="col col-xs-3">
+                            <p class="martinsText">{{condicao.Desc_Condicao}}</p>
+                        </div>
+                        <div class="col col-xs-9">
+                            <p class="martinsText text-right">+106,41</p>
+                        </div>
                     </div>
-                    <div class="col col-xs-9">
-                        <p class="martinsText text-right">+106,41</p>
+                    <hr>
+                    <div class="row mt-3">
+                        <div class="col col-xs-3">
+                            <p class="martinsText subtitlab darkbl">Subtotal</p>
+                        </div>
+                        <div class="col col-xs-9">
+                            <p class="martinsText text-right font-weight-bold">+106,41</p>
+                        </div>
                     </div>
                 </div>
-
-                <hr>
-
-                <div class="row mt-3">
-                    <div class="col col-xs-3">
-                        <p class="martinsText subtitlab darkbl">Subtotal</p>
-                    </div>
-                    <div class="col col-xs-9">
-                        <p class="martinsText text-right font-weight-bold">+106,41</p>
-                    </div>
-                </div>
-
             </div>
-
-            <div class="mt-3">
-                <h5 class="subtitlab darkbl m-0">REGULATÓRIO</h5>
-
-                <div class="row mt-3">
-                    <div class="col col-xs-3">
-                        <p class="martinsText">IPI</p>
-                    </div>
-                    <div class="col col-xs-9">
-                        <p class="martinsText text-right">+25,00</p>
-                    </div>
-                </div>
-
-                <div class="row mt-3">
-                    <div class="col col-xs-3">
-                        <p class="martinsText">ST</p>
-                    </div>
-                    <div class="col col-xs-9">
-                        <p class="martinsText text-right">+5,00</p>
-                    </div>
-                </div>
-
-
-                <hr>
-                <div class="row mt-3">
-                    <div class="col col-xs-3">
-                        <p class="martinsText subtitlab darkbl">Subtotal</p>
-                    </div>
-                    <div class="col col-xs-9">
-                        <p class="martinsText text-right font-weight-bold">+36,76</p>
-                    </div>
-                </div>
-
-            </div>
-
-
-            <div class="mt-3">
-                <h5 class="subtitlab darkbl m-0">OPERACIONAL</h5>
-
-                <div class="row mt-3">
-                    <div class="col col-xs-3">
-                        <p class="martinsText">Devolução</p>
-                    </div>
-                    <div class="col col-xs-9">
-                        <p class="martinsText text-right">+5,00</p>
-                    </div>
-                </div>
-
-                <hr>
-                <div class="row mt-3">
-                    <div class="col col-xs-3">
-                        <p class="martinsText subtitlab darkbl">Subtotal</p>
-                    </div>
-                    <div class="col col-xs-9">
-                        <p class="martinsText text-right font-weight-bold">+5,00</p>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="mt-3">
-                <h5 class="subtitlab darkbl m-0">FINANCIERO</h5>
-
-                <div class="row mt-3">
-                    <div class="col col-xs-3">
-                        <p class="martinsText">Condição de pag.</p>
-                    </div>
-                    <div class="col col-xs-9">
-                        <p class="martinsText text-right">0</p>
-                    </div>
-                </div>
-
-                <div class="row mt-3">
-                    <div class="col col-xs-3">
-                        <p class="martinsText">Margen por seg.</p>
-                    </div>
-                    <div class="col col-xs-9">
-                        <p class="martinsText text-right">0</p>
-                    </div>
-                </div>
-
-                <hr>
-                <div class="row mt-3">
-                    <div class="col col-xs-3">
-                        <p class="martinsText subtitlab darkbl">Subtotal</p>
-                    </div>
-                    <div class="col col-xs-9">
-                        <p class="martinsText text-right font-weight-bold">-20,39</p>
-                    </div>
-                </div>
-
-            </div>
-
         </div>
 
         <div class="col-xs-12 col-offset-col-md-4 col-lg-8">
@@ -231,8 +155,8 @@
                     </button>
 
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <button class="dropdown-item martinsText" *ngFor="let sequencia of sequencias"
-                            >{{ sequencia.Nome_Sequencia }}
+                        <button class="dropdown-item martinsText"
+                            *ngFor="let sequencia of sequencias">{{ sequencia.Nome_Sequencia }}
                         </button>
                     </div>
                 </div>
@@ -240,31 +164,37 @@
 
                 <div class="compliance border rounded martins-scrollbar px-3 py-2">
 
-                  <div class="myTable table-responsive table-hover p-">
-                    <table class="table table-striped ">
-                      <thead>
-                        <tr>
-                          <th class="p-1 text-center border-top-0 color-martins-blue font-weight-bold" scope="col">Cod. Cliente</th>
-                          <th scope="col" class="p-1 border-top-0 color-martins-blue font-weight-bold">Tipo Cliente</th>
-                          <th scope="col" class="p-1 border-top-0 color-martins-blue font-weight-bold">Valor</th>
-                          <th scope="col" class="p-1 border-top-0 color-martins-blue font-weight-bold">Válido de</th>
-                          <th scope="col" class="p-1 border-top-0 color-martins-blue font-weight-bold">Válido até</th>
-                        </tr>
-                      </thead>
+                    <div class="myTable table-responsive table-hover p-">
+                        <table class="table table-striped ">
+                            <thead>
+                                <tr>
+                                    <th class="p-1 text-center border-top-0 color-martins-blue font-weight-bold"
+                                        scope="col">Cod. Cliente</th>
+                                    <th scope="col" class="p-1 border-top-0 color-martins-blue font-weight-bold">Tipo
+                                        Cliente</th>
+                                    <th scope="col" class="p-1 border-top-0 color-martins-blue font-weight-bold">Valor
+                                    </th>
+                                    <th scope="col" class="p-1 border-top-0 color-martins-blue font-weight-bold">Válido
+                                        de</th>
+                                    <th scope="col" class="p-1 border-top-0 color-martins-blue font-weight-bold">Válido
+                                        até</th>
+                                </tr>
+                            </thead>
 
-                      <tbody class="">
-                         <tr class="" *ngFor="let r of dataListPreencher; let i = index" (click)="getSelectedCondicao(r , i)">
-                          <td class="p-1 text-center font-weight-bold ">{{r.idCliente}}</td>
-                          <td class="p-1 text-left font-weight-bold ">{{r.tipo}}</td>
-                          <td class="p-1 text-left font-weight-bold ">{{r.valor}}</td>
-                          <td class="p-1 text-left font-weight-bold ">{{r.valdesd}}</td>
-                          <td class="p-1 text-left font-weight-bold ">{{r.valate}}</td>
-                        </tr>
+                            <tbody class="">
+                                <tr class="" *ngFor="let r of dataListPreencher; let i = index"
+                                    (click)="getSelectedCondicao(r , i)">
+                                    <td class="p-1 text-center font-weight-bold ">{{r.idCliente}}</td>
+                                    <td class="p-1 text-left font-weight-bold ">{{r.tipo}}</td>
+                                    <td class="p-1 text-left font-weight-bold ">{{r.valor}}</td>
+                                    <td class="p-1 text-left font-weight-bold ">{{r.valdesd}}</td>
+                                    <td class="p-1 text-left font-weight-bold ">{{r.valate}}</td>
+                                </tr>
 
 
-                      </tbody>
-                    </table>
-                  </div>
+                            </tbody>
+                        </table>
+                    </div>
 
                 </div>
                 <div class="text-center">

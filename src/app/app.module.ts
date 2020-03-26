@@ -34,6 +34,7 @@ import { SelectPopupMaterialComponent } from './components/select-popup-material
 import { SelectPopupExpedicaoComponent } from './components/select-popup-expedicao/select-popup-expedicao.component';
 import { SelectPopupFaturamentoComponent } from './components/select-popup-faturamento/select-popup-faturamento.component';
 import { SelectPopupRegiaoComponent } from './components/select-popup-regiao/select-popup-regiao.component';
+import { CamadaService } from './services/camada.service';
 
 @NgModule({
   declarations: [
@@ -75,7 +76,7 @@ import { SelectPopupRegiaoComponent } from './components/select-popup-regiao/sel
     BrowserAnimationsModule,
     NgxSpinnerModule
   ],
-  providers: [appRoutingProviders],
+  providers: [appRoutingProviders, CamadaService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

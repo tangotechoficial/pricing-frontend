@@ -1,5 +1,7 @@
 import { Component, OnInit ,Input , Output } from '@angular/core';
 import { EsquemasService } from 'app/services/esquemas.service';
+import { Camada } from 'app/models/camadas';
+import { CamadaService } from 'app/services/camada.service';
 
 declare var $: any;
 
@@ -27,9 +29,11 @@ export class PrecioBusiness implements OnInit {
   public bSelectRegiao = false;
   public expedicao: boolean;
   public precoBaseMaterial: any;
+  public camadas: Array<Camada>;
 
   constructor(
-    private esquemaService: EsquemasService
+    private esquemaService: EsquemasService,
+    private camadaService: CamadaService
   ) {}
 
   ngOnInit() {
@@ -128,14 +132,17 @@ export class PrecioBusiness implements OnInit {
     this.estado = new Array<any>();
     this.region = new Array<any>();
     this.mercadoria = new Array<any>();
+    this.camadas = new Array<Camada>();
     Promise.all([
       this.esquemaService.getFilial().then(fi => fi.map(fiElem => this.filial.push(fiElem))),
       this.esquemaService.getFaturamento().then(fa => fa.map(faElem => this.faturamento.push(faElem))),
       this.esquemaService.getEstado().then(es => es.map(esElem => this.estado.push(esElem))),
       this.esquemaService.getRegion().then(re => re.map(reElem => this.region.push(reElem))),
-      this.esquemaService.getMercadoria().then(mer => mer.map(merElem => this.mercadoria.push(merElem)))
+      this.esquemaService.getMercadoria().then(mer => mer.map(merElem => this.mercadoria.push(merElem))),
+      this.camadaService.getCamadasByType('V').then(cam => cam.map(camElem => this.camadas.push(camElem)))
     ]).then(rs => {
       this.isLoading = false;
+      console.log(this.camadas)
     });
   }
 
