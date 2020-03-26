@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations'
 import { RouterTestingModule } from '@angular/router/testing';
@@ -7,6 +8,7 @@ import { PlanoCompraComponent } from './plano-compra.component';
 import { NavegacionComponent } from '@app/components/navegacion/navegacion.component';
 import { TechnicalMenuComponent } from '@app/components/navegacion/technical-menu/technical-menu.component';
 import { BusinessMenuComponent } from '@app/components/navegacion/business-menu/business-menu.component';
+
 fdescribe('PlanoCompraComponent', () => {
   let component: PlanoCompraComponent;
   let fixture: ComponentFixture<PlanoCompraComponent>;
@@ -14,7 +16,7 @@ fdescribe('PlanoCompraComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ RouterTestingModule, NoopAnimationsModule ],
+      imports: [ HttpClientModule, RouterTestingModule, NoopAnimationsModule],
       declarations: [ PlanoCompraComponent, NavegacionComponent, TechnicalMenuComponent, BusinessMenuComponent],
       schemas: [ NO_ERRORS_SCHEMA ]
     })
@@ -34,7 +36,7 @@ fdescribe('PlanoCompraComponent', () => {
 
   it('should have 4 rows', () => {
     const container = element.query(By.css('.main-container'))
-    expect(container.childNodes.length).toBe(4);
+    expect(container.childNodes.length).toBe(5);
   })
 
   it('should have a "filter" button on first row', () => {
