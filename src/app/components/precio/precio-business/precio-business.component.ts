@@ -13,7 +13,7 @@ declare var $: any;
 })
 // tslint:disable-next-line: component-class-suffix
 export class PrecioBusiness implements OnInit {
-
+  @Input() isVenta: any;
   public sequencias;
   public selectedSequencia;
   public filial: Array<any>;
@@ -37,7 +37,7 @@ export class PrecioBusiness implements OnInit {
   ) {}
 
   ngOnInit() {
-
+    console.log(this.isVenta);
     this.precoBaseMaterial = {
       material: { CODPRD: '',
                   DESPRD: '',

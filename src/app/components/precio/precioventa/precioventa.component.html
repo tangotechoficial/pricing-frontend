@@ -8,7 +8,7 @@
     <!--Main view-->
     <!-- BUSINESS USER -->
     <div *ngIf="bBusiness">
-        <precio-business></precio-business>
+        <precio-business [isVenta]="0" ></precio-business>
     </div>
     <!-- TECHNICAL USER -->
     <div *ngIf="!bBusiness">
