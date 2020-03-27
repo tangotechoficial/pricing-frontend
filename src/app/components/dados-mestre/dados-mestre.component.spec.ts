@@ -114,7 +114,7 @@ fdescribe('DadosMestreComponent', () => {
       expect(table.rows.length).toBeGreaterThan(1)
     });
 
-  })   
+  })
 
   it('price verba should have data', () => {
     const req = requestMock.expectOne(`${environment.apiUrl}/dadosmestreverba`);
@@ -129,7 +129,7 @@ fdescribe('DadosMestreComponent', () => {
       expect(table.rows.length).toBeGreaterThan(1)
     });
 
-  })    
+  })
   /**
   it('table verba info should have data', () => {
       fixture.detectChanges()
