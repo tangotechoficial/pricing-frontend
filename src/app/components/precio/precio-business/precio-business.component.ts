@@ -30,6 +30,7 @@ export class PrecioBusiness implements OnInit {
   public expedicao: boolean;
   public precoBaseMaterial: any;
   public camadas: Array<Camada>;
+  public camadaType: any;
 
   constructor(
     private esquemaService: EsquemasService,
@@ -38,6 +39,7 @@ export class PrecioBusiness implements OnInit {
 
   ngOnInit() {
     console.log(this.isVenta);
+    this.camadaType = this.isVenta === 0 ? 'V' : 'B';
     this.precoBaseMaterial = {
       material: { CODPRD: '',
                   DESPRD: '',
@@ -139,7 +141,7 @@ export class PrecioBusiness implements OnInit {
       this.esquemaService.getEstado().then(es => es.map(esElem => this.estado.push(esElem))),
       this.esquemaService.getRegion().then(re => re.map(reElem => this.region.push(reElem))),
       this.esquemaService.getMercadoria().then(mer => mer.map(merElem => this.mercadoria.push(merElem))),
-      this.camadaService.getCamadasByType('V').then(cam => cam.map(camElem => this.camadas.push(camElem)))
+      this.camadaService.getCamadasByType(this.camadaType).then(cam => cam.map(camElem => this.camadas.push(camElem)))
     ]).then(rs => {
       this.isLoading = false;
       console.log(this.camadas)
