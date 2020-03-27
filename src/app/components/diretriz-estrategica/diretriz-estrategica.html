@@ -1,90 +1,95 @@
 <!-- Navigation Bar -->
 <navegacion></navegacion>
 
+
 <div class="background">
+  <div class="row">
+    <div class="col-11 offset-1">
+      <div class="row">
+          <div class="col-md-2">
+              <div class="filter-diretriz">
+                  <h5 class="title">Filtro</h5>
+                  <p>Linha de Negócio</p>
+                  <div class="row filter-columns">
+                      <div class="col-md-4 border-filter">
+                          <img src="assets/img/diretriz-estrategica/drink-can.svg">
+                          <h2>ABB</h2>
+                      </div>
+                      <div class="col-md-4 border-filter">
+                          <img src="assets/img/diretriz-estrategica/smartphone.svg">
+                          <h2>TEI</h2>
+                      </div>
+                      <div class="col-md-4 border-filter">
+                          <img src="assets/img/diretriz-estrategica/soap.svg">
+                          <h2>HBL</h2>
+                      </div>
+                      <div class="col-md-4 border-filter">
+                          <img src="assets/img/diretriz-estrategica/hammer.svg">
+                          <h2>MTC</h2>
+                      </div>
+                  </div>
+              </div>
+          </div>
 
-    <div class="row">
-        <div class="col-md-3">
-            <div class="filter-diretriz">
-                <h5 class="title">Filtro</h5>
-                <p>Linha de Negócio</p>
-                <div class="row filter-columns">
-                    <div class="col-md-4 border-filter">
-                        <img src="assets/img/diretriz-estrategica/drink-can.svg">
-                        <h2>ABB</h2>
-                    </div>
-                    <div class="col-md-4 border-filter">
-                        <img src="assets/img/diretriz-estrategica/smartphone.svg">
-                        <h2>TEI</h2>
-                    </div>
-                    <div class="col-md-4 border-filter">
-                        <img src="assets/img/diretriz-estrategica/soap.svg">
-                        <h2>HBL</h2>
-                    </div>
-                    <div class="col-md-4 border-filter">
-                        <img src="assets/img/diretriz-estrategica/hammer.svg">
-                        <h2>MTC</h2>
-                    </div>
-                </div>
-            </div>
-        </div>
+          <div class="col-md-9 main-container">
+              <div class="tab-header">
+                  <div class="margin-box-container">
+                      <span class="date-box-info">Janeiro</span>
+                      <span class="date-box-info">2020</span>
+                  </div>
+                  <div class="margin-info-sales">
+                      <div class="margin-box-info">
+                          <p class="label-info">Vendas Martins:</p>
+                          <p class="content-info">R$ 1.000.000</p>
+                      </div>
+                      <div class="margin-box-info">
+                          <p class="label-info">Margem Contribuição Martins:</p>
+                          <p class="content-info">21%</p>
+                      </div>
+                      <div class="margin-box-info">
+                          <p class="label-info">Margem Bruta Martins:</p>
+                          <p class="content-info"> 21%</p>
+                      </div>
+                  </div>
+              </div>
 
-        <div class="col-md-9 main-container" id="main-container">
-            <div class="tab-header">
-                <div class="margin-box-container">
-                    <span class="date-box-info">Janeiro</span>
-                    <span class="date-box-info">2020</span>
-                </div>
-                <div class="margin-info-sales">
-                    <div class="margin-box-info">
-                        <p class="label-info">Vendas Martins:</p>
-                        <p class="content-info">R$ 1.000.000</p>
-                    </div>
-                    <div class="margin-box-info">
-                        <p class="label-info">Margem Contribuição Martins:</p>
-                        <p class="content-info">21%</p>
-                    </div>
-                    <div class="margin-box-info">
-                        <p class="label-info">Margem Bruta Martins:</p>
-                        <p class="content-info"> 21%</p>
-                    </div>
-                </div>
-            </div>
+              <div class="tab-content">
+                  <div class="tab-pane container-tab custom-scrollbar-css fade show active" id="tab-diretrizes" role="tabpanel" aria-labelledby="nav-composicao-preco">
+                      <table class="table">
+                          <tr class="table-head">
+                              <th class="th-center table-head-row">Subcategoria</th>
+                              <th></th>
+                              <th class="th-center table-head-row">Fornecedor</th>
+                              <th></th>
+                              <th class="th-center table-head-row">UF</th>
+                              <th></th>
+                              <th class="table-head-row" scope="col">Vendas R$</th>
+                              <th></th>
+                              <th class="table-head-row" scope="col">MG Contrib. (%)</th>
+                              <th></th>
+                              <th class="table-head-row" scope="col">MG Bruta (%)</th>
+                              <th></th>
+                          </tr>
+                          <tr *ngFor="let items of diretrizesEstrategicas">
+                              <td>{{items.DESGRPPRD}}</td>
+                              <td></td>
+                              <td>{{items.DESDIVFRN}}</td>
+                              <td></td>
+                              <td>{{items.CODESTUNI}}</td>
+                              <td></td>
+                              <td>{{items.VLRVNDFATLIQ}}</td>
+                              <td></td>
+                              <td>{{items.VLRMRGCRB}}</td>
+                              <td></td>
+                              <td>{{items.VLRMRGBRT}}</td>
+                          </tr>
+                      </table>
+                  </div>
+              </div>
 
-            <div class="tab-content">
-                <div class="tab-pane container-tab custom-scrollbar-css fade show active" id="tab-diretrizes" role="tabpanel" aria-labelledby="nav-composicao-preco">
-                    <table class="table">
-                        <tr class="table-head">
-                            <th class="th-center table-head-row">Subcategoria</th>
-                            <th></th>
-                            <th class="th-center table-head-row">Fornecedor</th>
-                            <th></th>
-                            <th class="th-center table-head-row">UF</th>
-                            <th></th>
-                            <th class="table-head-row" scope="col">Vendas R$</th>
-                            <th></th>
-                            <th class="table-head-row" scope="col">MG Contrib. (%)</th>
-                            <th></th>
-                            <th class="table-head-row" scope="col">MG Bruta (%)</th>
-                            <th></th>
-                        </tr>
-                        <tr *ngFor="let items of diretrizesEstrategicas">
-                            <td>{{items.DESGRPPRD}}</td>
-                            <td></td>
-                            <td>{{items.DESDIVFRN}}</td>
-                            <td></td>
-                            <td>{{items.CODESTUNI}}</td>
-                            <td></td>
-                            <td>{{items.VLRVNDFATLIQ}}</td>
-                            <td></td>
-                            <td>{{items.VLRMRGCRB}}</td>
-                            <td></td>
-                            <td>{{items.VLRMRGBRT}}</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-
-        </div>
+          </div>
+      </div>
     </div>
+  </div>
+
 </div>

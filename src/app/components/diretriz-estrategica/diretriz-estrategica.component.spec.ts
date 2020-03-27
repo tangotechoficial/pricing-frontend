@@ -64,6 +64,12 @@ fdescribe('DiretrizEstrategicaComponent', () => {
     expect(containers.childNodes.length).toBe(4)
   })
 
+  it('table-head should have 6 fiels and 6 spaces', () => {
+    const containers = element.query(By.css('.table-head'))
+    expect(containers.childNodes.length).toBe(12)
+  })
+
+  
 
 
   
