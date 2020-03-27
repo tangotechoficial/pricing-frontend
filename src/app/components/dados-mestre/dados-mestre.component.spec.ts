@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed, inject, fakeAsync, tick } from '@angular/core/testing';
-import { DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { DebugElement, NO_ERRORS_SCHEMA, Type} from '@angular/core';
+import { HttpClientTestingModule, HttpTestingController, TestRequest} from '@angular/common/http/testing';
+import {HttpResponse} from '@angular/common/http'
 import { By } from '@angular/platform-browser';
 import { DadosMestreComponent } from './dados-mestre.component';
 import { of } from  'rxjs';
@@ -15,7 +16,11 @@ import { NavegacionComponent } from '@app/components/navegacion/navegacion.compo
 import { TechnicalMenuComponent } from '@app/components/navegacion/technical-menu/technical-menu.component';
 import { FilterModalComponent } from '@app/components/filter-modal/filter-modal.component';
 import { BusinessMenuComponent } from '@app/components/navegacion/business-menu/business-menu.component';
+import { AuthenticationService } from '@services/authentication.service'
+import { environment } from '@env/environment';
 import { mockPipe } from '@app/pipes/mock.pipe'
+import verbas from '@datasources/dados-mestre-verba.json'
+import prices from '@datasources/dados-mestre-verba.json'
 
 fdescribe('DadosMestreComponent', () => {
   let component: DadosMestreComponent;
@@ -23,56 +28,15 @@ fdescribe('DadosMestreComponent', () => {
   let element: DebugElement;
   let moneyServiceStub: any;
   let priceCompositinonServiceStub: any;
-  
+  let requestMock: HttpTestingController;
+  let auth: AuthenticationService
 
   beforeEach(async(() => {
     moneyServiceStub = {
-      dadosMestresVerba: () => of(
-        [{
-          'url':'http://localhost:8000/api/dadosmestre/100/',
-          'NUMANOMES':201901,
-          'CODPRD':1602127,
-          'DESPRD':'CALDO KNORR CARNE 80X114G',
-          'CODFILEPD':52,
-          'CODDIVFRN':15850,
-          'VLRPRECOSALDOMESANTERIOR':'6.04',
-          'VLRPRECOCREDITO':'0.00',
-          'VLRPRECODEBITO':'0.00',
-          'VLRMARGEMSALDOMESANTERIOR':'-1309.60',
-          'VLRMARGEMCREDITO':'0.00',
-          'VLRMARGEMDEBITO':'0.00'
-        }])
+      dadosMestresVerba: () => of(verbas)
     }
     priceCompositinonServiceStub = {
-      dadosMestresPreco: () => of(
-        [{
-          'CODPRD': '205057',
-          'DESPRD': 'ABS.PLENITUD FEMME NOTURNO 8X1',
-          'ABC': 'A',
-          'SENSIVEL_REBATE': '0',
-          'TIPEDEREG': '34',
-          'CODEDEREG': '250',
-          'CODFILEMP': '64',
-          'CODFILFAT': '370',
-          'MB': '24,08',
-          'MB_CALCULADA': '26,79',
-          'VERBA_PRECO': '0',
-          'FUND_PRECO': '100',
-          'REBATE': '0,3462',
-          'ICMS': '0',
-          'PIS_COFINS': '9,25',
-          'DEVOLUCAO': '0,5',
-          'TARGET': '14,87',
-          'FLEX': '5',
-          'CMV': '96,797',
-          'BONIFICADO': '0',
-          'COMPLEMENTO': '0',
-          'PRECOBASE': '0',
-          'DATA_PRECO': '1/2/2020 00:00',
-          'CODESTUNI': 'SP',
-          'PRECO_LIVRO': '14,34'
-        }]
-      )
+      dadosMestresPreco: () => of(prices)
     }
     TestBed.configureTestingModule({
       declarations: [
@@ -83,14 +47,19 @@ fdescribe('DadosMestreComponent', () => {
         FilterModalComponent,
         mockPipe({name: 'filter'})
       ],
-      imports: [ HttpClientModule, RouterTestingModule, NoopAnimationsModule, ReactiveFormsModule],
+      imports: [ HttpClientTestingModule, RouterTestingModule, NoopAnimationsModule, ReactiveFormsModule],
       schemas: [ NO_ERRORS_SCHEMA ],
       providers: [
+        AuthenticationService,
         {provide: DadosMestresComposicaoPrecoService, useValue: priceCompositinonServiceStub },
         {provide: DadosMestreVerbaService, useValue: moneyServiceStub}
       ],
     })
     .compileComponents();
+    requestMock = TestBed.get(HttpTestingController)
+    auth = TestBed.get(AuthenticationService)
+    localStorage.setItem('token', "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJ1c2VybmFtZSI6InRlc3RlciIsImV4cCI6MTU4NTM1MDM5OCwiZW1haWwiOiIiLCJvcmlnX2lhdCI6MTU4NTE3NzU5OH0.JUMk08lro0rKUJhF58Ewmgfr0uout7uKkGiKllxcnaM")
+    localStorage.setItem('User', "{}")
 
   }));
 
@@ -123,7 +92,7 @@ fdescribe('DadosMestreComponent', () => {
     expect(button.listeners.length).toBe(1);
     expect(button.listeners[0].name).toBe('click');
   })
-  
+
   it('should call the right function when clicked', async(() => {
     let button = fixture.debugElement.nativeElement.querySelector('button.btn-filter-color');
     spyOn(component, 'showFilterModal');
@@ -132,16 +101,23 @@ fdescribe('DadosMestreComponent', () => {
     expect(component.showFilterModal).toHaveBeenCalled();
     });
   }))
-  
 
-  /**
-  it('table price composition should have data', () => {
-    const table = element.query(By.css('[id="priceComposition"]'))
-    //debuger
+  it('price composition should have data', () => {
+    fixture.detectChanges()
+    const req = requestMock.match(`${environment.apiUrl}/dadosmestrecomposicao`)[0];
+    req.flush(prices)
+
+    expect(component.masterDataPriceComposition.length).toBeGreaterThan(0)
+
+    fixture.whenStable().then(() => {
+      fixture.detectChanges()
+      const table = fixture.debugElement.nativeElement.querySelector('#priceComposition')
+      expect(table.rows.length).toBeGreaterThan(1)
+    });
+
   })
-
+  /**
   it('table verba info should have data', () => {
-      component.ngOnInit()
       fixture.detectChanges()
       const table = element.query(By.css('[id="verbaInfo"]'))
       //debuger
