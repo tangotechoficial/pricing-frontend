@@ -13,7 +13,7 @@ export class PurchasePlanningService {
     private httpClient: HttpClient
   ) {}
 
-  get planningData(): Observable<any> {
+  public get planningData(): Observable<any> {
     const result = this.httpClient.get(this.planningUrl);
     return result
   }
