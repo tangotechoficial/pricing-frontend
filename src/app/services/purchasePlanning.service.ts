@@ -7,7 +7,7 @@ import {map, timeout} from 'rxjs/operators';
 
 @Injectable({providedIn: 'root'})
 export class PurchasePlanningService {
-  private planningUrl = `${environment.apiUrl}/planodecompras`
+  private planningUrl = `${environment.apiUrl}/planocompras`
 
   constructor(
     private httpClient: HttpClient
