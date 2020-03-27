@@ -18,9 +18,9 @@ import { FilterModalComponent } from '@app/components/filter-modal/filter-modal.
 import { BusinessMenuComponent } from '@app/components/navegacion/business-menu/business-menu.component';
 import { AuthenticationService } from '@services/authentication.service'
 import { environment } from '@env/environment';
-import { mockPipe } from '@app/pipes/mock.pipe'
-import verbas from '@datasources/dados-mestre-verba.json'
-import prices from '@datasources/dados-mestre-verba.json'
+import { mockPipe } from '@app/pipes/mock.pipe';
+import verbas from '@datasources/dados-mestre-verba.json';
+import prices from '@datasources/dados-mestre-preco.json';
 
 fdescribe('DadosMestreComponent', () => {
   let component: DadosMestreComponent;
@@ -103,10 +103,9 @@ fdescribe('DadosMestreComponent', () => {
   }))
 
   it('price composition should have data', () => {
-    fixture.detectChanges()
-    const req = requestMock.match(`${environment.apiUrl}/dadosmestrecomposicao`)[0];
+    const req = requestMock.expectOne(`${environment.apiUrl}/dadosmestrecomposicao`);
     req.flush(prices)
-
+    console.log(component.masterDataPriceComposition)
     expect(component.masterDataPriceComposition.length).toBeGreaterThan(0)
 
     fixture.whenStable().then(() => {
@@ -115,7 +114,22 @@ fdescribe('DadosMestreComponent', () => {
       expect(table.rows.length).toBeGreaterThan(1)
     });
 
-  })
+  })   
+
+  it('price verba should have data', () => {
+    const req = requestMock.expectOne(`${environment.apiUrl}/dadosmestreverba`);
+    console.log(verbas)
+    req.flush(verbas)
+    debugger
+    expect(component.masterDataMoney.length).toBeGreaterThan(0)
+
+    fixture.whenStable().then(() => {
+      fixture.detectChanges()
+      const table = fixture.debugElement.nativeElement.querySelector('#verbaInfo')
+      expect(table.rows.length).toBeGreaterThan(1)
+    });
+
+  })    
   /**
   it('table verba info should have data', () => {
       fixture.detectChanges()
