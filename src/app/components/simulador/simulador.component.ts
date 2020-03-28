@@ -12,4 +12,8 @@ export class SimuladorComponent implements OnInit {
   ngOnInit() {
   }
 
+  filter() {
+    return;
+  }
+
 }
