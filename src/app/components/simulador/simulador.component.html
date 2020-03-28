@@ -1,5 +1,41 @@
 <!-- Navigation Bar -->
 <navegacion></navegacion>
-<div class="temporary">
-  <h1>Simulador</h1>
+<div class="background">
+  <div class="container col-9 main-container">
+    <div class="row">
+      <div class="container col-12 p-4 d-flex justify-content-start">
+          <button type="button" class="btn button-save btn-filter-color" (click)="filter()"><i
+                  class="fas fa-filter btn-filter-color"></i>&nbsp;Filtro</button>
+          <div class="applied-filters"></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <div class="row">
+          <span class="badger">Janeiro</span>
+          <span class="badger">2020</span>
+        </div>
+        <div class="row">
+          <div class="col-8">
+            <ng-container> <!-- *ngFor="let item of items" -->
+              <div class="infolet">
+
+              </div>
+            </ng-container>
+          </div>
+          <div class="col-4">
+            <div class="buttons">
+              <button class="btn btn-primary">Otimizar</button>
+              <button class="btn btn-primary-outline">Aceitar Verba</button>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <table class="table">
+
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
