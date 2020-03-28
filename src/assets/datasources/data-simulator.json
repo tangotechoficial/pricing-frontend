@@ -1,0 +1,122 @@
+[
+  {
+    "SP": {
+      "Verba": {
+        "mes": "janeiro",
+        "semanas": [
+           {
+             sugerido:0
+             planejado:0
+             realizado:0
+             otimizado:0
+           },
+           {
+             sugerido:0
+             planejado:0
+             realizado:0
+             otimizado:0
+           },
+           {
+             sugerido:0
+             planejado:0
+             realizado:0
+             otimizado:0
+           },
+           {
+             sugerido:0
+             planejado:0
+             realizado:0
+             otimizado:0
+           }
+         ]
+      },
+      "CMV": {
+        "mes": "janeiro",
+        "semanas": [
+           {
+             sugerido:0
+             planejado:0
+             realizado:0
+             otimizado:0
+           },
+           {
+             sugerido:0
+             planejado:0
+             realizado:0
+             otimizado:0
+           },
+           {
+             sugerido:0
+             planejado:0
+             realizado:0
+             otimizado:0
+           },
+           {
+             sugerido:0
+             planejado:0
+             realizado:0
+             otimizado:0
+           }
+         ]
+      },
+      "Margem": {
+        "mes": "janeiro",
+        "semanas": [
+           {
+             sugerido:0
+             planejado:0
+             realizado:0
+             otimizado:0
+           },
+           {
+             sugerido:0
+             planejado:0
+             realizado:0
+             otimizado:0
+           },
+           {
+             sugerido:0
+             planejado:0
+             realizado:0
+             otimizado:0
+           },
+           {
+             sugerido:0
+             planejado:0
+             realizado:0
+             otimizado:0
+           }
+         ]
+      },
+      "Competitividade": {
+        "mes": "janeiro",
+        "semanas": [
+           {
+             sugerido:0
+             planejado:0
+             realizado:0
+             otimizado:0
+           },
+           {
+             sugerido:0
+             planejado:0
+             realizado:0
+             otimizado:0
+           },
+           {
+             sugerido:0
+             planejado:0
+             realizado:0
+             otimizado:0
+           },
+           {
+             sugerido:0
+             planejado:0
+             realizado:0
+             otimizado:0
+           }
+         ]
+      }
+    }
+  }
+]
