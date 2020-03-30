@@ -157,3 +157,19 @@ button.dropdownMenuButton {
 .btn-grey{
   color:$martinsTextGrey !important;
 }
+
+.btn-outline-mrt {
+  border: 1px solid #4270C1
+}
+.btn-outline-mrt:hover {
+  background-color: transparent;
+  color: inherit
+}
+.badge-custom {
+  background-color: #7e7e7e;
+  color: #fafafa;
+  font-size: 1.1rem;
+}
+.badge-custom:nth-child(n+2) {
+  margin-left: 1em;
+}

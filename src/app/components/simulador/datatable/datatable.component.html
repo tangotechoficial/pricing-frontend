@@ -1,1 +1,23 @@
-<p>datatable works!</p>
+<table class="table">
+  <thead>
+    <col>
+    <colgroup span=4></colgroup>
+    <tr>
+      <ng-container *ngFor="let item of ['Venda', 'CMV', 'Margem', 'Competitividade']">
+        <th scope="colgroup" colspan="4">{{ item }}</th>
+      </ng-container>
+
+    </tr>
+    <tr>
+      <ng-container *ngFor="let item of [].constructor(4)">
+        <th scope="col">Planejado</th>
+        <th scope="col">Realizado</th>
+        <th scope="col">Otimizado</th>
+        <th scope="col">Sugerido</th>
+      </ng-container>
+    </tr>
+  </thead>
+  <tbody>
+
+  </tbody>
+</table>
