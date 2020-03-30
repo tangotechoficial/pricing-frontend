@@ -3,7 +3,7 @@
 <div class="background">
   <div class="container col-9 main-container">
     <div class="row">
-      <div class="container col-12 p-4 d-flex justify-content-start">
+      <div class="container col-12 pb-5 pt-5 d-flex justify-content-start">
           <button type="button" class="btn button-save btn-filter-color" (click)="filter()"><i
                   class="fas fa-filter btn-filter-color"></i>&nbsp;Filtro</button>
           <div class="applied-filters"></div>
@@ -12,28 +12,27 @@
     <div class="row">
       <div class="col-12">
         <div class="row">
-          <span class="badger">Janeiro</span>
-          <span class="badger">2020</span>
+          <span class="badge badge-secondary">Janeiro</span>
+          <span class="badge badge-secondary">2020</span>
         </div>
-        <div class="row">
-          <div class="col-8">
-            <ng-container> <!-- *ngFor="let item of items" -->
-              <div class="infolet">
-
-              </div>
-            </ng-container>
+        <div class="row d-flex flex-content-between">
+          <div class="col-8 ">
+            <div class="row">
+              <infolet title="Verba necessária" symbol="R$" value="900"></infolet>
+              <infolet title="Verba Disponível" symbol="R$" value="700"></infolet>
+              <infolet title="Verba Alocada" symbol="R$" value="682"></infolet>
+              <infolet title="Estoque" symbol="R$" value="12.0K"></infolet>
+            </div>
           </div>
-          <div class="col-4">
-            <div class="buttons">
+          <div class="col-4 d-flex flex-column justify-content-end">
+            <div class="buttons d-flex">
               <button class="btn btn-primary">Otimizar</button>
-              <button class="btn btn-primary-outline">Aceitar Verba</button>
+              <button class="btn btn-outline-primary">Aceitar Verba</button>
             </div>
           </div>
         </div>
         <div class="row">
-          <table class="table">
-
-          </table>
+          <simulador-datatable></simulador-datatable>
         </div>
       </div>
     </div>
