@@ -105,7 +105,6 @@ fdescribe('DadosMestreComponent', () => {
   it('price composition should have data', () => {
     const req = requestMock.expectOne(`${environment.apiUrl}/dadosmestrecomposicao`);
     req.flush(prices)
-    console.log(component.masterDataPriceComposition)
     expect(component.masterDataPriceComposition.length).toBeGreaterThan(0)
 
     fixture.whenStable().then(() => {
@@ -118,9 +117,7 @@ fdescribe('DadosMestreComponent', () => {
 
   it('price verba should have data', () => {
     const req = requestMock.expectOne(`${environment.apiUrl}/dadosmestreverba`);
-    console.log(verbas)
     req.flush(verbas)
-    debugger
     expect(component.masterDataMoney.length).toBeGreaterThan(0)
 
     fixture.whenStable().then(() => {
