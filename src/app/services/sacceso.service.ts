@@ -5,9 +5,11 @@ import { map } from 'rxjs/operators';
 import { Global } from './global';
 import { Sacceso } from '../models/sacceso';
 import { Sequencia } from '../models/sequencia';
+import { Campo } from 'app/models/campo';
 
 @Injectable()
 export class SaccesoService {
+    
     public url: string;
     public aSequenciaAcceso: Array<any>;
     private header = { headers: { 'Content-type': 'application/json' } };
@@ -16,33 +18,45 @@ export class SaccesoService {
         this.url = Global.url;
     }
 
+    getCampos(): Promise<Campo[]> {
+        return this.http.get(this.url + '/seqcampo/', this.header)
+            .toPromise()
+            .then(response => {
+                return response as Campo[];
+            })
+            .catch(err => {
+                throw new Error(err);
+            });
+      }
+
     postSacceso(seq: Sacceso) {
         return this.http.post(this.url + '/seqcampo/', { Cod_Campo: seq.sSeqAcceso, Nome_Campo: seq.sDesAcceso}, this.header);
     }
 
-    postSaccesoComp(seq: Sacceso): Promise<any> {
-         return this.http.post(this.url + '/sequencia/', { Cod_Sequencia: seq.sSeqAcceso, Nome_Sequencia: seq.sDesAcceso}, this.header)
-            .pipe(
-             map((elem: any) =>
-                seq._parents.forEach(campo => {
-                    this.postSeqAux(elem.id, campo.sId).subscribe();
-                }))
-         ).toPromise();
-    }
-
-    postSeqAux(seqId: any, campoId: any) {
-        return this.http.post(this.url + '/seqaux/',
-                                { id_Sequencia: seqId, id_Campo: campoId},
-                                this.header
-                              );
+    postSequencia(sequencia: Sequencia): Promise<any> {
+         const camps: Array<any> = new Array<any>();
+         sequencia.campos.map(elem => {
+            camps.push(elem.Cod_Campo);
+         });
+         return this.http
+            .post(this.url + '/sequencia/',
+                { Cod_Sequencia: sequencia.Cod_sequencia,
+                  Nome_Sequencia: sequencia.Nome_sequencia,
+                  campos: camps
+                }, this.header).toPromise();
     }
 
     getSaccesoList(): Observable <any> {
         return this.http.get(this.url + '/seqcampo/', this.header);
     }
 
-    getLastSeqCampo() {
-        return this.http.get(this.url + '/seqcampo/last/', this.header);
+    postCampo(campo: Campo): Promise<any> {
+        return this.http
+            .post(this.url + '/seqcampo/', { Cod_Campo: campo.Cod_Campo, Nome_Campo: campo.Nome_Campo}, this.header).toPromise();
+    }
+
+    getLastCampo(): Promise<any> {
+        return this.http.get(this.url + '/seqcampo/last/', this.header).toPromise();
     }
 
     getLastSequencia(): Promise<any> {
