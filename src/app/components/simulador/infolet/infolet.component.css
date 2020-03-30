@@ -1,0 +1,14 @@
+.infolet {
+  background-color: #e6e6e6;
+  padding: 1em;
+  width: 200px
+}
+.infolet h2 {
+  font-size: 1.2em
+}
+.infolet span.symbol {
+  display: initial !important;
+}
+.infolet p.value {
+  font-size: 250%
+}
