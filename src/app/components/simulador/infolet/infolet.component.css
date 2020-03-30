@@ -6,9 +6,10 @@
 .infolet h2 {
   font-size: 1.2em
 }
-.infolet span.symbol {
-  display: initial !important;
+.infolet p.symbol {
+  margin-top: 20%
 }
 .infolet p.value {
-  font-size: 250%
+  font-size: 250%;
+  font-weight: bold;
 }
