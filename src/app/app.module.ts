@@ -55,6 +55,8 @@ import { CamadaService } from './services/camada.service';
 import { registerLocaleData }  from '@angular/common'
 import localePt from '@angular/common/locales/pt';
 import { FilterTagComponent } from './components/shared/filter-tag/filter-tag.component';
+import { DatatableComponent } from './components/simulador/datatable/datatable.component';
+import { InfoletComponent } from './components/simulador/infolet/infolet.component';
 registerLocaleData(localePt, 'pt',);
 @NgModule({
   declarations: [
@@ -89,7 +91,6 @@ registerLocaleData(localePt, 'pt',);
     EditModeDirective,
     EditableOnEnterDirective,
     GenericDadaFilterPipe,
-    FilterTagComponent,
     PopupmenuComponent,
     SelectCondicionComponent,
     SelectPopupCondicionComponent,
@@ -97,7 +98,9 @@ registerLocaleData(localePt, 'pt',);
     SelectPopupExpedicaoComponent,
     SelectPopupFaturamentoComponent,
     SelectPopupRegiaoComponent,
-    FilterTagComponent
+    FilterTagComponent,
+    DatatableComponent,
+    InfoletComponent
   ],
   imports: [
     BrowserModule,
