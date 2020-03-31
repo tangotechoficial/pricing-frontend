@@ -19,19 +19,18 @@ start:
 	$(ANGULAR) serve --open
 
 # target: clean - Remove old builds
-clean: 
+clean:
 	rm -rf $(DIST_DIR)/$(PROJECT)
 
 # target: docker-build - Build docker container
-docker-build: 
+docker-build:
 	docker-compose up --build --no-start
 
 # target: docker-start - Start container. Binds to port 80
 docker-start:
 	docker-compose start
 
-
-# target: testing - Build application with development configuration settings
+# target: build - Build application with development configuration settings
 
 build:
 	$(MAKE) clean
@@ -61,5 +60,3 @@ pack_deploy:
 # target: token - Get authorization token
 token:
 	curl -X POST -d"username=$(username)&password=$(password)" $(url)
-
-
