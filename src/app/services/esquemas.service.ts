@@ -87,7 +87,7 @@ export class EsquemasService {
 
                     const esquemaRelationsFiltered = esquemaRelations.filter(esqRel => esqRel.Cod_Camada === elem.Cod_Camada)
                     const condicaosFiltered = esquemaRelationsFiltered.map(esqRel => {
-                        const condicaoWithIdRelation = condicaos.filter(cond => cond.Cod_Condicao == esqRel.Cod_Condicao)[0]
+                        const condicaoWithIdRelation = condicaos.filter(cond => cond.Cod_Condicao === esqRel.Cod_Condicao)[0]
                         condicaoWithIdRelation.idCondicaoCamadaEsquema = esqRel.id
                         return condicaoWithIdRelation
                     })

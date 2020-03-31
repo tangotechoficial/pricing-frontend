@@ -40,8 +40,8 @@ export class SaccesoService {
          });
          return this.http
             .post(this.url + '/sequencia/',
-                { Cod_Sequencia: sequencia.Cod_sequencia,
-                  Nome_Sequencia: sequencia.Nome_sequencia,
+                { Cod_Sequencia: sequencia.Cod_Sequencia,
+                  Nome_Sequencia: sequencia.Nome_Sequencia,
                   campos: camps
                 }, this.header).toPromise();
     }

@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Condicion } from 'app/models/condicion';
+import { Condicao } from 'app/models/condicao';
 
 declare var $: any;
 
@@ -11,9 +12,9 @@ declare var $: any;
 })
 export class SelectPopupCondicionComponent implements OnInit {
   @Output() closePopup: EventEmitter<any> = new EventEmitter<any>();
-  @Output() selectedObject: EventEmitter<any> = new EventEmitter<any>();
-  @Input() dataList: Array<any>;
-  public currenObject: Condicion = new Condicion();
+  @Output() selectedObject: EventEmitter<Condicao> = new EventEmitter<Condicao>();
+  @Input() dataList: Array<Condicao>;
+  public currenObject: Condicao = new Condicao();
   selectedItem: boolean = false;
 
   constructor() {}
@@ -31,15 +32,8 @@ export class SelectPopupCondicionComponent implements OnInit {
     this.closePopup.emit(false);
   }
 
-  getSelectedCondicao(val: any , i: any) {
-    this.currenObject.sId = val.id;
-    this.currenObject.sCodCondicion = val.Cod_Condicao;
-    this.currenObject.sDesCondicion = val.Desc_Condicao;
-    this.currenObject.bEscalaQtde = val.Escala_Qtde === 1 ? true : false;
-    this.currenObject.bNeg = val.POS_NEG === 'N' ? true : false;
-    this.currenObject.bPos = val.POS_NEG === 'P' ? true : false;
-    this.currenObject.MANDATORIA = val.MANDATORIA;
-    this.currenObject.ESTATISTICA = val.ESTATISTICA;
+  getSelectedCondicao(condicao: Condicao , i: any) {
+    this.currenObject = condicao;
     this.selectItemColor(i);
     this.selectedItem = true;
   }

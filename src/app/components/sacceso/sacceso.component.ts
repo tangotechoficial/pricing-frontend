@@ -111,7 +111,7 @@ export class SaccesoComponent implements OnInit {
     this.spinner.show();
     this.saccesoService.getLastSequencia()
       .then((result: any) => {
-        this.sequencia.Cod_sequencia = this.evaluateNextSA(result.Cod_Sequencia);
+        this.sequencia.Cod_Sequencia = this.evaluateNextSA(result.Cod_Sequencia);
         this.spinner.hide();
       });
   }
@@ -170,7 +170,7 @@ export class SaccesoComponent implements OnInit {
         desc = desc + '/' + elem.Nome_Campo;
       }
     });
-    this.sequencia.Nome_sequencia = desc;
+    this.sequencia.Nome_Sequencia = desc;
   }
 
   public submitCampo() {

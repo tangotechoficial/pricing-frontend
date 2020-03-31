@@ -103,7 +103,7 @@ export class PrecioBusiness implements OnInit {
     this.currentSelectedCampos = new Array<Campo>();
     val.campos.map(elem => this.currentSelectedCampos.push(elem));
     this.currentSelectedCampos.push({Cod_Campo: 'CPVAL', Nome_Campo: 'VALUE', Value: ''});
-    const sequenciavalue: SequenciaValues = new SequenciaValues(val.Cod_sequencia, val.Nome_sequencia, this.currentSelectedCampos);
+    const sequenciavalue: SequenciaValues = new SequenciaValues(val.Cod_Sequencia, val.Nome_Sequencia, this.currentSelectedCampos);
     sequenciavalue.camposValue.map(elem => elem.Value = '');
     this.currentSelectedSequenciaValues.push(sequenciavalue);
   }

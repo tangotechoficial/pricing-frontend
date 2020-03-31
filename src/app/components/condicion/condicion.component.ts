@@ -3,6 +3,11 @@ import { Condicion } from '../../models/condicion';
 import { MetadataService } from './../../services/metadata.service';
 import { CondicionService } from '../../services/condicion.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Sequencia } from 'app/models/sequencia';
+import { Condicao } from 'app/models/condicao';
+import { TipoValor } from 'app/models/tipovalor';
+import { Camada } from 'app/models/camadas';
+import { ChaveContas } from 'app/models/chavecontas';
 
 declare var $: any;
 
@@ -15,12 +20,12 @@ declare var $: any;
 export class CondicionComponent implements OnInit {
   public searchSeleccionado;
   public dbCondition: Array<any>;
-  public condicion: Condicion;
-  public sequencias: Array<any>;
-  public chaveContas: Array<any>;
-  public tipoValor: Array<any>;
-  public camadas: Array<any>;
-  public condicaos: Array<any>;
+  public condicion: Condicao;
+  public sequencias: Array<Sequencia>;
+  public chaveContas: Array<ChaveContas>;
+  public tipoValor: Array<TipoValor>;
+  public camadas: Array<Camada>;
+  public condicaos: Array<Condicao>;
   public selectedProperties: Array<any>;
   public bCreateMode: boolean;
   public sSeleccionCamadaPlaceholder = 'Selecione uma camada';
@@ -40,8 +45,7 @@ export class CondicionComponent implements OnInit {
     /* Initialized message local object */
     this.message = {};
     this.selectedProperties = new Array<any>();
-    this.condicion = new Condicion();
-
+    this.condicion = new Condicao();
 
     if (window.location.pathname.endsWith('criar')) {
       this.bCreateMode = true;
@@ -94,9 +98,10 @@ export class CondicionComponent implements OnInit {
     Input: Boolean from child component
     Output: Selected condicao object
   */
-  public getSelectedCondicao(val: any) {
+  public getSelectedCondicao(val: Condicao) {
     this.condicion = val;
-    this.updateCondicaoByCode();
+    console.log(val);
+    //this.camadas.map(elem => if(elem.Cod_Camada === this.condicion.camada.Cod_Camada))
   }
 
   /*
@@ -105,18 +110,18 @@ export class CondicionComponent implements OnInit {
   */
   public updateMasterData() {
     this.spinner.show();
-    this.sequencias = new Array<any>();
-    this.condicaos = new Array<any>();
-    this.tipoValor = new Array<any>();
-    this.camadas = new Array<any>();
-    this.chaveContas = new Array<any>();
+    this.sequencias = new Array<Sequencia>();
+    this.condicaos = new Array<Condicao>();
+    this.tipoValor = new Array<TipoValor>();
+    this.camadas = new Array<Camada>();
+    this.chaveContas = new Array<ChaveContas>();
     this.selectedProperties = new Array<any>();
     Promise.all([
-      this.condicionService.getSequenciasAcesso().then(result => result.map(sa => this.sequencias.push(sa))),
-      this.condicionService.getChaveContas().then(result => result.map(cc => this.chaveContas.push(cc))),
-      this.condicionService.getTiposValor().then(result => result.map(tv => this.tipoValor.push(tv))),
-      this.condicionService.getCamadas().then(result => result.map(ca => this.camadas.push(ca))),
-      this.condicionService.getCondicaos().then(result => result.map(co => this.condicaos.push(co)))
+      this.condicionService.getSequenciasAcesso().then(result => this.sequencias = result),
+      this.condicionService.getChaveContas().then(result => this.chaveContas = result),
+      this.condicionService.getTiposValor().then(result => this.tipoValor = result),
+      this.condicionService.getCamadas().then(result => this.camadas = result),
+      this.condicionService.getCondicaos().then(result => this.condicaos = result)
     ]).then(() => {
       this.spinner.hide();
     });
@@ -128,81 +133,30 @@ export class CondicionComponent implements OnInit {
   */
   public updateCondicaoByCode() {
     this.selectedProperties.map(elem => {
-      this.sequencias.map((seq, index) => {
-        if (seq.Cod_Sequencia === elem.Cod_Sequencia){
+      /* this.sequencias.map((seq: Sequencia, index) => {
+        if (seq.Cod_sequencia === elem.Cod_Sequencia) {
           const domElem = document.getElementById(index.toString());
           domElem.click();
         }
-      });
+      }); */
     });
-    this.bSelectCondicao = false;
-    this.spinner.show();
-    let flag = false;
-    this.condicionService.getCondicaoByCode(this.condicion.sCodCondicion)
-      .then((result: any) => {
-        flag = true;
-        this.condicion.sDesCondicion = result.Desc_Condicao;
-        this.condicion.bEscalaQtde = result.Escala_Qtde === 1 ? true : false;
-        this.condicion.bNeg = result.POS_NEG === 'N' ? true : false;
-        this.condicion.bPos = result.POS_NEG === 'P' ? true : false;
-        this.condicion.MANDATORIA = result.MANDATORIA;
-        this.condicion.ESTATISTICA = result.ESTATISTICA;
-        this.camadas.map(elems => {
-          if (elems.Cod_Camada === result.Cod_Camada) {
-            this.condicion.oCamada = elems;
-          }
-        });
-        this.chaveContas.map(elems => {
-          if (elems.Cod_ChaveContas === result.Cod_ChaveContas) {
-            this.condicion.oChaveContas = elems;
-          }
-        });
-        this.tipoValor.map(elems => {
-          if (elems.Cod_TipoValor === result.Cod_TipoValor) {
-            this.condicion.oTipoValor = elems;
-          }
-        });
-        this.condicion.TIP_BASE_VENDAS = this.condicion.oCamada.TIPO_BASE_VENDAS;
-        this.condicionService.getSequenciasByCondicao()
-          .then(elems => {
-            elems = elems.filter((obj: any) => {
-              return obj.Cod_Condicao === result.Cod_Condicao;
-            });
-            elems.map((seq: any) => {
-              this.sequencias.map((bseq: any, index: any) => {
-                if (seq.Cod_Sequencia === bseq.Cod_Sequencia) {
-                  const elem = document.getElementById(index.toString());
-                  elem.click();
-                }
-              });
-            });
-            this.spinner.hide();
-          });
-        if (!flag) {
-          this.spinner.hide();
-          this.message.errMessage = 'A condição não existe';
-          this.saveError = true;
-          setTimeout(() => {
-            this.saveError = false;
-          }, 2000);
-        }
-      });
   }
   /*
     Iván Lynch 08/03/2020
     Input: Selected Camada Item from dropdown
     Output: Update this._condicao.oCamada
   */
-  public getSelectedCamada(val: any) {
-    this.condicion.oCamada = val;
+  public getSelectedCamada(camada: Camada) {
+    this.condicion.camada = camada;
+    this.condicion.TIP_BASE_VENDAS = camada.TIPO_BASE_VENDAS;
   }
   /*
     Iván Lynch 08/03/2020
     Input: Selected Camada Item from dropdown
     Output: Update this._condicao.oCamada
   */
-  public getSelectedChaveContas(val: any) {
-    this.condicion.oChaveContas = val;
+  public getSelectedChaveContas(val: ChaveContas) {
+    this.condicion.chavecontas = val;
     this.bpopMenu = false;
   }
   /*
@@ -210,8 +164,8 @@ export class CondicionComponent implements OnInit {
     Input: Selected TipoValor Item from dropdown
     Output: Update this._condicao.oTipoValor
   */
-  public getSelectedTipoValor(val: any) {
-    this.condicion.oTipoValor = val;
+  public getSelectedTipoValor(val: TipoValor) {
+    this.condicion.tipovalor = val;
   }
 
   /*
@@ -221,11 +175,15 @@ export class CondicionComponent implements OnInit {
   public checkPosNeg(e: any) {
     const checkPos: any = document.getElementById('checkPositivo');
     const checkNeg: any = document.getElementById('checkNegativo');
+
     if (e.target.id === 'checkNegativo' && checkPos.checked) {
       checkPos.click();
+      this.condicion.POS_NEG = 0;
     }
+
     if (e.target.id === 'checkPositivo' && checkNeg.checked) {
       checkNeg.click();
+      this.condicion.POS_NEG = 1;
     }
   }
 
@@ -248,23 +206,21 @@ export class CondicionComponent implements OnInit {
     Input: Object
     Output: Push the object to selectedProperties array if the element is not in the array or delete them
   */
-  public checkValue(sa: any) {
-    if (this.selectedProperties.length < 1) {
-      this.selectedProperties.push(sa);
-      this.condicion.aSequencias.push(sa);
-    } else {
-      if (this.elemExist(sa, this.selectedProperties)) {
-        this.selectedProperties = this.selectedProperties.filter((obj) => {
-          return obj.Cod_Sequencia !== sa.Cod_Sequencia;
-        });
-        this.condicion.aSequencias = this.condicion.aSequencias.filter((seq) => {
-          return seq.Cod_Sequencia !== sa.Cod_Sequencia;
-        });
-      } else {
-        this.selectedProperties.push(sa);
-        this.condicion.aSequencias.push(sa);
+  public checkValue(sequencia: Sequencia) {
+    this.sequencias.map(elem => {
+      if (elem === sequencia) {
+        const domElem: any = document.getElementById(sequencia.Cod_Sequencia);
+        console.log(domElem.checked);
+        if (this.elemExist(sequencia, this.condicion.sequencias)) {
+          domElem.checked = false;
+          this.condicion.sequencias = this.condicion.sequencias.filter((obj) => {
+            return obj !== sequencia;
+          });
+        } else {
+          this.condicion.sequencias.push(sequencia);
+        }
       }
-    }
+    });
   }
 
   /*
@@ -272,13 +228,9 @@ export class CondicionComponent implements OnInit {
     Input: Object
     Output: Uncheck selected object from sequencias
   */
-  public onDltSelection(sel: any) {
-    this.sequencias.map((elem, index) => {
-      if (sel.Cod_Sequencia === elem.Cod_Sequencia) {
-        const selElem = document.getElementById(index.toString());
-        selElem.click();
-      }
-    });
+  public onDltSelection(sequencia: Sequencia) {
+    const domElem = document.getElementById(sequencia.Cod_Sequencia);
+    domElem.click();
   }
 
   /*
@@ -287,38 +239,22 @@ export class CondicionComponent implements OnInit {
     Output: Create new Condicao
   */
   public postCondicao() {
+    this.spinner.show();
     this.condicionService.postCondicao(this.condicion)
-      .then(elem => {
+      .then(result => {
+        this.sequencias.map( elem => {
+          const domElem: any = document.getElementById(elem.Cod_Sequencia);
+          domElem.checked = false;
+        });
+        this.spinner.hide();
         this.saveSucess = true;
-        this.message.sucMessage = 'Condição ' + this.condicion.sCodCondicion + ' - ' + this.condicion.sDesCondicion + ' salva com sucesso!';
         setTimeout(() => {
           this.saveSucess = false;
-          this.condicion = new Condicion();
-          this.getLastCondicao();
-          this.cleanSelections();
-        }, 2000);
-      })
-      .catch((error: any) => {
-        if (error.error.Cod_Condicao[0] === 'condicao with this Cod Condicao already exists.') {
-          this.message.errMessage = 'O código de condição já existe';
-          this.saveError = true;
-        }
-        setTimeout(() => {
-          this.saveError = false;
+          this.condicion = new Condicao();
         }, 2000);
       });
   }
 
-  public cleanSelections() {
-    this.condicion.aSequencias.map(elem => {
-      this.sequencias.map((seq, index) => {
-        if (elem.id === seq.id) {
-          const domElem = document.getElementById(index.toString());
-          domElem.click();
-        }
-      });
-    });
-  }
 
   /*
     Iván Lynch 12/03/2020
@@ -326,33 +262,16 @@ export class CondicionComponent implements OnInit {
     Output: Edit Condicao
   */
   public putCondicao() {
-    this.spinner.show();
-    this.condicionService.deleteCondicaoSequencia(this.condicion.sCodCondicion);
-    this.condicionService.editCondicao(this.condicion)
-      .then(elem => {
+    this.condicionService.putCondicao(this.condicion)
+      .then(result => {
+        this.sequencias.map( elem => {
+          const domElem: any = document.getElementById(elem.Cod_Sequencia);
+          domElem.checked = false;
+        });
         this.saveSucess = true;
-        this.message.sucMessage = 'Condição ' + this.condicion.sCodCondicion + ' - ' + this.condicion.sDesCondicion + ' salva com sucesso!';
-        this.condicion = new Condicion();
         setTimeout(() => {
           this.saveSucess = false;
-          this.condicaos = new Array<any>();
-          this.condicionService.getCondicaos()
-            .then(result => {
-              result.map(co => this.condicaos.push(co));
-              setTimeout(() => {
-                this.spinner.hide();
-              }, 2000);
-            });
-        }, 2000);
-      })
-      .catch((error: any) => {
-        if (error.error.Cod_Condicao[0] === 'condicao with this Cod Condicao already exists.') {
-          this.message.errMessage = 'O código de condição já existe';
-          this.saveError = true;
-        }
-        setTimeout(() => {
-          this.saveError = false;
-        }, 2000);
+        }, 3000);
       });
   }
 
@@ -381,7 +300,7 @@ export class CondicionComponent implements OnInit {
   public getLastCondicao() {
     this.condicionService.getLastCondicao()
       .then((result: any) => {
-        this.condicion.setCodigo(this.evaluateNextSA(result.Cod_Condicao));
+        this.condicion.Cod_Condicao = this.evaluateNextSA(result.Cod_Condicao);
       });
   }
 
