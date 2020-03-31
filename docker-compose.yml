@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  app:
+    container_name: martins_frontend
+    build: .
+    ports:
+      - 80:80
