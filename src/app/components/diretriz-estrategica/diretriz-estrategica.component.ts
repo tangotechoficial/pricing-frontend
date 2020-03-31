@@ -6,7 +6,7 @@ import { timingSafeEqual } from 'crypto';
   selector: 'app-diretriz-estrategica',
   templateUrl: './diretriz-estrategica.html',
   styleUrls: ['./diretriz-estrategica.component.scss'],
-  providers: [ DiretrizesEstrategicasService ] 
+  providers: [ DiretrizesEstrategicasService ]
 })
 export class DiretrizEstrategicaComponent implements OnInit {
 
@@ -18,8 +18,14 @@ export class DiretrizEstrategicaComponent implements OnInit {
 
   ngOnInit() {
     this.diretrizesEstrategicas = new Array<any>();
-    this.DiretrizesEstrategicasService.getDistretriz().subscribe(elem => elem.map(data => this.diretrizesEstrategicas.push(data)));
-    console.log(this.diretrizesEstrategicas);
+    this.DiretrizesEstrategicasService.diretrizesEstrategicas.subscribe(
+      data => data.results.map(
+        row => {
+          this.diretrizesEstrategicas.push(row);
+        }
+      ),
+      error => console.log(error)
+    );
   }
 
 }

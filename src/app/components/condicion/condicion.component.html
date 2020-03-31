@@ -1,5 +1,6 @@
 <!-- Navigation Bar -->
-<navegacion [cMode]="bCreateMode"></navegacion>
+<!-- <navegacion [cMode]="bCreateMode"></navegacion> -->
+<navegacion></navegacion>
 <popupmenu *ngIf="bpopMenu" (closePopup)="onCloseChaveContasPopUp($event)" (selectedObject)="getSelectedChaveContas($event)" [dataList]="this.chaveContas" ></popupmenu>
 <select-popup-condicion *ngIf="bSelectCondicao" (closePopup)="onCloseCondicaoPopUp($event)" (selectedObject)="getSelectedCondicao($event)" [dataList]="this.condicaos"></select-popup-condicion>
 
