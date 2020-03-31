@@ -1,3 +1,4 @@
+import { Sequencia } from './sequencia';
 
 export class Condicao {
     constructor(
@@ -16,7 +17,9 @@ export class Condicao {
         // tslint:disable-next-line: variable-name
         public Cod_ChaveContas: any,
         // tslint:disable-next-line: variable-name
-        public Cod_TipoValor: any
+        public Cod_TipoValor: any,
+        public value: any,
+        public sequencias: Array<Sequencia>
     ) {}
 
     // tslint:disable-next-line: variable-name
@@ -34,7 +37,9 @@ export class Condicao {
         // tslint:disable-next-line: variable-name
         Cod_ChaveContas?: any,
         // tslint:disable-next-line: variable-name
-        Cod_TipoValor?: any) {
+        Cod_TipoValor?: any,
+        value?: any,
+        sequencias?: Array<Sequencia>) {
         this.Cod_Condicao = Cod_Condicao;
         this.Desc_Condicao = Desc_Condicao;
         this.Escala_Qtde = Escala_Qtde;
@@ -45,6 +50,8 @@ export class Condicao {
         this.Cod_Camada = Cod_Camada;
         this.Cod_ChaveContas = Cod_ChaveContas;
         this.Cod_TipoValor = Cod_TipoValor;
+        this.value = value;
+        this.sequencias = sequencias;
 
     }
 }

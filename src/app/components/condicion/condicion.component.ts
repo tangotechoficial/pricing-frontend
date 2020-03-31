@@ -32,7 +32,7 @@ export class CondicionComponent implements OnInit {
   public bSelectCondicao = false;
 
   constructor(
-    private condicionService: CondicionService,
+    public condicionService: CondicionService,
     private spinner: NgxSpinnerService
   ) { }
 

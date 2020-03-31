@@ -43,7 +43,7 @@ describe('PrecioBaseComponent', () => {
       expect(component.loading).toBeTruthy()
     })
 
-    it('Fetch data OK', (done) => {
+    it('Fetch data OK [BASE]', (done) => {
       component.esquemasService
       .fetchCondicaoCamadaEsquema("B")
       .then(data => {
@@ -53,16 +53,26 @@ describe('PrecioBaseComponent', () => {
           const exist = keys.some(key => key == prop)
           expect(exist).toBeTruthy()
         })
-        
+        done()
+      })
+
+    })
+
+    it('Fetch data OK [VENDAS]', (done) => {
+      component.esquemasService
+      .fetchCondicaoCamadaEsquema("v")
+      .then(data => {
+        const props = ['camada','condicaos','condicaosAllow','tipoValor']
+        const keys = Object.keys(data[0])
+        props.forEach(prop => {
+          const exist = keys.some(key => key == prop)
+          expect(exist).toBeTruthy()
+        })
         done()
       })
 
     })
 
   })
-
-
-  
-
 
 });

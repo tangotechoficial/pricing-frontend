@@ -3,6 +3,8 @@ import { Sacceso } from '../../models/sacceso';
 import { MetadataService } from './../../services/metadata.service';
 import { SaccesoService } from '../../services/sacceso.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Campo } from 'app/models/campo';
+import { Sequencia } from 'app/models/sequencia';
 
 declare var $: any;
 
@@ -21,7 +23,6 @@ export class SaccesoComponent implements OnInit {
   selectedValue: string;
   public existSelected = false;
   public errDesc = '';
-  public sacceso: Sacceso;
   public saMessage: Sacceso;
   public newSA: Sacceso;
   public nextVal: string;
@@ -32,8 +33,13 @@ export class SaccesoComponent implements OnInit {
   public selValues1: Array<any>;
   public selValues2: Array<any>;
   public saveSuccess = false;
-  public saveError = false;
+  public saveCampoSuccess = false;
+  public saveCampoError = false;
   public inputDescripcion: string;
+  public campos: Array<Campo>;
+  public newCampo: Campo;
+  public saveError: boolean;
+  public sequencia: Sequencia;
 
 
   constructor(
@@ -50,24 +56,23 @@ export class SaccesoComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.newCampo = new Campo();
+    this.campos = new Array<Campo>();
+    this.sequencia = new Sequencia();
     this.sequenciasAcceso = new Array<any>();
     this.sequenciasAccesoSearch = new Array<any>();
-    this.selectedProperties = new Array<any>();
     this.searchValues = new Array<any>();
     this.selValues1 = new Array<any>();
     this.selValues2 = new Array<any>();
-    this.sacceso = new Sacceso();
-    this.newSA = new Sacceso();
     this.saMessage = new Sacceso();
 
-    // Update SeqCampo elements
-    this.updateSeqCampo();
+    // Update campos
+    this.updateCampos();
 
-    // Updates the newSA with the last Cod_Campo
-    this.getLastSeqCampo();
+    // Updates Campo with the last Cod_Campo
+    this.getLastCampo();
 
-    // Updates the sacceso with the last Cod_Sequencia
+    // Update Sequencia with the last Cod_Sequencia
     this.getLastSequencia();
 
     $('div[contenteditable]').keydown((e: any) => {
@@ -78,24 +83,11 @@ export class SaccesoComponent implements OnInit {
     });
   }
 
-
-  /* Iván Lynch - 06/03/2020
-     Input: null
-     Output: null
-     This function updates the SeqCampo elements
-  */
-  public updateSeqCampo() {
-    // Get values from SeqCampo
-    this.sequenciasAcceso = new Array<any>();
-    this.saccesoService.getSaccesoList().subscribe((values) => {
-      values.map((elem) => {
-        const seq = new Sacceso();
-        seq.setCodigo(elem.Cod_Campo);
-        seq.setDescription(elem.Nome_Campo);
-        this.sequenciasAccesoSearch.push(seq);
-        this.sequenciasAcceso.push(seq);
-      });
-    });
+  public updateCampos() {
+    Promise.all([
+      this.saccesoService.getCampos()
+        .then(campos => this.campos = campos)
+    ]);
   }
 
   /* Iván Lynch - 06/03/2020
@@ -103,11 +95,11 @@ export class SaccesoComponent implements OnInit {
      Output: null
      This function updates the newSA Object
   */
-  public getLastSeqCampo() {
-    this.saccesoService.getLastSeqCampo().subscribe((value: any) => {
-      const oldCode = value.Cod_Campo;
-      this.newSA.setCodigo(this.evaluateNextSA(oldCode));
-    });
+  public getLastCampo() {
+    this.saccesoService.getLastCampo()
+      .then(result => {
+        this.newCampo.Cod_Campo = this.evaluateNextSA(result.Cod_Campo);
+      });
   }
 
   /* Iván Lynch - 06/03/2020
@@ -119,7 +111,7 @@ export class SaccesoComponent implements OnInit {
     this.spinner.show();
     this.saccesoService.getLastSequencia()
       .then((result: any) => {
-        this.sacceso.setCodigo(this.evaluateNextSA(result.Cod_Sequencia));
+        this.sequencia.Cod_sequencia = this.evaluateNextSA(result.Cod_Sequencia);
         this.spinner.hide();
       });
   }
@@ -140,108 +132,59 @@ export class SaccesoComponent implements OnInit {
     return nextCode;
   }
 
-  public onSelectedValue(event) {
-    this.selectedValue = event;
-    this.sacceso = event;
-    this.existSelected = true;
-    setTimeout(function() {
-      this.existSelected = false;
-    }.bind(this), 3000);
+  onDltSelection(campo: Campo) {
+    const domElem = document.getElementById(campo.Cod_Campo);
+    domElem.click();
   }
 
-  onDltSelection(val) {
-    let selectedIndex = '';
-    this.selectedProperties.forEach((elem, index) => {
-      if (elem.getCodigo() === val.getCodigo()) {
-        this.sequenciasAcceso.forEach((sElem, index2) => {
-          if (sElem.getCodigo() === val.getCodigo()) {
-            selectedIndex = index2.toString();
-          }
-        });
-        this.selectedProperties.splice(index, 1);
-        this.sacceso._parents.slice(index, 1);
+  public elemExist(obj, list) {
+    for (const row of list) {
+      if (row === obj) {
+        return true;
       }
-    });
-
-    const elements = document.getElementsByClassName('custom-control-input');
-    const aElems = Array.prototype.slice.call(elements);
-    aElems.forEach((elem: any, index: any) => {
-      const elemLabel = elem.labels;
-      if (elemLabel[0].innerText === val.getDescription()) {
-        aElems[index].click();
-      }
-    });
+    }
+    return false;
   }
 
-  public checkValue(sa: Sacceso) {
-    // Iterate over SEQ_CAMPOS
-    this.sequenciasAcceso.map(elem => {
-
-      // If selected elemement sa is equal to current element in the array loop
-      if (elem.getCodigo() === sa.getCodigo()) {
-
-        // Check if current element is already selected
-        if (elem.isSelected()) {
-
-          // Unselect current element
-          elem.setSelected(false);
-
-          // Iterate over selected properties to remove current selected item
-          this.selectedProperties.map((elem2, index) => {
-
-            // If current selected item exist on the the array
-            if (elem2.getCodigo() === elem.getCodigo()) {
-              // Remove elem from array
-              this.selectedProperties.splice(index, 1);
-              this.sacceso._parents = this.sacceso._parents.filter((obj) => {
-                return obj.getCodigo() !== sa.getCodigo();
-              });
-            }
+  public checkValue(campo: Campo) {
+    let desc = '';
+    this.campos.map(elem => {
+      if (elem === campo) {
+        const domElem: any = document.getElementById(campo.Cod_Campo);
+        if (this.elemExist(campo, this.sequencia.campos)) {
+          domElem.checked = false;
+          this.sequencia.campos = this.sequencia.campos.filter((obj) => {
+            return obj !== campo;
           });
         } else {
-          this.sacceso._parents.push(sa);
-          console.log(this.sacceso._parents);
-          elem.setSelected(true);
-          this.selectedProperties.push(elem);
+          this.sequencia.campos.push(campo);
         }
       }
     });
 
-    let descripcion = '';
-    this.selectedProperties.forEach((elem, index) => {
+    this.sequencia.campos.map((elem: Campo, index: any) => {
       if (index === 0) {
-        descripcion = descripcion + elem.getDescription();
+        desc = desc + elem.Nome_Campo;
+        console.log(desc);
       } else {
-        descripcion = descripcion + '/' + elem.getDescription();
+        desc = desc + '/' + elem.Nome_Campo;
       }
     });
-    this.sacceso.sDesAcceso = descripcion;
+    this.sequencia.Nome_sequencia = desc;
   }
 
-  submitNewSA() {
-    this.saccesoService.postSacceso(this.newSA)
-      .subscribe(response => {
-        this.saveSuccess = true;
-        this.updateSeqCampo();
-      },
-        error => {
-          console.log(error.error.Nome_Campo[0] === 'se q_campo with this Nome Campo already exists.');
-          this.errDesc = 'O campo já existe';
-          this.saveError = true;
-          setTimeout(function() {
-            this.saveError = false;
-          }.bind(this), 2000);
-        });
-
-    this.saMessage.setCodigo(this.newSA.getCodigo());
-    this.saMessage.setDescription(this.newSA.getDescription());
-
-    setTimeout(function() {
-      this.saveSuccess = false;
-      this.getLastSeqCampo();
-    }.bind(this), 2000);
-    this.newSA = new Sacceso();
-
+  public submitCampo() {
+    this.spinner.show();
+    this.getLastCampo();
+    this.saccesoService.postCampo(this.newCampo)
+      .then(result => {
+        this.saveCampoSuccess = true;
+        this.updateCampos();
+        this.spinner.hide();
+        setTimeout(() => {
+          this.saveCampoSuccess = false;
+        }, 3000);
+      });
   }
 
   public pad_with_zeroes(num, length) {
@@ -254,40 +197,20 @@ export class SaccesoComponent implements OnInit {
 
   public submitSA() {
     this.spinner.show();
-    this.saccesoService.postSaccesoComp(this.sacceso)
+    this.saccesoService.postSequencia(this.sequencia)
       .then(data => {
         this.saveSuccess = true;
+        this.campos.map( elem => {
+          const domElem: any = document.getElementById(elem.Cod_Campo);
+          domElem.checked = false;
+        });
         $('#myModal').modal('show');
         this.spinner.hide();
         this.getLastSequencia();
         setTimeout(function() {
           this.saveSuccess = false;
         }.bind(this), 2000);
-        this.saMessage.setCodigo(this.sacceso.getCodigo());
-        this.saMessage.setDescription(this.sacceso.getDescription());
-        this.sacceso = new Sacceso();
-        this.selectedProperties.map(elem => {
-          this.onDltSelection(elem);
-        });
-        this.selectedProperties.forEach(elem => {
-          this.onDltSelection(elem);
-        });
-        this.selectedProperties.map(elem => {
-          this.onDltSelection(elem);
-        });
-        this.selectedProperties.map(elem => {
-          this.onDltSelection(elem);
-        });
-      })
-      .catch((err) => {
-        if (err.error.Nome_Sequencia[0] === 'sequencia with this Nome Sequencia already exists.') {
-          this.errDesc = 'A sequência de acesso já existe.';
-          this.saveError = true;
-          this.spinner.hide();
-          setTimeout(function() {
-            this.saveError = false;
-          }.bind(this), 2000);
-        }
+        this.sequencia = new Sequencia();
       });
   }
 }
