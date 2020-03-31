@@ -9,10 +9,7 @@
           <app-business-menu *ngIf="!userTechnical"></app-business-menu>
 
         </li>
-
         <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">{{section}}</a>
-
-
       </ul>
     </div>
 
@@ -30,6 +27,7 @@
         <li class="configIcon nav-item" (click)="triggerShowBMenu()"> <i class="menuIcon fas fa-cog"></i>
         <li class="logoIcon nav-item"><img src="../../../assets/img/logo-nav.jpg" /></li>
         <li class="logoIcon2 nav-item"><img src="../../../assets/img/login-logo.jpg" /></li>
+        <li><a href="#" class="nav-link" (click)="logout()"><i class="fas fa-sign-out-alt"></i> Sair</a></li>
 
       </ul>
     </div>

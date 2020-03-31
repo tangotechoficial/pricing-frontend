@@ -1,5 +1,6 @@
 <!-- Navigation Bar -->
-<navegacion (navOutput)="parentListenerNavbar($event)"></navegacion>
+<!-- <navegacion (navOutput)="parentListenerNavbar($event)"></navegacion> -->
+<navegacion></navegacion>
 <!-- Div usuario Business -->
 <div class="container menu-background">
 
@@ -100,7 +101,7 @@
     </div>
 
     <div class="modalMsg">
-      <h3 class="msg1">Seja Bem-vindo {{this.sCurrentUser.name}}!</h3>
+      <h3 class="msg1">Seja Bem-vindo {{this.sCurrentUser.username || ''}}!</h3>
       <p class="msg2">Vocé tem <span class="font-weight-bold"></span> que precisam da sua
         atenção </p>
     </div>

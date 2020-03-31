@@ -1,22 +1,20 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
+import { environment } from '@env/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DiretrizesEstrategicasService {
 
-  public _http = "https://pricing.tangotechapp.com/api/diretrizestrategica";
-
   constructor(private http: HttpClient) { }
 
   listar() {
-    return this.http.get(`${this._http}`)
+    return this.http.get(`${environment.apiUrl}/diretrizesestrategica`)
   }
 
-  getDistretriz(): Observable<any>{
-    return this.http.get(this._http);
+  public get diretrizesEstrategicas(): Observable<any>{
+    return this.http.get(`${environment.apiUrl}/diretrizesestrategica`);
   }
 }

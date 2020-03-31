@@ -1,8 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import {HttpClientModule} from '@angular/common/http';
-import {FormsModule} from '@angular/forms';
+import { NgModule, LOCALE_ID} from '@angular/core';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
+import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 import { routing, appRoutingProviders } from './app.routing';
+import { JWTInterceptorHelper } from '@helpers/jwt.interceptor';
+import { FakeDataProviderInterceptor } from '@app/helpers/fake.dataprovider.interceptor';
 import { AppComponent } from './app.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { ErrorComponent } from './components/error/error.component';
@@ -15,6 +17,10 @@ import { PrecioTechnical } from './components/precio/precio-technical/precio-tec
 import { PrecioBusiness } from './components/precio/precio-business/precio-business.component';
 import { SaccesoComponent } from './components/sacceso/sacceso.component';
 import { CondicionComponent } from './components/condicion/condicion.component';
+import { PlanoCompraComponent } from './components/plano-compra/plano-compra.component';
+import { ExecucaoComponent } from './components/execucao/execucao.component';
+import { SimuladorComponent } from './components/simulador/simulador.component';
+
 import { AutocompleteInputComponent } from './components/autocomplete-input/autocomplete-input.component';
 import { FilterPipeSeqAcceso } from './pipes/filterseqacceso.pipe';
 import { FilterPipeSeqSearch } from './pipes/filterseqsearch';
@@ -26,6 +32,16 @@ import { TechnicalMenuComponent } from './components/navegacion/technical-menu/t
 import { DadosMestreComponent } from './components/dados-mestre/dados-mestre.component';
 import { DiretrizEstrategicaComponent } from './components/diretriz-estrategica/diretriz-estrategica.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FilterModalComponent } from './components/filter-modal/filter-modal.component';
+import { TabbedChartsComponent } from './components/plano-compra/tabbed-charts/tabbed-charts.component';
+import { SellingCompositionChartsComponent } from './components/plano-compra/selling-composition-charts/selling-composition-charts.component';
+import { PlanningTableComponent } from './components/plano-compra/planning-table/planning-table.component';
+import { InlineEditComponent } from './components/shared/inline-edit/inline-edit.component';
+import { ViewModeDirective } from './components/shared/viewmode.directive';
+import { EditModeDirective } from './components/shared/editmode.directive';
+import { EditableOnEnterDirective } from './components/shared/editableonenter.directive';
+import { GenericDadaFilterPipe } from '@app/pipes/generic-data-filter.pipe'
+
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { PopupmenuComponent } from './components/popupmenu/popupmenu.component';
 import { SelectCondicionComponent } from './components/select-condicion/select-condicion.component';
@@ -36,6 +52,10 @@ import { SelectPopupFaturamentoComponent } from './components/select-popup-fatur
 import { SelectPopupRegiaoComponent } from './components/select-popup-regiao/select-popup-regiao.component';
 import { CamadaService } from './services/camada.service';
 
+import { registerLocaleData }  from '@angular/common'
+import localePt from '@angular/common/locales/pt';
+import { FilterTagComponent } from './components/shared/filter-tag/filter-tag.component';
+registerLocaleData(localePt, 'pt',);
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,6 +77,19 @@ import { CamadaService } from './services/camada.service';
     TechnicalMenuComponent,
     DadosMestreComponent,
     DiretrizEstrategicaComponent,
+    PlanoCompraComponent,
+    ExecucaoComponent,
+    SimuladorComponent,
+    FilterModalComponent,
+    TabbedChartsComponent,
+    SellingCompositionChartsComponent,
+    PlanningTableComponent,
+    InlineEditComponent,
+    ViewModeDirective,
+    EditModeDirective,
+    EditableOnEnterDirective,
+    GenericDadaFilterPipe,
+    FilterTagComponent,
     PopupmenuComponent,
     SelectCondicionComponent,
     SelectPopupCondicionComponent,
@@ -69,6 +102,7 @@ import { CamadaService } from './services/camada.service';
     BrowserModule,
     routing,
     HttpClientModule,
+    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
     FormsModule,
     Ng2SearchPipeModule,
     FontAwesomeModule,
@@ -76,7 +110,13 @@ import { CamadaService } from './services/camada.service';
     BrowserAnimationsModule,
     NgxSpinnerModule
   ],
-  providers: [appRoutingProviders, CamadaService],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: FakeDataProviderInterceptor, multi: true},
+    appRoutingProviders,
+    CamadaService,
+    {provide: HTTP_INTERCEPTORS, useClass: JWTInterceptorHelper, multi: true},
+    {provide: LOCALE_ID, useValue: "pt"}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

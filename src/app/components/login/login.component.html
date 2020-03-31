@@ -8,14 +8,12 @@
         <div class="row">
             <div class="col-md-4 offset-md-4">
                 <h1 class="login-title text-center color-martins-darkblue mt-4">Simple<b class="color-martins-darkblue">Pricing</b></h1>
-                <form #loginForm="ngForm" (ngSubmit)="onSubmit()">
+                <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                     <div login="form-group" class="mt-4">
                         <div class="d-inline">
                             <label class="login-input-label font-weight-bold">E-mail:</label>
                             <div class="input-group">
-                                <input class="form-control border-0" type="text" name="email" #email="ngModel"
-                                    [(ngModel)]="_user.email" placeholder="&#xf1fa;"
-                                    />
+                                <input class="form-control border-0" type="text" name="email" formControlName="email" placeholder="&#xf1fa;" [ngClass]="{ 'is-invalid': submitted && form.email.errors }"/>
                             </div>
                         </div>
                     </div>
@@ -23,22 +21,24 @@
                         <label class="login-input-label font-weight-bold">Senha:</label>
                         <div class="input-group">
                             <input class="form-control border-0" placeholder="&#xf023;" type="password" name="password"
-                                #password="ngModel" [(ngModel)]="_user.password" />
+                            formControlName="password" [ngClass]="{ 'is-invalid': submitted && form.password.errors }"/>
                         </div>
                     </div>
 
                     <div class="row justify-content-md-center">
                         <div class="col-md-7">
                             <div class="form-group" class="mt-4">
-                                <input type="submit" (click)="onSubmit()"class="btn bg-standard btn-block" value="Entrar">
+                                <button type="submit" class="btn bg-standard btn-block">
+                                    Entrar
+                                </button>
                             </div>
                         </div>
-                        <div *ngIf="_BL" class="col-md-8 alert alert-danger" role="alert">
+                        <!-- <div *ngIf="_BL" class="col-md-8 alert alert-danger" role="alert">
                             Erro de credencial 
                         </div>
                         <div *ngIf="_SE" class="col-md-8 alert alert-danger" role="alert">
                             Erro no servidor
-                        </div>
+                        </div> -->
                         <div class="col-md-8 d-flex justify-content-center mt-4">
                             <a href="#" class="login-link font-weight-bold">Esqueci minha senha</a>
                         </div>
