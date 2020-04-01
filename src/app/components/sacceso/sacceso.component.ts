@@ -23,10 +23,7 @@ export class SaccesoComponent implements OnInit {
   selectedValue: string;
   public existSelected = false;
   public errDesc = '';
-  public saMessage: Sacceso;
-  public newSA: Sacceso;
   public nextVal: string;
-  public sequenciasAcceso: Array<any>;
   public sequenciasAccesoSearch: Array<any>;
   public selectedProperties: Array<any>;
   public searchValues: Array<any>;
@@ -59,12 +56,10 @@ export class SaccesoComponent implements OnInit {
     this.newCampo = new Campo();
     this.campos = new Array<Campo>();
     this.sequencia = new Sequencia();
-    this.sequenciasAcceso = new Array<any>();
     this.sequenciasAccesoSearch = new Array<any>();
     this.searchValues = new Array<any>();
     this.selValues1 = new Array<any>();
     this.selValues2 = new Array<any>();
-    this.saMessage = new Sacceso();
 
     // Update campos
     this.updateCampos();
@@ -74,13 +69,6 @@ export class SaccesoComponent implements OnInit {
 
     // Update Sequencia with the last Cod_Sequencia
     this.getLastSequencia();
-
-    $('div[contenteditable]').keydown((e: any) => {
-      if (e.keyCode === 13) {
-        document.execCommand('insertHTML', false, '<br>');
-        return false;
-      }
-    });
   }
 
   public updateCampos() {
@@ -111,9 +99,7 @@ export class SaccesoComponent implements OnInit {
     this.spinner.show();
     this.saccesoService.getLastSequencia()
       .then((result: any) => {
-        console.log(result);
         this.sequencia.Cod_Sequencia = this.evaluateNextSA(result.Cod_Sequencia);
-        console.log(this.sequencia);
         this.spinner.hide();
       });
   }
