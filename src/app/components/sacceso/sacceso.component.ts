@@ -79,10 +79,10 @@ export class SaccesoComponent implements OnInit {
      This function updates the newSA Object
   */
   public getLastCampo() {
-    // this.saccesoService.getLastCampo()
-    //   .then(result => {
-    //     this.newCampo.Cod_Campo = this.evaluateNextSA(result.Cod_Campo);
-    //   });
+    this.saccesoService.getLastCampo()
+      .then(result => {
+        this.newCampo.Cod_Campo = this.evaluateNextSA(result.Cod_Campo);
+      });
   }
 
   /* Iván Lynch - 06/03/2020
@@ -206,18 +206,19 @@ export class SaccesoComponent implements OnInit {
     this.spinner.show();
     this.saccesoService.postSequencia(this.sequencia)
       .then(data => {
+        $('#myModal').modal('show');
         this.saveSuccess = true;
         this.campos.map( elem => {
           const domElem: any = document.getElementById(elem.Cod_Campo);
           domElem.checked = false;
         });
-        $('#myModal').modal('show');
         this.spinner.hide();
         this.getLastSequencia();
         setTimeout(function() {
           this.saveSuccess = false;
+          this.sequencia = new Sequencia();
         }.bind(this), 2000);
-        this.sequencia = new Sequencia();
+
       });
   }
 }
