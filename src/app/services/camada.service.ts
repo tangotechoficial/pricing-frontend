@@ -4,7 +4,7 @@ import { Global } from './global';
 import { Camada } from 'app/models/camadas';
 import { Observable } from 'rxjs';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class CamadaService {
 
     public url: string;

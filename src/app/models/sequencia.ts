@@ -5,9 +5,9 @@ export class Sequencia {
 
     constructor(
         // tslint:disable-next-line: variable-name
-        public Cod_sequencia: string = '',
+        public Cod_Sequencia: string = '',
         // tslint:disable-next-line: variable-name
-        public Nome_sequencia: string = '',
+        public Nome_Sequencia: string = '',
         public campos: Array<Campo> = new Array<Campo>()
     ) {}
 }

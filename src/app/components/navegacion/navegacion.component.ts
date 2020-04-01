@@ -1,7 +1,8 @@
 import { Component, OnInit, Input ,Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from "@angular/common";
-import {BrowserModule} from '@angular/platform-browser'
+import {BrowserModule} from '@angular/platform-browser';
+import { AuthenticationService } from '@services/authentication.service'
 
 declare var $: any;
 
@@ -45,7 +46,7 @@ import {
     ])
 ],
 
-  styleUrls: ['./navegacion.component.css' , './navegacion.component.scss']
+  styleUrls: ['./navegacion.component.scss']
 })
 
 export class NavegacionComponent implements OnInit {
@@ -57,7 +58,7 @@ export class NavegacionComponent implements OnInit {
   public showBMenu: boolean = false;
   public showDetail:boolean = false;
   public section: string;
-  @Input() cMode: boolean;
+
   @Output() navOutput = new EventEmitter<boolean>()
   private mapUrlToSection = {
     "/menu": "Inicio",
@@ -67,17 +68,15 @@ export class NavegacionComponent implements OnInit {
     "/condicion": "Criar nova condição",
   }
   constructor(
+    private authService: AuthenticationService,
     private _router: Router,
     private _route: ActivatedRoute,
     location: Location
   ) {}
 
   ngOnInit() {
-    const user = JSON.parse(localStorage.User);
-    this.userTechnical = user.type == "technical" ? true : false;
-    this._router.routeReuseStrategy.shouldReuseRoute = function () {
-      return false;
-    };
+    /* const user = JSON.parse(localStorage.User);
+    this.userTechnical = user.type == "technical" ? true : false; */
     this._route.url.subscribe(url => {
       this.section = this.mapUrlToSection[location.pathname]
       if(location.pathname != "/login"){
@@ -89,15 +88,6 @@ export class NavegacionComponent implements OnInit {
 
 
   }
-
-  /* ngDoCheck() {
-    this.navOutput.next(this.cMode);
-    if(!this.cMode){
-      this.section = "Alterar condição";
-    }else{
-      this.section = "Criar nova condição";
-    }
-  } */
 
   notifyOpen(){
       $("#notificationPopUp").fadeToggle(400);
@@ -115,5 +105,19 @@ export class NavegacionComponent implements OnInit {
     this.showBMenu = true;
     this.navOutput.emit(this.showBMenu)
   }
+
+  logout() {
+    this.authService.logout()
+    window.location.reload()
+  }
+
+  /* ngDoCheck() {
+    this.navOutput.next(this.cMode);
+    if(!this.cMode){
+      this.section = "Alterar condição";
+    }else{
+      this.section = "Criar nova condição";
+    }
+  } */
 
 }

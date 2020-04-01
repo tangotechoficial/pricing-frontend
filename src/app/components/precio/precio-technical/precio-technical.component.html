@@ -7,13 +7,13 @@
         <div class="row col-12 p-4" *ngFor="let condicao of condicaos; let i=
             index">
             <div class="col-2">
-                <span class="text-header">Cod. Condicao</span>
+                <span class="text-header">Cod. Condição</span>
                 <input class="form-control mt-3" readonly
                     name="{{camadaU.id}}Cod_Condicao{{i}}"
                     [(ngModel)]="condicao.Cod_Condicao" />
             </div>
             <div class="col-3">
-                <span class="text-header">Descricao de condicao</span>
+                <span class="text-header">Descrição da condicao</span>
                 <input class="form-control mt-3" 
                     name="{{camadaU.id}}Desc_Condicao{{i}}"
                     [(ngModel)]="condicao.Desc_Condicao" disabled/>

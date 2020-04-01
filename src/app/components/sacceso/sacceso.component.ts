@@ -23,10 +23,7 @@ export class SaccesoComponent implements OnInit {
   selectedValue: string;
   public existSelected = false;
   public errDesc = '';
-  public saMessage: Sacceso;
-  public newSA: Sacceso;
   public nextVal: string;
-  public sequenciasAcceso: Array<any>;
   public sequenciasAccesoSearch: Array<any>;
   public selectedProperties: Array<any>;
   public searchValues: Array<any>;
@@ -41,7 +38,6 @@ export class SaccesoComponent implements OnInit {
   public saveError: boolean;
   public sequencia: Sequencia;
 
-
   constructor(
     private saccesoService: SaccesoService,
     private spinner: NgxSpinnerService
@@ -51,20 +47,14 @@ export class SaccesoComponent implements OnInit {
     $('#myModal').modal('hide');
   }
 
-  public openPop() {
-
-  }
-
   ngOnInit() {
     this.newCampo = new Campo();
     this.campos = new Array<Campo>();
     this.sequencia = new Sequencia();
-    this.sequenciasAcceso = new Array<any>();
     this.sequenciasAccesoSearch = new Array<any>();
     this.searchValues = new Array<any>();
     this.selValues1 = new Array<any>();
     this.selValues2 = new Array<any>();
-    this.saMessage = new Sacceso();
 
     // Update campos
     this.updateCampos();
@@ -74,13 +64,6 @@ export class SaccesoComponent implements OnInit {
 
     // Update Sequencia with the last Cod_Sequencia
     this.getLastSequencia();
-
-    $('div[contenteditable]').keydown((e: any) => {
-      if (e.keyCode === 13) {
-        document.execCommand('insertHTML', false, '<br>');
-        return false;
-      }
-    });
   }
 
   public updateCampos() {
@@ -96,10 +79,10 @@ export class SaccesoComponent implements OnInit {
      This function updates the newSA Object
   */
   public getLastCampo() {
-    this.saccesoService.getLastCampo()
-      .then(result => {
-        this.newCampo.Cod_Campo = this.evaluateNextSA(result.Cod_Campo);
-      });
+    // this.saccesoService.getLastCampo()
+    //   .then(result => {
+    //     this.newCampo.Cod_Campo = this.evaluateNextSA(result.Cod_Campo);
+    //   });
   }
 
   /* Iván Lynch - 06/03/2020
@@ -111,7 +94,7 @@ export class SaccesoComponent implements OnInit {
     this.spinner.show();
     this.saccesoService.getLastSequencia()
       .then((result: any) => {
-        this.sequencia.Cod_sequencia = this.evaluateNextSA(result.Cod_Sequencia);
+        this.sequencia.Cod_Sequencia = this.evaluateNextSA(result.Cod_Sequencia);
         this.spinner.hide();
       });
   }
@@ -132,11 +115,19 @@ export class SaccesoComponent implements OnInit {
     return nextCode;
   }
 
+  /* Iván Lynch - 1/4/2020
+     Input: Selected Campo
+     Output: Unselect Campo from current sequencia
+  */
   onDltSelection(campo: Campo) {
     const domElem = document.getElementById(campo.Cod_Campo);
     domElem.click();
   }
 
+  /* Iván Lynch - 1/4/2020
+     Input: Object, List
+     Output: Check if current object exists in a list
+  */
   public elemExist(obj, list) {
     for (const row of list) {
       if (row === obj) {
@@ -146,6 +137,10 @@ export class SaccesoComponent implements OnInit {
     return false;
   }
 
+  /* Iván Lynch - 1/4/2020
+     Input: Object
+     Output: Add object to a campos array in the sequencia
+  */
   public checkValue(campo: Campo) {
     let desc = '';
     this.campos.map(elem => {
@@ -170,9 +165,13 @@ export class SaccesoComponent implements OnInit {
         desc = desc + '/' + elem.Nome_Campo;
       }
     });
-    this.sequencia.Nome_sequencia = desc;
+    this.sequencia.Nome_Sequencia = desc;
   }
 
+  /* Iván Lynch - 1/4/2020
+     Input: Object
+     Output: Create campo in /api/seqcampos/
+  */
   public submitCampo() {
     this.spinner.show();
     this.getLastCampo();
@@ -187,6 +186,10 @@ export class SaccesoComponent implements OnInit {
       });
   }
 
+  /* Iván Lynch - 1/4/2020
+     Input: Code
+     Output: Add leading zeros to a code
+  */
   public pad_with_zeroes(num, length) {
     let myString = '' + num;
     while (myString.length < length) {
@@ -195,6 +198,10 @@ export class SaccesoComponent implements OnInit {
     return myString;
   }
 
+  /* Iván Lynch - 1/4/2020
+     Input: Sequencia Object
+     Output: Create new sequencia
+  */
   public submitSA() {
     this.spinner.show();
     this.saccesoService.postSequencia(this.sequencia)

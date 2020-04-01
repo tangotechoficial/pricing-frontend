@@ -3,6 +3,11 @@ import { HttpClient } from '@angular/common/http';
 import { Global } from './global';
 import { Condicion } from '../models/condicion';
 import { map } from 'rxjs/operators';
+import { Sequencia } from 'app/models/sequencia';
+import { Condicao } from 'app/models/condicao';
+import { ChaveContas } from 'app/models/chavecontas';
+import { TipoValor } from 'app/models/tipovalor';
+import { Camada } from 'app/models/camadas';
 
 
 @Injectable()
@@ -13,36 +18,61 @@ export class CondicionService {
     this.url = Global.url;
   }
 
-  getCamadas(): Promise<any> {
+  getCamadas(): Promise<Camada[]> {
     return this.http
       .get(this.url + '/camada/', {
         headers: { 'Content-type': 'application/json' }
       })
-      .toPromise();
+      .toPromise()
+      .then(result => {
+        return result as Camada[];
+      })
+      .catch(err => {
+        throw new Error(err);
+      });
   }
 
-  getChaveContas(): Promise<any> {
+  getChaveContas(): Promise<ChaveContas[]> {
     return this.http
       .get(this.url + '/chavecontas/', {
         headers: { 'Content-type': 'application/json' }
       })
-      .toPromise();
+      .toPromise()
+      .then(result => {
+        return result as ChaveContas[];
+      })
+      .catch(err => {
+        throw new Error(err);
+      });
   }
 
-  getTiposValor(): Promise<any> {
+  getTiposValor(): Promise<TipoValor[]> {
     return this.http
       .get(this.url + '/tipovalor/', {
         headers: { 'Content-type': 'application/json' }
       })
-      .toPromise();
+      .toPromise()
+      .then(result => {
+        return result as TipoValor[];
+      })
+      .catch(err => {
+        throw new Error(err);
+      });
   }
 
-  getSequenciasAcesso(): Promise<any> {
+  getSequenciasAcesso(): Promise<Sequencia[]> {
     return this.http
       .get(this.url + '/sequencia/', {
         headers: { 'Content-type': 'application/json' }
       })
-      .toPromise();
+      .toPromise()
+      .then(result => {
+        console.log(result)
+        return result as Sequencia[];
+      })
+      .catch(err => {
+        throw new Error(err);
+      });
   }
 
   getSequenciasByCondicao(): Promise<any> {
@@ -53,59 +83,49 @@ export class CondicionService {
       .toPromise();
   }
 
-  postCondicao(co: Condicion): Promise<any> {
-    console.log(co);
+  postCondicao(condicion: Condicao): Promise<any> {
+    const codSequencias = [];
+    condicion.sequencias.map(elem => codSequencias.push(elem.Cod_Sequencia));
     return this.http
       .post(
         this.url + '/condicao/',
         {
-          Cod_Condicao: co.sCodCondicion,
-          Desc_Condicao: co.sDesCondicion,
-          Escala_Qtde: co.bEscalaQtde ? 1 : 0,
-          POS_NEG: co.bNeg ? 'N' : 'P',
-          TIP_BASE_VENDAS: co.oCamada.TIPO_BASE_VENDAS,
+          Cod_Condicao: condicion.Cod_Condicao,
+          Desc_Condicao: condicion.Desc_Condicao,
+          Escala_Qtde: condicion.Escala_Qtde ? 1 : 0,
+          POS_NEG: condicion.POS_NEG ? 'N' : 'P',
+          TIP_BASE_VENDAS: condicion.TIP_BASE_VENDAS,
           MANDATORIA: 0,
           ESTATISTICA: 0,
-          Cod_Camada: co.oCamada.Cod_Camada,
-          Cod_ChaveContas: co.oChaveContas.Cod_ChaveContas,
-          Cod_TipoValor: co.oTipoValor.Cod_TipoValor
+          Cod_Camada: condicion.camada.Cod_Camada,
+          Cod_ChaveContas: condicion.chavecontas.Cod_ChaveContas,
+          Cod_TipoValor: condicion.tipovalor.Cod_TipoValor,
+          sequencias: codSequencias
         },
         { headers: { 'Content-type': 'application/json' } }
-      )
-      .pipe(
-        map((elem: any) =>
-          co.aSequencias.forEach(campo => {
-            this.postCondicaoSequencia(elem.Cod_Condicao, campo.Cod_Sequencia).subscribe();
-          })
-        )
       )
       .toPromise();
   }
 
-  editCondicao(co: Condicion): Promise<any> {
+  putCondicao(condicion: Condicao): Promise<any> {
+    const codSequencias = [];
+    condicion.sequencias.map(elem => codSequencias.push(elem.Cod_Sequencia));
     return this.http
-      .put(
-        this.url + '/condicao/' + co.sCodCondicion + '/',
+      .post(
+        this.url + '/condicao/' + condicion.Cod_Condicao + '/',
         {
-          Cod_Condicao: co.sCodCondicion,
-          Desc_Condicao: co.sDesCondicion,
-          Escala_Qtde: co.bEscalaQtde ? 1 : 0,
-          POS_NEG: co.bNeg ? 'N' : 'P',
-          TIP_BASE_VENDAS: co.oCamada.TIPO_BASE_VENDAS,
+          Desc_Condicao: condicion.Desc_Condicao,
+          Escala_Qtde: condicion.Escala_Qtde ? 1 : 0,
+          POS_NEG: condicion.POS_NEG ? 'N' : 'P',
+          TIP_BASE_VENDAS: condicion.TIP_BASE_VENDAS,
           MANDATORIA: 0,
           ESTATISTICA: 0,
-          Cod_Camada: co.oCamada.Cod_Camada,
-          Cod_ChaveContas: co.oChaveContas.Cod_ChaveContas,
-          Cod_TipoValor: co.oTipoValor.Cod_TipoValor
+          Cod_Camada: condicion.camada.Cod_Camada,
+          Cod_ChaveContas: condicion.chavecontas.Cod_ChaveContas,
+          Cod_TipoValor: condicion.tipovalor.Cod_TipoValor,
+          sequencias: codSequencias
         },
         { headers: { 'Content-type': 'application/json' } }
-      )
-      .pipe(
-        map((elem: any) =>
-          co.aSequencias.forEach(campo => {
-            this.postCondicaoSequencia(elem.Cod_Condicao, campo.Cod_Sequencia).subscribe();
-          })
-        )
       )
       .toPromise();
   }
@@ -126,36 +146,6 @@ export class CondicionService {
       .toPromise();
   }
 
-  deleteCondicaoSequencia(id: any) {
-    const arr: any = [];
-    const getSequenciasCondicao = this.http
-      .get(this.url + '/condicaosequencia/', {
-        headers: { 'Content-type': 'application/json' }
-      })
-      .toPromise();
-    getSequenciasCondicao.then((elems: any) => {
-      elems.map((sc: any) => {
-        if (sc.id_Condicao === id) {
-          arr.push(sc);
-        }
-      });
-      arr.map((sc: any) => {
-        this.deleteRelation(sc.id);
-      });
-    });
-  }
-
-  postCondicaoSequencia(condId, seqId) {
-    return this.http.post(
-      this.url + '/condicaosequencia/',
-      {
-        Cod_Condicao: condId,
-        Cod_Sequencia: seqId
-      },
-      { headers: { 'Content-type': 'application/json' } }
-    );
-  }
-
   public getCondicaoByCode(val: any): Promise<any> {
     return this.http
       .get(this.url + '/condicao/' + val + '/', {
@@ -164,12 +154,18 @@ export class CondicionService {
       .toPromise();
   }
 
-  public getCondicaos(): Promise<any> {
+  public getCondicaos(): Promise<Condicao[]> {
     return this.http
       .get(this.url + '/condicao/', {
         headers: { 'Content-type': 'application/json' }
       })
-      .toPromise();
+      .toPromise()
+      .then(result => {
+        return result as Condicao[];
+      })
+      .catch(err => {
+        throw new Error(err);
+      });
   }
 
   public getCondicaoCamada(): Promise<any> {

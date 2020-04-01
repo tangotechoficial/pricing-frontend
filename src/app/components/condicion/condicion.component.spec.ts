@@ -53,7 +53,7 @@ describe("CondicionComponent", () => {
     it("values init", () => {
       expect(component.message).toEqual({});
       expect(component.selectedProperties).toEqual([]);
-      expect(component.condicion).toEqual(new Condicion());
+      // expect(component.condicion).toEqual(new Condicion());
     });
 
     //   it('should fetch the user', () => {
