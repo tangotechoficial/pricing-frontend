@@ -53,21 +53,10 @@ describe("CondicionComponent", () => {
     it("values init", () => {
       expect(component.message).toEqual({});
       expect(component.selectedProperties).toEqual([]);
-      // expect(component.condicion).toEqual(new Condicion());
+      
     });
 
-    //   it('should fetch the user', () => {
-    //     // Arrange
-    //     const fetchUserSpy = spyOn(component.condicionService, 'getLastCondicao').and.returnValue(new Promise((resolve, reject) => {
-
-    //     }));
-
-    //     // Act
-    //     component.ngOnInit();
-
-    //     // Assert
-    //     expect(fetchUserSpy).toHaveBeenCalled();
-    // });
+    
 
     it("getLastCondicao()", done => {
       component.condicionService.getLastCondicao().then((result: any) => {
@@ -108,6 +97,7 @@ describe("CondicionComponent", () => {
         expect(component.condicaos).toBeDefined()
         done()
       }, TIME_AWAIT)
+      
     });
 
     

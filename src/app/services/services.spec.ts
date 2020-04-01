@@ -131,7 +131,7 @@ describe("Services", () => {
       [PurchasePlanningService],
       (purchasePlanningService: PurchasePlanningService) => {
         purchasePlanningService.planningData.subscribe(event => {
-          done();
+          // done();
         });
       }
     )();
