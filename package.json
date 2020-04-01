@@ -10,7 +10,8 @@
     "e2e": "ng e2e",
 
     "test:pbase": "ng test --include src/app/components/precio/preciobase/*.spec.ts",
-    "test:condicion": "ng test --include src/app/components/condicion/*.spec.ts"
+    "test:condicion": "ng test --include src/app/components/condicion/*.spec.ts",
+    "test:service": "ng test --include src/app/services/*.spec.ts"
   },
   "private": true,
   "dependencies": {
