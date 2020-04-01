@@ -38,7 +38,6 @@ export class SaccesoComponent implements OnInit {
   public saveError: boolean;
   public sequencia: Sequencia;
 
-
   constructor(
     private saccesoService: SaccesoService,
     private spinner: NgxSpinnerService
@@ -46,10 +45,6 @@ export class SaccesoComponent implements OnInit {
 
   public closePopUp() {
     $('#myModal').modal('hide');
-  }
-
-  public openPop() {
-
   }
 
   ngOnInit() {
@@ -120,11 +115,19 @@ export class SaccesoComponent implements OnInit {
     return nextCode;
   }
 
+  /* Iván Lynch - 1/4/2020
+     Input: Selected Campo
+     Output: Unselect Campo from current sequencia
+  */
   onDltSelection(campo: Campo) {
     const domElem = document.getElementById(campo.Cod_Campo);
     domElem.click();
   }
 
+  /* Iván Lynch - 1/4/2020
+     Input: Object, List
+     Output: Check if current object exists in a list
+  */
   public elemExist(obj, list) {
     for (const row of list) {
       if (row === obj) {
@@ -134,6 +137,10 @@ export class SaccesoComponent implements OnInit {
     return false;
   }
 
+  /* Iván Lynch - 1/4/2020
+     Input: Object
+     Output: Add object to a campos array in the sequencia
+  */
   public checkValue(campo: Campo) {
     let desc = '';
     this.campos.map(elem => {
@@ -161,6 +168,10 @@ export class SaccesoComponent implements OnInit {
     this.sequencia.Nome_Sequencia = desc;
   }
 
+  /* Iván Lynch - 1/4/2020
+     Input: Object
+     Output: Create campo in /api/seqcampos/
+  */
   public submitCampo() {
     this.spinner.show();
     this.getLastCampo();
@@ -175,6 +186,10 @@ export class SaccesoComponent implements OnInit {
       });
   }
 
+  /* Iván Lynch - 1/4/2020
+     Input: Code
+     Output: Add leading zeros to a code
+  */
   public pad_with_zeroes(num, length) {
     let myString = '' + num;
     while (myString.length < length) {
@@ -183,6 +198,10 @@ export class SaccesoComponent implements OnInit {
     return myString;
   }
 
+  /* Iván Lynch - 1/4/2020
+     Input: Sequencia Object
+     Output: Create new sequencia
+  */
   public submitSA() {
     this.spinner.show();
     this.saccesoService.postSequencia(this.sequencia)
