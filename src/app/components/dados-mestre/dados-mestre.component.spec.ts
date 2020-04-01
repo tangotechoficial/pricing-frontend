@@ -125,14 +125,5 @@ fdescribe('DadosMestreComponent', () => {
       const table = fixture.debugElement.nativeElement.querySelector('#verbaInfo')
       expect(table.rows.length).toBeGreaterThan(1)
     });
-
   })
-  /**
-  it('table verba info should have data', () => {
-      fixture.detectChanges()
-      const table = element.query(By.css('[id="verbaInfo"]'))
-      //debuger
-    }
-  );
-  **/
 })
