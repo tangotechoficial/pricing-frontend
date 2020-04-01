@@ -98,7 +98,6 @@ export class LoginComponent implements OnInit {
               this._SE = true;
               break;
           }
-          
         }
       );
   } */

@@ -111,7 +111,9 @@ export class SaccesoComponent implements OnInit {
     this.spinner.show();
     this.saccesoService.getLastSequencia()
       .then((result: any) => {
+        console.log(result);
         this.sequencia.Cod_Sequencia = this.evaluateNextSA(result.Cod_Sequencia);
+        console.log(this.sequencia);
         this.spinner.hide();
       });
   }

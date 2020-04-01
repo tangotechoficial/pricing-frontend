@@ -1,4 +1,4 @@
 export let Global = {
-    url: 'https://pricing.tangotechapp.com/api/v1',
-    login: 'https://backend.tangotechapp.com/users/login'
+    url: 'http://backend2.tangotechapp.com:8000/api',
+    login: 'https://pricing.tangotechapp.com/api'
 };

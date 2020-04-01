@@ -30,7 +30,8 @@ export class MenuComponent implements OnInit {
 
   ngOnInit() {
     this.token = this.authenticationService.currentTokenValue;
-    this.sCurrentUser = this.setUserInfo()
+    this.sCurrentUser = this.setUserInfo();
+    this.bBusiness = false;
 
     /* if(this.sCurrentUser.type !== "technical"){
       this.bBusiness = true;

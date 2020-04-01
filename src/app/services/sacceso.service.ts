@@ -21,8 +21,8 @@ export class SaccesoService {
     getCampos(): Promise<Campo[]> {
         return this.http.get(this.url + '/seqcampo/', this.header)
             .toPromise()
-            .then(response => {
-                return response as Campo[];
+            .then((response: any) => {
+                return response.results as Campo[];
             })
             .catch(err => {
                 throw new Error(err);
