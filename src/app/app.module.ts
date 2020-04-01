@@ -57,6 +57,8 @@ import localePt from '@angular/common/locales/pt';
 import { FilterTagComponent } from './components/shared/filter-tag/filter-tag.component';
 import { DatatableComponent } from './components/simulador/datatable/datatable.component';
 import { InfoletComponent } from './components/simulador/infolet/infolet.component';
+import { ModalDetailingComponent } from './components/simulador/modal-detailing/modal-detailing.component';
+import { ConfirmationModalComponent } from './components/shared/confirmation-modal/confirmation-modal.component';
 registerLocaleData(localePt, 'pt',);
 @NgModule({
   declarations: [
@@ -100,7 +102,9 @@ registerLocaleData(localePt, 'pt',);
     SelectPopupRegiaoComponent,
     FilterTagComponent,
     DatatableComponent,
-    InfoletComponent
+    InfoletComponent,
+    ModalDetailingComponent,
+    ConfirmationModalComponent
   ],
   imports: [
     BrowserModule,
