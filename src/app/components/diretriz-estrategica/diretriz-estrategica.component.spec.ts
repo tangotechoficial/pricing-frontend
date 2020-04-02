@@ -1,16 +1,4 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-<<<<<<< HEAD
-
-import { DiretrizEstrategicaComponent } from './diretriz-estrategica.component';
-
-describe('DiretrizEstrategicaComponent', () => {
-  let component: DiretrizEstrategicaComponent;
-  let fixture: ComponentFixture<DiretrizEstrategicaComponent>;
-
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ DiretrizEstrategicaComponent ]
-=======
 import { DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -41,7 +29,6 @@ fdescribe('DiretrizEstrategicaComponent', () => {
         BusinessMenuComponent
       ],
       imports: [ HttpClientModule, RouterTestingModule, NoopAnimationsModule ],
->>>>>>> c5d698bad176927ff24820c9c3e51cc4fe5bc1b9
     })
     .compileComponents();
   }));
@@ -49,18 +36,13 @@ fdescribe('DiretrizEstrategicaComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(DiretrizEstrategicaComponent);
     component = fixture.componentInstance;
-<<<<<<< HEAD
-=======
     element = fixture.debugElement;
->>>>>>> c5d698bad176927ff24820c9c3e51cc4fe5bc1b9
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-<<<<<<< HEAD
-=======
 
   it('should contain 2 table', () => {
     const tables = element.query(By.css('table'))
@@ -92,5 +74,4 @@ fdescribe('DiretrizEstrategicaComponent', () => {
 
   
 
->>>>>>> c5d698bad176927ff24820c9c3e51cc4fe5bc1b9
 });
