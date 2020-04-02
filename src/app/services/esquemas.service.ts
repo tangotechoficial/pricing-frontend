@@ -58,16 +58,17 @@ export class EsquemasService {
     }
 
     updateCondicao(cond): Promise<any> {
-        console.log({cond})
-        return this.http.put(this.url + "/condicao/" + cond.Cod_Condicao + "/",cond,{ headers: { "Content-type": "application/json" } }).toPromise()
+        console.log({cond});
+        return this.http
+            .put(this.url + '/condicao/' + cond.Cod_Condicao + '/', cond, { headers: { 'Content-type': 'application/json' } }).toPromise();
     }
     /*
       Andrés Atencio 23/03/2020
       Get data and make relations
     */
     fetchCondicaoCamadaEsquema(tipoBaseVendas: string) {
-        
-        let dataCondicaoCamadaEsquema = []
+
+        const dataCondicaoCamadaEsquema = [];
 
         return new Promise((resolve, reject) => {
 
@@ -77,7 +78,7 @@ export class EsquemasService {
                 this.condicionService.getCamadas(),
                 this.condicionService.getCondicaos(),
                 this.getEsquemaRelation()
-              ]).then(([tipoValor,camadas,condicaos, esquemaRelations]) => {
+              ]).then(([tipoValor, camadas, condicaos, esquemaRelations]) => {
 
                 // Filter camadas by TIPO_BASE_VENDAS
                 camadas = camadas.filter((camada: any) => camada.TIPO_BASE_VENDAS === tipoBaseVendas);
@@ -85,32 +86,30 @@ export class EsquemasService {
                 // Relations
                 camadas.forEach(elem => {
 
-                    const esquemaRelationsFiltered = esquemaRelations.filter(esqRel => esqRel.Cod_Camada === elem.Cod_Camada)
+                    const esquemaRelationsFiltered = esquemaRelations.filter(esqRel => esqRel.Cod_Camada === elem.Cod_Camada);
                     const condicaosFiltered = esquemaRelationsFiltered.map(esqRel => {
                         const condicaoWithIdRelation: any = condicaos.filter(cond => cond.Cod_Condicao === esqRel.Cod_Condicao)[0];
                         condicaoWithIdRelation.idCondicaoCamadaEsquema = esqRel.id;
                         return condicaoWithIdRelation;
-                    })
-                    
+                    });
+
                     const data = {
                         camada: elem,
                         condicaos: condicaosFiltered,
                         condicaosAllow: condicaos.filter((cond: any) => cond.Cod_Camada === elem.Cod_Camada),
-                        tipoValor: tipoValor
-                    }
+                        tipoValor
+                    };
 
-                    dataCondicaoCamadaEsquema.push(data)
-                })
+                    dataCondicaoCamadaEsquema.push(data);
+                });
 
-                resolve(dataCondicaoCamadaEsquema)
+                resolve(dataCondicaoCamadaEsquema);
 
               })
               .catch(err => {
-                  reject({err, msg: "Error fetchCondicaoCamadaEsquema"})
-              })
-
-
-        })
+                  reject({err, msg: 'Error fetchCondicaoCamadaEsquema'});
+              });
+        });
     }
 }
 
