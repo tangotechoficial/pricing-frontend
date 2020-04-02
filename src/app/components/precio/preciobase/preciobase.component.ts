@@ -14,12 +14,12 @@ declare var $: any;
 })
 export class PrecioBaseComponent implements OnInit {
   sCurrentUser = JSON.parse(localStorage.getItem('User'));
-  camadasUpdate = { "ADD": {}, "UPDATE": {}, "REMOVE": {}};
+  camadasUpdate = { ADD: {}, UPDATE: {}, REMOVE: {}};
   camadasFullData: any = [];
   bBusiness: boolean;
   loading = true;
-  typeBaseVendasDesc = ""
-  typeBaseVendas = ""
+  typeBaseVendasDesc = '';
+  typeBaseVendas = '';
   typeBase;
 
 
@@ -39,19 +39,19 @@ export class PrecioBaseComponent implements OnInit {
       which component will be shown
     */
     this.loading = true;
-    this.checkTypeUser()
-    this.checkTypeBaseVendas()
+    this.checkTypeUser();
+    this.checkTypeBaseVendas();
     this.fetchData();
   }
 
   checkTypeUser() {
-    this.bBusiness = this.sCurrentUser.type !== "technical" ? true : false
+    this.bBusiness = this.sCurrentUser.username !== 'tester' ? true : false;
   }
 
   checkTypeBaseVendas() {
-    this.typeBaseVendas = window.location.pathname === '/preciobase' ? "B" : "v"
-    this.typeBaseVendasDesc = this.typeBaseVendas == "B" ? "Base" : "Vendas"
-    this.typeBase = window.location.pathname === '/preciobase' ? true : false
+    this.typeBaseVendas = window.location.pathname === '/preciobase' ? 'B' : 'v';
+    this.typeBaseVendasDesc = this.typeBaseVendas === 'B' ? 'Base' : 'Vendas';
+    this.typeBase = window.location.pathname === '/preciobase' ? true : false;
   }
 
   fetchData() {
@@ -59,12 +59,12 @@ export class PrecioBaseComponent implements OnInit {
       .fetchCondicaoCamadaEsquema(this.typeBaseVendas)
       .then(camadasFullData => {
         this.stopLoading();
-        this.camadasFullData = camadasFullData
+        this.camadasFullData = camadasFullData;
       })
       .catch(err => {
         this.stopLoading();
-        console.log(err)
-      })
+        console.log(err);
+      });
   }
 
   stopLoading() {
@@ -73,42 +73,39 @@ export class PrecioBaseComponent implements OnInit {
   }
 
   updateCamada({camada, condicaos, action}) {
-    this.camadasUpdate[action][camada.Cod_Camada] ? this.camadasUpdate[action][camada.Cod_Camada].push(condicaos) : this.camadasUpdate[action][camada.Cod_Camada] = [condicaos]
+    // tslint:disable-next-line: max-line-length
+    this.camadasUpdate[action][camada.Cod_Camada] ? this.camadasUpdate[action][camada.Cod_Camada].push(condicaos) : this.camadasUpdate[action][camada.Cod_Camada] = [condicaos];
   }
 
 
   submiteEsquema() {
     // console.log({camadasUpdate: this.camadasUpdate})
     $('#myModalPrecioBase').modal('show');
-    let promisesAddCondCamadaEsq: Array<any> = Object.keys(this.camadasUpdate["ADD"]).map(codCamada => {
-      return this.camadasUpdate["ADD"][codCamada].map(cond => {
+    const promisesAddCondCamadaEsq: Array<any> = Object.keys(this.camadasUpdate.ADD).map(codCamada => {
+      return this.camadasUpdate.ADD[codCamada].map(cond => {
           // new relations
           const objCondCamadaEsq = {
-            Cod_Esquema_Calculo: "EC000", //CAMBIAR PARA VENTAS
+            Cod_Esquema_Calculo: 'EC000', // CAMBIAR PARA VENTAS
             Cod_Condicao: cond.Cod_Condicao,
             Cod_Camada: codCamada
-          }
-         return this.esquemasService.postEsquema(objCondCamadaEsq)
-        
-      })
-    })
+          };
+          return this.esquemasService.postEsquema(objCondCamadaEsq);
+      });
+    });
 
-    let promisesRemoveCondCamadaEsq: Array<any> = Object.keys(this.camadasUpdate["REMOVE"]).map(codCamada => {
-      return this.camadasUpdate["REMOVE"][codCamada].map(cond => {
-        
-         return this.esquemasService.removeEsquema({id: cond.idCondicaoCamadaEsquema})
-        
-      })
-    })
+    const promisesRemoveCondCamadaEsq: Array<any> = Object.keys(this.camadasUpdate.REMOVE).map(codCamada => {
+      return this.camadasUpdate.REMOVE[codCamada].map(cond => {
+         return this.esquemasService.removeEsquema({id: cond.idCondicaoCamadaEsquema});
+      });
+    });
 
-    let promisesUpdateCondCamadaEsq: Array<any> = Object.keys(this.camadasUpdate["UPDATE"]).map(codCamada => {
-      return this.camadasUpdate["UPDATE"][codCamada].map(cond => {
-        cond.MANDATORIA = cond.MANDATORIA ? 1 : 0
-        cond.ESTATISTICA = cond.ESTATISTICA ? 1 : 0
-        return this.esquemasService.updateCondicao(cond)
-        
-      })
-    })
+    const promisesUpdateCondCamadaEsq: Array<any> = Object.keys(this.camadasUpdate.UPDATE).map(codCamada => {
+      return this.camadasUpdate.UPDATE[codCamada].map(cond => {
+        cond.MANDATORIA = cond.MANDATORIA ? 1 : 0;
+        cond.ESTATISTICA = cond.ESTATISTICA ? 1 : 0;
+        return this.esquemasService.updateCondicao(cond);
+      });
+    });
 
     const promisesCondCamadaEsq = [].concat(...[promisesAddCondCamadaEsq, promisesRemoveCondCamadaEsq, promisesUpdateCondCamadaEsq]);
 
@@ -116,30 +113,29 @@ export class PrecioBaseComponent implements OnInit {
     Promise.all(promisesCondCamadaEsq)
       .then(this.verifyErrorFetchData)
       .then(data => {
-        console.log("oks")
-        console.log({data})
+        console.log('oks');
+        console.log({data});
       })
       .catch(err => {
         $('#myModalPrecioBaseError').modal('show');
-        console.log(err)
-      })
+        console.log(err);
+      });
 
-    this.camadasUpdate = { "ADD": {}, "UPDATE": {}, "REMOVE": {}}
+    this.camadasUpdate = {ADD: {}, UPDATE: {}, REMOVE: {}};
   }
 
   verifyErrorFetchData(data) {
-    
-    const error = data[0][0].__zone_symbol__value ? data[0][0].__zone_symbol__value : false
-    console.log({error})
+    const error = data[0][0].__zone_symbol__value ? data[0][0].__zone_symbol__value : false;
+    console.log({error});
     if (error) {
-      throw error.name
+      throw error.name;
     } else {
-      return data
+      return data;
     }
   }
 
   parseResponseCamada(data) {
-    return data.filter(e => e.TIPO_BASE_VENDAS === "B");
+    return data.filter(e => e.TIPO_BASE_VENDAS === 'B');
   }
 
   closePopUp() {
