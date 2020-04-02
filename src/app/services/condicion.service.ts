@@ -24,8 +24,8 @@ export class CondicionService {
         headers: { 'Content-type': 'application/json' }
       })
       .toPromise()
-      .then(result => {
-        return result as Camada[];
+      .then((result: any) => {
+        return result.results as Camada[];
       })
       .catch(err => {
         throw new Error(err);
@@ -38,8 +38,8 @@ export class CondicionService {
         headers: { 'Content-type': 'application/json' }
       })
       .toPromise()
-      .then(result => {
-        return result as ChaveContas[];
+      .then((result: any) => {
+        return result.results as ChaveContas[];
       })
       .catch(err => {
         throw new Error(err);
@@ -52,8 +52,8 @@ export class CondicionService {
         headers: { 'Content-type': 'application/json' }
       })
       .toPromise()
-      .then(result => {
-        return result as TipoValor[];
+      .then((result: any) => {
+        return result.results as TipoValor[];
       })
       .catch(err => {
         throw new Error(err);
@@ -66,9 +66,8 @@ export class CondicionService {
         headers: { 'Content-type': 'application/json' }
       })
       .toPromise()
-      .then(result => {
-        console.log(result)
-        return result as Sequencia[];
+      .then((result: any) => {
+        return result.results as Sequencia[];
       })
       .catch(err => {
         throw new Error(err);
@@ -160,8 +159,8 @@ export class CondicionService {
         headers: { 'Content-type': 'application/json' }
       })
       .toPromise()
-      .then(result => {
-        return result as Condicao[];
+      .then((result: any) => {
+        return result.results as Condicao[];
       })
       .catch(err => {
         throw new Error(err);
