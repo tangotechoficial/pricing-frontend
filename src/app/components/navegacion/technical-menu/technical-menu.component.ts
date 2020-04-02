@@ -11,5 +11,4 @@ export class TechnicalMenuComponent implements OnInit {
 
   ngOnInit() {
   }
-
 }

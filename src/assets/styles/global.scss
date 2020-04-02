@@ -1,6 +1,5 @@
 @import './mixins-var.scss';
 
-
 *:not(.fas) {
     font-family: 'Raleway', sans-serif;
 }
@@ -17,6 +16,19 @@
 .background {
     background: $backgroundGrey;
 }
+
+.bg-martins-blue {
+    background-color: $martinsBlue;
+}
+
+.color-martins-blue {
+    color: $martinsBlue;
+}
+
+.color-martins-darkblue {
+    color: $martinsDarkBlue;
+}
+/*------------*/
 
 button.dropdownMenuButton {
     background-color: white;

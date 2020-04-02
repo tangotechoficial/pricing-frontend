@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '@services/authentication.service';
-
 declare var $: any;
 
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
-  styleUrls: ['./menu.component.css' , './menu.component.scss' ]
+  styleUrls: ['./menu.component.scss']
 })
 
 export class MenuComponent implements OnInit {
@@ -31,13 +30,14 @@ export class MenuComponent implements OnInit {
 
   ngOnInit() {
     this.token = this.authenticationService.currentTokenValue;
-    this.sCurrentUser = this.setUserInfo()
+    this.sCurrentUser = this.setUserInfo();
+    this.bBusiness = false;
 
-    // if(this.sCurrentUser.type !== "technical"){
-    //   this.bBusiness = true;
-    // }else{
-    //   this.bBusiness = false;
-    // }
+    /* if(this.sCurrentUser.type !== "technical"){
+      this.bBusiness = true;
+    }else{
+      this.bBusiness = false;
+    } */
     setTimeout(function(){
       $('.alert').hide();
     },
@@ -48,6 +48,7 @@ export class MenuComponent implements OnInit {
    this.modalView = true;
   }
 
+  
 
 
 }

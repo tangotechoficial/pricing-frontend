@@ -1,0 +1,82 @@
+<select-popup-condicion *ngIf="bSelectCondicao" (closePopup)="onCloseCondicaoPopUp($event)" (selectedObject)="selectCondicao($event, isEditNew)" [dataList]="this.condicaosAllow"></select-popup-condicion>
+<div class="container col-12 d-flex flex-column justify-content-center px-4 py-4">
+    <div *ngIf="loading" class="container p-0 rounded border col-12 bg-white">
+        <div class="col-12 p-3 border-bottom">
+            <span class="text-header">{{camadaU.Nome_Camada}}</span>
+        </div>
+        <div class="row col-12 p-4" *ngFor="let condicao of condicaos; let i=
+            index">
+            <div class="col-2">
+                <span class="text-header">Cod. Condição</span>
+                <input class="form-control mt-3" readonly
+                    name="{{camadaU.id}}Cod_Condicao{{i}}"
+                    [(ngModel)]="condicao.Cod_Condicao" />
+            </div>
+            <div class="col-3">
+                <span class="text-header">Descrição da condicao</span>
+                <input class="form-control mt-3" 
+                    name="{{camadaU.id}}Desc_Condicao{{i}}"
+                    [(ngModel)]="condicao.Desc_Condicao" disabled/>
+            </div>
+            <div class="col-1 mb-2 col-1 d-flex flex-column justify-content-end
+                align-items-center">
+                <i class="fas fa-search" (click)="launchModal(condicao)"></i>
+            </div>
+            <div class="col-2">
+                <span class="text-header">Tipo de valor</span>
+                <input class="form-control mt-3" disabled
+                    name="{{camadaU.id}}id_TipoValor{{i}}"
+                    [(ngModel)]="condicao.Desc_TipoValor" />
+            </div>
+            <div class="col-2 d-flex flex-column justify-content-center
+                align-items-center">
+                <span class="text-header">Mandatoria</span>
+                <div class="custom-control custom-checkbox mt-2 ml-5 mb-2 p-0">
+                    <input type="checkbox" class="custom-control-input"
+                        id="{{camadaU.id}}MANDATORIA{{i}}"
+                        [(ngModel)]="condicao.MANDATORIA" (change)="updateMandatoria(condicao)">
+                    <label class="pl-4 custom-control-label"
+                        for="{{camadaU.id}}MANDATORIA{{i}}"
+                        id="checkMandatoriaLabel"></label>
+                </div>
+            </div>
+            <div class="col-1 d-flex flex-column justify-content-center
+                align-items-center">
+                <span class="text-header">Estadistica</span>
+                <div class="custom-control custom-checkbox mt-2 ml-5 mb-2 p-0">
+                    <input type="checkbox" class="custom-control-input"
+                        id="{{camadaU.id}}ESTATISTICA{{i}}"
+                        [(ngModel)]="condicao.ESTATISTICA" (change)="updateEstadistica(condicao)">
+                    <label class="pl-4 custom-control-label"
+                        for="{{camadaU.id}}ESTATISTICA{{i}}"
+                        id="checkEstatisticaLabel"></label>
+                </div>
+            </div>
+            <div class="col-1 d-flex flex-column justify-content-center
+                align-items-center">
+                <div class="mt-1 ml-4">
+                    <span class="pb-3 mt-2 text-header">Remover</span>
+                </div>
+                <div class="w-100 h-100 d-flex justify-content-center
+                    align-items-center mb-1">
+                    <button (click)="remove(condicao.Cod_Condicao)" type="button"
+                        class="btn btn-secondary p-0 ml-4 d-flex flex-column
+                        align-items-center justify-content-center">
+                        <span class="btn-label d-flex align-items-center"><i
+                                class="fas fa-times p-0 text-white"></i></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="row col-12 p-4">
+            <span *ngIf="!isEditNew" class="color-martins-blue martins-pointer"
+                (click)="add()"><i class="fas fa-plus-circle color-martins-blue"></i>
+                Adicionar tipo de condição</span>
+            <span *ngIf="isEditNew" class="btn-grey"><i class="fas fa-plus-circle btn-grey"></i>
+                Adicionar tipo de condição</span>
+            <!-- <span *ngIf="isEditNew" class="color-martins-blue martins-pointer"
+                (click)="cancel()"> Cancelar</span> -->
+        </div>
+
+    </div>
+</div>

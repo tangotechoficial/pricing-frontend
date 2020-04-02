@@ -1,66 +1,42 @@
 <div class="dropdown">
-    <button class="btn btn-light font-weight-bold d-flex align-items-center" type="button"
-      id="dropdownMenuButton" data-toggle="dropdown"
-      aria-haspopup="true" aria-expanded="false">
-        <span class="fas fa-bars" aria-hidden="true"></span>
-        <p class="my-0 ml-2 font-weight-bold">Menu</p>
-    </button>
+  <button class="btn btn-light font-weight-bold d-flex align-items-center" type="button" id="dropdownMenuButton"
+    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <span class="fas fa-bars color-martins-blue" aria-hidden="true"></span>
+    <p class="my-0 ml-2 font-weight-bold color-martins-darkblue">Menu</p>
+  </button>
 
-    <div class="dropdown-menu menu-nav py-3"
-      aria-labelledby="dropdownMenuButton">
-      <div class="triangle"></div>
-      <a class="dropdown-item d-flex cuki flex-row align-items-center py-2" [routerLink]="['/menu']"><span class="fas
-          fa-home" ></span><p class="my-0 ml-2 font-weight-bold">Início</p></a>
-      <li class="dropdown-submenu">
-        <a tabindex="-1" class="dropdown-item d-flex flex-row align-items-center py-2">
-          <span class="fas fa-hand-holding-usd" ></span>
-            <p class="my-0 ml-2 font-weight-bold">Esquema de Cálculo</p>
-            <i class="pl-3 fas fa-angle-right"></i>
+  <div class="dropdown-menu menu-nav py-3" aria-labelledby="dropdownMenuButton">
+    <div class="triangle"></div>
+    <a class="dropdown-item d-flex flex-row align-items-center py-2" [routerLink]="['/menu']"><span class="fas
+          fa-home"></span>
+      <p class="my-0 ml-2 font-weight-bold">Início</p>
+    </a>
+    <li class="dropdown-submenu">
+      <a tabindex="-1" class="dropdown-item d-flex flex-row align-items-center py-2">
+        <span class="fas fa-hand-holding-usd"></span>
+        <p class="my-0 ml-2 font-weight-bold">Esquema de Cálculo</p>
+        <i class="pl-3 fas fa-angle-right"></i>
+      </a>
+      <ul class="dropdown-menu">
+        <li>
+          <a tabindex="-1" class="dropdown-item" [routerLink]="['/preciobase']">
+            <p class="my-0 ml-2 font-weight-bold">Preço Base</p>
           </a>
-        <ul class="dropdown-menu">
-          <li>
-            <a tabindex="-1" class="dropdown-item"
-              [routerLink]="['/preciobase']"><p class="my-0 ml-2 font-weight-bold">Preço Base</p></a>
-          </li>
-          <li>
-            <a tabindex="-1" class="dropdown-item"
-              [routerLink]="['/precioventa']"><p class="my-0 ml-2 font-weight-bold">Preço de Venda</p>
-              </a>
-          </li>
-        </ul>
-      </li>
-
-      <li class="dropdown-submenu">
-        <a tabindex="-1" class="dropdown-item d-flex flex-row align-items-center py-2">
-          <span class="fas fa-chart-line" ></span>
-            <p class="my-0 ml-2 font-weight-bold">Growth Data Lab</p>
-            <i class="pl-3 fas fa-angle-right"></i>
+        </li>
+        <li>
+          <a tabindex="-1" class="dropdown-item" [routerLink]="['/precioventa']">
+            <p class="my-0 ml-2 font-weight-bold">Preço de Venda</p>
           </a>
-          <ul class="dropdown-menu">
-            <li>
-              <a tabindex="-1" class="dropdown-item"
-                [routerLink]="['/dados-mestre']"><p class="my-0 ml-2 font-weight-bold">Dados Mestre</p></a>
-            </li>
-            <li>
-              <a tabindex="-1" class="dropdown-item"
-                [routerLink]="['/diretriz-estrategica']"><p class="my-0 ml-2 font-weight-bold">Diretriz Estratégica</p>
-                </a>
-            </li>
-            <li>
-              <a tabindex="-1" class="dropdown-item"
-                [routerLink]="['/plano-compra']"><p class="my-0 ml-2 font-weight-bold">Plano de compra</p></a>
-            </li>
-            <li>
-              <a tabindex="-1" class="dropdown-item"
-                [routerLink]="['/execucao']"><p class="my-0 ml-2 font-weight-bold">Execução</p></a>
-            </li>
-          </ul>
-      </li>
-
-      <a class="dropdown-item d-flex flex-row align-items-center py-2" [routerLink]="['/sacceso']"><span class="fas
-          fa-home" ></span><p class="my-0 ml-2 font-weight-bold">Sequência de Acesso</p></a>
-      <a class="dropdown-item d-flex flex-row align-items-center py-2" [routerLink]="['/condicion']"><span
-          class="fas fa-clipboard-list"
-          ></span><p class="my-0 ml-2 pl-1 font-weight-bold">Condição</p></a>
-    </div>
+        </li>
+      </ul>
+    </li>
+    <a class="dropdown-item d-flex flex-row align-items-center py-2" [routerLink]="['/sacceso']"><span class="fas
+          fa-home"></span>
+      <p class="my-0 ml-2 font-weight-bold">Sequência de Acesso</p>
+    </a>
+    <a class="dropdown-item d-flex flex-row align-items-center py-2" (click)="checkIfReloadIsNeeded()" [routerLink]="['/selectcondicao']"><span
+        class="fas fa-clipboard-list"></span>
+      <p class="my-0 ml-2 pl-1 font-weight-bold">Condição</p>
+    </a>
   </div>
+</div>

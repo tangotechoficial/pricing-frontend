@@ -1,9 +1,26 @@
 <!-- Navigation Bar -->
 <navegacion></navegacion>
-
+<ngx-spinner></ngx-spinner>
 <!--Component Content -->
 <div class="background container col-9 d-flex flex-column justify-content-center">
-
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header bg-light border-bottom-0">
+              <h5 class="modal-title" id="exampleModalLabel">Sequência de acesso</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                Sequência de acesso salva com sucesso!
+            </div>
+            <div class="modal-footer d-flex justify-content-center border-top-0">
+              <button type="button" class="btn bg-standard" (click)="closePopUp()">Ok</button>
+            </div>
+          </div>
+        </div>
+    </div>
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -17,34 +34,26 @@
                 </div>
                 <div class="modal-body">
                     <span class="text-header">Código</span>
-                    <input id="input-modal-tipo" [(ngModel)]="_newSA.sSeqAcceso" class="form-control mb-2 mt-3" readonly/>
+                    <input id="input-modal-tipo" [(ngModel)]="newCampo.Cod_Campo" class="form-control mb-2 mt-3" readonly/>
                     <span class="text-header">Descrição</span>
-                    <input id="input-modal-descripcion" [(ngModel)]="_newSA.sDesAcceso" class="form-control mt-3"/>
+                    <input id="input-modal-descripcion" [(ngModel)]="newCampo.Nome_Campo" class="form-control mt-3"/>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn bg-inverted font-weight-bold" data-dismiss="modal">Fechar</button>
-                    <button type="button" class="btn bg-standard font-weight-bold" data-dismiss="modal" (click)="submitNewSA()" >Salvar</button>
+                    <button type="button" class="btn bg-standard font-weight-bold" data-dismiss="modal" (click)="submitCampo()" >Salvar</button>
                 </div>
             </div>
         </div>
     </div>
     <div class="container row col-12 p-4">
-
+        
         <div class="col-sm-2">
-            <span class="text-header">Cód. Sequência de Acesso</span>
-            <input id="SQSearch" class="form-control mt-3" [(ngModel)]="_sacceso.sSeqAcceso" [value]="selectedValue" readonly/>
-            <ul *ngIf="_sacceso.sSeqAcceso" class="filter-select list-group">
-                <ng-container *ngIf="!existSelected">
-                    <li *ngFor="let val of sequenciasAccesoSearch | filterseqsearch: _sacceso.sSeqAcceso ;" (click)="onSelectedValue(val)"
-                        class="filter-select-list list-group-item">
-                        {{val.sDesAcceso}}
-                    </li>
-                </ng-container>
-            </ul>
+            <span class="text-header">Cód. Sequência</span>
+            <input class="form-control mt-3" [(ngModel)]="sequencia.Cod_Sequencia" readonly/>
         </div>
         <div class="col-sm-10">
             <span class="text-header">Descrição da Sequência de acesso</span>
-            <input class="form-control mt-3" [(ngModel)]="_sacceso.sDesAcceso" readonly />
+            <input class="form-control mt-3" [(ngModel)]="sequencia.Nome_Sequencia" readonly />
         </div>
     </div>
     <ul>
@@ -52,16 +61,15 @@
     <div class="container row col-12 p-4">
         <div class="col-sm-6">
             <span class="text-header">Todos os campos</span>
-            <div class="options-list rounded mt-3">
+            <div class="bg-white rounded mt-3">
                 <input id="saSearch1"
                     class="form-control border-top-0 border-right-0 border-left-0 p-4 list-header custom-text-muted"
                     [(ngModel)]="searchSeq" placeholder="Pesquise o tipo de condição..." />
-                <ul class="p-0 custom-scrollbar-css">
-                    <li *ngFor="let seq of sequenciasAcceso | filterseleccionado: searchSeq ; let id = index " class="p-2">
-                        <div class="custom-control custom-checkbox">
-                            <input (change)="checkValue(seq)" type="checkbox" class="custom-control-input"
-                                id="{{id}}">
-                            <label class="pl-4 custom-control-label" for="{{id}}">{{seq.getDescription()}}</label>
+                <ul class="p-0 martins-scrollbar">
+                    <li *ngFor="let campo of campos | filterseleccionado: searchSeq" class="p-2">
+                        <div class="custom-control pl-3custom-checkbox">
+                            <input (change)="checkValue(campo)" type="checkbox" class="custom-control-input" id="{{campo.Cod_Campo}}">
+                            <label class="pl-4 custom-control-label" for="{{campo.Cod_Campo}}">{{campo.Nome_Campo}}</label>
                         </div>
                     </li>
                 </ul>
@@ -69,17 +77,16 @@
         </div>
         <div class="col-sm-6">
             <span class="text-header pb-3">Campos Selecionados</span>
-            <div class="options-list rounded mt-3">
+            <div class="bg-white rounded mt-3">
                 <input id="saSearch2"
                     class="form-control border-top-0 border-right-0 border-left-0 p-4 list-header custom-text-muted"
                     [(ngModel)]="searchSeleccionado" placeholder="Pesquise o tipo de condição..." />
-                <ul class="p-0 custom-scrollbar-css">
-                    <li *ngFor="let seq of selectedProperties | filterseleccionado :searchSeleccionado"
+                <ul class="p-0 martins-scrollbar">
+                    <li *ngFor="let campo of sequencia.campos | filterseleccionado :searchSeleccionado"
                         class="p-2 w-100 d-flex">
                         <div class="d-flex w-100 justify-content-between align-items-center">
-                            <label class="pl-4 mb-0">{{seq.getDescription()}}</label>
-                            <button type="button" (click)="onDltSelection(seq)"
-                                class="btn btn-danger ml-2 p-0 d-flex flex-column align-items-center">
+                            <label class="pl-4 mb-0">{{campo.Nome_Campo}}</label>
+                            <button type="button" (click)="onDltSelection(campo)" class="btn btn-danger ml-2 p-0 d-flex flex-column align-items-center">
                                 <span class="btn-label d-flex align-items-center"><i
                                         class="fas fa-times p-0"></i></span>
                             </button>
@@ -107,12 +114,26 @@
     </div>
     <div class="row justify-content-md-center">
         <div *ngIf="saveSuccess" class="col-md-8 alert alert-success" role="alert">
-            <strong>Sequência de acesso {{_saMessage.sSeqAcceso}} - {{_saMessage.sDesAcceso}} salva com sucesso!</strong>
+            <strong>Sequência de acesso {{sequencia.Cod_Sequencia}} - {{sequencia.Nome_Sequencia}} salva com sucesso!</strong>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
         </div>
         <div *ngIf="saveError" class="col-md-8 alert alert-danger" role="alert">
+            <strong>{{errDesc}}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+        </div>
+    </div>
+    <div class="row justify-content-md-center">
+        <div *ngIf="saveCampoSuccess" class="col-md-8 alert alert-success" role="alert">
+            <strong>Campo {{newCampo.Cod_Campo}} - {{newCampo.Nome_Campo}} salva com sucesso!</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+        </div>
+        <div *ngIf="saveCampoError" class="col-md-8 alert alert-danger" role="alert">
             <strong>{{errDesc}}</strong>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>

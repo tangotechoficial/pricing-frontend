@@ -1,7 +1,7 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input ,Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from "@angular/common";
-import {BrowserModule} from '@angular/platform-browser'
+import {BrowserModule} from '@angular/platform-browser';
 import { AuthenticationService } from '@services/authentication.service'
 
 declare var $: any;
@@ -21,10 +21,10 @@ import {
   templateUrl: './navegacion.component.html',
   animations: [
   trigger('ngIfAnimation', [
-    transition(':enter, :leave', [
-      query('@*', animateChild(), { optional: true })
-    ])
+    transition(':enter, :leave', [ ])
   ]),
+
+
 
   trigger('easeInOut', [
     transition('void => *', [
@@ -46,7 +46,7 @@ import {
     ])
 ],
 
-  styleUrls: ['./navegacion.component.css' , './navegacion.component.scss']
+  styleUrls: ['./navegacion.component.scss']
 })
 
 export class NavegacionComponent implements OnInit {
@@ -56,28 +56,27 @@ export class NavegacionComponent implements OnInit {
   public numNotif:number = 3 ;
   public numAprob:number = 1;
   public showBMenu: boolean = false;
-
   public showDetail:boolean = false;
+  public section: string;
 
+  @Output() navOutput = new EventEmitter<boolean>()
   private mapUrlToSection = {
     "/menu": "Inicio",
     "/preciobase": "Esquema de Cálculo / Precio Base",
     "/precioventa": "Esquema de Cálculo / Precio Venta",
     "/sacceso": "Sequência de acesso",
-    "/condicion": "Condicion",
+    "/condicion": "Criar nova condição",
   }
-  public section: string;
-  @Output() navOutput = new EventEmitter<boolean>()
   constructor(
     private authService: AuthenticationService,
     private _router: Router,
     private _route: ActivatedRoute,
     location: Location
-  ) { }
+  ) {}
 
   ngOnInit() {
-    // const user = JSON.parse(localStorage.User);
-    // this.userTechnical = user.type == "technical" ? true : false;
+    /* const user = JSON.parse(localStorage.User);
+    this.userTechnical = user.type == "technical" ? true : false; */
     this._route.url.subscribe(url => {
       this.section = this.mapUrlToSection[location.pathname]
       if(location.pathname != "/login"){
@@ -86,6 +85,8 @@ export class NavegacionComponent implements OnInit {
         this.isLoggedIn = false;
       }
     })
+
+
   }
 
   notifyOpen(){
@@ -110,27 +111,13 @@ export class NavegacionComponent implements OnInit {
     window.location.reload()
   }
 
-/*   ngDoCheck() {
-    this._route.url.subscribe(url => {
-      console.log(location)
-      if(url[0].path != ""){
-        this.isLoggedIn = true;
-      }else{
-        this.isLoggedIn = false;
-      }
-    });
-  }
-
-  ngAfterContentInit() {
-    this._route.url.subscribe(url => {
-      console.log(url[0])
-      if(url[0].path != ""){
-        this.isLoggedIn = true;
-      }else{
-        this.isLoggedIn = false;
-      }
-    });
+  /* ngDoCheck() {
+    this.navOutput.next(this.cMode);
+    if(!this.cMode){
+      this.section = "Alterar condição";
+    }else{
+      this.section = "Criar nova condição";
+    }
   } */
-
 
 }

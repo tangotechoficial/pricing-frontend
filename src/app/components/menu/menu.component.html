@@ -1,13 +1,14 @@
 <!-- Navigation Bar -->
+<!-- <navegacion (navOutput)="parentListenerNavbar($event)"></navegacion> -->
 <navegacion></navegacion>
 <!-- Div usuario Business -->
 <div class="container menu-background">
 
-  <div class="businessContainer" *ngIf="bBusiness && isShowMenu">
-    <div class="bcard">
+  <div class="businessContainer p-4 w-100" *ngIf="bBusiness && isShowMenu">
+    <div class="bcard bg-white">
       <h5 class="title">Meu perfil</h5>
 
-      <div class="form row">
+      <div class="p-3 row">
         <div class="form-group col-xs-12 col-md-3">
             <label for="nombre" class="martinsLabel control-label">Nome</label>
             <input type="text" value='' class="form-control" name="nombre" id="nombre" placeholder="Nome">
@@ -36,11 +37,11 @@
 
     </div>
 
-    <div class="bcard">
+    <div class="bcard bg-white">
 
       <h5 class="title">Mudar Senha</h5>
 
-      <div class="form row">
+      <div class="p-3 row">
 
       <div class="form-group col-xs-12 col-md-3">
             <label for="contraAnt" class="martinsLabel control-label">Senha Atual</label>
@@ -77,22 +78,22 @@
 
 <!-- MODAL BIENVENIDA -->
 
-<div class="modalBienvenida" [hidden]="modalView" *ngIf="!bBusiness">
-  <button type="button" class="close" aria-label="Close" (click)="closeWelcome()">
+<div class="modalBienvenida text-center bg-white px-3 py-2" [hidden]="modalView" *ngIf="!bBusiness">
+  <button type="button" class="border-0 bg-white px-2 py-3 float-right" aria-label="Close" (click)="closeWelcome()">
     <span aria-hidden="true">&times;</span>
   </button>
 
-  <div class="modalWrapper">
+  <div class="modalWrapper p-5">
 
-    <div class="modalIcons">
+    <div class="modalIcons my-2 mx-auto">
 
-      <div class="circle">
+      <div class="circle rounded-circle w-100">
       </div>
       <div class="exclam">
         <i class="badgeIcon fas fa-exclamation"></i>
       </div>
 
-      <div class="circleNum">
+      <div class="circleNum bg-martins-blue">
         <span class="badgeIcon">{{numTotNotif}}</span>
       </div>
 
@@ -107,7 +108,7 @@
 
 
     <div class="modalBut">
-      <button (click)="closeWelcome()"><i class="fas fa-minus-square"></i> Agora não</button>
+      <button class="color-martins-blue border-0" (click)="closeWelcome()"><i class="fas fa-minus-square"></i> Agora não</button>
     </div>
 
   </div>
