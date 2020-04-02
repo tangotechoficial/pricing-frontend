@@ -1,18 +1,3 @@
-<<<<<<< HEAD
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { PlanoCompraComponent } from './plano-compra.component';
-
-describe('PlanoCompraComponent', () => {
-  let component: PlanoCompraComponent;
-  let fixture: ComponentFixture<PlanoCompraComponent>;
-
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ PlanoCompraComponent ]
-    })
-    .compileComponents();
-=======
 import { PurchasePlanningService } from '@services/purchasePlanning.service';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
@@ -51,24 +36,18 @@ fdescribe('PlanoCompraComponent', () => {
     })
     .compileComponents();
     requestMock = TestBed.get(HttpTestingController)
->>>>>>> c5d698bad176927ff24820c9c3e51cc4fe5bc1b9
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(PlanoCompraComponent);
     component = fixture.componentInstance;
-<<<<<<< HEAD
-=======
     element = fixture.debugElement
->>>>>>> c5d698bad176927ff24820c9c3e51cc4fe5bc1b9
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-<<<<<<< HEAD
-=======
 
   it('should have 4 rows', () => {
     const container = element.query(By.css('.main-container'))
@@ -95,5 +74,4 @@ fdescribe('PlanoCompraComponent', () => {
 
   })
 
->>>>>>> c5d698bad176927ff24820c9c3e51cc4fe5bc1b9
 });

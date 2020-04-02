@@ -1,16 +1,4 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-<<<<<<< HEAD
-
-import { FilterModalComponent } from './filter-modal.component';
-
-describe('FilterModalComponent', () => {
-  let component: FilterModalComponent;
-  let fixture: ComponentFixture<FilterModalComponent>;
-
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ FilterModalComponent ]
-=======
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -29,7 +17,6 @@ fdescribe('FilterModalComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ FilterModalComponent ],
       imports: [ HttpClientModule, RouterTestingModule, ReactiveFormsModule],
->>>>>>> c5d698bad176927ff24820c9c3e51cc4fe5bc1b9
     })
     .compileComponents();
   }));
@@ -37,10 +24,7 @@ fdescribe('FilterModalComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(FilterModalComponent);
     component = fixture.componentInstance;
-<<<<<<< HEAD
-=======
     element = fixture.debugElement;
->>>>>>> c5d698bad176927ff24820c9c3e51cc4fe5bc1b9
     fixture.detectChanges();
   });
 
@@ -48,8 +32,6 @@ fdescribe('FilterModalComponent', () => {
     expect(component).toBeTruthy();
   });
 
-<<<<<<< HEAD
-=======
   it('should contain 3 divs', () => {
     const form = element.query(By.css('.form'))
     expect(form.childNodes.length).toBe(3)
@@ -87,5 +69,4 @@ fdescribe('FilterModalComponent', () => {
     });
   }))
 
->>>>>>> c5d698bad176927ff24820c9c3e51cc4fe5bc1b9
 });
