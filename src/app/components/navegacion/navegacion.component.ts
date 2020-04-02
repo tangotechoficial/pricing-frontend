@@ -21,10 +21,10 @@ import {
   templateUrl: './navegacion.component.html',
   animations: [
   trigger('ngIfAnimation', [
-    transition(':enter, :leave', [
-      query('@*', animateChild())
-    ])
+    transition(':enter, :leave', [ ])
   ]),
+
+
 
   trigger('easeInOut', [
     transition('void => *', [
