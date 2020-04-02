@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Sacceso } from '../../models/sacceso';
-import { MetadataService } from './../../services/metadata.service';
 import { SaccesoService } from '../../services/sacceso.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Campo } from 'app/models/campo';

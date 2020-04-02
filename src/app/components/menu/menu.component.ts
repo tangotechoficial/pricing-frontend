@@ -31,14 +31,9 @@ export class MenuComponent implements OnInit {
   ngOnInit() {
     this.token = this.authenticationService.currentTokenValue;
     this.sCurrentUser = this.setUserInfo();
-    this.bBusiness = false;
+    this.bBusiness = true;
 
-    /* if(this.sCurrentUser.type !== "technical"){
-      this.bBusiness = true;
-    }else{
-      this.bBusiness = false;
-    } */
-    setTimeout(function(){
+    setTimeout(function() {
       $('.alert').hide();
     },
     2000);
@@ -47,8 +42,4 @@ export class MenuComponent implements OnInit {
   closeWelcome(){
    this.modalView = true;
   }
-
-  
-
-
 }
