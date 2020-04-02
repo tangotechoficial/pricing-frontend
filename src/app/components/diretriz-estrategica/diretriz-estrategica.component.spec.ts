@@ -4,10 +4,6 @@ import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations'
 import { HttpClientModule } from '@angular/common/http';
-
-
-
-
 import { NavegacionComponent } from '@app/components/navegacion/navegacion.component';
 import { TechnicalMenuComponent } from '@app/components/navegacion/technical-menu/technical-menu.component';
 import { DiretrizEstrategicaComponent } from './diretriz-estrategica.component';
@@ -68,10 +64,4 @@ fdescribe('DiretrizEstrategicaComponent', () => {
     const containers = element.query(By.css('.table-head'))
     expect(containers.childNodes.length).toBe(12)
   })
-
-  
-
-
-  
-
 });
