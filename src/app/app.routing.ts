@@ -9,7 +9,6 @@ import { MenuComponent } from './components/menu/menu.component';
 import { LoginComponent } from './components/login/login.component';
 import { ErrorComponent } from './components/error/error.component';
 import { PrecioBaseComponent } from './components/precio/preciobase/preciobase.component';
-import { PrecioVentaComponent } from './components/precio/precioventa/precioventa.component';
 import { SaccesoComponent } from './components/sacceso/sacceso.component';
 import { CondicionComponent } from './components/condicion/condicion.component';
 import { DadosMestreComponent } from './components/dados-mestre/dados-mestre.component';
