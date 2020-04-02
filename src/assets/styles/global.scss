@@ -13,7 +13,6 @@
     font-weight: 800;
 }
 
-/*----global color styles----*/
 .background {
     background: $backgroundGrey;
 }
@@ -36,16 +35,16 @@ button.dropdownMenuButton {
     border: 1px solid #D0D1D6;
     border-radius: .40rem;
     font-size:13px;
-    /* &:focus:not(.list-header) {
+    &:focus:not(.list-header) {
     border: 2px solid $martinsBlue;
-    } */
+    }
 }
 
 
 .dropdown-toggle:after{
-    /* position: relative;
+    position: relative;
     top: 0.5rem;
-    float: right; */
+    float: right;
     color: $martinsBlue;
 }
 
@@ -56,10 +55,17 @@ button.dropdownMenuButton {
     padding: .25rem 1.5rem !important;
 }
 
+#precio-container {
+    height: 100vh;
+}
+
 .form-control{
      border-radius: .35rem !important;
      font-size:13px;
 
+}
+.form-group{
+    padding: 0px 5px !important;
 }
 
 .form-control:focus,
@@ -102,7 +108,6 @@ button.dropdownMenuButton {
         color:$martinsBlue;
     }
 }
-
 .martinsText{
    color:$navMenuIconGrey;
    padding:3px;
@@ -117,7 +122,7 @@ button.dropdownMenuButton {
     font-weight: 700;
 }
 
-/*---buttons---*/
+/**--buttons--*/
 
 @mixin inverted-btn {
     background-color: transparent;
@@ -152,75 +157,3 @@ button.dropdownMenuButton {
 .btn-grey{
   color:$martinsTextGrey !important;
 }
-
-.martins-pointer {
-    cursor: pointer;
-}
-
-i.fas.fa-search.disabledSearch {
-    color: gray;
-}
-
-.fas.fa-search:hover{
-    @extend .color-martins-blue;
-    @extend .martins-pointer;
-}
-
-/*---green checkbox for condicion, sacceso, pventa, preciobase---*/
-.custom-control-input:checked~.custom-control-label::before {
-    border-color: #009966;
-    background-color: #009966;
-}
-
-.custom-checkbox .custom-control-label::before {
-    border: 2px solid #009966 !important;
-    background-color: transparent;
-}
-/*---table borders for popupmenu & selectpopupcondicion---*/
-.table-border-right {
-    border-radius: 0 10px 10px 0; border: 2px solid transparent;
-}
-
-.table-border-left {
-    border-radius: 10px 0 0 10px; border: 2px solid transparent;
-}
-// ----- custom scrollbar for whole app -------
-// change 'height' as needed
-// in the styles of the corresponding component
-
-.martins-scrollbar {
-    /*styles for Firefox*/
-    scrollbar-color: #384461  #eee;
-    scrollbar-width: thin;
-  }
-
-  .martins-scrollbar {
-    overflow-y: scroll;
-  }
-
-    /*-----styles for Chrome and Safari-----*/
-  /* scrollbar width */
-  .martins-scrollbar::-webkit-scrollbar {
-    width: 0.8rem;
-  }
-
-  /* scrollbar track */
-  .martins-scrollbar::-webkit-scrollbar-track {
-    background: #eee;
-  }
-
-  /* scrollbar handle */
-  .martins-scrollbar::-webkit-scrollbar-thumb {
-    border-radius: 1rem;
-    background-color: #384461;
-  }
-
-
-   /* click popup menu and table */
-  .mySelect{
-    background-color: $martinsBlue !important;
-      td{
-          color:white !important;
-      }
-  }
-

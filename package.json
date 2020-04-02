@@ -5,12 +5,9 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "lint": "ng lint",
     "test": "ng test",
-    "e2e": "ng e2e",
-    "test:pbase": "ng test --include src/app/components/precio/preciobase/*.spec.ts",
-    "test:condicion": "ng test --include src/app/components/condicion/*.spec.ts",
-    "test:service": "ng test --include src/app/services/*.spec.ts"
+    "lint": "ng lint",
+    "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {
@@ -61,7 +58,8 @@
     "sass-loader": "7.3.1",
     "ts-node": "~7.0.0",
     "tslint": "~5.15.0",
-    "typescript": "~3.5.3"
+    "typescript": "~3.5.3",
+    "@babel/compat-data": "~7.8.0"
   },
   "description": "This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.21.",
   "main": "karma.conf.js",

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { async, ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 
 import { CondicionComponent } from "./condicion.component";
@@ -37,6 +38,21 @@ describe("CondicionComponent", () => {
       imports: [HttpClientModule],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
+=======
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { CondicionComponent } from './condicion.component';
+
+describe('CondicionComponent', () => {
+  let component: CondicionComponent;
+  let fixture: ComponentFixture<CondicionComponent>;
+
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [ CondicionComponent ]
+    })
+    .compileComponents();
+>>>>>>> c5d698bad176927ff24820c9c3e51cc4fe5bc1b9
   }));
 
   beforeEach(() => {
@@ -45,6 +61,7 @@ describe("CondicionComponent", () => {
     fixture.detectChanges();
   });
 
+<<<<<<< HEAD
   it("should create", () => {
     expect(component).toBeTruthy();
   });
@@ -103,4 +120,9 @@ describe("CondicionComponent", () => {
     
 
   });
+=======
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+>>>>>>> c5d698bad176927ff24820c9c3e51cc4fe5bc1b9
 });

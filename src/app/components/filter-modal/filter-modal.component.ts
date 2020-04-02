@@ -7,7 +7,7 @@ declare var $: any;
 @Component({
   selector: 'filter-modal',
   templateUrl: './filter-modal.component.html',
-  styleUrls: ['./filter-modal.component.scss']
+  styleUrls: ['./filter-modal.component.css']
 })
 export class FilterModalComponent implements OnInit, OnChanges {
 

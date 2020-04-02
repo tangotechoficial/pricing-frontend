@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Global } from './global';
-import { Sacceso } from 'app/models/sacceso';
+import { Sacceso } from '@models/sacceso';
 
 
 @Injectable()

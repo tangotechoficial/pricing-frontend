@@ -12,7 +12,6 @@ import { PrecioBaseComponent } from './components/precio/preciobase/preciobase.c
 import { PrecioVentaComponent } from './components/precio/precioventa/precioventa.component';
 import { SaccesoComponent } from './components/sacceso/sacceso.component';
 import { CondicionComponent } from './components/condicion/condicion.component';
-
 import { DadosMestreComponent } from './components/dados-mestre/dados-mestre.component';
 import { DiretrizEstrategicaComponent } from './components/diretriz-estrategica/diretriz-estrategica.component';
 import { SelectCondicionComponent } from './components/select-condicion/select-condicion.component';
@@ -26,7 +25,6 @@ const appRoutes: Routes = [
 //    { path: 'pbaseseleccion', component: PbaseseleccionComponent},
     { path: 'preciobase', component: PrecioBaseComponent, canActivate: [AuthenticationGuard]},
     { path: 'precioventa', component: PrecioBaseComponent, canActivate: [AuthenticationGuard]},
-    
     { path: 'sacceso', component: SaccesoComponent, canActivate: [AuthenticationGuard]},
     { path: 'selectcondicao', component: SelectCondicionComponent},
     { path: 'condicion/:param', component: CondicionComponent, runGuardsAndResolvers: 'always'},

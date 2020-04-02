@@ -1,0 +1,54 @@
+    <div class="container background d-flex flex-column align-items-center justify-content-center col-12 mt-5 p-5"> 
+            <div class="col-9 align-items-center d-flex flex-column justify-content-end pt-5">
+                <span class="text-header col-md-7 col-lg-5 d-flex align-items-end">Seleccione o canal de vendas</span>
+                <div class="dropdown col-md-7 col-lg-5 mt-2">
+                    <button class="dropdownMenuButton col-12 btn btn-light dropdown-toggle text-left px-4 py-2" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{canalDeVentas}}
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <button class="dropdown-item martinsText" (click)="onClickCanalDeVentas('Televendas')">Televendas</button>
+                        <button class="dropdown-item martinsText" (click)="onClickCanalDeVentas('B2B')">B2B</button>
+                        <button class="dropdown-item martinsText" (click)="onClickCanalDeVentas('Presencial')">Presencial</button>
+                    </div>
+                </div>
+                <!-- <label>Simple Select</label>
+                <select class="selectpicker">
+                <option>Male</option>
+                <option>Female</option>
+                </select>
+                <div class="form-group">
+                    <label for="exampleFormControlSelect1">Example select</label>
+                    <select class="form-control form-control-sm" id="exampleFormControlSelect1">
+                      <option>1</option>
+                      <option>2</option>
+                      <option>3</option>
+                      <option>4</option>
+                      <option>5</option>
+                    </select>
+                  </div> -->
+                  
+            </div>
+            <!-- <div class="btn-group">
+                <a class="col-12 btn btn-light dropdown-toggle text-left px-4 py-2" data-toggle="dropdown" href="#">
+                    Menuddddddddddddddddddddddddddddd
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="nav-link" href="#">Choice1</a></li>
+                    <li><a class="nav-link" href="#">Choice2</a></li>
+                    <li><a class="nav-link" href="#">Choice3</a></li>
+                </ul>
+            </div> -->
+            <div class="col-9 align-items-center d-flex flex-column justify-content-start pt-3 pb-5">
+                <span class="text-header col-md-7 col-lg-5 d-flex align-items-end">Seleccione a linha de negocio</span>
+                <div class="dropdown col-md-7 col-lg-5 mt-2">
+                    <button class="dropdownMenuButton col-12 btn btn-light dropdown-toggle text-left px-4 py-2" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{lineaDeNegocios}}
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <button class="dropdown-item martinsText" (click)="onClickLineaDeNegocio('TEI')">TEI</button>
+                        <button class="dropdown-item martinsText" (click)="onClickLineaDeNegocio('ABB')">ABB</button>
+                        <button class="dropdown-item martinsText" (click)="onClickLineaDeNegocio('HBL')">HBL</button>
+                        <button class="dropdown-item martinsText" (click)="onClickLineaDeNegocio('MTC')">MTC</button>
+                    </div>
+                </div>
+            </div>
+    </div>     

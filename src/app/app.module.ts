@@ -29,7 +29,7 @@ import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { BusinessMenuComponent } from './components/navegacion/business-menu/business-menu.component';
 import { TechnicalMenuComponent } from './components/navegacion/technical-menu/technical-menu.component';
-import { DadosMestreComponent } from './components/dados-mestre/dados-mestre.component';
+import { DadosMestreComponent } from './components/dados-mestre/dados-mestre.component'
 import { DiretrizEstrategicaComponent } from './components/diretriz-estrategica/diretriz-estrategica.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FilterModalComponent } from './components/filter-modal/filter-modal.component';
@@ -96,7 +96,8 @@ registerLocaleData(localePt, 'pt',);
     SelectPopupMaterialComponent,
     SelectPopupExpedicaoComponent,
     SelectPopupFaturamentoComponent,
-    SelectPopupRegiaoComponent
+    SelectPopupRegiaoComponent,
+    FilterTagComponent
   ],
   imports: [
     BrowserModule,
@@ -115,7 +116,7 @@ registerLocaleData(localePt, 'pt',);
     appRoutingProviders,
     CamadaService,
     {provide: HTTP_INTERCEPTORS, useClass: JWTInterceptorHelper, multi: true},
-    {provide: LOCALE_ID, useValue: "pt"}
+    {provide: LOCALE_ID, useValue: 'pt'}
   ],
   bootstrap: [AppComponent]
 })

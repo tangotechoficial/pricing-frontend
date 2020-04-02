@@ -1,3 +1,3 @@
 export interface Deserializable {
-    deserialize(data: any): this;
-  }
+  deserialize(data: any): this;
+}

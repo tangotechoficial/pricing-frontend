@@ -1,5 +1,35 @@
 <!-- Navigation Bar -->
 <navegacion></navegacion>
+<<<<<<< HEAD
 <div class="temporary">
   <h1>EXECUÇÃO</h1>
+=======
+<div class="background">
+  <div class="container col-9 main-container">
+    <div class="row">
+      <div class="container col-12 p-4 d-flex justify-content-start">
+          <button type="button" class="btn button-save btn-filter-color" (click)="filter()"><i
+                  class="fas fa-filter btn-filter-color"></i>&nbsp;Filtro</button>
+          <div class="applied-filters"></div>
+      </div>
+    </div>
+    <div class="row shaded">
+      <div class="container col-12 p-4 d-flex justify-content-start">
+          <div class="chart-placeholder">
+              <tabbed-charts></tabbed-charts>
+          </div>
+      </div>
+    </div>
+    <div class="row shaded">
+      <div class="container col-12 p-4">
+        <planning-table [data]="planningData"></planning-table>
+      </div>
+    </div>
+    <div class="row shaded">
+        <div class="chart-placeholder">
+          <selling-composition-charts></selling-composition-charts>
+        </div>
+    </div>
+  </div>
+>>>>>>> c5d698bad176927ff24820c9c3e51cc4fe5bc1b9
 </div>

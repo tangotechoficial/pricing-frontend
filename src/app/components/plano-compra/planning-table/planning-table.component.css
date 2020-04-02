@@ -1,16 +1,43 @@
 .table td {
-    text-align: right;
-    width: 115px;
-    height: .40rem
+  text-align: right;
+  width: 115px;
+  height: .40rem
+}
+
+.mirrorInput {
+  outline: 1px solid #4270C1;
+  box-sizing: border-box;
+  padding: .4em
+}
+
+.w-50.ng-star-inserted {
+  width: 50px
+}
+
+.with-overflow {
+  overflow-x: scroll;
+}
+
+
+.custom-scrollbar-css {
+    /*styles for Firefox*/
+    scrollbar-color: #384461  #eee;
+    scrollbar-width: thin;
   }
-  
-  .mirrorInput {
-    outline: 1px solid #4270C1;
-    box-sizing: border-box;
-    padding: .4em
+
+    /*-----styles for Chrome and Safari-----*/
+  /* scrollbar width */
+  .custom-scrollbar-css::-webkit-scrollbar {
+    width: 0.8rem;
   }
-  
-  .w-50.ng-star-inserted {
-    width: 50px
+
+  /* scrollbar track */
+  .custom-scrollbar-css::-webkit-scrollbar-track {
+    background: #eee;
   }
-  
+
+  /* scrollbar handle */
+  .custom-scrollbar-css::-webkit-scrollbar-thumb {
+    border-radius: 1rem;
+    background-color: #384461;
+  }

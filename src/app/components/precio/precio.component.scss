@@ -1,10 +1,7 @@
 @import '../../../assets/styles/global.scss';
-//@import '../../../assets/styles/condicion-sacceso.scss';
+@import '../../../assets/styles/condicion-sacceso.scss';
 @import '../../../assets/styles/mixins-var.scss';
 
-.menu-background {
-	height: auto;
-}
 
 .fa-search {
     color: $martinsTextGrey;
