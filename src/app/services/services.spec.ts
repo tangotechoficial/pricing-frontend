@@ -7,7 +7,7 @@ import { JWTInterceptorHelper } from '@helpers/jwt.interceptor';
 import { PurchasePlanningService } from './purchasePlanning.service';
 import { EsquemasService } from './esquemas.service';
 
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 1000 * 10;
+//jasmine.DEFAULT_TIMEOUT_INTERVAL = 1000 * 10;
 
 /* const verifyKey = ({ props, data, expect }) => {
   const keys = Object.keys(data);

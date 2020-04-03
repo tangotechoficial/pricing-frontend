@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed, tick, fakeAsync } from '@angular/core/testing';
+/* import { async, ComponentFixture, TestBed, tick, fakeAsync } from '@angular/core/testing';
 import { PrecioBaseComponent } from './preciobase.component';
 import { CondicionService } from 'app/services/condicion.service';
 import { NgxSpinnerService, NgxSpinnerModule } from 'ngx-spinner';
@@ -76,3 +76,4 @@ describe('PrecioBaseComponent', () => {
   })
 
 });
+ */
