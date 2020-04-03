@@ -6,6 +6,7 @@ import { Sequencia } from 'app/models/sequencia';
 import { Condicao } from 'app/models/condicao';
 import { Campo } from 'app/models/campo';
 import { SequenciaValues } from 'app/models/sequencia_values';
+import { EsquemaCalculo } from '@app/models/esquemacalculo';
 
 declare var $: any;
 
@@ -38,6 +39,7 @@ export class PrecioBusiness implements OnInit {
   public currentSequencias: Array<Sequencia>;
   public currentSelectedCampos: Array<Campo>;
   public currentSelectedSequenciaValues: Array<SequenciaValues>;
+  public esquema: EsquemaCalculo;
 
   constructor(
     private esquemaService: EsquemasService,
@@ -78,12 +80,6 @@ export class PrecioBusiness implements OnInit {
 
     this.updateMasterData();
 
-    this.dataListPreencher = [{idCliente: 51 , tipo: 'Consum Final' , valor: '$R30' , valdesd: '12/04/2019' , valate: '99/99/9999'},
-    {idCliente: 52 , tipo: 'Consum Final' , valor: '$R120' , valdesd: '12/04/2020' , valate: '99/99/9999'},
-    {idCliente: 51 , tipo: 'Consum Final' , valor: '$R320' , valdesd: '12/02/2019' , valate: '99/99/9999'},
-    {idCliente: 51 , tipo: 'Consum Final' , valor: '$R320' , valdesd: '12/02/2019' , valate: '99/99/9999'}
-
-  ];
   }
 
   onSelectCondicao(val: Condicao) {
@@ -163,16 +159,18 @@ export class PrecioBusiness implements OnInit {
     this.region = new Array<any>();
     this.mercadoria = new Array<any>();
     this.camadas = new Array<Camada>();
+    this.esquema = new EsquemaCalculo();
     Promise.all([
       this.esquemaService.getFilial().then(fi => fi.map(fiElem => this.filial.push(fiElem))),
       this.esquemaService.getFaturamento().then(fa => fa.map(faElem => this.faturamento.push(faElem))),
       this.esquemaService.getEstado().then(es => es.map(esElem => this.estado.push(esElem))),
       this.esquemaService.getRegion().then(re => re.map(reElem => this.region.push(reElem))),
       this.esquemaService.getMercadoria().then(mer => mer.map(merElem => this.mercadoria.push(merElem))),
-      this.camadaService.getCamadasByType(this.camadaType).then(cam => cam.map(camElem => this.camadas.push(camElem)))
+      this.esquemaService.getEsquemaCalculo('EC001').then(result => {
+        this.esquema = result;
+      })
     ]).then(rs => {
       this.isLoading = false;
-      console.log(this.camadas);
     });
   }
 

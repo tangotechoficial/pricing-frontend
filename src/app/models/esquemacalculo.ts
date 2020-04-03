@@ -2,6 +2,7 @@ import { Condicao } from './condicao';
 
 export class EsquemaCalculo {
     constructor(
+        public id = '',
         // tslint:disable-next-line: variable-name
         public Cod_Esquema_Calculo = '',
         // tslint:disable-next-line: variable-name

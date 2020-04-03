@@ -59,14 +59,20 @@ export class EsquemasService {
         return this.http
             .put(this.url + '/condicao/' + cond.Cod_Condicao + '/', cond, { headers: { 'Content-type': 'application/json' } }).toPromise();
     }
-    getEsquemaCamadaCondicion(): Promise<EsquemaCalculo[]> {
+    getEsquemaCalculo(COD: string): Promise<EsquemaCalculo> {
         return this.http
             .get(this.url + '/esquemacamadacondicion/', { headers: { 'Content-type': 'application/json' } })
             .toPromise()
-            .then(result => {
-                return result as EsquemaCalculo[];
+            .then((result: any) => {
+                let esquema: EsquemaCalculo = new EsquemaCalculo();
+                result.map(elem => {
+                    if (elem.Cod_Esquema_Calculo === COD) {
+                        esquema = elem;
+                    }
+                });
+                console.log(esquema);
+                return esquema as EsquemaCalculo;
             });
-
     }
     /*
       Andrés Atencio 23/03/2020
