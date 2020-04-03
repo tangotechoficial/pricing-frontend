@@ -4,7 +4,7 @@ declare var $: any;
 
 
 @Component({
-  selector: 'app-confirmation-modal',
+  selector: 'confirmation-modal',
   templateUrl: './confirmation-modal.component.html',
   styleUrls: ['./confirmation-modal.component.css']
 })
