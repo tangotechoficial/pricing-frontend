@@ -1,10 +1,9 @@
-import { Component, OnInit ,Input , Output } from '@angular/core';
+import { Component, OnInit , Input } from '@angular/core';
 import { EsquemasService } from 'app/services/esquemas.service';
 import { Camada } from 'app/models/camadas';
 import { CamadaService } from 'app/services/camada.service';
 import { Sequencia } from 'app/models/sequencia';
 import { Condicao } from 'app/models/condicao';
-import { Condicion } from 'app/models/condicion';
 import { Campo } from 'app/models/campo';
 import { SequenciaValues } from 'app/models/sequencia_values';
 
@@ -79,12 +78,12 @@ export class PrecioBusiness implements OnInit {
 
     this.updateMasterData();
 
-    this.dataListPreencher = [{'idCliente':51 , 'tipo':'Consum Final' , 'valor':'$R30' , 'valdesd':'12/04/2019' , 'valate':'99/99/9999'},
-    {'idCliente':52 , 'tipo':'Consum Final' , 'valor':'$R120' , 'valdesd':'12/04/2020' , 'valate':'99/99/9999'},
-    {'idCliente':51 , 'tipo':'Consum Final' , 'valor':'$R320' , 'valdesd':'12/02/2019' , 'valate':'99/99/9999'},
-    {'idCliente':51 , 'tipo':'Consum Final' , 'valor':'$R320' , 'valdesd':'12/02/2019' , 'valate':'99/99/9999'}
+    this.dataListPreencher = [{idCliente: 51 , tipo: 'Consum Final' , valor: '$R30' , valdesd: '12/04/2019' , valate: '99/99/9999'},
+    {idCliente: 52 , tipo: 'Consum Final' , valor: '$R120' , valdesd: '12/04/2020' , valate: '99/99/9999'},
+    {idCliente: 51 , tipo: 'Consum Final' , valor: '$R320' , valdesd: '12/02/2019' , valate: '99/99/9999'},
+    {idCliente: 51 , tipo: 'Consum Final' , valor: '$R320' , valdesd: '12/02/2019' , valate: '99/99/9999'}
 
-  ]
+  ];
   }
 
   onSelectCondicao(val: Condicao) {
@@ -108,7 +107,7 @@ export class PrecioBusiness implements OnInit {
     this.currentSelectedSequenciaValues.push(sequenciavalue);
   }
 
-  openPopUp(tp: string){
+  openPopUp(tp: string) {
     if (tp === 'expedicao') {
       this.bSelectExpedicao = true;
     } else if (tp === 'material') {
@@ -173,7 +172,7 @@ export class PrecioBusiness implements OnInit {
       this.camadaService.getCamadasByType(this.camadaType).then(cam => cam.map(camElem => this.camadas.push(camElem)))
     ]).then(rs => {
       this.isLoading = false;
-      console.log(this.camadas)
+      console.log(this.camadas);
     });
   }
 
