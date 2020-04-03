@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Global } from './global';
 import { CondicionService } from './condicion.service';
+import { EsquemaCalculo } from '@app/models/esquemacalculo';
 
 @Injectable()
 export class EsquemasService {
@@ -57,6 +58,15 @@ export class EsquemasService {
         console.log({cond});
         return this.http
             .put(this.url + '/condicao/' + cond.Cod_Condicao + '/', cond, { headers: { 'Content-type': 'application/json' } }).toPromise();
+    }
+    getEsquemaCamadaCondicion(): Promise<EsquemaCalculo[]> {
+        return this.http
+            .get(this.url + '/esquemacamadacondicion/', { headers: { 'Content-type': 'application/json' } })
+            .toPromise()
+            .then(result => {
+                return result as EsquemaCalculo[];
+            });
+
     }
     /*
       Andrés Atencio 23/03/2020
