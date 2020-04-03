@@ -23,11 +23,11 @@ export class GenericDadaFilterPipe implements PipeTransform {
       }
 
       const i = items[0]
-      
+
       if(!i) {
         return items;
       }
-      
+
       const kargs = Object.keys(args).map((str) => { return str.toUpperCase() })
       const keys = kargs.filter(
         (key) => {
@@ -37,16 +37,18 @@ export class GenericDadaFilterPipe implements PipeTransform {
       })
 
       if (filterDefault) {
-        return items.filter(item =>
-          keys.reduce((x, key) =>{
-            return (x && new RegExp(args[key.toLowerCase()], 'gi').test(item[key])) || args[key.toLowerCase()] == ""
-          }, true))
+        return items.filter(item => {
+          return keys.every((key) => {
+            return  new RegExp(args[key.toLowerCase()], 'gi').test(item[key]) || args[key.toLowerCase()] == ""
+          })
+        })
       }
       return items.filter(item => {
         return keys.some((key) => {
-          return new RegExp(args[key.toLowerCase()], 'gi').test(item[key]) || args[key.toLowerCase()] == ""
+          return  new RegExp(args[key.toLowerCase()], 'gi').test(item[key]) || args[key.toLowerCase()] == ""
         })
       })
+
 
   }
 }
