@@ -38,10 +38,11 @@ export class PrecioVentaComponent implements OnInit {
       Gets type of user to validate
       which component will be shown
     */
-    if (this.sCurrentUser.type !== 'technical') {
-      this.bBusiness = true;
-    } else {
+    console.log(this.sCurrentUser.groups[0].name);
+    if (this.sCurrentUser.groups[0].name !== 'business') {
       this.bBusiness = false;
+    } else {
+      this.bBusiness = true;
     }
     this.loading = true;
     this.tipoValor = new Array<any>();

@@ -13,19 +13,19 @@ export class MenuComponent implements OnInit {
   private token: string;
   public sCurrentUser: any;
   public bBusiness: boolean;
-  public numTotNotif:number = 3;
-  public modalView:boolean = false;
+  public numTotNotif = 3;
+  public modalView = false;
 
   constructor(private authenticationService: AuthenticationService) { }
 
   private setUserInfo() {
-    try{
+    try {
        console.log(this.authenticationService.currentUserValue);
        return JSON.parse(this.authenticationService.currentUserValue);
-    } catch( Error ) {
+    } catch ( Error ) {
         return {
           username: 'Guest'
-        }
+        };
     }
   }
 
@@ -33,15 +33,15 @@ export class MenuComponent implements OnInit {
     this.token = this.authenticationService.currentTokenValue;
     this.sCurrentUser = this.setUserInfo();
     this.sCurrentUser.technical = true;
-    this.bBusiness = true;
+    this.bBusiness = this.sCurrentUser.groups[0].name === 'business' ? true : false;
 
-    setTimeout(function() {
+    setTimeout(() => {
       $('.alert').hide();
     },
     2000);
   }
 
-  closeWelcome(){
+  closeWelcome() {
    this.modalView = true;
   }
 }

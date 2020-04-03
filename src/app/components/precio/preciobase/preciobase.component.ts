@@ -45,7 +45,11 @@ export class PrecioBaseComponent implements OnInit {
   }
 
   checkTypeUser() {
-    this.bBusiness =  false;
+    if (this.sCurrentUser.groups[0].name !== 'business') {
+      this.bBusiness = false;
+    } else {
+      this.bBusiness = true;
+    }
   }
 
   checkTypeBaseVendas() {
