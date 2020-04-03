@@ -98,10 +98,44 @@ export class CondicionComponent implements OnInit {
     Input: Boolean from child component
     Output: Selected condicao object
   */
-  public getSelectedCondicao(val: Condicao) {
-    this.condicion = val;
-    console.log(val);
-    //this.camadas.map(elem => if(elem.Cod_Camada === this.condicion.camada.Cod_Camada))
+  public getSelectedCondicao(val: any) {
+    const checkPos: any = document.getElementById('checkPositivo');
+    const checkNeg: any = document.getElementById('checkNegativo');
+    val.sequencias.map(elem => {
+      const domElem = document.getElementById(elem);
+      domElem.click();
+    });
+    this.condicion.Cod_Condicao = val.Cod_Condicao;
+    this.condicion.Desc_Condicao = val.Desc_Condicao;
+    this.condicion.Escala_Qtde = val.Escala_Qtde;
+    this.condicion.POS_NEG = val.POS_NEG;
+    this.condicion.TIP_BASE_VENDAS = val.TIP_BASE_VENDAS;
+    this.condicion.MANDATORIA = val.MANDATORIA;
+    this.condicion.ESTATISTICA = val.ESTATISTICA;
+    this.camadas.map(elem => {
+      if (elem.Cod_Camada === val.Cod_Camada) {
+        this.condicion.camada = elem;
+      }
+    });
+
+    if (this.condicion.POS_NEG === 'P') {
+      checkPos.checked = true;
+      checkNeg.checked = false;
+    } else {
+      checkPos.checked = false;
+      checkNeg.checked = true;
+    }
+
+    this.chaveContas.map(elem => {
+      if (elem.Cod_ChaveContas === val.Cod_ChaveContas) {
+        this.condicion.chavecontas = elem;
+      }
+    });
+    this.tipoValor.map(elem => {
+      if (elem.Cod_TipoValor === val.Cod_TipoValor) {
+        this.condicion.tipovalor = elem;
+      }
+    });
   }
 
   /*
@@ -178,12 +212,12 @@ export class CondicionComponent implements OnInit {
 
     if (e.target.id === 'checkNegativo' && checkPos.checked) {
       checkPos.click();
-      this.condicion.POS_NEG = 0;
+      this.condicion.POS_NEG = 'N';
     }
 
     if (e.target.id === 'checkPositivo' && checkNeg.checked) {
       checkNeg.click();
-      this.condicion.POS_NEG = 1;
+      this.condicion.POS_NEG = 'P';
     }
   }
 
@@ -238,7 +272,7 @@ export class CondicionComponent implements OnInit {
     Input: null
     Output: Create new Condicao
   */
-  public postCondicao() {
+  async postCondicao(callback) {
     this.spinner.show();
     this.condicionService.postCondicao(this.condicion)
       .then(result => {
@@ -246,11 +280,12 @@ export class CondicionComponent implements OnInit {
           const domElem: any = document.getElementById(elem.Cod_Sequencia);
           domElem.checked = false;
         });
-        this.spinner.hide();
         this.saveSucess = true;
         setTimeout(() => {
           this.saveSucess = false;
           this.condicion = new Condicao();
+          this.spinner.hide();
+          callback(true);
         }, 2000);
       });
   }
@@ -261,17 +296,20 @@ export class CondicionComponent implements OnInit {
     Input: null
     Output: Edit Condicao
   */
-  public putCondicao() {
+  public putCondicao(callback) {
+    this.spinner.show();
     this.condicionService.putCondicao(this.condicion)
       .then(result => {
+        this.saveSucess = true;
         this.sequencias.map( elem => {
           const domElem: any = document.getElementById(elem.Cod_Sequencia);
           domElem.checked = false;
         });
-        this.saveSucess = true;
         setTimeout(() => {
           this.saveSucess = false;
-        }, 3000);
+          this.condicion = new Condicao();
+          callback(true);
+        }, 1000);
       });
   }
 
@@ -280,13 +318,17 @@ export class CondicionComponent implements OnInit {
     Input: null
     Output: null
   */
-  public onSubmitCondicao() {
+  onSubmitCondicao() {
     if (this.bCreateMode) {
-      this.postCondicao();
-      this.updateMasterData();
+      this.postCondicao((val: boolean) => {
+
+      });
     } else {
-      this.putCondicao();
-      this.updateMasterData();
+      this.putCondicao((val: boolean) => {
+        if (val) {
+          this.updateMasterData();
+        }
+      });
     }
   }
 

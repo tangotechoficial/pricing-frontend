@@ -20,6 +20,7 @@ export class MenuComponent implements OnInit {
 
   private setUserInfo() {
     try{
+       console.log(this.authenticationService.currentUserValue);
        return JSON.parse(this.authenticationService.currentUserValue);
     } catch( Error ) {
         return {
@@ -31,6 +32,7 @@ export class MenuComponent implements OnInit {
   ngOnInit() {
     this.token = this.authenticationService.currentTokenValue;
     this.sCurrentUser = this.setUserInfo();
+    this.sCurrentUser.technical = true;
     this.bBusiness = true;
 
     setTimeout(function() {

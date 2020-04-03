@@ -11,14 +11,15 @@ export class SaccesoService {
     private header = { headers: { 'Content-type': 'application/json' } };
 
   constructor(private http: HttpClient) {
-    this.url = Global.url;
+    //this.url = Global.url;
+    this.url = 'https://pricing.tangotechapp.com/api/v1';
   }
 
     getCampos(): Promise<any> {
-        return this.http.get(this.url + '/seqcampo/', this.header)
+        return this.http.get(this.url + '/campo/', this.header)
             .toPromise()
             .then((response: any) => {
-                return response.results as Campo[];
+                return response as Campo[];
             })
             .catch(err => {
                 throw new Error(err);
@@ -40,7 +41,7 @@ export class SaccesoService {
 
     postCampo(campo: Campo): Promise<any> {
         return this.http
-            .post(this.url + '/seqcampo/', { Cod_Campo: campo.Cod_Campo, Nome_Campo: campo.Nome_Campo}, this.header).toPromise();
+            .post(this.url + '/campo/', { Cod_Campo: campo.Cod_Campo, Nome_Campo: campo.Nome_Campo}, this.header).toPromise();
     }
 
     getLastSequencia(): Promise<any> {
@@ -48,6 +49,6 @@ export class SaccesoService {
     }
 
     getLastCampo(): Promise<any> {
-      return this.http.get(this.url + '/seqcampo/last/', this.header).toPromise();
+      return this.http.get(this.url + '/campo/last/', this.header).toPromise();
   }
 }

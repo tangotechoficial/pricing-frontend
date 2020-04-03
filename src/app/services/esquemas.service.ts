@@ -29,13 +29,8 @@ export class EsquemasService {
         return this.http.delete(this.url + '/condicaocamadaesquema/' + id, { headers: { 'Content-type': 'application/json' } }).toPromise();
     }
 
-    getEsquemaRelation(): Promise<any> {
-        return this.http.get(this.url + '/condicaocamadaesquema/', { headers: { 'Content-type': 'application/json' } }).toPromise();
-    }
-
     async getEsquema() {
         return await Promise.all([
-            this.getEsquemaRelation(),
             this.condicionService.getCamadas(),
             this.condicionService.getCondicaos()
         ]);
@@ -67,42 +62,18 @@ export class EsquemasService {
       Get data and make relations
     */
     fetchCondicaoCamadaEsquema(tipoBaseVendas: string) {
-
         const dataCondicaoCamadaEsquema = [];
-
         return new Promise((resolve, reject) => {
 
             // Fetch data
             Promise.all([
                 this.condicionService.getTiposValor(),
-                this.condicionService.getCamadas(),
-                this.condicionService.getCondicaos(),
-                this.getEsquemaRelation()
-              ]).then(([tipoValor, camadas, condicaos, esquemaRelations]) => {
-
-                // Filter camadas by TIPO_BASE_VENDAS
-                camadas = camadas.filter((camada: any) => camada.TIPO_BASE_VENDAS === tipoBaseVendas);
-
-                // Relations
-                camadas.forEach(elem => {
-
-                    const esquemaRelationsFiltered = esquemaRelations.filter(esqRel => esqRel.Cod_Camada === elem.Cod_Camada);
-                    const condicaosFiltered = esquemaRelationsFiltered.map(esqRel => {
-                        const condicaoWithIdRelation: any = condicaos.filter(cond => cond.Cod_Condicao === esqRel.Cod_Condicao)[0];
-                        condicaoWithIdRelation.idCondicaoCamadaEsquema = esqRel.id;
-                        return condicaoWithIdRelation;
-                    });
-
-                    const data = {
-                        camada: elem,
-                        condicaos: condicaosFiltered,
-                        condicaosAllow: condicaos.filter((cond: any) => cond.Cod_Camada === elem.Cod_Camada),
-                        tipoValor
-                    };
-
-                    dataCondicaoCamadaEsquema.push(data);
-                });
-
+                this.condicionService.getCamadasAndCondicaos(),
+                this.condicionService.getCondicaos()
+              ]).then(([tipoValor, camadas, condicaos]) => {
+                dataCondicaoCamadaEsquema.push(tipoValor);
+                dataCondicaoCamadaEsquema.push(camadas);
+                dataCondicaoCamadaEsquema.push(condicaos);
                 resolve(dataCondicaoCamadaEsquema);
 
               })

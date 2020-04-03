@@ -45,11 +45,11 @@ export class PrecioBaseComponent implements OnInit {
   }
 
   checkTypeUser() {
-    this.bBusiness = this.sCurrentUser.username !== 'tester' ? true : false;
+    this.bBusiness =  false;
   }
 
   checkTypeBaseVendas() {
-    this.typeBaseVendas = window.location.pathname === '/preciobase' ? 'B' : 'v';
+    this.typeBaseVendas = window.location.pathname === '/preciobase' ? 'B' : 'V';
     this.typeBaseVendasDesc = this.typeBaseVendas === 'B' ? 'Base' : 'Vendas';
     this.typeBase = window.location.pathname === '/preciobase' ? true : false;
   }
@@ -60,10 +60,10 @@ export class PrecioBaseComponent implements OnInit {
       .then(camadasFullData => {
         this.stopLoading();
         this.camadasFullData = camadasFullData;
+        console.log(camadasFullData);
       })
       .catch(err => {
         this.stopLoading();
-        console.log(err);
       });
   }
 

@@ -211,10 +211,10 @@ export class SaccesoComponent implements OnInit {
           domElem.checked = false;
         });
         this.spinner.hide();
-        this.getLastSequencia();
         setTimeout(function() {
           this.saveSuccess = false;
           this.sequencia = new Sequencia();
+          this.getLastSequencia();
         }.bind(this), 2000);
 
       });

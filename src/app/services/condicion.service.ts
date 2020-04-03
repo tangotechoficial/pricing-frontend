@@ -15,7 +15,8 @@ export class CondicionService {
   public url: string;
   public condicion: Array<any>;
   constructor(private http: HttpClient) {
-    this.url = Global.url;
+    //this.url = Global.url;
+    this.url = 'https://pricing.tangotechapp.com/api/v1';
   }
 
   getCamadas(): Promise<Camada[]> {
@@ -25,7 +26,21 @@ export class CondicionService {
       })
       .toPromise()
       .then((result: any) => {
-        return result.results as Camada[];
+        return result as Camada[];
+      })
+      .catch(err => {
+        throw new Error(err);
+      });
+  }
+
+  getCamadasAndCondicaos(): Promise<Camada[]> {
+    return this.http
+      .get(this.url + '/camadacond/', {
+        headers: { 'Content-type': 'application/json' }
+      })
+      .toPromise()
+      .then((result: any) => {
+        return result as Camada[];
       })
       .catch(err => {
         throw new Error(err);
@@ -39,7 +54,7 @@ export class CondicionService {
       })
       .toPromise()
       .then((result: any) => {
-        return result.results as ChaveContas[];
+        return result as ChaveContas[];
       })
       .catch(err => {
         throw new Error(err);
@@ -53,7 +68,7 @@ export class CondicionService {
       })
       .toPromise()
       .then((result: any) => {
-        return result.results as TipoValor[];
+        return result as TipoValor[];
       })
       .catch(err => {
         throw new Error(err);
@@ -67,7 +82,7 @@ export class CondicionService {
       })
       .toPromise()
       .then((result: any) => {
-        return result.results as Sequencia[];
+        return result as Sequencia[];
       })
       .catch(err => {
         throw new Error(err);
@@ -110,9 +125,10 @@ export class CondicionService {
     const codSequencias = [];
     condicion.sequencias.map(elem => codSequencias.push(elem.Cod_Sequencia));
     return this.http
-      .post(
+      .put(
         this.url + '/condicao/' + condicion.Cod_Condicao + '/',
         {
+          Cod_Condicao: condicion.Cod_Condicao,
           Desc_Condicao: condicion.Desc_Condicao,
           Escala_Qtde: condicion.Escala_Qtde ? 1 : 0,
           POS_NEG: condicion.POS_NEG ? 'N' : 'P',
@@ -160,7 +176,7 @@ export class CondicionService {
       })
       .toPromise()
       .then((result: any) => {
-        return result.results as Condicao[];
+        return result as Condicao[];
       })
       .catch(err => {
         throw new Error(err);
