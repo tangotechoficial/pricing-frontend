@@ -60,7 +60,7 @@ export class PrecioBaseComponent implements OnInit {
 
   fetchData() {
     this.esquemasService
-      .fetchCondicaoCamadaEsquema(this.typeBaseVendas)
+      .fetchCondicaoCamadaEsquema2(this.typeBaseVendas)
       .then(camadasFullData => {
         this.stopLoading();
         this.camadasFullData = camadasFullData;
