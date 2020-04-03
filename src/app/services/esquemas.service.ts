@@ -12,7 +12,8 @@ export class EsquemasService {
         private http: HttpClient,
         private condicionService: CondicionService
     ) {
-        this.url = Global.url;
+        //this.url = Global.url;
+        this.url = 'https://pricing.tangotechapp.com/api/v1';
     }
 
     getMercadoria(): Promise<any> {
