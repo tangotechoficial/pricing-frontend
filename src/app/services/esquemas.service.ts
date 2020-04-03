@@ -78,28 +78,95 @@ export class EsquemasService {
       Andrés Atencio 23/03/2020
       Get data and make relations
     */
-    fetchCondicaoCamadaEsquema(tipoBaseVendas: string) {
-        const dataCondicaoCamadaEsquema = [];
-        return new Promise((resolve, reject) => {
 
-            // Fetch data
-            Promise.all([
-                this.condicionService.getTiposValor(),
-                this.condicionService.getCamadasAndCondicaos(),
-                this.condicionService.getCondicaos()
-              ]).then(([tipoValor, camadas, condicaos]) => {
-                dataCondicaoCamadaEsquema.push(tipoValor);
-                dataCondicaoCamadaEsquema.push(camadas);
-                dataCondicaoCamadaEsquema.push(condicaos);
-                resolve(dataCondicaoCamadaEsquema);
+  getEsquemaRelation(): Promise<any> {
+    return this.http
+      .get(this.url + "/condicaocamadaesquema/", {
+        headers: { "Content-type": "application/json" }
+      })
+      .toPromise();
+  }
 
-              })
-              .catch(err => {
-                  reject({err, msg: 'Error fetchCondicaoCamadaEsquema'});
-              });
+  fetchCondicaoCamadaEsquema2(tipoBaseVendas: string) {
+    let dataCondicaoCamadaEsquema = [];
+    return new Promise((resolve, reject) => {
+      const promiseEsquemaCada = fetch(
+        this.url + "/esquemacamada/"
+      ).then(resp => resp.json());
+      const promiseTipoValor = this.condicionService.getTiposValor();
+
+      Promise.all([promiseEsquemaCada, promiseTipoValor]).then(
+        ([data, tipoValor]) => {
+          console.log({ data });
+          let camadas = data.filter(
+            cam => cam.TIP_BASE_VENDAS == tipoBaseVendas
+          );
+          camadas = camadas[0].camadas;
+          camadas.forEach(camada => {
+            const data = {
+              camada: camada,
+              condicaos: camada.condicaos,
+              condicaosAllow: camada.condicaos,
+              tipoValor: tipoValor
+            };
+
+            dataCondicaoCamadaEsquema.push(data);
+          });
+          resolve(dataCondicaoCamadaEsquema);
+        }
+      ).catch(err => {
+        reject(err);
+      })
+    });
+  }
+
+  fetchCondicaoCamadaEsquema(tipoBaseVendas: string) {
+    let dataCondicaoCamadaEsquema = [];
+
+    return new Promise((resolve, reject) => {
+      // Fetch data
+      Promise.all([
+        this.condicionService.getTiposValor(),
+        this.condicionService.getCamadas(),
+        this.condicionService.getCondicaos(),
+        this.getEsquemaRelation()
+      ])
+        .then(([tipoValor, camadas, condicaos, esquemaRelations]) => {
+          // Filter camadas by TIPO_BASE_VENDAS
+          camadas = camadas.filter(
+            (camada: any) => camada.TIPO_BASE_VENDAS === tipoBaseVendas
+          );
+
+          // Relations
+          camadas.forEach(elem => {
+            const esquemaRelationsFiltered = esquemaRelations.filter(
+              esqRel => esqRel.Cod_Camada === elem.Cod_Camada
+            );
+            const condicaosFiltered = esquemaRelationsFiltered.map(esqRel => {
+              const condicaoWithIdRelation: any = condicaos.filter(
+                cond => cond.Cod_Condicao === esqRel.Cod_Condicao
+              )[0];
+              condicaoWithIdRelation.idCondicaoCamadaEsquema = esqRel.id;
+              return condicaoWithIdRelation;
+            });
+
+            const data = {
+              camada: elem,
+              condicaos: condicaosFiltered,
+              condicaosAllow: condicaos.filter(
+                (cond: any) => cond.Cod_Camada === elem.Cod_Camada
+              ),
+              tipoValor: tipoValor
+            };
+
+            dataCondicaoCamadaEsquema.push(data);
+          });
+
+          resolve(dataCondicaoCamadaEsquema);
+        })
+        .catch(err => {
+          reject({ err, msg: "Error fetchCondicaoCamadaEsquema" });
         });
-    }
+    });
+  }
 }
-
-
-
