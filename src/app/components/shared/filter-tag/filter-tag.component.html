@@ -1,8 +1,8 @@
 <div class="col-12">
-  <ng-container *ngFor="let item of filters|keyvalue">
-    <div *ngIf="item.value" [attr.data-field]="item.key" [attr.id]="item.key" class="badge badge-secondary">
-      <span>{{ item.value }}</span>
-      <a class="close" aria-label="close" [attr.data-dismiss]="item.key" (click)="remove($event)">&times;</a>
+  <ng-container *ngFor="let item of filters">
+    <div *ngIf="item.objVal" [attr.data-field]="item.ojbKey" [attr.id]="item.ojbKey" class="badge badge-secondary">
+      <span>{{ item.objVal }}</span>
+      <a class="close" aria-label="close" [attr.data-dismiss]="item.ojbKey" (click)="remove($event)">&times;</a>
     </div>
   </ng-container>
 </div>
