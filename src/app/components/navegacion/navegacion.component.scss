@@ -1,19 +1,13 @@
 // UNIFICAR VARIABLES EN NAVEGACION Y MENU .SCSS
-
+@import '../../../assets/styles/global.scss';
 $color-prim:#737373;
 $color-prim-light:#9FA2AB;
 $color-prim-light2:#E7E9F1;
-$color-sec:#6288CB;
 
 $mobile : 350px;
 $tablet : 770px;
 $desktop : 3000px;
 
-
-.custom-nav{
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
 
 .custom-container {
     height: 70px;
@@ -24,9 +18,6 @@ $desktop : 3000px;
     color: #9FA2AB;
 }
 
-.isLogMenu{
-		padding-left:10px;
-}
 .barWidth{
 	width: 86%;
 	margin:0 auto;
@@ -60,13 +51,12 @@ $desktop : 3000px;
 			cursor:pointer;
 		}
 		&:hover i{
-			color:$color-sec !important;
+			color:$martinsBlue !important;
 			transition:1s;
 		}
 		&.bellIcon{
 			position: relative;
 			.myBadge{
-				background-color: $color-sec;
 				border-radius:42%;
 				position: absolute;
 				height: 17px;
@@ -75,43 +65,28 @@ $desktop : 3000px;
 				right:-3px;
 				opacity:0.95;
 				p {
-					color:white;
-					text-align: center;
 					font-size: 12px;
 					margin-top:-1px;
 				}
-
-
 			}
 		}
 		&.logoIcon{
 			display: none;
-
-
 			@media (min-width: $tablet) and (max-width: $desktop) {
 			  display: inline-block;
 			}
 			img{
 				width: 140px;
 			}
-
-
-
 		}
 		&.logoIcon2{
 			display: none;
-			margin:0px;
-			margin-top:8px;
 			@media (min-width: 0px) and (max-width: $tablet) {
 			  display: inline-block;
-
 			}
 			img{
 				width: 40px;
 			}
-
-
-
 		}
 
 	}
@@ -122,7 +97,6 @@ $desktop : 3000px;
 
 	.itemtab{
 		font-size: 14px !important;
-		color:$color-prim;
 	}
 
 
@@ -144,17 +118,11 @@ $desktop : 3000px;
 		margin:25px;
 
 	}
-	.notifTab{
-		color:$color-sec;
-		font-weight: 700;
-	}
 	.notificationTitle{
 		height: 45px;
-		text-align: center;
 		padding:13px;
 		h4{
 			color:$color-prim;
-			font-weight: 700;
 			font-size:15px;
 
 		}
@@ -172,87 +140,38 @@ $desktop : 3000px;
 			.notificationItem{
 
 				.notiWrapp{
-				padding:10px 16px 0px 16px;
 				font-size: 12px;
 				color:$color-prim;
-				width: 100%;
 				background-color: #EAEFF8;
 				border-radius: 5px;
-				margin-right:0px !important;
-				margin-top: 10px;
 				cursor: pointer;
 				.titleMod{
 
 					.title{
-						font-weight: 700;
 						font-size:13.5px;
-						.complete{
-							padding-left:5px;
-							color:$color-sec;
-							font-weight: 700;
-						}
-					}
-					.title2{
-
-						text-align: right;
 					}
 				}
 
 				.descriptionMod{
 					position: relative;
-					padding-bottom:5px;
-					.description{
-						text-transform: uppercase;
-						margin-bottom: 	3px;
-
-					}
 					.detProd{
-
 						padding:10px;
 						td,  th {
-						    border: none;
-								color:$color-prim;
-						}
-						th{
-							font-weight: 400;
+							color:$color-prim;
 						}
 						td{
-							text-align:center;
 							border-radius:5px !important;
 							background:#F7F8FB;
-							padding:5px;
 							border-right:1px solid #E7E9F1;
 						}
 					}
 				}
 			}
-			.col-xs-6{
-					padding:0px !important ;
-			}
-			.verif{
-					background-color: $color-sec !important;
-					border:0px;
-					width: 100% !important;
-					border-radius:0px;
-					padding:5px !important;
-					font-weight: 700;
-					font-size:14px;
-					border-right:3px solid #E7E9F1;
-					&.noline{
-						border-right:0px;
-					}
-
-
-
-			}
-			}
+		}
 			.nonotif{
-				padding:20px 0px 0px 20px;
 				p{
 					font-size: 12px;
 					color:$color-prim;
-					text-align: center;
-					margin-bottom: 0px;
 				}
 			}
 
