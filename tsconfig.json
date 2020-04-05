@@ -24,6 +24,9 @@
       "@helpers/*": [
         "app/helpers/*",
       ],
+      "@pipes/*": [
+        "app/pipes/*"
+      ],
       "@services/*": [
         "app/services/*",
       ],
