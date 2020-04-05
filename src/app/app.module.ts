@@ -55,6 +55,8 @@ import { CamadaService } from './services/camada.service';
 import { registerLocaleData }  from '@angular/common'
 import localePt from '@angular/common/locales/pt';
 import { FilterTagComponent } from './components/shared/filter-tag/filter-tag.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+
 registerLocaleData(localePt, 'pt',);
 @NgModule({
   declarations: [
@@ -109,7 +111,8 @@ registerLocaleData(localePt, 'pt',);
     FontAwesomeModule,
     AutocompleteLibModule ,
     BrowserAnimationsModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    NgxChartsModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: FakeDataProviderInterceptor, multi: true},
