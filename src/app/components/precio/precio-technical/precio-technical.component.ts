@@ -40,6 +40,7 @@ export class PrecioTechnical {
     const condicaos = this.camada.condicaos.map(cond => {
       const tipValor = this.tipoValor.filter(tipoValor => tipoValor.Cod_TipoValor === cond.Cod_TipoValor)[0]
       cond.Desc_TipoValor = tipValor.Desc_TipoValor;
+      console.log({cond})
       return new ModelCondicao(cond)
     })
     this.condicaos = condicaos
@@ -92,7 +93,8 @@ export class PrecioTechnical {
 
 
   addCondicao(val){
-    const modelcondicao = this.camada.condicaosAllow.filter(cond => cond.Cod_Condicao === val.sCodCondicion)[0]
+
+    const modelcondicao = this.camada.condicaosAllow.filter(cond => cond.Cod_Condicao === val.Cod_Condicao)[0]
     const tipValor = this.tipoValor.filter(tipoValor => tipoValor.Cod_TipoValor === modelcondicao.Cod_TipoValor)[0]
     modelcondicao.Desc_TipoValor = tipValor.Desc_TipoValor
     this.condicaos[this.condicaos.length - 1].set(modelcondicao)
@@ -121,7 +123,7 @@ export class PrecioTechnical {
   }
 
   updateMandatoria(condicao) {
-    // console.log({condicao})
+    console.log({condicao})
     this.selectedObject.emit({action: 'UPDATE', camada: this.camadaU, condicaos: condicao});
   }
 

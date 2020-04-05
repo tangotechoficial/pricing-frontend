@@ -64,9 +64,10 @@ export class PrecioBaseComponent implements OnInit {
       .then(camadasFullData => {
         this.stopLoading();
         this.camadasFullData = camadasFullData;
-        console.log(camadasFullData);
+        
       })
       .catch(err => {
+        console.log(err)
         this.stopLoading();
       });
   }
@@ -83,17 +84,22 @@ export class PrecioBaseComponent implements OnInit {
 
 
   submiteEsquema() {
-    // console.log({camadasUpdate: this.camadasUpdate})
+    console.log({camadasUpdate: this.camadasUpdate})
     $('#myModalPrecioBase').modal('show');
     const promisesAddCondCamadaEsq: Array<any> = Object.keys(this.camadasUpdate.ADD).map(codCamada => {
       return this.camadasUpdate.ADD[codCamada].map(cond => {
+        console.log("ADD")
+        console.log({cond})
           // new relations
-          const objCondCamadaEsq = {
-            Cod_Esquema_Calculo: 'EC000', // CAMBIAR PARA VENTAS
-            Cod_Condicao: cond.Cod_Condicao,
-            Cod_Camada: codCamada
-          };
-          return this.esquemasService.postEsquema(objCondCamadaEsq);
+          const objEsqCamCond = {
+            "id": cond.idEsqCamCond,
+            "Cod_Esquema_Calculo": "EC000",
+            "Cod_Camada": "CA001",
+            "CONDICAO": [
+                "CO000"
+            ]
+        }
+          // return this.esquemasService.putEsquemaCamadaCondicion(objEsqCamCond);
       });
     });
 
@@ -107,6 +113,7 @@ export class PrecioBaseComponent implements OnInit {
       return this.camadasUpdate.UPDATE[codCamada].map(cond => {
         cond.MANDATORIA = cond.MANDATORIA ? 1 : 0;
         cond.ESTATISTICA = cond.ESTATISTICA ? 1 : 0;
+
         return this.esquemasService.updateCondicao(cond);
       });
     });
@@ -115,7 +122,7 @@ export class PrecioBaseComponent implements OnInit {
 
 
     Promise.all(promisesCondCamadaEsq)
-      .then(this.verifyErrorFetchData)
+      // .then(this.verifyErrorFetchData)
       .then(data => {
         console.log('oks');
         console.log({data});
