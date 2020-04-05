@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Global } from './global';
 import { CondicionService } from './condicion.service';
+import { environment } from '@env/environment';
 
 @Injectable()
 export class EsquemasService {
@@ -12,7 +12,7 @@ export class EsquemasService {
         private http: HttpClient,
         private condicionService: CondicionService
     ) {
-        this.url = Global.url;
+        this.url = `${environment.apiUrl}/dinamica`;
     }
 
     getMercadoria(): Promise<any> {
@@ -112,6 +112,3 @@ export class EsquemasService {
         });
     }
 }
-
-
-

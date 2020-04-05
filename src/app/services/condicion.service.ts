@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Global } from './global';
 import { Condicion } from '../models/condicion';
 import { map } from 'rxjs/operators';
 import { Sequencia } from 'app/models/sequencia';
@@ -8,14 +7,14 @@ import { Condicao } from 'app/models/condicao';
 import { ChaveContas } from 'app/models/chavecontas';
 import { TipoValor } from 'app/models/tipovalor';
 import { Camada } from 'app/models/camadas';
-
+import { environment} from '@env/environment'
 
 @Injectable()
 export class CondicionService {
   public url: string;
   public condicion: Array<any>;
   constructor(private http: HttpClient) {
-    this.url = Global.url;
+    this.url = `${environment.apiUrl}/dinamica`;
   }
 
   getCamadas(): Promise<Camada[]> {

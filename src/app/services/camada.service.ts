@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Global } from './global';
 import { Camada } from 'app/models/camadas';
 import { Observable } from 'rxjs';
+import { environment} from '@env/environment'
 
 @Injectable({providedIn: 'root'})
 export class CamadaService {
@@ -12,7 +12,7 @@ export class CamadaService {
     constructor(
         private http: HttpClient,
     ) {
-        this.url = Global.url;
+        this.url = `${environment.apiUrl}/dinamica`;
     }
 
     getCamadas(): Promise<any> {
@@ -36,6 +36,3 @@ export class CamadaService {
             });
     }
 }
-
-
-
