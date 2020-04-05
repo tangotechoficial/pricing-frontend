@@ -1,8 +1,8 @@
 export class ChaveContas {
     constructor(
         // tslint:disable-next-line: variable-name
-        public Cod_ChaveContas = '',
+        public cod_chavecontas = '',
         // tslint:disable-next-line: variable-name
-        public Desc_ChaveContas = ''
+        public desc_chavecontas = ''
     ) {}
 }

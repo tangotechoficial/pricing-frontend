@@ -11,11 +11,11 @@
     <div class="container row col-12 p-4">
         <div class="col-sm-2">
             <span class="text-header">Cód. Condição</span>
-            <input class="form-control mt-3" value="TBNC" [(ngModel)]="condicion.Cod_Condicao" readonly/>
+            <input class="form-control mt-3" value="TBNC" [(ngModel)]="condicion.cod_condicao" readonly/>
         </div>
         <div class="col-sm-3 p-0">
             <span class="text-header">Descrição da condição</span>
-            <input class="form-control mt-3" [(ngModel)]="condicion.Desc_Condicao" value="Beneficio customizado" />
+            <input class="form-control mt-3" [(ngModel)]="condicion.desc_condicao" value="Beneficio customizado" />
         </div>
         <div *ngIf="bCreateMode"  class="col-sm-1 mt-5 mb-2 d-flex justify-content-center align-items-center">
             <i class="fas fa-search disabledSearch"></i>
@@ -28,10 +28,10 @@
             <div class="dropdown col-10 p-0 mt-3">
                 <button class="col-12 d-flex justify-content-between align-items-center btn btn-light dropdown-toggle bg-white border rounded" type="button" id="dropdownMenuButton"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {{this.condicion.camada.Nome_Camada != '' ? this.condicion.camada.Nome_Camada : this.sSeleccionCamadaPlaceholder}}
+                    {{this.condicion.camada.nome_camada != '' ? this.condicion.camada.nome_camada : this.sSeleccionCamadaPlaceholder}}
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a *ngFor="let ca of camadas ; let id = index" class="dropdown-item" (click)="getSelectedCamada(ca)">{{ca.Nome_Camada}}</a>
+                    <a *ngFor="let ca of camadas ; let id = index" class="dropdown-item" (click)="getSelectedCamada(ca)">{{ca.nome_camada}}</a>
                 </div>
             </div>
         </div>
@@ -39,13 +39,13 @@
     <div class="container row col-12 p-4">
         <div class="col-sm-2">
             <span class="text-header">Chave de contas</span>
-            <input *ngIf="condicion.chavecontas.Cod_ChaveContas != ''" [(ngModel)]="condicion.chavecontas.Cod_ChaveContas" class="form-control mt-3" placeholder="Chave" readonly/>
-            <input *ngIf="condicion.chavecontas.Desc_ChaveContas === ''" class="form-control mt-3" readonly/>
+            <input *ngIf="condicion.chavecontas.cod_chavecontas != ''" [(ngModel)]="condicion.chavecontas.cod_chavecontas" class="form-control mt-3" placeholder="Chave" readonly/>
+            <input *ngIf="condicion.chavecontas.cod_chavecontas === ''" class="form-control mt-3" readonly/>
         </div>
         <div class="col-sm-3 p-0">
             <span class="text-header">Descrição da chave de contas</span>
-            <input *ngIf="condicion.chavecontas.Desc_ChaveContas != ''" [(ngModel)]="condicion.chavecontas.Desc_ChaveContas" class="form-control mt-3" readonly/>
-            <input *ngIf="condicion.chavecontas.Desc_ChaveContas === ''" class="form-control mt-3" readonly/>
+            <input *ngIf="condicion.chavecontas.desc_chavecontas != ''" [(ngModel)]="condicion.chavecontas.desc_chavecontas" class="form-control mt-3" readonly/>
+            <input *ngIf="condicion.chavecontas.desc_chavecontas === ''" class="form-control mt-3" readonly/>
         </div>
         <div class="col-sm-1 mt-5 mb-2 d-flex justify-content-center align-items-center">
             <i (click)="onSearchChaveContas()" class="fas fa-search"></i>
@@ -55,10 +55,10 @@
             <div class="dropdown mt-3">
                 <button class="d-flex justify-content-between align-items-center btn btn-light dropdown-toggle valor-dropdown bg-white border rounded" type="button" id="dropdownMenuButton"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {{this.condicion.tipovalor.Cod_TipoValor != '' ? this.condicion.tipovalor.Desc_TipoValor : this.sSeleccionPlaceholder}}
+                    {{this.condicion.tipovalor.cod_tipovalor != '' ? this.condicion.tipovalor.desc_tipovalor : this.sSeleccionPlaceholder}}
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a *ngFor="let tp of tipoValor ; let id = index" class="dropdown-item" (click)="getSelectedTipoValor(tp)">{{tp.Desc_TipoValor}}</a>
+                    <a *ngFor="let tp of tipoValor ; let id = index" class="dropdown-item" (click)="getSelectedTipoValor(tp)">{{tp.desc_tipovalor}}</a>
                 </div>
             </div>
         </div>
@@ -99,8 +99,8 @@
                     <li *ngFor="let sequencia of sequencias" class="p-2">
                         <div class="custom-control pl-3 custom-checkbox">
                             <input (change)="checkValue(sequencia)" type="checkbox"
-                                class="sacceso-opcion custom-control-input" id="{{sequencia.Cod_Sequencia}}">
-                            <label class="pl-4 custom-control-label" for="{{sequencia.Cod_Sequencia}}">{{sequencia.Nome_Sequencia}}</label>
+                                class="sacceso-opcion custom-control-input" id="{{sequencia.cod_sequencia}}">
+                            <label class="pl-4 custom-control-label" for="{{sequencia.cod_sequencia}}">{{sequencia.nome_sequencia}}</label>
                         </div>
                     </li>
                 </ul>
@@ -116,7 +116,7 @@
                 <ul class="p-0 martins-scrollbar">
                     <li *ngFor="let sequencia of condicion.sequencias" class="p-2">
                         <div class="d-flex w-100 justify-content-between align-items-center">
-                            <label class="pl-4 mb-0">{{sequencia.Nome_Sequencia}}</label>
+                            <label class="pl-4 mb-0">{{sequencia.nome_sequencia}}</label>
                             <button type="button" (click)="onDltSelection(sequencia)"
                                 class="btn btn-danger ml-2 p-0 d-flex flex-column align-items-center">
                                 <span class="btn-label d-flex align-items-center"><i
@@ -139,14 +139,14 @@
     <div class="row justify-content-md-center">
         <!-- Success Message -->
         <div *ngIf="saveSucess" class="col-md-8 alert alert-success" role="alert">
-            <strong>{{this.condicion.Cod_Condicao}} - {{this.condicion.Desc_Condicao}} salva com sucesso!</strong>
+            <strong>{{this.condicion.cod_condicao}} - {{this.condicion.desc_condicao}} salva com sucesso!</strong>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
         </div>
         <!-- Error Message -->
         <div *ngIf="saveError" class="col-md-8 alert alert-danger" role="alert">
-            <strong>{{this.condicion.Desc_Condicao}}</strong>
+            <strong>{{this.condicion.desc_condicao}}</strong>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>

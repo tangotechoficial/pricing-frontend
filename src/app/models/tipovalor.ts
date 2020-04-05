@@ -1,8 +1,8 @@
 export class TipoValor {
     constructor(
         // tslint:disable-next-line: variable-name
-        public Cod_TipoValor = '',
+        public cod_tipovalor = '',
         // tslint:disable-next-line: variable-name
-        public Desc_TipoValor = ''
+        public desc_tipovalor = ''
     ) {}
 }

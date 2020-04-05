@@ -1,15 +1,15 @@
 export class Campo {
     // tslint:disable-next-line: variable-name
-    public Cod_Campo: string;
+    public cod_campo: string;
     // tslint:disable-next-line: variable-name
-    public Nome_Campo: string;
-    public Value: any;
+    public nome_campo: string;
+    public value: any;
 
     constructor(
         // tslint:disable-next-line: variable-name
-        Cod_Campo = '',
+        cod_campo = '',
         // tslint:disable-next-line: variable-name
-        Nome_Campo = '',
-        Value = ''
+        nome_campo = '',
+        value = ''
     ) {}
 }

@@ -137,19 +137,15 @@ export class EsquemasService {
             this.getEsquemaRelation()
           ]).then(([tipoValor,camadas,condicaos, esquemaRelations]) => {
             console.log({tipoValor,camadas,condicaos, esquemaRelations})
-            // tipoValor = tipoValor.results;
-            // camadas = camadas.results;
-            // condicaos = condicaos.results;
-            // esquemaRelations = esquemaRelations.results;
-
+            
             // Filter camadas by TIPO_BASE_VENDAS
             camadas = camadas.filter((camada: any) => camada.tipo_base_vendas === tipoBaseVendas);
             // Relations
             camadas.forEach(elem => {
 
-                const esquemaRelationsFiltered = esquemaRelations.filter(esqRel => esqRel.cod_camada === elem.cod_camada)
-                const condicaosFiltered = esquemaRelationsFiltered.map(esqRel => {
-                    const condicaoWithIdRelation = condicaos.filter(cond => cond.cod_condicao == esqRel.cod_condicao)[0]
+                const esquemaRelationsFiltered = esquemaRelations.filter((esqRel: any) => esqRel.cod_camada === elem.cod_camada)
+                const condicaosFiltered = esquemaRelationsFiltered.map((esqRel: any) => {
+                    const condicaoWithIdRelation = condicaos.filter((cond: any) => cond.cod_condicao == esqRel.cod_condicao)[0]
                     condicaoWithIdRelation.idCondicaoCamadaEsquema = esqRel.id
                     return condicaoWithIdRelation
                 })

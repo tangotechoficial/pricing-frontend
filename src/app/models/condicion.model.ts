@@ -26,7 +26,7 @@ export class ModelCondicao {
     this.pos_neg = obj.pos_neg;
     this.tip_base_vendas = obj.tip_base_vendas;
     this.mandatoria = obj.mandatoria == "1" ? true : false;
-    this.estadistica = obj.estadistica == "1" ? true : false;
+    this.estatistica = obj.estatistica == "1" ? true : false;
     this.cod_camada = obj.cod_camada;
     this.cod_chavecontas = obj.cod_chavecontas;
     this.cod_tipovalor = obj.cod_tipovalor;
@@ -42,7 +42,7 @@ export class ModelCondicao {
     this.pos_neg = obj.pos_neg;
     this.tip_base_vendas = obj.tip_base_vendas;
     this.mandatoria = obj.mandatoria == "1" ? true : false;
-    this.estadistica = obj.estadistica == "1" ? true : false;
+    this.estatistica = obj.estatistica == "1" ? true : false;
     this.cod_camada = obj.cod_camada;
     this.cod_chavecontas = obj.cod_chavecontas;
     this.cod_tipovalor = obj.cod_tipovalor;

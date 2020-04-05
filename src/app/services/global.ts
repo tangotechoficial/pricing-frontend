@@ -6,5 +6,5 @@
 
 export let Global = {
     url: 'http://localhost:8000/api',
-    login: 'https://pricing.tangotechapp.com/api'
+    login: 'http://localhost/api/login'
 };

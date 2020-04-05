@@ -101,24 +101,26 @@ export class CondicionComponent implements OnInit {
   public getSelectedCondicao(val: any) {
     const checkPos: any = document.getElementById('checkPositivo');
     const checkNeg: any = document.getElementById('checkNegativo');
-    val.sequencias.map(elem => {
-      const domElem = document.getElementById(elem);
-      domElem.click();
-    });
-    this.condicion.Cod_Condicao = val.Cod_Condicao;
-    this.condicion.Desc_Condicao = val.Desc_Condicao;
-    this.condicion.Escala_Qtde = val.Escala_Qtde;
-    this.condicion.POS_NEG = val.POS_NEG;
-    this.condicion.TIP_BASE_VENDAS = val.TIP_BASE_VENDAS;
-    this.condicion.MANDATORIA = val.MANDATORIA;
-    this.condicion.ESTATISTICA = val.ESTATISTICA;
+    if (val.sequencias) {
+      val.sequencias.map(elem => {
+        const domElem = document.getElementById(elem.cod_sequencia);
+        domElem.click();
+      });
+    }
+    this.condicion.cod_condicao = val.cod_condicao;
+    this.condicion.desc_condicao = val.desc_condicao;
+    this.condicion.escala_qtde = val.escala_qtde;
+    this.condicion.pos_neg = val.pos_neg;
+    this.condicion.tip_base_vendas = val.tip_base_vendas;
+    this.condicion.mandatoria = val.mandatoria;
+    this.condicion.estatistica = val.estatistica;
     this.camadas.map(elem => {
-      if (elem.Cod_Camada === val.Cod_Camada) {
+      if (elem.cod_camada === val.cod_camada) {
         this.condicion.camada = elem;
       }
     });
 
-    if (this.condicion.POS_NEG === 'P') {
+    if (this.condicion.pos_neg === 'P') {
       checkPos.checked = true;
       checkNeg.checked = false;
     } else {
@@ -127,12 +129,12 @@ export class CondicionComponent implements OnInit {
     }
 
     this.chaveContas.map(elem => {
-      if (elem.Cod_ChaveContas === val.Cod_ChaveContas) {
+      if (elem.cod_chavecontas === val.cod_chavecontas) {
         this.condicion.chavecontas = elem;
       }
     });
     this.tipoValor.map(elem => {
-      if (elem.Cod_TipoValor === val.Cod_TipoValor) {
+      if (elem.cod_tipovalor === val.cod_tipovalor) {
         this.condicion.tipovalor = elem;
       }
     });
@@ -168,7 +170,7 @@ export class CondicionComponent implements OnInit {
   public updateCondicaoByCode() {
     this.selectedProperties.map(elem => {
       /* this.sequencias.map((seq: Sequencia, index) => {
-        if (seq.Cod_sequencia === elem.Cod_Sequencia) {
+        if (seq.cod_sequencia === elem.cod_sequencia) {
           const domElem = document.getElementById(index.toString());
           domElem.click();
         }
@@ -182,7 +184,7 @@ export class CondicionComponent implements OnInit {
   */
   public getSelectedCamada(camada: Camada) {
     this.condicion.camada = camada;
-    this.condicion.TIP_BASE_VENDAS = camada.TIPO_BASE_VENDAS;
+    this.condicion.tip_base_vendas = camada.tipo_base_vendas;
   }
   /*
     Iván Lynch 08/03/2020
@@ -212,12 +214,12 @@ export class CondicionComponent implements OnInit {
 
     if (e.target.id === 'checkNegativo' && checkPos.checked) {
       checkPos.click();
-      this.condicion.POS_NEG = 'N';
+      this.condicion.pos_neg = 'N';
     }
 
     if (e.target.id === 'checkPositivo' && checkNeg.checked) {
       checkNeg.click();
-      this.condicion.POS_NEG = 'P';
+      this.condicion.pos_neg = 'P';
     }
   }
 
@@ -243,8 +245,7 @@ export class CondicionComponent implements OnInit {
   public checkValue(sequencia: Sequencia) {
     this.sequencias.map(elem => {
       if (elem === sequencia) {
-        const domElem: any = document.getElementById(sequencia.Cod_Sequencia);
-        console.log(domElem.checked);
+        const domElem: any = document.getElementById(sequencia.cod_sequencia);
         if (this.elemExist(sequencia, this.condicion.sequencias)) {
           domElem.checked = false;
           this.condicion.sequencias = this.condicion.sequencias.filter((obj) => {
@@ -263,7 +264,7 @@ export class CondicionComponent implements OnInit {
     Output: Uncheck selected object from sequencias
   */
   public onDltSelection(sequencia: Sequencia) {
-    const domElem = document.getElementById(sequencia.Cod_Sequencia);
+    const domElem = document.getElementById(sequencia.cod_sequencia);
     domElem.click();
   }
 
@@ -277,7 +278,7 @@ export class CondicionComponent implements OnInit {
     this.condicionService.postCondicao(this.condicion)
       .then(result => {
         this.sequencias.map( elem => {
-          const domElem: any = document.getElementById(elem.Cod_Sequencia);
+          const domElem: any = document.getElementById(elem.cod_sequencia);
           domElem.checked = false;
         });
         this.saveSucess = true;
@@ -302,7 +303,7 @@ export class CondicionComponent implements OnInit {
       .then(result => {
         this.saveSucess = true;
         this.sequencias.map( elem => {
-          const domElem: any = document.getElementById(elem.Cod_Sequencia);
+          const domElem: any = document.getElementById(elem.cod_sequencia);
           domElem.checked = false;
         });
         setTimeout(() => {
@@ -342,7 +343,7 @@ export class CondicionComponent implements OnInit {
   public getLastCondicao() {
     this.condicionService.getLastCondicao()
       .then((result: any) => {
-        this.condicion.Cod_Condicao = this.evaluateNextSA(result.Cod_Condicao);
+        this.condicion.cod_condicao = this.evaluateNextSA(result.cod_condicao);
       });
   }
 
