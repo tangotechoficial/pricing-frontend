@@ -33,9 +33,9 @@ import { DadosMestreComponent } from './components/dados-mestre/dados-mestre.com
 import { DiretrizEstrategicaComponent } from './components/diretriz-estrategica/diretriz-estrategica.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FilterModalComponent } from './components/filter-modal/filter-modal.component';
-import { TabbedChartsComponent } from './components/plano-compra/tabbed-charts/tabbed-charts.component';
-import { SellingCompositionChartsComponent } from './components/plano-compra/selling-composition-charts/selling-composition-charts.component';
-import { PlanningTableComponent } from './components/plano-compra/planning-table/planning-table.component';
+import { TabbedChartsComponent } from './components/shared/tabbed-charts/tabbed-charts.component';
+import { SellingCompositionChartsComponent } from './components/shared/selling-composition-charts/selling-composition-charts.component';
+import { PlanningTableComponent } from './components/shared/planning-table/planning-table.component';
 import { InlineEditComponent } from './components/shared/inline-edit/inline-edit.component';
 import { ViewModeDirective } from './components/shared/viewmode.directive';
 import { EditModeDirective } from './components/shared/editmode.directive';
