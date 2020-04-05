@@ -99,12 +99,11 @@ export class CondicionComponent implements OnInit {
     Output: Selected condicao object
   */
   public getSelectedCondicao(val: any) {
-    console.log(val);
     const checkPos: any = document.getElementById('checkPositivo');
     const checkNeg: any = document.getElementById('checkNegativo');
-    if (val.sequencia) {
+    if (val.sequencias) {
       val.sequencias.map(elem => {
-        const domElem = document.getElementById(elem);
+        const domElem = document.getElementById(elem.cod_sequencia);
         domElem.click();
       });
     }
@@ -247,7 +246,6 @@ export class CondicionComponent implements OnInit {
     this.sequencias.map(elem => {
       if (elem === sequencia) {
         const domElem: any = document.getElementById(sequencia.cod_sequencia);
-        console.log(domElem.checked);
         if (this.elemExist(sequencia, this.condicion.sequencias)) {
           domElem.checked = false;
           this.condicion.sequencias = this.condicion.sequencias.filter((obj) => {

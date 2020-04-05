@@ -8,6 +8,7 @@ import { Condicao } from 'app/models/condicao';
 import { ChaveContas } from 'app/models/chavecontas';
 import { TipoValor } from 'app/models/tipovalor';
 import { Camada } from 'app/models/camadas';
+import { compileDirectiveFromRender2 } from '@angular/compiler/src/render3/view/compiler';
 
 
 @Injectable()
@@ -98,7 +99,6 @@ export class CondicionService {
 
   postCondicao(condicion: Condicao): Promise<any> {
     const codSequencias = [];
-    console.log(condicion);
     condicion.sequencias.map(elem => codSequencias.push(elem.cod_sequencia));
     return this.http
       .post(
@@ -123,7 +123,15 @@ export class CondicionService {
 
   putCondicao(condicion: Condicao): Promise<any> {
     const codSequencias = [];
+    this.deleteRelationSequenciaCondicao(condicion.cod_condicao);
     condicion.sequencias.map(elem => codSequencias.push(elem.cod_sequencia));
+    if (codSequencias) {
+      codSequencias.map(elem => {
+        console.log(elem);
+        console.log(condicion.cod_condicao)
+        this.postRelationSequenciaCondicao(condicion.cod_condicao, elem);
+      });
+    }
     return this.http
       .put(
         this.url + '/condicao/' + condicion.cod_condicao + '/',
@@ -145,12 +153,29 @@ export class CondicionService {
       .toPromise();
   }
 
-  async deleteRelation(id: any) {
-    await this.http
-      .delete(this.url + '/condicaosequencia/' + id + '/', {
+  postRelationSequenciaCondicao(codcon: any, codseq: any): Promise <any> {
+    return this.http
+      .post(this.url + '/sequenciacondicao/', {
+        id: codcon + codseq,
+        cod_condicao: codcon,
+        cod_sequencia: codseq
+      }, {
         headers: { 'Content-type': 'application/json' }
       })
       .toPromise();
+  }
+
+  deleteRelationSequenciaCondicao(id: any) {
+    this.getCondicaoByCode(id)
+      .then((result: any) => {
+        result.sequencias.map((elem: any) => {
+          return this.http
+            .delete(this.url + '/sequenciacondicao/' + id + elem.cod_sequencia + '/', {
+              headers: { 'Content-type': 'application/json' }
+            })
+            .toPromise();
+        });
+      });
   }
 
   getLastCondicao(): Promise<any> {
@@ -181,6 +206,14 @@ export class CondicionService {
       .catch(err => {
         throw new Error(err);
       });
+  }
+
+  deleteCondicaoRelacao(): Promise<any> {
+    return this.http
+      .delete(this.url + '/sequenciacondicao/', {
+        headers: { 'Content-type': 'application/json' }
+      })
+      .toPromise();
   }
 
   public getCondicaoCamada(): Promise<any> {
