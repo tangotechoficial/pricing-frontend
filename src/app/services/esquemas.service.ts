@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Global } from './global';
 import { CondicionService } from './condicion.service';
 import { EsquemaCalculo } from '@app/models/esquemacalculo';
+import { Mercadoria } from '@app/models/mercadoria';
 
 @Injectable()
 export class EsquemasService {
@@ -16,8 +17,13 @@ export class EsquemasService {
         this.url = Global.url;
     }
 
-    getMercadoria(): Promise<any> {
-        return this.http.get(this.url + '/mercadoria/', { headers: { 'Content-type': 'application/json' } }).toPromise();
+    getMercadoria(): Promise<Mercadoria[]> {
+        return this.http
+          .get(this.url + '/productos/', { headers: { 'Content-type': 'application/json' } })
+          .toPromise()
+          .then((result: any) => {
+            return result.results as Mercadoria[];
+          });
     }
 
     postEsquema({cod_esquema_calculo, cod_condicao, cod_camada}: any): Promise<any> {

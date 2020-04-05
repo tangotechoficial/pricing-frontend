@@ -7,6 +7,7 @@ import { Condicao } from 'app/models/condicao';
 import { Campo } from 'app/models/campo';
 import { SequenciaValues } from 'app/models/sequencia_values';
 import { EsquemaCalculo } from '@app/models/esquemacalculo';
+import { Mercadoria } from '@app/models/mercadoria';
 
 declare var $: any;
 
@@ -25,7 +26,7 @@ export class PrecioBusiness implements OnInit {
   public faturamento: Array<any>;
   public estado: Array<any>;
   public region: Array<any>;
-  public mercadoria: Array<any>;
+  public mercadoria: Array<Mercadoria>;
   public isLoading = false;
   public dataListPreencher: Array <any>;
   public bSelectMaterial = false;
@@ -157,7 +158,7 @@ export class PrecioBusiness implements OnInit {
     this.faturamento = new Array<any>();
     this.estado = new Array<any>();
     this.region = new Array<any>();
-    this.mercadoria = new Array<any>();
+    this.mercadoria = new Array<Mercadoria>();
     this.camadas = new Array<Camada>();
     this.esquema = new EsquemaCalculo();
     Promise.all([
@@ -165,11 +166,12 @@ export class PrecioBusiness implements OnInit {
       this.esquemaService.getFaturamento().then(fa => fa.map(faElem => this.faturamento.push(faElem))),
       this.esquemaService.getEstado().then(es => es.map(esElem => this.estado.push(esElem))),
       this.esquemaService.getRegion().then(re => re.map(reElem => this.region.push(reElem))),
-      this.esquemaService.getMercadoria().then(mer => mer.map(merElem => this.mercadoria.push(merElem))),
+      this.esquemaService.getMercadoria().then(mer => this.mercadoria = mer),
       this.esquemaService.getEsquemaCalculo('EC001').then(result => {
         this.esquema = result;
       })
     ]).then(rs => {
+      console.log(this.mercadoria);
       this.isLoading = false;
     });
   }
