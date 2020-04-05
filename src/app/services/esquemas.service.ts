@@ -12,8 +12,8 @@ export class EsquemasService {
     private http: HttpClient,
     private condicionService: CondicionService
   ) {
-    //this.url = Global.url;
-    this.url = "https://pricing.tangotechapp.com/api/v1";
+    this.url = Global.url;
+    // this.url = "http://localhost:8000/api";
   }
 
   getMercadoria(): Promise<any> {
@@ -109,74 +109,71 @@ export class EsquemasService {
       Get data and make relations
     */
 
-  getEsquemaRelation(): Promise<any> {
+  getEsquemaRelation(): Promise<[]> {
     return this.http
       .get(this.url + "/condicaocamadaesquema/", {
         headers: { "Content-type": "application/json" }
       })
-      .toPromise();
+      .toPromise()
+      .then((data: any) => {
+        return data.results
+      })
+      .catch(err => {
+        return new Error("")
+      })
   }
 
-  fetchCondicaoCamadaEsquema2(tipoBaseVendas: string) {
-    let dataCondicaoCamadaEsquema = [];
+  fetchCondicaoCamadaEsquema(tipoBaseVendas: string) {
+        
+    let dataCondicaoCamadaEsquema = []
+
     return new Promise((resolve, reject) => {
-      const promiseEsquemaCada = fetch(
-        this.url + "/esquemacamada/"
-      ).then(resp => resp.json());
-      const promiseCondicionRelation = fetch(
-        this.url + "/esquemacamadacondicion/"
-      ).then(resp => resp.json());
-      const promiseTipoValor = this.condicionService.getTiposValor();
-      const promiseCondicaosData = this.condicionService.getCondicaos();
 
-      Promise.all([
-        promiseEsquemaCada,
-        promiseTipoValor,
-        promiseCondicionRelation,
-        promiseCondicaosData
-      ])
-        .then(([data, tipoValor, condicaosRelations, condicaosData]) => {
-          let camadas = data.filter(
-            cam => cam.TIP_BASE_VENDAS == tipoBaseVendas
-          );
-          camadas = camadas[0].camadas;
-          console.log({ condicaosRelations, condicaosData });
-          camadas.forEach(camada => {
-            const condicaosRel = condicaosRelations.filter(
-              cond => cond.Cod_Camada == camada.Cod_Camada
-            )[0];
+        // Fetch data
+        Promise.all([
+            this.condicionService.getTiposValor(),
+            this.condicionService.getCamadas(),
+            this.condicionService.getCondicaos(),
+            this.getEsquemaRelation()
+          ]).then(([tipoValor,camadas,condicaos, esquemaRelations]) => {
+            console.log({tipoValor,camadas,condicaos, esquemaRelations})
+            // tipoValor = tipoValor.results;
+            // camadas = camadas.results;
+            // condicaos = condicaos.results;
+            // esquemaRelations = esquemaRelations.results;
 
-            const condicaoRelData = condicaosRel.CONDICAO.map(Cod_Condicao => {
-              let data =  condicaosData.filter(
-                condD => condD.Cod_Condicao == Cod_Condicao
-              )[0];
-              data.idEsqCamCond = condicaosRel.id
-              return data
-            });
+            // Filter camadas by TIPO_BASE_VENDAS
+            camadas = camadas.filter((camada: any) => camada.tipo_base_vendas === tipoBaseVendas);
+            // Relations
+            camadas.forEach(elem => {
 
+                const esquemaRelationsFiltered = esquemaRelations.filter(esqRel => esqRel.cod_camada === elem.cod_camada)
+                const condicaosFiltered = esquemaRelationsFiltered.map(esqRel => {
+                    const condicaoWithIdRelation = condicaos.filter(cond => cond.cod_condicao == esqRel.cod_condicao)[0]
+                    condicaoWithIdRelation.idCondicaoCamadaEsquema = esqRel.id
+                    return condicaoWithIdRelation
+                })
+                
+                const data = {
+                    camada: elem,
+                    condicaos: condicaosFiltered,
+                    condicaosAllow: condicaos.filter((cond: any) => cond.cod_camada === elem.cod_camada),
+                    tipoValor: tipoValor
+                }
 
-            const condicaosAllow = camada.condicaos.map(cond => {
-                cond.idEsqCamCond = condicaosRel.id
-                return cond
+                dataCondicaoCamadaEsquema.push(data)
             })
-            
-            
-            const data = {
-              camada: camada,
-              condicaos: condicaoRelData,
-              condicaosAllow,
-              tipoValor: tipoValor
-            };
 
-            dataCondicaoCamadaEsquema.push(data);
-          });
-          resolve(dataCondicaoCamadaEsquema);
-        })
-        .catch(err => {
-          reject(err);
-        });
-    });
-  }
+            resolve(dataCondicaoCamadaEsquema)
+
+          })
+          .catch(err => {
+              reject({err, msg: "Error fetchCondicaoCamadaEsquema"})
+          })
+
+
+    })
+}
 
   putEsquemaCamadaCondicion(esqCamCond) {
     return new Promise((resolve, reject) => {

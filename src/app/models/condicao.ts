@@ -7,15 +7,15 @@ export class Condicao {
     [x: string]: any;
     constructor(
         // tslint:disable-next-line: variable-name
-        public Cod_Condicao: any = '',
+        public cod_condicao: any = '',
         // tslint:disable-next-line: variable-name
-        public Desc_Condicao: any = '',
+        public desc_condicao: any = '',
         // tslint:disable-next-line: variable-name
-        public Escala_Qtde: any = '',
-        public POS_NEG: any = 0,
-        public TIP_BASE_VENDAS: any = '',
-        public MANDATORIA: any = '',
-        public ESTATISTICA: any = '',
+        public escala_qtde: any = '',
+        public pos_neg: any = 0,
+        public tip_base_vendas: any = '',
+        public mandatoria: any = '',
+        public estatistica: any = '',
         // tslint:disable-next-line: variable-name
         public camada: Camada = new Camada(),
         // tslint:disable-next-line: variable-name

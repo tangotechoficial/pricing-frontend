@@ -15,8 +15,8 @@ export class CondicionService {
   public url: string;
   public condicion: Array<any>;
   constructor(private http: HttpClient) {
-    //this.url = Global.url;
-    this.url = 'https://pricing.tangotechapp.com/api/v1';
+    this.url = Global.url;
+    // this.url = 'https://pricing.tangotechapp.com/api/v1';
   }
 
   getCamadas(): Promise<Camada[]> {
@@ -26,7 +26,7 @@ export class CondicionService {
       })
       .toPromise()
       .then((result: any) => {
-        return result as Camada[];
+        return result.results as Camada[];
       })
       .catch(err => {
         throw new Error(err);
@@ -67,8 +67,8 @@ export class CondicionService {
         headers: { 'Content-type': 'application/json' }
       })
       .toPromise()
-      .then((result: any) => {
-        return result as TipoValor[];
+      .then((data: any) => {
+        return data.results as TipoValor[];
       })
       .catch(err => {
         throw new Error(err);
@@ -176,7 +176,7 @@ export class CondicionService {
       })
       .toPromise()
       .then((result: any) => {
-        return result as Condicao[];
+        return result.results as Condicao[];
       })
       .catch(err => {
         throw new Error(err);

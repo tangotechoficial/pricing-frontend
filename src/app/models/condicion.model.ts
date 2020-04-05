@@ -1,53 +1,53 @@
 export class ModelCondicao {
   // tslint:disable-next-line: variable-name
-  Cod_Condicao: any;
+  cod_condicao: any;
   // tslint:disable-next-line: variable-name
-  Desc_Condicao: any;
+  desc_condicao: any;
   // tslint:disable-next-line: variable-name
-  Escala_Qtde: any;
-  POS_NEG: any;
-  TIP_BASE_VENDAS: any;
-  MANDATORIA: any;
-  ESTATISTICA: any;
+  escala_qtde: any;
+  pos_neg: any;
+  tip_base_vendas: any;
+  mandatoria: any;
+  estatistica: any;
   // tslint:disable-next-line: variable-name
-  Cod_Camada: any;
+  cod_camada: any;
   // tslint:disable-next-line: variable-name
-  Cod_ChaveContas: any;
+  cod_chavecontas: any;
   // tslint:disable-next-line: variable-name
-  Cod_TipoValor: any;
+  cod_tipovalor: any;
   idCondicaoCamadaEsquema: any;
-  Desc_TipoValor: any;
+  desc_tipovalor: any;
   sequencias: any;
 
   constructor(obj) {
-    this.Cod_Condicao = obj.Cod_Condicao;
-    this.Desc_Condicao = obj.Desc_Condicao;
-    this.Escala_Qtde = obj.Escala_Qtde;
-    this.POS_NEG = obj.POS_NEG;
-    this.TIP_BASE_VENDAS = obj.TIP_BASE_VENDAS;
-    this.MANDATORIA = obj.MANDATORIA == "1" ? true : false;
-    this.ESTATISTICA = obj.ESTATISTICA == "1" ? true : false;
-    this.Cod_Camada = obj.Cod_Camada;
-    this.Cod_ChaveContas = obj.Cod_ChaveContas;
-    this.Cod_TipoValor = obj.Cod_TipoValor;
+    this.cod_condicao = obj.cod_condicao;
+    this.desc_condicao = obj.desc_condicao;
+    this.escala_qtde = obj.escala_qtde;
+    this.pos_neg = obj.pos_neg;
+    this.tip_base_vendas = obj.tip_base_vendas;
+    this.mandatoria = obj.mandatoria == "1" ? true : false;
+    this.estadistica = obj.estadistica == "1" ? true : false;
+    this.cod_camada = obj.cod_camada;
+    this.cod_chavecontas = obj.cod_chavecontas;
+    this.cod_tipovalor = obj.cod_tipovalor;
     this.idCondicaoCamadaEsquema = obj.idCondicaoCamadaEsquema;
-    this.Desc_TipoValor = obj.Desc_TipoValor;
+    this.desc_tipovalor = obj.desc_tipovalor;
     this.sequencias = obj.sequencias
   }
 
   set(obj: any) {
-    this.Cod_Condicao = obj.Cod_Condicao;
-    this.Desc_Condicao = obj.Desc_Condicao;
-    this.Escala_Qtde = obj.Escala_Qtde;
-    this.POS_NEG = obj.POS_NEG;
-    this.TIP_BASE_VENDAS = obj.TIP_BASE_VENDAS;
-    this.MANDATORIA = obj.MANDATORIA == "1" ? true : false;
-    this.ESTATISTICA = obj.ESTATISTICA == "1" ? true : false;
-    this.Cod_Camada = obj.Cod_Camada;
-    this.Cod_ChaveContas = obj.Cod_ChaveContas;
-    this.Cod_TipoValor = obj.Cod_TipoValor;
+    this.cod_condicao = obj.cod_condicao;
+    this.desc_condicao = obj.desc_condicao;
+    this.escala_qtde = obj.escala_qtde;
+    this.pos_neg = obj.pos_neg;
+    this.tip_base_vendas = obj.tip_base_vendas;
+    this.mandatoria = obj.mandatoria == "1" ? true : false;
+    this.estadistica = obj.estadistica == "1" ? true : false;
+    this.cod_camada = obj.cod_camada;
+    this.cod_chavecontas = obj.cod_chavecontas;
+    this.cod_tipovalor = obj.cod_tipovalor;
     this.idCondicaoCamadaEsquema = obj.idCondicaoCamadaEsquema;
-    this.Desc_TipoValor = obj.Desc_TipoValor;
+    this.desc_tipovalor = obj.desc_tipovalor;
     this.sequencias = obj.sequencias
   }
 }
