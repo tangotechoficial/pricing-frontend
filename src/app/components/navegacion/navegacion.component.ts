@@ -51,7 +51,7 @@ import {
 
 export class NavegacionComponent implements OnInit {
   public isLoggedIn: boolean = false
-  public userTechnical: boolean = true;
+  public userTechnical: boolean;
   public currentUrl: string;
   public numNotif:number = 3 ;
   public numAprob:number = 1;

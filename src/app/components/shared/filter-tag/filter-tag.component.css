@@ -1,15 +1,22 @@
 .badge {
   padding: .5em;
-  font-size: 1em;
+  font-size: 1.2em;
 }
 
+.badge-filter {
+  background: #9FA2AB;
+  color: #fafafa
+}
+.badge:nth-child(n+2) {
+  margin-left: 1em
+}
 .badge span {
-  margin-right: 1em;
+  margin-right: .4em;
   vertical-align: middle;
 }
 
 .badge .close {
-	margin-left: 1rem;
+	margin-left: .5rem;
 	color: #fff;
 	font-size: 80%;
 	text-shadow: 0 1px 0 rgba(#000, .5);

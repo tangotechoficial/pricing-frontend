@@ -5,31 +5,15 @@ import { Filter } from '@models/filter'
   templateUrl: './filter-tag.component.html',
   styleUrls: ['./filter-tag.component.css']
 })
-export class FilterTagComponent implements OnInit, OnChanges {
-  @Input() filter: Filter
-  @Output() filterChange: EventEmitter<Filter> = new EventEmitter<Filter>();
+export class FilterTagComponent implements OnInit {
 
-  filters: Array<any> = new Array()
+  filterData: Array<{}>
 
   constructor() { }
 
   ngOnInit() {
-    if(this.filter){
-      Object.keys(this.filter).map(
-        (value, idx) => this.filters.push(this.filter[value])
-      )
-    }
-  }
 
-  ngOnChanges() {
-    if(this.filter){
-      Object.keys(this.filter).map(
-        (value, idx) => this.filters.push(this.filter[value])
-      )
-    }
-    this.filterChange.emit(this.filter)
   }
-
   remove($evt) {
     const badge = $evt.target.parentElement
     const field = badge.dataset.field

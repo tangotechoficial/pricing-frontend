@@ -8,13 +8,14 @@ import { environment } from '@env/environment';
 })
 export class DiretrizesEstrategicasService {
 
+  public url = `${environment.apiUrl}/analitica/diretrizesestrategica`
   constructor(private http: HttpClient) { }
 
   listar() {
-    return this.http.get(`${environment.apiUrl}/diretrizesestrategica`)
+    return this.http.get(this.url)
   }
 
   public get diretrizesEstrategicas(): Observable<any>{
-    return this.http.get(`${environment.apiUrl}/diretrizesestrategica`);
+    return this.http.get(this.url);
   }
 }
