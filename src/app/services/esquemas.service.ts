@@ -13,22 +13,21 @@ export class EsquemasService {
         private http: HttpClient,
         private condicionService: CondicionService
     ) {
-        //this.url = Global.url;
-        this.url = 'https://pricing.tangotechapp.com/api/v1';
+        this.url = Global.url;
     }
 
     getMercadoria(): Promise<any> {
         return this.http.get(this.url + '/mercadoria/', { headers: { 'Content-type': 'application/json' } }).toPromise();
     }
 
-    postEsquema({Cod_Esquema_Calculo, Cod_Condicao, Cod_Camada}: any): Promise<any> {
+    postEsquema({cod_esquema_calculo, cod_condicao, cod_camada}: any): Promise<any> {
         // tslint:disable-next-line: max-line-length
-        return this.http.post(this.url + '/condicaocamadaesquema/', {Cod_Esquema_Calculo, Cod_Condicao, Cod_Camada}, { headers: { 'Content-type': 'application/json' } }).toPromise();
+        return this.http.post(this.url + '/condicaocamadaesquema/', {cod_esquema_calculo, cod_condicao, cod_camada}, { headers: { 'Content-type': 'application/json' } }).toPromise();
     }
 
     removeEsquema({id}: any): Promise<any> {
         // tslint:disable-next-line: max-line-length
-        return this.http.delete(this.url + '/condicaocamadaesquema/' + id, { headers: { 'Content-type': 'application/json' } }).toPromise();
+        return this.http.delete(this.url + '/esquemacondicaocamada/' + id, { headers: { 'Content-type': 'application/json' } }).toPromise();
     }
 
     async getEsquema() {
@@ -140,11 +139,11 @@ export class EsquemasService {
           // Relations
           camadas.forEach(elem => {
             const esquemaRelationsFiltered = esquemaRelations.filter(
-              esqRel => esqRel.Cod_Camada === elem.Cod_Camada
+              esqRel => esqRel.cod_camada === elem.cod_camada
             );
             const condicaosFiltered = esquemaRelationsFiltered.map(esqRel => {
               const condicaoWithIdRelation: any = condicaos.filter(
-                cond => cond.Cod_Condicao === esqRel.Cod_Condicao
+                cond => cond.cod_condicao === esqRel.cod_condicao
               )[0];
               condicaoWithIdRelation.idCondicaoCamadaEsquema = esqRel.id;
               return condicaoWithIdRelation;
@@ -154,7 +153,7 @@ export class EsquemasService {
               camada: elem,
               condicaos: condicaosFiltered,
               condicaosAllow: condicaos.filter(
-                (cond: any) => cond.Cod_Camada === elem.Cod_Camada
+                (cond: any) => cond.cod_camada === elem.cod_camada
               ),
               tipoValor: tipoValor
             };
