@@ -8,6 +8,7 @@ import { Filter } from '@models/filter'
 export class FilterTagComponent implements OnInit {
 
   filterData: Array<{}>
+  filter: Filter;
 
   constructor() { }
 
@@ -18,7 +19,6 @@ export class FilterTagComponent implements OnInit {
     const badge = $evt.target.parentElement
     const field = badge.dataset.field
     this.filter.nullify(field)
-    this.filterChange.emit(this.filter)
     badge.remove()
   }
 
