@@ -4,6 +4,7 @@ import { ChaveContas } from './chavecontas';
 import { TipoValor } from './tipovalor';
 
 export class Condicao {
+    [x: string]: any;
     constructor(
         // tslint:disable-next-line: variable-name
         public cod_condicao: any = '',

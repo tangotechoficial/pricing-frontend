@@ -7,7 +7,6 @@ import { Mercadoria } from '@app/models/mercadoria';
 
 @Injectable()
 export class EsquemasService {
-
     public url: string;
     public condicion: Array<any>;
     constructor(
@@ -79,99 +78,78 @@ export class EsquemasService {
                 return esquema as EsquemaCalculo;
             });
     }
-    /*
-      Andrés Atencio 23/03/2020
-      Get data and make relations
-    */
 
-  getEsquemaRelation(): Promise<any> {
+  getEsquemaRelation(): Promise<[]> {
     return this.http
       .get(this.url + "/condicaocamadaesquema/", {
         headers: { "Content-type": "application/json" }
       })
-      .toPromise();
-  }
-
-  fetchCondicaoCamadaEsquema2(tipoBaseVendas: string) {
-    let dataCondicaoCamadaEsquema = [];
-    return new Promise((resolve, reject) => {
-      const promiseEsquemaCada = fetch(
-        this.url + "/esquemacamada/"
-      ).then(resp => resp.json());
-      const promiseTipoValor = this.condicionService.getTiposValor();
-
-      Promise.all([promiseEsquemaCada, promiseTipoValor]).then(
-        ([data, tipoValor]) => {
-          console.log({ data });
-          let camadas = data.filter(
-            cam => cam.TIP_BASE_VENDAS == tipoBaseVendas
-          );
-          camadas = camadas[0].camadas;
-          camadas.forEach(camada => {
-            const data = {
-              camada: camada,
-              condicaos: camada.condicaos,
-              condicaosAllow: camada.condicaos,
-              tipoValor: tipoValor
-            };
-
-            dataCondicaoCamadaEsquema.push(data);
-          });
-          resolve(dataCondicaoCamadaEsquema);
-        }
-      ).catch(err => {
-        reject(err);
+      .toPromise()
+      .then((data: any) => {
+        return data.results
       })
-    });
+      .catch(err => {
+        return new Error("")
+      })
   }
 
   fetchCondicaoCamadaEsquema(tipoBaseVendas: string) {
-    let dataCondicaoCamadaEsquema = [];
+        
+    let dataCondicaoCamadaEsquema = []
 
     return new Promise((resolve, reject) => {
-      // Fetch data
-      Promise.all([
-        this.condicionService.getTiposValor(),
-        this.condicionService.getCamadas(),
-        this.condicionService.getCondicaos(),
-        this.getEsquemaRelation()
-      ])
-        .then(([tipoValor, camadas, condicaos, esquemaRelations]) => {
-          // Filter camadas by TIPO_BASE_VENDAS
-          camadas = camadas.filter(
-            (camada: any) => camada.TIPO_BASE_VENDAS === tipoBaseVendas
-          );
 
-          // Relations
-          camadas.forEach(elem => {
-            const esquemaRelationsFiltered = esquemaRelations.filter(
-              esqRel => esqRel.cod_camada === elem.cod_camada
-            );
-            const condicaosFiltered = esquemaRelationsFiltered.map(esqRel => {
-              const condicaoWithIdRelation: any = condicaos.filter(
-                cond => cond.cod_condicao === esqRel.cod_condicao
-              )[0];
-              condicaoWithIdRelation.idCondicaoCamadaEsquema = esqRel.id;
-              return condicaoWithIdRelation;
-            });
+        // Fetch data
+        Promise.all([
+            this.condicionService.getTiposValor(),
+            this.condicionService.getCamadas(),
+            this.condicionService.getCondicaos(),
+            this.getEsquemaRelation()
+          ]).then(([tipoValor,camadas,condicaos, esquemaRelations]) => {
+            console.log({tipoValor,camadas,condicaos, esquemaRelations})
+            
+            // Filter camadas by TIPO_BASE_VENDAS
+            camadas = camadas.filter((camada: any) => camada.tipo_base_vendas === tipoBaseVendas);
+            // Relations
+            camadas.forEach(elem => {
 
-            const data = {
-              camada: elem,
-              condicaos: condicaosFiltered,
-              condicaosAllow: condicaos.filter(
-                (cond: any) => cond.cod_camada === elem.cod_camada
-              ),
-              tipoValor: tipoValor
-            };
+                const esquemaRelationsFiltered = esquemaRelations.filter((esqRel: any) => esqRel.cod_camada === elem.cod_camada)
+                const condicaosFiltered = esquemaRelationsFiltered.map((esqRel: any) => {
+                    const condicaoWithIdRelation = condicaos.filter((cond: any) => cond.cod_condicao == esqRel.cod_condicao)[0]
+                    condicaoWithIdRelation.idCondicaoCamadaEsquema = esqRel.id
+                    return condicaoWithIdRelation
+                })
+                
+                const data = {
+                    camada: elem,
+                    condicaos: condicaosFiltered,
+                    condicaosAllow: condicaos.filter((cond: any) => cond.cod_camada === elem.cod_camada),
+                    tipoValor: tipoValor
+                }
 
-            dataCondicaoCamadaEsquema.push(data);
-          });
+                dataCondicaoCamadaEsquema.push(data)
+            })
 
-          resolve(dataCondicaoCamadaEsquema);
-        })
-        .catch(err => {
-          reject({ err, msg: "Error fetchCondicaoCamadaEsquema" });
-        });
+            resolve(dataCondicaoCamadaEsquema)
+
+          })
+          .catch(err => {
+              reject({err, msg: "Error fetchCondicaoCamadaEsquema"})
+          })
+
+
+    })
+}
+
+  putEsquemaCamadaCondicion(esqCamCond) {
+    return new Promise((resolve, reject) => {
+      fetch(this.url + '/esquemacamadacondicion/' + esqCamCond.id, {
+        method: 'PUT',
+        body: esqCamCond,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
     });
   }
 }
