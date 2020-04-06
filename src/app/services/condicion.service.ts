@@ -7,7 +7,9 @@ import { Condicao } from 'app/models/condicao';
 import { ChaveContas } from 'app/models/chavecontas';
 import { TipoValor } from 'app/models/tipovalor';
 import { Camada } from 'app/models/camadas';
-import { environment} from '@env/environment'
+import { compileDirectiveFromRender2 } from '@angular/compiler/src/render3/view/compiler';
+import { environment } from '@env/environment';
+
 
 @Injectable()
 export class CondicionService {
@@ -20,6 +22,20 @@ export class CondicionService {
   getCamadas(): Promise<Camada[]> {
     return this.http
       .get(this.url + '/camada/', {
+        headers: { 'Content-type': 'application/json' }
+      })
+      .toPromise()
+      .then((result: any) => {
+        return result.results as Camada[];
+      })
+      .catch(err => {
+        throw new Error(err);
+      });
+  }
+
+  getCamadasAndCondicaos(): Promise<Camada[]> {
+    return this.http
+      .get(this.url + '/camadacond/', {
         headers: { 'Content-type': 'application/json' }
       })
       .toPromise()
@@ -51,8 +67,8 @@ export class CondicionService {
         headers: { 'Content-type': 'application/json' }
       })
       .toPromise()
-      .then((result: any) => {
-        return result.results as TipoValor[];
+      .then((data: any) => {
+        return data.results as TipoValor[];
       })
       .catch(err => {
         throw new Error(err);
@@ -83,21 +99,21 @@ export class CondicionService {
 
   postCondicao(condicion: Condicao): Promise<any> {
     const codSequencias = [];
-    condicion.sequencias.map(elem => codSequencias.push(elem.Cod_Sequencia));
+    condicion.sequencias.map(elem => codSequencias.push(elem.cod_sequencia));
     return this.http
       .post(
         this.url + '/condicao/',
         {
-          Cod_Condicao: condicion.Cod_Condicao,
-          Desc_Condicao: condicion.Desc_Condicao,
-          Escala_Qtde: condicion.Escala_Qtde ? 1 : 0,
-          POS_NEG: condicion.POS_NEG ? 'N' : 'P',
-          TIP_BASE_VENDAS: condicion.TIP_BASE_VENDAS,
-          MANDATORIA: 0,
-          ESTATISTICA: 0,
-          Cod_Camada: condicion.camada.Cod_Camada,
-          Cod_ChaveContas: condicion.chavecontas.Cod_ChaveContas,
-          Cod_TipoValor: condicion.tipovalor.Cod_TipoValor,
+          cod_condicao: condicion.cod_condicao,
+          desc_condicao: condicion.desc_condicao,
+          escala_qtde: condicion.escala_qtde ? 1 : 0,
+          pos_neg: condicion.pos_neg ? 'N' : 'P',
+          tip_base_vendas: condicion.tip_base_vendas,
+          mandatoria: condicion.mandatoria ? condicion.mandatoria : 0,
+          estatistica: condicion.estatistica ? condicion.estatistica : 0,
+          cod_camada: condicion.camada.cod_camada,
+          cod_chavecontas: condicion.chavecontas.cod_chavecontas,
+          cod_tipovalor: condicion.tipovalor.cod_tipovalor,
           sequencias: codSequencias
         },
         { headers: { 'Content-type': 'application/json' } }
@@ -107,20 +123,29 @@ export class CondicionService {
 
   putCondicao(condicion: Condicao): Promise<any> {
     const codSequencias = [];
-    condicion.sequencias.map(elem => codSequencias.push(elem.Cod_Sequencia));
+    this.deleteRelationSequenciaCondicao(condicion.cod_condicao);
+    condicion.sequencias.map(elem => codSequencias.push(elem.cod_sequencia));
+    if (codSequencias) {
+      codSequencias.map(elem => {
+        console.log(elem);
+        console.log(condicion.cod_condicao)
+        this.postRelationSequenciaCondicao(condicion.cod_condicao, elem);
+      });
+    }
     return this.http
-      .post(
-        this.url + '/condicao/' + condicion.Cod_Condicao + '/',
+      .put(
+        this.url + '/condicao/' + condicion.cod_condicao + '/',
         {
-          Desc_Condicao: condicion.Desc_Condicao,
-          Escala_Qtde: condicion.Escala_Qtde ? 1 : 0,
-          POS_NEG: condicion.POS_NEG ? 'N' : 'P',
-          TIP_BASE_VENDAS: condicion.TIP_BASE_VENDAS,
-          MANDATORIA: 0,
-          ESTATISTICA: 0,
-          Cod_Camada: condicion.camada.Cod_Camada,
-          Cod_ChaveContas: condicion.chavecontas.Cod_ChaveContas,
-          Cod_TipoValor: condicion.tipovalor.Cod_TipoValor,
+          cod_condicao: condicion.cod_condicao,
+          desc_condicao: condicion.desc_condicao,
+          escala_qtde: condicion.escala_qtde ? 1 : 0,
+          pos_neg: condicion.pos_neg ? 'N' : 'P',
+          tip_base_vendas: condicion.tip_base_vendas,
+          mandatoria: condicion.mandatoria ? condicion.mandatoria : 0,
+          estatistica: condicion.estatistica ? condicion.estatistica : 0,
+          cod_camada: condicion.camada.cod_camada,
+          cod_chavecontas: condicion.chavecontas.cod_chavecontas,
+          cod_tipovalor: condicion.tipovalor.cod_tipovalor,
           sequencias: codSequencias
         },
         { headers: { 'Content-type': 'application/json' } }
@@ -128,12 +153,29 @@ export class CondicionService {
       .toPromise();
   }
 
-  async deleteRelation(id: any) {
-    await this.http
-      .delete(this.url + '/condicaosequencia/' + id + '/', {
+  postRelationSequenciaCondicao(codcon: any, codseq: any): Promise <any> {
+    return this.http
+      .post(this.url + '/sequenciacondicao/', {
+        id: codcon + codseq,
+        cod_condicao: codcon,
+        cod_sequencia: codseq
+      }, {
         headers: { 'Content-type': 'application/json' }
       })
       .toPromise();
+  }
+
+  deleteRelationSequenciaCondicao(id: any) {
+    this.getCondicaoByCode(id)
+      .then((result: any) => {
+        result.sequencias.map((elem: any) => {
+          return this.http
+            .delete(this.url + '/sequenciacondicao/' + id + elem.cod_sequencia + '/', {
+              headers: { 'Content-type': 'application/json' }
+            })
+            .toPromise();
+        });
+      });
   }
 
   getLastCondicao(): Promise<any> {
@@ -164,6 +206,14 @@ export class CondicionService {
       .catch(err => {
         throw new Error(err);
       });
+  }
+
+  deleteCondicaoRelacao(): Promise<any> {
+    return this.http
+      .delete(this.url + '/sequenciacondicao/', {
+        headers: { 'Content-type': 'application/json' }
+      })
+      .toPromise();
   }
 
   public getCondicaoCamada(): Promise<any> {

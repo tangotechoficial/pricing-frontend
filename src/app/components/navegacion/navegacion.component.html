@@ -3,7 +3,7 @@
 
     <div class="col-4">
 
-      <ul *ngIf="isLoggedIn" class="nav custom-nav col">
+      <ul *ngIf="isLoggedIn" class="nav mt-2 mb-2 col">
         <li class="nav-item">
           <app-technical-menu *ngIf="userTechnical"></app-technical-menu>
           <app-business-menu *ngIf="!userTechnical"></app-business-menu>
@@ -15,17 +15,17 @@
     <div class="col-auto"></div>
 
     <div class="col-4">
-      <ul class="notfiConfigList nav custom-nav">
+      <ul class="notfiConfigList nav mt-2 mb-2">
         <li class="bellIcon nav-item" (click)="notifyOpen()">
           <i class="menuIcon far fa-bell"></i>
-          <div class="myBadge">
-            <p>{{numAprob + numNotif }} </p>
+          <div class="myBadge bg-martins-blue ">
+            <p class="bg-white text-center">{{numAprob + numNotif }} </p>
           </div>
         </li>
         <li class="configIcon nav-item" (click)="triggerShowBMenu()"> <i class="menuIcon fas fa-cog"></i>
         <li class="logoIcon nav-item"><img src="../../../assets/img/logo-nav.jpg" /></li>
-        <li class="logoIcon2 nav-item"><img src="../../../assets/img/login-logo.jpg" /></li>
-        <li><a href="#" class="nav-link" (click)="logout()"><i class="fas fa-sign-out-alt"></i> Sair</a></li>
+        <li class="logoIcon2 nav-item m-0 mt-2"><img src="../../../assets/img/login-logo.jpg" /></li>
+        <li><a href="#" class="nav-link color-martins-blue" (click)="logout()"><i class="fas fa-sign-out-alt color-martins-blue"></i> Sair</a></li>
 
       </ul>
     </div>
@@ -40,18 +40,18 @@
 
 <div id="notificationPopUp" class="notificationPopUp">
 
-  <div class="notificationTitle">
-    <h4>pendências</h4>
+  <div class="notificationTitle text-center">
+    <h4 class="font-weight-bold">pendências</h4>
   </div>
 
 
   <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
 
     <a class=" itemtab nav-item nav-link active col-xs-6 " id="nav-home-tab" data-toggle="tab" href="#nav-home"
-      role="tab" aria-controls="nav-home" aria-selected="true"><span class="notifTab">{{numNotif}}
+      role="tab" aria-controls="nav-home" aria-selected="true"><span class="font-weight-bold color-martins-blue">{{numNotif}}
       </span>notificações</a>
     <a class=" itemtab nav-item nav-link col-xs-6" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
-      aria-controls="nav-profile" aria-selected="false"><span class="notifTab">{{numAprob}} </span>aprovações</a>
+      aria-controls="nav-profile" aria-selected="false"><span class="font-weight-bold color-martins-blue">{{numAprob}} </span>aprovações</a>
 
   </div>
 
@@ -65,40 +65,40 @@
 
             <li class="notificationItem">
 
-              <div class="notiWrapp">
+              <div class="notiWrapp w-100 px-3 py-0 mr-0 mt-3">
 
                 <div class="mod1" (click)="toggleDetail()">
 
                   <div class="titleMod">
                     <div class="row">
                       <div class="col col-lg-9">
-                        <p class="title">Rebate a Vencer 2 <span class="complete"></span></p>
+                        <p class="title font-weight-bold">Rebate a Vencer 2 <span class="complete font-weight-bold color-martins-blue"></span></p>
                       </div>
                       <div class="col col-lg-3">
-                        <p class="title2">Há 4h</p>
+                        <p class="text-right">Há 4h</p>
                       </div>
                     </div>
                   </div>
-                  <div class="descriptionMod">
-                    <p class="description" *ngIf="!showDetail" @ngIfAnimation>ACHOC.NESCAU 2.0 ACTIG 30X400G</p>
+                  <div class="descriptionMod pb-1">
+                    <p class="text-uppercase mb-1" *ngIf="!showDetail" @ngIfAnimation>ACHOC.NESCAU 2.0 ACTIG 30X400G</p>
 
                     <table class="table table-sm detProd borderless" *ngIf="showDetail" @ngIfAnimation>
                       <thead>
                         <tr>
-                          <th scope="col">Produto</th>
-                          <th scope="col">Exped.</th>
-                          <th scope="col">Fatura</th>
-                          <th scope="col">Reg.P.</th>
-                          <th scope="col">Emissão</th>
+                          <th class="font-weight-normal border-0" scope="col">Produto</th>
+                          <th class="font-weight-normal border-0" scope="col">Exped.</th>
+                          <th class="font-weight-normal border-0" scope="col">Fatura</th>
+                          <th class="font-weight-normal border-0" scope="col">Reg.P.</th>
+                          <th class="font-weight-normal border-0" scope="col">Emissão</th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr>
-                          <td>1601215</td>
-                          <td>SP</td>
-                          <td>SP</td>
-                          <td>33</td>
-                          <td>31/12//2020</td>
+                          <td class="p-2 border-0 text-center">1601215</td>
+                          <td class="p-2 border-0 text-center">SP</td>
+                          <td class="p-2 border-0 text-center">SP</td>
+                          <td class="p-2 border-0 text-center">33</td>
+                          <td class="p-2 border-0 text-center">31/12//2020</td>
                         </tr>
 
                       </tbody>
@@ -108,10 +108,10 @@
                 </div>
                 <div class="row" *ngIf="showDetail" @ngIfAnimation>
                   <div class="col-xs-6 col-md-6">
-                    <button class="btn btn-info btn-block btn-md verif">Atuar</button>
+                    <button class="btn btn-info btn-block btn-md verif font-weight-bold bg-martins-blue">Atuar</button>
                   </div>
                   <div class="col-xs-6 col-md-6">
-                    <button class="btn btn-info btn-block btn-md verif noline">Excluir</button>
+                    <button class="btn btn-info btn-block btn-md verif font-weight-bold bg-martins-blue border-right-0">Excluir</button>
                   </div>
                 </div>
               </div>
@@ -125,15 +125,15 @@
                   <div class="titleMod">
                     <div class="row">
                       <div class="col col-lg-9">
-                        <p class="title">Diretriz estratégica declinada <span class="complete"> 2/5</span></p>
+                        <p class="title font-weight-bold">Diretriz estratégica declinada <span class="complete color-martins-blue"> 2/5</span></p>
                       </div>
                       <div class="col col-lg-3">
-                        <p class="title2">Há22h</p>
+                        <p class="text-right">Há22h</p>
                       </div>
                     </div>
                   </div>
-                  <div class="descriptionMod">
-                    <p class="description">COPO AMERICANO AGUA 190ML 2010 24X1</p>
+                  <div class="descriptionMod pb-1">
+                    <p class="text-uppercase mb-1">COPO AMERICANO AGUA 190ML 2010 24X1</p>
                   </div>
                 </div>
               </div>
@@ -145,22 +145,22 @@
                   <div class="titleMod">
                     <div class="row">
                       <div class="col col-lg-9">
-                        <p class="title">Rebate a Vencer<span class="complete"> </span></p>
+                        <p class="title font-weight-bold">Rebate a Vencer<span class="complete color-martins-blue"> </span></p>
                       </div>
                       <div class="col col-lg-3">
-                        <p class="title2">Há 1d 8h</p>
+                        <p class="text-right">Há 1d 8h</p>
                       </div>
                     </div>
                   </div>
-                  <div class="descriptionMod">
-                    <p class="description">ACHOC. NESCAU 2.0 ACTIG 30X400G</p>
+                  <div class="descriptionMod pb-1">
+                    <p class="text-uppercase mb-1">ACHOC. NESCAU 2.0 ACTIG 30X400G</p>
                   </div>
                 </div>
               </div>
             </li>
 
-            <div class="nonotif">
-              <p>não há mais notificações</p>
+            <div class="nonotif py-3 px-0">
+              <p class="text-center mb-0">não há mais notificações</p>
             </div>
 
           </div>
@@ -181,32 +181,32 @@
                   <div class="mod1" (click)="toggleDetail()">
                     <div class="row">
                       <div class="col col-lg-9">
-                        <p class="title">Suzi Cristina <span class="complete">1/5</span></p>
+                        <p class="title font-weight-bold">Suzi Cristina <span class="complete color-martins-blue">1/5</span></p>
                       </div>
                       <div class="col col-lg-3">
-                        <p class="title2">Há 4h</p>
+                        <p class="text-right">Há 4h</p>
                       </div>
                     </div>
                   </div>
-                  <div class="descriptionMod">
-                    <p class="description" *ngIf="!showDetail" @ngIfAnimation>ACHOC.NESCAU 2.0 ACTIG 30X400G</p>
+                  <div class="descriptionMod pb-1">
+                    <p class="text-uppercase mb-1" *ngIf="!showDetail" @ngIfAnimation>ACHOC.NESCAU 2.0 ACTIG 30X400G</p>
                     <table class="table table-sm detProd borderless" *ngIf="showDetail" @ngIfAnimation>
                       <thead @easeInOut>
                         <tr>
-                          <th scope="col">Produto</th>
-                          <th scope="col">Exped.</th>
-                          <th scope="col">Fatura</th>
-                          <th scope="col">Reg.P.</th>
-                          <th scope="col">Emissão</th>
+                          <th class="font-weight-normal border-0" scope="col">Produto</th>
+                          <th class="font-weight-normal border-0" scope="col">Exped.</th>
+                          <th class="font-weight-normal border-0" scope="col">Fatura</th>
+                          <th class="font-weight-normal border-0" scope="col">Reg.P.</th>
+                          <th class="font-weight-normal border-0" scope="col">Emissão</th>
                         </tr>
                       </thead>
                       <tbody @easeInOut>
                         <tr>
-                          <td>1601215</td>
-                          <td>SP</td>
-                          <td>SP</td>
-                          <td>33</td>
-                          <td>31/12//2020</td>
+                          <td class="p-2 border-0 text-center">1601215</td>
+                          <td class="p-2 border-0 text-center">SP</td>
+                          <td class="p-2 border-0 text-center">SP</td>
+                          <td class="p-2 border-0 text-center">33</td>
+                          <td class="p-2 border-0 text-center">31/12//2020</td>
                         </tr>
 
                       </tbody>
@@ -216,13 +216,13 @@
 
                 </div>
               </div>
-              <button class="btn btn-info btn-block btn-sm verif" *ngIf="showDetail" @easeInOut>Verificar</button>
+              <button class="btn btn-info btn-block btn-sm verif font-weight-bold bg-martins-blue" *ngIf="showDetail" @easeInOut>Verificar</button>
             </li>
 
 
 
-            <div class="nonotif">
-              <p>não há mais notificações</p>
+            <div class="nonotif py-3 px-0">
+              <p class="text-center mb-0">não há mais notificações</p>
             </div>
 
           </div>

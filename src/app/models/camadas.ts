@@ -5,18 +5,20 @@ import { Condicao } from './condicao';
 export class Camada {
     constructor(
         // tslint:disable-next-line: variable-name
-        public Cod_Camada = '',
+        public cod_camada = '',
         // tslint:disable-next-line: variable-name
-        public Nome_Camada = '',
-        public TIPO_BASE_VENDAS = '',
-        public condicaos?: Array<Condicao>
+        public nome_camada = '',
+        // tslint:disable-next-line: variable-name
+        public tipo_base_vendas = '',
+        public condicaos?: Array<Condicao>,
+        public value?: any
     ) {}
 
     // tslint:disable-next-line: variable-name
-    set(Cod_Camada: any, Nome_Camada: any, TIPO_BASE_VENDAS: any, condicaos?: any) {
-        this.Cod_Camada = Cod_Camada;
-        this.Nome_Camada = Nome_Camada;
-        this.TIPO_BASE_VENDAS = TIPO_BASE_VENDAS;
+    set(cod_camada: any, nome_camada: any, tipo_base_vendas: any, condicaos?: any) {
+        this.cod_camada = cod_camada;
+        this.nome_camada = nome_camada;
+        this.tipo_base_vendas = tipo_base_vendas;
         this.condicaos = condicaos;
     }
 }

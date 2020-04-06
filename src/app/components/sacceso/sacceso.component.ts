@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Sacceso } from '../../models/sacceso';
-import { MetadataService } from './../../services/metadata.service';
 import { SaccesoService } from '../../services/sacceso.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Campo } from 'app/models/campo';
@@ -81,7 +79,7 @@ export class SaccesoComponent implements OnInit {
   public getLastCampo() {
     this.saccesoService.getLastCampo()
       .then(result => {
-        this.newCampo.Cod_Campo = this.evaluateNextSA(result.Cod_Campo);
+        this.newCampo.cod_campo = this.evaluateNextSA(result.cod_campo);
       });
   }
 
@@ -94,7 +92,8 @@ export class SaccesoComponent implements OnInit {
     this.spinner.show();
     this.saccesoService.getLastSequencia()
       .then((result: any) => {
-        this.sequencia.Cod_Sequencia = this.evaluateNextSA(result.Cod_Sequencia);
+        console.log(result);
+        this.sequencia.cod_sequencia = this.evaluateNextSA(result.cod_sequencia);
         this.spinner.hide();
       });
   }
@@ -106,7 +105,7 @@ export class SaccesoComponent implements OnInit {
         Input: CP001
         Output: CP002
   */
-  public evaluateNextSA(code: any) {
+  public evaluateNextSA(code: string) {
     const codeString = code.substr(0, 2);
     // tslint:disable-next-line: radix
     const codeNumer = parseInt(code.substr(code.length - 2, code.length));
@@ -120,7 +119,7 @@ export class SaccesoComponent implements OnInit {
      Output: Unselect Campo from current sequencia
   */
   onDltSelection(campo: Campo) {
-    const domElem = document.getElementById(campo.Cod_Campo);
+    const domElem = document.getElementById(campo.cod_campo);
     domElem.click();
   }
 
@@ -145,7 +144,7 @@ export class SaccesoComponent implements OnInit {
     let desc = '';
     this.campos.map(elem => {
       if (elem === campo) {
-        const domElem: any = document.getElementById(campo.Cod_Campo);
+        const domElem: any = document.getElementById(campo.cod_campo);
         if (this.elemExist(campo, this.sequencia.campos)) {
           domElem.checked = false;
           this.sequencia.campos = this.sequencia.campos.filter((obj) => {
@@ -159,13 +158,13 @@ export class SaccesoComponent implements OnInit {
 
     this.sequencia.campos.map((elem: Campo, index: any) => {
       if (index === 0) {
-        desc = desc + elem.Nome_Campo;
+        desc = desc + elem.nome_campo;
         console.log(desc);
       } else {
-        desc = desc + '/' + elem.Nome_Campo;
+        desc = desc + '/' + elem.nome_campo;
       }
     });
-    this.sequencia.Nome_Sequencia = desc;
+    this.sequencia.nome_sequencia = desc;
   }
 
   /* Iván Lynch - 1/4/2020
@@ -209,16 +208,24 @@ export class SaccesoComponent implements OnInit {
         $('#myModal').modal('show');
         this.saveSuccess = true;
         this.campos.map( elem => {
-          const domElem: any = document.getElementById(elem.Cod_Campo);
+          const domElem: any = document.getElementById(elem.cod_campo);
           domElem.checked = false;
         });
         this.spinner.hide();
-        this.getLastSequencia();
         setTimeout(function() {
           this.saveSuccess = false;
           this.sequencia = new Sequencia();
+          this.getLastSequencia();
         }.bind(this), 2000);
 
+      })
+      .catch((errr: any) => {
+        this.saveError = true;
+        this.errDesc = 'A sequência de acesso já existe';
+        this.spinner.hide();
+        setTimeout(function() {
+          this.saveError = false;
+        }.bind(this), 2000);
       });
   }
 }

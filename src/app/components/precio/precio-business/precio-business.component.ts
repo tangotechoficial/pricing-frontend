@@ -1,12 +1,19 @@
-import { Component, OnInit ,Input , Output } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { EsquemasService } from 'app/services/esquemas.service';
 import { Camada } from 'app/models/camadas';
 import { CamadaService } from 'app/services/camada.service';
 import { Sequencia } from 'app/models/sequencia';
 import { Condicao } from 'app/models/condicao';
-import { Condicion } from 'app/models/condicion';
 import { Campo } from 'app/models/campo';
 import { SequenciaValues } from 'app/models/sequencia_values';
+import { EsquemaCalculo } from '@app/models/esquemacalculo';
+import { Mercadoria } from '@app/models/mercadoria';
+import { FilialFaturamento } from '@app/models/filialfaturamento';
+import { FilialExpedicao } from '@app/models/filialexpedicao';
+import { Estado } from '@app/models/estado';
+import { Regiao } from '@app/models/regiao';
+import { ChavePrecificao } from '@app/models/chaveprecificao';
+import { CondicionService } from '@app/services/condicion.service';
 
 declare var $: any;
 
@@ -21,13 +28,14 @@ export class PrecioBusiness implements OnInit {
   @Input() isVenta: any;
   public sequencias;
   public selectedSequencia;
-  public filial: Array<any>;
-  public faturamento: Array<any>;
-  public estado: Array<any>;
-  public region: Array<any>;
-  public mercadoria: Array<any>;
+  public filialExpedicao: Array<FilialExpedicao>;
+  public filialFaturamento: Array<FilialFaturamento>;
+  public estado: Array<Estado>;
+  public regiao: Array<Regiao>;
+  public mercadoria: Array<Mercadoria>;
+  public chavePrecificao: ChavePrecificao;
   public isLoading = false;
-  public dataListPreencher: Array <any>;
+  public dataListPreencher: Array<any>;
   public bSelectMaterial = false;
   public bSelectExpedicao = false;
   public bSelectFacturamento = false;
@@ -39,52 +47,26 @@ export class PrecioBusiness implements OnInit {
   public currentSequencias: Array<Sequencia>;
   public currentSelectedCampos: Array<Campo>;
   public currentSelectedSequenciaValues: Array<SequenciaValues>;
+  public esquema: EsquemaCalculo;
+  public camadafullData: any;
+  public condicaos: Condicao[];
+  public condicaosAllow: any;
+  public condicaosValues: any;
+  public currentPrecoBase: any;
+  public currentMargemCanal: any;
+  public currentTotal: any;
 
   constructor(
     private esquemaService: EsquemasService,
-    private camadaService: CamadaService
-  ) {}
+    private condicionService: CondicionService
+  ) { }
 
   ngOnInit() {
     this.currentSelectedSequenciaValues = new Array<SequenciaValues>();
     this.camadaType = this.isVenta === 0 ? 'V' : 'B';
-    this.precoBaseMaterial = {
-      material: { CODPRD: '',
-                  DESPRD: '',
-                  CODGRPPRD: '',
-                  CODCLSPRD: '',
-                  DESCLSPRD: '',
-                  CODSUBCTGPRD: '',
-                  DESSUBCTGPRD: '',
-                  CODSMR: '',
-                  DESSMR: ''},
-      filialExpedicao: {
-        Cod_Filial: '',
-        Desc_Filial: ''
-      },
-      filialFaturamento: {
-        Cod_Faturamento: '',
-        Desc_Faturamento: ''
-      },
-      estado: {
-        Cod_Estado: 'SP',
-        Desc_Estado: ''
-      },
-      regiaoPreco: {
-        Cod_Region: '',
-        Tipo_Region: '',
-        Desc_Region: ''
-      }
-    };
-
+    this.chavePrecificao = new ChavePrecificao();
     this.updateMasterData();
 
-    this.dataListPreencher = [{'idCliente':51 , 'tipo':'Consum Final' , 'valor':'$R30' , 'valdesd':'12/04/2019' , 'valate':'99/99/9999'},
-    {'idCliente':52 , 'tipo':'Consum Final' , 'valor':'$R120' , 'valdesd':'12/04/2020' , 'valate':'99/99/9999'},
-    {'idCliente':51 , 'tipo':'Consum Final' , 'valor':'$R320' , 'valdesd':'12/02/2019' , 'valate':'99/99/9999'},
-    {'idCliente':51 , 'tipo':'Consum Final' , 'valor':'$R320' , 'valdesd':'12/02/2019' , 'valate':'99/99/9999'}
-
-  ]
   }
 
   onSelectCondicao(val: Condicao) {
@@ -94,21 +76,98 @@ export class PrecioBusiness implements OnInit {
   }
 
   currVal(val) {
-    console.log(val);
+    let precobase = 0;
+    let margemcanal = 0;
+    const domCampo: any = document.getElementById(val.nome_campo);
+    this.camadafullData.map(camada => {
+      if (camada.camada.length !== 0) {
+        if (camada.camada.nome_camada === 'PRECO_BASE') {
+          precobase = camada.camada.value;
+          this.currentPrecoBase = precobase;
+        }
+      }
+    });
+
+    if (val.nome_campo === 'PERMRGADICNLVND') {
+      this.camadafullData.map(camada => {
+        if (camada.camada.length !== 0) {
+          if (camada.camada.nome_camada === 'MARGEM') {
+            camada.condicaos.map(elem => {
+              console.log(elem)
+              if (elem.desc_condicao === 'MARGEM_CANAL') {
+                elem.value = Math.floor(precobase * domCampo.innerHTML)/100;;
+                margemcanal = elem.value;
+                this.currentMargemCanal = margemcanal;
+              }
+
+            });
+            camada.camada.value = margemcanal;
+          }
+        }
+      });
+    }
+    this.currentTotal = this.currentPrecoBase + this.currentMargemCanal;
+  }
+
+  onSalvarEsquema() {
+    const id = this.chavePrecificao.mercadoria.codprd.toString() +
+      this.chavePrecificao.filialExpedicao.codfilemp.toString() +
+      this.chavePrecificao.filialFaturamento.codfilempfat.toString() +
+      this.chavePrecificao.regiao.tipedereg.toString() +
+      this.chavePrecificao.regiao.codedereg.toString();
+    this.esquemaService.postPreco(this.camadaType, id, 'EC001', this.currentTotal)
+    .then(result => {
+      $('#myModal2').modal('show');
+    });
+  }
+
+  public closePopUp() {
+    $('#myModal2').modal('hide');
+  }
+
+  onAbrirChavePrecificao() {
+    const id = this.chavePrecificao.mercadoria.codprd.toString() +
+      this.chavePrecificao.filialExpedicao.codfilemp.toString() +
+      this.chavePrecificao.filialFaturamento.codfilempfat.toString() +
+      this.chavePrecificao.regiao.tipedereg.toString() +
+      this.chavePrecificao.regiao.codedereg.toString();
+    this.esquemaService.getPreco()
+      .then(elem => {
+        elem.map(preco => {
+          if (preco.chave === id) {
+            this.camadafullData.map(camada => {
+              if (camada.camada.length !== 0) {
+                if (camada.camada.nome_camada === 'PRECO_BASE') {
+                  camada.camada.value = preco.valor;
+                  this.precoBaseMaterial = preco.valor;
+                }
+              }
+            });
+          }
+        });
+      });
   }
 
   onSelectSequencia(val: Sequencia) {
     this.selectedSequencia = new Sequencia();
     this.selectedSequencia = val;
     this.currentSelectedCampos = new Array<Campo>();
-    val.campos.map(elem => this.currentSelectedCampos.push(elem));
-    this.currentSelectedCampos.push({Cod_Campo: 'CPVAL', Nome_Campo: 'VALUE', Value: ''});
-    const sequenciavalue: SequenciaValues = new SequenciaValues(val.Cod_Sequencia, val.Nome_Sequencia, this.currentSelectedCampos);
-    sequenciavalue.camposValue.map(elem => elem.Value = '');
-    this.currentSelectedSequenciaValues.push(sequenciavalue);
+    const nomeSequencia = val.nome_sequencia;
+    const endpoint = nomeSequencia.replace(/\//g, '');
+    this.esquemaService.getSequenciaValues(endpoint.toLowerCase())
+      .then(result => {
+        result.map(elem => {
+          Object.keys(elem).forEach(key => {
+            if (key !== 'id') {
+              const campo = new Campo('', key.toUpperCase(), elem[key]);
+              this.currentSelectedCampos.push(campo);
+            }
+          });
+        });
+      });
   }
 
-  openPopUp(tp: string){
+  openPopUp(tp: string) {
     if (tp === 'expedicao') {
       this.bSelectExpedicao = true;
     } else if (tp === 'material') {
@@ -133,23 +192,23 @@ export class PrecioBusiness implements OnInit {
   }
 
   getSelectedMaterial(val: any) {
-    this.precoBaseMaterial.material = val;
+    this.chavePrecificao.mercadoria = val;
   }
 
   getSelectedExpedicao(val: any) {
-    this.precoBaseMaterial.filialExpedicao = val;
+    this.chavePrecificao.filialExpedicao = val;
   }
 
   getSelectedFaturamento(val: any) {
-    this.precoBaseMaterial.filialFaturamento = val;
+    this.chavePrecificao.filialFaturamento = val;
   }
 
   getSelectedRegiao(val: any) {
-    this.precoBaseMaterial.regiaoPreco = val;
+    this.chavePrecificao.regiao = val;
   }
 
   onSelectEstado(val: any) {
-    this.precoBaseMaterial.estado = val;
+    this.chavePrecificao.estado = val;
   }
 
   postPrecioBaseForMaterial() {
@@ -158,33 +217,47 @@ export class PrecioBusiness implements OnInit {
 
   updateMasterData() {
     this.isLoading = true;
-    this.filial = new Array<any>();
-    this.faturamento = new Array<any>();
-    this.estado = new Array<any>();
-    this.region = new Array<any>();
-    this.mercadoria = new Array<any>();
+    this.filialExpedicao = new Array<FilialExpedicao>();
+    this.filialFaturamento = new Array<FilialFaturamento>();
+    this.estado = new Array<Estado>();
+    this.regiao = new Array<Regiao>();
+    this.mercadoria = new Array<Mercadoria>();
     this.camadas = new Array<Camada>();
+    this.esquema = new EsquemaCalculo();
     Promise.all([
-      this.esquemaService.getFilial().then(fi => fi.map(fiElem => this.filial.push(fiElem))),
-      this.esquemaService.getFaturamento().then(fa => fa.map(faElem => this.faturamento.push(faElem))),
-      this.esquemaService.getEstado().then(es => es.map(esElem => this.estado.push(esElem))),
-      this.esquemaService.getRegion().then(re => re.map(reElem => this.region.push(reElem))),
-      this.esquemaService.getMercadoria().then(mer => mer.map(merElem => this.mercadoria.push(merElem))),
-      this.camadaService.getCamadasByType(this.camadaType).then(cam => cam.map(camElem => this.camadas.push(camElem)))
+      this.esquemaService.getFilialExpedicao().then(fi => this.filialExpedicao = fi),
+      this.esquemaService.getFilialFaturamento().then(fa => this.filialFaturamento = fa),
+      this.condicionService.getCamadas().then(ca => this.camadas = ca),
+      this.esquemaService.getEstado().then(es => this.estado = es),
+      this.esquemaService.getRegiao().then(re => this.regiao = re),
+      this.esquemaService.getMercadoria().then(mer => this.mercadoria = mer),
+      this.esquemaService.fetchCondicaoCamadaEsquema(this.camadaType).then(data => this.camadafullData = data),
+      this.esquemaService.getEsquemaCalculo(this.camadaType).then(result => {
+        this.esquema = result;
+      })
     ]).then(rs => {
+      this.camadas = this.camadas.filter(obj => {
+        return obj.tipo_base_vendas === this.camadaType;
+      });
       this.isLoading = false;
-      console.log(this.camadas)
+      this.camadafullData.map(elem => {
+        if (elem.condicaos.length !== 0) {
+          elem.condicaos.map(co => {
+            co.value = 0;
+          });
+        }
+      });
     });
   }
 
-  getSelectedCondicao(val: any , i: any) {
+  getSelectedCondicao(val: any, i: any) {
     this.selectItemColor(i);
   }
 
   selectItemColor(item: number) {
     $('tr').removeClass('mySelect');
     $('tr').eq(item + 1).addClass('mySelect');
-   }
+  }
 
 
 }

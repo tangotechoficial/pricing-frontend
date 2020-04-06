@@ -16,7 +16,7 @@ export class SaccesoService {
   }
 
     getCampos(): Promise<any> {
-        return this.http.get(this.url + '/seqcampo/', this.header)
+        return this.http.get(this.url + '/campo/', this.header)
             .toPromise()
             .then((response: any) => {
                 return response.results as Campo[];
@@ -29,19 +29,19 @@ export class SaccesoService {
     postSequencia(sequencia: Sequencia): Promise<any> {
          const camps: Array<any> = new Array<any>();
          sequencia.campos.map(elem => {
-            camps.push(elem.Cod_Campo);
+            camps.push(elem.cod_campo);
          });
          return this.http
             .post(this.url + '/sequencia/',
-                { Cod_Sequencia: sequencia.Cod_Sequencia,
-                  Nome_Sequencia: sequencia.Nome_Sequencia,
+                { cod_sequencia: sequencia.cod_sequencia,
+                  nome_sequencia: sequencia.nome_sequencia,
                   campos: camps
                 }, this.header).toPromise();
     }
 
     postCampo(campo: Campo): Promise<any> {
         return this.http
-            .post(this.url + '/seqcampo/', { Cod_Campo: campo.Cod_Campo, Nome_Campo: campo.Nome_Campo}, this.header).toPromise();
+            .post(this.url + '/campo/', { cod_campo: campo.cod_campo, nome_campo: campo.nome_campo}, this.header).toPromise();
     }
 
     getLastSequencia(): Promise<any> {
@@ -49,6 +49,6 @@ export class SaccesoService {
     }
 
     getLastCampo(): Promise<any> {
-      return this.http.get(this.url + '/seqcampo/last/', this.header).toPromise();
+      return this.http.get(this.url + '/campo/last/', this.header).toPromise();
   }
 }

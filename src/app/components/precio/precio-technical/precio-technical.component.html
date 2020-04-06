@@ -2,21 +2,21 @@
 <div class="container col-12 d-flex flex-column justify-content-center px-4 py-4">
     <div *ngIf="loading" class="container p-0 rounded border col-12 bg-white">
         <div class="col-12 p-3 border-bottom">
-            <span class="text-header">{{camadaU.Nome_Camada}}</span>
+            <span class="text-header">{{camadaU.nome_camada}}</span>
         </div>
         <div class="row col-12 p-4" *ngFor="let condicao of condicaos; let i=
             index">
             <div class="col-2">
                 <span class="text-header">Cod. Condição</span>
                 <input class="form-control mt-3" readonly
-                    name="{{camadaU.id}}Cod_Condicao{{i}}"
-                    [(ngModel)]="condicao.Cod_Condicao" />
+                    name="{{camadaU.id}}cod_condicao{{i}}"
+                    [(ngModel)]="condicao.cod_condicao" />
             </div>
             <div class="col-3">
                 <span class="text-header">Descrição da condicao</span>
                 <input class="form-control mt-3" 
-                    name="{{camadaU.id}}Desc_Condicao{{i}}"
-                    [(ngModel)]="condicao.Desc_Condicao" disabled/>
+                    name="{{camadaU.id}}desc_condicao{{i}}"
+                    [(ngModel)]="condicao.desc_condicao" disabled/>
             </div>
             <div class="col-1 mb-2 col-1 d-flex flex-column justify-content-end
                 align-items-center">
@@ -26,17 +26,17 @@
                 <span class="text-header">Tipo de valor</span>
                 <input class="form-control mt-3" disabled
                     name="{{camadaU.id}}id_TipoValor{{i}}"
-                    [(ngModel)]="condicao.Desc_TipoValor" />
+                    [(ngModel)]="condicao.desc_tipovalor" />
             </div>
             <div class="col-2 d-flex flex-column justify-content-center
                 align-items-center">
                 <span class="text-header">Mandatoria</span>
                 <div class="custom-control custom-checkbox mt-2 ml-5 mb-2 p-0">
                     <input type="checkbox" class="custom-control-input"
-                        id="{{camadaU.id}}MANDATORIA{{i}}"
-                        [(ngModel)]="condicao.MANDATORIA" (change)="updateMandatoria(condicao)">
+                        id="{{camadaU.id}}mandatoria{{i}}"
+                        [(ngModel)]="condicao.mandatoria" (change)="updateMandatoria(condicao)">
                     <label class="pl-4 custom-control-label"
-                        for="{{camadaU.id}}MANDATORIA{{i}}"
+                        for="{{camadaU.id}}mandatoria{{i}}"
                         id="checkMandatoriaLabel"></label>
                 </div>
             </div>
@@ -45,10 +45,10 @@
                 <span class="text-header">Estadistica</span>
                 <div class="custom-control custom-checkbox mt-2 ml-5 mb-2 p-0">
                     <input type="checkbox" class="custom-control-input"
-                        id="{{camadaU.id}}ESTATISTICA{{i}}"
-                        [(ngModel)]="condicao.ESTATISTICA" (change)="updateEstadistica(condicao)">
+                        id="{{camadaU.id}}estatistica{{i}}"
+                        [(ngModel)]="condicao.estatistica" (change)="updateEstadistica(condicao)">
                     <label class="pl-4 custom-control-label"
-                        for="{{camadaU.id}}ESTATISTICA{{i}}"
+                        for="{{camadaU.id}}estadistica{{i}}"
                         id="checkEstatisticaLabel"></label>
                 </div>
             </div>
@@ -59,7 +59,7 @@
                 </div>
                 <div class="w-100 h-100 d-flex justify-content-center
                     align-items-center mb-1">
-                    <button (click)="remove(condicao.Cod_Condicao)" type="button"
+                    <button (click)="remove(condicao.cod_condicao)" type="button"
                         class="btn btn-secondary p-0 ml-4 d-flex flex-column
                         align-items-center justify-content-center">
                         <span class="btn-label d-flex align-items-center"><i
