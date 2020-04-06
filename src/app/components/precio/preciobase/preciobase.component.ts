@@ -84,20 +84,21 @@ export class PrecioBaseComponent implements OnInit {
   }
 
   updateCamada({camada, condicaos, action}) {
-    this.camadasUpdate[action][camada.Cod_Camada] ? this.camadasUpdate[action][camada.Cod_Camada].push(condicaos) : this.camadasUpdate[action][camada.Cod_Camada] = [condicaos]
+    this.camadasUpdate[action][camada.cod_camada] ? this.camadasUpdate[action][camada.cod_camada].push(condicaos) : this.camadasUpdate[action][camada.cod_camada] = [condicaos]
   }
 
 
   submiteEsquema() {
-    // console.log({camadasUpdate: this.camadasUpdate})
+    console.log({camadasUpdate: this.camadasUpdate})
     $('#myModalPrecioBase').modal('show');
     let promisesAddCondCamadaEsq: Array<any> = Object.keys(this.camadasUpdate["ADD"]).map(codCamada => {
       return this.camadasUpdate["ADD"][codCamada].map(cond => {
           // new relations
           const objCondCamadaEsq = {
-            Cod_Esquema_Calculo: "EC000", //CAMBIAR PARA VENTAS
-            Cod_Condicao: cond.Cod_Condicao,
-            Cod_Camada: codCamada
+            id: "EC000" + cond.cod_condicao + codCamada,
+            cod_esquema_calculo: "EC000", //CAMBIAR PARA VENTAS
+            cod_condicao: cond.cod_condicao,
+            cod_camada: codCamada
           }
          return this.esquemasService.postEsquema(objCondCamadaEsq)
         
@@ -114,8 +115,8 @@ export class PrecioBaseComponent implements OnInit {
 
     let promisesUpdateCondCamadaEsq: Array<any> = Object.keys(this.camadasUpdate["UPDATE"]).map(codCamada => {
       return this.camadasUpdate["UPDATE"][codCamada].map(cond => {
-        cond.MANDATORIA = cond.MANDATORIA ? 1 : 0
-        cond.ESTATISTICA = cond.ESTATISTICA ? 1 : 0
+        cond.mandatoria = cond.mandatoria ? 1 : 0
+        cond.estatistica = cond.estatistica ? 1 : 0
         return this.esquemasService.updateCondicao(cond)
         
       })
@@ -125,7 +126,7 @@ export class PrecioBaseComponent implements OnInit {
 
 
     Promise.all(promisesCondCamadaEsq)
-      .then(this.verifyErrorFetchData)
+      // .then(this.verifyErrorFetchData)
       .then(data => {
         console.log("oks")
         console.log({data})
