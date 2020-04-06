@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+declare var $: any;
 
 @Component({
   selector: 'app-simulador',
@@ -12,4 +13,15 @@ export class SimuladorComponent implements OnInit {
   ngOnInit() {
   }
 
+  filter() {
+    $('#modalFilter').modal('show')
+  }
+
+  showVerbaDetails() {
+    $('#detailsModal').modal('show')
+  }
+
+  confirmAcceptance() {
+    $('#confirmModal').modal('show')
+  }
 }

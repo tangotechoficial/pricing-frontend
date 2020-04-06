@@ -1,0 +1,117 @@
+[
+  {
+    "UF":"SP",
+    "data": {
+      "item": {
+        "product": "nescau ball actig.45x350g"
+        "values": {
+          "Verba": [
+             {
+               sugerido:0
+               planejado:80
+               realizado:75
+               otimizado:0
+             },
+             {
+               sugerido:0
+               planejado:75
+               realizado:75
+               otimizado:0
+             },
+             {
+               sugerido:0
+               planejado:75
+               realizado:0
+               otimizado:0
+             },
+             {
+               sugerido:0
+               planejado:70
+               realizado:0
+               otimizado:0
+             }
+           ],
+          "CMV": [
+             {
+               sugerido:0
+               planejado:8.95
+               realizado:9
+               otimizado:0
+             },
+             {
+               sugerido:0
+               planejado:8.75
+               realizado:9.50
+               otimizado:0
+             },
+             {
+               sugerido:0
+               planejado:8.65
+               realizado:0
+               otimizado:0
+             },
+             {
+               sugerido:0
+               planejado:8.45
+               realizado:0
+               otimizado:0
+             }
+           ],
+        "Margem": [
+             {
+               sugerido:0
+               planejado:22
+               realizado:15.5
+               otimizado:0
+             },
+             {
+               sugerido:0
+               planejado:22
+               realizado:14.5
+               otimizado:0
+             },
+             {
+               sugerido:0
+               planejado:19
+               realizado:0
+               otimizado:0
+             },
+             {
+               sugerido:0
+               planejado:18
+               realizado:0
+               otimizado:0
+             }
+           ],
+          "Competitividade": [
+             {
+               sugerido:0
+               planejado:0.025
+               realizado:6.5
+               otimizado:0
+             },
+             {
+               sugerido:0
+               planejado:0.015
+               realizado:7
+               otimizado:0
+             },
+             {
+               sugerido:0
+               planejado:-0.015
+               realizado:0
+               otimizado:0
+             },
+             {
+               sugerido:0
+               planejado:-0.025
+               realizado:0
+               otimizado:0
+             }
+           ]
+        }
+      }
+
+    }
+  }
+]
