@@ -14,6 +14,7 @@ import { Estado } from '@app/models/estado';
 import { Regiao } from '@app/models/regiao';
 import { ChavePrecificao } from '@app/models/chaveprecificao';
 import { CondicionService } from '@app/services/condicion.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 declare var $: any;
 
@@ -58,7 +59,8 @@ export class PrecioBusiness implements OnInit {
 
   constructor(
     private esquemaService: EsquemasService,
-    private condicionService: CondicionService
+    private condicionService: CondicionService,
+    private spinnerService: NgxSpinnerService
   ) { }
 
   ngOnInit() {
@@ -110,6 +112,7 @@ export class PrecioBusiness implements OnInit {
   }
 
   onSalvarEsquema() {
+    this.spinnerService.show();
     const id = this.chavePrecificao.mercadoria.codprd.toString() +
       this.chavePrecificao.filialExpedicao.codfilemp.toString() +
       this.chavePrecificao.filialFaturamento.codfilempfat.toString() +
@@ -117,6 +120,7 @@ export class PrecioBusiness implements OnInit {
       this.chavePrecificao.regiao.codedereg.toString();
     this.esquemaService.postPreco(this.camadaType, id, 'EC001', this.currentTotal)
     .then(result => {
+      this.spinnerService.hide();
       $('#myModal2').modal('show');
     });
   }
