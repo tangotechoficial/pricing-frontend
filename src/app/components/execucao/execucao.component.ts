@@ -20,7 +20,7 @@ export class ExecucaoComponent implements OnInit {
   ngOnInit() {
 
     this.planningDataService.planningData.pipe(first()).subscribe(
-          data => data.default.map(
+          data => data.results.map(
             row => {
               this.planningData.push(new PurchasePlan().deserialize(row))
             }

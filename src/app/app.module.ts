@@ -56,6 +56,8 @@ import { registerLocaleData }  from '@angular/common'
 import localePt from '@angular/common/locales/pt';
 import { FilterTagComponent } from './components/shared/filter-tag/filter-tag.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { ImpactIndicatorComponent } from './components/shared/impact-indicator/impact-indicator.component';
+
 
 registerLocaleData(localePt, 'pt',);
 @NgModule({
@@ -99,7 +101,8 @@ registerLocaleData(localePt, 'pt',);
     SelectPopupExpedicaoComponent,
     SelectPopupFaturamentoComponent,
     SelectPopupRegiaoComponent,
-    FilterTagComponent
+    FilterTagComponent,
+    ImpactIndicatorComponent,
   ],
   imports: [
     BrowserModule,

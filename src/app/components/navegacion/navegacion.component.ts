@@ -66,6 +66,11 @@ export class NavegacionComponent implements OnInit {
     "/precioventa": "Esquema de Cálculo / Precio Venta",
     "/sacceso": "Sequência de acesso",
     "/condicion": "Criar nova condição",
+    "/datalab/dados-mestre": "Growth Data Lab / Dados Mestre",
+    "/datalab/diretriz-estrategica": "Growth Data Lab / Diretriz Estratégica",
+    "/datalab/plano-compras": "Growth Data Lab / Plano de Compras",
+    "/datalab/execucao": "Growth Data Lab / Execução",
+    "/datalab/simulador": "Growth Data Lab / Simulador"
   }
   constructor(
     private authService: AuthenticationService,
