@@ -20,8 +20,8 @@ export class FakeDataProviderInterceptor implements HttpInterceptor{
 
     function handleRoute() {
       switch(true) {
-        case url.endsWith('/api/planodecompras') && method === 'GET':
-          return loadTableData()
+        // case url.endsWith('/api/planodecompras') && method === 'GET':
+        //   return loadTableData()
         case url.endsWith('/api/dadosmestrecomposicao') && method === 'GET':
           return loadMasterDataComps()
         case url.endsWith('/api/diretrizesestrategica') && method === 'GET':

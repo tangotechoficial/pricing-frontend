@@ -30,12 +30,12 @@ export class FilterTagComponent implements OnInit, OnChanges {
     this.filterChange.emit(this.filter)
    }
 
-   remove($evt) {
+ remove($evt) {
      const badge = $evt.target.parentElement
      const field = badge.dataset.field
      this.filter.nullify(field)
      this.filterChange.emit(this.filter)
      badge.remove()
-   }
-
  }
+
+}
