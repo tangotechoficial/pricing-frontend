@@ -173,7 +173,6 @@ export class SaccesoComponent implements OnInit {
   */
   public submitCampo() {
     this.spinner.show();
-    this.getLastCampo();
     this.saccesoService.postCampo(this.newCampo)
       .then(result => {
         this.saveCampoSuccess = true;
@@ -181,6 +180,8 @@ export class SaccesoComponent implements OnInit {
         this.spinner.hide();
         setTimeout(() => {
           this.saveCampoSuccess = false;
+          this.newCampo = new Campo();
+          this.getLastCampo();
         }, 3000);
       });
   }

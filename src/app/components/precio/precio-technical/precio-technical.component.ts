@@ -38,19 +38,11 @@ export class PrecioTechnical {
     this.tipoValor = this.camada.tipoValor;
 
     const condicaos = this.camada.condicaos.map(cond => {
-      const tipValor = this.tipoValor.filter(tipoValor => tipoValor.Cod_TipoValor === cond.Cod_TipoValor)[0]
-      cond.Desc_TipoValor = tipValor.Desc_TipoValor;
+      const tipValor = this.tipoValor.filter(tipoValor => tipoValor.cod_tipovalor === cond.cod_tipovalor)[0]
+      cond.desc_tipovalor = tipValor.desc_tipovalor;
       return new ModelCondicao(cond)
     })
     this.condicaos = condicaos
-    // console.log({condicao: this.condicaos})
-    // this.condicionService.getTiposValor()
-    //   .then(data => { 
-    //     this.tipoValor = data
-
-        
-    //   });
-    
     
   }
 
@@ -65,7 +57,7 @@ export class PrecioTechnical {
 
   remove(val: any) {
     this.condicaos.map((elem, index) => {
-      if (elem.Cod_Condicao === val) {
+      if (elem.cod_condicao === val) {
         this.condicaos.splice(index, 1);
         this.selectedObject.emit({action: 'REMOVE', camada: this.camadaU, condicaos: elem});
       }
@@ -121,12 +113,12 @@ export class PrecioTechnical {
   }
 
   updateMandatoria(condicao) {
-    // console.log({condicao})
+    console.log({condicao})
     this.selectedObject.emit({action: 'UPDATE', camada: this.camadaU, condicaos: condicao});
   }
 
   updateEstadistica(condicao) {
-    // console.log({condicao})
+    console.log({condicao})
     this.selectedObject.emit({action: 'UPDATE', camada: this.camadaU, condicaos: condicao});
   }
 }

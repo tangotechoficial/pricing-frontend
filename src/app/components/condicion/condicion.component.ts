@@ -277,6 +277,8 @@ export class CondicionComponent implements OnInit {
     this.spinner.show();
     this.condicionService.postCondicao(this.condicion)
       .then(result => {
+        this.spinner.hide();
+        $('#myModal').modal('show');
         this.sequencias.map( elem => {
           const domElem: any = document.getElementById(elem.cod_sequencia);
           domElem.checked = false;
@@ -285,12 +287,14 @@ export class CondicionComponent implements OnInit {
         setTimeout(() => {
           this.saveSucess = false;
           this.condicion = new Condicao();
-          this.spinner.hide();
           callback(true);
         }, 2000);
       });
   }
 
+  public closePopUp() {
+    $('#myModal').modal('hide');
+  }
 
   /*
     Iván Lynch 12/03/2020

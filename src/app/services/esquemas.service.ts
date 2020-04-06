@@ -40,23 +40,59 @@ export class EsquemasService {
   }
 
   postPreco(tipe: any, chav: any, codesq: any, val: any): Promise<any> {
-    var f = new Date();
-    var date = f.getFullYear() + "-"+ f.getMonth()+ "-" + f.getDate();
-    return this.http
-      .post(this.url + '/preco/', {
-        id: Math.round(Math.random() * 100),
-        tipo_base_vendas: tipe,
-        datainicio: date,
-        valor: val,
-        cod_esquema_calculo: codesq,
-        chave: chav
-      }, { headers: { 'Content-type': 'application/json' } })
-      .toPromise()
-      .then((result: any) => {
-        return result.results;
+
+    const f = new Date();
+    const date = f.getFullYear() + '-' + f.getMonth() + '-' + f.getDate();
+    let idPreco: any;
+    return this.getPreco()
+      .then(result => {
+        console.log(result);
+        result = result.filter(obj => {
+          return obj.chave === chav && obj.tipo_base_vendas === tipe;
+        });
+        if (result.length !== 0) {
+          idPreco = result[0].id;
+          this.http.delete(this.url + '/preco/' + idPreco + '/', { headers: { 'Content-type': 'application/json' } })
+            .toPromise()
+            .then(rs => {
+              return this.http
+                .post(this.url + '/preco/', {
+                  id: Math.round(Math.random() * 100),
+                  tipo_base_vendas: tipe,
+                  datainicio: date,
+                  valor: val,
+                  cod_esquema_calculo: codesq,
+                  chave: chav
+                }, { headers: { 'Content-type': 'application/json' } })
+                .toPromise()
+                .then((result2: any) => {
+                  return result2.results as any;
+                })
+                .catch(error => {
+                  throw new Error(error);
+                });
+            })
+            .catch(err => {
+              throw new Error(err);
+            });
+        } else {
+          return this.http
+            .post(this.url + '/preco/', {
+              id: Math.round(Math.random() * 100),
+              tipo_base_vendas: tipe,
+              datainicio: date,
+              valor: val,
+              cod_esquema_calculo: codesq,
+              chave: chav
+            }, { headers: { 'Content-type': 'application/json' } })
+            .toPromise()
+            .then((result: any) => {
+              return result.results;
+            });
+        }
+
       });
   }
-
   getPreco(): Promise<any> {
     return this.http
       .get(this.url + '/preco/', { headers: { 'Content-type': 'application/json' } })
@@ -75,14 +111,14 @@ export class EsquemasService {
       });
   }
 
-  postEsquema({ cod_esquema_calculo, cod_condicao, cod_camada }: any): Promise<any> {
+  postEsquema(condCamEsq: any): Promise<any> {
     // tslint:disable-next-line: max-line-length
-    return this.http.post(this.url + '/condicaocamadaesquema/', { cod_esquema_calculo, cod_condicao, cod_camada }, { headers: { 'Content-type': 'application/json' } }).toPromise();
+    return this.http.post(this.url + '/condicaocamadaesquema/', condCamEsq, { headers: { 'Content-type': 'application/json' } }).toPromise();
   }
 
   removeEsquema({ id }: any): Promise<any> {
     // tslint:disable-next-line: max-line-length
-    return this.http.delete(this.url + '/esquemacondicaocamada/' + id, { headers: { 'Content-type': 'application/json' } }).toPromise();
+    return this.http.delete(this.url + '/condicaocamadaesquema/' + id, { headers: { 'Content-type': 'application/json' } }).toPromise();
   }
 
   async getEsquema() {
@@ -130,9 +166,9 @@ export class EsquemasService {
   updateCondicao(cond): Promise<any> {
     console.log({ cond });
     return this.http
-      .put(this.url + '/condicao/' + cond.Cod_Condicao + '/', cond, { headers: { 'Content-type': 'application/json' } }).toPromise();
+      .put(this.url + '/condicao/' + cond.cod_condicao + '/', cond, { headers: { 'Content-type': 'application/json' } }).toPromise();
   }
-  getEsquemaRelations(COD: string): Promise<EsquemaCalculo> {
+  getEsquemaCalculo(COD: string): Promise<EsquemaCalculo> {
     return this.http
       .get(this.url + '/esquemarelations/', { headers: { 'Content-type': 'application/json' } })
       .toPromise()
@@ -148,20 +184,6 @@ export class EsquemasService {
       });
   }
 
-  getEsquemaCalculo(COD: string): Promise<EsquemaCalculo> {
-    return this.http
-      .get(this.url + '/esquemadecalculo/', { headers: { 'Content-type': 'application/json' } })
-      .toPromise()
-      .then((result: any) => {
-        let esquema: EsquemaCalculo = new EsquemaCalculo();
-        result.results.map(elem => {
-          if (elem.tipo_base_vendas === COD) {
-            esquema = elem;
-          }
-        });
-        return esquema as EsquemaCalculo;
-      });
-  }
 
   getEsquemaRelation(): Promise<[]> {
     return this.http
@@ -227,7 +249,7 @@ export class EsquemasService {
 
   putEsquemaCamadaCondicion(esqCamCond) {
     return new Promise((resolve, reject) => {
-      fetch(this.url + '/esquemacamadacondicion/' + esqCamCond.id, {
+      fetch(this.url + '/condicaocamadaesquema/' + esqCamCond.id, {
         method: 'PUT',
         body: esqCamCond,
         headers: {
