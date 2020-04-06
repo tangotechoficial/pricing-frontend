@@ -138,6 +138,9 @@ button.dropdownMenuButton {
         @include inverted-btn;
     }
 }
+.mySelect{
+    background-color: $martinsBlue !important;
+}
 
 .btn.bg-inverted{
     @include inverted-btn;
