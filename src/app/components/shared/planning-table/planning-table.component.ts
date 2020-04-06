@@ -10,7 +10,7 @@ import {FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 })
 export class PlanningTableComponent implements AfterViewInit {
   _data: any;
-
+  @Input() hasRealized: boolean = false;
   editable: boolean = false;
   formGroups: FormArray;
   dataFilter: any;

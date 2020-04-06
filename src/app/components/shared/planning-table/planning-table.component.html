@@ -18,7 +18,7 @@
       <ng-container *ngFor="let item of data">
         <th scope="col">Sugerido</th>
         <th scope="col">Planejado</th>
-        <th scope="col">Realizado</th>
+        <th scope="col"><span *ngIf="hasRealized">Realizado</span></th>
       </ng-container>
     </tr>
     <tr>
@@ -137,14 +137,7 @@
       <th scope="row">Verba Sugerida (R$)</th>
       <ng-container *ngFor="let item of data; index as index">
       <td>{{ item.vrbuntsugsug|currency:'BRL'}}</td>
-      <td>
-        <inline-edit (update)="updateField(index, 'vrbuntsugpln')" editableOnEnter>
-          <ng-template viewMode> {{ item.vrbuntsugpln|currency:'BRL'}}</ng-template>
-          <ng-template editMode editableOnEnter>
-            <input class="w-50"[formControl]="getControl(index, 'vrbuntsugpln')" (ngModelChange)="captureChanges($event)" size="8" [(ngModel)]="item.vrbuntsugpln" type="text">
-          </ng-template>
-        </inline-edit>
-      </td>
+      <td>{{ item.vrbuntsugpln|currency:'BRL'}}</td>
       <td></td>
       </ng-container>
     </tr>
@@ -156,7 +149,10 @@
         <inline-edit (update)="updateField(index, 'vlrvrbpln')" editableOnEnter>
           <ng-template viewMode> {{ item.vlrvrbpln|currency:'BRL'}}</ng-template>
           <ng-template editMode editableOnEnter>
-            <input class="w-50"[formControl]="getControl(index, 'vlrvrbpln')" (ngModelChange)="captureChanges($event)" size="8" [(ngModel)]="item.vlrvrbpln" type="text">
+            <input class="w-50"
+              [formControl]="getControl(index, 'vlrvrbpln')"
+              (ngModelChange)="captureChanges($event)" size="8"
+              [(ngModel)]="item.vlrvrbpln" type="text">
           </ng-template>
         </inline-edit>
       </td>
@@ -168,14 +164,7 @@
       <th scope="row">CMV Preço Sugerido (R$)</th>
       <ng-container *ngFor="let item of data; index as index">
       <td>{{ item.vlrcmvpcosug|currency:'BRL'}}</td>
-      <td>
-        <inline-edit (update)="updateField(index, 'vlrcmvpcopln')" editableOnEnter>
-          <ng-template viewMode>{{ item.vlrcmvpcopln|currency:'BRL'}}</ng-template>
-          <ng-template editMode>
-            <input class="w-50"[formControl]="getControl(index, 'vlrcmvpcopln')" (ngModelChange)="captureChanges($event)" size="8" type="text" [(ngModel)]="item.vlrcmvpcopln">
-          </ng-template>
-        </inline-edit>
-      </td>
+      <td>{{ item.vlrcmvpcopln|currency:'BRL'}}</td>
       <td></td>
       </ng-container>
     </tr>
@@ -183,14 +172,7 @@
       <th scope="row">CMV Preço Atual (R$)</th>
       <ng-container *ngFor="let item of data; index as index">
       <td>{{ item.vlrcmvpcoatu|currency:'BRL'}}</td>
-      <td>
-        <inline-edit (update)="updateField(index, 'vlrcmvpcoatu')" editableOnEnter>
-          <ng-template viewMode>{{ item.vlrcmvpcoatu|currency:'BRL'}}</ng-template>
-          <ng-template editMode>
-            <input class="w-50"[formControl]="getControl(index, 'vlrcmvpcoatu')" (ngModelChange)="captureChanges($event)" size="8" type="text" [(ngModel)]="item.vlrcmvpcoatu">
-          </ng-template>
-        </inline-edit>
-      </td>
+      <td>{{ item.vlrcmvpcoatu|currency:'BRL'}}</td>
       <td></td>
       </ng-container>
     </tr>
