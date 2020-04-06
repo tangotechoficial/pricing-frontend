@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Global } from './global';
 import { Sacceso } from '@models/sacceso';
-
+import { environment } from '@env/environment';
 
 @Injectable()
 export class MetadataService{
@@ -17,7 +17,7 @@ export class MetadataService{
     constructor(
         private _http: HttpClient
     ){
-        this.url = Global.url;
+        this.url = `${environment.apiUrl}/dinamica`;
         this._aSequenciaAcceso = ['Cliente', 'Material', 'Estado', 'Quantidade Vendas', 'Quantidade estoque', 'Transferencia', 'Test', 'Testing'];
         this._aSequenciaAccesos = new Array<any>();
         this.listaCondiciones = ['Cliente/QuantidadeVendas', 'Cliente/Material/Estado', 'Material/QuantidadeEstoque', 'Material/Estado/Transferencia', 'Test', 'Testing'];

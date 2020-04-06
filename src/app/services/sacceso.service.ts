@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Global } from './global';
 import { Sequencia } from '../models/sequencia';
 import { Campo } from 'app/models/campo';
+import { environment } from '@env/environment';
 
 @Injectable({providedIn: 'root'})
 export class SaccesoService {
@@ -11,7 +12,7 @@ export class SaccesoService {
     private header = { headers: { 'Content-type': 'application/json' } };
 
   constructor(private http: HttpClient) {
-    this.url = Global.url;
+    this.url = `${environment.apiUrl}/dinamica`;
   }
 
     getCampos(): Promise<any> {

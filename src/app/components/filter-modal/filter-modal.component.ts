@@ -1,6 +1,8 @@
 import { Component, OnInit, Output, EventEmitter, OnChanges } from '@angular/core';
 import {FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Filter} from '@models/filter'
+import { Filter} from '@models/filter';
+import filterData from '@datasources/filter.json'
+
 // jQuery
 declare var $: any;
 
@@ -22,85 +24,12 @@ export class FilterModalComponent implements OnInit, OnChanges {
   ufList: any[] = []
   materials: any[] = []
 
-  filterData = {
-        business_line: ['abb', 'hbl', 'tei', 'mtc'],
-        category: {
-          abb: [
-            'atomatados',
-            'bolachas e biscoitos',
-            'café',
-            'doces' ,
-            'destilados'
-          ]
-        },
-        subCategory: {
-          abb: {
-            doces: [
-                'doces cremosos',
-                'doces em calda',
-                'achocolatados',
-                'balas',
-                'tortas'
-            ],
-          }
-        },
-        provider: {
-          abb :{
-            doces: {
-              achocolatados: [
-                'pepsico brasil ltda',
-                'nestlé - garoto',
-                'pandurata alimentos-lac',
-                'hero brasil s/a',
-                'unilever bestfood-bas'
-              ]
-            }
-          }
-        },
-        expedition_branch: {
-          abb: {
-            doces: {
-              achocolatados: {
-                "nestlé - garoto": [1, 41, 52, 64, 462]
-              }
-            }
-          }
-        },
-        uf: {
-          abb:{
-            doces:{
-              achocolatados:{
-                "nestlé - garoto": {
-                  "1":['sc', 'rj', 'mg', 'sp', 'ba']
-                }
-              }
-            }
-          }
-        },
-        material: {
-          abb: {
-            doces: {
-              achocolatados:{
-              "nestlé - garoto": {
-                "1": {
-                  'sp': [
-                    'nescau ball actig.45x350g',
-                    'nesquick actig 45x350g',
-                    'leite ninho actig.30x400g',
-                    'nescau 2.0 actibootsg.30400g'
-                  ]
-                }
-              }
-            }
-          }
-        }
-      }
-    }
+  filterData: any;
 
   constructor(
     private formBuilder: FormBuilder
   ) {
-
+    this.filterData = filterData
   }
 
   ngOnInit() {
@@ -117,6 +46,7 @@ export class FilterModalComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
+    debugger
     this.outputFilter.emit(this.filter);
   }
 

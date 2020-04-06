@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Global } from './global';
 import { CondicionService } from './condicion.service';
 import { EsquemaCalculo } from '@app/models/esquemacalculo';
 import { Mercadoria } from '@app/models/mercadoria';
@@ -9,6 +8,7 @@ import { FilialFaturamento } from '@app/models/filialfaturamento';
 import { Estado } from '@app/models/estado';
 import { Regiao } from '@app/models/regiao';
 import { ChavePrecificao } from '@app/models/chaveprecificao';
+import { environment } from '@env/environment';
 
 @Injectable()
 export class EsquemasService {
@@ -18,7 +18,7 @@ export class EsquemasService {
     private http: HttpClient,
     private condicionService: CondicionService
   ) {
-    this.url = Global.url;
+    this.url = `${environment.apiUrl}/dinamica`;
   }
 
   getSequenciaValues(endpoint: string): Promise<any> {
