@@ -24,6 +24,9 @@
       "@helpers/*": [
         "app/helpers/*",
       ],
+      "@pipes/*": [
+        "app/pipes/*"
+      ],
       "@services/*": [
         "app/services/*",
       ],
@@ -34,12 +37,13 @@
         "assets/datasources/*"
       ]
     },
+    "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
+    "esModuleInterop": true,
     "lib": [
       "es2018",
       "dom"
-    ],
-    "allowSyntheticDefaultImports": true
+    ]
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,

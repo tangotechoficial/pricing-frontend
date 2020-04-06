@@ -2,42 +2,32 @@ import { element } from 'protractor';
 
 export class Sacceso {
     constructor(
-        public sId: string = '',
         public sSeqAcceso: string = '',
         public sDesAcceso: string = '',
+        // tslint:disable-next-line: variable-name
         public _parents: Array<any> = new Array<any>(),
         public selected: boolean = false
-    ){}
-
-
-    public setId(val){
-        this.sId = val;
-    }
-
-    public getId(){
-        return this.sId;
-    }
-    
-    public setSelected(val){
+    ) {}
+    public setSelected(val) {
         this.selected = val;
     }
 
-    public isSelected(){
+    public isSelected() {
         return this.selected;
     }
 
-    public setCodigo(codigo){
+    public setCodigo(codigo) {
         this.sSeqAcceso = codigo;
     }
-    public getCodigo(){
+    public getCodigo() {
         return this.sSeqAcceso;
     }
 
-    public setDescription(description){
+    public setDescription(description) {
         this.sDesAcceso = description;
     }
 
-    public getDescription(){
+    public getDescription() {
         return this.sDesAcceso;
     }
 }

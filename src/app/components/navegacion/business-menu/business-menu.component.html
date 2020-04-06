@@ -3,13 +3,13 @@
     type="button"
     id="dropdownMenuButton" data-toggle="dropdown"
     aria-haspopup="true" aria-expanded="false">
-    <span class="fas fa-bars" aria-hidden="true"></span>
-    <p class="my-0 ml-2 font-weight-bold">Menu</p>
+    <span class="fas fa-bars color-martins-blue" aria-hidden="true"></span>
+    <p class="my-0 ml-2 font-weight-bold color-martins-darkblue">Menu</p>
   </button>
 
   <div class="dropdown-menu menu-nav py-3" aria-labelledby="dropdownMenuButton">
     <div class="triangle"></div>
-    <a class="dropdown-item d-flex cuki flex-row align-items-center py-2"
+    <a class="dropdown-item d-flex flex-row align-items-center py-2"
       [routerLink]="['/menu']">
       <span class="fas fa-home"></span>
       <p class="my-0 ml-2 font-weight-bold">Início</p>
@@ -24,14 +24,14 @@
       <ul class="dropdown-menu">
         <li>
           <a tabindex="-1" class="dropdown-item"
-            [routerLink]="['/b-preciobase']">
+            [routerLink]="['/preciobase']">
             <p class="my-0 ml-2 font-weight-bold">Preço Base</p>
           </a>
         </li>
         <li>
           <a tabindex="-1" class="dropdown-item"
-            [routerLink]="['/b-precioventa']">
-            <p class="my-0 ml-2 font-weight-bold">Preço de Venda</p>
+            [routerLink]="['/precioventa']">
+            <p class="my-0 ml-2 font-weight-bold">Preço Venda</p>
           </a>
         </li>
       </ul>
@@ -54,7 +54,7 @@
             <li>
               <a tabindex="-1" class="dropdown-item dropdown-item d-flex
                 flex-row align-items-center py-2"
-                [routerLink]="['/dados-mestre']">
+                [routerLink]="['/datalab/dados-mestre']">
                 <p class="my-0 ml-2 font-weight-bold">Dados Mestre</p>
               </a>
             </li>
@@ -62,7 +62,7 @@
             <li>
               <a tabindex="-1" class="dropdown-item dropdown-item d-flex
                 flex-row align-items-center py-2"
-                [routerLink]="['/diretriz-estrategica']">
+                [routerLink]="['/datalab/diretriz-estrategica']">
                 <p class="my-0 ml-2 font-weight-bold">Diretriz Estrategica</p>
               </a>
             </li>

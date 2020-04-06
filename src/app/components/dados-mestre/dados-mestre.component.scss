@@ -1,9 +1,6 @@
 @import '../../../assets/styles/global.scss';
 @import '../../../assets/styles/condicion-sacceso.scss';
 
-.main-container {
-    height: 100vh;
-}
 
 .btn-filter-color {
     color: white;
@@ -11,7 +8,6 @@
 
 .container-tab {
     position: relative;
-    height: 434px;
     overflow: auto;
     background: white;
     padding-left:30px;

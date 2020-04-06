@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PreciobbaseComponent } from './preciobbase.component';
+import { SelectPopupRegiaoComponent } from './select-popup-regiao.component';
 
-describe('PreciobbaseComponent', () => {
-  let component: PreciobbaseComponent;
-  let fixture: ComponentFixture<PreciobbaseComponent>;
+describe('SelectPopupRegiaoComponent', () => {
+  let component: SelectPopupRegiaoComponent;
+  let fixture: ComponentFixture<SelectPopupRegiaoComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PreciobbaseComponent ]
+      declarations: [ SelectPopupRegiaoComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PreciobbaseComponent);
+    fixture = TestBed.createComponent(SelectPopupRegiaoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

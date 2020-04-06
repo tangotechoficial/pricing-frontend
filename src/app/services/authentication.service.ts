@@ -13,14 +13,13 @@ export class AuthenticationService {
   private currentUser: Observable<string>;
 
   constructor(private httpClient: HttpClient){
-    this.currentTokenSubject = new BehaviorSubject<string>(JSON.parse(localStorage.getItem('token')));
+    this.currentTokenSubject = new BehaviorSubject<string>(localStorage.getItem('token'));
     this.currentToken = this.currentTokenSubject.asObservable();
     this.currentUserSubject = new BehaviorSubject<string>(JSON.parse(localStorage.getItem('User')));
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
   login(email: string, password: string) {
-
     return this.httpClient.post<any>(
       `${environment.apiUrl}/login/`,
       {'username': email, 'password': password}

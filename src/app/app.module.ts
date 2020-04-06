@@ -1,10 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, LOCALE_ID } from '@angular/core';
+import { NgModule, LOCALE_ID} from '@angular/core';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 import { routing, appRoutingProviders } from './app.routing';
 import { JWTInterceptorHelper } from '@helpers/jwt.interceptor';
-import { FakeDataProviderInterceptor } from '@helpers/fake.dataprovider.interceptor';
+import { FakeDataProviderInterceptor } from '@app/helpers/fake.dataprovider.interceptor';
 import { AppComponent } from './app.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { ErrorComponent } from './components/error/error.component';
@@ -12,14 +12,11 @@ import { LoginComponent } from './components/login/login.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NavegacionComponent } from './components/navegacion/navegacion.component';
 import { PrecioBaseComponent } from './components/precio/preciobase/preciobase.component';
-import { PreciobbaseComponent } from './components/precio/preciobbase/preciobbase.component';
-import { PreciobvendasComponent } from './components/precio/preciobvendas/preciobvendas.component';
 import { PrecioVentaComponent } from './components/precio/precioventa/precioventa.component';
-import { PrecioSeleccion } from './components/precio/precioseleccion/precioseleccion.component';
-import { PrecioElement } from './components/precio/precioelement/precioelement.component';
+import { PrecioTechnical } from './components/precio/precio-technical/precio-technical.component';
+import { PrecioBusiness } from './components/precio/precio-business/precio-business.component';
 import { SaccesoComponent } from './components/sacceso/sacceso.component';
 import { CondicionComponent } from './components/condicion/condicion.component';
-import { PrecioBaseBusinessComponent } from './components/precio/preciobase/business/preciobase.component';
 import { PlanoCompraComponent } from './components/plano-compra/plano-compra.component';
 import { ExecucaoComponent } from './components/execucao/execucao.component';
 import { SimuladorComponent } from './components/simulador/simulador.component';
@@ -45,11 +42,20 @@ import { EditModeDirective } from './components/shared/editmode.directive';
 import { EditableOnEnterDirective } from './components/shared/editableonenter.directive';
 import { GenericDadaFilterPipe } from '@app/pipes/generic-data-filter.pipe'
 
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { PopupmenuComponent } from './components/popupmenu/popupmenu.component';
+import { SelectCondicionComponent } from './components/select-condicion/select-condicion.component';
+import { SelectPopupCondicionComponent } from './components/select-popup-condicion/select-popup-condicion.component';
+import { SelectPopupMaterialComponent } from './components/select-popup-material/select-popup-material.component';
+import { SelectPopupExpedicaoComponent } from './components/select-popup-expedicao/select-popup-expedicao.component';
+import { SelectPopupFaturamentoComponent } from './components/select-popup-faturamento/select-popup-faturamento.component';
+import { SelectPopupRegiaoComponent } from './components/select-popup-regiao/select-popup-regiao.component';
+import { CamadaService } from './services/camada.service';
+
 import { registerLocaleData }  from '@angular/common'
 import localePt from '@angular/common/locales/pt';
 import { FilterTagComponent } from './components/shared/filter-tag/filter-tag.component';
 registerLocaleData(localePt, 'pt',);
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,14 +64,11 @@ registerLocaleData(localePt, 'pt',);
     LoginComponent,
     NavegacionComponent,
     PrecioBaseComponent,
-    PreciobbaseComponent,
-    PreciobvendasComponent,
     PrecioVentaComponent,
-    PrecioSeleccion,
-    PrecioElement,
+    PrecioTechnical,
+    PrecioBusiness,
     SaccesoComponent,
     CondicionComponent,
-    PrecioBaseBusinessComponent,
     AutocompleteInputComponent,
     FilterPipeSeqAcceso,
     FilterPipeSeqSearch,
@@ -86,6 +89,14 @@ registerLocaleData(localePt, 'pt',);
     EditModeDirective,
     EditableOnEnterDirective,
     GenericDadaFilterPipe,
+    FilterTagComponent,
+    PopupmenuComponent,
+    SelectCondicionComponent,
+    SelectPopupCondicionComponent,
+    SelectPopupMaterialComponent,
+    SelectPopupExpedicaoComponent,
+    SelectPopupFaturamentoComponent,
+    SelectPopupRegiaoComponent,
     FilterTagComponent
   ],
   imports: [
@@ -97,14 +108,15 @@ registerLocaleData(localePt, 'pt',);
     Ng2SearchPipeModule,
     FontAwesomeModule,
     AutocompleteLibModule ,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NgxSpinnerModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: FakeDataProviderInterceptor, multi: true},
     appRoutingProviders,
+    CamadaService,
     {provide: HTTP_INTERCEPTORS, useClass: JWTInterceptorHelper, multi: true},
-    {provide: LOCALE_ID, useValue: "pt"}
-
+    {provide: LOCALE_ID, useValue: 'pt'}
   ],
   bootstrap: [AppComponent]
 })

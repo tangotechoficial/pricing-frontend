@@ -1,21 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { Sacceso } from '../../models/sacceso';
-import { MetadataService } from './../../services/metadata.service';
 import { SaccesoService } from '../../services/sacceso.service';
-import { fromEvent } from 'rxjs';
-import { tap, switchMap } from "rxjs/operators";
-import { THIS_EXPR, ThrowStmt } from '@angular/compiler/src/output/output_ast';
-import { parse } from 'querystring';
-
-
+import { NgxSpinnerService } from 'ngx-spinner';
+import { Campo } from 'app/models/campo';
+import { Sequencia } from 'app/models/sequencia';
 
 declare var $: any;
 
 @Component({
+  // tslint:disable-next-line: component-selector
   selector: 'sacceso',
   templateUrl: './sacceso.component.html',
   styleUrls: ['./sacceso.component.scss'],
-  providers: [MetadataService, SaccesoService]
+  providers: [SaccesoService, NgxSpinnerService]
 })
 
 export class SaccesoComponent implements OnInit {
@@ -24,242 +20,213 @@ export class SaccesoComponent implements OnInit {
   searchSeleccionado;
   selectedValue: string;
   public existSelected = false;
-  public errDesc = "";
-  public _sacceso: Sacceso;
-  public _saMessage: Sacceso;
-  public _newSA: Sacceso;
-  public _nextVal: string;
-  public sequenciasAcceso: Array<any>;
+  public errDesc = '';
+  public nextVal: string;
   public sequenciasAccesoSearch: Array<any>;
   public selectedProperties: Array<any>;
   public searchValues: Array<any>;
   public selValues1: Array<any>;
   public selValues2: Array<any>;
-  public saveSuccess: boolean = false;
-  public saveError: boolean = false;
+  public saveSuccess = false;
+  public saveCampoSuccess = false;
+  public saveCampoError = false;
   public inputDescripcion: string;
-
+  public campos: Array<Campo>;
+  public newCampo: Campo;
+  public saveError: boolean;
+  public sequencia: Sequencia;
 
   constructor(
-    private _metadataService: MetadataService,
-    private _saccesoService: SaccesoService
+    private saccesoService: SaccesoService,
+    private spinner: NgxSpinnerService
   ) { }
 
+  public closePopUp() {
+    $('#myModal').modal('hide');
+  }
+
   ngOnInit() {
-
-
-    this.sequenciasAcceso = new Array<any>();
+    this.newCampo = new Campo();
+    this.campos = new Array<Campo>();
+    this.sequencia = new Sequencia();
     this.sequenciasAccesoSearch = new Array<any>();
-    this.selectedProperties = new Array<any>();
     this.searchValues = new Array<any>();
     this.selValues1 = new Array<any>();
     this.selValues2 = new Array<any>();
-    this._sacceso = new Sacceso();
-    //CODE SEQUENCIA
-    this._sacceso.setCodigo("SQ000");
-    this._newSA = new Sacceso();
-    //CAMPO SEQUENCIA
-    this._newSA.setCodigo("SF000");
-    this._saMessage = new Sacceso();
-    this._saccesoService.getSaccesoList().subscribe((values) => {
-      console.log(values);
-      values.map((elem) => { 
-        let seq = new Sacceso();
-        seq.setId(elem.ID);
-        seq.setCodigo(elem.SEQCODE);
-        seq.setDescription(elem.SEQDESC);
-        this.sequenciasAccesoSearch.push(seq);
-        this.sequenciasAcceso.push(seq);
+
+    // Update campos
+    this.updateCampos();
+
+    // Updates Campo with the last Cod_Campo
+    this.getLastCampo();
+
+    // Update Sequencia with the last Cod_Sequencia
+    this.getLastSequencia();
+  }
+
+  public updateCampos() {
+    Promise.all([
+      this.saccesoService.getCampos()
+        .then(campos => this.campos = campos)
+    ]);
+  }
+
+  /* Iván Lynch - 06/03/2020
+     Input: null
+     Output: null
+     This function updates the newSA Object
+  */
+  public getLastCampo() {
+    this.saccesoService.getLastCampo()
+      .then(result => {
+        this.newCampo.cod_campo = this.evaluateNextSA(result.cod_campo);
       });
-    });
+  }
 
-    $('div[contenteditable]').keydown(function (e) {
-      // trap the return key being pressed
-      if (e.keyCode === 13) {
-        // insert 2 br tags (if only one br tag is inserted the cursor won't go to the next line)
-        document.execCommand('insertHTML', false, '<br>');
-        // prevent the default behaviour of return key pressed
-        return false;
+  /* Iván Lynch - 06/03/2020
+     Input: null
+     Output: null
+     This function updates the sacceso Object
+  */
+  public getLastSequencia() {
+    this.spinner.show();
+    this.saccesoService.getLastSequencia()
+      .then((result: any) => {
+        console.log(result);
+        this.sequencia.cod_sequencia = this.evaluateNextSA(result.cod_sequencia);
+        this.spinner.hide();
+      });
+  }
+
+  /* Iván Lynch - 05/03/2020
+     Input: String Code
+     Output: String Code + 1
+     ie:
+        Input: CP001
+        Output: CP002
+  */
+  public evaluateNextSA(code: string) {
+    const codeString = code.substr(0, 2);
+    // tslint:disable-next-line: radix
+    const codeNumer = parseInt(code.substr(code.length - 2, code.length));
+    const nextValue = codeNumer + 1;
+    const nextCode = codeString + this.pad_with_zeroes(nextValue, 3);
+    return nextCode;
+  }
+
+  /* Iván Lynch - 1/4/2020
+     Input: Selected Campo
+     Output: Unselect Campo from current sequencia
+  */
+  onDltSelection(campo: Campo) {
+    const domElem = document.getElementById(campo.cod_campo);
+    domElem.click();
+  }
+
+  /* Iván Lynch - 1/4/2020
+     Input: Object, List
+     Output: Check if current object exists in a list
+  */
+  public elemExist(obj, list) {
+    for (const row of list) {
+      if (row === obj) {
+        return true;
       }
-    });
-  }
-
-
-
-  public onBlurSQSearch() {
-    this.searchValues = new Array<any>();
-  }
-
-  public onSelectedValue(event) {
-    this.selectedValue = event;
-    this._sacceso = event;
-    this.existSelected = true;
-    setTimeout(function () {
-      this.existSelected = false;
-    }.bind(this), 3000)
-  }
-
-  ngAfterViewInit() {
-
-    const input: any = document.getElementById('SQSearch');
-    const selectedElements: any = document.getElementById('saSearch1');
-    const selectedElements2: any = document.getElementById('saSearch2');
-
-    const search$ = fromEvent(input, 'keyup')
-      .pipe(
-        tap(() => this.searchValues = []),
-        switchMap(() => this._metadataService.searchData(input.value))
-      )
-    search$.subscribe(
-      (values) => {
-        this.searchValues.push(values);
-      }
-    );
-
-  }
-
-  onDltSelection(val) {
-    var selectedIndex = '';
-    this.selectedProperties.forEach((elem, index) => {
-      if (elem.getCodigo() == val.getCodigo()) {
-        this.sequenciasAcceso.forEach((sElem, index2) => {
-          if (sElem.getCodigo() == val.getCodigo()) {
-            selectedIndex = index2.toString();
-          }
-        })
-        this.selectedProperties.splice(index, 1);
-        this._sacceso._parents.slice(index, 1);
-      }
-    })
-
-   /* var elem = document.getElementById(selectedIndex);
-    if (elem) {
-      elem.click()
-    } else { */
-      const elements = document.getElementsByClassName("custom-control-input");
-      const aElems = Array.prototype.slice.call(elements) 
-      for (var i = 0; i < aElems.length; i++) {
-         const elemLabels = aElems[i].labels
-         
-        if (elemLabels[0].innerText === val.getDescription()) {
-          aElems[i].click();
-        }
-        //const filtered = aElems.filter(aElems[i].innerText === val.getDescription())
-        //filtered.click() 
-        }
-    // }
-    
-  }
-
-  public checkValue(sa: Sacceso) {
-    this.sequenciasAcceso.map(elem => {
-      if (elem.getCodigo() == sa.getCodigo()) {
-        if (elem.isSelected()) {
-          elem.setSelected(false);
-          this.selectedProperties.map((elem2, index) => {
-            if (elem2.getCodigo() == sa.getCodigo()) {
-              this.selectedProperties.splice(index, 1);
-              this._sacceso._parents.slice(index, 1);
-            }
-          })
-        } else {
-          this._sacceso._parents.push(sa);
-          elem.setSelected(true);
-          this.selectedProperties.push(elem);
-        }
-      }
-    })
-
-    var descripcion = '';
-    this.selectedProperties.forEach((elem, index) => {
-      if (index == 0) {
-        descripcion = descripcion + elem.getDescription();
-      } else {
-        descripcion = descripcion + '/' + elem.getDescription();
-      }
-    })
-
-    this._sacceso.sDesAcceso = descripcion;
-  }
-
-  submitNewSA(){
-    this._saccesoService.postSacceso(this._newSA)
-      .subscribe(response => {
-        this._nextVal = this.generateNewId(response);
-        this.saveSuccess = true;
-      },
-        error => {
-          this.saveError = true;
-          setTimeout(function () {
-            this.saveError = false;
-          }.bind(this), 2000)
-        })
-
-    this._saMessage.setCodigo(this._newSA.getCodigo());
-    this._saMessage.setDescription(this._newSA.getDescription());
-
-    setTimeout(function () {
-      this.saveSuccess = false;
-      this._newSA.setCodigo(this._nextVal);
-    }.bind(this), 2000)
-    this.sequenciasAcceso.push(this._newSA);
-    this._newSA = new Sacceso();
-   
-  }
-
-  public pad_with_zeroes(number, length) {
-
-    var my_string = '' + number;
-    while (my_string.length < length) {
-        my_string = '0' + my_string;
     }
-
-    return my_string;
-
+    return false;
   }
 
-  public generateNewId(response){
-    console.log(response.LASTSEQ);
-    var lastNumber = response.LASTSEQ.substring(response.LASTSEQ.length-3, response.LASTSEQ.length);
-    var newNum = parseInt(lastNumber);
-    var addLeadingZeros = this.pad_with_zeroes(newNum+1, 3);
-    var newCode = "SQ" + addLeadingZeros;
-    return newCode;
+  /* Iván Lynch - 1/4/2020
+     Input: Object
+     Output: Add object to a campos array in the sequencia
+  */
+  public checkValue(campo: Campo) {
+    let desc = '';
+    this.campos.map(elem => {
+      if (elem === campo) {
+        const domElem: any = document.getElementById(campo.cod_campo);
+        if (this.elemExist(campo, this.sequencia.campos)) {
+          domElem.checked = false;
+          this.sequencia.campos = this.sequencia.campos.filter((obj) => {
+            return obj !== campo;
+          });
+        } else {
+          this.sequencia.campos.push(campo);
+        }
+      }
+    });
+
+    this.sequencia.campos.map((elem: Campo, index: any) => {
+      if (index === 0) {
+        desc = desc + elem.nome_campo;
+        console.log(desc);
+      } else {
+        desc = desc + '/' + elem.nome_campo;
+      }
+    });
+    this.sequencia.nome_sequencia = desc;
   }
 
-  
+  /* Iván Lynch - 1/4/2020
+     Input: Object
+     Output: Create campo in /api/seqcampos/
+  */
+  public submitCampo() {
+    this.spinner.show();
+    this.saccesoService.postCampo(this.newCampo)
+      .then(result => {
+        this.saveCampoSuccess = true;
+        this.updateCampos();
+        this.spinner.hide();
+        setTimeout(() => {
+          this.saveCampoSuccess = false;
+          this.newCampo = new Campo();
+          this.getLastCampo();
+        }, 3000);
+      });
+  }
 
+  /* Iván Lynch - 1/4/2020
+     Input: Code
+     Output: Add leading zeros to a code
+  */
+  public pad_with_zeroes(num, length) {
+    let myString = '' + num;
+    while (myString.length < length) {
+      myString = '0' + myString;
+    }
+    return myString;
+  }
+
+  /* Iván Lynch - 1/4/2020
+     Input: Sequencia Object
+     Output: Create new sequencia
+  */
   public submitSA() {
-    this._saccesoService.postSaccesoComp(this._sacceso)
-      .subscribe(response => {
-        this._nextVal = this.generateNewId(response);
+    this.spinner.show();
+    this.saccesoService.postSequencia(this.sequencia)
+      .then(data => {
+        $('#myModal').modal('show');
         this.saveSuccess = true;
-        this._saccesoService.getSaccesoList().subscribe(response => {
-          console.log(response);
-        })
-      },
-        error => {
-          this.saveError = true;
-          setTimeout(function () {
-            this.saveError = false;
-          }.bind(this), 2000)
-        })
-    setTimeout(function () {
-      this.saveSuccess = false;
-      this._sacceso.setCodigo(this._nextVal);
-      this.selectedProperties.map(elem => {
-      this.onDltSelection(elem);
-    })
-    }.bind(this), 2000)
-    this._saMessage.setCodigo(this._sacceso.getCodigo());
-    this._saMessage.setDescription(this._sacceso.getDescription());
-    this._sacceso = new Sacceso();
-    this.selectedProperties.map(elem => {
-      this.onDltSelection(elem);
-    })
-    this.selectedProperties.map(elem => {
-      this.onDltSelection(elem);
-    })
-  }
+        this.campos.map( elem => {
+          const domElem: any = document.getElementById(elem.cod_campo);
+          domElem.checked = false;
+        });
+        this.spinner.hide();
+        setTimeout(function() {
+          this.saveSuccess = false;
+          this.sequencia = new Sequencia();
+          this.getLastSequencia();
+        }.bind(this), 2000);
 
+      })
+      .catch((errr: any) => {
+        this.saveError = true;
+        this.errDesc = 'A sequência de acesso já existe';
+        this.spinner.hide();
+        setTimeout(function() {
+          this.saveError = false;
+        }.bind(this), 2000);
+      });
+  }
 }

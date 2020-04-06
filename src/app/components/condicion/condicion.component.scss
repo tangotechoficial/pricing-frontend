@@ -6,6 +6,19 @@
 }
 
 .fa-search {
-    color: $martinsBlue;
     font-size: 1.2rem;
 }
+
+.valor-dropdown {
+  overflow: hidden;
+  white-space: nowrap;
+  display: inline-block;
+  text-overflow: ellipsis;
+  width: 130%;
+}
+
+.dropdown-toggle {
+    border-color: #ced4da;
+}
+
+
