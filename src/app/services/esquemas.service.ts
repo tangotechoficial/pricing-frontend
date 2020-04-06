@@ -40,20 +40,38 @@ export class EsquemasService {
   }
 
   postPreco(tipe: any, chav: any, codesq: any, val: any): Promise<any> {
-    var f = new Date();
-    var date = f.getFullYear() + "-"+ f.getMonth()+ "-" + f.getDate();
-    return this.http
-      .post(this.url + '/preco/', {
-        id: Math.round(Math.random() * 100),
-        tipo_base_vendas: tipe,
-        datainicio: date,
-        valor: val,
-        cod_esquema_calculo: codesq,
-        chave: chav
-      }, { headers: { 'Content-type': 'application/json' } })
-      .toPromise()
-      .then((result: any) => {
-        return result.results;
+    const f = new Date();
+    const date = f.getFullYear() + '-' + f.getMonth() + '-' + f.getDate();
+    let idPreco: any;
+    return this.getPreco()
+      .then(result => {
+        result = result.filter(obj => {
+          return obj.chave === chav && obj.tipo_base_vendas === tipe;
+        });
+        idPreco = result[0].id;
+        this.http.delete(this.url + '/preco/' + idPreco + '/', { headers: { 'Content-type': 'application/json' } })
+          .toPromise()
+          .then(rs => {
+            return this.http
+              .post(this.url + '/preco/', {
+                id: Math.round(Math.random() * 100),
+                tipo_base_vendas: tipe,
+                datainicio: date,
+                valor: val,
+                cod_esquema_calculo: codesq,
+                chave: chav
+              }, { headers: { 'Content-type': 'application/json' } })
+              .toPromise()
+              .then((result2: any) => {
+                return result2.results as any;
+              })
+              .catch(error => {
+                throw new Error(error);
+              });
+          })
+          .catch(err => {
+            throw new Error(err);
+          });
       });
   }
 

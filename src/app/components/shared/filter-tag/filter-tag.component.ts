@@ -8,6 +8,8 @@ import { Filter } from '@models/filter'
 export class FilterTagComponent implements OnInit {
 
   filterData: Array<{}>
+  filter: any;
+  filterChange: any;
 
   constructor() { }
 
