@@ -227,7 +227,7 @@ export class EsquemasService {
 
   putEsquemaCamadaCondicion(esqCamCond) {
     return new Promise((resolve, reject) => {
-      fetch(this.url + '/esquemacamadacondicion/' + esqCamCond.id, {
+      fetch(this.url + '/condicaocamadaesquema/' + esqCamCond.id, {
         method: 'PUT',
         body: esqCamCond,
         headers: {
