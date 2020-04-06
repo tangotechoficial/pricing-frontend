@@ -10,7 +10,8 @@ export class Camada {
         public nome_camada = '',
         // tslint:disable-next-line: variable-name
         public tipo_base_vendas = '',
-        public condicaos?: Array<Condicao>
+        public condicaos?: Array<Condicao>,
+        public value?: any
     ) {}
 
     // tslint:disable-next-line: variable-name

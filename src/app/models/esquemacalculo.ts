@@ -1,13 +1,14 @@
 import { Condicao } from './condicao';
+import { Camada } from './camadas';
 
 export class EsquemaCalculo {
     constructor(
         public id = '',
         // tslint:disable-next-line: variable-name
-        public Cod_Esquema_Calculo = '',
+        public cod_esquema_calculo = '',
         // tslint:disable-next-line: variable-name
-        public Cod_Camada = '',
+        public tipo_base_vendas = '',
         // tslint:disable-next-line: variable-name
-        public CONDICAO = new Array<Condicao>()
+        public camadas = new Array<Camada>()
     ) {}
 }

@@ -62,8 +62,8 @@ export class NavegacionComponent implements OnInit {
   @Output() navOutput = new EventEmitter<boolean>();
   private mapUrlToSection = {
     '/menu': 'Inicio',
-    '/preciobase': 'Esquema de Cálculo / Precio Base',
-    '/precioventa': 'Esquema de Cálculo / Precio Venta',
+    '/preciobase': 'Esquema de Cálculo / Preço Base',
+    '/precioventa': 'Esquema de Cálculo / Preço Venda',
     '/sacceso': 'Sequência de acesso',
     '/condicion': 'Criar nova condição',
   };
