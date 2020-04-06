@@ -25,14 +25,14 @@ export class EsquemasService {
           });
     }
 
-    postEsquema({cod_esquema_calculo, cod_condicao, cod_camada}: any): Promise<any> {
+    postEsquema(condCamEsq: any): Promise<any> {
         // tslint:disable-next-line: max-line-length
-        return this.http.post(this.url + '/condicaocamadaesquema/', {cod_esquema_calculo, cod_condicao, cod_camada}, { headers: { 'Content-type': 'application/json' } }).toPromise();
+        return this.http.post(this.url + '/condicaocamadaesquema/', condCamEsq, { headers: { 'Content-type': 'application/json' } }).toPromise();
     }
 
     removeEsquema({id}: any): Promise<any> {
         // tslint:disable-next-line: max-line-length
-        return this.http.delete(this.url + '/esquemacondicaocamada/' + id, { headers: { 'Content-type': 'application/json' } }).toPromise();
+        return this.http.delete(this.url + '/condicaocamadaesquema/' + id, { headers: { 'Content-type': 'application/json' } }).toPromise();
     }
 
     async getEsquema() {
@@ -61,7 +61,7 @@ export class EsquemasService {
     updateCondicao(cond): Promise<any> {
         console.log({cond});
         return this.http
-            .put(this.url + '/condicao/' + cond.Cod_Condicao + '/', cond, { headers: { 'Content-type': 'application/json' } }).toPromise();
+            .put(this.url + '/condicao/' + cond.cod_condicao + '/', cond, { headers: { 'Content-type': 'application/json' } }).toPromise();
     }
     getEsquemaCalculo(COD: string): Promise<EsquemaCalculo> {
         return this.http
@@ -143,7 +143,7 @@ export class EsquemasService {
 
   putEsquemaCamadaCondicion(esqCamCond) {
     return new Promise((resolve, reject) => {
-      fetch(this.url + '/esquemacamadacondicion/' + esqCamCond.id, {
+      fetch(this.url + '/condicaocamadaesquema/' + esqCamCond.id, {
         method: 'PUT',
         body: esqCamCond,
         headers: {
