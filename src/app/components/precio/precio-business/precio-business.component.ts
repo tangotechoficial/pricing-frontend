@@ -56,6 +56,7 @@ export class PrecioBusiness implements OnInit {
   public currentPrecoBase: any;
   public currentMargemCanal: any;
   public currentTotal: any;
+  public precioType: any;
 
   constructor(
     private esquemaService: EsquemasService,
@@ -68,14 +69,31 @@ export class PrecioBusiness implements OnInit {
     this.camadaType = this.isVenta === 0 ? 'V' : 'B';
     this.chavePrecificao = new ChavePrecificao();
     this.updateMasterData();
+    this.precioType = this.totalCondition();
 
   }
+  totalCondition(){
+    let indicator = this.isVenta
+    if (indicator == 0){
+      return "VENDAS";
+    }else{
+      return "BASE";
+    }
+  }
 
-  onSelectCondicao(val: Condicao) {
+  onSelectCondicao(val: Condicao , index:any) {
     this.currentSelectedCampos = null;
     this.selectedSequencia = null;
     this.currentSequencias = val.sequencias;
+    this.selectItemColor(index)
+
   }
+
+  selectItemColor(item: number) {
+    $('.condicionSel').removeClass('selectedItem');
+    $('.condicionSel').eq(item + 1).addClass('selectedItem');
+   }
+
 
   currVal(val) {
     let precobase = 0;
@@ -258,10 +276,10 @@ export class PrecioBusiness implements OnInit {
     this.selectItemColor(i);
   }
 
-  selectItemColor(item: number) {
-    $('tr').removeClass('mySelect');
-    $('tr').eq(item + 1).addClass('mySelect');
-  }
+  // selectItemColor(item: number) {
+  //   $('tr').removeClass('mySelect');
+  //   $('tr').eq(item + 1).addClass('mySelect');
+  // }
 
 
 }
