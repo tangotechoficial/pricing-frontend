@@ -9,7 +9,7 @@ import { environment } from '@env/environment';
 })
 export class DadosMestresComposicaoPrecoService {
 
-  public dadosMestresPrecoUrl = `${environment.apiUrl}/analitica/dadosmestrecomposicao`;
+  public dadosMestresPrecoUrl = `${environment.apiUrl}/pricing_parsing/dadosmestrecomposicao`;
 
   constructor (private http: HttpClient) { }
 
