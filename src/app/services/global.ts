@@ -5,6 +5,6 @@
 
 
 export let Global = {
-    url: 'http://localhost:8000/api',
-    login: 'http://localhost/api/login'
+    url: 'http://backend2.tangotechapp.com:8000/api',
+    login: 'http://backend2.tangotechapp.com:8000/login'
 };

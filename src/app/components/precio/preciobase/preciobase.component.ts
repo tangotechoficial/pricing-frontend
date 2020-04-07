@@ -17,12 +17,12 @@ declare var $: any;
 })
 export class PrecioBaseComponent implements OnInit {
   sCurrentUser = JSON.parse(localStorage.getItem('User'));
-  camadasUpdate = { "ADD": {}, "UPDATE": {}, "REMOVE": {}};
+  camadasUpdate = { ADD: {}, UPDATE: {}, REMOVE: {}};
   camadasFullData: any = [];
   bBusiness: boolean;
   loading = true;
-  typeBaseVendasDesc = ""
-  typeBaseVendas = ""
+  typeBaseVendasDesc = '';
+  typeBaseVendas = '';
   typeBase;
 
 
@@ -42,8 +42,8 @@ export class PrecioBaseComponent implements OnInit {
       which component will be shown
     */
     this.loading = true;
-    this.checkTypeUser()
-    this.checkTypeBaseVendas()
+    this.checkTypeUser();
+    this.checkTypeBaseVendas();
     this.fetchData();
   }
 
@@ -60,9 +60,9 @@ export class PrecioBaseComponent implements OnInit {
   }
 
   checkTypeBaseVendas() {
-    this.typeBaseVendas = window.location.pathname === '/preciobase' ? "B" : "V"
-    this.typeBaseVendasDesc = this.typeBaseVendas == "B" ? "Base" : "Vendas"
-    this.typeBase = window.location.pathname === '/preciobase' ? true : false
+    this.typeBaseVendas = window.location.pathname === '/preciobase' ? 'B' : 'V';
+    this.typeBaseVendasDesc = this.typeBaseVendas === 'B' ? 'Base' : 'Vendas';
+    this.typeBase = window.location.pathname === '/preciobase' ? true : false;
   }
 
   fetchData() {
@@ -70,12 +70,12 @@ export class PrecioBaseComponent implements OnInit {
       .fetchCondicaoCamadaEsquema(this.typeBaseVendas)
       .then(camadasFullData => {
         this.stopLoading();
-        this.camadasFullData = camadasFullData
+        this.camadasFullData = camadasFullData;
       })
       .catch(err => {
         this.stopLoading();
-        console.log(err)
-      })
+        console.log(err);
+      });
   }
 
   stopLoading() {
@@ -84,37 +84,37 @@ export class PrecioBaseComponent implements OnInit {
   }
 
   updateCamada({camada, condicaos, action}) {
-    this.camadasUpdate[action][camada.cod_camada] ? this.camadasUpdate[action][camada.cod_camada].push(condicaos) : this.camadasUpdate[action][camada.cod_camada] = [condicaos]
+    // tslint:disable-next-line: max-line-length
+    this.camadasUpdate[action][camada.cod_camada] ? this.camadasUpdate[action][camada.cod_camada].push(condicaos) : this.camadasUpdate[action][camada.cod_camada] = [condicaos];
   }
 
 
   submiteEsquema() {
     console.log({camadasUpdate: this.camadasUpdate})
     $('#myModalPrecioBase').modal('show');
-    let promisesAddCondCamadaEsq: Array<any> = Object.keys(this.camadasUpdate["ADD"]).map(codCamada => {
-      return this.camadasUpdate["ADD"][codCamada].map(cond => {
+    const promisesAddCondCamadaEsq: Array<any> = Object.keys(this.camadasUpdate.ADD).map(codCamada => {
+      return this.camadasUpdate.ADD[codCamada].map(cond => {
           // new relations
           const objCondCamadaEsq = {
-            id: "EC000" + cond.cod_condicao + codCamada,
-            cod_esquema_calculo: "EC000", //CAMBIAR PARA VENTAS
+            id: 'EC000' + cond.cod_condicao + codCamada,
+            cod_esquema_calculo: 'EC000',
             cod_condicao: cond.cod_condicao,
             cod_camada: codCamada
           }
-         return this.esquemasService.postEsquema(objCondCamadaEsq)
-        
-      })
-    })
+          return this.esquemasService.postEsquema(objCondCamadaEsq);
+      });
+    });
 
-    let promisesRemoveCondCamadaEsq: Array<any> = Object.keys(this.camadasUpdate["REMOVE"]).map(codCamada => {
-      return this.camadasUpdate["REMOVE"][codCamada].map(cond => {
+    let promisesRemoveCondCamadaEsq: Array<any> = Object.keys(this.camadasUpdate['REMOVE']).map(codCamada => {
+      return this.camadasUpdate['REMOVE'][codCamada].map(cond => {
         
          return this.esquemasService.removeEsquema({id: cond.idCondicaoCamadaEsquema})
         
       })
     })
 
-    let promisesUpdateCondCamadaEsq: Array<any> = Object.keys(this.camadasUpdate["UPDATE"]).map(codCamada => {
-      return this.camadasUpdate["UPDATE"][codCamada].map(cond => {
+    let promisesUpdateCondCamadaEsq: Array<any> = Object.keys(this.camadasUpdate['UPDATE']).map(codCamada => {
+      return this.camadasUpdate['UPDATE'][codCamada].map(cond => {
         cond.mandatoria = cond.mandatoria ? 1 : 0
         cond.estatistica = cond.estatistica ? 1 : 0
         return this.esquemasService.updateCondicao(cond)
@@ -128,7 +128,7 @@ export class PrecioBaseComponent implements OnInit {
     Promise.all(promisesCondCamadaEsq)
       // .then(this.verifyErrorFetchData)
       .then(data => {
-        console.log("oks")
+        console.log('oks')
         console.log({data})
       })
       .catch(err => {
@@ -136,7 +136,7 @@ export class PrecioBaseComponent implements OnInit {
         console.log(err)
       })
 
-    this.camadasUpdate = { "ADD": {}, "UPDATE": {}, "REMOVE": {}}
+    this.camadasUpdate = { 'ADD': {}, 'UPDATE': {}, 'REMOVE': {}}
   }
 
   verifyErrorFetchData(data) {
@@ -151,7 +151,7 @@ export class PrecioBaseComponent implements OnInit {
   }
 
   parseResponseCamada(data) {
-    return data.filter(e => e.TIPO_BASE_VENDAS === "B");
+    return data.filter(e => e.TIPO_BASE_VENDAS === 'B');
   }
 
   closePopUp() {
