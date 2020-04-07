@@ -57,31 +57,49 @@
                   <div class="tab-pane container-tab custom-scrollbar-css fade show active" id="tab-diretrizes" role="tabpanel" aria-labelledby="nav-composicao-preco">
                       <table class="table">
                           <tr class="table-head">
-                              <th class="th-center table-head-row">Subcategoria</th>
-                              <th></th>
-                              <th class="th-center table-head-row">Fornecedor</th>
+                              <th class="th-center table-head-row">Data</th>
                               <th></th>
                               <th class="th-center table-head-row">UF</th>
                               <th></th>
-                              <th class="table-head-row" scope="col">Vendas R$</th>
+                              <th class="th-center table-head-row">Código Fornecedor</th>
                               <th></th>
-                              <th class="table-head-row" scope="col">MG Contrib. (%)</th>
+                              <th class="th-center table-head-row">Célula de Compras</th>
                               <th></th>
-                              <th class="table-head-row" scope="col">MG Bruta (%)</th>
+                              <th class="th-center table-head-row">Diretoria de Compras</th>
                               <th></th>
+                              <th class="th-center table-head-row">Valor Venda</th>
+                              <th></th>
+                              <th class="th-center table-head-row">Receita Líquida</th>
+                              <th></th>
+                              <th class="th-center table-head-row">Margem de Contribuição</th>
+                              <th></th>
+                              <th class="th-center table-head-row">Margem Bruta</th>
+                              <th></th>
+                              <th class="th-center table-head-row">Filial</th>
+                              <th></th>
+
                           </tr>
                           <tr *ngFor="let items of diretrizesEstrategicas">
-                              <td>{{items.DESGRPPRD}}</td>
-                              <td></td>
-                              <td>{{items.DESDIVFRN}}</td>
+                              <td>{{items.DATREFPOD}}</td>
                               <td></td>
                               <td>{{items.CODESTUNI}}</td>
                               <td></td>
+                              <td>{{items.CODDIVFRN}}</td>
+                              <td></td>
+                              <td>{{items.CODCLLCMPATU}}</td>
+                              <td></td>
+                              <td>{{items.DESCLLCMPATU}}</td>
+                              <td></td>
                               <td>{{items.VLRVNDFATLIQ}}</td>
+                              <td></td>
+                              <td>{{items.VLRRCTLIQAPU}}</td>
                               <td></td>
                               <td>{{items.VLRMRGCRB}}</td>
                               <td></td>
                               <td>{{items.VLRMRGBRT}}</td>
+                              <td></td>
+                              <td>{{items.CODFIL}}</td>
+                              <td></td>
                           </tr>
                       </table>
                   </div>
