@@ -13,7 +13,7 @@ import { TechnicalMenuComponent } from '@app/components/navegacion/technical-men
 import { BusinessMenuComponent } from '@app/components/navegacion/business-menu/business-menu.component';
 import { environment } from '@env/environment';
 import { mockPipe } from '@app/pipes/mock.pipe';
-import * as data from '@datasources/plano-de-compras.json';
+import data from '@datasources/plano-de-compras.json';
 
 fdescribe('PlanoCompraComponent', () => {
   let component: PlanoCompraComponent;
@@ -66,11 +66,11 @@ fdescribe('PlanoCompraComponent', () => {
     req.flush(data)
     expect(component.planningData.length).toBeGreaterThan(0)
 
-    // fixture.whenStable().then(() => {
-    //   fixture.detectChanges()
-    //   const table = fixture.debugElement.nativeElement.querySelector(data)
-    //   expect(table.rows.length).toBeGreaterThan(1)
-    // });
+    fixture.whenStable().then(() => {
+      fixture.detectChanges()
+      const table = fixture.debugElement.nativeElement.querySelector('#verbaInfo')
+      expect(table.rows.length).toBeGreaterThan(1)
+    });
 
   })
 

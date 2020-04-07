@@ -195,7 +195,7 @@ export class SaccesoComponent implements OnInit {
         this.saveCampoError = true;
         this.errDesc = 'O nome do campo já existe';
         this.spinner.hide();
-        setTimeout(()=> {
+        setTimeout(() => {
           this.saveCampoError = false;
         }, 3000);
       });
