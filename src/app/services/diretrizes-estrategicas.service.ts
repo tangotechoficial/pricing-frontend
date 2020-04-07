@@ -8,7 +8,7 @@ import { environment } from '@env/environment';
 })
 export class DiretrizesEstrategicasService {
 
-  public url = `${environment.apiUrl}/analitica/diretrizesestrategica`
+  public url = `${environment.apiUrl}/pricing_parsing/diretrizesestrategica`
   constructor(private http: HttpClient) { }
 
   listar() {
