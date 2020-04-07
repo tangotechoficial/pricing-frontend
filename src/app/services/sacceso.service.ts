@@ -4,51 +4,64 @@ import { Global } from './global';
 import { Sequencia } from '../models/sequencia';
 import { Campo } from 'app/models/campo';
 import { environment } from '@env/environment';
+import { SequenciaValues } from '@app/models/sequencia_values';
+import { resolve } from 'url';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class SaccesoService {
-    public url: string;
-    public aSequenciaAcceso: Array<any>;
-    private header = { headers: { 'Content-type': 'application/json' } };
+  public url: string;
+  public aSequenciaAcceso: Array<any>;
+  private header = { headers: { 'Content-type': 'application/json' } };
 
   constructor(private http: HttpClient) {
     this.url = `${environment.apiUrl}/dinamica`;
   }
 
-    getCampos(): Promise<any> {
-        return this.http.get(this.url + '/campo/', this.header)
-            .toPromise()
-            .then((response: any) => {
-                return response.results as Campo[];
-            })
-            .catch(err => {
-                throw new Error(err);
-            });
-      }
+  getCampos(): Promise<any> {
+    return this.http.get(this.url + '/campo/', this.header)
+      .toPromise()
+      .then((response: any) => {
+        return response.results as Campo[];
+      })
+      .catch(err => {
+        throw new Error(err);
+      });
+  }
 
-    postSequencia(sequencia: Sequencia): Promise<any> {
-         const camps: Array<any> = new Array<any>();
-         sequencia.campos.map(elem => {
-            camps.push(elem.cod_campo);
-         });
-         return this.http
-            .post(this.url + '/sequencia/',
-                { cod_sequencia: sequencia.cod_sequencia,
-                  nome_sequencia: sequencia.nome_sequencia,
-                  campos: camps
-                }, this.header).toPromise();
-    }
+  getSequencias(): Promise<Sequencia[]> {
+    return this.http.get(this.url + '/sequencia/', this.header)
+      .toPromise()
+      .then((result: any) => {
+        return result.results as Sequencia[]
+      });
+  }
 
-    postCampo(campo: Campo): Promise<any> {
-        return this.http
-            .post(this.url + '/campo/', { cod_campo: campo.cod_campo, nome_campo: campo.nome_campo}, this.header).toPromise();
-    }
+  postSequencia(sequencia: Sequencia): Promise<any> {
+    const camps: Array<any> = new Array<any>();
+    sequencia.campos.map(elem => {
+      camps.push(elem.cod_campo);
+    });
+    return this.http
+      .post(this.url + '/sequencia/',
+       { cod_sequencia: sequencia.cod_sequencia,
+         nome_sequencia: sequencia.nome_sequencia,
+         campos: camps }, this.header)
+      .toPromise()
+      .catch(err => {
+        throw new Error(err);
+      });
+  }
 
-    getLastSequencia(): Promise<any> {
-        return this.http.get(this.url + '/sequencia/last/', this.header).toPromise();
-    }
+  postCampo(campo: Campo): Promise<any> {
+    return this.http
+      .post(this.url + '/campo/', { cod_campo: campo.cod_campo, nome_campo: campo.nome_campo }, this.header).toPromise();
+  }
 
-    getLastCampo(): Promise<any> {
-      return this.http.get(this.url + '/campo/last/', this.header).toPromise();
+  getLastSequencia(): Promise<any> {
+    return this.http.get(this.url + '/sequencia/last/', this.header).toPromise();
+  }
+
+  getLastCampo(): Promise<any> {
+    return this.http.get(this.url + '/campo/last/', this.header).toPromise();
   }
 }

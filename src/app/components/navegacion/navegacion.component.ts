@@ -11,8 +11,6 @@ import {
   style,
   animate,
   transition,
-  query,
-  animateChild
 } from '@angular/animations';
 
 @Component({
