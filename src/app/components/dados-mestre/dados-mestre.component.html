@@ -2,7 +2,6 @@
 <navegacion></navegacion>
 <filter-modal (update)="getFilter($event)"></filter-modal>
 <div class="background">
-
     <div class="container col-9 main-container">
         <div class="container row col-12 p-4">
           <button type="button" class="btn bg-standard" (click)="showFilterModal()" ><i
@@ -17,10 +16,7 @@
         </nav>
         <div class="tab-content">
             <div class="tab-pane container-tab custom-scrollbar-css fade show active" id="tab-composicao-preco" role="tabpanel" aria-labelledby="nav-composicao-preco">
-
                 <table class="table price-composition-table" id="priceComposition">
-
-
                     <thead>
                       <tr class="table-head">
                           <th class="th-center table-head-row">Cód.Produto</th>
@@ -62,6 +58,10 @@
                           <th class="table-head-row" scope="col">Preço Base</th>
                           <th></th>
                           <th class="table-head-row" scope="col">Código Região</th>
+                          <th></th>
+                          <th class="table-head-row" scope="col">Relacionamento</th>
+                          <th></th>
+                          <th class="table-head-row" scope="col">Tipo Calculo Preço</th>
                           <th></th>
                       </tr>
                     </thead>
