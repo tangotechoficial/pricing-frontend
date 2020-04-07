@@ -157,3 +157,10 @@ button.dropdownMenuButton {
 .btn-grey{
   color:$martinsTextGrey !important;
 }
+
+.selectedItem{
+  background-color: darken($martinsBlue , 5%) !important;
+      td{
+        color:white !important;
+    }
+}

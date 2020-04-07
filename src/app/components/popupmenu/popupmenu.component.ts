@@ -28,15 +28,15 @@ export class PopupmenuComponent implements OnInit {
     this.closePopup.emit(false);
   }
 
-  getSelectedChaveContas(val: any, i: any) {
+  getSelectedChaveContas(val: any, index: any) {
     this.currenObject = val;
-    this.selectItemColor(i);
+    this.selectItemColor(index);
     this.selectedItem = true;
   }
 
   selectItemColor(item: number) {
-    $('tr').removeClass('mySelect');
-    $('tr').eq(item + 1).addClass('mySelect');
+    $('tr').removeClass('selectedItem');
+    $('tr').eq(item + 1).addClass('selectedItem');
    }
 
 
