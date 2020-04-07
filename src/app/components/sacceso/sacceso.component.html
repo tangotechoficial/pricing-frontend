@@ -40,13 +40,12 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn bg-inverted font-weight-bold" data-dismiss="modal" [disabled]="!isCampoReady">Fechar</button>
-                    <button type="button" class="btn bg-standard font-weight-bold" data-dismiss="modal" (click)="submitCampo()" >Salvar</button>
+                    <button type="button" class="btn bg-standard font-weight-bold" data-dismiss="modal" (click)="submitCampo()" [disabled]="(isCampoReady && !newCampo.nome_campo)">Salvar</button>
                 </div>
             </div>
         </div>
     </div>
     <div class="container row col-12 p-4">
-        
         <div class="col-sm-2">
             <span class="text-header">Cód. Sequência</span>
             <input class="form-control mt-3" [(ngModel)]="sequencia.cod_sequencia" readonly/>
@@ -108,7 +107,7 @@
         </div>
         <div class="col-md-4">
             <div class="form-group">
-                <input (click)="submitSA()" type="submit" class="btn bg-standard btn-block font-weight-bold" value="Salvar">
+                <input (click)="submitSA()" type="submit" class="btn bg-standard btn-block font-weight-bold" [disabled]="!sequencia.nome_sequencia" value="Salvar">
             </div>
         </div>
     </div>
