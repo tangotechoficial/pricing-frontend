@@ -47,9 +47,11 @@ hr{
 		i {
 			font-size:20px;
 		}
-
     .total{
-      background-color: $backgroundGrey ;
+      background-color: $backgroundGrey;
+    }
+    .condicionSel{
+      cursor:pointer;
     }
 
 	}

@@ -81,17 +81,18 @@ export class PrecioBusiness implements OnInit {
     }
   }
 
-  onSelectCondicao(val: Condicao , index:any) {
+  onSelectCondicao(val: Condicao , camada: String , index:any) {
     this.currentSelectedCampos = null;
     this.selectedSequencia = null;
     this.currentSequencias = val.sequencias;
-    this.selectItemColor(index)
+    this.selectItemColor(index , camada)
+
 
   }
 
-  selectItemColor(item: number) {
-    $('.condicionSel').removeClass('selectedItem');
-    $('.condicionSel').eq(item + 1).addClass('selectedItem');
+  selectItemColor(item: number , cam:String) {
+     $('p').removeClass('selectedTextItem');
+     $('.' + cam).eq(item).addClass('selectedTextItem');
    }
 
 
@@ -272,9 +273,9 @@ export class PrecioBusiness implements OnInit {
     });
   }
 
-  getSelectedCondicao(val: any, i: any) {
-    this.selectItemColor(i);
-  }
+  // getSelectedCondicao(val: any, i: any) {
+  //   this.selectItemColor(i);
+  // }
 
   // selectItemColor(item: number) {
   //   $('tr').removeClass('mySelect');
