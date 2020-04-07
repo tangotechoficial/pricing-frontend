@@ -59,16 +59,16 @@ export class NavegacionComponent implements OnInit {
 
   @Output() navOutput = new EventEmitter<boolean>();
   private mapUrlToSection = {
-    "/menu": "Inicio",
-    "/preciobase": "Esquema de Cálculo / Precio Base",
-    "/precioventa": "Esquema de Cálculo / Precio Venta",
-    "/sacceso": "Sequência de acesso",
-    "/condicion": "Criar nova condição",
-    "/datalab/dados-mestre": "Growth Data Lab / Dados Mestre",
-    "/datalab/diretriz-estrategica": "Growth Data Lab / Diretriz Estratégica",
-    "/datalab/plano-compras": "Growth Data Lab / Plano de Compras",
-    "/datalab/execucao": "Growth Data Lab / Execução",
-    "/datalab/simulador": "Growth Data Lab / Simulador"
+    '/menu': 'Inicio',
+    '/preciobase': 'Esquema de Cálculo / Preço Base',
+    '/precioventa': 'Esquema de Cálculo / Preço Venda',
+    '/sacceso': 'Sequência de acesso',
+    '/condicion': 'Criar nova condição',
+    '/datalab/dados-mestre': 'Growth Data Lab / Dados Mestre',
+    '/datalab/diretriz-estrategica': 'Growth Data Lab / Diretriz Estratégica',
+    '/datalab/plano-compras': 'Growth Data Lab / Plano de Compras',
+    '/datalab/execucao': 'Growth Data Lab / Execução',
+    '/datalab/simulador': 'Growth Data Lab / Simulador'
   }
   constructor(
     private authService: AuthenticationService,
@@ -80,7 +80,6 @@ export class NavegacionComponent implements OnInit {
   ngOnInit() {
     const user = JSON.parse(localStorage.getItem('User'));
     this.userTechnical =  user.groups[0].name === 'tecnico' ? true : false;
-    console.log(this.userTechnical);
     this._route.url.subscribe(url => {
       this.section = this.mapUrlToSection[location.pathname];
       if (location.pathname !== '/login') {
@@ -88,7 +87,10 @@ export class NavegacionComponent implements OnInit {
       } else {
         this.isLoggedIn = false;
       }
+      console.log(this.isLoggedIn);
     });
+
+
 
 
   }

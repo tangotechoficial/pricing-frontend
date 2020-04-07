@@ -33,6 +33,7 @@ export class MenuComponent implements OnInit {
     this.token = this.authenticationService.currentTokenValue;
     this.sCurrentUser = this.setUserInfo();
     this.bBusiness = this.sCurrentUser.groups[0].name === 'business' ? true : false;
+    console.log(this.bBusiness);
 
     setTimeout(() => {
       $('.alert').hide();
