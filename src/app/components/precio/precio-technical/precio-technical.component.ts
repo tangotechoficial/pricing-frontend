@@ -38,12 +38,12 @@ export class PrecioTechnical {
     this.tipoValor = this.camada.tipoValor;
 
     const condicaos = this.camada.condicaos.map(cond => {
-      const tipValor = this.tipoValor.filter(tipoValor => tipoValor.cod_tipovalor === cond.cod_tipovalor)[0]
+      const tipValor = this.tipoValor.filter(tipoValor => tipoValor.cod_tipovalor === cond.cod_tipovalor)[0];
       cond.desc_tipovalor = tipValor.desc_tipovalor;
-      return new ModelCondicao(cond)
-    })
-    this.condicaos = condicaos
-    
+      return new ModelCondicao(cond);
+    });
+    this.condicaos = condicaos;
+
   }
 
   add() {
@@ -64,6 +64,7 @@ export class PrecioTechnical {
     });
   }
 
+  
   cancel() {
     this.condicaos.pop();
   }
@@ -75,11 +76,11 @@ export class PrecioTechnical {
   selectCondicao(val, isEditNew) {
     console.log({val, isEditNew})
     if (isEditNew && !this.isEditCondicao) {
-      this.addCondicao(val)
+      this.addCondicao(val);
     } else {
-      this.updateCondicao(val)
+      this.updateCondicao(val);
     }
-    this.isEditCondicao = false
+    this.isEditCondicao = false;
   }
 
 
@@ -103,7 +104,7 @@ export class PrecioTechnical {
       if (cond.cod_condicao === this.condicaoUpdateCod) {
         cond.set(modelcondicao)
       }
-    })
+    });
   }
 
 

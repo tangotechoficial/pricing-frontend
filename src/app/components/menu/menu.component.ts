@@ -32,7 +32,6 @@ export class MenuComponent implements OnInit {
   ngOnInit() {
     this.token = this.authenticationService.currentTokenValue;
     this.sCurrentUser = this.setUserInfo();
-    this.sCurrentUser.technical = true;
     this.bBusiness = this.sCurrentUser.groups[0].name === 'business' ? true : false;
 
     setTimeout(() => {
