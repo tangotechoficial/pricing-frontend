@@ -129,9 +129,11 @@
             </div>
         </div>
 
-        <div class="modCond modGeneral col-xs-12 col-md-4 col-lg-4 bg-white rounded martins-scrollbar p-4">
-            <div class="d-flex flex-row">
+        <div class="modCond modGeneral col-xs-12 col-md-4 col-lg-4 bg-white rounded martins-scrollbar">
+            <div class="p-3">
+              <div class="d-flex flex-row">
                 <h4 class="subtitlab darkbl col-md-8">Seleccione uma condição</h4>
+
                 <i class="fas fa-info-circle col-md-4 text-right"></i>
             </div>
             <!-- Camadas/Condiçaos -->
@@ -139,8 +141,8 @@
                 <div>
                     <h5 class="subtitlab darkbl m-0">{{camada.camada.nome_camada}}</h5>
                     <div class="row mt-3 d-flex flex-column">
-                        <div *ngFor="let condicao of camada.condicaos" class="d-flex justify-content-between col col-xs-3 col-12">
-                            <p id="condicao.cod_condicao" (click)="onSelectCondicao(condicao)" class="martinsText">{{condicao.desc_condicao}}</p>
+                        <div *ngFor="let condicao of camada.condicaos  ; let i = index" class="d-flex justify-content-between col col-xs-3 col-12">
+                            <p id="condicao.cod_condicao" (click)="onSelectCondicao(condicao , camada.camada.nome_camada , i)" class=" condicionSel {{camada.camada.nome_camada}} martinsText">{{condicao.desc_condicao}}</p>
                             <p class="martinsText text-right">{{condicao.value}}</p>
                         </div>
                     </div>
@@ -155,10 +157,12 @@
                     </div>
                 </div>
             </div>
+            </div>
+
             <div>
-                <div class="row mt-3">
+                <div class="row mt-3 total p-2">
                     <div class="col col-xs-3">
-                        <p class="martinsText subtitlab darkbl">TOTAL</p>
+                        <p class="martinsText subtitlab lightbl">PREÇO {{precioType}}</p>
                     </div>
                     <div class="col col-xs-9">
                         <p class="martinsText text-right font-weight-bold">{{currentTotal}}</p>

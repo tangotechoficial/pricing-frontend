@@ -78,14 +78,16 @@ export class SaccesoComponent implements OnInit {
      Output: null
      This function updates the newSA Object
   */
-  public getLastCampo(sucess?, error?) {
+  public getLastCampo(sucess?) {
+    this.isCampoReady = false;
     this.saccesoService.getLastCampo()
       .then(result => {
         this.newCampo.cod_campo = this.evaluateNextSA(result.cod_campo);
         sucess(true);
+        this.isCampoReady = true;
       })
       .catch(() => {
-        error(false);
+        this.isCampoReady = true;
       });
   }
 
@@ -98,7 +100,6 @@ export class SaccesoComponent implements OnInit {
     this.spinner.show();
     this.saccesoService.getLastSequencia()
       .then((result: any) => {
-        console.log(result);
         this.sequencia.cod_sequencia = this.evaluateNextSA(result.cod_sequencia);
         this.spinner.hide();
       });
@@ -183,13 +184,15 @@ export class SaccesoComponent implements OnInit {
       .then(result => {
         this.saveCampoSuccess = true;
         this.updateCampos();
-        this.newCampo = new Campo();
-        this.getLastCampo((value) => {
-          if (value) {
-            this.saveCampoSuccess = false;
-            this.spinner.hide();
-          }
-        });
+        setTimeout(() => {
+          this.saveCampoSuccess = false;
+          this.newCampo = new Campo();
+          this.getLastCampo((value) => {
+            if (value) {
+              this.spinner.hide();
+            }
+          });
+        }, 2000);
       })
       .catch((error: any) => {
         this.saveCampoError = true;
@@ -199,6 +202,7 @@ export class SaccesoComponent implements OnInit {
           this.saveCampoError = false;
         }, 3000);
       });
+
   }
 
   /* Iván Lynch - 1/4/2020
