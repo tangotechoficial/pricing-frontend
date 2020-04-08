@@ -1,5 +1,4 @@
 import { Component, OnInit, Renderer2, ElementRef, Input } from '@angular/core';
-import { Condicion } from '../../models/condicion';
 import { MetadataService } from './../../services/metadata.service';
 import { CondicionService } from '../../services/condicion.service';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -8,7 +7,7 @@ import { Condicao } from 'app/models/condicao';
 import { TipoValor } from 'app/models/tipovalor';
 import { Camada } from 'app/models/camadas';
 import { ChaveContas } from 'app/models/chavecontas';
-
+import { iif } from 'rxjs';
 declare var $: any;
 
 @Component({
@@ -93,53 +92,78 @@ export class CondicionComponent implements OnInit {
     this.bpopMenu = val;
   }
 
+  checkEscalaValue() {
+    const domElem: any = document.getElementById('checkEscala');
+    if (domElem.checked) {
+      domElem.checked = false;
+      this.condicion.escala_qtde = 0;
+    }
+
+    if (!domElem.checked) {
+      domElem.checked = true;
+      this.condicion.escala_qtde = 1;
+    }
+  }
+
   /*
     Iván Lynch 12/03/2020
     Input: Boolean from child component
     Output: Selected condicao object
   */
   public getSelectedCondicao(val: any) {
-    const checkPos: any = document.getElementById('checkPositivo');
-    const checkNeg: any = document.getElementById('checkNegativo');
-    if (val.sequencias) {
-      val.sequencias.map(elem => {
-        const domElem = document.getElementById(elem.cod_sequencia);
-        domElem.click();
+    if (val.cod_condicao !== this.condicion.cod_condicao) {
+      const escalaCheck: any = document.getElementById('checkEscala');
+      this.condicion.sequencias = [];
+      this.sequencias.map((elems: any) => {
+        const domElem: any = document.getElementById(elems.cod_sequencia);
+        domElem.checked = false;
+      });
+      const checkPos: any = document.getElementById('checkPositivo');
+      const checkNeg: any = document.getElementById('checkNegativo');
+      if (val.sequencias) {
+        val.sequencias.map(elem => {
+          const domElem = document.getElementById(elem.cod_sequencia);
+          domElem.click();
+        });
+      }
+      this.condicion.cod_condicao = val.cod_condicao;
+      this.condicion.desc_condicao = val.desc_condicao;
+      if (val.escala_qtde !== 0) {
+        escalaCheck.checked = true;
+      } else {
+        escalaCheck.checked = false;
+      }
+      this.condicion.escala_qtde = val.escala_qtde;
+      this.condicion.pos_neg = val.pos_neg;
+      this.condicion.tip_base_vendas = val.tip_base_vendas;
+      this.condicion.mandatoria = val.mandatoria;
+      this.condicion.estatistica = val.estatistica;
+      this.camadas.map(elem => {
+        if (elem.cod_camada === val.cod_camada) {
+          this.condicion.camada = elem;
+        }
+      });
+
+      if (this.condicion.pos_neg === 'P') {
+        checkPos.checked = true;
+        checkNeg.checked = false;
+      } else {
+        checkPos.checked = false;
+        checkNeg.checked = true;
+      }
+
+      this.chaveContas.map(elem => {
+        if (elem.cod_chavecontas === val.cod_chavecontas) {
+          this.condicion.chavecontas = elem;
+        }
+      });
+      this.tipoValor.map(elem => {
+        if (elem.cod_tipovalor === val.cod_tipovalor) {
+          this.condicion.tipovalor = elem;
+        }
       });
     }
-    this.condicion.cod_condicao = val.cod_condicao;
-    this.condicion.desc_condicao = val.desc_condicao;
-    this.condicion.escala_qtde = val.escala_qtde;
-    this.condicion.pos_neg = val.pos_neg;
-    this.condicion.tip_base_vendas = val.tip_base_vendas;
-    this.condicion.mandatoria = val.mandatoria;
-    this.condicion.estatistica = val.estatistica;
-    this.camadas.map(elem => {
-      if (elem.cod_camada === val.cod_camada) {
-        this.condicion.camada = elem;
-      }
-    });
-
-    if (this.condicion.pos_neg === 'P') {
-      checkPos.checked = true;
-      checkNeg.checked = false;
-    } else {
-      checkPos.checked = false;
-      checkNeg.checked = true;
-    }
-
-    this.chaveContas.map(elem => {
-      if (elem.cod_chavecontas === val.cod_chavecontas) {
-        this.condicion.chavecontas = elem;
-      }
-    });
-    this.tipoValor.map(elem => {
-      if (elem.cod_tipovalor === val.cod_tipovalor) {
-        this.condicion.tipovalor = elem;
-      }
-    });
   }
-
   /*
     Iván Lynch 09/03/2020
     Output: Return master values
@@ -160,6 +184,7 @@ export class CondicionComponent implements OnInit {
       this.condicionService.getCondicaos().then(result => this.condicaos = result)
     ]).then(() => {
       this.spinner.hide();
+      console.log(this.condicaos);
     });
   }
 
@@ -279,7 +304,7 @@ export class CondicionComponent implements OnInit {
       .then(result => {
         this.spinner.hide();
         $('#myModal').modal('show');
-        this.sequencias.map( elem => {
+        this.sequencias.map(elem => {
           const domElem: any = document.getElementById(elem.cod_sequencia);
           domElem.checked = false;
         });
@@ -303,10 +328,11 @@ export class CondicionComponent implements OnInit {
   */
   public putCondicao(callback) {
     this.spinner.show();
+    console.log(this.condicion);
     this.condicionService.putCondicao(this.condicion)
       .then(result => {
         this.saveSucess = true;
-        this.sequencias.map( elem => {
+        this.sequencias.map(elem => {
           const domElem: any = document.getElementById(elem.cod_sequencia);
           domElem.checked = false;
         });
@@ -325,9 +351,7 @@ export class CondicionComponent implements OnInit {
   */
   onSubmitCondicao() {
     if (this.bCreateMode) {
-      this.postCondicao((val: boolean) => {
-
-      });
+      this.postCondicao((val: boolean) => { });
     } else {
       this.putCondicao((val: boolean) => {
         if (val) {

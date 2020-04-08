@@ -33,7 +33,7 @@
         </div>
         <div class="col-sm-3 p-0">
             <span class="text-header">Descrição da condição</span>
-            <input class="form-control mt-3" [(ngModel)]="condicion.desc_condicao" value="Beneficio customizado" />
+            <input class="form-control mt-3" [(ngModel)]="condicion.desc_condicao" value="Beneficio customizado" [ngClass]="{ 'is-invalid': !condicion.desc_condicao }" />
         </div>
         <div *ngIf="bCreateMode"  class="col-sm-1 mt-5 mb-2 d-flex justify-content-center align-items-center">
             <i class="fas fa-search disabledSearch"></i>
@@ -43,9 +43,9 @@
         </div>
         <div class="col-sm-3">
             <span class="text-header">Atribua à camada</span>
-            <div class="dropdown col-10 p-0 mt-3">
+            <div class="dropdown col-10 p-0 mt-3" >
                 <button class="col-12 d-flex justify-content-between align-items-center btn btn-light dropdown-toggle bg-white border rounded" type="button" id="dropdownMenuButton"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
                     {{this.condicion.camada.nome_camada != '' ? this.condicion.camada.nome_camada : this.sSeleccionCamadaPlaceholder}}
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -83,7 +83,7 @@
         <div class="col-2 d-flex flex-column justify-content-center align-items-center">
             <span class="text-header">Escala por qtd.</span>
             <div class="custom-control pl-3 custom-checkbox mt-2 mb-2">
-                <input type="checkbox" [(ngModel)]="this.condicion.Escala_Qtde" class="custom-control-input" id="checkEscala">
+                <input (click)="checkEscalaValue()" type="checkbox" [(ngModel)]="this.condicion.Escala_Qtde" class="custom-control-input" id="checkEscala">
                 <label class="pl-4 custom-control-label" for="checkEscala" id="checkEscalaLabel"></label>
             </div>
         </div>
