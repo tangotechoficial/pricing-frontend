@@ -11,7 +11,7 @@ export class Condicao {
         // tslint:disable-next-line: variable-name
         public desc_condicao: any = '',
         // tslint:disable-next-line: variable-name
-        public escala_qtde: any = '',
+        public escala_qtde: boolean = false,
         public pos_neg: any = 0,
         public tip_base_vendas: any = '',
         public mandatoria: any = '',
