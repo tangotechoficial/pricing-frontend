@@ -1,5 +1,4 @@
-import { Component, OnInit, Renderer2, ElementRef, Input } from '@angular/core';
-import { Condicion } from '../../models/condicion';
+import { Component, OnInit, Renderer2, ElementRef, Input, DoCheck } from '@angular/core';
 import { MetadataService } from './../../services/metadata.service';
 import { CondicionService } from '../../services/condicion.service';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -8,7 +7,7 @@ import { Condicao } from 'app/models/condicao';
 import { TipoValor } from 'app/models/tipovalor';
 import { Camada } from 'app/models/camadas';
 import { ChaveContas } from 'app/models/chavecontas';
-
+import { iif } from 'rxjs';
 declare var $: any;
 
 @Component({
@@ -17,7 +16,7 @@ declare var $: any;
   styleUrls: ['./condicion.component.scss'],
   providers: [MetadataService, CondicionService, NgxSpinnerService]
 })
-export class CondicionComponent implements OnInit {
+export class CondicionComponent implements OnInit, DoCheck {
   public searchSeleccionado;
   public dbCondition: Array<any>;
   public condicion: Condicao;
@@ -25,6 +24,7 @@ export class CondicionComponent implements OnInit {
   public chaveContas: Array<ChaveContas>;
   public tipoValor: Array<TipoValor>;
   public camadas: Array<Camada>;
+  public camadasFiltered: Array<Camada>;
   public condicaos: Array<Condicao>;
   public selectedProperties: Array<any>;
   public bCreateMode: boolean;
@@ -35,11 +35,45 @@ export class CondicionComponent implements OnInit {
   public message: any;
   public bpopMenu = false;
   public bSelectCondicao = false;
+  public isValid: any = true;
 
   constructor(
     public condicionService: CondicionService,
     private spinner: NgxSpinnerService
   ) { }
+
+  ngDoCheck() {
+
+    if (this.condicion.desc_condicao) {
+      this.isValid = true;
+    } else {
+      this.isValid = false;
+    }
+
+    if (this.condicion.camada.cod_camada) {
+      this.isValid = true;
+    } else {
+      this.isValid = false;
+    }
+
+    if (this.condicion.chavecontas.cod_chavecontas) {
+      this.isValid = true;
+    } else {
+      this.isValid = false;
+    }
+
+    if (this.condicion.tipovalor.cod_tipovalor) {
+      this.isValid = true;
+    } else {
+      this.isValid = false;
+    }
+
+    if (this.condicion.sequencias.length !== 0) {
+      this.isValid = true;
+    } else {
+      this.isValid = false;
+    }
+  }
 
   ngOnInit() {
     /* Initialized message local object */
@@ -93,53 +127,78 @@ export class CondicionComponent implements OnInit {
     this.bpopMenu = val;
   }
 
+  checkEscalaValue() {
+    const domElem: any = document.getElementById('checkEscala');
+    if (domElem.checked) {
+      domElem.checked = false;
+      this.condicion.escala_qtde = 0;
+    }
+
+    if (!domElem.checked) {
+      domElem.checked = true;
+      this.condicion.escala_qtde = 1;
+    }
+  }
+
   /*
     Iván Lynch 12/03/2020
     Input: Boolean from child component
     Output: Selected condicao object
   */
   public getSelectedCondicao(val: any) {
-    const checkPos: any = document.getElementById('checkPositivo');
-    const checkNeg: any = document.getElementById('checkNegativo');
-    if (val.sequencias) {
-      val.sequencias.map(elem => {
-        const domElem = document.getElementById(elem.cod_sequencia);
-        domElem.click();
+    if (val.cod_condicao !== this.condicion.cod_condicao) {
+      const escalaCheck: any = document.getElementById('checkEscala');
+      this.condicion.sequencias = [];
+      this.sequencias.map((elems: any) => {
+        const domElem: any = document.getElementById(elems.cod_sequencia);
+        domElem.checked = false;
+      });
+      const checkPos: any = document.getElementById('checkPositivo');
+      const checkNeg: any = document.getElementById('checkNegativo');
+      if (val.sequencias) {
+        val.sequencias.map(elem => {
+          const domElem = document.getElementById(elem.cod_sequencia);
+          domElem.click();
+        });
+      }
+      this.condicion.cod_condicao = val.cod_condicao;
+      this.condicion.desc_condicao = val.desc_condicao;
+      if (val.escala_qtde !== 0) {
+        escalaCheck.checked = true;
+      } else {
+        escalaCheck.checked = false;
+      }
+      this.condicion.escala_qtde = val.escala_qtde;
+      this.condicion.pos_neg = val.pos_neg;
+      this.condicion.tip_base_vendas = val.tip_base_vendas;
+      this.condicion.mandatoria = val.mandatoria;
+      this.condicion.estatistica = val.estatistica;
+      this.camadas.map(elem => {
+        if (elem.cod_camada === val.cod_camada) {
+          this.condicion.camada = elem;
+        }
+      });
+
+      if (this.condicion.pos_neg === 'P') {
+        checkPos.checked = true;
+        checkNeg.checked = false;
+      } else {
+        checkPos.checked = false;
+        checkNeg.checked = true;
+      }
+
+      this.chaveContas.map(elem => {
+        if (elem.cod_chavecontas === val.cod_chavecontas) {
+          this.condicion.chavecontas = elem;
+        }
+      });
+      this.tipoValor.map(elem => {
+        if (elem.cod_tipovalor === val.cod_tipovalor) {
+          this.condicion.tipovalor = elem;
+        }
       });
     }
-    this.condicion.cod_condicao = val.cod_condicao;
-    this.condicion.desc_condicao = val.desc_condicao;
-    this.condicion.escala_qtde = val.escala_qtde;
-    this.condicion.pos_neg = val.pos_neg;
-    this.condicion.tip_base_vendas = val.tip_base_vendas;
-    this.condicion.mandatoria = val.mandatoria;
-    this.condicion.estatistica = val.estatistica;
-    this.camadas.map(elem => {
-      if (elem.cod_camada === val.cod_camada) {
-        this.condicion.camada = elem;
-      }
-    });
-
-    if (this.condicion.pos_neg === 'P') {
-      checkPos.checked = true;
-      checkNeg.checked = false;
-    } else {
-      checkPos.checked = false;
-      checkNeg.checked = true;
-    }
-
-    this.chaveContas.map(elem => {
-      if (elem.cod_chavecontas === val.cod_chavecontas) {
-        this.condicion.chavecontas = elem;
-      }
-    });
-    this.tipoValor.map(elem => {
-      if (elem.cod_tipovalor === val.cod_tipovalor) {
-        this.condicion.tipovalor = elem;
-      }
-    });
   }
-
   /*
     Iván Lynch 09/03/2020
     Output: Return master values
@@ -160,6 +219,8 @@ export class CondicionComponent implements OnInit {
       this.condicionService.getCondicaos().then(result => this.condicaos = result)
     ]).then(() => {
       this.spinner.hide();
+      const checkVenda: any = document.getElementById('checkVenda');
+      checkVenda.click();
     });
   }
 
@@ -225,6 +286,33 @@ export class CondicionComponent implements OnInit {
 
   /*
     Iván Lynch 08/03/2020
+    Output: Uncheck Pos and Neg checkbox if the other is active
+  */
+ public checkBaseVenda(e: any) {
+  const checkBase: any = document.getElementById('checkBase');
+  const checkVenda: any = document.getElementById('checkVenda');
+
+  if (e.target.id === 'checkBase' && checkBase.checked) {
+    this.camadasFiltered = this.camadas;
+    this.camadasFiltered = this.camadasFiltered.filter(obj => {
+      return obj.tipo_base_vendas !== 'V';
+    });
+    checkVenda.checked = false;
+    checkBase.click();
+  }
+
+  if (e.target.id === 'checkVenda' && checkVenda.checked) {
+    this.camadasFiltered = this.camadas;
+    this.camadasFiltered = this.camadasFiltered.filter(obj => {
+      return obj.tipo_base_vendas !== 'B';
+    });
+    checkBase.checked = false;
+    checkVenda.click();
+  }
+}
+
+  /*
+    Iván Lynch 08/03/2020
     Input: Object, Array
     Output: Return true if exists in the array or false if doesn't exist
   */
@@ -279,7 +367,7 @@ export class CondicionComponent implements OnInit {
       .then(result => {
         this.spinner.hide();
         $('#myModal').modal('show');
-        this.sequencias.map( elem => {
+        this.sequencias.map(elem => {
           const domElem: any = document.getElementById(elem.cod_sequencia);
           domElem.checked = false;
         });
@@ -303,10 +391,11 @@ export class CondicionComponent implements OnInit {
   */
   public putCondicao(callback) {
     this.spinner.show();
+    console.log(this.condicion);
     this.condicionService.putCondicao(this.condicion)
       .then(result => {
         this.saveSucess = true;
-        this.sequencias.map( elem => {
+        this.sequencias.map(elem => {
           const domElem: any = document.getElementById(elem.cod_sequencia);
           domElem.checked = false;
         });
@@ -325,9 +414,7 @@ export class CondicionComponent implements OnInit {
   */
   onSubmitCondicao() {
     if (this.bCreateMode) {
-      this.postCondicao((val: boolean) => {
-
-      });
+      this.postCondicao((val: boolean) => { });
     } else {
       this.putCondicao((val: boolean) => {
         if (val) {
