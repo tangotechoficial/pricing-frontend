@@ -87,7 +87,6 @@ export class PrecioBusiness implements OnInit {
     this.currentSequencias = val.sequencias;
     this.selectItemColor(index , camada)
 
-
   }
 
   selectItemColor(item: number , cam:String) {
