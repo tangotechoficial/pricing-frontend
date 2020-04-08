@@ -1,6 +1,3 @@
-
-
-
 import { Component, OnInit } from '@angular/core';
 import { CondicionService } from '../../../services/condicion.service';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -52,7 +49,8 @@ export class PrecioBaseComponent implements OnInit {
   // }
 
   checkTypeUser() {
-    if (this.sCurrentUser.groups[0].name !== 'business') {
+    // console.log({sCurrentUser: this.sCurrentUser})
+    if (this.sCurrentUser.groups[0].name == 'tecnico') {
       this.bBusiness = false;
     } else {
       this.bBusiness = true;
@@ -90,7 +88,7 @@ export class PrecioBaseComponent implements OnInit {
 
 
   submiteEsquema() {
-    console.log({camadasUpdate: this.camadasUpdate})
+    // console.log({camadasUpdate: this.camadasUpdate})
     $('#myModalPrecioBase').modal('show');
     const promisesAddCondCamadaEsq: Array<any> = Object.keys(this.camadasUpdate.ADD).map(codCamada => {
       return this.camadasUpdate.ADD[codCamada].map(cond => {
