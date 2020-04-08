@@ -1,5 +1,7 @@
 import { Component, OnInit ,Input, Output , EventEmitter} from '@angular/core';
 
+declare var $: any;
+
 @Component({
   selector: 'select-popup-regiao',
   templateUrl: './select-popup-regiao.component.html',
@@ -21,12 +23,19 @@ export class SelectPopupRegiaoComponent implements OnInit {
     this.closePopup.emit(false);
   }
 
-  getSelectedRegiao(val: any, index: any) {
-    this.currentRegiao = val;
-  }
 
   onClosePopup() {
     this.closePopup.emit(false);
   }
+
+  getSelectedRegiao(val: any, index: any) {
+    this.currentRegiao = val;
+    this.selectItemColor(index);
+  }
+
+  selectItemColor(item: number) {
+    $('tr').removeClass('selectedItem');
+    $('tr').eq(item + 1).addClass('selectedItem');
+   }
 
 }

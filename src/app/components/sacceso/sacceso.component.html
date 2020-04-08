@@ -39,7 +39,7 @@
                     <input id="input-modal-descripcion" [(ngModel)]="newCampo.nome_campo" class="form-control mt-3"/>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn bg-inverted font-weight-bold" data-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn bg-inverted font-weight-bold" data-dismiss="modal" [disabled]="!isCampoReady">Fechar</button>
                     <button type="button" class="btn bg-standard font-weight-bold" data-dismiss="modal" (click)="submitCampo()" >Salvar</button>
                 </div>
             </div>
@@ -67,7 +67,7 @@
                     [(ngModel)]="searchSeq" placeholder="Pesquise o tipo de condição..." />
                 <ul class="p-0 martins-scrollbar">
                     <li *ngFor="let campo of campos | filterseleccionado: searchSeq" class="p-2">
-                        <div class="custom-control pl-3custom-checkbox">
+                        <div class="custom-control custom-checkbox pl-3">
                             <input (change)="checkValue(campo)" type="checkbox" class="custom-control-input" id="{{campo.cod_campo}}">
                             <label class="pl-4 custom-control-label" for="{{campo.cod_campo}}">{{campo.nome_campo}}</label>
                         </div>
@@ -88,7 +88,7 @@
                             <label class="pl-4 mb-0">{{campo.nome_campo}}</label>
                             <button type="button" (click)="onDltSelection(campo)" class="btn btn-danger ml-2 p-0 d-flex flex-column align-items-center">
                                 <span class="btn-label d-flex align-items-center"><i
-                                        class="fas fa-times p-0"></i></span>
+                                        class="fas fa-times p-0 text-white"></i></span>
                             </button>
                         </div>
                     </li>

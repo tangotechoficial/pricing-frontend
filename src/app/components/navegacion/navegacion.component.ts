@@ -11,8 +11,6 @@ import {
   style,
   animate,
   transition,
-  query,
-  animateChild
 } from '@angular/animations';
 
 @Component({
@@ -82,6 +80,7 @@ export class NavegacionComponent implements OnInit {
   ngOnInit() {
     const user = JSON.parse(localStorage.getItem('User'));
     this.userTechnical =  user.groups[0].name === 'tecnico' ? true : false;
+    console.log(this.userTechnical);
     this._route.url.subscribe(url => {
       this.section = this.mapUrlToSection[location.pathname];
       if (location.pathname !== '/login') {

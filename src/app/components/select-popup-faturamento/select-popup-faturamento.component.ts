@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, Output , EventEmitter} from '@angular/core';
 
+declare var $: any;
+
 @Component({
   // tslint:disable-next-line: component-selector
   selector: 'select-popup-faturamento',
@@ -16,9 +18,6 @@ export class SelectPopupFaturamentoComponent implements OnInit {
   ngOnInit() {
   }
 
-  getSelectedFaturamento(val: any, index: any) {
-    this.currentFaturamento = val;
-  }
 
   onSelectedFaturamento() {
     this.selectedFaturamento.emit(this.currentFaturamento);
@@ -28,5 +27,16 @@ export class SelectPopupFaturamentoComponent implements OnInit {
   onClosePopup() {
     this.closePopup.emit(false);
   }
+
+  getSelectedFaturamento(val: any, index: any) {
+    this.currentFaturamento = val;
+    this.selectItemColor(index);
+  }
+
+  selectItemColor(item: number) {
+    $('tr').removeClass('selectedItem');
+    $('tr').eq(item + 1).addClass('selectedItem');
+   }
+
 
 }
