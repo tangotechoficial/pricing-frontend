@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2, ElementRef, Input } from '@angular/core';
+import { Component, OnInit, Renderer2, ElementRef, Input, DoCheck } from '@angular/core';
 import { MetadataService } from './../../services/metadata.service';
 import { CondicionService } from '../../services/condicion.service';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -16,7 +16,7 @@ declare var $: any;
   styleUrls: ['./condicion.component.scss'],
   providers: [MetadataService, CondicionService, NgxSpinnerService]
 })
-export class CondicionComponent implements OnInit {
+export class CondicionComponent implements OnInit, DoCheck {
   public searchSeleccionado;
   public dbCondition: Array<any>;
   public condicion: Condicao;
@@ -24,6 +24,7 @@ export class CondicionComponent implements OnInit {
   public chaveContas: Array<ChaveContas>;
   public tipoValor: Array<TipoValor>;
   public camadas: Array<Camada>;
+  public camadasFiltered: Array<Camada>;
   public condicaos: Array<Condicao>;
   public selectedProperties: Array<any>;
   public bCreateMode: boolean;
@@ -34,11 +35,45 @@ export class CondicionComponent implements OnInit {
   public message: any;
   public bpopMenu = false;
   public bSelectCondicao = false;
+  public isValid: any = true;
 
   constructor(
     public condicionService: CondicionService,
     private spinner: NgxSpinnerService
   ) { }
+
+  ngDoCheck() {
+
+    if (this.condicion.desc_condicao) {
+      this.isValid = true;
+    } else {
+      this.isValid = false;
+    }
+
+    if (this.condicion.camada.cod_camada) {
+      this.isValid = true;
+    } else {
+      this.isValid = false;
+    }
+
+    if (this.condicion.chavecontas.cod_chavecontas) {
+      this.isValid = true;
+    } else {
+      this.isValid = false;
+    }
+
+    if (this.condicion.tipovalor.cod_tipovalor) {
+      this.isValid = true;
+    } else {
+      this.isValid = false;
+    }
+
+    if (this.condicion.sequencias.length !== 0) {
+      this.isValid = true;
+    } else {
+      this.isValid = false;
+    }
+  }
 
   ngOnInit() {
     /* Initialized message local object */
@@ -184,7 +219,8 @@ export class CondicionComponent implements OnInit {
       this.condicionService.getCondicaos().then(result => this.condicaos = result)
     ]).then(() => {
       this.spinner.hide();
-      console.log(this.condicaos);
+      const checkVenda: any = document.getElementById('checkVenda');
+      checkVenda.click();
     });
   }
 
@@ -247,6 +283,33 @@ export class CondicionComponent implements OnInit {
       this.condicion.pos_neg = 'P';
     }
   }
+
+  /*
+    Iván Lynch 08/03/2020
+    Output: Uncheck Pos and Neg checkbox if the other is active
+  */
+ public checkBaseVenda(e: any) {
+  const checkBase: any = document.getElementById('checkBase');
+  const checkVenda: any = document.getElementById('checkVenda');
+
+  if (e.target.id === 'checkBase' && checkBase.checked) {
+    this.camadasFiltered = this.camadas;
+    this.camadasFiltered = this.camadasFiltered.filter(obj => {
+      return obj.tipo_base_vendas !== 'V';
+    });
+    checkVenda.checked = false;
+    checkBase.click();
+  }
+
+  if (e.target.id === 'checkVenda' && checkVenda.checked) {
+    this.camadasFiltered = this.camadas;
+    this.camadasFiltered = this.camadasFiltered.filter(obj => {
+      return obj.tipo_base_vendas !== 'B';
+    });
+    checkBase.checked = false;
+    checkVenda.click();
+  }
+}
 
   /*
     Iván Lynch 08/03/2020

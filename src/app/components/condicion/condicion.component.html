@@ -33,13 +33,31 @@
         </div>
         <div class="col-sm-3 p-0">
             <span class="text-header">Descrição da condição</span>
-            <input class="form-control mt-3" [(ngModel)]="condicion.desc_condicao" value="Beneficio customizado" [ngClass]="{ 'is-invalid': !condicion.desc_condicao }" />
+            <input class="form-control mt-3" [(ngModel)]="condicion.desc_condicao" value="Beneficio customizado" />
         </div>
         <div *ngIf="bCreateMode"  class="col-sm-1 mt-5 mb-2 d-flex justify-content-center align-items-center">
             <i class="fas fa-search disabledSearch"></i>
         </div>
         <div *ngIf="!bCreateMode" class="col-sm-1 mt-5 mb-2 d-flex justify-content-center align-items-center">
             <i (click)="onSearchCondicao()" class="fas fa-search"></i>
+        </div>
+        <div class="d-flex justify-content-between border rounded col-sm-3 p-0">
+            <div class="col-12 d-flex justify-content-center p-0 bg-white">
+                <div class="col-6 d-flex flex-column justify-content-center align-items-center">
+                    <span class="text-header">VENDA</span>
+                    <div class="custom-control pl-3 custom-checkbox mb-2">
+                        <input type="checkbox" (click)="checkBaseVenda($event)" class="custom-control-input" id="checkVenda">
+                        <label class="pl-4 custom-control-label" for="checkVenda" id="checkPositivoLabel"></label>
+                    </div>
+                </div>
+                <div class="col-6 d-flex flex-column justify-content-center align-items-center">
+                    <span class="text-header">BASE</span>
+                    <div class="custom-control pl-3 custom-checkbox mb-2">
+                        <input type="checkbox" (click)="checkBaseVenda($event)" class="custom-control-input" id="checkBase">
+                        <label class="pl-4 custom-control-label" for="checkBase" id="checkNegativoLabel"></label>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="col-sm-3">
             <span class="text-header">Atribua à camada</span>
@@ -49,7 +67,7 @@
                     {{this.condicion.camada.nome_camada != '' ? this.condicion.camada.nome_camada : this.sSeleccionCamadaPlaceholder}}
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a *ngFor="let ca of camadas ; let id = index" class="dropdown-item" (click)="getSelectedCamada(ca)">{{ca.nome_camada}}</a>
+                    <a *ngFor="let ca of camadasFiltered ; let id = index" class="dropdown-item" (click)="getSelectedCamada(ca)">{{ca.nome_camada}}</a>
                 </div>
             </div>
         </div>
@@ -149,7 +167,7 @@
     <div class="container row col-12 p-4 justify-content-md-center">
         <div class="col-md-4">
             <div class="form-group">
-                <input type="submit" (click)="onSubmitCondicao()" class="btn bg-standard btn-block font-weight-bold" value="Salvar">
+                <input type="submit" (click)="onSubmitCondicao()" class="btn bg-standard btn-block font-weight-bold" [disabled]="!isValid" value="Salvar">
             </div>
         </div>
     </div>
