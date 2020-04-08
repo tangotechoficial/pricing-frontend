@@ -1,6 +1,6 @@
 @import './mixins-var.scss';
 
-*:not(.fas):not(.far) {
+*:not(.fas):not(.far):not(.table tr) {
     font-family: 'Raleway', sans-serif;
 }
 
