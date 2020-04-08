@@ -4,26 +4,26 @@
 
 <div class="background">
   <div class="row">
-    <div class="col-11 offset-1">
+    <div class="col-12">
       <div class="row">
-          <div class="col-md-2">
+          <div class="col-3">
               <div class="filter-diretriz">
                   <h5 class="title">Filtro</h5>
                   <p>Linha de Negócio</p>
                   <div class="row filter-columns">
-                      <div class="col-md-4 border-filter">
+                      <div class="col-4 border-filter">
                           <img src="assets/img/diretriz-estrategica/drink-can.svg">
                           <h2>ABB</h2>
                       </div>
-                      <div class="col-md-4 border-filter">
+                      <div class="col-4 border-filter">
                           <img src="assets/img/diretriz-estrategica/smartphone.svg">
                           <h2>TEI</h2>
                       </div>
-                      <div class="col-md-4 border-filter">
+                      <div class="col-4 border-filter">
                           <img src="assets/img/diretriz-estrategica/soap.svg">
                           <h2>HBL</h2>
                       </div>
-                      <div class="col-md-4 border-filter">
+                      <div class="col-4 border-filter">
                           <img src="assets/img/diretriz-estrategica/hammer.svg">
                           <h2>MTC</h2>
                       </div>
@@ -57,31 +57,108 @@
                   <div class="tab-pane container-tab custom-scrollbar-css fade show active" id="tab-diretrizes" role="tabpanel" aria-labelledby="nav-composicao-preco">
                       <table class="table">
                           <tr class="table-head">
-                              <th class="th-center table-head-row">Subcategoria</th>
-                              <th></th>
-                              <th class="th-center table-head-row">Fornecedor</th>
+                              <th class="th-center table-head-row">Data</th>
                               <th></th>
                               <th class="th-center table-head-row">UF</th>
                               <th></th>
-                              <th class="table-head-row" scope="col">Vendas R$</th>
+                              <th class="th-center table-head-row">Código Fornecedor</th>
                               <th></th>
-                              <th class="table-head-row" scope="col">MG Contrib. (%)</th>
+                              <th class="th-center table-head-row">Valor Venda</th>
                               <th></th>
-                              <th class="table-head-row" scope="col">MG Bruta (%)</th>
+                              <th class="th-center table-head-row">Receita Líquida</th>
                               <th></th>
+                              <th class="th-center table-head-row">Margem de Contribuição</th>
+                              <th></th>
+                              <th class="th-center table-head-row">Margem Bruta</th>
+                              <th></th>
+                              <th class="th-center table-head-row">Comprador</th>
+                              <th></th>
+                              <th class="th-center table-head-row">Filial</th>
+                              <th></th>
+                              <th class="th-center table-head-row">Código Grupo Produto</th>
+                              <th></th>
+                              <th class="th-center table-head-row">Grupo Produto</th>
+                              <th></th>
+                              <th class="th-center table-head-row">Código Categoria de Produto</th>
+                              <th></th>
+                              <th class="th-center table-head-row">Categoria de Produto</th>
+                              <th></th>
+                              <th class="th-center table-head-row">Código Subcategoria de Produto</th>
+                              <th></th>
+                              <th class="th-center table-head-row">Subcategoria de Produto</th>
+                              <th></th>
+                              <th class="th-center table-head-row">Grupo Fornecedor</th>
+                              <th></th>
+                              <th class="th-center table-head-row">Fornecedor</th>
+                              <th></th>
+                              <th class="th-center table-head-row">Mês</th>
+                              <th></th>
+                              <th class="th-center table-head-row">Semana</th>
+                              <th></th>
+                              <th class="th-center table-head-row">Dia</th>
+                              <th></th>
+                              <th class="th-center table-head-row">Semana do Ano</th>
+                              <th></th>
+                              <th class="th-center table-head-row">Código de Célula de Compras</th>
+                              <th></th>
+                              <th class="th-center table-head-row">Código Diretoria de Compras</th>
+                              <th></th>
+                              <th class="th-center table-head-row">Diretoria de Compras</th>
+                              <th></th>
+
+
                           </tr>
                           <tr *ngFor="let items of diretrizesEstrategicas">
-                              <td>{{items.DESGRPPRD}}</td>
-                              <td></td>
-                              <td>{{items.DESDIVFRN}}</td>
+                              <td>{{items.DATREFPOD}}</td>
                               <td></td>
                               <td>{{items.CODESTUNI}}</td>
                               <td></td>
+                              <td>{{items.CODDIVFRN}}</td>
+                              <td></td>
                               <td>{{items.VLRVNDFATLIQ}}</td>
+                              <td></td>
+                              <td>{{items.VLRRCTLIQAPU}}</td>
                               <td></td>
                               <td>{{items.VLRMRGCRB}}</td>
                               <td></td>
                               <td>{{items.VLRMRGBRT}}</td>
+                              <td></td>
+                              <td>{{items.NOMCPR}}</td>
+                              <td></td>
+                              <td>{{items.CODFIL}}</td>
+                              <td></td>
+                              <td>{{items.CODGRPMER}}</td>
+                              <td></td>
+                              <td>{{items.DESGRPMER}}</td>
+                              <td></td>
+                              <td>{{items.CODFMLMER}}</td>
+                              <td></td>
+                              <td>{{items.DESFMLMER}}</td>
+                              <td></td>
+                              <td>{{items.CODCLSMER}}</td>
+                              <td></td>
+                              <td>{{items.DESCLSMER}}</td>
+                              <td></td>
+                              <td>{{items.NOMGRPFRN}}</td>
+                              <td></td>
+                              <td>{{items.NOMFRN}}</td>
+                              <td></td>
+                              <td>{{items.NOMMES}}</td>
+                              <td></td>
+                              <td>{{items.NOMSMS}}</td>
+                              <td></td>
+                              <td>{{items.NOMDIASMN}}</td>
+                              <td></td>
+                              <td>{{items.NOMSMSANO}}</td>
+                              <td></td>
+                              <td>{{items.CODCLLCMPATU}}</td>
+                              <td></td>
+                              <td>{{items.DESCLLCMPATU}}</td>
+                              <td></td>
+                              <td>{{items.CODDRTCLLATU}}</td>
+                              <td></td>
+                              <td>{{items.DESDRTCLLATU}}</td>
+                              <td></td>
                           </tr>
                       </table>
                   </div>

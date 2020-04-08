@@ -13,7 +13,8 @@ export class JWTInterceptorHelper implements HttpInterceptor {
     if (token) {
       request = request.clone({
         setHeaders: {
-          Authorization: `JWT ${token}`
+          Authorization: `JWT ${token}`,
+          'Content-type': 'application/json; charset=UTF-8'
         }
       });
     }
