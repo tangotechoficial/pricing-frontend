@@ -1,12 +1,10 @@
 <!-- Navigation Bar -->
 <navegacion></navegacion>
-
-
 <div class="background">
   <div class="row">
-    <div class="col-12">
+    <div class="col-10 offset-1">
       <div class="row">
-          <div class="col-3">
+          <!-- <div class="col-3">
               <div class="filter-diretriz">
                   <h5 class="title">Filtro</h5>
                   <p>Linha de Negócio</p>
@@ -29,9 +27,9 @@
                       </div>
                   </div>
               </div>
-          </div>
+          </div> -->
 
-          <div class="col-md-9 main-container">
+          <div class="col-md-12 main-container">
               <div class="tab-header">
                   <div class="margin-box-container">
                       <span class="date-box-info">Janeiro</span>
@@ -83,8 +81,6 @@
                               <th></th>
                               <th class="th-center table-head-row">Margem Bruta</th>
                               <th></th>
-
-
                           </tr>
                           <tr *ngFor="let items of diretrizesEstrategicas">
                               <td>{{items.DATREFPOD}}</td>
