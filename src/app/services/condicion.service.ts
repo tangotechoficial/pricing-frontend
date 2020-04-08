@@ -1,13 +1,10 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Condicion } from '../models/condicion';
-import { map } from 'rxjs/operators';
 import { Sequencia } from 'app/models/sequencia';
 import { Condicao } from 'app/models/condicao';
 import { ChaveContas } from 'app/models/chavecontas';
 import { TipoValor } from 'app/models/tipovalor';
 import { Camada } from 'app/models/camadas';
-import { compileDirectiveFromRender2 } from '@angular/compiler/src/render3/view/compiler';
 import { environment } from '@env/environment';
 
 
@@ -107,7 +104,7 @@ export class CondicionService {
           cod_condicao: condicion.cod_condicao,
           desc_condicao: condicion.desc_condicao,
           escala_qtde: condicion.escala_qtde ? 1 : 0,
-          pos_neg: condicion.pos_neg ? 'N' : 'P',
+          pos_neg: condicion.pos_neg,
           tip_base_vendas: condicion.tip_base_vendas,
           mandatoria: condicion.mandatoria ? condicion.mandatoria : 0,
           estatistica: condicion.estatistica ? condicion.estatistica : 0,
@@ -120,45 +117,51 @@ export class CondicionService {
       .toPromise()
       .then(() => {
         codSequencias.map(elem => {
-          console.log(elem);
-          console.log(condicion.cod_condicao);
           this.postRelationSequenciaCondicao(condicion.cod_condicao, elem);
         });
       });
   }
 
-  putCondicao(condicion: Condicao): Promise<any> {
-    const codSequencias = [];
-    return this.deleteRelationSequenciaCondicao(condicion.cod_condicao, () => {
-      condicion.sequencias.map(elem => codSequencias.push(elem.cod_sequencia));
-      if (codSequencias) {
-        codSequencias.map(elem => {
-          this.postRelationSequenciaCondicao(condicion.cod_condicao, elem);
-        });
+  putCondicao(condicion: Condicao, putSucess) {
+    console.log(condicion);
+    this.deleteRelationSequenciaCondicao(condicion.cod_condicao, (cb) => {
+      console.log(cb);
+      if (cb) {
+        if (condicion.sequencias.length > 0) {
+          condicion.sequencias.map(seq => {
+            this.postRelationSequenciaCondicao(condicion.cod_condicao, seq.cod_sequencia);
+          });
+        }
+        return this.http
+          .put(
+            this.url + '/condicao/' + condicion.cod_condicao + '/',
+            {
+              cod_condicao: condicion.cod_condicao,
+              desc_condicao: condicion.desc_condicao,
+              escala_qtde: condicion.escala_qtde ? 1 : 0,
+              pos_neg: condicion.pos_neg,
+              tip_base_vendas: condicion.tip_base_vendas,
+              mandatoria: condicion.mandatoria ? condicion.mandatoria : 0,
+              estatistica: condicion.estatistica ? condicion.estatistica : 0,
+              cod_camada: condicion.camada.cod_camada,
+              cod_chavecontas: condicion.chavecontas.cod_chavecontas,
+              cod_tipovalor: condicion.tipovalor.cod_tipovalor
+            },
+            { headers: { 'Content-type': 'application/json' } }
+          )
+          .toPromise()
+          .then(() => {
+            putSucess(true);
+          });
+
       }
-      return this.http
-        .put(
-          this.url + '/condicao/' + condicion.cod_condicao + '/',
-          {
-            cod_condicao: condicion.cod_condicao,
-            desc_condicao: condicion.desc_condicao,
-            escala_qtde: condicion.escala_qtde ? 1 : 0,
-            pos_neg: condicion.pos_neg ? 'N' : 'P',
-            tip_base_vendas: condicion.tip_base_vendas,
-            mandatoria: condicion.mandatoria ? condicion.mandatoria : 0,
-            estatistica: condicion.estatistica ? condicion.estatistica : 0,
-            cod_camada: condicion.camada.cod_camada,
-            cod_chavecontas: condicion.chavecontas.cod_chavecontas,
-            cod_tipovalor: condicion.tipovalor.cod_tipovalor,
-            sequencias: codSequencias
-          },
-          { headers: { 'Content-type': 'application/json' } }
-        )
-        .toPromise();
     });
   }
 
+
+
   postRelationSequenciaCondicao(codcon: any, codseq: any): Promise<any> {
+    console.log('postRelationSequenciaCondicao', codcon + codseq);
     return this.http
       .post(this.url + '/sequenciacondicao/', {
         id: codcon + codseq,
@@ -171,17 +174,23 @@ export class CondicionService {
   }
 
   deleteRelationSequenciaCondicao(id: any, cb) {
-    return this.getCondicaoByCode(id)
-      .then((result: any) => {
-        result.sequencias.map((elem: any) => {
-          return this.http
+    this.getCondicaoByCode(id, (success) => {
+      if (success.sequencias.length  !== 0) {
+        success.sequencias.map(elem => {
+          console.log(elem);
+          this.http
             .delete(this.url + '/sequenciacondicao/' + id + elem.cod_sequencia + '/', {
               headers: { 'Content-type': 'application/json' }
             })
-            .toPromise();
+            .toPromise()
+            .then(() => {
+              cb(true);
+            });
         });
+      } else {
         cb(true);
-      });
+      }
+    })
   }
 
   getLastCondicao(): Promise<any> {
@@ -192,12 +201,15 @@ export class CondicionService {
       .toPromise();
   }
 
-  public getCondicaoByCode(val: any): Promise<any> {
+  public getCondicaoByCode(val: any, onSucess) {
     return this.http
       .get(this.url + '/condicao/' + val + '/', {
         headers: { 'Content-type': 'application/json' }
       })
-      .toPromise();
+      .toPromise()
+      .then((result) => {
+        onSucess(result);
+      });
   }
 
   public getCondicaos(): Promise<Condicao[]> {

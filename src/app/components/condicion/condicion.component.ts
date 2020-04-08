@@ -8,6 +8,7 @@ import { TipoValor } from 'app/models/tipovalor';
 import { Camada } from 'app/models/camadas';
 import { ChaveContas } from 'app/models/chavecontas';
 import { iif } from 'rxjs';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 declare var $: any;
 
 @Component({
@@ -73,10 +74,29 @@ export class CondicionComponent implements OnInit, DoCheck {
     } else {
       this.isValid = false;
     }
+
+    const checkBase: any = document.getElementById('checkBase');
+    const checkVenda: any = document.getElementById('checkVenda');
+
+    if (checkBase.checked) {
+      checkVenda.checked = false;
+      this.camadasFiltered = this.camadas;
+      this.camadasFiltered = this.camadasFiltered.filter(obj => {
+        return obj.tipo_base_vendas !== 'V';
+      });
+    } else {
+      checkVenda.checked = true;
+      this.camadasFiltered = this.camadas;
+      this.camadasFiltered = this.camadasFiltered.filter(obj => {
+        return obj.tipo_base_vendas !== 'B';
+      });
+    }
+
   }
 
   ngOnInit() {
     /* Initialized message local object */
+    this.spinner.show();
     this.message = {};
     this.selectedProperties = new Array<any>();
     this.condicion = new Condicao();
@@ -88,7 +108,11 @@ export class CondicionComponent implements OnInit, DoCheck {
       this.bCreateMode = false;
     }
 
-    this.updateMasterData();
+    this.updateMasterData((cb) => {
+      if (cb) {
+        this.spinner.hide();
+      }
+    });
 
   }
 
@@ -125,19 +149,6 @@ export class CondicionComponent implements OnInit, DoCheck {
   */
   onCloseChaveContasPopUp(val: any) {
     this.bpopMenu = val;
-  }
-
-  checkEscalaValue() {
-    const domElem: any = document.getElementById('checkEscala');
-    if (domElem.checked) {
-      domElem.checked = false;
-      this.condicion.escala_qtde = 0;
-    }
-
-    if (!domElem.checked) {
-      domElem.checked = true;
-      this.condicion.escala_qtde = 1;
-    }
   }
 
   /*
@@ -203,8 +214,7 @@ export class CondicionComponent implements OnInit, DoCheck {
     Iván Lynch 09/03/2020
     Output: Return master values
   */
-  public updateMasterData() {
-    this.spinner.show();
+  public updateMasterData(callback?) {
     this.sequencias = new Array<Sequencia>();
     this.condicaos = new Array<Condicao>();
     this.tipoValor = new Array<TipoValor>();
@@ -218,9 +228,9 @@ export class CondicionComponent implements OnInit, DoCheck {
       this.condicionService.getCamadas().then(result => this.camadas = result),
       this.condicionService.getCondicaos().then(result => this.condicaos = result)
     ]).then(() => {
-      this.spinner.hide();
       const checkVenda: any = document.getElementById('checkVenda');
       checkVenda.click();
+      callback(true);
     });
   }
 
@@ -288,28 +298,28 @@ export class CondicionComponent implements OnInit, DoCheck {
     Iván Lynch 08/03/2020
     Output: Uncheck Pos and Neg checkbox if the other is active
   */
- public checkBaseVenda(e: any) {
-  const checkBase: any = document.getElementById('checkBase');
-  const checkVenda: any = document.getElementById('checkVenda');
+  public checkBaseVenda(e: any) {
+    const checkBase: any = document.getElementById('checkBase');
+    const checkVenda: any = document.getElementById('checkVenda');
 
-  if (e.target.id === 'checkBase' && checkBase.checked) {
-    this.camadasFiltered = this.camadas;
-    this.camadasFiltered = this.camadasFiltered.filter(obj => {
-      return obj.tipo_base_vendas !== 'V';
-    });
-    checkVenda.checked = false;
-    checkBase.click();
-  }
+    if (e.target.id === 'checkBase' && checkBase.checked) {
+      this.camadasFiltered = this.camadas;
+      this.camadasFiltered = this.camadasFiltered.filter(obj => {
+        return obj.tipo_base_vendas !== 'V';
+      });
+      checkVenda.checked = false;
+      checkBase.click();
+    }
 
-  if (e.target.id === 'checkVenda' && checkVenda.checked) {
-    this.camadasFiltered = this.camadas;
-    this.camadasFiltered = this.camadasFiltered.filter(obj => {
-      return obj.tipo_base_vendas !== 'B';
-    });
-    checkBase.checked = false;
-    checkVenda.click();
+    if (e.target.id === 'checkVenda' && checkVenda.checked) {
+      this.camadasFiltered = this.camadas;
+      this.camadasFiltered = this.camadasFiltered.filter(obj => {
+        return obj.tipo_base_vendas !== 'B';
+      });
+      checkBase.checked = false;
+      checkVenda.click();
+    }
   }
-}
 
   /*
     Iván Lynch 08/03/2020
@@ -362,10 +372,8 @@ export class CondicionComponent implements OnInit, DoCheck {
     Output: Create new Condicao
   */
   async postCondicao(callback) {
-    this.spinner.show();
     this.condicionService.postCondicao(this.condicion)
       .then(result => {
-        this.spinner.hide();
         $('#myModal').modal('show');
         this.sequencias.map(elem => {
           const domElem: any = document.getElementById(elem.cod_sequencia);
@@ -390,10 +398,8 @@ export class CondicionComponent implements OnInit, DoCheck {
     Output: Edit Condicao
   */
   public putCondicao(callback) {
-    this.spinner.show();
-    console.log(this.condicion);
-    this.condicionService.putCondicao(this.condicion)
-      .then(result => {
+    this.condicionService.putCondicao(this.condicion, (sucess) => {
+      if (sucess) {
         this.saveSucess = true;
         this.sequencias.map(elem => {
           const domElem: any = document.getElementById(elem.cod_sequencia);
@@ -404,7 +410,8 @@ export class CondicionComponent implements OnInit, DoCheck {
           this.condicion = new Condicao();
           callback(true);
         }, 1000);
-      });
+      }
+    });
   }
 
   /*
@@ -413,12 +420,21 @@ export class CondicionComponent implements OnInit, DoCheck {
     Output: null
   */
   onSubmitCondicao() {
+    this.spinner.show();
     if (this.bCreateMode) {
-      this.postCondicao((val: boolean) => { });
+      this.postCondicao((cb) => {
+        if (cb) {
+          this.spinner.hide();
+        }
+      });
     } else {
-      this.putCondicao((val: boolean) => {
-        if (val) {
-          this.updateMasterData();
+      this.putCondicao((cb) => {
+        if (cb) {
+          this.updateMasterData((cb2) => {
+            if (cb2) {
+              this.spinner.hide();
+            }
+          });
         }
       });
     }
