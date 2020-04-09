@@ -12,7 +12,7 @@
       </div>
       <div class="modal-body">
           <form [formGroup]="filterForm" class='form'>
-            <div class="d-flex flex-row justify-content-between">
+            <!-- <div class="d-flex flex-row justify-content-between">
               <select class="form-control" formControlName="linha_negocio" [(ngModel)]="filter.linha_negocio" (change)="loadCategory()" id="line">
                 <option [ngValue]="null" disabled>LINHA</option>
                 <option *ngFor="let line of filterData.business_line" [value]="line">{{ line|uppercase }}</option>
@@ -25,32 +25,36 @@
                 <option [ngValue]="null" disabled>SUB-CATEGORIA</option>
                 <option *ngFor="let subCategory of subCats" [value]="subCategory">{{ subCategory|uppercase }}</option>
               </select>
-            </div>
+            </div> -->
             <div class="d-flex flex-row justify-content-between">
-              <select class="form-control" formControlName="desdivfrn" [(ngModel)]="filter.desdivfrn"  (change)="loadBranches()" id="provider">
+              <!-- <select class="form-control" formControlName="desdivfrn" [(ngModel)]="filter.desdivfrn"  (change)="loadBranches()" id="provider">
                 <option [ngValue]="null" disabled>FORNECEDOR</option>
                 <option *ngFor="let provider of providers" [value]="provider">{{ provider|uppercase }}</option>
+              </select> -->
+              <select class="form-control" formControlName="codfilfat" [(ngModel)]="filter.codfilfat" id="ff">
+                <option [ngValue]="null">{{'Filial de Faturamento'|uppercase}}</option>
+                <option *ngFor="let fe of billBranches" [value]="fe">{{ fe }}</option>
               </select>
-              <select class="form-control" formControlName="codfilemp" [(ngModel)]="filter.codfilemp" id="fe" (change)="loadUFDest()">
-                <option [ngValue]="null" disabled>FE</option>
-                <option *ngFor="let fe of branches" [value]="fe">{{ fe }}</option>
+              <select class="form-control" formControlName="codfilemp" [(ngModel)]="filter.codfilemp" id="fe" >
+                <option [ngValue]="null" >{{ 'Filial de Expedição'|uppercase }}</option>
+                <option *ngFor="let fe of expBranches" [value]="fe">{{ fe }}</option>
               </select>
-              <select class="form-control" formControlName="codestuni" [(ngModel)]="filter.codestuni" id="uf" (change)="loadMaterials()">
-                <option [ngValue]="null" disabled>UF</option>
-                <option *ngFor="let uf of ufList" [value]="uf">{{ uf|uppercase }}</option>
+              <select class="form-control" formControlName="codestuni" [(ngModel)]="filter.codestuni" id="uf">
+                <option [ngValue]="null">UF</option>
+                <option *ngFor="let uf of uf" [value]="uf">{{ uf|uppercase }}</option>
               </select>
             </div>
             <div class="d-flex flex-row justify-content-between">
               <select class="form-control" formControlName="desprd" [(ngModel)]="filter.desprd" id="material">
-                <option [ngValue]="null" disabled>MATERIAL</option>
-                <option *ngFor="let material of materials" [value]="material">{{ material|uppercase }}</option>
+                <option [ngValue]="null">MATERIAL</option>
+                <option *ngFor="let material of materials" [value]="material.codprd">{{ material.codprd }} - {{ material.desprd|uppercase }}</option>
               </select>
             </div>
           </form>
       </div>
       <div class="modal-footer">
           <button type="button" class="btn btn-default" (click)="reset()">Limpar</button>
-          <button type="button" class="btn btn-primary" (click)="submit()">Filtrar</button>
+          <button type="button" class="btn btn-primary" [disabled]="disabled" (click)="submit()">Filtrar</button>
       </div>
     </div>
   </div>
