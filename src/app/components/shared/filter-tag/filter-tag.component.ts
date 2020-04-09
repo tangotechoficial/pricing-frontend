@@ -16,7 +16,11 @@ export class FilterTagComponent implements OnInit, OnChanges {
    ngOnInit() {
     if(this.filter){
       Object.keys(this.filter).map(
-        (value, idx) => this.filters.push(this.filter[value])
+        (value, idx) => {
+          if (this.filter[value] !== undefined && this.filter[value] !== null) {
+            this.filters.push(this.filter[value])
+          }
+        }
       )
     }
   }
@@ -24,9 +28,15 @@ export class FilterTagComponent implements OnInit, OnChanges {
   ngOnChanges() {
     if(this.filter){
       Object.keys(this.filter).map(
-        (value, idx) => this.filters.push(this.filter[value])
+        (value, idx) => {
+          debugger
+          if(this.filter[value] !== undefined && this.filter[value] !== null) {
+            this.filters.push(this.filter[value])
+          }
+        }
       )
     }
+    console.log(this.filters)
     this.filterChange.emit(this.filter)
    }
 
