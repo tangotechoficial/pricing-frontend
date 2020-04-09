@@ -1,9 +1,12 @@
-import { Component, OnInit, OnChanges, Input, SimpleChanges} from '@angular/core';
+import { Component, OnInit, Input, Output} from '@angular/core';
 import { DadosMestresComposicaoPrecoService} from '../../services/dados-mestres-composicao-preco.service'
 import { DadosMestreVerbaService} from '../../services/dados-mestre-verba.service'
 import { PriceComposition } from '@models/pricecomposition';
 import { MasterDataMoney } from '@models/masterdatamoney'
 import { Filter } from '@models/filter'
+import { FilterModalService } from '@services/filtermodal.service'
+import { NgxSpinnerService } from 'ngx-spinner'
+import { Material } from '@models/material'
 
 declare var $: any;
 
@@ -11,53 +14,66 @@ declare var $: any;
   selector: 'app-dados-mestre',
   templateUrl: './dados-mestre.component.html',
   styleUrls: ['./dados-mestre.component.scss'],
-  providers: [ DadosMestresComposicaoPrecoService, DadosMestreVerbaService]
+  providers: [ DadosMestresComposicaoPrecoService, DadosMestreVerbaService, NgxSpinnerService]
 })
-export class DadosMestreComponent implements OnChanges, OnInit{
+export class DadosMestreComponent implements OnInit{
 
-  public masterDataPriceComposition: Array<any>;
+  public masterDataPriceComposition: Array<PriceComposition>;
   public masterDataMoney: Array<any>;
-  dataFilter: Filter;
-  changeLog: string[] = [];
+  filter: Filter;
+  submitted: boolean
+  loading: boolean = true;
+  materials: Material[] = []
+  billBranches: any[] = []
 
   constructor(
     private priceCompositionService : DadosMestresComposicaoPrecoService,
-    private moneyService: DadosMestreVerbaService
+    private moneyService: DadosMestreVerbaService,
+    private filterService: FilterModalService,
+    private spinner: NgxSpinnerService
   ) {
-    this.masterDataPriceComposition = new Array<any>();
-    this.masterDataMoney = new Array<any>();
+
   }
 
   ngOnInit() {
-    this.priceCompositionService.dadosMestresPreco.subscribe(
-      data =>
-        data.results.map(
+    this.spinner.show()
+    this.masterDataPriceComposition = new Array<PriceComposition>();
+    this.masterDataMoney = new Array<MasterDataMoney>();
+    Promise.all([
+      this.priceCompositionService.dadosMestresPreco.then(
+        data =>
+          data.map(
+            row => {
+              this.masterDataPriceComposition.push(new PriceComposition().deserialize(row));
+            }
+          )
+      ),
+      this.moneyService.dadosMestresVerba.then(
+        data =>
+        data.map(
           row => {
-            this.masterDataPriceComposition.push(new PriceComposition().deserialize(row));
+            this.masterDataMoney.push(new MasterDataMoney().deserialize(row));
           }
         ),
-      err => console.log(err)
-    )
-    this.moneyService.dadosMestresVerba.subscribe(
-      data =>
-      data.results.map(
-        row => {
-          this.masterDataMoney.push(new MasterDataMoney().deserialize(row));
-        }
+        err => console.log(err)
       ),
-      err => console.log(err)
+    ]).then(
+      result => {
+        this.loading = false
+        this.spinner.hide()
+      }
     )
+
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    // Listen for changes
+  @Input() isSubmitted(value) {
+    this.submitted = value
   }
 
-  getFilter(filter: Filter) {
-    this.dataFilter = filter
+  @Input() setFilter(value) {
+    this.filter = value
+    console.log(value)
   }
-
-
 
   showFilterModal() {
     $('#modalFilter').modal('show')

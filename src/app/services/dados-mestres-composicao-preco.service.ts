@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '@env/environment';
-
+import {PriceComposition} from '@models/pricecomposition'
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +17,14 @@ export class DadosMestresComposicaoPrecoService {
     return this.http.get<any[]>(this.dadosMestresPrecoUrl)
   }
 
-  public get dadosMestresPreco(): Observable<any>{
+  public get dadosMestresPreco(): Promise<PriceComposition[]>{
     const result = this.http.get(this.dadosMestresPrecoUrl);
-    return result
+    return result.toPromise()
+    .then((result: any) => {
+      return result.results as PriceComposition[];
+    })
+    .catch(err => {
+      throw new Error(err);
+    });
   }
 }
