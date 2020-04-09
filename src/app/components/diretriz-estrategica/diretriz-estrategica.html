@@ -30,7 +30,7 @@
           </div> -->
 
           <div class="col-md-12 main-container">
-              <div class="tab-header">
+              <!-- <div class="tab-header">
                   <div class="margin-box-container">
                       <span class="date-box-info">Janeiro</span>
                       <span class="date-box-info">2020</span>
@@ -49,7 +49,7 @@
                           <p class="content-info"> 21%</p>
                       </div>
                   </div>
-              </div>
+              </div> -->
 
               <div class="tab-content">
                   <div class="tab-pane container-tab custom-scrollbar-css fade show active" id="tab-diretrizes" role="tabpanel" aria-labelledby="nav-composicao-preco">
@@ -83,7 +83,7 @@
                               <th></th>
                           </tr>
                           <tr *ngFor="let items of diretrizesEstrategicas">
-                              <td>{{items.DATREFPOD}}</td>
+                              <td>{{items.DATREFPOD.split(" ")[0]}}</td>
                               <td></td>
                               <td>{{items.NOMMES}}</td>
                               <td></td>
