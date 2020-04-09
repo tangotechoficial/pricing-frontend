@@ -1,10 +1,10 @@
 import { Deserializable } from '@app/interfaces'
 
 export class Filter implements Deserializable{
-  linha_negocio: string = null;
-  descgrpprd: string = null;
-  desctgprd: string = null;
-  desdivfrn: string = null;
+  // linha_negocio: string = null;
+  // descgrpprd: string = null;
+  // desctgprd: string = null;
+  codfilfat: string = null;
   codfilemp: number = null;
   codestuni: string = null;
   desprd: string = null;
