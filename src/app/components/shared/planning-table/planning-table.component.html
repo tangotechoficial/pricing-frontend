@@ -22,81 +22,140 @@
       </ng-container>
     </tr>
     <tr>
-      <th scope="row">Vendas (R$)</th>
+      <th scope="row">Vendas (OMR)</th>
       <ng-container *ngFor="let item of data">
-        <td>{{ item.volvndsug|currency:'BRL'}}</td>
-        <td>{{ item.volvndpln|currency:'BRL'}}</td>
+        <td>{{ item.VLRVNDLIQCAL|currency:'BRL'}}</td>
+        <td>{{ item.VLRVNDLIQCAL|currency:'BRL'}}</td>
         <td></td>
       </ng-container>
     </tr>
     <tr>
-      <th scope="row">Margem (%)</th>
+      <th scope="row">Vendas Alcançadas </th>
       <ng-container *ngFor="let item of data">
-        <td>{{ item.vlrmrgbrtsug|number:'1.2-2'}}</td>
-        <td>{{ item.vlrmrgbrtpln|number:'1.2-2'}}</td>
+        <td>{{ item.VLRVNDPRVCTR|currency:'BRL'}}</td>
+        <td>{{ item.VLRVNDLIQOCD|currency:'BRL'}}</td>
         <td></td>
       </ng-container>
     </tr>
     <tr>
-      <th scope="row">Competitividade (%)</th>
+      <th scope="row">Competitividade </th>
       <ng-container *ngFor="let item of data">
-        <td>{{ item.vlrcompsug|number:'1.2-2'}}</td>
-        <td>{{ item.vlrcomppln|number:'1.2-2'}}</td>
+        <td>{{ item.VLRMCDCAL|number:'1.2-2'}}%</td>
+        <td>{{ item.VLRMCDOCD|number:'1.2-2'}}%</td>
         <td></td>
       </ng-container>
     </tr>
     <tr>
-      <th scope="row">Preço Mercado (R$)</th> <!-- child from competitividade row -->
+      <th scope="row"> - Preço Mercado </th> <!-- child from competitividade row -->
       <ng-container *ngFor="let item of data">
-        <td>{{ item.vlrpcomrc|currency:'BRL'}}</td>
-        <td>{{ item.vlrpcomrc|currency:'BRL'}}</td>
+        <td>{{ item.VLRPCOMEDMCD|currency:'BRL'}}</td>
+        <td>{{ item.VLRPCOMEDMCD|currency:'BRL'}}</td>
         <td></td>
       </ng-container>
     </tr>
     <tr>
-      <th scope="row">Preço Venda (R$)</th>
+      <th scope="row">Margem Bruta </th>
       <ng-container *ngFor="let item of data">
-        <td>{{ item.vlrpcosug|currency:'BRL'}}</td>
-        <td>{{ item.vlrpcopln|currency:'BRL'}}</td>
+      <td>{{ ((item.MRGBRTOCD/item.VLRRCTLIQOCD)*100).toFixed(2)}}%</td>
+      <td>{{ ((item.MRGBRTOCD/item.VLRRCTLIQOCD)*100).toFixed(2)}}%</td>
+      <td></td>
+      </ng-container>
+    </tr>
+    <tr>
+      <th scope="row">Preço Venda </th>
+      <ng-container *ngFor="let item of data">
+        <td>{{ item.VLRPCOVNDLIQCAL|currency:'BRL'}}</td>
+        <td>{{ item.VLRPCOVNDLIQOCD|currency:'BRL'}}</td>
         <td></td>
       </ng-container>
     </tr>
     <tr>
-      <th scope="row">Custos (R$)</th>
+      <th scope="row">Preço Base </th>
       <ng-container *ngFor="let item of data">
-        <td>{{ item.impostos|currency:'BRL'}}</td>
-        <td>{{ item.impostos|currency:'BRL'}}</td>
+        <td>{{ item.VLRPCOBSECAL|currency:'BRL'}}</td>
+        <td>{{ item.VLRPCOBSEOCD|currency:'BRL'}}</td>
         <td></td>
       </ng-container>
     </tr>
     <tr>
-      <th scope="row">Impostos (R$)</th>
+      <th scope="row">(+) Impostos </th>
       <ng-container *ngFor="let item of data">
-      <td>{{ item.vlrimptotsug|currency:'BRL'}}</td>
-      <td>{{ item.vlrimptotpln|currency:'BRL'}}</td>
+      <td>{{ item.VLRIMPTOTCAL|currency:'BRL'}}</td>
+      <td>{{ item.VLRIMPTOTOCD|currency:'BRL'}}</td>
+      <td></td>
+      </ng-container>
+    </tr>
+    <tr>
+      <th scope="row"> - ICMS </th>
+      <ng-container *ngFor="let item of data">
+      <td>{{ item.VLRICMCAL|currency:'BRL'}}</td>
+      <td>{{ item.VLRICMOCD|currency:'BRL'}}</td>
+      <td></td>
+      </ng-container>
+    </tr>
+    <tr>
+      <th scope="row"> - PIS/COFINS </th>
+      <ng-container *ngFor="let item of data">
+      <td>{{ item.VLRPISCAL|currency:'BRL'}}</td>
+      <td>{{ item.VLRPISOCD|currency:'BRL'}}</td>
+      <td></td>
+      </ng-container>
+    </tr>
+    <tr>
+      <th scope="row">Devolução </th> <!-- Operacional's child -->
+      <ng-container *ngFor="let item of data">
+      <td>{{ item.VLRDVLCAL|currency:'BRL'}}</td>
+      <td>{{ item.VLRDVLOCD|currency:'BRL'}}</td>
+      <td></td>
+      </ng-container>
+    </tr>
+    <tr>
+      <th scope="row">Flexível </th>
+      <ng-container *ngFor="let item of data">
+      <td>{{ item.VLRPISCAL|currency:'BRL'}}</td>
+      <td>{{ item.VLRPISOCD|currency:'BRL'}}</td>
+      <td></td>
+      </ng-container>
+    </tr>
+    <tr>
+      <th scope="row">Margem Bruta Unitária</th>
+      <ng-container *ngFor="let item of data">
+        <td>{{ item.VLRMRGBRTCAL|currency:'BRL'}}</td>
+        <td>{{ item.VLRMRGBRTOCD|currency:'BRL'}}</td>
+        <td></td>
+      </ng-container>
+    </tr>
+    <tr>
+      <th scope="row">Verba Sugerida </th>
+      <ng-container *ngFor="let item of data; index as index">
+      <td>{{ item.VLRRBTOCD|currency:'BRL'}}</td>
+      <td>{{ item.VLRRBTCAL|currency:'BRL'}}</td>
+      <td></td>
+      </ng-container>
+    </tr>
+    <tr>
+      <th scope="row">Verba Planejada </th>
+      <ng-container *ngFor="let item of data; index as index">
+      <td>{{ item.VLRVBAOCD || '-' }}</td>
+      <td>
+        <inline-edit (update)="updateField(index, 'VLRVBAOCD')" editableOnEnter>
+          <ng-template viewMode> {{ item.VLRVBAOCD|currency:'BRL'}}</ng-template>
+          <ng-template editMode editableOnEnter>
+            <input class="w-50"
+              [formControl]="getControl(index, 'VLRVBAOCD')"
+              (ngModelChange)="captureChanges($event)" size="8"
+              [(ngModel)]="item.VLRVBAOCD" type="text">
+          </ng-template>
+        </inline-edit>
+      </td>
       <td></td>
       </ng-container>
     </tr>
     <!-- start Impostos children -->
-    <tr>
-      <th scope="row">ICMS (R$)</th>
-      <ng-container *ngFor="let item of data">
-      <td>{{ item.vlricmssug|currency:'BRL'}}</td>
-      <td>{{ item.vlricmspln|currency:'BRL'}}</td>
-      <td></td>
-      </ng-container>
-    </tr>
-    <tr>
-      <th scope="row">PIS/COFINS (R$)</th>
-      <ng-container *ngFor="let item of data">
-      <td>{{ item.vlrpiscofsug|currency:'BRL'}}</td>
-      <td>{{ item.vlrpiscofpln|currency:'BRL'}}</td>
-      <td></td>
-      </ng-container>
-    </tr>
+
     <!-- // End Impostos children -->
-    <tr>
-      <th scope="row">Operacional (R$)</th>
+    <!-- <tr>
+      <th scope="row">Operacional </th>
       <ng-container *ngFor="let item of data">
       <td>
         <span *ngIf="item.operacional">
@@ -108,83 +167,33 @@
       </td>
       <td></td>
       </ng-container>
-    </tr>
-    <tr>
-      <th scope="row">Devolução (R$)</th> <!-- Operacional's child -->
-      <ng-container *ngFor="let item of data">
-      <td>{{ item.vlrdevsug|currency:'BRL'}}</td>
-      <td>{{ item.vlrdevpln|currency:'BRL'}}</td>
-      <td></td>
-      </ng-container>
-    </tr>
-    <tr>
-      <th scope="row">Flexível (R$)</th>
-      <ng-container *ngFor="let item of data">
-      <td>{{ item.vlrflxsug|currency:'BRL'}}</td>
-      <td>{{ item.vlrflxpln|currency:'BRL'}}</td>
-      <td></td>
-      </ng-container>
-    </tr>
-    <tr>
-      <th scope="row">Margem Bruta (R$)</th>
-      <ng-container *ngFor="let item of data">
-      <td>{{ item.vlrmrgbrtsug|currency:'BRL'}}</td>
-      <td>{{ item.vlrmrgbrtpln|currency:'BRL'}}</td>
-      <td></td>
-      </ng-container>
-    </tr>
-    <tr>
-      <th scope="row">Verba Sugerida (R$)</th>
-      <ng-container *ngFor="let item of data; index as index">
-      <td>{{ item.vrbuntsugsug|currency:'BRL'}}</td>
-      <td>{{ item.vrbuntsugpln|currency:'BRL'}}</td>
-      <td></td>
-      </ng-container>
-    </tr>
-    <tr>
-      <th scope="row">Verba Planejada (R$)</th>
-      <ng-container *ngFor="let item of data; index as index">
-      <td>{{ item.vlrvrbplan || '-' }}</td>
-      <td>
-        <inline-edit (update)="updateField(index, 'vlrvrbpln')" editableOnEnter>
-          <ng-template viewMode> {{ item.vlrvrbpln|currency:'BRL'}}</ng-template>
-          <ng-template editMode editableOnEnter>
-            <input class="w-50"
-              [formControl]="getControl(index, 'vlrvrbpln')"
-              (ngModelChange)="captureChanges($event)" size="8"
-              [(ngModel)]="item.vlrvrbpln" type="text">
-          </ng-template>
-        </inline-edit>
-      </td>
-      <td></td>
-      </ng-container>
-    </tr>
+    </tr> -->
     <!-- // Verba's children end -->
     <tr>
-      <th scope="row">CMV Preço Sugerido (R$)</th>
+      <th scope="row">CMV Preço Sugerido </th>
       <ng-container *ngFor="let item of data; index as index">
-      <td>{{ item.vlrcmvpcosug|currency:'BRL'}}</td>
-      <td>{{ item.vlrcmvpcopln|currency:'BRL'}}</td>
+      <td>{{ item.VLRCMVCAL|currency:'BRL'}}</td>
+      <td>{{ item.VLRCMVOCD|currency:'BRL'}}</td>
       <td></td>
       </ng-container>
     </tr>
     <tr>
-      <th scope="row">CMV Preço Atual (R$)</th>
+      <th scope="row">CMV Preço Atual </th>
       <ng-container *ngFor="let item of data; index as index">
-      <td>{{ item.vlrcmvpcoatu|currency:'BRL'}}</td>
-      <td>{{ item.vlrcmvpcoatu|currency:'BRL'}}</td>
+      <td>{{ item.VLRCMVPCOATU|currency:'BRL'}}</td>
+      <td>{{ item.VLRCMVPCOATU|currency:'BRL'}}</td>
       <td></td>
       </ng-container>
     </tr>
     <tr>
-      <th scope="row">CMV Compra Estoque (R$)</th>
+      <th scope="row">CMV Compra Estoque </th>
       <ng-container *ngFor="let item of data; index as index">
-      <td>{{ item.vlrcmvcmpatu|currency:'BRL'}}</td>
+      <td>{{ item.VLRCSTCMPMER|currency:'BRL'}}</td>
       <td>
-        <inline-edit (update)="updateField(index, 'vlrcmvcmppln')" editableOnEnter>
-          <ng-template viewMode>{{ item.vlrcmvcmppln|currency:'BRL'}}</ng-template>
+        <inline-edit (update)="updateField(index, 'VLRCSTCMPIDL')" editableOnEnter>
+          <ng-template viewMode>{{ item.VLRCSTCMPIDL|currency:'BRL'}}</ng-template>
           <ng-template editMode>
-            <input class="w-50"[formControl]="getControl(index, 'vlrcmvcmppln')" (ngModelChange)="captureChanges($event)" size="8" type="text" [(ngModel)]="item.vlrcmvcmppln">
+            <input class="w-50"[formControl]="getControl(index, 'VLRCSTCMPIDL')" (ngModelChange)="captureChanges($event)" size="8" type="text" [(ngModel)]="item.vlrcmvcmppln">
           </ng-template>
         </inline-edit>
       </td>

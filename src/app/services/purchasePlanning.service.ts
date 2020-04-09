@@ -8,7 +8,7 @@ import { PurchasePlan } from '@models/purchaseplan'
 
 @Injectable({providedIn: 'root'})
 export class PurchasePlanningService {
-  private planningUrl = `${environment.apiUrl}/pricing_parsing/movplncmpcal/`
+  private planningUrl = `${environment.apiUrl}/pricing_parsing/planocompras/`
 
 
   constructor(
