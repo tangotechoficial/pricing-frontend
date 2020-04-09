@@ -1,8 +1,11 @@
 .table td {
   text-align: right;
   width: 115px;
-  height: .40rem
+  height: .40rem;
+  font-size: 0.9rem;
 }
+
+
 
 .mirrorInput {
   outline: 1px solid #4270C1;
