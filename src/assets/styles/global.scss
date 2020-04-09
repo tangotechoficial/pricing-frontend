@@ -137,6 +137,9 @@ button.dropdownMenuButton {
         @include inverted-btn;
     }
 }
+.mySelect{
+    background-color: $martinsBlue !important;
+}
 
 .btn.bg-inverted{
     @include inverted-btn;
@@ -160,8 +163,13 @@ button.dropdownMenuButton {
 .selectedItem{
   background-color: darken($martinsBlue , 5%) !important;
       td{
-        color:rgb(66, 64, 64) !important;
+        color:white!important;
     }
+}
+
+.selectedTextItem{
+  font-weight: 700 !important;
+  color:$martinsBlue !important;
 }
 
 .martins-pointer {

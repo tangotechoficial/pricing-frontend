@@ -64,6 +64,7 @@ export class PrecioTechnical {
     });
   }
 
+  
   cancel() {
     this.condicaos.pop();
   }
@@ -73,7 +74,7 @@ export class PrecioTechnical {
   }
 
   selectCondicao(val, isEditNew) {
-    // console.log({val, isEditNew})
+    console.log({val, isEditNew})
     if (isEditNew && !this.isEditCondicao) {
       this.addCondicao(val);
     } else {
@@ -83,40 +84,43 @@ export class PrecioTechnical {
   }
 
 
-  addCondicao(val) {
-    const modelcondicao = this.camada.condicaosAllow.filter(cond => cond.Cod_Condicao === val.sCodCondicion)[0];
-    const tipValor = this.tipoValor.filter(tipoValor => tipoValor.Cod_TipoValor === modelcondicao.Cod_TipoValor)[0];
-    modelcondicao.Desc_TipoValor = tipValor.Desc_TipoValor;
-    this.condicaos[this.condicaos.length - 1].set(modelcondicao);
+  addCondicao(val){
+    
+    const modelcondicao = this.camada.condicaosAllow.filter(cond => cond.cod_condicao === val.cod_condicao)[0]
+    const tipValor = this.tipoValor.filter(tipoValor => tipoValor.cod_tipovalor === modelcondicao.cod_tipovalor)[0]
+    modelcondicao.desc_tipovalor = tipValor.desc_tipovalor
+    this.condicaos[this.condicaos.length - 1].set(modelcondicao)
     this.selectedObject.emit({action: 'ADD', camada: this.camadaU, condicaos: modelcondicao});
     this.isEditNew = false;
   }
 
-  updateCondicao(val) {
-    const modelcondicao = this.camada.condicaosAllow.filter(cond => cond.Cod_Condicao === val.sCodCondicion)[0];
-    const tipValor = this.tipoValor.filter(tipoValor => tipoValor.Cod_TipoValor === modelcondicao.Cod_TipoValor)[0];
-    modelcondicao.Desc_TipoValor = tipValor.Desc_TipoValor;
+  
+
+  updateCondicao(val){
+    const modelcondicao = this.camada.condicaosAllow.filter(cond => cond.cod_condicao === val.cod_condicao)[0]
+    const tipValor = this.tipoValor.filter(tipoValor => tipoValor.cod_tipovalor === modelcondicao.cod_tipovalor)[0]
+    modelcondicao.desc_tipovalor = tipValor.desc_tipovalor
     this.condicaos.forEach(cond => {
-      if (cond.Cod_Condicao === this.condicaoUpdateCod) {
-        cond.set(modelcondicao);
+      if (cond.cod_condicao === this.condicaoUpdateCod) {
+        cond.set(modelcondicao)
       }
     });
   }
 
 
   launchModal(condicao) {
-    this.isEditCondicao = condicao.Cod_Condicao ? true : false;
-    this.condicaoUpdateCod = condicao.Cod_Condicao ? condicao.Cod_Condicao : null;
+    this.isEditCondicao = condicao.cod_condicao ? true : false
+    this.condicaoUpdateCod = condicao.cod_condicao ? condicao.cod_condicao : null
     this.bSelectCondicao = true;
   }
 
   updateMandatoria(condicao) {
-    console.log({condicao});
+    // console.log({condicao})
     this.selectedObject.emit({action: 'UPDATE', camada: this.camadaU, condicaos: condicao});
   }
 
   updateEstadistica(condicao) {
-    console.log({condicao});
+    // console.log({condicao})
     this.selectedObject.emit({action: 'UPDATE', camada: this.camadaU, condicaos: condicao});
   }
 }
