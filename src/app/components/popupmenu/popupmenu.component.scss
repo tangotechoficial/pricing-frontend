@@ -1,12 +1,6 @@
  @import '../../../assets/styles/global.scss';
 
- .mySelect{
-	 background-color: $martinsBlue !important;
-	 td{
-		 color:white !important;
-	 }    
- }
- 
+
  .popupmenu{
 	 position: absolute;
 	 z-index: 100;
@@ -33,14 +27,14 @@
 			 border:1px solid darken($backgroundGrey,20%);
 			 height: 310px;
 			 overflow-y: scroll;
- 
+
 		 }
- 
+
 		 .table{
 			 border:1px solid $backgroundGrey !important;
-			 border-radius: 10px;			
+			 border-radius: 10px;
 		 }
-		 
+
 		 tr{
 			 transition: none;
 		 }
@@ -51,7 +45,7 @@
 		 }
 	 }
  }
- 
+
  /* .selected {
 	 background-color: $martinsBlue;
  } */

@@ -20,7 +20,7 @@ export class SelectPopupCondicionComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    console.log(this.dataList)
+
   }
 
   onSelectObject() {
@@ -32,15 +32,15 @@ export class SelectPopupCondicionComponent implements OnInit {
     this.closePopup.emit(false);
   }
 
-  getSelectedCondicao(condicao: Condicao , i: any) {
+  getSelectedCondicao(condicao: Condicao , index: any) {
     this.currenObject = condicao;
-    this.selectItemColor(i);
+    this.selectItemColor(index);
     this.selectedItem = true;
   }
 
   selectItemColor(item: number) {
-    $('tr').removeClass('mySelect');
-    $('tr').eq(item + 1).addClass('mySelect');
+    $('tr').removeClass('selectedItem');
+    $('tr').eq(item + 1).addClass('selectedItem');
    }
 
 }

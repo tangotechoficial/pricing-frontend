@@ -39,14 +39,13 @@
                     <input id="input-modal-descripcion" [(ngModel)]="newCampo.nome_campo" class="form-control mt-3"/>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn bg-inverted font-weight-bold" data-dismiss="modal">Fechar</button>
-                    <button type="button" class="btn bg-standard font-weight-bold" data-dismiss="modal" (click)="submitCampo()" >Salvar</button>
+                    <button type="button" class="btn bg-inverted font-weight-bold" data-dismiss="modal" [disabled]="!isCampoReady">Fechar</button>
+                    <button type="button" class="btn bg-standard font-weight-bold" data-dismiss="modal" (click)="submitCampo()" [disabled]="(isCampoReady && !newCampo.nome_campo)">Salvar</button>
                 </div>
             </div>
         </div>
     </div>
     <div class="container row col-12 p-4">
-        
         <div class="col-sm-2">
             <span class="text-header">Cód. Sequência</span>
             <input class="form-control mt-3" [(ngModel)]="sequencia.cod_sequencia" readonly/>
@@ -67,7 +66,7 @@
                     [(ngModel)]="searchSeq" placeholder="Pesquise o tipo de condição..." />
                 <ul class="p-0 martins-scrollbar">
                     <li *ngFor="let campo of campos | filterseleccionado: searchSeq" class="p-2">
-                        <div class="custom-control pl-3custom-checkbox">
+                        <div class="custom-control custom-checkbox pl-3">
                             <input (change)="checkValue(campo)" type="checkbox" class="custom-control-input" id="{{campo.cod_campo}}">
                             <label class="pl-4 custom-control-label" for="{{campo.cod_campo}}">{{campo.nome_campo}}</label>
                         </div>
@@ -88,7 +87,7 @@
                             <label class="pl-4 mb-0">{{campo.nome_campo}}</label>
                             <button type="button" (click)="onDltSelection(campo)" class="btn btn-danger ml-2 p-0 d-flex flex-column align-items-center">
                                 <span class="btn-label d-flex align-items-center"><i
-                                        class="fas fa-times p-0"></i></span>
+                                        class="fas fa-times p-0 text-white"></i></span>
                             </button>
                         </div>
                     </li>
@@ -108,7 +107,7 @@
         </div>
         <div class="col-md-4">
             <div class="form-group">
-                <input (click)="submitSA()" type="submit" class="btn bg-standard btn-block font-weight-bold" value="Salvar">
+                <input (click)="submitSA()" type="submit" class="btn bg-standard btn-block font-weight-bold" [disabled]="!sequencia.nome_sequencia" value="Salvar">
             </div>
         </div>
     </div>

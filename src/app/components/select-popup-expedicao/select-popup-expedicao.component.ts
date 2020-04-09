@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, Output , EventEmitter} from '@angular/core';
 
+declare var $: any;
+
 @Component({
   // tslint:disable-next-line: component-selector
   selector: 'select-popup-expedicao',
@@ -26,8 +28,15 @@ export class SelectPopupExpedicaoComponent implements OnInit {
   onClosePopup() {
     this.closePopup.emit(false);
   }
+
   getSelectedExpedicao(val: any, index: any) {
     this.currentExpedicao = val;
+    this.selectItemColor(index);
   }
+
+  selectItemColor(item: number) {
+    $('tr').removeClass('selectedItem');
+    $('tr').eq(item + 1).addClass('selectedItem');
+   }
 
 }

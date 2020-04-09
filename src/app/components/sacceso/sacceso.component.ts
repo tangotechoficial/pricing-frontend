@@ -3,6 +3,7 @@ import { SaccesoService } from '../../services/sacceso.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Campo } from 'app/models/campo';
 import { Sequencia } from 'app/models/sequencia';
+import { timingSafeEqual } from 'crypto';
 
 declare var $: any;
 
@@ -35,6 +36,7 @@ export class SaccesoComponent implements OnInit {
   public newCampo: Campo;
   public saveError: boolean;
   public sequencia: Sequencia;
+  public isCampoReady = false;
 
   constructor(
     private saccesoService: SaccesoService,
@@ -76,10 +78,16 @@ export class SaccesoComponent implements OnInit {
      Output: null
      This function updates the newSA Object
   */
-  public getLastCampo() {
+  public getLastCampo(sucess?) {
+    this.isCampoReady = false;
     this.saccesoService.getLastCampo()
       .then(result => {
         this.newCampo.cod_campo = this.evaluateNextSA(result.cod_campo);
+        sucess(true);
+        this.isCampoReady = true;
+      })
+      .catch(() => {
+        this.isCampoReady = true;
       });
   }
 
@@ -92,7 +100,6 @@ export class SaccesoComponent implements OnInit {
     this.spinner.show();
     this.saccesoService.getLastSequencia()
       .then((result: any) => {
-        console.log(result);
         this.sequencia.cod_sequencia = this.evaluateNextSA(result.cod_sequencia);
         this.spinner.hide();
       });
@@ -177,13 +184,25 @@ export class SaccesoComponent implements OnInit {
       .then(result => {
         this.saveCampoSuccess = true;
         this.updateCampos();
-        this.spinner.hide();
         setTimeout(() => {
           this.saveCampoSuccess = false;
           this.newCampo = new Campo();
-          this.getLastCampo();
+          this.getLastCampo((value) => {
+            if (value) {
+              this.spinner.hide();
+            }
+          });
+        }, 2000);
+      })
+      .catch((error: any) => {
+        this.saveCampoError = true;
+        this.errDesc = 'O nome do campo já existe';
+        this.spinner.hide();
+        setTimeout(() => {
+          this.saveCampoError = false;
         }, 3000);
       });
+
   }
 
   /* Iván Lynch - 1/4/2020
@@ -208,12 +227,12 @@ export class SaccesoComponent implements OnInit {
       .then(data => {
         $('#myModal').modal('show');
         this.saveSuccess = true;
-        this.campos.map( elem => {
+        this.campos.map(elem => {
           const domElem: any = document.getElementById(elem.cod_campo);
           domElem.checked = false;
         });
         this.spinner.hide();
-        setTimeout(function() {
+        setTimeout(function () {
           this.saveSuccess = false;
           this.sequencia = new Sequencia();
           this.getLastSequencia();
@@ -224,7 +243,7 @@ export class SaccesoComponent implements OnInit {
         this.saveError = true;
         this.errDesc = 'A sequência de acesso já existe';
         this.spinner.hide();
-        setTimeout(function() {
+        setTimeout(function () {
           this.saveError = false;
         }.bind(this), 2000);
       });

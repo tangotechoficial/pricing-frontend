@@ -1,12 +1,14 @@
 @import './mixins-var.scss';
 
-*:not(.fas) {
+*:not(.fas):not(.far):not(.table tr) {
     font-family: 'Raleway', sans-serif;
+}
+.table td {
+  font-size: 11pt
 }
 
 *:not(input){
     color: $martinsTextGrey;
-
 }
 
 .text-header {
@@ -42,8 +44,8 @@ button.dropdownMenuButton {
 
 
 .dropdown-toggle:after{
-    position: relative;
-    top: 0.5rem;
+    /* position: relative;
+    top: 0.5rem; */
     float: right;
     color: $martinsBlue;
 }
@@ -138,6 +140,9 @@ button.dropdownMenuButton {
         @include inverted-btn;
     }
 }
+.mySelect{
+    background-color: $martinsBlue !important;
+}
 
 .btn.bg-inverted{
     @include inverted-btn;
@@ -158,18 +163,85 @@ button.dropdownMenuButton {
   color:$martinsTextGrey !important;
 }
 
-.btn-outline-mrt {
-  border: 1px solid #4270C1
+.selectedItem{
+  background-color: darken($martinsBlue , 5%) !important;
+      td{
+        color:rgb(66, 64, 64) !important;
+    }
 }
-.btn-outline-mrt:hover {
-  background-color: transparent;
-  color: inherit
+
+.selectedTextItem{
+  font-weight: 700 !important;
+  color:$martinsBlue !important;
 }
-.badge-custom {
-  background-color: #7e7e7e;
-  color: #fafafa;
-  font-size: 1.1rem;
+
+.martins-pointer {
+    cursor: pointer;
 }
-.badge-custom:nth-child(n+2) {
-  margin-left: 1em;
+
+i.fas.fa-search.disabledSearch {
+    color: gray;
 }
+
+.fas.fa-search:hover{
+    @extend .color-martins-blue;
+    @extend .martins-pointer;
+}
+
+/*---green checkbox for condicion, sacceso, pventa, preciobase---*/
+.custom-control-input:checked~.custom-control-label::before {
+    border-color: #009966;
+    background-color: #009966;
+}
+
+.custom-checkbox .custom-control-label::before {
+    border: 2px solid #009966 !important;
+    background-color: transparent;
+}
+/*---table borders for popupmenu & selectpopupcondicion---*/
+.table-border-right {
+    border-radius: 0 10px 10px 0; border: 2px solid transparent;
+}
+
+.table-border-left {
+    border-radius: 10px 0 0 10px; border: 2px solid transparent;
+}
+// ----- custom scrollbar for whole app -------
+// change 'height' as needed
+// in the styles of the corresponding component
+
+.martins-scrollbar {
+    /*styles for Firefox*/
+    scrollbar-color: #384461  #eee;
+    scrollbar-width: thin;
+  }
+
+  .martins-scrollbar {
+    overflow-y: scroll;
+  }
+
+    /*-----styles for Chrome and Safari-----*/
+  /* scrollbar width */
+  .martins-scrollbar::-webkit-scrollbar {
+    width: 0.8rem;
+  }
+
+  /* scrollbar track */
+  .martins-scrollbar::-webkit-scrollbar-track {
+    background: #eee;
+  }
+
+  /* scrollbar handle */
+  .martins-scrollbar::-webkit-scrollbar-thumb {
+    border-radius: 1rem;
+    background-color: #384461;
+  }
+
+
+   /* click popup menu and table */
+  .mySelect{
+    background-color: $martinsBlue !important;
+      td{
+          color:white !important;
+      }
+  }

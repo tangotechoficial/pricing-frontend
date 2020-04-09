@@ -1,5 +1,7 @@
 import { Component, OnInit ,Input, Output , EventEmitter} from '@angular/core';
 
+declare var $: any;
+
 @Component({
   selector: 'select-popup-material',
   templateUrl: './select-popup-material.component.html',
@@ -28,6 +30,12 @@ export class SelectPopupMaterialComponent implements OnInit {
 
   getSelectedMaterial(val: any, index: any) {
     this.currentMaterial = val;
+    this.selectItemColor(index);
   }
+
+  selectItemColor(item: number) {
+    $('tr').removeClass('selectedItem');
+    $('tr').eq(item + 1).addClass('selectedItem');
+   }
 
 }
