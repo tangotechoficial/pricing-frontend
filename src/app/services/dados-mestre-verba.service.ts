@@ -8,7 +8,7 @@ import { environment } from '@env/environment';
 })
 export class DadosMestreVerbaService {
 
-  public dadosMestreVerbaUrl = `${environment.apiUrl}/analitica/dadosmestreverba`;
+  public dadosMestreVerbaUrl = `${environment.apiUrl}/pricing_parsing/dadosmestreverba`;
 
   constructor(private http: HttpClient) { }
 

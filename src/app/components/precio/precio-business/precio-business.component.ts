@@ -170,6 +170,10 @@ export class PrecioBusiness implements OnInit {
       });
   }
 
+  getSequenciaEstructura(val: any) {
+
+  }
+
   onSelectSequencia(val: Sequencia) {
     this.selectedSequencia = new Sequencia();
     this.selectedSequencia = val;

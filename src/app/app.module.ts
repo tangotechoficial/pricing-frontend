@@ -33,9 +33,9 @@ import { DadosMestreComponent } from './components/dados-mestre/dados-mestre.com
 import { DiretrizEstrategicaComponent } from './components/diretriz-estrategica/diretriz-estrategica.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FilterModalComponent } from './components/filter-modal/filter-modal.component';
-import { TabbedChartsComponent } from './components/plano-compra/tabbed-charts/tabbed-charts.component';
-import { SellingCompositionChartsComponent } from './components/plano-compra/selling-composition-charts/selling-composition-charts.component';
-import { PlanningTableComponent } from './components/plano-compra/planning-table/planning-table.component';
+import { TabbedChartsComponent } from './components/shared/tabbed-charts/tabbed-charts.component';
+import { SellingCompositionChartsComponent } from './components/shared/selling-composition-charts/selling-composition-charts.component';
+import { PlanningTableComponent } from './components/shared/planning-table/planning-table.component';
 import { InlineEditComponent } from './components/shared/inline-edit/inline-edit.component';
 import { ViewModeDirective } from './components/shared/viewmode.directive';
 import { EditModeDirective } from './components/shared/editmode.directive';
@@ -51,10 +51,17 @@ import { SelectPopupExpedicaoComponent } from './components/select-popup-expedic
 import { SelectPopupFaturamentoComponent } from './components/select-popup-faturamento/select-popup-faturamento.component';
 import { SelectPopupRegiaoComponent } from './components/select-popup-regiao/select-popup-regiao.component';
 import { CamadaService } from './services/camada.service';
-
 import { registerLocaleData }  from '@angular/common'
 import localePt from '@angular/common/locales/pt';
 import { FilterTagComponent } from './components/shared/filter-tag/filter-tag.component';
+import { DatatableComponent } from './components/simulador/datatable/datatable.component';
+import { InfoletComponent } from './components/simulador/infolet/infolet.component';
+import { ModalDetailingComponent } from './components/simulador/modal-detailing/modal-detailing.component';
+import { ConfirmationModalComponent } from './components/shared/confirmation-modal/confirmation-modal.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { ImpactIndicatorComponent } from './components/shared/impact-indicator/impact-indicator.component';
+import { DinamicTableComponent } from './components/precio/precio-business/dinamic-table/dinamic-table.component';
+
 registerLocaleData(localePt, 'pt',);
 @NgModule({
   declarations: [
@@ -89,7 +96,6 @@ registerLocaleData(localePt, 'pt',);
     EditModeDirective,
     EditableOnEnterDirective,
     GenericDadaFilterPipe,
-    FilterTagComponent,
     PopupmenuComponent,
     SelectCondicionComponent,
     SelectPopupCondicionComponent,
@@ -97,7 +103,13 @@ registerLocaleData(localePt, 'pt',);
     SelectPopupExpedicaoComponent,
     SelectPopupFaturamentoComponent,
     SelectPopupRegiaoComponent,
-    FilterTagComponent
+    FilterTagComponent,
+    DatatableComponent,
+    InfoletComponent,
+    ModalDetailingComponent,
+    ConfirmationModalComponent,
+    ImpactIndicatorComponent,
+    DinamicTableComponent,
   ],
   imports: [
     BrowserModule,
@@ -109,7 +121,8 @@ registerLocaleData(localePt, 'pt',);
     FontAwesomeModule,
     AutocompleteLibModule ,
     BrowserAnimationsModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    NgxChartsModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: FakeDataProviderInterceptor, multi: true},
