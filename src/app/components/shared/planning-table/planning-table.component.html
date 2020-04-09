@@ -1,10 +1,10 @@
 
 <div class="row d-flex flex-row badges">
-    <div>
+    <!-- <div>
     <span class="badge badge-secondary p-2">11/03/2020</span>
     <span class="badge badge-secondary p-2">Semana 2</span>
     </div>
-  <button class="btn btn-outline-primary p-1">Elasticidade</button>
+  <button class="btn btn-outline-primary p-1">Elasticidade</button> -->
 </div>
 <div class="row with-overflow custom-scrollbar-css">
   <table class="table">
@@ -12,7 +12,7 @@
     <colgroup span=3></colgroup>
     <tr>
       <td rowspan="2"></td>
-      <th scope="colgroup" *ngFor="let item of data; let weekCount=index" colspan="3">Semana {{weekCount +1 }}</th>
+      <th scope="colgroup" *ngFor="let item of data; let weekCount=index" class="text-center" colspan="3">Semana {{weekCount +1 }}</th>
     </tr>
     <tr>
       <ng-container *ngFor="let item of data">
