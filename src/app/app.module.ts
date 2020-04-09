@@ -60,6 +60,7 @@ import { ModalDetailingComponent } from './components/simulador/modal-detailing/
 import { ConfirmationModalComponent } from './components/shared/confirmation-modal/confirmation-modal.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { ImpactIndicatorComponent } from './components/shared/impact-indicator/impact-indicator.component';
+import { DinamicTableComponent } from './components/precio/precio-business/dinamic-table/dinamic-table.component';
 
 registerLocaleData(localePt, 'pt',);
 @NgModule({
@@ -108,6 +109,7 @@ registerLocaleData(localePt, 'pt',);
     ModalDetailingComponent,
     ConfirmationModalComponent,
     ImpactIndicatorComponent,
+    DinamicTableComponent,
   ],
   imports: [
     BrowserModule,
