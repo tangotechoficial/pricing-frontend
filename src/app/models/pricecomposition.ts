@@ -7,7 +7,7 @@ export class PriceComposition implements Deserializable {
   sensivel_rebate: any
   tipedereg: any;
   codedereg: any;
-  codfilemp: any;
+  codfilepd: any;
   codfilfat: any;
   mb: number;
   mb_calculada: number;
