@@ -6,7 +6,7 @@
         <div class="container row col-12 p-4">
           <button type="button" class="btn bg-standard" (click)="showFilterModal()" ><i
                   class="fas fa-filter btn-filter-color"></i>&nbsp;Filtro</button>
-          <filter-tag [filter]="filter"></filter-tag>
+          <filter-tag [filter]="filter" (updateFilter)="setFilter($event)"></filter-tag>
 
         </div>
         <nav>

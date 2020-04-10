@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output} from '@angular/core';
+import { Component, OnInit, Input} from '@angular/core';
 import { DadosMestresComposicaoPrecoService} from '../../services/dados-mestres-composicao-preco.service'
 import { DadosMestreVerbaService} from '../../services/dados-mestre-verba.service'
 import { PriceComposition } from '@models/pricecomposition';
