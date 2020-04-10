@@ -36,6 +36,7 @@ export class GenericDadaFilterPipe implements PipeTransform {
           }
       })
 
+
       if (filterDefault) {
         return items.filter(item => {
           return keys.every((key) => {

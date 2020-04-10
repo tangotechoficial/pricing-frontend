@@ -32,13 +32,14 @@ export class DadosMestreComponent implements OnInit{
     private filterService: FilterModalService,
     private spinner: NgxSpinnerService
   ) {
-
+    this.filter = this.filterService.currentFilterValue
   }
 
   ngOnInit() {
     this.spinner.show()
     this.masterDataPriceComposition = new Array<PriceComposition>();
     this.masterDataMoney = new Array<MasterDataMoney>();
+    this.filterService.filterCurrent.subscribe(filter => this.filter = filter)
     Promise.all([
       this.priceCompositionService.dadosMestresPreco.then(
         data =>
@@ -72,7 +73,6 @@ export class DadosMestreComponent implements OnInit{
 
   @Input() setFilter(value) {
     this.filter = value
-    console.log(value)
   }
 
   showFilterModal() {
