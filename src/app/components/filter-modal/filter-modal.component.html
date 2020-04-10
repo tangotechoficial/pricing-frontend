@@ -35,7 +35,7 @@
                 <option [ngValue]="null">{{'Filial de Faturamento'|uppercase}}</option>
                 <option *ngFor="let fe of billBranches" [value]="fe">{{ fe }}</option>
               </select>
-              <select class="form-control" formControlName="codfilemp" [(ngModel)]="filter.codfilemp" id="fe" >
+              <select class="form-control" formControlName="codfilepd" [(ngModel)]="filter.codfilepd" id="fe" >
                 <option [ngValue]="null" >{{ 'Filial de Expedição'|uppercase }}</option>
                 <option *ngFor="let fe of expBranches" [value]="fe">{{ fe }}</option>
               </select>
