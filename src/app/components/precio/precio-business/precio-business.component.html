@@ -205,17 +205,14 @@
                         <table class="table table-striped ">
                             <thead>
                                 <tr>
-                                    <th *ngFor="let campo of currentSelectedCampos"
-                                        class="p-1 text-center border-top-0 color-martins-blue font-weight-bold"
-                                        scope="col">{{campo.nome_campo}}</th>
+                                    <th class="p-1 text-center border-top-0 color-martins-blue font-weight-bold"
+                                    scope="col" *ngFor="let column of currentColumnNames"
+                                        [innerHtml]="column"></th>
                                 </tr>
                             </thead>
                             <tbody class="">
-                                <tr class="">
-                                    <td (blur)="currVal(campo)" contenteditable="true"
-                                        *ngFor="let campo of currentSelectedCampos; let i = index"
-                                        id="{{campo.nome_campo}}" class="p-1 text-center font-weight-bold ">
-                                        {{campo.value}}</td>
+                                <tr class="" *ngFor="let row of currentSequenciaData; let i = index" id="row{{i}}">
+                                    <td contenteditable="true" class="p-1 text-center font-weight-bold" scope="col" *ngFor="let col of row.data" [innerHTML]="col"></td>
                                 </tr>
                             </tbody>
                         </table>

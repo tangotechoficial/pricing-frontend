@@ -57,6 +57,11 @@ export class PrecioBusiness implements OnInit {
   public currentMargemCanal: any;
   public currentTotal: any;
   public precioType: any;
+  public dinamicDomElems: Array<any>;
+  public currentSequenciaModel: any;
+  public currentSequenciaData: Array<any>;
+  public currentColumnNames: Array<any>;
+  public test = `<td contenteditable="true" class="p-1 text-center font-weight-bold">{{col.}}</td>`;
 
   constructor(
     private esquemaService: EsquemasService,
@@ -72,27 +77,27 @@ export class PrecioBusiness implements OnInit {
     this.precioType = this.totalCondition();
 
   }
-  totalCondition(){
+  totalCondition() {
     let indicator = this.isVenta
-    if (indicator == 0){
+    if (indicator == 0) {
       return "VENDAS";
-    }else{
+    } else {
       return "BASE";
     }
   }
 
-  onSelectCondicao(val: Condicao , camada: String , index:any) {
+  onSelectCondicao(val: Condicao, camada: String, index: any) {
     this.currentSelectedCampos = null;
     this.selectedSequencia = null;
     this.currentSequencias = val.sequencias;
-    this.selectItemColor(index , camada)
+    this.selectItemColor(index, camada)
 
   }
 
-  selectItemColor(item: number , cam:String) {
-     $('p').removeClass('selectedTextItem');
-     $('.' + cam).eq(item).addClass('selectedTextItem');
-   }
+  selectItemColor(item: number, cam: String) {
+    $('p').removeClass('selectedTextItem');
+    $('.' + cam).eq(item).addClass('selectedTextItem');
+  }
 
 
   currVal(val) {
@@ -115,7 +120,7 @@ export class PrecioBusiness implements OnInit {
             camada.condicaos.map(elem => {
               console.log(elem)
               if (elem.desc_condicao === 'MARGEM_CANAL') {
-                elem.value = Math.floor(precobase * domCampo.innerHTML)/100;;
+                elem.value = Math.floor(precobase * domCampo.innerHTML) / 100;;
                 margemcanal = elem.value;
                 this.currentMargemCanal = margemcanal;
               }
@@ -137,10 +142,10 @@ export class PrecioBusiness implements OnInit {
       this.chavePrecificao.regiao.tipedereg.toString() +
       this.chavePrecificao.regiao.codedereg.toString();
     this.esquemaService.postPreco(this.camadaType, id, 'EC001', this.currentTotal)
-    .then(result => {
-      this.spinnerService.hide();
-      $('#myModal2').modal('show');
-    });
+      .then(result => {
+        this.spinnerService.hide();
+        $('#myModal2').modal('show');
+      });
   }
 
   public closePopUp() {
@@ -170,11 +175,48 @@ export class PrecioBusiness implements OnInit {
       });
   }
 
-  getSequenciaEstructura(val: any) {
+  getModelStructure(val: any) {
+    const obj = {};
+    const properties = Object.getOwnPropertyNames(val);
+    properties.map(props => obj[props.toUpperCase()] = '');
+    return obj;
+  }
 
+  getColumnNamesHTML(val: any) {
+    const arr = [];
+    const startTh =
+      `<th class="p-1 text-center border-top-0 color-martins-blue font-weight-bold"
+       scope="col">`;
+    const endTh = `<th>`;
+    const obj = {};
+    const properties = Object.getOwnPropertyNames(val);
+    properties.map(props => {
+      let currentCol = ``;
+      currentCol = startTh + props.toUpperCase() + endTh;
+      arr.push(currentCol);
+    });
+    return arr;
+  }
+
+  getRowDataHTML(val: any) {
+    console.log(this.currentSequenciaModel);
+    const arr = [];
+    const objProps = [];
+    const valor = `" `;
+    // tslint:disable-next-line: forin
+    for (const key in val) {
+      if (val.hasOwnProperty(key)) {
+        const row = `<td>
+      ` + val[key] + `</td>`;
+        arr.push(row);
+      }
+    }
+    return arr;
   }
 
   onSelectSequencia(val: Sequencia) {
+    this.currentColumnNames = [];
+    this.currentSequenciaData = [];
     this.selectedSequencia = new Sequencia();
     this.selectedSequencia = val;
     this.currentSelectedCampos = new Array<Campo>();
@@ -182,13 +224,20 @@ export class PrecioBusiness implements OnInit {
     const endpoint = nomeSequencia.replace(/\//g, '');
     this.esquemaService.getSequenciaValues(endpoint.toLowerCase())
       .then(result => {
-        result.map(elem => {
-          Object.keys(elem).forEach(key => {
-            if (key !== 'id') {
-              const campo = new Campo('', key.toUpperCase(), elem[key]);
-              this.currentSelectedCampos.push(campo);
-            }
-          });
+        result.map((elem, index) => {
+
+          // Obtains model structure
+          const estructura = this.getModelStructure(elem);
+
+          // Save Current Model
+          this.currentSequenciaModel = estructura;
+
+          // Get Column Names
+          this.currentColumnNames = this.getColumnNamesHTML(elem);
+
+          // Get Row Data
+          this.currentSequenciaData.push({ row: index, data: this.getRowDataHTML(elem) });
+          console.log('Sequencias info', this.currentSequenciaData);
         });
       });
   }
