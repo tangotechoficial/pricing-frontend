@@ -48,6 +48,7 @@ export class FilterModalComponent implements OnInit, AfterViewInit {
       codestuni: [Validators.required],
       desprd: [Validators.required]
     })
+    this.filterService.filterCurrent.subscribe(filter => this.filter = filter)
     this.filterService.materials.then(
       data =>{
         data.map(
@@ -98,6 +99,7 @@ export class FilterModalComponent implements OnInit, AfterViewInit {
   submit() {
     this.filterData.emit(Object.assign({}, this.filter))
     this.submitted.emit(true)
+    this.filterService.setFilter(Object.assign({}, this.filter))
     $('#modalFilter').modal('hide')
   }
 

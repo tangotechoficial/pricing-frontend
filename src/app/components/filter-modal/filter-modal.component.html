@@ -47,7 +47,7 @@
             <div class="d-flex flex-row justify-content-between">
               <select class="form-control" formControlName="desprd" [(ngModel)]="filter.desprd" id="material">
                 <option [ngValue]="null">MATERIAL</option>
-                <option *ngFor="let material of materials" [value]="material.codprd">{{ material.codprd }} - {{ material.desprd|uppercase }}</option>
+                <option *ngFor="let material of materials" [value]="material.desprd">{{ material.codprd }} - {{ material.desprd|uppercase }}</option>
               </select>
             </div>
           </form>
