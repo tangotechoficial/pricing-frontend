@@ -29,7 +29,6 @@ export class FilterTagComponent implements OnInit, OnChanges {
     if(this.filter){
       Object.keys(this.filter).map(
         (value, idx) => {
-          debugger
           if(this.filter[value] !== undefined && this.filter[value] !== null) {
             this.filters.push(this.filter[value])
           }

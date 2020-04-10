@@ -44,7 +44,7 @@ export class FilterModalComponent implements OnInit, AfterViewInit {
     this.spinner.show()
     this.filterForm = this.formBuilder.group({
       codfilfat: [Validators.required],
-      codfilemp: [Validators.required],
+      codfilepd: [Validators.required],
       codestuni: [Validators.required],
       desprd: [Validators.required]
     })
