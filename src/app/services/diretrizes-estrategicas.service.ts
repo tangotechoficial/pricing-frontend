@@ -36,7 +36,7 @@ export class DiretrizesEstrategicasService {
     ).catch(error => { throw new Error(error); });
   }
 
-  getCategories(param: number): Promise<Category[]> {
+  getCategories(param: any): Promise<Category[]> {
     const options = param ?
    { params: new HttpParams().set('CODGRPMER', param) } : {};
     return this
