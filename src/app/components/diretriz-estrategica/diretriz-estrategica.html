@@ -4,30 +4,21 @@
   <div class="row">
     <div class="col-10 offset-1">
       <div class="row">
-          <!-- <div class="col-3">
+          <div class="col-3">
               <div class="filter-diretriz">
                   <h5 class="title">Filtro</h5>
-                  <p>Linha de Negócio</p>
-                  <div class="row filter-columns">
-                      <div class="col-4 border-filter">
-                          <img src="assets/img/diretriz-estrategica/drink-can.svg">
-                          <h2>ABB</h2>
-                      </div>
-                      <div class="col-4 border-filter">
-                          <img src="assets/img/diretriz-estrategica/smartphone.svg">
-                          <h2>TEI</h2>
-                      </div>
-                      <div class="col-4 border-filter">
-                          <img src="assets/img/diretriz-estrategica/soap.svg">
-                          <h2>HBL</h2>
-                      </div>
-                      <div class="col-4 border-filter">
-                          <img src="assets/img/diretriz-estrategica/hammer.svg">
-                          <h2>MTC</h2>
-                      </div>
+                  <div class="row">
+                    <div class="form-group">
+                        <label for="diretoria">Diretoria de Compras</label>
+                        <select name="diretoria" id="diretoria" (change)="loadGroups()">
+                          <option value="null">Selecione um item</option>
+                          <option *ngFor="let opt of directories"  value="opt.DESDRTCLLATU">{{ opt.DESDRTCLLATU }} </option>
+                        </select>
+                    </div>
+
                   </div>
               </div>
-          </div> -->
+          </div>
 
           <div class="col-md-12 main-container">
               <div class="tab-header">
@@ -38,7 +29,7 @@
                   <div class="margin-info-sales">
                       <div class="margin-box-info">
                           <p class="label-info">Vendas Martins:</p>
-                          <p class="content-info">R$ {{sum_VLRVNDFATLIQ|number:'1.2-2'}}</p>
+                          <p class="content-info">R$ {{sumVLRVNDFATLIQ|number:'1.2-2'}}</p>
                       </div>
                       <div class="margin-box-info">
                           <p class="label-info">Margem Contribuição Martins:</p>

@@ -2,20 +2,39 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '@env/environment';
+import { Diretrix } from '@models/diretrix';
+import { Directory } from '@app/models/directory';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DiretrizesEstrategicasService {
 
-  public url = `${environment.apiUrl}/pricing_parsing/diretrizesestrategicas`
+  public url = `${environment.apiUrl}/pricing_parsing/diretrizesestrategicas`;
+  public directoryURL = `${environment.apiUrl}/pricing_parsing/diretrizesdirectories`;
+
   constructor(private http: HttpClient) { }
 
-  listar() {
-    return this.http.get(this.url)
+  public get diretrizesEstrategicas(): Promise<Diretrix[]> {
+    const result = this.http.get(this.url);
+    return result.toPromise()
+    .then((res: any) => {
+      return res.results as Diretrix[];
+    })
+    .catch(err => {
+      throw new Error(err);
+    });
   }
 
-  public get diretrizesEstrategicas(): Observable<any>{
-    return this.http.get(this.url);
+  getDirectories(): Promise<Directory[]>{
+    const result =  this.http.get(this.directoryURL).toPromise();
+    return result.then(
+      (response: any) => {
+        return response.results as Directory[];
+      }
+    ).catch(error => {throw new Error(error)});
+
   }
+
 }
+
