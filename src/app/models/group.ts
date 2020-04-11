@@ -1,5 +1,5 @@
 import { Deserializable } from '@app/interfaces/deserializable.model';
-export class Groups implements Deserializable {
+export class Group implements Deserializable {
   CODGRPMER: number;
   DESGRPMER: string;
 
