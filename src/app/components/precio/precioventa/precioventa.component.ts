@@ -4,6 +4,7 @@ import { CondicionService } from '../../../services/condicion.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { EsquemasService } from 'app/services/esquemas.service';
 
+
 @Component({
   // tslint:disable-next-line: component-selector
   selector: 'precioventa',

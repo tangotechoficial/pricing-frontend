@@ -25,14 +25,13 @@ describe('PrecioBaseComponent', () => {
     // localStorage.setItem("User", JSON.stringify(new User("suzi.campahna@tangotech.com.br", "12345678", "Suzi Campahna", "Token", "technical", true, "103", 1)));
     fixture = TestBed.createComponent(PrecioBaseComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+    fixture.detectChanges()
   });
 
   it('should create', () => {
-    fixture.detectChanges();
     expect(component).toBeTruthy();
-
   });
+
 
 
   // describe("ngOnInit", () => {
