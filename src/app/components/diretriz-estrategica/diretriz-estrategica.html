@@ -3,12 +3,12 @@
 <ngx-spinner></ngx-spinner>
 <div class="background">
   <div class="row">
-    <div class="col-10 offset-1">
+    <div class="col-12">
       <div class="row">
           <div class="col-3">
               <div class="filter-diretriz">
                   <h5 class="title">Filtro</h5>
-                  <div class="row  d-flex flex-column">
+                  <div class="d-flex flex-column">
                     <div class="form-group">
                         <label for="diretoria">Diretoria de Compras</label>
                         <select name="diretoria" id="diretoria" class="form-control" (change)="loadGroups($event)">
@@ -51,11 +51,16 @@
                         <option *ngFor="let opt of filial"  value="{{opt.CODESTUNI}}">{{ opt.CODESTUNI }} </option>
                       </select>
                     </div>
+                    <div class="form-group text-right">
+                      <!-- <button class="btn btn-primary" type="submit">Filtrar</button> -->
+                      <button type="button" class="btn bg-standard">Filtrar</button>
+                    </div>
+
                   </div>
               </div>
           </div>
 
-          <div class="col-md-12 main-container">
+          <div class="col-md-9 main-container">
               <div class="tab-header">
                   <div class="margin-box-container">
                       <!-- <span class="date-box-info">Janeiro</span>

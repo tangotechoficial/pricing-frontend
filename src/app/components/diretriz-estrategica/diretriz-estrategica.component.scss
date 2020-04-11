@@ -8,7 +8,8 @@
   background: #fff !important;
   box-shadow: 0px 0px 3px #00000012;
   padding-left: 10px;
-  padding-top: 10px;
+  padding-right: 1rem;
+  padding-top:1rem;
   .filter-columns {
     padding-left: 30px;
     padding-right: 60px;
@@ -47,6 +48,7 @@
 
 .main-container {
   margin-top:30px;
+  padding-right: 3rem;
   .tab-header {
     background: #fff;
     height: 84px;
@@ -222,8 +224,7 @@
   }
   .tab-content {
     background: #fff;
-    color: #232323;
-    padding: 20px;
+    color: hsl(0, 0%, 14%);
   }
   .tab-pane {
     display: none;
