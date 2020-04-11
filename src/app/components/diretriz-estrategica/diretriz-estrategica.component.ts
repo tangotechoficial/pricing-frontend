@@ -1,7 +1,8 @@
 import { Component, OnInit, ɵConsole } from '@angular/core';
-import { DiretrizesEstrategicasService } from '../../services/diretrizes-estrategicas.service'
+import { DiretrizesEstrategicasService } from '../../services/diretrizes-estrategicas.service';
 import { TechnicalMenuComponent } from '../navegacion/technical-menu/technical-menu.component';
 import { timingSafeEqual } from 'crypto';
+import {} from '@models/directory';
 
 @Component({
   selector: 'app-diretriz-estrategica',
@@ -12,6 +13,9 @@ import { timingSafeEqual } from 'crypto';
 export class DiretrizEstrategicaComponent implements OnInit {
 
   public diretrizesEstrategicas: Array<any>;
+  public directories: any;
+  public groups: any;
+  public categories: any;
   public sumVLRVNDFATLIQ = 0;
   public sumVLRMRGCRB = 0;
   public sumVLRMRGBRT = 0;
@@ -29,7 +33,8 @@ export class DiretrizEstrategicaComponent implements OnInit {
 
   ngOnInit() {
     this.diretrizesEstrategicas = new Array<any>();
-    this.diretrixService.diretrizesEstrategicas.then(
+    Promise.all([
+      this.diretrixService.diretrizesEstrategicas.then(
       data => data.map(
         row => {
           this.diretrizesEstrategicas.push(row);
@@ -37,15 +42,20 @@ export class DiretrizEstrategicaComponent implements OnInit {
           this.sumVLRMRGCRB = (Number(this.sumVLRMRGCRB) + Number(row.VLRMRGCRB));
           this.sumVLRMRGBRT = (Number(this.sumVLRMRGBRT) + Number(row.VLRMRGBRT));
           this.sumVLRRCTLIQAPU = (Number(this.sumVLRRCTLIQAPU) + Number(row.VLRRCTLIQAPU));
-          this.MRGCRB =  (Number(this.sumVLRMRGCRB)  / Number(this.sumVLRRCTLIQAPU)) *100;
-          this.MRGBRT =  (Number(this.sumVLRMRGBRT) / Number(this.sumVLRRCTLIQAPU)) *100;
+          this.MRGCRB =  (Number(this.sumVLRMRGCRB)  / Number(this.sumVLRRCTLIQAPU)) * 100;
+          this.MRGBRT =  (Number(this.sumVLRMRGBRT) / Number(this.sumVLRRCTLIQAPU)) * 100;
         }
       )
     )
-    .catch(error => console.error(error));
+    .catch(error => console.error(error)),
+    this.diretrixService.getDirectories().then(directories => {this.directories = directories;})
+  ]);
   }
 
-  loadGroups(){
-    return;
+  loadGroups(value){
+    return this.diretrixService.getGroups(value.currentTarget.value).then( groups => { this.groups = groups; } );
+  }
+  loadCategories(value) {
+    return this.diretrixService.getCategories(value.currentTarget.value).then(categories => {this.categories = categories;} );
   }
 }

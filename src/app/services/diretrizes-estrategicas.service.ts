@@ -16,12 +16,12 @@ import { Filial } from '@app/models/filial';
 export class DiretrizesEstrategicasService {
 
   public url = `${environment.apiUrl}/pricing_parsing/diretrizesestrategicas`;
-  public directoryURL = `${environment.apiUrl}/pricing_parsing/diretrizesdirectories`;
-  public groupURL = `${environment.apiUrl}/pricing_parsing/diretrizesgroups`;
-  public categoryUrl = `${environment.apiUrl}/pricing_parsing/diretrizescategories/`
-  public subCategoryURL = `${environment.apiUrl}/pricing_parsing/diretrizessubcategories`;
-  public fornecedorURL = `${environment.apiUrl}/pricing_parsing/diretrizesfornecedor`;
-  public filialURL = `${environment.apiUrl}/pricing_parsing/diretrizesfilial`;
+  public directoryURL = `${environment.apiUrl}/pricing_parsing/diretrizesdirectories/`;
+  public groupURL = `${environment.apiUrl}/pricing_parsing/diretrizesgroups/`;
+  public categoryUrl = `${environment.apiUrl}/pricing_parsing/diretrizescategories/`;
+  public subCategoryURL = `${environment.apiUrl}/pricing_parsing/diretrizessubcategories/`;
+  public fornecedorURL = `${environment.apiUrl}/pricing_parsing/diretrizesfornecedor/`;
+  public filialURL = `${environment.apiUrl}/pricing_parsing/diretrizesfilial/`;
 
   constructor(private http: HttpClient) { }
 
@@ -41,8 +41,7 @@ export class DiretrizesEstrategicasService {
     return result.then(
       (response: any) => {
         return response.results as Directory[];
-      }
-    ).catch(error => { throw new Error(error); });
+      }).catch(error => { throw new Error(error); });
   }
 
   getCategories(param: any): Promise<Category[]> {
@@ -59,7 +58,7 @@ export class DiretrizesEstrategicasService {
 
   }
 
-  getGroups(param: any): Promise<Group[]>{
+  getGroups(param: any): Promise<Group[]> {
     const options = param ?
    { params: new HttpParams().set('DESDRTCLLATU', param) } : {};
     const result =  this.http.get(this.groupURL, options).toPromise();
@@ -67,43 +66,40 @@ export class DiretrizesEstrategicasService {
       (response: any) => {
         return response.results as Group[];
       }
-    ).catch(error => {throw new Error(error)});
+    ).catch(error => {throw new Error(error); });
 
   }
 
-  getSubCategory(param: any): Promise<SubCategory[]>{
-            const options = param ?
-   { params: new HttpParams().set('CODFMLMER', param) } : {};
-    const result =  this.http.get(this.subCategoryURL, options).toPromise();
+  getSubCategory(param: any): Promise<SubCategory[]> {
+    const options = param ? { params: new HttpParams().set('CODFMLMER', param) } : {};
+    const result = this.http.get(this.subCategoryURL, options).toPromise();
     return result.then(
       (response: any) => {
         return response.results as SubCategory[];
       }
-    ).catch(error => {throw new Error(error)});
+    ).catch(error => {throw new Error(error); });
 
   }
 
-  getFornecedor(): Promise<Fornecedor[]>{
-                const options = param ?
-   { params: new HttpParams().set('CODCLSMER', param) } : {};
+  getFornecedor(param: any): Promise<Fornecedor[]> {
+    const options = param ? { params: new HttpParams().set('CODCLSMER', param) } : {};
     const result =  this.http.get(this.fornecedorURL, options).toPromise();
     return result.then(
       (response: any) => {
         return response.results as Fornecedor[];
       }
-    ).catch(error => {throw new Error(error)});
+    ).catch(error => {throw new Error(error); });
 
   }
 
-  getFilial(): Promise<Filial[]>{
-      const options = param ?
-   { params: new HttpParams().set('CODDIVFRN', param) } : {};
+  getFilial(param: any): Promise<Filial[]> {
+    const options = param ? { params: new HttpParams().set('CODDIVFRN', param) } : {};
     const result =  this.http.get(this.filialURL, options).toPromise();
     return result.then(
       (response: any) => {
         return response.results as Filial[];
       }
-    ).catch(error => {throw new Error(error)});
+    ).catch(error => {throw new Error(error); });
 
   }
 
