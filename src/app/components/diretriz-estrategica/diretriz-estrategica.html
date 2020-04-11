@@ -114,7 +114,7 @@
                               <th class="th-center table-head-row">Margem Bruta</th>
                               <th></th>
                           </tr>
-                          <tr *ngFor="let items of diretrizesEstrategicas">
+                          <tr *ngFor="let items of diretrizesEstrategicas|filter:filter:true">
                               <td>{{items.DATREFPOD.split(" ")[0]}}</td>
                               <td></td>
                               <td>{{items.NOMMES}}</td>
