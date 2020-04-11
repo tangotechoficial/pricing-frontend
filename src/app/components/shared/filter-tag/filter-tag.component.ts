@@ -13,14 +13,14 @@ export class FilterTagComponent implements OnInit, OnChanges, AfterViewInit {
   props_map = {
     codfilfat: "FF",
     codfilepd: "FE",
-    desprd: "Material",
+    codprd: "Material",
     codestuni: "UF"
   }
 
   rev_map = {
     "FF": "codfilfat",
     "FE": "codfilepd",
-    "Material": "desprd",
+    "Material": "codprd",
     "UF": "codestuni"
   }
   filters: Array<any>
@@ -44,7 +44,12 @@ export class FilterTagComponent implements OnInit, OnChanges, AfterViewInit {
          (value, idx) => {
            if(this._filter[value] !== undefined && this._filter[value] !== null) {
              let obj = {}
-             obj[this.props_map[value]] = this._filter[value]
+             if (value == 'codprd') {
+              obj[this.props_map[value]] = this._filter[value].split('-')[1]
+             } else {
+              obj[this.props_map[value]] = this._filter[value]
+             }
+             
              this.filters.push(obj)
            }
          }

@@ -46,7 +46,7 @@ export class FilterModalComponent implements OnInit, AfterViewInit {
       codfilfat: [Validators.required],
       codfilepd: [Validators.required],
       codestuni: [Validators.required],
-      desprd: [Validators.required]
+      codprd: [Validators.required]
     })
     this.filterService.filterCurrent.subscribe(filter => this.filter = filter)
     this.filterService.materials.then(
