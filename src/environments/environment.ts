@@ -4,7 +4,9 @@
 
 export const environment = {
   production: false,
+  // apiUrl: 'http://backend2.tangotechapp.com:8000/api'
   apiUrl: 'http://localhost:8000/api'
+
 };
 
 /*
