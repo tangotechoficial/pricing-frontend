@@ -32,7 +32,7 @@ export class GenericDadaFilterPipe implements PipeTransform {
     return result
   }
   /**
-   * 
+   *
    * @param items An array of objects
    * @param args The filter object.
    * @param and If true, the object should search exclusively by items having property values equals to those ones found on filter object
@@ -68,7 +68,7 @@ export class GenericDadaFilterPipe implements PipeTransform {
             return key
           }
       })
-      
+
       if (and) {
         return items.filter(item => {
           return this.processItemByFilterKeys(args, keys, item).every( k => {return k == true})
