@@ -25,11 +25,13 @@ describe('PopupmenuComponent', () => {
   });
 
 
-  describe("ngOnInit", () => {
+  describe("Inicio del compon", () => {
     
     it('selectedItem', () => {
       expect(component.selectedItem).toBeFalsy()
     })
+
+    
   
   })
 
@@ -37,6 +39,7 @@ describe('PopupmenuComponent', () => {
 
     it('getSelectedChaveContas', () => {
       component.getSelectedChaveContas({}, 1)
+      expect(component.currenObject).toEqual({})
       expect(component.selectedItem).toBeTruthy();
     })
 

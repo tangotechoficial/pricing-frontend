@@ -62,6 +62,8 @@ export class PrecioTechnical {
         this.selectedObject.emit({action: 'REMOVE', camada: this.camadaU, condicaos: elem});
       }
     });
+
+    this.isEditNew = false
   }
 
   
