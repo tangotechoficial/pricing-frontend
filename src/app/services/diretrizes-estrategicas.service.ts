@@ -18,7 +18,7 @@ export class DiretrizesEstrategicasService {
   public url = `${environment.apiUrl}/pricing_parsing/diretrizesestrategicas`;
   public directoryURL = `${environment.apiUrl}/pricing_parsing/diretrizesdirectories`;
   public groupURL = `${environment.apiUrl}/pricing_parsing/diretrizesgroups`;
-  public categoryUrl = `${environments.apiUrl}/pricing_parsing/diretrizescategories/`
+  public categoryUrl = `${environment.apiUrl}/pricing_parsing/diretrizescategories/`
   public subCategoryURL = `${environment.apiUrl}/pricing_parsing/diretrizessubcategories`;
   public fornecedorURL = `${environment.apiUrl}/pricing_parsing/diretrizesfornecedor`;
   public filialURL = `${environment.apiUrl}/pricing_parsing/diretrizesfilial`;
@@ -77,7 +77,7 @@ export class DiretrizesEstrategicasService {
     const result =  this.http.get(this.subCategoryURL, options).toPromise();
     return result.then(
       (response: any) => {
-        return response.results as Subcategory[];
+        return response.results as SubCategory[];
       }
     ).catch(error => {throw new Error(error)});
 
