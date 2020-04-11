@@ -70,7 +70,7 @@ export class DiretrizesEstrategicasService {
 
   }
 
-  getSubCategory(param: any): Promise<SubCategory[]> {
+  getSubCategories(param: any): Promise<SubCategory[]> {
     const options = param ? { params: new HttpParams().set('CODFMLMER', param) } : {};
     const result = this.http.get(this.subCategoryURL, options).toPromise();
     return result.then(
@@ -81,7 +81,7 @@ export class DiretrizesEstrategicasService {
 
   }
 
-  getFornecedor(param: any): Promise<Fornecedor[]> {
+  getFornecedores(param: any): Promise<Fornecedor[]> {
     const options = param ? { params: new HttpParams().set('CODCLSMER', param) } : {};
     const result =  this.http.get(this.fornecedorURL, options).toPromise();
     return result.then(
@@ -92,7 +92,7 @@ export class DiretrizesEstrategicasService {
 
   }
 
-  getFilial(param: any): Promise<Filial[]> {
+  getFiliais(param: any): Promise<Filial[]> {
     const options = param ? { params: new HttpParams().set('CODDIVFRN', param) } : {};
     const result =  this.http.get(this.filialURL, options).toPromise();
     return result.then(

@@ -10,37 +10,44 @@
                   <div class="row">
                     <div class="form-group">
                         <label for="diretoria">Diretoria de Compras</label>
-                        <select name="diretoria" id="diretoria" (change)="loadGroups($event)">
+                        <select name="diretoria" id="diretoria" class="form-control" (change)="loadGroups($event)">
                           <option value="null">Selecione um item</option>
                           <option *ngFor="let opt of directories"  value="{{opt.DESDRTCLLATU}}">{{ opt.DESDRTCLLATU }} </option>
                         </select>
                     </div>
                     <div class="form-group">
                       <label for="diretoria">Grupo de Mercadoria</label>
-                      <select name="grupo" id="grupo" (change)="loadCategories($event)">
+                      <select name="grupo" id="grupo" class="form-control" (change)="loadCategories($event)">
                         <option value="null">Selecione um item</option>
-                        <option *ngFor="let opt of groups"  value="{{opt.CODGRPMER}}">{{ opt.DESGRPMER }} </option>
+                        <option *ngFor="let opt of groups" value="{{opt.CODGRPMER}}">{{ opt.DESGRPMER }} </option>
                       </select>
                     </div>
                     <div class="form-group">
-                      <label for="diretoria">Diretoria de Compras</label>
-                      <select name="diretoria" id="diretoria" (change)="loadGroups()">
+                      <label for="diretoria">Categorias</label>
+                      <select name="diretoria" id="diretoria" class="form-control" (change)="loadSubCategories($event)">
                         <option value="null">Selecione um item</option>
-                        <option *ngFor="let opt of directories"  value="{{opt.DESDRTCLLATU}}">{{ opt.DESDRTCLLATU }} </option>
+                        <option *ngFor="let opt of categories"  value="{{opt.CODFMLMER}}">{{ opt.DESFMLMER }} </option>
                       </select>
                     </div>
                     <div class="form-group">
-                    <label for="diretoria">Diretoria de Compras</label>
-                      <select name="diretoria" id="diretoria" (change)="loadGroups()">
+                    <label for="diretoria">SubCategorias</label>
+                      <select name="diretoria" id="diretoria" class="form-control" (change)="loadFornecedor($event)">
                         <option value="null">Selecione um item</option>
-                        <option *ngFor="let opt of directories"  value="{{opt.DESDRTCLLATU}}">{{ opt.DESDRTCLLATU }} </option>
+                        <option *ngFor="let opt of subCategories"  value="{{opt.CODCLSMER}}">{{ opt.DESCLSMER }} </option>
                       </select>
                     </div>
                     <div class="form-group">
-                      <label for="diretoria">Diretoria de Compras</label>
-                      <select name="diretoria" id="diretoria" (change)="loadGroups()">
+                      <label for="diretoria">Fornecedor</label>
+                      <select name="diretoria" id="diretoria" class="form-control" (change)="loadUF($event)">
                         <option value="null">Selecione um item</option>
-                        <option *ngFor="let opt of directories"  value="{{opt.DESDRTCLLATU}}">{{ opt.DESDRTCLLATU }} </option>
+                        <option *ngFor="let opt of fornecedores"  value="{{opt.CODDIVFRN}}">{{ opt.NOMFRN }} </option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="diretoria">Estado</label>
+                      <select name="diretoria" class="form-control" id="diretoria">
+                        <option value="null">Selecione um item</option>
+                        <option *ngFor="let opt of filial"  value="{{opt.CODESTUNI}}">{{ opt.CODESTUNI }} </option>
                       </select>
                     </div>
 

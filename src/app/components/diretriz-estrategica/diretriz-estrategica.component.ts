@@ -16,6 +16,9 @@ export class DiretrizEstrategicaComponent implements OnInit {
   public directories: any;
   public groups: any;
   public categories: any;
+  public subCategories: any;
+  public fornecedores: any;
+  public filial: any;
   public sumVLRVNDFATLIQ = 0;
   public sumVLRMRGCRB = 0;
   public sumVLRMRGBRT = 0;
@@ -57,5 +60,16 @@ export class DiretrizEstrategicaComponent implements OnInit {
   }
   loadCategories(value) {
     return this.diretrixService.getCategories(value.currentTarget.value).then(categories => {this.categories = categories;} );
+  }
+
+  loadSubCategories(value) {
+    return this.diretrixService.getSubCategories(value.currentTarget.value).then(subCategories => {this.subCategories = subCategories;})
+  }
+
+  loadFornecedor(value) {
+      return this.diretrixService.getFornecedores(value.currentTarget.value).then(fornecedores => {this.fornecedores = fornecedores;})
+  }
+  loadUF(value) {
+      return this.diretrixService.getFiliais(value.currentTarget.value).then(filial => this.filial = filial)
   }
 }
