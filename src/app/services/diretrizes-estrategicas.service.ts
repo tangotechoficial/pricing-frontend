@@ -5,7 +5,7 @@ import { environment } from '@env/environment';
 import { Diretrix } from '@models/diretrix';
 import { Directory } from '@app/models/directory';
 import { Group } from '@app/models/group';
-import { Category } from '@models/category';
+import { Category } from '@app/models/category';
 import { SubCategory } from '@app/models/subcategory';
 import { Fornecedor } from '@app/models/fornecedor';
 import { Filial } from '@app/models/filial';

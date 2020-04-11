@@ -1,6 +1,6 @@
 import { Deserializable } from '@app/interfaces/deserializable.model';
 
-class Category implements Deserializable {
+export class Category implements Deserializable {
 
   CODFMLMER: number;
   DESFMLMER: string;
