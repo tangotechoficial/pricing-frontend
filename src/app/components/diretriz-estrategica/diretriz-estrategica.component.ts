@@ -46,11 +46,15 @@ export class DiretrizEstrategicaComponent implements OnInit, OnChanges {
   ngOnInit() {
     this.diretrizesEstrategicas = new Array<any>();
     this.filterForm = this.formBuilder.group({
-      codfilfat: [Validators.required],
-      codfilepd: [Validators.required],
+      desdrtcllatu: [Validators.required],
+      codgrpmer: [Validators.required],
+      codfmlmer: [Validators.required],
+      codclsmer: [Validators.required],
+      coddivfrn: [Validators.required],
       codestuni: [Validators.required],
-      codprd: [Validators.required]
     })
+    this.spinner.show()
+    this.filterService.filterCurrent.subscribe(filter => this.filter = filter)
     Promise.all([
       this.diretrixService.diretrizesEstrategicas.then(
         data => data.map(
@@ -67,7 +71,9 @@ export class DiretrizEstrategicaComponent implements OnInit, OnChanges {
       )
       .catch(error => console.error(error)),
       this.diretrixService.getDirectories().then(directories => {this.directories = directories;})
-    ]);
+    ]).then( result => {
+      this.spinner.hide()
+    });
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -76,20 +82,37 @@ export class DiretrizEstrategicaComponent implements OnInit, OnChanges {
 
 
   loadGroups(value){
-    return this.diretrixService.getGroups(value.currentTarget.value).then( groups => { this.groups = groups; } );
+    this.spinner.show()
+    return this.diretrixService.getGroups(value.currentTarget.value)
+    .then( groups => { this.groups = groups; this.spinner.hide() } );
   }
   loadCategories(value) {
-    return this.diretrixService.getCategories(value.currentTarget.value).then(categories => {this.categories = categories;} );
+    this.spinner.show();
+    return this.diretrixService.getCategories(value.currentTarget.value)
+    .then(categories => {this.categories = categories; this.spinner.hide();
+    } );
   }
 
   loadSubCategories(value) {
-    return this.diretrixService.getSubCategories(value.currentTarget.value).then(subCategories => {this.subCategories = subCategories;})
+    this.spinner.show();
+    return this.diretrixService.getSubCategories(value.currentTarget.value)
+    .then(subCategories => {this.subCategories = subCategories; this.spinner.hide();
+    });
   }
 
   loadFornecedor(value) {
-      return this.diretrixService.getFornecedores(value.currentTarget.value).then(fornecedores => {this.fornecedores = fornecedores;})
+    this.spinner.show();
+    return this.diretrixService.getFornecedores(value.currentTarget.value).
+    then(fornecedores => {this.fornecedores = fornecedores; this.spinner.hide();
+    });
   }
   loadUF(value) {
-      return this.diretrixService.getFiliais(value.currentTarget.value).then(filial => this.filial = filial)
+    this.spinner.show();
+    return this.diretrixService.getFiliais(value.currentTarget.value).then(filial => {this.filial = filial;this.spinner.hide(); })
+  }
+
+  setFilter() {
+    const val = this.filterForm.value;
+    this.filterService.setFilter(new Filter().deserialize(val))
   }
 }
