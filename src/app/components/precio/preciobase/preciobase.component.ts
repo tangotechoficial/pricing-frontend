@@ -12,6 +12,7 @@ declare var $: any;
   styleUrls: ['../../precio/precio.component.scss'],
   providers: [CondicionService, NgxSpinnerService, EsquemasService]
 })
+
 export class PrecioBaseComponent implements OnInit {
   sCurrentUser = JSON.parse(localStorage.getItem('User'));
   camadasUpdate = { ADD: {}, UPDATE: {}, REMOVE: {}};
