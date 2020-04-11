@@ -28,18 +28,21 @@ describe('PrecioBaseComponent', () => {
     fixture.detectChanges();
   });
 
-  // it('should create', () => {
-  //   expect(component).toBeTruthy();
+  it('should create', () => {
+    fixture.detectChanges();
+    expect(component).toBeTruthy();
 
-  // });
+  });
 
-  
-  describe("ngOnInit", () => {
-    it('Check technical user', () => {
-      component.checkTypeUser()
-      expect(component.bBusiness).toBeFalsy()
-    })
-    
+
+  // describe("ngOnInit", () => {
+  //   it('Check technical user', () => {
+  //     component.checkTypeUser()
+  //     expect(component.bBusiness).toBeFalsy()
+  //   })
+  // })
+
+
     /*
     it('Fetch data [loading]', () => {
       component.fetchData()
@@ -76,7 +79,6 @@ describe('PrecioBaseComponent', () => {
 
     })
     */
-  })
-  
+
+
 });
- 
