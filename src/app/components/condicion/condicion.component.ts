@@ -75,7 +75,7 @@ export class CondicionComponent implements OnInit, DoCheck {
       this.isValid = false;
     }
 
-    const checkBase: any = document.getElementById('checkBase');
+    /* const checkBase: any = document.getElementById('checkBase');
     const checkVenda: any = document.getElementById('checkVenda');
 
     if (checkBase.checked) {
@@ -90,7 +90,7 @@ export class CondicionComponent implements OnInit, DoCheck {
       this.camadasFiltered = this.camadasFiltered.filter(obj => {
         return obj.tipo_base_vendas !== 'B';
       });
-    }
+    } */
 
   }
 
@@ -111,6 +111,10 @@ export class CondicionComponent implements OnInit, DoCheck {
     this.updateMasterData((cb) => {
       if (cb) {
         this.spinner.hide();
+        this.camadasFiltered = this.camadas;
+        this.camadasFiltered = this.camadasFiltered.filter(obj => {
+          return obj.tipo_base_vendas !== 'V';
+        });
       }
     });
 
@@ -228,8 +232,8 @@ export class CondicionComponent implements OnInit, DoCheck {
       this.condicionService.getCamadas().then(result => this.camadas = result),
       this.condicionService.getCondicaos().then(result => this.condicaos = result)
     ]).then(() => {
-      const checkVenda: any = document.getElementById('checkVenda');
-      checkVenda.click();
+/*       const checkVenda: any = document.getElementById('checkVenda');
+      checkVenda.click(); */
       callback(true);
     });
   }

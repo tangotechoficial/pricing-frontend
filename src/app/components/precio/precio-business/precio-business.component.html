@@ -202,7 +202,7 @@
                 <h4 class="subtitlab darkgr">Preencher condições</h4>
                 <div class="compliance border rounded martins-scrollbar px-3 py-2">
                     <div class="myTable table-responsive table-hover p-">
-                        <table class="table table-striped ">
+                        <table id="sequenciaTable" class="table table-striped ">
                             <thead>
                                 <tr>
                                     <th class="p-1 text-center border-top-0 color-martins-blue font-weight-bold"
@@ -212,7 +212,7 @@
                             </thead>
                             <tbody class="">
                                 <tr class="" *ngFor="let row of currentSequenciaData; let i = index" id="row{{i}}">
-                                    <td contenteditable="true" class="p-1 text-center font-weight-bold" scope="col" *ngFor="let col of row.data" [innerHTML]="col"></td>
+                                    <td contenteditable (blur)="checkIfRowHasChanges(row)" class="p-1 text-center font-weight-bold" scope="col" *ngFor="let col of row.data; let i = index" [innerHTML]="col"></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -221,8 +221,8 @@
                 <!-- Table Sequencia de acesso - END -->
                 <!-- Boton Salvar / Adicionar -->
                 <div class="text-center col-12">
-                    <input type="submit" (click)="onAddRecord()"
-                        class="btn bg-inverted btn-md btn-pventa font-weight-bold mt-4 mx-1 py-2 px-5 col-3"
+                    <input type="submit"
+                        (click)="createEmptyRowDataHTML()" class="btn bg-inverted btn-md btn-pventa font-weight-bold mt-4 mx-1 py-2 px-5 col-3"
                         value="Adicionar">
                     <input type="submit" (click)="onSalvarEsquema()"
                         class="btn bg-inverted btn-md btn-pventa font-weight-bold mx-1 mt-4 py-2 px-5 col-3"

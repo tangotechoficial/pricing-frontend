@@ -58,10 +58,11 @@ export class PrecioBusiness implements OnInit {
   public currentTotal: any;
   public precioType: any;
   public dinamicDomElems: Array<any>;
+  public changes: Array<any>;
   public currentSequenciaModel: any;
   public currentSequenciaData: Array<any>;
   public currentColumnNames: Array<any>;
-  public test = `<td contenteditable="true" class="p-1 text-center font-weight-bold">{{col.}}</td>`;
+  public updatedIndexes: Array<any>;
 
   constructor(
     private esquemaService: EsquemasService,
@@ -78,11 +79,11 @@ export class PrecioBusiness implements OnInit {
 
   }
   totalCondition() {
-    let indicator = this.isVenta
+    const indicator = this.isVenta;
     if (indicator == 0) {
-      return "VENDAS";
+      return 'VENDAS';
     } else {
-      return "BASE";
+      return 'BASE';
     }
   }
 
@@ -90,7 +91,7 @@ export class PrecioBusiness implements OnInit {
     this.currentSelectedCampos = null;
     this.selectedSequencia = null;
     this.currentSequencias = val.sequencias;
-    this.selectItemColor(index, camada)
+    this.selectItemColor(index, camada);
 
   }
 
@@ -118,9 +119,9 @@ export class PrecioBusiness implements OnInit {
         if (camada.camada.length !== 0) {
           if (camada.camada.nome_camada === 'MARGEM') {
             camada.condicaos.map(elem => {
-              console.log(elem)
+              console.log(elem);
               if (elem.desc_condicao === 'MARGEM_CANAL') {
-                elem.value = Math.floor(precobase * domCampo.innerHTML) / 100;;
+                elem.value = Math.floor(precobase * domCampo.innerHTML) / 100; 
                 margemcanal = elem.value;
                 this.currentMargemCanal = margemcanal;
               }
@@ -135,7 +136,20 @@ export class PrecioBusiness implements OnInit {
   }
 
   onSalvarEsquema() {
-    this.spinnerService.show();
+    const myRows = [];
+    const $headers = $('th');
+    const $rows = $('tbody tr').each(function(index) {
+      const $cells = $(this).find('td');
+      myRows[index] = {};
+      $cells.each(function(cellIndex) {
+        myRows[index][$($headers[cellIndex]).html()] = $(this).html().trim();
+      });
+    });
+
+    const myObj: any = {};
+    myObj.myrows = myRows;
+    console.log(myObj);
+/*     this.spinnerService.show();
     const id = this.chavePrecificao.mercadoria.codprd.toString() +
       this.chavePrecificao.filialExpedicao.codfilemp.toString() +
       this.chavePrecificao.filialFaturamento.codfilempfat.toString() +
@@ -145,7 +159,7 @@ export class PrecioBusiness implements OnInit {
       .then(result => {
         this.spinnerService.hide();
         $('#myModal2').modal('show');
-      });
+      }); */
   }
 
   public closePopUp() {
@@ -184,9 +198,7 @@ export class PrecioBusiness implements OnInit {
 
   getColumnNamesHTML(val: any) {
     const arr = [];
-    const startTh =
-      `<th class="p-1 text-center border-top-0 color-martins-blue font-weight-bold"
-       scope="col">`;
+    const startTh = `<th>`;
     const endTh = `<th>`;
     const obj = {};
     const properties = Object.getOwnPropertyNames(val);
@@ -206,12 +218,61 @@ export class PrecioBusiness implements OnInit {
     // tslint:disable-next-line: forin
     for (const key in val) {
       if (val.hasOwnProperty(key)) {
-        const row = `<td>
-      ` + val[key] + `</td>`;
+        const row = `<td>` + val[key] + `</td>`;
         arr.push(row);
       }
     }
     return arr;
+  }
+
+  createEmptyRowDataHTML() {
+    const lastIndex = this.currentSequenciaData[this.currentSequenciaData.length - 1].row + 1;
+    const arr = [];
+    for (const key in this.currentSequenciaModel) {
+      if (this.currentSequenciaModel.hasOwnProperty(key)) {
+        const row = `<td></td>`;
+        arr.push(row);
+      }
+    }
+    this.currentSequenciaData.push({ row: lastIndex, data: arr });
+  }
+
+  parseHTMLtoJSON(val: any) {
+    const props = Object.getOwnPropertyNames(this.currentSequenciaModel);
+    const currObjectModel = {};
+    props.map(elem => {
+      currObjectModel[elem] = '';
+    });
+    const keys = Object.keys(currObjectModel);
+    keys.map((key, index) => {
+      const arrValue = val.cells[index].innerHTML;
+      currObjectModel[key] = arrValue;
+    });
+    return currObjectModel;
+  }
+
+  isEquivalent(a, b) {
+      const aProps = Object.getOwnPropertyNames(a);
+      const bProps = Object.getOwnPropertyNames(b);
+
+      if (aProps.length != bProps.length) {
+          return false;
+      }
+
+      // tslint:disable-next-line: prefer-for-of
+      for (let i = 0; i < aProps.length; i++) {
+          const propName = aProps[i];
+          if (a[propName] !== b[propName]) {
+              return false;
+          }
+      }
+      return true;
+  }
+
+  checkIfRowHasChanges(val: any) {
+    const row: any = document.getElementById('row' + val.row);
+    const currHTMLObject = this.parseHTMLtoJSON(row);
+    console.log(currHTMLObject);
   }
 
   onSelectSequencia(val: Sequencia) {
