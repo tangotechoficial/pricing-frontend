@@ -67,7 +67,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr *ngFor="let item of masterDataPriceComposition|filter:filter">
+                      <tr *ngFor="let item of masterDataPriceComposition|filter:filter:true">
                           <td>{{item.CODPRD}}</td>
                           <td></td>
                           <td>{{item.CODFILEPD}}</td>
@@ -139,7 +139,7 @@
                         <th></th>
                         <th class="table-head-row" scope="col">Valor Margem Débito</th>
                     </tr>
-                    <tr *ngFor="let item of masterDataMoney|filter:filter">
+                    <tr *ngFor="let item of masterDataMoney|filter:filter:true">
                         <td></td>
                         <td>{{item.DATREF}}</td>
                         <td></td>
