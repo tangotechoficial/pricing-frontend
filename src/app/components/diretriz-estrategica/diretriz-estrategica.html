@@ -1,5 +1,6 @@
 <!-- Navigation Bar -->
 <navegacion></navegacion>
+<ngx-spinner></ngx-spinner>
 <div class="background">
   <div class="row">
     <div class="col-10 offset-1">
@@ -7,7 +8,7 @@
           <div class="col-3">
               <div class="filter-diretriz">
                   <h5 class="title">Filtro</h5>
-                  <div class="row">
+                  <div class="row  d-flex flex-column">
                     <div class="form-group">
                         <label for="diretoria">Diretoria de Compras</label>
                         <select name="diretoria" id="diretoria" class="form-control" (change)="loadGroups($event)">
@@ -50,7 +51,6 @@
                         <option *ngFor="let opt of filial"  value="{{opt.CODESTUNI}}">{{ opt.CODESTUNI }} </option>
                       </select>
                     </div>
-
                   </div>
               </div>
           </div>
