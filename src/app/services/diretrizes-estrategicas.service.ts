@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from '@env/environment';
 import { Diretrix } from '@models/diretrix';
 import { Directory } from '@app/models/directory';
+import { Groups } from '@app/models/groups';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ export class DiretrizesEstrategicasService {
 
   public url = `${environment.apiUrl}/pricing_parsing/diretrizesestrategicas`;
   public directoryURL = `${environment.apiUrl}/pricing_parsing/diretrizesdirectories`;
+  public groupsURL = `${environment.apiUrl}/pricing_parsing/diretrizesgroups`;
 
   constructor(private http: HttpClient) { }
 
@@ -31,6 +33,16 @@ export class DiretrizesEstrategicasService {
     return result.then(
       (response: any) => {
         return response.results as Directory[];
+      }
+    ).catch(error => {throw new Error(error)});
+
+  }
+
+  getGroups(): Promise<Groups[]>{
+    const result =  this.http.get(this.groupsURL).toPromise();
+    return result.then(
+      (response: any) => {
+        return response.results as Groups[];
       }
     ).catch(error => {throw new Error(error)});
 
