@@ -41,20 +41,24 @@ export class DiretrizEstrategicaComponent implements OnInit, OnChanges {
     private filterService: FilterModalService,
     private spinner: NgxSpinnerService,
     private cdr: ChangeDetectorRef
-  ) { }
+  ) {
+
+    this.filter = this.filterService.currentFilterValue;
+
+  }
 
   ngOnInit() {
     this.diretrizesEstrategicas = new Array<any>();
     this.filterForm = this.formBuilder.group({
-      desdrtcllatu: [Validators.required],
-      codgrpmer: [Validators.required],
-      codfmlmer: [Validators.required],
-      codclsmer: [Validators.required],
-      coddivfrn: [Validators.required],
-      codestuni: [Validators.required],
+      desdrtcllatu: [''],
+      codgrpmer: [''],
+      codfmlmer: [''],
+      codclsmer: [''],
+      coddivfrn: [''],
+      codestuni: [''],
     })
     this.spinner.show()
-    this.filterService.filterCurrent.subscribe(filter => this.filter = filter)
+    this.filterService.filterCurrent.subscribe(filter => {this.filter = filter})
     Promise.all([
       this.diretrixService.diretrizesEstrategicas.then(
         data => data.map(
@@ -77,7 +81,8 @@ export class DiretrizEstrategicaComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-
+    this.cdr.detectChanges()
+    debugger
   }
 
 
@@ -112,7 +117,7 @@ export class DiretrizEstrategicaComponent implements OnInit, OnChanges {
   }
 
   setFilter() {
-    const val = this.filterForm.value;
-    this.filterService.setFilter(new Filter().deserialize(val))
+    this.filterService.setFilter(new Filter().deserialize(this.filterForm.value))
+
   }
 }
