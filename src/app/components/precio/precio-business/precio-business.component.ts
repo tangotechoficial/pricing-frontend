@@ -15,6 +15,8 @@ import { Regiao } from '@app/models/regiao';
 import { ChavePrecificao } from '@app/models/chaveprecificao';
 import { CondicionService } from '@app/services/condicion.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { empty } from 'rxjs';
+import { TipoValor } from '@app/models/tipovalor';
 
 declare var $: any;
 
@@ -59,10 +61,14 @@ export class PrecioBusiness implements OnInit {
   public precioType: any;
   public dinamicDomElems: Array<any>;
   public changes: Array<any>;
+  public currentSequencia: any;
   public currentSequenciaModel: any;
   public currentSequenciaData: Array<any>;
   public currentColumnNames: Array<any>;
   public updatedIndexes: Array<any>;
+  public sequenciasToUpdate: Array<any>;
+  public sequenciaDataToUpdate: Array<any>;
+  tipovalor: TipoValor[];
 
   constructor(
     private esquemaService: EsquemasService,
@@ -76,6 +82,8 @@ export class PrecioBusiness implements OnInit {
     this.chavePrecificao = new ChavePrecificao();
     this.updateMasterData();
     this.precioType = this.totalCondition();
+    this.sequenciasToUpdate = [];
+    this.sequenciaDataToUpdate = [];
 
   }
   totalCondition() {
@@ -100,55 +108,14 @@ export class PrecioBusiness implements OnInit {
     $('.' + cam).eq(item).addClass('selectedTextItem');
   }
 
-
-  currVal(val) {
-    let precobase = 0;
-    let margemcanal = 0;
-    const domCampo: any = document.getElementById(val.nome_campo);
-    this.camadafullData.map(camada => {
-      if (camada.camada.length !== 0) {
-        if (camada.camada.nome_camada === 'PRECO_BASE') {
-          precobase = camada.camada.value;
-          this.currentPrecoBase = precobase;
-        }
-      }
-    });
-
-    if (val.nome_campo === 'PERMRGADICNLVND') {
-      this.camadafullData.map(camada => {
-        if (camada.camada.length !== 0) {
-          if (camada.camada.nome_camada === 'MARGEM') {
-            camada.condicaos.map(elem => {
-              console.log(elem);
-              if (elem.desc_condicao === 'MARGEM_CANAL') {
-                elem.value = Math.floor(precobase * domCampo.innerHTML) / 100; 
-                margemcanal = elem.value;
-                this.currentMargemCanal = margemcanal;
-              }
-
-            });
-            camada.camada.value = margemcanal;
-          }
-        }
-      });
-    }
-    this.currentTotal = this.currentPrecoBase + this.currentMargemCanal;
-  }
-
   onSalvarEsquema() {
-    const myRows = [];
-    const $headers = $('th');
-    const $rows = $('tbody tr').each(function(index) {
-      const $cells = $(this).find('td');
-      myRows[index] = {};
-      $cells.each(function(cellIndex) {
-        myRows[index][$($headers[cellIndex]).html()] = $(this).html().trim();
-      });
-    });
-
-    const myObj: any = {};
-    myObj.myrows = myRows;
-    console.log(myObj);
+    const index = this.sequenciaDataToUpdate.findIndex(elem => elem.sequencia === this.currentSequencia);
+    if (this.sequenciaDataToUpdate.find(elem => elem.sequencia === this.currentSequencia)) {
+      this.sequenciaDataToUpdate[index].data = this.currentSequenciaData;
+    } else {
+      this.sequenciaDataToUpdate.push({sequencia: this.currentSequencia, data: this.currentSequenciaData});
+    }
+    this.esquemaService.postUpdatedSequenciaValues(this.sequenciasToUpdate, this.sequenciaDataToUpdate);
 /*     this.spinnerService.show();
     const id = this.chavePrecificao.mercadoria.codprd.toString() +
       this.chavePrecificao.filialExpedicao.codfilemp.toString() +
@@ -211,7 +178,6 @@ export class PrecioBusiness implements OnInit {
   }
 
   getRowDataHTML(val: any) {
-    console.log(this.currentSequenciaModel);
     const arr = [];
     const objProps = [];
     const valor = `" `;
@@ -226,6 +192,8 @@ export class PrecioBusiness implements OnInit {
   }
 
   createEmptyRowDataHTML() {
+    const emptyModel: any = this.currentSequenciaModel;
+    emptyModel['isNew'] = true;
     const lastIndex = this.currentSequenciaData[this.currentSequenciaData.length - 1].row + 1;
     const arr = [];
     for (const key in this.currentSequenciaModel) {
@@ -251,7 +219,22 @@ export class PrecioBusiness implements OnInit {
     return currObjectModel;
   }
 
-  isEquivalent(a, b) {
+  parseCurrentObjectToJSON(val: any) {
+    const props = Object.getOwnPropertyNames(this.currentSequenciaModel);
+    const currObjectModel = {};
+    props.map(elem => {
+      currObjectModel[elem] = '';
+    });
+    const keys = Object.keys(currObjectModel);
+    keys.map((key, index) => {
+      const elem = document.createElement('tr');
+      elem.innerHTML = val[index];
+      currObjectModel[key] = elem.cells[0].innerHTML;
+    });
+    return currObjectModel;
+  }
+
+  areEquals(a, b) {
       const aProps = Object.getOwnPropertyNames(a);
       const bProps = Object.getOwnPropertyNames(b);
 
@@ -269,13 +252,47 @@ export class PrecioBusiness implements OnInit {
       return true;
   }
 
+  public elemExist(obj, list) {
+    for (const row of list) {
+      if (row === obj) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   checkIfRowHasChanges(val: any) {
-    const row: any = document.getElementById('row' + val.row);
-    const currHTMLObject = this.parseHTMLtoJSON(row);
-    console.log(currHTMLObject);
+    const currentRow: any = document.getElementById('row' + val.row);
+    const fromDBRow: any = this.parseCurrentObjectToJSON(val.data);
+    const currHTMLObject = this.parseHTMLtoJSON(currentRow);
+    if (!this.areEquals(fromDBRow, currHTMLObject)) {
+      const obj: any = {sequencia: this.currentSequencia, data: []};
+      obj.data.push(currHTMLObject);
+      const index = this.sequenciasToUpdate.findIndex(elem => elem.sequencia === this.currentSequencia);
+      console.log(index);
+      if (this.sequenciasToUpdate.find(elem => elem.sequencia === this.currentSequencia)) {
+        console.log(this.sequenciaDataToUpdate[index]);
+        if (!this.areEquals(this.sequenciaDataToUpdate[index].data[val.row], currHTMLObject)) {
+          this.sequenciasToUpdate[index].data[val.row] = currHTMLObject;
+        } else {
+          this.sequenciasToUpdate[index].data.push(currHTMLObject);
+        }
+      } else {
+        this.sequenciasToUpdate.push(obj);
+      }
+    }
   }
 
   onSelectSequencia(val: Sequencia) {
+    if (this.currentSequencia) {
+      const objData = {sequencia: this.currentSequencia, data: this.currentSequenciaData};
+      if (this.sequenciaDataToUpdate.find(elem => elem.sequencia === this.currentSequencia)) {
+        const index = this.sequenciaDataToUpdate.findIndex(elem => elem.sequencia === this.currentSequencia);
+        this.sequenciaDataToUpdate[index] = objData;
+      } else {
+        this.sequenciaDataToUpdate.push(objData);
+      }
+    }
     this.currentColumnNames = [];
     this.currentSequenciaData = [];
     this.selectedSequencia = new Sequencia();
@@ -283,7 +300,12 @@ export class PrecioBusiness implements OnInit {
     this.currentSelectedCampos = new Array<Campo>();
     const nomeSequencia = val.nome_sequencia;
     const endpoint = nomeSequencia.replace(/\//g, '');
-    this.esquemaService.getSequenciaValues(endpoint.toLowerCase())
+    this.currentSequencia = endpoint.toLocaleLowerCase();
+    if (this.sequenciaDataToUpdate.find(elem => elem.sequencia === endpoint)) {
+      const index = this.sequenciaDataToUpdate.findIndex(elem => elem.sequencia === endpoint);
+      this.currentSequenciaData = this.sequenciaDataToUpdate[index].data;
+    } else {
+      this.esquemaService.getSequenciaValues(endpoint.toLowerCase())
       .then(result => {
         result.map((elem, index) => {
 
@@ -298,9 +320,10 @@ export class PrecioBusiness implements OnInit {
 
           // Get Row Data
           this.currentSequenciaData.push({ row: index, data: this.getRowDataHTML(elem) });
-          console.log('Sequencias info', this.currentSequenciaData);
+
         });
       });
+    }
   }
 
   openPopUp(tp: string) {
@@ -360,12 +383,14 @@ export class PrecioBusiness implements OnInit {
     this.mercadoria = new Array<Mercadoria>();
     this.camadas = new Array<Camada>();
     this.esquema = new EsquemaCalculo();
+    this.tipovalor = new Array<TipoValor>();
     Promise.all([
       this.esquemaService.getFilialExpedicao().then(fi => this.filialExpedicao = fi),
       this.esquemaService.getFilialFaturamento().then(fa => this.filialFaturamento = fa),
       this.condicionService.getCamadas().then(ca => this.camadas = ca),
       this.esquemaService.getEstado().then(es => this.estado = es),
       this.esquemaService.getRegiao().then(re => this.regiao = re),
+      this.condicionService.getTiposValor().then(tp => this.tipovalor = tp),
       this.esquemaService.getMercadoria().then(mer => this.mercadoria = mer),
       this.esquemaService.fetchCondicaoCamadaEsquema(this.camadaType).then(data => this.camadafullData = data),
       this.esquemaService.getEsquemaCalculo(this.camadaType).then(result => {
@@ -382,6 +407,12 @@ export class PrecioBusiness implements OnInit {
             co.value = 0;
           });
         }
+      });
+      this.camadafullData.map(elem => {
+        elem.condicaos.map(cond => {
+          const tipovalor = this.tipovalor.find(tipo => tipo.cod_tipovalor === cond.cod_tipovalor);
+          cond.tipovalor = tipovalor;
+        });
       });
     });
   }

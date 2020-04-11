@@ -330,14 +330,7 @@ export class CondicionComponent implements OnInit, DoCheck {
     Input: Object, Array
     Output: Return true if exists in the array or false if doesn't exist
   */
-  public elemExist(obj, list) {
-    for (const row of list) {
-      if (row === obj) {
-        return true;
-      }
-    }
-    return false;
-  }
+  c
 
   /*
     Iván Lynch 08/03/2020
@@ -358,6 +351,15 @@ export class CondicionComponent implements OnInit, DoCheck {
         }
       }
     });
+  }
+
+  public elemExist(obj, list) {
+    for (const row of list) {
+      if (row === obj) {
+        return true;
+      }
+    }
+    return false;
   }
 
   /*

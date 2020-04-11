@@ -12,6 +12,7 @@ import { environment } from '@env/environment';
 
 @Injectable()
 export class EsquemasService {
+  
   public url: string;
   public condicion: Array<any>;
   constructor(
@@ -28,6 +29,19 @@ export class EsquemasService {
       .then((result: any) => {
         return result.results;
       });
+  }
+
+  postUpdatedSequenciaValues(val: any, elems) {
+    console.log(val);
+    val.map(sequencias => {
+      sequencias.data.map(elem => {
+        const objelem = elems[val.sequencia].data[elem];
+        console.log(objelem);
+        if (objelem.isNew) {
+          this.http.post(this.url + val.sequencia, objelem , { headers: { 'Content-type': 'application/json' } });
+        }
+      });
+    });
   }
 
   getChavePrecificao(id: string): Promise<ChavePrecificao> {

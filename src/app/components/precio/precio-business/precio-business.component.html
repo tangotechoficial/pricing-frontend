@@ -174,7 +174,7 @@
                                 <p id="condicao.cod_condicao"
                                     (click)="onSelectCondicao(condicao , camada.camada.nome_camada , i)"
                                     class=" condicionSel {{camada.camada.nome_camada}} martinsText">
-                                    {{condicao.desc_condicao}}</p>
+                                    {{condicao.desc_condicao}} - {{condicao.tipovalor.desc_tipovalor === "VALOR" ? "R&#36;" : "%"}}</p>
                             </div>
                         </div>
                     </div>
