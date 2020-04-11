@@ -31,13 +31,13 @@
                 <option [ngValue]="null" disabled>FORNECEDOR</option>
                 <option *ngFor="let provider of providers" [value]="provider">{{ provider|uppercase }}</option>
               </select> -->
-              <select class="form-control" formControlName="codfilfat" [(ngModel)]="filter.codfilfat" id="ff">
-                <option [ngValue]="null">{{'Filial de Faturamento'|uppercase}}</option>
-                <option *ngFor="let fe of billBranches" [value]="fe">{{ fe }}</option>
-              </select>
               <select class="form-control" formControlName="codfilepd" [(ngModel)]="filter.codfilepd" id="fe" >
                 <option [ngValue]="null" >{{ 'Filial de Expedição'|uppercase }}</option>
                 <option *ngFor="let fe of expBranches" [value]="fe">{{ fe }}</option>
+              </select>
+              <select class="form-control" formControlName="codfilfat" [(ngModel)]="filter.codfilfat" id="ff">
+                <option [ngValue]="null">{{'Filial de Faturamento'|uppercase}}</option>
+                <option *ngFor="let fe of billBranches" [value]="fe">{{ fe }}</option>
               </select>
               <select class="form-control" formControlName="codestuni" [(ngModel)]="filter.codestuni" id="uf">
                 <option [ngValue]="null">UF</option>
@@ -45,9 +45,9 @@
               </select>
             </div>
             <div class="d-flex flex-row justify-content-between">
-              <select class="form-control" formControlName="desprd" [(ngModel)]="filter.desprd" id="material">
+              <select class="form-control" formControlName="codprd" [(ngModel)]="filter.codprd" id="material">
                 <option [ngValue]="null">MATERIAL</option>
-                <option *ngFor="let material of materials" [value]="material.desprd">{{ material.codprd }} - {{ material.desprd|uppercase }}</option>
+                <option *ngFor="let material of materials" [value]="(material.codprd)+'-'+(material.desprd)">{{ material.codprd }} - {{ material.desprd|uppercase }}</option>
               </select>
             </div>
           </form>

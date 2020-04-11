@@ -34,6 +34,8 @@ export class FilterModalService {
     this.filterSubject.next(value)
   }
 
+  
+
   get materials(): Promise<Material[]>{
     return this.http.get<Material[]>(this.url).toPromise()
     .then((result: any) => {

@@ -7,7 +7,7 @@ export class Filter implements Deserializable{
   codfilfat: string = null;
   codfilepd: number = null;
   codestuni: string = null;
-  desprd: string = null;
+  codprd: string = null;
 
   deserialize(data: any) {
     Object.assign(this, data);
