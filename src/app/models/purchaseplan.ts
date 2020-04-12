@@ -1,47 +1,48 @@
 import { Deserializable } from '@app/interfaces';
 
 export class PurchasePlan implements Deserializable {
-  codprd: number = 0;
-  codfilemp: number = 0;
-  codfilfat: number = 0;
+  codprd: number;
+  codfilemp: number;
+  codfilfat: number;
+  week: string;
   data_preco: Date;
-  codestuni: number = 0;
-  meta_venda_sugerido: number = 0;
-  meta_venda_planejado: number = 0;
-  preco_venda_liquido_sugerido: number = 0;
-  preco_venda_liquido_planejado: number = 0;
-  competitividade_sugerido: number = 0;
-  competitividade_planejado: number = 0;
-  preco_venda_bruta_sugerido: number = 0;
-  preco_venda_bruta_planejado: number = 0;
-  custos_sugerido: number = 0;
-  custos_planejado: number = 0;
-  icms_sugerido: number = 0;
-  pis_cofins_sugerido: number = 0;
-  ipi_sugerido: number = 0
-  st_sugerido: number = 0
-  icms_planejado: number = 0;
-  pis_cofins_planejado: number = 0;
-  ipi_planejado: number = 0
-  st_planejado: number = 0
-  operacional_devolucao_sugerido: number = 0;
-  operacional_devolucao_planejado: number = 0;
-  operacional_logistica_sugerido: number = 0;
-  operacional_logistica_planejado: number = 0;
-  preco_base_sugerido: number = 0;
-  preco_base_planejado: number = 0;
-  rebate_sugerido: number = 0;
-  rebate_planejado: number = 0;
+  codestuni: number;
+  meta_venda_sugerido: number;
+  meta_venda_planejado: number;
+  preco_venda_liquido_sugerido: number;
+  preco_venda_liquido_planejado: number;
+  competitividade_sugerido: number;
+  competitividade_planejado: number;
+  preco_venda_bruta_sugerido: number;
+  preco_venda_bruta_planejado: number;
+  custos_sugerido: number;
+  custos_planejado: number;
+  icms_sugerido: number;
+  pis_cofins_sugerido: number;
+  ipi_sugerido: number
+  st_sugerido: number
+  icms_planejado: number;
+  pis_cofins_planejado: number;
+  ipi_planejado: number
+  st_planejado: number
+  operacional_devolucao_sugerido: number;
+  operacional_devolucao_planejado: number;
+  operacional_logistica_sugerido: number;
+  operacional_logistica_planejado: number;
+  preco_base_sugerido: number;
+  preco_base_planejado: number;
+  rebate_sugerido: number;
+  rebate_planejado: number;
   bonificacao_sugerido: number=0;
   bonificacao_planejado: number=0;
-  funding_planejado: number = 0;
-  verba_planejado: number = 0;
-  verba_sugerido: number = 0;
-  verba_especie_sugerido: any = 0;
-  verba_especie_planejado: any = 0;
-  margem_bruta_planejado: number = 0;
-  cmv_sugerido: number = 0;
-  cmv_planejado: number = 0;
+  funding_planejado: number;
+  verba_planejado: number;
+  verba_sugerido: number;
+  verba_especie_sugerido: any;
+  verba_especie_planejado: any;
+  margem_bruta_planejado: number;
+  cmv_sugerido: number;
+  cmv_planejado: number;
   sensivel_rebate: string;
 
   deserialize(data: any) {

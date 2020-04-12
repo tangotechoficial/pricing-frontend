@@ -21,23 +21,10 @@ export class PlanoCompraComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.planningDataService.planningData.pipe(first()).subscribe(
-      data => {
-        let result = data.results.filter(item => {
-          return item["week"] !== "MÊS"
-        })
-        result.map(
-          row => {
-            this.planningData.push(new PurchasePlan().deserialize(row))
-          }
-        )
-        this.data.emit(this.planningData)
-      }, // should change this in real world
-      err => console.log(err)
-    )
+
   }
 
   filter() {
-    $('#modalFilter').modal('show')
+    $('#modalFilter').modal('show');
   }
 }
