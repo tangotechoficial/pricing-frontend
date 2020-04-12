@@ -5,13 +5,13 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-light border-bottom-0">
-                    <h5 class="modal-title" id="exampleModalLabel">Esquema de Cálculo</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">{{validationTitle}}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    Esquema de Cálculo salva com sucesso!
+                    {{validationDescription}}
                 </div>
                 <div class="modal-footer d-flex justify-content-center border-top-0">
                     <button type="button" class="btn bg-standard" (click)="closePopUp()">Ok</button>
@@ -56,7 +56,7 @@
                         <!-- Search Material -->
                         <div class="col-xs-12 col-md-1 d-flex justify-content-center align-items-center mt-3"
                             (click)="openPopUp('material')">
-                            <i class="fas fa-search"></i>
+                            <i class="fas fa-search enabled"></i>
                         </div>
                         <!-- Search Material -->
                         <!-- Codigo Filial expedicao -->
@@ -77,7 +77,7 @@
                         <!-- Search Filial expedicao -->
                         <div class="col-xs-12 col-md-1 d-flex justify-content-center align-items-center mt-3"
                             (click)="openPopUp('expedicao')">
-                            <i class="fas fa-search"></i>
+                            <i class="fas  enable"></i>
                         </div>
                         <!-- Search Filial expedicao -->
                     </div>
@@ -103,7 +103,7 @@
                         <!-- Search filial faturamento -->
                         <div class="col-xs-12 col-md-1 d-flex justify-content-center align-items-center mt-3"
                             (click)="openPopUp('filial')">
-                            <i class="fas fa-search"></i>
+                            <i class="fas fa-search enabled"></i>
                         </div>
                         <!-- Search filial faturamento -->
                         <!-- dropdown estado -->
@@ -132,7 +132,7 @@
                         <!-- search regiao de preco -->
                         <div class="col-xs-12 col-md-1 d-flex justify-content-center align-items-center mt-3"
                             (click)="openPopUp('regiao')">
-                            <i class="fas fa-search"></i>
+                            <i class="fas fa-search enabled"></i>
                         </div>
                         <!-- search regiao de preco -->
                         <!-- Abrir limpiar chave precificacao -->
@@ -147,7 +147,7 @@
                             <div class="px-1 mb-3 col-xs-12 col-md-6">
                                 <input type="submit"
                                     class="btn bg-inverted btn-labeled btn-block btn-md btn-pventa btn-grey"
-                                    value="Limpar">
+                                    (click)="onLimpiarChavePrecificao()" value="Limpar">
                             </div>
                             <!-- Button Limpiar -->
                         </div>
@@ -189,7 +189,7 @@
                 <h4 class="pb-2 subtitlab darkgr">Selecione uma sequência de acesso</h4>
                 <div class="dropdown col-12 mt-2 mb-4 p-0">
                     <button class="dropdownMenuButton col-12 btn btn-light dropdown-toggle text-left  px-12 py-12"
-                        type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        (click)="checkIfCondicaoWasSelected()" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {{ selectedSequencia ? selectedSequencia.nome_sequencia : 'Selecione uma opção' }}
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">

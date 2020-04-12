@@ -69,7 +69,11 @@ export class PrecioBusiness implements OnInit {
   public sequenciasToUpdate: Array<any>;
   public sequenciaDataToUpdate: Array<any>;
   public newElementsIndex: Array<any>;
+  public validationDescription: string;
+  public validationTitle: string;
+
   tipovalor: TipoValor[];
+  public currentCondicao: Condicao;
 
   constructor(
     private esquemaService: EsquemasService,
@@ -99,10 +103,11 @@ export class PrecioBusiness implements OnInit {
 
   onSelectCondicao(val: Condicao, camada: String, index: any) {
     this.currentSelectedCampos = null;
+    this.currentCondicao = new Condicao();
+    this.currentCondicao = val;
     this.selectedSequencia = null;
     this.currentSequencias = val.sequencias;
     this.selectItemColor(index, camada);
-
   }
 
   selectItemColor(item: number, cam: String) {
@@ -112,26 +117,39 @@ export class PrecioBusiness implements OnInit {
 
   onSalvarEsquema() {
     console.log('Estoy aca');
-    this.esquemaService.postUpdatedSequenciaValues(this.sequenciasToUpdate, (res) => {
-      if (res) {
-        this.sequenciasToUpdate = [];
-      }
-    });
-/*     this.spinnerService.show();
-    const id = this.chavePrecificao.mercadoria.codprd.toString() +
-      this.chavePrecificao.filialExpedicao.codfilemp.toString() +
-      this.chavePrecificao.filialFaturamento.codfilempfat.toString() +
-      this.chavePrecificao.regiao.tipedereg.toString() +
-      this.chavePrecificao.regiao.codedereg.toString();
-    this.esquemaService.postPreco(this.camadaType, id, 'EC001', this.currentTotal)
-      .then(result => {
-        this.spinnerService.hide();
-        $('#myModal2').modal('show');
-      }); */
+    if (this.sequenciasToUpdate.length === 0) {
+      this.validationTitle = 'Informação - Nenhuma alteração detectada';
+      this.validationDescription = 'Adicione ou modifique algum valor antes de salvar';
+      $('#myModal2').modal('show');
+    } else {
+      this.esquemaService.postUpdatedSequenciaValues(this.sequenciasToUpdate, (res) => {
+        this.validationTitle = 'Esquema de Cálculo';
+        this.validationDescription = 'Esquema de Cálculo salva com sucesso!';
+        if (res) {
+          $('#myModal2').modal('show');
+          this.sequenciasToUpdate = [];
+        }
+      });
+    }
+    /*     this.spinnerService.show();
+        const id = this.chavePrecificao.mercadoria.codprd.toString() +
+          this.chavePrecificao.filialExpedicao.codfilemp.toString() +
+          this.chavePrecificao.filialFaturamento.codfilempfat.toString() +
+          this.chavePrecificao.regiao.tipedereg.toString() +
+          this.chavePrecificao.regiao.codedereg.toString();
+        this.esquemaService.postPreco(this.camadaType, id, 'EC001', this.currentTotal)
+          .then(result => {
+            this.spinnerService.hide();
+            $('#myModal2').modal('show');
+          }); */
   }
 
   public closePopUp() {
     $('#myModal2').modal('hide');
+  }
+
+  onLimpiarChavePrecificao() {
+    this.chavePrecificao = new ChavePrecificao();
   }
 
   onAbrirChavePrecificao() {
@@ -140,21 +158,33 @@ export class PrecioBusiness implements OnInit {
       this.chavePrecificao.filialFaturamento.codfilempfat.toString() +
       this.chavePrecificao.regiao.tipedereg.toString() +
       this.chavePrecificao.regiao.codedereg.toString();
-    this.esquemaService.getPreco()
-      .then(elem => {
-        elem.map(preco => {
-          if (preco.chave === id) {
-            this.camadafullData.map(camada => {
-              if (camada.camada.length !== 0) {
-                if (camada.camada.nome_camada === 'PRECO_BASE') {
-                  camada.camada.value = preco.valor;
-                  this.precoBaseMaterial = preco.valor;
+    if ((this.chavePrecificao.mercadoria.codprd.toString() === '') ||
+      (this.chavePrecificao.filialExpedicao.codfilemp.toString() === '') ||
+      (this.chavePrecificao.filialFaturamento.codfilempfat === '') ||
+      (this.chavePrecificao.regiao.tipedereg.toString() === '') ||
+      (this.chavePrecificao.regiao.codedereg.toString() === '')) {
+      this.validationTitle = 'Chave de preço incompleta';
+      this.validationDescription = 'Por favor, preencha os campos da chave de preço';
+      $('#myModal2').modal('show');
+    } else {
+      this.esquemaService.getPreco()
+        .then(elem => {
+          elem.map(preco => {
+            if (preco.chave === id) {
+              this.camadafullData.map(camada => {
+                if (camada.camada.length !== 0) {
+                  if (camada.camada.nome_camada === 'PRECO_BASE') {
+                    camada.camada.value = preco.valor;
+                    this.precoBaseMaterial = preco.valor;
+                  }
                 }
-              }
-            });
-          }
+              });
+            }
+          });
         });
-      });
+    }
+
+
   }
 
   getModelStructure(val: any) {
@@ -204,7 +234,7 @@ export class PrecioBusiness implements OnInit {
     } else {
       const array = [];
       array.push(lastIndex);
-      this.newElementsIndex.push({sequencia: this.currentSequencia, data: array});
+      this.newElementsIndex.push({ sequencia: this.currentSequencia, data: array });
     }
     const arr = [];
     for (const key in emptyModel) {
@@ -250,35 +280,35 @@ export class PrecioBusiness implements OnInit {
   }
 
   areEquals(a, b) {
-      const aProps = Object.getOwnPropertyNames(a);
-      const bProps = Object.getOwnPropertyNames(b);
-      let aPropsLength = 0;
-      let bPropsLength = 0;
+    const aProps = Object.getOwnPropertyNames(a);
+    const bProps = Object.getOwnPropertyNames(b);
+    let aPropsLength = 0;
+    let bPropsLength = 0;
 
-      aProps.map(elem => {
-        if (elem !== 'isNew') {
-          aPropsLength = aPropsLength + 1;
-        }
-      });
-
-      bProps.map(elem => {
-        if (elem !== 'isNew') {
-          bPropsLength = bPropsLength + 1;
-        }
-      });
-
-      if (aPropsLength !== bPropsLength) {
-          return false;
+    aProps.map(elem => {
+      if (elem !== 'isNew') {
+        aPropsLength = aPropsLength + 1;
       }
+    });
 
-      // tslint:disable-next-line: prefer-for-of
-      for (let i = 0; i < aPropsLength; i++) {
-          const propName = aProps[i];
-          if (a[propName] !== b[propName]) {
-              return false;
-          }
+    bProps.map(elem => {
+      if (elem !== 'isNew') {
+        bPropsLength = bPropsLength + 1;
       }
-      return true;
+    });
+
+    if (aPropsLength !== bPropsLength) {
+      return false;
+    }
+
+    // tslint:disable-next-line: prefer-for-of
+    for (let i = 0; i < aPropsLength; i++) {
+      const propName = aProps[i];
+      if (a[propName] !== b[propName]) {
+        return false;
+      }
+    }
+    return true;
   }
 
   public elemExist(obj, list) {
@@ -296,7 +326,7 @@ export class PrecioBusiness implements OnInit {
     const currHTMLObject = this.parseHTMLtoJSON(currentRow);
     if (!this.areEquals(fromDBRow, currHTMLObject)) {
       // Creo un objecto de con la secuencia seleccionada y el objeto generado
-      const obj: any = {sequencia: this.currentSequencia, data: []};
+      const obj: any = { sequencia: this.currentSequencia, data: [] };
       obj.data[val.row] = currHTMLObject;
       // Busco en el array si existe el objeto
       const index = this.sequenciasToUpdate.findIndex(elem => elem.sequencia === this.currentSequencia);
@@ -318,9 +348,18 @@ export class PrecioBusiness implements OnInit {
     });
   }
 
+  checkIfCondicaoWasSelected() {
+    console.log(this.currentCondicao)
+    if (this.currentCondicao === undefined) {
+      this.validationTitle = 'Condição';
+      this.validationDescription = 'Selecione uma condição';
+      $('#myModal2').modal('show');
+    }
+  }
+
   onSelectSequencia(val: Sequencia) {
     if (this.currentSequencia) {
-      const objData = {sequencia: this.currentSequencia, data: this.currentSequenciaData};
+      const objData = { sequencia: this.currentSequencia, data: this.currentSequenciaData };
       if (this.sequenciaDataToUpdate.find(elem => elem.sequencia === this.currentSequencia)) {
         const index = this.sequenciaDataToUpdate.findIndex(elem => elem.sequencia === this.currentSequencia);
         this.sequenciaDataToUpdate[index] = objData;
@@ -339,25 +378,26 @@ export class PrecioBusiness implements OnInit {
     if (this.sequenciaDataToUpdate.find(elem => elem.sequencia === endpoint)) {
       const index = this.sequenciaDataToUpdate.findIndex(elem => elem.sequencia === endpoint);
       this.currentSequenciaData = this.sequenciaDataToUpdate[index].data;
+      console.log(this.sequenciaDataToUpdate[index].data);
     } else {
       this.esquemaService.getSequenciaValues(endpoint.toLowerCase())
-      .then(result => {
-        result.map((elem, index) => {
+        .then(result => {
+          result.map((elem, index) => {
 
-          // Obtains model structure
-          const estructura = this.getModelStructure(elem);
+            // Obtains model structure
+            const estructura = this.getModelStructure(elem);
 
-          // Save Current Model
-          this.currentSequenciaModel = estructura;
+            // Save Current Model
+            this.currentSequenciaModel = estructura;
 
-          // Get Column Names
-          this.currentColumnNames = this.getColumnNamesHTML(elem);
+            // Get Column Names
+            this.currentColumnNames = this.getColumnNamesHTML(elem);
 
-          // Get Row Data
-          this.currentSequenciaData.push({ row: index, data: this.getRowDataHTML(elem) });
+            // Get Row Data
+            this.currentSequenciaData.push({ row: index, data: this.getRowDataHTML(elem) });
 
+          });
         });
-      });
     }
   }
 
