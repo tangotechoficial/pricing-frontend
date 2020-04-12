@@ -137,8 +137,8 @@
       <th scope="row">Verba Planejada </th>
       <ng-container *ngFor="let item of data; index as index">
       <td>{{ item.VLRVBAOCD || '-' }}</td>
-      <td>
-        <inline-edit (update)="updateField(index, 'VLRVBAOCD')" editableOnEnter>
+      <td>{{ item.VLRVBAOCD|currency:'BRL'}}
+        <!-- <inline-edit (update)="updateField(index, 'VLRVBAOCD')" editableOnEnter>
           <ng-template viewMode> {{ item.VLRVBAOCD|currency:'BRL'}}</ng-template>
           <ng-template editMode editableOnEnter>
             <input class="w-50"
@@ -146,7 +146,7 @@
               (ngModelChange)="captureChanges($event)" size="8"
               [(ngModel)]="item.VLRVBAOCD" type="text">
           </ng-template>
-        </inline-edit>
+        </inline-edit> -->
       </td>
       <td></td>
       </ng-container>
@@ -189,17 +189,16 @@
       <th scope="row">CMV Compra Estoque </th>
       <ng-container *ngFor="let item of data; index as index">
       <td>{{ item.VLRCSTCMPMER|currency:'BRL'}}</td>
-      <td>
-        <inline-edit (update)="updateField(index, 'VLRCSTCMPIDL')" editableOnEnter>
+      <td>{{ item.VLRCSTCMPIDL|currency:'BRL'}}
+        <!-- <inline-edit (update)="updateField(index, 'VLRCSTCMPIDL')" editableOnEnter>
           <ng-template viewMode>{{ item.VLRCSTCMPIDL|currency:'BRL'}}</ng-template>
           <ng-template editMode>
             <input class="w-50"[formControl]="getControl(index, 'VLRCSTCMPIDL')" (ngModelChange)="captureChanges($event)" size="8" type="text" [(ngModel)]="item.vlrcmvcmppln">
           </ng-template>
-        </inline-edit>
+        </inline-edit> -->
       </td>
       <td></td>
       </ng-container>
     </tr>
   </table>
 </div>
-<filter-modal (update)="filter($event)"></filter-modal>

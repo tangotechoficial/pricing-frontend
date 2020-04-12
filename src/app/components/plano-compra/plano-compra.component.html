@@ -1,10 +1,12 @@
 <!-- Navigation Bar -->
 <navegacion></navegacion>
+<ngx-spinner></ngx-spinner>
+<modal-plano filterParentScreen="Plano de Compras" (update)="isSubmitted($event)" ></modal-plano>
 <div class="background">
   <div class="container col-9 main-container">
     <div class="row">
       <div class="container col-12 p-4 d-flex justify-content-start">
-          <button type="button" class="btn button-save btn-filter-color" (click)="filter()"><i
+          <button type="button" class="btn bg-standard btn-filter-color" (click)="modal()"><i
                   class="fas fa-filter btn-filter-color"></i>&nbsp;Filtro</button>
           <div class="applied-filters"></div>
       </div>
@@ -12,7 +14,7 @@
     <tabbed-charts class="row shaded charts"></tabbed-charts>
     <div class="row shaded">
       <div class="container col-12 p-4">
-        <planning-table [data]="planningData"></planning-table>
+        <planning-table *ngIf="planningData" [data]="planningData"></planning-table>
       </div>
     </div>
     <!-- <div class="row shaded">

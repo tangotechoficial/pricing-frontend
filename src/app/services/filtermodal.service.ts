@@ -9,7 +9,7 @@ import { Filter } from '@models/filter'
   providedIn: 'root'
 })
 export class FilterModalService {
-  url: string = `${environment.apiUrl}/pricing_parsing/Ettprdfilter`
+  private url = `${environment.apiUrl}/pricing_parsing/Ettprdfilter`
   private filterSubject: BehaviorSubject<Filter>
   public filterCurrent: Observable<Filter>
 
@@ -17,7 +17,7 @@ export class FilterModalService {
     private http: HttpClient
   ){
     this.filterSubject = new BehaviorSubject<Filter>(new Filter());
-    this.filterCurrent = this.filterSubject.asObservable()
+    this.filterCurrent = this.filterSubject.asObservable();
   }
 
 
@@ -34,7 +34,7 @@ export class FilterModalService {
     this.filterSubject.next(value)
   }
 
-  
+
 
   get materials(): Promise<Material[]>{
     return this.http.get<Material[]>(this.url).toPromise()

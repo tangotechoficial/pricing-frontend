@@ -31,6 +31,9 @@ export class PlanningTableComponent implements AfterViewInit {
 
   private buildFormGroups()
   {
+    if(!this._data === undefined) {
+      return;
+    }
     const groups = this._data.map(
       row =>  {
         const group = new FormGroup({
@@ -71,8 +74,6 @@ export class PlanningTableComponent implements AfterViewInit {
   captureChanges(evt) {
     return;
   }
-  filter(evtResult) {
-    this.dataFilter = evtResult
-  }
+
 
 }
