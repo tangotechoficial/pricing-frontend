@@ -1,53 +1,96 @@
 <!-- Navigation Bar -->
 <navegacion></navegacion>
+<ngx-spinner></ngx-spinner>
 <div class="background">
   <div class="row">
-    <div class="col-10 offset-1">
+    <div class="col-12">
       <div class="row">
-          <!-- <div class="col-3">
+          <div class="col-3">
               <div class="filter-diretriz">
                   <h5 class="title">Filtro</h5>
-                  <p>Linha de Negócio</p>
-                  <div class="row filter-columns">
-                      <div class="col-4 border-filter">
-                          <img src="assets/img/diretriz-estrategica/drink-can.svg">
-                          <h2>ABB</h2>
+                  <div class="d-flex flex-column">
+                    <form [formGroup]="filterForm" class='form'>
+                      <div class="form-group">
+                          <label for="diretoria">Diretoria de Compras</label>
+                          <select name="diretoria"  formControlName="desdrtcllatu" [(ngModel)]="filter.desdrtcllatu" id="diretoria" class="form-control" (change)="loadGroups($event)">
+                            <option value="null">Selecione um item</option>
+                            <option *ngFor="let opt of directories"  value="{{opt.DESDRTCLLATU}}">{{ opt.DESDRTCLLATU }} </option>
+                          </select>
                       </div>
-                      <div class="col-4 border-filter">
-                          <img src="assets/img/diretriz-estrategica/smartphone.svg">
-                          <h2>TEI</h2>
+                      <div class="form-group">
+                        <label for="diretoria">Grupo de Mercadoria</label>
+                        <select name="grupo"  formControlName="codgrpmer" [(ngModel)]="filter.codgrpmer"  id="grupo" class="form-control" (change)="loadCategories($event)">
+                          <option value="null">Selecione um item</option>
+                          <option *ngFor="let opt of groups" value="{{opt.CODGRPMER}}">{{ opt.DESGRPMER }} </option>
+                        </select>
                       </div>
-                      <div class="col-4 border-filter">
-                          <img src="assets/img/diretriz-estrategica/soap.svg">
-                          <h2>HBL</h2>
+                      <div class="form-group">
+                        <label for="diretoria">Categorias</label>
+                        <select name="diretoria"  formControlName="codfmlmer" [(ngModel)]="filter.codfmlmer" id="diretoria" class="form-control" (change)="loadSubCategories($event)">
+                          <option value="null">Selecione um item</option>
+                          <option *ngFor="let opt of categories"  value="{{opt.CODFMLMER}}">{{ opt.DESFMLMER }} </option>
+                        </select>
                       </div>
-                      <div class="col-4 border-filter">
-                          <img src="assets/img/diretriz-estrategica/hammer.svg">
-                          <h2>MTC</h2>
+                      <div class="form-group">
+                      <label for="diretoria">SubCategorias</label>
+                        <select name="diretoria"  formControlName="codclsmer" [(ngModel)]="filter.codclsmer" id="diretoria" class="form-control" (change)="loadFornecedor($event)">
+                          <option value="null">Selecione um item</option>
+                          <option *ngFor="let opt of subCategories"  value="{{opt.CODCLSMER}}">{{ opt.DESCLSMER }} </option>
+                        </select>
                       </div>
+                      <div class="form-group">
+                        <label for="diretoria">Fornecedor</label>
+                        <select name="diretoria"  formControlName="coddivfrn" [(ngModel)]="filter.coddivfrn" id="diretoria" class="form-control" (change)="loadUF($event)">
+                          <option value="null">Selecione um item</option>
+                          <option *ngFor="let opt of fornecedores"  value="{{opt.CODDIVFRN}}">{{ opt.NOMFRN }} </option>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label for="diretoria">Estado</label>
+                        <select name="diretoria"  formControlName="codestuni" [(ngModel)]="filter.codestuni"  class="form-control" id="diretoria">
+                          <option value="null">Selecione um item</option>
+                          <option *ngFor="let opt of filial"  value="{{opt.CODESTUNI}}">{{ opt.CODESTUNI }} </option>
+                        </select>
+                      </div>
+                      <div class="form-group buttons-capsule">
+                        <button class="btn btn-outline-secondary" (click)="resetFilter()">Limpar Filtros</button>
+                        <button type="button" class="btn bg-standard" (click)="setFilter()">Filtrar</button>
+                      </div>
+                    </form>
                   </div>
               </div>
-          </div> -->
+          </div>
 
-          <div class="col-md-12 main-container">
+          <div class="col-md-9 main-container">
               <div class="tab-header">
                   <div class="margin-box-container">
-                      <span class="date-box-info">Janeiro</span>
-                      <span class="date-box-info">2020</span>
+                      <!-- <span class="date-box-info">Janeiro</span>
+                      <span class="date-box-info">2020</span> -->
                   </div>
-                  <div class="margin-info-sales">
+                  <div>
+
+                  </div>
+                  <div class="info-sales">
+                    <div class="header-tittle">
+                      <h5>
+                        Informações de Venda
+                      </h5>
+                    </div>
+                    <div class="margin-info-sales">
                       <div class="margin-box-info">
                           <p class="label-info">Vendas Martins:</p>
-                          <p class="content-info">R$ 1.000.000</p>
+
+                          <p class="content-info">R$ {{sumVLRVNDFATLIQ|number:'1.2-2'}}</p>
                       </div>
                       <div class="margin-box-info">
                           <p class="label-info">Margem Contribuição Martins:</p>
-                          <p class="content-info">21%</p>
+                          <p class="content-info">{{MRGCRB|number:'1.2-2'}}%</p>
                       </div>
                       <div class="margin-box-info">
                           <p class="label-info">Margem Bruta Martins:</p>
-                          <p class="content-info"> 21%</p>
+                          <p class="content-info"> {{MRGBRT|number:'1.2-2'}}%</p>
                       </div>
+                    </div>
                   </div>
               </div>
 
@@ -83,7 +126,7 @@
                               <th></th>
                           </tr>
                           <tr *ngFor="let items of diretrizesEstrategicas">
-                              <td>{{items.DATREFPOD}}</td>
+                              <td>{{items.DATREFPOD.split(" ")[0]}}</td>
                               <td></td>
                               <td>{{items.NOMMES}}</td>
                               <td></td>
@@ -101,13 +144,13 @@
                               <td></td>
                               <td>{{items.CODESTUNI}}</td>
                               <td></td>
-                              <td>{{items.VLRVNDFATLIQ}}</td>
+                              <td>{{items.VLRVNDFATLIQ|number:'1.2-2'}}</td>
                               <td></td>
-                              <td>{{items.VLRRCTLIQAPU}}</td>
+                              <td>{{items.VLRRCTLIQAPU|number:'1.2-2'}}</td>
                               <td></td>
-                              <td>{{items.VLRMRGCRB}}</td>
+                              <td>{{items.VLRMRGCRB|number:'1.2-2'}}</td>
                               <td></td>
-                              <td>{{items.VLRMRGBRT}}</td>
+                              <td>{{items.VLRMRGBRT|number:'1.2-2'}}</td>
                               <td></td>
 
                           </tr>

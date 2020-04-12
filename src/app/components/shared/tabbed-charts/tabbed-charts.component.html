@@ -5,81 +5,53 @@
       <a class="nav-item nav-link" data-toggle="tab" id="nav-vendas" href="#tab-vendas" role="tab">Vendas</a>
   </div>
 </nav>
-<div class="tab-content">
-  <div class="tab-pane container-tab custom-scrollbar-css fade show active" id="tab-margin" role="tabpanel" aria-labelledby="nav-margin">
-    <div class="row">
-      <div class="col-2">
-        <impact-indicator title="Impacto Mensal" indicatorValue="1" symbol="%"></impact-indicator>
-      </div>
-      <div class="col-8">
-        Margem Sugerida vs Planejada
-        <div class="col-12 d-flex">
-          <ng-container class="d-flex" *ngFor="let item of marginData">
-            <ngx-charts-gauge
-              [view]="view"
-              [results]="item"
-              [legend]="false"
-              [angleSpan]="180"
-              [startAngle]="-90"
-              [showText]='false'
-              [scheme]="colors"
-              [min] = "-10"
-              [showAxis]=false
-              [smallSegments]="0"
-              [max]="10"></ngx-charts-gauge>
-          </ng-container>
+<div class="col-12">
+  <div class="tab-content">
+    <div class="tab-pane container-tab custom-scrollbar-css fade show active" id="tab-margin" role="tabpanel"
+      aria-labelledby="nav-margin">
+      <div class="row">
+        <div class="col-3 box-indicator">
+          <impact-indicator title="Impacto Mensal" indicatorValue="1,0" symbol="%"></impact-indicator>
+        </div>
+        <div class="col-9">
+          <span class="chart-title"><strong>Margem</strong> Sugerida vs Planejada</span>
+          <div class="row">
+            <canvas baseChart [datasets]="marginChartData" [labels]="chartLabels" [options]="chartOptions"
+              [plugins]="chartPlugins" [legend]="chartLegend" [chartType]="chartType">
+            </canvas>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="tab-pane container-tab custom-scrollbar-css fade" id="tab-competitividade" role="tabpanel" aria-labelledby="nav-competitividade">
-    <div class="row">
-      <div class="col-2">
-        <impact-indicator title="Impacto Mensal" indicatorValue="1" symbol="%"></impact-indicator>
-      </div>
-      <div class="col-8">
-        Competitividade Sugerida vs Planejada
-        <div class="col-12 d-flex">
-          <ng-container class="d-flex" *ngFor="let item of competitivityData">
-            <ngx-charts-gauge
-              [view]="view"
-              [results]="item"
-              [legend]="false"
-              [angleSpan]="180"
-              [startAngle]="-90"
-              [showText]='false'
-              [scheme]="colors"
-              [min] = "-10"
-              [showAxis]=false
-              [smallSegments]="0"
-              [max]="10"></ngx-charts-gauge>
-          </ng-container>
+    <div class="tab-pane container-tab custom-scrollbar-css fade" id="tab-competitividade" role="tabpanel"
+      aria-labelledby="nav-competitividade">
+      <div class="row">
+        <div class="col-3 box-indicator">
+          <impact-indicator title="Impacto Mensal" indicatorValue="1,0" symbol="%"></impact-indicator>
+        </div>
+        <div class="col-9">
+          <span class="chart-title"><strong>Competitividade</strong> Sugerida vs Planejada</span>
+          <div class="row">
+            <canvas baseChart [datasets]="competitivityChartData" [labels]="chartLabels" [options]="chartOptions"
+              [plugins]="chartPlugins" [legend]="chartLegend" [chartType]="chartType">
+            </canvas>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="tab-pane container-tab custom-scrollbar-css fade" id="tab-vendas" role="tabpanel" aria-labelledby="nav-vendas">
-    <div class="row">
-      <div class="col-2">
-        <impact-indicator title="Impacto Mensal" indicatorValue="1" symbol="k"></impact-indicator>
-      </div>
-      <div class="col-8">
-        Vendas Sugerida vs Planejada
-        <div class="col-12 d-flex">
-          <ng-container class="d-flex" *ngFor="let item of sellingData">
-            <ngx-charts-gauge
-              [view]="view"
-              [results]="item"
-              [legend]="false"
-              [angleSpan]="180"
-              [startAngle]="-90"
-              [showText]='false'
-              [scheme]="colors"
-              [min] = "0"
-              [showAxis]=false
-              [smallSegments]="0"
-              [max]="1000"></ngx-charts-gauge>
-          </ng-container>
+    <div class="tab-pane container-tab custom-scrollbar-css fade" id="tab-vendas" role="tabpanel"
+      aria-labelledby="nav-vendas">
+      <div class="row">
+        <div class="col-3 box-indicator">
+          <impact-indicator title="Impacto Mensal" indicatorValue="2.0" symbol="k"></impact-indicator>
+        </div>
+        <div class="col-9">
+          <span class="chart-title"><strong>Vendas</strong> Sugerida vs Planejada</span>
+          <div class="row">
+            <canvas baseChart [datasets]="sellingChartData" [labels]="chartLabels" [options]="chartOptions"
+              [plugins]="chartPlugins" [legend]="chartLegend" [chartType]="chartType">
+            </canvas>
+          </div>
         </div>
       </div>
     </div>

@@ -51,7 +51,7 @@ import { SelectPopupExpedicaoComponent } from './components/select-popup-expedic
 import { SelectPopupFaturamentoComponent } from './components/select-popup-faturamento/select-popup-faturamento.component';
 import { SelectPopupRegiaoComponent } from './components/select-popup-regiao/select-popup-regiao.component';
 import { CamadaService } from './services/camada.service';
-import { registerLocaleData }  from '@angular/common'
+import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 import { FilterTagComponent } from './components/shared/filter-tag/filter-tag.component';
 import { DatatableComponent } from './components/simulador/datatable/datatable.component';
@@ -60,9 +60,10 @@ import { ModalDetailingComponent } from './components/simulador/modal-detailing/
 import { ConfirmationModalComponent } from './components/shared/confirmation-modal/confirmation-modal.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { ImpactIndicatorComponent } from './components/shared/impact-indicator/impact-indicator.component';
-import { DinamicTableComponent } from './components/precio/precio-business/dinamic-table/dinamic-table.component';
+import { PlanningFilterModalComponent } from './components/filter-modal-plano/filter-modal-plano.component';
+import { ChartsModule } from 'ng2-charts';
 
-registerLocaleData(localePt, 'pt',);
+registerLocaleData(localePt, 'pt');
 @NgModule({
   declarations: [
     AppComponent,
@@ -109,7 +110,7 @@ registerLocaleData(localePt, 'pt',);
     ModalDetailingComponent,
     ConfirmationModalComponent,
     ImpactIndicatorComponent,
-    DinamicTableComponent,
+    PlanningFilterModalComponent
   ],
   imports: [
     BrowserModule,
@@ -122,7 +123,8 @@ registerLocaleData(localePt, 'pt',);
     AutocompleteLibModule ,
     BrowserAnimationsModule,
     NgxSpinnerModule,
-    NgxChartsModule
+    NgxChartsModule,
+    ChartsModule,
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: FakeDataProviderInterceptor, multi: true},

@@ -1,12 +1,13 @@
 <!-- Navigation Bar -->
 <navegacion></navegacion>
-<filter-modal (update)="getFilter($event)"></filter-modal>
+<ngx-spinner></ngx-spinner>
 <div class="background">
     <div class="container col-9 main-container">
         <div class="container row col-12 p-4">
           <button type="button" class="btn bg-standard" (click)="showFilterModal()" ><i
                   class="fas fa-filter btn-filter-color"></i>&nbsp;Filtro</button>
-          <!-- <filter-tag [filter]="dataFilter"></filter-tag> -->
+          <filter-tag [filter]="filter" (updateFilter)="setFilter($event)"></filter-tag>
+
         </div>
         <nav>
           <div class="nav nav-tabs" id="tabs" role="tablist">
@@ -19,11 +20,11 @@
                 <table class="table price-composition-table" id="priceComposition">
                     <thead>
                       <tr class="table-head">
-                          <th class="th-center table-head-row">Cód.Produto</th>
+                          <th class="th-center table-head-row">Cód. Produto</th>
                           <th></th>
-                          <th class="th-center table-head-row">Código Filial Expedição</th>
+                          <th class="th-center table-head-row">Cód. Filial Expedição</th>
                           <th></th>
-                          <th class="table-head-row" scope="col">Código Filial Faturamento</th>
+                          <th class="table-head-row" scope="col">Cód. Filial Faturamento</th>
                           <th></th>
                           <th class="table-head-row" scope="col">Data</th>
                           <th></th>
@@ -57,7 +58,7 @@
                           <th></th>
                           <th class="table-head-row" scope="col">Preço Base</th>
                           <th></th>
-                          <th class="table-head-row" scope="col">Código Região</th>
+                          <th class="table-head-row" scope="col">Cód. Região</th>
                           <th></th>
                           <th class="table-head-row" scope="col">Relacionamento</th>
                           <th></th>
@@ -66,14 +67,14 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr *ngFor="let item of masterDataPriceComposition|filter:dataFilter">
+                      <tr *ngFor="let item of masterDataPriceComposition|filter:filter:true">
                           <td>{{item.CODPRD}}</td>
                           <td></td>
                           <td>{{item.CODFILEPD}}</td>
                           <td></td>
                           <td>{{item.CODFILFAT}}</td>
                           <td></td>
-                          <td>{{item.DATREF}}</td>
+                          <td>{{item.DATREF.split(" ")[0]}}</td>
                           <td></td>
                           <td>{{item.CODESTUNI}}</td>
                           <td></td>
@@ -138,7 +139,7 @@
                         <th></th>
                         <th class="table-head-row" scope="col">Valor Margem Débito</th>
                     </tr>
-                    <tr *ngFor="let item of masterDataMoney|filter:dataFilter">
+                    <tr *ngFor="let item of masterDataMoney|filter:filter:true">
                         <td></td>
                         <td>{{item.DATREF}}</td>
                         <td></td>
@@ -159,9 +160,9 @@
                         <td>{{item.VLRDBTMRG || '0.00'}}</td>
                     </tr>
                 </table>
-
             </div>
         </div>
 
     </div>
 </div>
+<filter-modal filterParentScreen="Dados Mestre" (update)="isSubmitted" (updateFilter)="setFilter($event)" *ngIf="!loading" [data]="masterDataPriceComposition"></filter-modal>

@@ -1,10 +1,10 @@
 .badge {
-  padding: .5em;
-  font-size: 1.2em;
+  padding: .8rem;
+  font-size: 0.9rem;
 }
 
 .badge-filter {
-  background: #9FA2AB;
+  background: #bfbfbf;
   color: #fafafa
 }
 .badge:nth-child(n+2) {
@@ -19,6 +19,7 @@
 	margin-left: .5rem;
 	color: #fff;
 	font-size: 80%;
-	text-shadow: 0 1px 0 rgba(#000, .5);
+	text-shadow: 0 1px 0 rgba(#000, .4);
   vertical-align:middle;
+  cursor: pointer;
 }

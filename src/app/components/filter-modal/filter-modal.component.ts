@@ -1,7 +1,10 @@
-import { Component, OnInit, Output, EventEmitter, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import {FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Filter} from '@models/filter';
-import filterData from '@datasources/filter.json'
+import { Filter} from '@models/filter'
+import { Material} from '@models/material'
+import { PriceComposition } from '@models/pricecomposition'
+import { FilterModalService } from '@services/filtermodal.service'
+import { NgxSpinnerService } from 'ngx-spinner';
 
 // jQuery
 declare var $: any;
@@ -9,90 +12,94 @@ declare var $: any;
 @Component({
   selector: 'filter-modal',
   templateUrl: './filter-modal.component.html',
-  styleUrls: ['./filter-modal.component.css']
+  styleUrls: ['./filter-modal.component.css'],
+  providers: [NgxSpinnerService]
 })
-export class FilterModalComponent implements OnInit, OnChanges {
+export class FilterModalComponent implements OnInit, AfterViewInit {
 
   filterForm: FormGroup;
   filter: Filter = new Filter();
-  filterParentScreen: string = "";
-  @Output('update') outputFilter: EventEmitter<Filter> = new EventEmitter<Filter>();
-  categories: any[] = []
-  subCats: any[] = []
-  providers: any[] = []
-  branches: any[] = []
-  ufList: any[] = []
-  materials: any[] = []
+  disabled: boolean = true
 
-  filterData: any;
+  @Input() filterParentScreen: string = "";
+  @Input() data: Array<PriceComposition>;
+
+  @Output('update') submitted: EventEmitter<boolean> = new EventEmitter<boolean>(false);
+  @Output('updateFilter') filterData: EventEmitter<Filter> = new EventEmitter<Filter>();
+
+  materials: Set<Material> = new Set<Material>()
+  billBranches: Array<string> = new Array<string>()
+  expBranches: Array<string> = new Array<string>()
+  uf: Array<string> = new Array<string>()
 
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private filterService: FilterModalService,
+    private spinner: NgxSpinnerService,
+    private cdr: ChangeDetectorRef
   ) {
-    this.filterData = filterData
   }
 
   ngOnInit() {
-
+    this.spinner.show()
     this.filterForm = this.formBuilder.group({
-      linha_negocio: [Validators.required],
-      descgrpprd: [Validators.required],
-      desctgprd: [Validators.required],
-      desdivfrn: [Validators.required],
-      codfilemp: [Validators.required],
+      codfilfat: [Validators.required],
+      codfilepd: [Validators.required],
       codestuni: [Validators.required],
-      desprd: [Validators.required]
+      codprd: [Validators.required]
     })
+    this.filterService.filterCurrent.subscribe(filter => this.filter = filter)
+    this.filterService.materials.then(
+      data =>{
+        data.map(
+          row => {
+            this.materials.add(new Material().deserialize(row));
+          }
+        )
+        this.disabled = false;
+        this.spinner.hide()
+      }
+    )
   }
 
-  ngOnChanges() {
-    debugger
-    this.outputFilter.emit(this.filter);
+  buildList(fieldname) {
+    let a = new Set<any>()
+
+    this.data.forEach(item => {
+      if (fieldname === 'CODFILFAT' || fieldname === 'CODFILEPD') {
+        a.add(Number(item[fieldname]))
+      } else {
+        a.add(item[fieldname])
+      }
+    })
+    return [...a].sort()
+  }
+  ngAfterViewInit() {
+
+    this.billBranches = this.buildList('CODFILFAT')
+    this.expBranches = this.buildList('CODFILEPD')
+    this.uf = this.buildList('CODESTUNI')
+
+    this.cdr.detectChanges()
+
   }
 
   private get form() {
     return this.filterForm;
   }
 
-  resetSelects() {
-    this.categories = []
-    this.subCats = []
-    this.providers = []
-    this.branches = []
-    this.ufList = []
-    this.materials = []
-  }
 
   reset() {
-    this.filter = new Filter();
-    this.outputFilter.emit(this.filter)
-    this.resetSelects()
-  }
-
-  loadCategory() {
-
-    this.categories = this.filterData['category'][this.filter.linha_negocio]
-  }
-  loadSubCategory() {
-    this.subCats = this.filterData['subCategory'][this.filter.linha_negocio][this.filter.descgrpprd]
-  }
-  loadProvider() {
-    this.providers = this.filterData['provider'][this.filter.linha_negocio][this.filter.descgrpprd][this.filter.desctgprd]
-  }
-  loadBranches() {
-    this.branches = this.filterData['expedition_branch'][this.filter.linha_negocio][this.filter.descgrpprd][this.filter.desctgprd][this.filter.desdivfrn]
-  }
-  loadUFDest() {
-    this.ufList = this.filterData['uf'][this.filter.linha_negocio][this.filter.descgrpprd][this.filter.desctgprd][this.filter.desdivfrn][this.filter.codfilemp]
-  }
-  loadMaterials() {
-    this.materials = this.filterData['material'][this.filter.linha_negocio][this.filter.descgrpprd][this.filter.desctgprd][this.filter.desdivfrn][this.filter.codfilemp][this.filter.codestuni]
+    this.filterForm.reset()
+    this.filterData.emit(new Filter())
+    $('#modalFilter').modal('hide')
   }
 
 
   submit() {
-    this.filter.deserialize(this.form.value);
-    this.outputFilter.emit(this.filter);
+    this.filterData.emit(Object.assign({}, this.filter))
+    this.submitted.emit(true)
+    this.filterService.setFilter(Object.assign({}, this.filter))
     $('#modalFilter').modal('hide')
   }
 

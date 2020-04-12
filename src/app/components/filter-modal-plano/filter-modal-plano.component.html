@@ -6,7 +6,7 @@
           <h4 id="filterModalTitle">Filtro</h4>
           <p class="">Selecione os filtros da tela {{ filterParentScreen }}</p>
         </div>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" data-dismiss="modal" [disabled]="disabled" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -31,30 +31,30 @@
                 <option [ngValue]="null" disabled>FORNECEDOR</option>
                 <option *ngFor="let provider of providers" [value]="provider">{{ provider|uppercase }}</option>
               </select> -->
-              <select class="form-control" formControlName="codfilepd" [(ngModel)]="filter.codfilepd" id="fe" >
+              <select class="form-control" formControlName="codfilepd" [(ngModel)]="filter.codfilepd" id="fe" (change)="loadBillingBranches($event)" >
                 <option [ngValue]="null" >{{ 'Filial de Expedição'|uppercase }}</option>
-                <option *ngFor="let fe of expBranches" [value]="fe">{{ fe }}</option>
+                <option *ngFor="let branch of expBranches" [value]="branch.CODFILEPD">{{ branch.CODFILEPD}}</option>
               </select>
-              <select class="form-control" formControlName="codfilfat" [(ngModel)]="filter.codfilfat" id="ff">
+              <select class="form-control" formControlName="codfilfat" [(ngModel)]="filter.codfilfat" id="ff" (change)="loadStates($event)">
                 <option [ngValue]="null">{{'Filial de Faturamento'|uppercase}}</option>
-                <option *ngFor="let fe of billBranches" [value]="fe">{{ fe }}</option>
+                <option *ngFor="let branch of billBranches" [value]="branch.CODFILFAT">{{ branch.CODFILFAT }}</option>
               </select>
-              <select class="form-control" formControlName="codestuni" [(ngModel)]="filter.codestuni" id="uf">
+              <select class="form-control" formControlName="codestuni" [(ngModel)]="filter.codestuni" id="uf" (change)="loadProducts($event)">
                 <option [ngValue]="null">UF</option>
-                <option *ngFor="let uf of uf" [value]="uf">{{ uf|uppercase }}</option>
+                <option *ngFor="let uf of uf" [value]="uf.CODESTUNI">{{ uf.CODESTUNI|uppercase }}</option>
               </select>
             </div>
             <div class="d-flex flex-row justify-content-between">
-              <select class="form-control" formControlName="codprd" [(ngModel)]="filter.codprd" id="material">
+              <select class="form-control" formControlName="codprd" [(ngModel)]="filter.codprd" id="material" (change)="disabled=false">
                 <option [ngValue]="null">MATERIAL</option>
-                <option *ngFor="let material of materials" [value]="(material.codprd)+'-'+(material.desprd)">{{ material.codprd }} - {{ material.desprd|uppercase }}</option>
+                <option *ngFor="let material of materials" [value]="(material.CODPRD)+'-'+(material.DESPRD)">{{ material.CODPRD }} - {{ material.DESPRD|uppercase }}</option>
               </select>
             </div>
           </form>
       </div>
       <div class="modal-footer">
           <button type="button" class="btn btn-default" (click)="reset()">Limpar</button>
-          <button type="button" class="btn btn-primary" [disabled]="disabled" (click)="submit()">Filtrar</button>
+          <button type="button" class="btn btn-primary" [disabled]="disabled" (click)="setFilter()">Filtrar</button>
       </div>
     </div>
   </div>
