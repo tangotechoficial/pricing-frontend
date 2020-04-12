@@ -6,6 +6,7 @@ import { PurchasePlan } from '@models/purchaseplan';
 import { BillingBranch } from '@models/billingbranch';
 import { ShipmentBranch } from '@models/shipmentbranch';
 import { State } from '@models/state';
+import { Material } from '@models/material';
 
 @Injectable({
   providedIn: 'root'
@@ -63,18 +64,37 @@ export class PurchasePlanningService {
       .catch(error => { throw new Error(error ); });
   }
 
-  getProducts(param: any): Promise<State[]> {
+  getProducts(param: any): Promise<Material[]> {
     const options = param ?
    { params: new HttpParams().set('CODESTUNI', param) } : {};
     return this.http$.get(this.productshUrl, options).toPromise()
       .then((response: any) => {
-        return response.results as State[];
+        return response.results as Material[];
       })
       .catch(error => { throw new Error(error ); });
 
   }
 
-
+  getFilteredData(params: any): Promise<PurchasePlan[]> {
+    // tslint:disable-next-line: max-line-length
+    let url = this.planningDataurl;
+    const options = {};
+    let connectr ='?';
+    Object.keys(params).map(key => {
+        if (params[key] !== null && params[key] !== undefined && params[key] !== '') {
+          if(key !== 'desdrtcllatu') {
+            connectr = '&';
+          }
+          url = url + connectr + key.toUpperCase() + '=' + params[key];
+        }
+    });
+    const result =  this.http$.get(url).toPromise();
+    return result.then(
+      (response: any) => {
+        return response.results as PurchasePlan[];
+      }
+    ).catch(error => {throw new Error(error); });
+  }
 
 
 
