@@ -109,7 +109,7 @@ export class CondicionService {
           mandatoria: condicion.mandatoria ? condicion.mandatoria : 0,
           estatistica: condicion.estatistica ? condicion.estatistica : 0,
           cod_camada: condicion.camada.cod_camada,
-          cod_chavecontas: condicion.chavecontas.cod_chavecontas,
+          cod_chavecontas: condicion.chavecontas.cod_chavecontas ? condicion.chavecontas.cod_chavecontas : null,
           cod_tipovalor: condicion.tipovalor.cod_tipovalor
         },
         { headers: { 'Content-type': 'application/json' } }

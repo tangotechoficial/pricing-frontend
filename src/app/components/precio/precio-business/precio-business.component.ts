@@ -68,6 +68,7 @@ export class PrecioBusiness implements OnInit {
   public updatedIndexes: Array<any>;
   public sequenciasToUpdate: Array<any>;
   public sequenciaDataToUpdate: Array<any>;
+  public newElementsIndex: Array<any>;
   tipovalor: TipoValor[];
 
   constructor(
@@ -84,6 +85,7 @@ export class PrecioBusiness implements OnInit {
     this.precioType = this.totalCondition();
     this.sequenciasToUpdate = [];
     this.sequenciaDataToUpdate = [];
+    this.newElementsIndex = [];
 
   }
   totalCondition() {
@@ -109,13 +111,12 @@ export class PrecioBusiness implements OnInit {
   }
 
   onSalvarEsquema() {
-    const index = this.sequenciaDataToUpdate.findIndex(elem => elem.sequencia === this.currentSequencia);
-    if (this.sequenciaDataToUpdate.find(elem => elem.sequencia === this.currentSequencia)) {
-      this.sequenciaDataToUpdate[index].data = this.currentSequenciaData;
-    } else {
-      this.sequenciaDataToUpdate.push({sequencia: this.currentSequencia, data: this.currentSequenciaData});
-    }
-    this.esquemaService.postUpdatedSequenciaValues(this.sequenciasToUpdate, this.sequenciaDataToUpdate);
+    console.log('Estoy aca');
+    this.esquemaService.postUpdatedSequenciaValues(this.sequenciasToUpdate, (res) => {
+      if (res) {
+        this.sequenciasToUpdate = [];
+      }
+    });
 /*     this.spinnerService.show();
     const id = this.chavePrecificao.mercadoria.codprd.toString() +
       this.chavePrecificao.filialExpedicao.codfilemp.toString() +
@@ -159,7 +160,7 @@ export class PrecioBusiness implements OnInit {
   getModelStructure(val: any) {
     const obj = {};
     const properties = Object.getOwnPropertyNames(val);
-    properties.map(props => obj[props.toUpperCase()] = '');
+    properties.map(props => obj[props.toLowerCase()] = '');
     return obj;
   }
 
@@ -193,11 +194,21 @@ export class PrecioBusiness implements OnInit {
 
   createEmptyRowDataHTML() {
     const emptyModel: any = this.currentSequenciaModel;
-    emptyModel['isNew'] = true;
+    emptyModel.isNew = true;
     const lastIndex = this.currentSequenciaData[this.currentSequenciaData.length - 1].row + 1;
+    if (this.newElementsIndex.find(elem => elem.sequencia === this.currentSequencia)) {
+      const index = this.newElementsIndex.findIndex(elem => elem.sequencia === this.currentSequencia);
+      if (!this.newElementsIndex[index].data.includes(lastIndex)) {
+        this.newElementsIndex[index].data.push(lastIndex);
+      }
+    } else {
+      const array = [];
+      array.push(lastIndex);
+      this.newElementsIndex.push({sequencia: this.currentSequencia, data: array});
+    }
     const arr = [];
-    for (const key in this.currentSequenciaModel) {
-      if (this.currentSequenciaModel.hasOwnProperty(key)) {
+    for (const key in emptyModel) {
+      if (emptyModel.hasOwnProperty(key) && key !== 'isNew') {
         const row = `<td></td>`;
         arr.push(row);
       }
@@ -213,8 +224,10 @@ export class PrecioBusiness implements OnInit {
     });
     const keys = Object.keys(currObjectModel);
     keys.map((key, index) => {
-      const arrValue = val.cells[index].innerHTML;
-      currObjectModel[key] = arrValue;
+      if (key !== 'isNew') {
+        const arrValue = val.cells[index].innerHTML;
+        currObjectModel[key] = arrValue;
+      }
     });
     return currObjectModel;
   }
@@ -227,9 +240,11 @@ export class PrecioBusiness implements OnInit {
     });
     const keys = Object.keys(currObjectModel);
     keys.map((key, index) => {
-      const elem = document.createElement('tr');
-      elem.innerHTML = val[index];
-      currObjectModel[key] = elem.cells[0].innerHTML;
+      if (key !== 'isNew') {
+        const elem = document.createElement('tr');
+        elem.innerHTML = val[index];
+        currObjectModel[key] = elem.cells[0].innerHTML;
+      }
     });
     return currObjectModel;
   }
@@ -237,13 +252,27 @@ export class PrecioBusiness implements OnInit {
   areEquals(a, b) {
       const aProps = Object.getOwnPropertyNames(a);
       const bProps = Object.getOwnPropertyNames(b);
+      let aPropsLength = 0;
+      let bPropsLength = 0;
 
-      if (aProps.length != bProps.length) {
+      aProps.map(elem => {
+        if (elem !== 'isNew') {
+          aPropsLength = aPropsLength + 1;
+        }
+      });
+
+      bProps.map(elem => {
+        if (elem !== 'isNew') {
+          bPropsLength = bPropsLength + 1;
+        }
+      });
+
+      if (aPropsLength !== bPropsLength) {
           return false;
       }
 
       // tslint:disable-next-line: prefer-for-of
-      for (let i = 0; i < aProps.length; i++) {
+      for (let i = 0; i < aPropsLength; i++) {
           const propName = aProps[i];
           if (a[propName] !== b[propName]) {
               return false;
@@ -266,21 +295,27 @@ export class PrecioBusiness implements OnInit {
     const fromDBRow: any = this.parseCurrentObjectToJSON(val.data);
     const currHTMLObject = this.parseHTMLtoJSON(currentRow);
     if (!this.areEquals(fromDBRow, currHTMLObject)) {
+      // Creo un objecto de con la secuencia seleccionada y el objeto generado
       const obj: any = {sequencia: this.currentSequencia, data: []};
-      obj.data.push(currHTMLObject);
+      obj.data[val.row] = currHTMLObject;
+      // Busco en el array si existe el objeto
       const index = this.sequenciasToUpdate.findIndex(elem => elem.sequencia === this.currentSequencia);
-      console.log(index);
-      if (this.sequenciasToUpdate.find(elem => elem.sequencia === this.currentSequencia)) {
-        console.log(this.sequenciaDataToUpdate[index]);
-        if (!this.areEquals(this.sequenciaDataToUpdate[index].data[val.row], currHTMLObject)) {
-          this.sequenciasToUpdate[index].data[val.row] = currHTMLObject;
-        } else {
-          this.sequenciasToUpdate[index].data.push(currHTMLObject);
-        }
+      // Compruebo si la sequencia existe en el array
+      if (index !== -1) {
+        // Si la sequencia existe
+        this.sequenciasToUpdate[index].data[val.row] = currHTMLObject;
       } else {
         this.sequenciasToUpdate.push(obj);
       }
     }
+    const currSequenciaIndex = this.sequenciasToUpdate.findIndex(elem => elem.sequencia === this.currentSequencia);
+    const newElemSequenciaIndex = this.newElementsIndex.findIndex(elem => elem.sequencia === this.currentSequencia);
+    this.newElementsIndex[newElemSequenciaIndex].data.map(ind => {
+      console.log(ind);
+      console.log(currHTMLObject);
+      console.log(this.sequenciasToUpdate[currSequenciaIndex].data[ind]);
+      this.sequenciasToUpdate[currSequenciaIndex].data[ind].isNew = true;
+    });
   }
 
   onSelectSequencia(val: Sequencia) {

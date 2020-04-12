@@ -57,12 +57,6 @@ export class CondicionComponent implements OnInit, DoCheck {
       this.isValid = false;
     }
 
-    if (this.condicion.chavecontas.cod_chavecontas) {
-      this.isValid = true;
-    } else {
-      this.isValid = false;
-    }
-
     if (this.condicion.tipovalor.cod_tipovalor) {
       this.isValid = true;
     } else {
@@ -113,7 +107,7 @@ export class CondicionComponent implements OnInit, DoCheck {
         this.spinner.hide();
         this.camadasFiltered = this.camadas;
         this.camadasFiltered = this.camadasFiltered.filter(obj => {
-          return obj.tipo_base_vendas !== 'V';
+          return obj.tipo_base_vendas !== 'B';
         });
       }
     });
