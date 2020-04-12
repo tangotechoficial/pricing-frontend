@@ -10,6 +10,11 @@
   padding-left: 10px;
   padding-right: 1rem;
   padding-top:1rem;
+  .buttons-capsule {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
   .filter-columns {
     padding-left: 30px;
     padding-right: 60px;
@@ -51,7 +56,7 @@
   padding-right: 3rem;
   .tab-header {
     background: #fff;
-    height: 84px;
+    height: 116px;
     margin-bottom: 10px;
     display: flex;
     flex: row;
@@ -63,6 +68,11 @@
     opacity: 1;
     padding-top:1%;
     border-radius: 5px;
+    .header-tittle {
+      border-bottom: 1px solid black;
+      margin-bottom: 10px;
+      width: 40rem;
+    }
     .margin-box-container {
       width: 120px;
       height: 80px;
