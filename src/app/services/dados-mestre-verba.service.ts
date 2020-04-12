@@ -7,7 +7,7 @@ import { MasterDataMoney } from '@models/masterdatamoney'
   providedIn: 'root'
 })
 export class DadosMestreVerbaService {
-
+  
   public dadosMestreVerbaUrl = `${environment.apiUrl}/pricing_parsing/dadosmestreverba`;
 
   constructor(private http: HttpClient) { }
