@@ -1,21 +1,7 @@
-.indicator-title {
-  font-weight: 400;
-  margin-bottom: 0;
-}
 .indicator {
-  position: relative;
-  display: inline;
-  padding-right: .5em;
-  color: #707070;
-  font-size: 4em;
-  font-weight: 700;
-  line-height: 1.1;
+  font-size: 6em
 }
-
 .indicator  .fas.fa-arrow-down {
-  position: absolute;
-  top: 0;
-  right: 0;
-  font-size: .4em !important;
-  color: #F86061
+  font-size: .5em !important;
+  color: rgb(181, 49, 49)
 }

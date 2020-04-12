@@ -38,15 +38,5 @@ export var marginData = [
       name: "margem planejada",
       value: 2.83
     }
-  ],
-  [
-    {
-      name: "margem sugerida",
-      value: 1.63
-    },
-    {
-      name: "margem planejada",
-      value: 3.12
-    }
   ]
 ]
