@@ -1,4 +1,4 @@
-<select-popup-condicion *ngIf="bSelectCondicao" (closePopup)="onCloseCondicaoPopUp($event)" (selectedObject)="selectCondicao($event, isEditNew)" [dataList]="this.condicaosAllow"></select-popup-condicion>
+<select-popup-condicion *ngIf="bSelectCondicao" (closePopup)="onCloseCondicaoPopUp($event)" (selectedObject)="selectCondicao($event, isEditNew)" [dataList]="this.condicaosShow"></select-popup-condicion>
 <div class="container col-12 d-flex flex-column justify-content-center px-4 py-4">
     <div *ngIf="loading" class="container p-0 rounded border col-12 bg-white">
         <div class="col-12 p-3 border-bottom">

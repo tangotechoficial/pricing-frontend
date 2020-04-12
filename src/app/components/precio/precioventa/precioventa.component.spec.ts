@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PrecioVentaComponent } from './precioventa.component';
+import { NavegacionComponent } from '../../navegacion/navegacion.component';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 describe('PrecioVentaComponent', () => {
   let component: PrecioVentaComponent;
@@ -8,7 +10,8 @@ describe('PrecioVentaComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PrecioVentaComponent ]
+      declarations: [ PrecioVentaComponent , NavegacionComponent],
+      providers: [NgxSpinnerService]
     })
     .compileComponents();
   }));
