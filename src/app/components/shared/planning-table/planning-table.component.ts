@@ -31,16 +31,19 @@ export class PlanningTableComponent implements AfterViewInit {
 
   private buildFormGroups()
   {
-    const groups = this._data.map(
-      row =>  {
-        const group = new FormGroup({
-          'verba_especie_planejado': new FormControl(row.verba_especie_planejado, null),
-          'cmv_planejado': new FormControl(row.cmv_planejado, null)
-        });
-        return group
-      }
-    )
-    this.formGroups = new FormArray(groups);
+    // if(!this._data === undefined) {
+    //   return;
+    // }
+    // const groups = this._data.map(
+    //   row =>  {
+    //     const group = new FormGroup({
+    //       'verba_especie_planejado': new FormControl(row.verba_especie_planejado, null),
+    //       'cmv_planejado': new FormControl(row.cmv_planejado, null)
+    //     });
+    //     return group
+    //   }
+    // )
+    // this.formGroups = new FormArray(groups);
   }
   ngAfterViewInit() {
     this.buildFormGroups()
@@ -71,8 +74,6 @@ export class PlanningTableComponent implements AfterViewInit {
   captureChanges(evt) {
     return;
   }
-  filter(evtResult) {
-    this.dataFilter = evtResult
-  }
+
 
 }

@@ -1,5 +1,7 @@
+import { NgxSpinnerService } from 'ngx-spinner';
 import { FilterModalService } from '@services/filtermodal.service';
-import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
+// tslint:disable-next-line: max-line-length
+import { Component, OnInit, Output, EventEmitter, OnDestroy, Input, DoCheck } from '@angular/core';
 import { PurchasePlanningService } from '@services/purchasePlanning.service';
 import { PlanningDataManagerService } from '@app/services/planning-data.service';
 import { first } from 'rxjs/operators';
@@ -15,24 +17,35 @@ declare var $: any;
   styleUrls: ['./plano-compra.component.scss'],
   providers: [ PurchasePlanningService],
 })
-export class PlanoCompraComponent implements OnInit, OnDestroy {
+export class PlanoCompraComponent implements OnInit, OnDestroy, DoCheck {
   public planningData: Array<PurchasePlan>;
-  @Output() data = new EventEmitter<Array<PurchasePlan>>()
+  @Output() data = new EventEmitter<Array<PurchasePlan>>();
+  // tslint:disable-next-line: variable-name
+  _submitted = false;
   filter: Filter;
   constructor(
     private planningDataService: PurchasePlanningService,
     private filterService: FilterModalService,
-    private planningDataManager: PlanningDataManagerService
+    private planningDataManager: PlanningDataManagerService,
+    private spinner: NgxSpinnerService
   ) {
 
   }
-  ngOnDestroy(): void {
+  ngDoCheck(): void {
+    if(this._submitted) {
 
+      console.log(this.filter);
+      // this.spinner.show()
+      // this.planningDataService.getFilteredData(this.filterForm.value)
+      // .then((result) => {
+      //   this.planningDataManager.setData(result);
+      //   this.spinner.hide();
+      // });
+    }
   }
-
   ngOnInit() {
-    this.modal()
-    this.filterService.filterCurrent.pipe(untilDestroyed(this)).subscribe(filter => {this.filter = filter;});
+    this.modal();
+    this.filterService.filterCurrent.pipe(untilDestroyed(this)).subscribe(filter => { this.filter = filter; });
     this.planningDataManager.actualPlanData
     .pipe(untilDestroyed(this))
     .subscribe(
@@ -41,7 +54,14 @@ export class PlanoCompraComponent implements OnInit, OnDestroy {
 
   }
 
+  @Input() isSubmitted(value) {
+    console.log(value)
+    this._submitted = value;
+  }
   modal() {
     $('#modalFilter').modal('show');
+  }
+  ngOnDestroy(): void {
+
   }
 }
