@@ -166,12 +166,7 @@ export class DiretrizEstrategicaComponent implements OnInit, OnChanges,OnDestroy
           this.MRGCRB =  (Number(this.sumVLRMRGCRB)  / Number(this.sumVLRRCTLIQAPU)) * 100;
           this.MRGBRT =  (Number(this.sumVLRMRGBRT) / Number(this.sumVLRRCTLIQAPU)) * 100;
         });
-        console.log(this.sumVLRVNDFATLIQ,
-          this.sumVLRMRGCRB,
-          this.sumVLRMRGBRT,
-          this.sumVLRRCTLIQAPU,
-          this.MRGCRB,
-          this.MRGBRT)
+       
         this.spinner.hide();
       });
   }
