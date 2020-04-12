@@ -24,6 +24,7 @@ export class DiretrizesEstrategicasService {
   public filialURL = `${environment.apiUrl}/pricing_parsing/diretrizesfilial/`;
 
   constructor(private http: HttpClient) { }
+  //params 
 
   public get diretrizesEstrategicas(): Promise<Diretrix[]> {
     const result = this.http.get(this.url);
