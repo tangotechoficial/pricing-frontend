@@ -1,7 +1,25 @@
-#placeholder {
-  box-sizing: content-box;
-  width: 70vw;
-  min-height: 29vh;
-  background-image: url('/assets/img/placeholders/tabbed-charts.png');
-  background-size: cover;
+.nav-chart {
+  font-size: .8rem;
+  padding-left: 15px;
+  padding-right: 15px;
+  position: absolute;
+  z-index: 1;
+}
+
+.nav-chart .nav-link {
+  padding: .5rem;
+}
+
+.chart-title {
+  font-size: 0.8rem;
+}
+
+.box-indicator {
+  padding-top: 3.5rem;
+}
+
+.chart-item {
+  width: 20%;
+  padding-left: 15px;
+  padding-right: 15px;
 }

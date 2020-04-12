@@ -60,6 +60,7 @@ import { ModalDetailingComponent } from './components/simulador/modal-detailing/
 import { ConfirmationModalComponent } from './components/shared/confirmation-modal/confirmation-modal.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { ImpactIndicatorComponent } from './components/shared/impact-indicator/impact-indicator.component';
+import { ChartModule } from 'angular2-chartjs';
 
 registerLocaleData(localePt, 'pt',);
 @NgModule({
@@ -120,7 +121,8 @@ registerLocaleData(localePt, 'pt',);
     AutocompleteLibModule ,
     BrowserAnimationsModule,
     NgxSpinnerModule,
-    NgxChartsModule
+    NgxChartsModule,
+    ChartModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: FakeDataProviderInterceptor, multi: true},
