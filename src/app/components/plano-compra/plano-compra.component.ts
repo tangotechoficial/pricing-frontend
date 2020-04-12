@@ -22,6 +22,7 @@ export class PlanoCompraComponent implements OnInit, OnDestroy, DoCheck {
   @Output() data = new EventEmitter<Array<PurchasePlan>>();
   // tslint:disable-next-line: variable-name
   _submitted = false;
+  done =  false;
   filter: Filter;
   constructor(
     private planningDataService: PurchasePlanningService,
@@ -32,13 +33,14 @@ export class PlanoCompraComponent implements OnInit, OnDestroy, DoCheck {
 
   }
   ngDoCheck(): void {
-    if (this._submitted) {
-
+    if (this._submitted && !this.done ) {
       this.spinner.show();
       this.planningDataService.getFilteredData(this.filter)
       .then((result) => {
         this.planningDataManager.setData(result);
         this.spinner.hide();
+        this._submitted = false;
+        this.done = true;
       });
     }
   }
@@ -58,6 +60,7 @@ export class PlanoCompraComponent implements OnInit, OnDestroy, DoCheck {
     this._submitted = value;
   }
   modal() {
+    this.done = false
     $('#modalFilter').modal('show');
   }
   ngOnDestroy(): void {

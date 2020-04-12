@@ -6,7 +6,7 @@
           <h4 id="filterModalTitle">Filtro</h4>
           <p class="">Selecione os filtros da tela {{ filterParentScreen }}</p>
         </div>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" data-dismiss="modal" [disabled]="disabled" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>

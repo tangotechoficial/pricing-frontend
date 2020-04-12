@@ -77,25 +77,23 @@ export class PurchasePlanningService {
 
   getFilteredData(params: any): Promise<PurchasePlan[]> {
     // tslint:disable-next-line: max-line-length
-    let url = this.planningDataurl;
-    const options = {};
-    let connectr ='?';
+    const url = this.planningDataurl;
+    const options = {params: {}};
     Object.keys(params).map(key => {
         if (params[key] !== null && params[key] !== undefined && params[key] !== '') {
-          if(key !== 'codfilepd') {
-            connectr = '&';
+          let value = params[key]
+          if(key === 'codprd') {
+              value = params[key].split('-')[0];
           }
-          url = url + connectr + key.toUpperCase() + '=' + params[key];
+          options.params[key.toUpperCase()] = value;
         }
     });
-    const result =  this.http$.get(url).toPromise();
+    const result =  this.http$.get(url, options).toPromise();
     return result.then(
       (response: any) => {
         return response.results as PurchasePlan[];
       }
     ).catch(error => {throw new Error(error); });
   }
-
-
 
 }

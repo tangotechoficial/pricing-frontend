@@ -9,7 +9,7 @@ import { Filter } from '@models/filter'
   providedIn: 'root'
 })
 export class FilterModalService {
-  url: string = `${environment.apiUrl}/pricing_parsing/Ettprdfilter`
+  private url = `${environment.apiUrl}/pricing_parsing/Ettprdfilter`
   private filterSubject: BehaviorSubject<Filter>
   public filterCurrent: Observable<Filter>
 
