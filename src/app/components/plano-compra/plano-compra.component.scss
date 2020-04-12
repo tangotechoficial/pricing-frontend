@@ -1,7 +1,6 @@
 @import 'assets/styles/global.scss';
 @import 'assets/styles/condicion-sacceso.scss';
 
-
 .main-container {
   display: flex;
   flex-direction: column;
@@ -123,3 +122,8 @@
   height: 1%;
 }
 
+.charts {
+  position: relative;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
