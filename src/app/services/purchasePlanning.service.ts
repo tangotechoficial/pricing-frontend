@@ -82,7 +82,7 @@ export class PurchasePlanningService {
     let connectr ='?';
     Object.keys(params).map(key => {
         if (params[key] !== null && params[key] !== undefined && params[key] !== '') {
-          if(key !== 'desdrtcllatu') {
+          if(key !== 'codfilepd') {
             connectr = '&';
           }
           url = url + connectr + key.toUpperCase() + '=' + params[key];
