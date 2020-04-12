@@ -70,7 +70,7 @@
                   <div class="margin-info-sales">
                       <div class="margin-box-info">
                           <p class="label-info">Vendas Martins:</p>
-                          
+
                           <p class="content-info">R$ {{sumVLRVNDFATLIQ|number:'1.2-2'}}</p>
                       </div>
                       <div class="margin-box-info">
@@ -115,7 +115,7 @@
                               <th class="th-center table-head-row">Margem Bruta</th>
                               <th></th>
                           </tr>
-                          <tr *ngFor="let items of diretrizesEstrategicas|filter:filter:true">
+                          <tr *ngFor="let items of diretrizesEstrategicas">
                               <td>{{items.DATREFPOD.split(" ")[0]}}</td>
                               <td></td>
                               <td>{{items.NOMMES}}</td>
