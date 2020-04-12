@@ -155,6 +155,7 @@ export class DiretrizEstrategicaComponent implements OnInit, OnChanges,OnDestroy
 
   setFilter() {
     this.spinner.show()
+    this.sumVLRVNDFATLIQ = 0
     this.diretrixService.getFilteredData(this.filterForm.value)
       .then((result) => {
         this.diretrixDataManager.setData(result)
@@ -166,7 +167,7 @@ export class DiretrizEstrategicaComponent implements OnInit, OnChanges,OnDestroy
           this.MRGCRB =  (Number(this.sumVLRMRGCRB)  / Number(this.sumVLRRCTLIQAPU)) * 100;
           this.MRGBRT =  (Number(this.sumVLRMRGBRT) / Number(this.sumVLRRCTLIQAPU)) * 100;
         });
-       
+
         this.spinner.hide();
       });
   }
