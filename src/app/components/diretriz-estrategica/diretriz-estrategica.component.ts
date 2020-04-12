@@ -27,12 +27,12 @@ export class DiretrizEstrategicaComponent implements OnInit, OnChanges,OnDestroy
   public fornecedores: any;
   public filial: any;
 
-  public sumVLRVNDFATLIQ = 0;
-  public sumVLRMRGCRB = 0;
-  public sumVLRMRGBRT = 0;
-  public sumVLRRCTLIQAPU = 0;
-  public MRGCRB = 0;
-  public MRGBRT = 0;
+  public sumVLRVNDFATLIQ: number;
+  public sumVLRMRGCRB: number;
+  public sumVLRMRGBRT: number;
+  public sumVLRRCTLIQAPU: number;
+  public MRGCRB: number;
+  public MRGBRT: number;
 
 
   /**
@@ -54,6 +54,12 @@ export class DiretrizEstrategicaComponent implements OnInit, OnChanges,OnDestroy
   }
 
   private calculateIndicators(source) {
+    this.sumVLRVNDFATLIQ = 0;
+    this.sumVLRMRGCRB = 0;
+    this.sumVLRMRGBRT = 0;
+    this.sumVLRRCTLIQAPU = 0;
+    this.MRGCRB = 0;
+    this.MRGBRT = 0;
     this.sumVLRVNDFATLIQ = (Number(this.sumVLRVNDFATLIQ) + Number(source.VLRVNDFATLIQ));
     this.sumVLRMRGCRB = (Number(this.sumVLRMRGCRB) + Number(source.VLRMRGCRB));
     this.sumVLRMRGBRT = (Number(this.sumVLRMRGBRT) + Number(source.VLRMRGBRT));
@@ -89,7 +95,7 @@ export class DiretrizEstrategicaComponent implements OnInit, OnChanges,OnDestroy
         )
       )
       .catch(error => console.error(error)),
-      this.diretrixService.getDirectories().then(directories => {this.directories = directories;})
+      this.diretrixService.getDirectories().then(directories => {this.directories = directories; })
     ]).then( result => {
       this.diretrixDataManager.setData(dataArray);
       this.cdr.markForCheck();
@@ -105,6 +111,16 @@ export class DiretrizEstrategicaComponent implements OnInit, OnChanges,OnDestroy
 
   }
 
+  resetFilter() {
+    this.filterForm.reset();
+    this.spinner.show();
+    this.diretrixService.diretrizesEstrategicas
+    .then((result) => {
+        this.diretrixDataManager.setData(result);
+        result.map(row => this.calculateIndicators(row));
+        this.spinner.hide();
+      });
+  }
 
   loadGroups(value){
     this.spinner.show()
