@@ -15,7 +15,7 @@ import { Filial } from '@app/models/filial';
 })
 export class DiretrizesEstrategicasService {
 
-  public url = `${environment.apiUrl}/pricing_parsing/diretrizesestrategicas`;
+  public url = `${environment.apiUrl}/pricing_parsing/diretrizesestrategicas/`;
   public directoryURL = `${environment.apiUrl}/pricing_parsing/diretrizesdirectories/`;
   public groupURL = `${environment.apiUrl}/pricing_parsing/diretrizesgroups/`;
   public categoryUrl = `${environment.apiUrl}/pricing_parsing/diretrizescategories/`;
@@ -104,6 +104,26 @@ export class DiretrizesEstrategicasService {
 
   }
 
+  getFilteredData(params: any): Promise<Diretrix[]> {
+    // tslint:disable-next-line: max-line-length
+    let url = this.url;
+    const options = {};
+    let connectr ='?';
+    Object.keys(params).map(key => {
+        if (params[key] !== null && params[key] !== undefined && params[key] !== '') {
+          if(key !== 'desdrtcllatu') {
+            connectr = '&';
+          }
+          url = url + connectr + key.toUpperCase() + '=' + params[key];
+        }
+    });
+    const result =  this.http.get(url).toPromise();
+    return result.then(
+      (response: any) => {
+        console.log(response.results)
+        return response.results as Diretrix[];
+      }
+    ).catch(error => {throw new Error(error); });
+  }
+
 }
-
-
