@@ -1,13 +1,10 @@
-import { Component, OnInit, Input} from '@angular/core'
-import {marginData} from '@helpers/marginData'
-import {competitivityData} from '@helpers/competitivity'
-import {sellingData } from '@helpers/selling'
-import { Observable } from 'rxjs'
-import { first } from 'rxjs/operators'
+import { Component } from '@angular/core'
+import { marginData } from '@helpers/marginData'
+import { competitivityData } from '@helpers/competitivity'
+import { sellingData } from '@helpers/selling'
 import { NgxSpinnerService } from 'ngx-spinner';
-import {PurchasePlanningService} from '@services/purchasePlanning.service'
-import { PurchasePlan } from '@models/purchaseplan'
-
+import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
+import { Label } from 'ng2-charts';
 
 @Component({
   selector: 'tabbed-charts',
@@ -15,41 +12,39 @@ import { PurchasePlan } from '@models/purchaseplan'
   styleUrls: ['./tabbed-charts.component.css'],
   providers: [NgxSpinnerService]
 })
-export class TabbedChartsComponent implements OnInit {
-  private _data: any
-  view: any[] = [300, 200]
 
-  colors = {
-    domain: ['#2a7824', 'rgb(181, 49, 49)']
-  }
+export class TabbedChartsComponent {
   marginData = marginData
   competitivityData = competitivityData
   sellingData = sellingData
-  constructor(
-    private spinner: NgxSpinnerService
 
-  ) {
+  public chartOptions: ChartOptions = {
+    responsive: true,
+    animation: {
+      animateScale: true,
+      animateRotate: true,
+    },
+    legend: {
+      display: true,
+      position: 'bottom'
+    },
+  };
+  public chartLabels: Label[] = ['S1', 'S2', 'S3', 'S4', 'S5'];
+  public chartType: ChartType = 'bar';
+  public chartPlugins = [];
 
-  }
+  public marginChartData: ChartDataSets[] = [
+    { data: Array.from({length: 5}, () => Math.floor(Math.random() * 100)), label: 'Sugerido', backgroundColor: '#6289CF' },
+    { data: Array.from({length: 5}, () => Math.floor(Math.random() * 100)), label: 'Planjedo', backgroundColor: '#FF6F50'}
+  ];
 
-  @Input() set data(data: any) {
-    this.spinner.show()
-    if(data){
-      this._data = data
-    }
-    this.spinner.hide()
-  }
+  public competitivityChartData: ChartDataSets[] = [
+    { data: Array.from({length: 5}, () => Math.floor(Math.random() * 100)), label: 'Sugerido', backgroundColor: '#6289CF'},
+    { data: Array.from({length: 5}, () => Math.floor(Math.random() * 100)), label: 'Planjedo', backgroundColor: '#FF6F50'}
+  ];
 
-  get data(): any {
-    return this._data
-  }
-
-
-  ngOnInit() {
-
-  }
-
-
-
-
+  public sellingChartData: ChartDataSets[] = [
+    { data: Array.from({length: 5}, () => Math.floor(Math.random() * 100)), label: 'Sugerido', backgroundColor: '#6289CF'},
+    { data: Array.from({length: 5}, () => Math.floor(Math.random() * 100)), label: 'Planjedo', backgroundColor: '#FF6F50'}
+  ];
 }
