@@ -1,6 +1,7 @@
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import {FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { PurchasePlanningService } from '@services/purchasePlanning.service';
 import { Filter} from '@models/filter';
 import { Material} from '@models/material';
 import { BillingBranch } from '@models/billingbranch';
@@ -39,6 +40,8 @@ export class PlanningFilterModalComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private filterService: PlanningFilterModalService,
+    private planningService: PurchasePlanningService,
+    private spinner: NgxSpinnerService
   ) {
 
   }
@@ -51,13 +54,17 @@ export class PlanningFilterModalComponent implements OnInit {
       codprd: [Validators.required]
     });
     this.filterService.filterCurrent.subscribe(filter => this.filter = filter);
-
+    this.planningService.getShipmentBranches()
+    .then( branches => { this.expBranches = branches; this.spinner.hide(); } );
   }
 
   private get form() {
     return this.filterForm;
   }
 
+  loadBillingBranches(value){}
+  loadStates(value){}
+  loadProducts(value){}
 
   reset() {
     this.filterForm.reset();
