@@ -1,15 +1,16 @@
-import { SaccesoService } from './sacceso.service';
-import { AuthenticationService } from './authentication.service';
-import { TestBed, async, inject } from '@angular/core/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { JWTInterceptorHelper } from '@helpers/jwt.interceptor';
-import { PurchasePlanningService } from './purchasePlanning.service';
-import { EsquemasService } from './esquemas.service';
+import { SaccesoService } from "./sacceso.service";
+import { AuthenticationService } from "./authentication.service";
+import { TestBed, async, inject } from "@angular/core/testing";
+import { NO_ERRORS_SCHEMA } from "@angular/core";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
+import { JWTInterceptorHelper } from "@helpers/jwt.interceptor";
+import { PurchasePlanningService } from "./purchasePlanning.service";
+import { EsquemasService } from "./esquemas.service";
 
-//jasmine.DEFAULT_TIMEOUT_INTERVAL = 1000 * 10;
+// Setea el tiempo de espera de la peticion
+jasmine.DEFAULT_TIMEOUT_INTERVAL = 1000 * 10;
 
-/* const verifyKey = ({ props, data, expect }) => {
+const verifyKey = ({ props, data, expect }) => {
   const keys = Object.keys(data);
   props.forEach(prop => {
     const exist = keys.some(key => key == prop);
@@ -17,7 +18,7 @@ import { EsquemasService } from './esquemas.service';
   });
 };
 
-describe('Services', () => {
+describe("Services", () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [],
@@ -35,51 +36,52 @@ describe('Services', () => {
     inject(
       [AuthenticationService],
       (authenticationService: AuthenticationService) => {
-        const email = 'tester';
-        const password = '@t@ng0@t3ch';
+        const email = "tester";
+        const password = "@t@ng0@t3ch";
         authenticationService.login(email, password).subscribe(event => {
           console.log({ event });
         });
       }
     )();
-  })); */
+  }));
 
   /*
   Test sacceso service
   */
-/*   it('sacceso getCampos()', done => {
+  it("sacceso getCampos()", done => {
     inject([SaccesoService], (saccesoService: SaccesoService) => {
       saccesoService
         .getCampos()
         .then(data => {
-          const props = ['Cod_Campo', 'Nome_Campo'];
+          const props = ["cod_campo", "nome_campo"];
           verifyKey({ props, data: data[0], expect });
           console.log(data);
           done();
         })
         .catch(err => {
-          console.log('error');
+          console.log("error");
           console.log(JSON.stringify(err));
           done();
         });
     })();
   });
 
-  it('sacceso postSecuencia()', done => {
-    inject([SaccesoService], (saccesoService: SaccesoService) => {
-      // const component = new SaccesoComponent(saccesoService, new NgxSpinnerService);
-      // console.log({saveSuccess: component.saveSuccess})
-      const mock = spyOn(saccesoService, 'postSequencia').and.returnValue(
-        new Promise((resolve, reject) => {
-          resolve();
-        })
-      );
+  // it("sacceso postSecuencia()", done => {
+  //   inject([SaccesoService], (saccesoService: SaccesoService) => {
+  //     // const component = new SaccesoComponent(saccesoService, new NgxSpinnerService);
+  //     // console.log({saveSuccess: component.saveSuccess})
+  //     const mock = spyOn(saccesoService, "postSequencia").and.returnValue(
+  //       new Promise((resolve, reject) => {
+  //         resolve();
+  //       })
+  //     );
 
-      mock().then(data => {
-        done();
-      });
-    })();
-  }); */
+  //     mock().then(data => {
+  //       done();
+  //     });
+  //   })();
+  // });
+});
 
 /*   it('sacceso postCampo()', done => {
     inject([SaccesoService], (saccesoService: SaccesoService) => {
@@ -119,7 +121,7 @@ describe('Services', () => {
     })();
   }); */
 
-  /*
+/*
   Test purchasePlanning service
   */
 
@@ -134,7 +136,7 @@ describe('Services', () => {
     )();
   }); */
 
-  /*
+/*
   Test esquema service
   */
 
@@ -210,8 +212,7 @@ describe('Services', () => {
     })();
   }); */
 
-  //
-  //
-  //
-  //
-
+//
+//
+//
+//
