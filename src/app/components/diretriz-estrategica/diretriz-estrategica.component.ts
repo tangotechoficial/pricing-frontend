@@ -27,12 +27,12 @@ export class DiretrizEstrategicaComponent implements OnInit, OnChanges,OnDestroy
   public fornecedores: any;
   public filial: any;
 
-  public sumVLRVNDFATLIQ: number;
-  public sumVLRMRGCRB: number;
-  public sumVLRMRGBRT: number;
-  public sumVLRRCTLIQAPU: number;
-  public MRGCRB: number;
-  public MRGBRT: number;
+  public sumVLRVNDFATLIQ = 0;
+  public sumVLRMRGCRB = 0;
+  public sumVLRMRGBRT = 0;
+  public sumVLRRCTLIQAPU = 0;
+  public MRGCRB = 0;
+  public MRGBRT = 0;
 
 
   /**
@@ -53,21 +53,10 @@ export class DiretrizEstrategicaComponent implements OnInit, OnChanges,OnDestroy
     this.diretrizesEstrategicas = this.diretrixDataManager.currentDiretrixValue;
   }
 
-  private calculateIndicators(source) {
-    this.sumVLRVNDFATLIQ = 0;
-    this.sumVLRMRGCRB = 0;
-    this.sumVLRMRGBRT = 0;
-    this.sumVLRRCTLIQAPU = 0;
-    this.MRGCRB = 0;
-    this.MRGBRT = 0;
-    this.sumVLRVNDFATLIQ = (Number(this.sumVLRVNDFATLIQ) + Number(source.VLRVNDFATLIQ));
-    this.sumVLRMRGCRB = (Number(this.sumVLRMRGCRB) + Number(source.VLRMRGCRB));
-    this.sumVLRMRGBRT = (Number(this.sumVLRMRGBRT) + Number(source.VLRMRGBRT));
-    this.sumVLRRCTLIQAPU = (Number(this.sumVLRRCTLIQAPU) + Number(source.VLRRCTLIQAPU));
-    this.MRGCRB =  (Number(this.sumVLRMRGCRB)  / Number(this.sumVLRRCTLIQAPU)) * 100;
-    this.MRGBRT =  (Number(this.sumVLRMRGBRT) / Number(this.sumVLRRCTLIQAPU)) * 100;
-  }
+
   ngOnInit() {
+
+
 
     this.filterForm = this.formBuilder.group({
       desdrtcllatu: [''],
@@ -90,7 +79,12 @@ export class DiretrizEstrategicaComponent implements OnInit, OnChanges,OnDestroy
         data => data.map(
           row => {
             dataArray.push(row);
-            this.calculateIndicators(row);
+            this.sumVLRVNDFATLIQ = (Number(this.sumVLRVNDFATLIQ) + Number(row.VLRVNDFATLIQ));
+            this.sumVLRMRGCRB = (Number(this.sumVLRMRGCRB) + Number(row.VLRMRGCRB));
+            this.sumVLRMRGBRT = (Number(this.sumVLRMRGBRT) + Number(row.VLRMRGBRT));
+            this.sumVLRRCTLIQAPU = (Number(this.sumVLRRCTLIQAPU) + Number(row.VLRRCTLIQAPU));
+            this.MRGCRB =  (Number(this.sumVLRMRGCRB)  / Number(this.sumVLRRCTLIQAPU)) * 100;
+            this.MRGBRT =  (Number(this.sumVLRMRGBRT) / Number(this.sumVLRRCTLIQAPU)) * 100;
           }
         )
       )
@@ -117,7 +111,14 @@ export class DiretrizEstrategicaComponent implements OnInit, OnChanges,OnDestroy
     this.diretrixService.diretrizesEstrategicas
     .then((result) => {
         this.diretrixDataManager.setData(result);
-        result.map(row => this.calculateIndicators(row));
+        result.map(row => {
+          this.sumVLRVNDFATLIQ = (Number(this.sumVLRVNDFATLIQ) + Number(row.VLRVNDFATLIQ));
+          this.sumVLRMRGCRB = (Number(this.sumVLRMRGCRB) + Number(row.VLRMRGCRB));
+          this.sumVLRMRGBRT = (Number(this.sumVLRMRGBRT) + Number(row.VLRMRGBRT));
+          this.sumVLRRCTLIQAPU = (Number(this.sumVLRRCTLIQAPU) + Number(row.VLRRCTLIQAPU));
+          this.MRGCRB =  (Number(this.sumVLRMRGCRB)  / Number(this.sumVLRRCTLIQAPU)) * 100;
+          this.MRGBRT =  (Number(this.sumVLRMRGBRT) / Number(this.sumVLRRCTLIQAPU)) * 100;
+        });
         this.spinner.hide();
       });
   }
@@ -157,8 +158,21 @@ export class DiretrizEstrategicaComponent implements OnInit, OnChanges,OnDestroy
     this.diretrixService.getFilteredData(this.filterForm.value)
       .then((result) => {
         this.diretrixDataManager.setData(result)
-        result.map(row => this.calculateIndicators(row))
-        this.spinner.hide()
+        result.map(row => {
+          this.sumVLRVNDFATLIQ = (Number(this.sumVLRVNDFATLIQ) + Number(row.VLRVNDFATLIQ));
+          this.sumVLRMRGCRB = (Number(this.sumVLRMRGCRB) + Number(row.VLRMRGCRB));
+          this.sumVLRMRGBRT = (Number(this.sumVLRMRGBRT) + Number(row.VLRMRGBRT));
+          this.sumVLRRCTLIQAPU = (Number(this.sumVLRRCTLIQAPU) + Number(row.VLRRCTLIQAPU));
+          this.MRGCRB =  (Number(this.sumVLRMRGCRB)  / Number(this.sumVLRRCTLIQAPU)) * 100;
+          this.MRGBRT =  (Number(this.sumVLRMRGBRT) / Number(this.sumVLRRCTLIQAPU)) * 100;
+        });
+        console.log(this.sumVLRVNDFATLIQ,
+          this.sumVLRMRGCRB,
+          this.sumVLRMRGBRT,
+          this.sumVLRRCTLIQAPU,
+          this.MRGCRB,
+          this.MRGBRT)
+        this.spinner.hide();
       });
   }
 }
