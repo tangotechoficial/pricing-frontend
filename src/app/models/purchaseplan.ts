@@ -10,7 +10,6 @@ export class PurchasePlan implements Deserializable {
   VLRCSTCMPMER: number;
   VLRCSTCMPIDL: number;
   VLRCMVOCD: number;
-  VLRCMVOCD: number;
   VLRCMVCAL: number;
   VLRFLXPLN: number;
   VLRFLXSUG: number;

@@ -27,7 +27,7 @@ export class PurchasePlanningService {
 
   public get planningData(): Promise<PurchasePlan[]> {
       return this.http$.get(this.planningDataurl).toPromise()
-        .then((response) => {
+        .then((response: any) => {
           return response.results as PurchasePlan[];
         })
         .catch((error) => {
