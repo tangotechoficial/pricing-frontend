@@ -51,7 +51,7 @@ import { SelectPopupExpedicaoComponent } from './components/select-popup-expedic
 import { SelectPopupFaturamentoComponent } from './components/select-popup-faturamento/select-popup-faturamento.component';
 import { SelectPopupRegiaoComponent } from './components/select-popup-regiao/select-popup-regiao.component';
 import { CamadaService } from './services/camada.service';
-import { registerLocaleData }  from '@angular/common'
+import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 import { FilterTagComponent } from './components/shared/filter-tag/filter-tag.component';
 import { DatatableComponent } from './components/simulador/datatable/datatable.component';
@@ -60,8 +60,9 @@ import { ModalDetailingComponent } from './components/simulador/modal-detailing/
 import { ConfirmationModalComponent } from './components/shared/confirmation-modal/confirmation-modal.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { ImpactIndicatorComponent } from './components/shared/impact-indicator/impact-indicator.component';
+import { PlanningFilterModalComponent } from './components/filter-modal-plano/filter-modal-plano.component';
 
-registerLocaleData(localePt, 'pt',);
+registerLocaleData(localePt, 'pt');
 @NgModule({
   declarations: [
     AppComponent,
@@ -108,6 +109,7 @@ registerLocaleData(localePt, 'pt',);
     ModalDetailingComponent,
     ConfirmationModalComponent,
     ImpactIndicatorComponent,
+    PlanningFilterModalComponent
   ],
   imports: [
     BrowserModule,
