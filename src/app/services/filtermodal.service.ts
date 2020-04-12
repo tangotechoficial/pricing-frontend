@@ -17,7 +17,7 @@ export class FilterModalService {
     private http: HttpClient
   ){
     this.filterSubject = new BehaviorSubject<Filter>(new Filter());
-    this.filterCurrent = this.filterSubject.asObservable()
+    this.filterCurrent = this.filterSubject.asObservable();
   }
 
 
@@ -34,7 +34,7 @@ export class FilterModalService {
     this.filterSubject.next(value)
   }
 
-  
+
 
   get materials(): Promise<Material[]>{
     return this.http.get<Material[]>(this.url).toPromise()

@@ -1,5 +1,5 @@
 import { NgxSpinnerService } from 'ngx-spinner';
-import { FilterModalService } from '@services/filtermodal.service';
+import { PlanningFilterModalService } from '@services/planfiltermodal.service';
 // tslint:disable-next-line: max-line-length
 import { Component, OnInit, Output, EventEmitter, OnDestroy, Input, DoCheck } from '@angular/core';
 import { PurchasePlanningService } from '@services/purchasePlanning.service';
@@ -25,22 +25,21 @@ export class PlanoCompraComponent implements OnInit, OnDestroy, DoCheck {
   filter: Filter;
   constructor(
     private planningDataService: PurchasePlanningService,
-    private filterService: FilterModalService,
+    private filterService: PlanningFilterModalService,
     private planningDataManager: PlanningDataManagerService,
     private spinner: NgxSpinnerService
   ) {
 
   }
   ngDoCheck(): void {
-    if(this._submitted) {
+    if (this._submitted) {
 
-      console.log(this.filter);
-      // this.spinner.show()
-      // this.planningDataService.getFilteredData(this.filterForm.value)
-      // .then((result) => {
-      //   this.planningDataManager.setData(result);
-      //   this.spinner.hide();
-      // });
+      this.spinner.show();
+      this.planningDataService.getFilteredData(this.filter)
+      .then((result) => {
+        this.planningDataManager.setData(result);
+        this.spinner.hide();
+      });
     }
   }
   ngOnInit() {

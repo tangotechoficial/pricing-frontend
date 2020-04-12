@@ -92,7 +92,6 @@ export class PlanningFilterModalComponent implements OnInit, OnDestroy {
   }
 
   setFilter() {
-    debugger
     this.filterService.setFilter(new Filter().deserialize(this.filterForm.value));
     this.submitted.emit(true);
     $('#modalFilter').modal('hide');
