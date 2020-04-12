@@ -19,14 +19,14 @@ export class ExecucaoComponent implements OnInit {
 
   ngOnInit() {
 
-    this.planningDataService.planningData.pipe(first()).subscribe(
-          data => data.results.map(
-            row => {
-              this.planningData.push(new PurchasePlan().deserialize(row))
-            }
-          ), // should change this in real world
-          err => console.log(err)
-        )
+    // this.planningDataService.planningData.pipe(first()).subscribe(
+    //       data => data.results.map(
+    //         row => {
+    //           this.planningData.push(new PurchasePlan().deserialize(row))
+    //         }
+    //       ), // should change this in real world
+    //       err => console.log(err)
+    //     )
   }
 
 
