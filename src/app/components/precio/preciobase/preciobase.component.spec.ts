@@ -1,31 +1,35 @@
-import { async, ComponentFixture, TestBed, tick, fakeAsync } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { PrecioBaseComponent } from './preciobase.component';
 import { CondicionService } from 'app/services/condicion.service';
-import { NgxSpinnerService, NgxSpinnerModule } from 'ngx-spinner';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { EsquemasService } from 'app/services/esquemas.service';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { User } from 'app/models/user';
+
+
 
 describe('PrecioBaseComponent', () => {
   let component: PrecioBaseComponent;
   let fixture: ComponentFixture<PrecioBaseComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [ PrecioBaseComponent ],
       providers: [ CondicionService, NgxSpinnerService, EsquemasService],
+      schemas: [ NO_ERRORS_SCHEMA ],
       imports: [ HttpClientModule ],
-      schemas: [ NO_ERRORS_SCHEMA ]
     })
     .compileComponents();
-  }));
+  });
 
   beforeEach(() => {
-    // localStorage.setItem("User", JSON.stringify(new User("suzi.campahna@tangotech.com.br", "12345678", "Suzi Campahna", "Token", "technical", true, "103", 1)));
     fixture = TestBed.createComponent(PrecioBaseComponent);
     component = fixture.componentInstance;
+    component.sCurrentUser = {"id":4,"is_superuser":false,"username":"alice","first_name":"Alice","last_name":"","email":"","groups":[{"name":"tecnico"}]}
+    component.fetchData = () => {}
     fixture.detectChanges()
+    
   });
 
   it('should create', () => {
