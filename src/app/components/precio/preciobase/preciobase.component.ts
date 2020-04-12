@@ -45,10 +45,6 @@ export class PrecioBaseComponent implements OnInit {
     this.fetchData();
   }
 
-  // checkTypeUser() {
-  //   this.bBusiness = this.sCurrentUser.type !== "technical" ? true : false
-  // }
-
   checkTypeUser() {
     // console.log({sCurrentUser: this.sCurrentUser})
     if (this.sCurrentUser.groups[0].name == 'tecnico') {
