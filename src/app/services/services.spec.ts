@@ -6,6 +6,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { JWTInterceptorHelper } from "@helpers/jwt.interceptor";
 import { PurchasePlanningService } from "./purchasePlanning.service";
 import { EsquemasService } from "./esquemas.service";
+import { CondicionService } from './condicion.service';
+
 
 // Setea el tiempo de espera de la peticion
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 1000 * 10;
@@ -27,7 +29,8 @@ describe("Services", () => {
           provide: HTTP_INTERCEPTORS,
           useClass: JWTInterceptorHelper,
           multi: true
-        }
+        },
+        CondicionService
       ],
       imports: [HttpClientModule],
       schemas: [NO_ERRORS_SCHEMA]
@@ -65,6 +68,29 @@ describe("Services", () => {
         });
     })();
   });
+
+    /*
+  Test condicion service
+  */
+ it("condicion getCamadas()", done => {
+  inject([CondicionService], (condicionService: CondicionService) => {
+    condicionService
+      .getCamadas()
+      .then(data => {
+        const props = ["cod_camada", "nnome_camada" , "tipo_base_vendas"];
+        verifyKey({ props, data: data[0], expect });
+        console.log(data);
+        done();
+      })
+      .catch(err => {
+        console.log("error");
+        console.log(JSON.stringify(err));
+        done();
+      });
+  })();
+});
+
+
 
   // it("sacceso postSecuencia()", done => {
   //   inject([SaccesoService], (saccesoService: SaccesoService) => {

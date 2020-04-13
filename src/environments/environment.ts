@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:8000/api'
+  apiUrl: 'http://backend2.tangotechapp.com:8000/api'
 };
 
 /*
@@ -15,3 +15,6 @@ export const environment = {
  * on performance if an error is thrown.
  */
 // import 'zone.js/dist/zone-error';  // Included with Angular CLI.
+
+//'http://backend2.tangotechapp.com:8000/api'
+//'http://localhost:8000/api'

@@ -66,6 +66,7 @@ export class PrecioBaseComponent implements OnInit {
       .then(camadasFullData => {
         this.stopLoading();
         this.camadasFullData = camadasFullData;
+        console.log(this.camadasFullData)
       })
       .catch(err => {
         this.stopLoading();

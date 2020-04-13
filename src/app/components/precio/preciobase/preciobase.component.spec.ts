@@ -46,14 +46,12 @@ describe('PrecioBaseComponent', () => {
   });
 
 
-
   describe("ngOnInit", () => {
     it('Check technical user', () => {
       component.checkTypeUser()
       expect(component.bBusiness).toBeFalsy();
     })
   })
-
 
 
 });
