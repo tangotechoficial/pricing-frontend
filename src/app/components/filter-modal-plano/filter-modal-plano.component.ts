@@ -53,6 +53,7 @@ export class PlanningFilterModalComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.spinner.show();
     this.filterForm = this.formBuilder.group({
       codfilfat: [Validators.required],
       codfilepd: [Validators.required],
