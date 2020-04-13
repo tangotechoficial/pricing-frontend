@@ -74,6 +74,12 @@ export class DiretrizEstrategicaComponent implements OnInit, OnChanges,OnDestroy
       diretrixes => this.diretrizesEstrategicas = diretrixes
     );
     const dataArray: Diretrix[] = [];
+    this.sumVLRVNDFATLIQ = 0
+    this.sumVLRRCTLIQAPU= 0
+    this.MRGBRT = 0
+    this.MRGCRB = 0
+    this.sumVLRMRGCRB = 0
+    this.sumVLRMRGBRT = 0
     Promise.all([
       this.diretrixService.diretrizesEstrategicas.then(
         data => data.map(
@@ -108,6 +114,13 @@ export class DiretrizEstrategicaComponent implements OnInit, OnChanges,OnDestroy
   resetFilter() {
     this.filterForm.reset();
     this.spinner.show();
+        this.spinner.show()
+    this.sumVLRVNDFATLIQ = 0
+    this.sumVLRRCTLIQAPU= 0
+    this.MRGBRT = 0
+    this.MRGCRB = 0
+    this.sumVLRMRGCRB = 0
+    this.sumVLRMRGBRT =0
     this.diretrixService.diretrizesEstrategicas
     .then((result) => {
         this.diretrixDataManager.setData(result);
@@ -154,8 +167,12 @@ export class DiretrizEstrategicaComponent implements OnInit, OnChanges,OnDestroy
   }
 
   setFilter() {
-    this.spinner.show()
     this.sumVLRVNDFATLIQ = 0
+    this.sumVLRRCTLIQAPU= 0
+    this.MRGBRT = 0
+    this.MRGCRB = 0
+    this.sumVLRMRGCRB = 0
+    this.sumVLRMRGBRT = 0
     this.diretrixService.getFilteredData(this.filterForm.value)
       .then((result) => {
         this.diretrixDataManager.setData(result)
@@ -166,6 +183,7 @@ export class DiretrizEstrategicaComponent implements OnInit, OnChanges,OnDestroy
           this.sumVLRRCTLIQAPU = (Number(this.sumVLRRCTLIQAPU) + Number(row.VLRRCTLIQAPU));
           this.MRGCRB =  (Number(this.sumVLRMRGCRB)  / Number(this.sumVLRRCTLIQAPU)) * 100;
           this.MRGBRT =  (Number(this.sumVLRMRGBRT) / Number(this.sumVLRRCTLIQAPU)) * 100;
+          console.log(this.sumVLRMRGCRB)
         });
 
         this.spinner.hide();
