@@ -53,10 +53,10 @@ describe("CondicionComponent", () => {
     it("values init", () => {
       expect(component.message).toEqual({});
       expect(component.selectedProperties).toEqual([]);
-      
+
     });
 
-    
+
 
     it("getLastCondicao()", done => {
       component.condicionService.getLastCondicao().then((result: any) => {
@@ -86,7 +86,7 @@ describe("CondicionComponent", () => {
     /*
     Andrés Atencio
     Verificar test 🤔
-    
+
     it('updateMasterData 🤔', (done) => {
       const TIME_AWAIT = 1000 * 3
       setTimeout(() => {
@@ -97,7 +97,7 @@ describe("CondicionComponent", () => {
         expect(component.condicaos).toBeDefined()
         done()
       }, TIME_AWAIT)
-      
+
     });
   });
 });

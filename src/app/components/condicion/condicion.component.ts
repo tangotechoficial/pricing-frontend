@@ -57,12 +57,6 @@ export class CondicionComponent implements OnInit, DoCheck {
       this.isValid = false;
     }
 
-    if (this.condicion.chavecontas.cod_chavecontas) {
-      this.isValid = true;
-    } else {
-      this.isValid = false;
-    }
-
     if (this.condicion.tipovalor.cod_tipovalor) {
       this.isValid = true;
     } else {
@@ -75,7 +69,7 @@ export class CondicionComponent implements OnInit, DoCheck {
       this.isValid = false;
     }
 
-    const checkBase: any = document.getElementById('checkBase');
+    /* const checkBase: any = document.getElementById('checkBase');
     const checkVenda: any = document.getElementById('checkVenda');
 
     if (checkBase.checked) {
@@ -90,7 +84,7 @@ export class CondicionComponent implements OnInit, DoCheck {
       this.camadasFiltered = this.camadasFiltered.filter(obj => {
         return obj.tipo_base_vendas !== 'B';
       });
-    }
+    } */
 
   }
 
@@ -111,6 +105,10 @@ export class CondicionComponent implements OnInit, DoCheck {
     this.updateMasterData((cb) => {
       if (cb) {
         this.spinner.hide();
+        this.camadasFiltered = this.camadas;
+        this.camadasFiltered = this.camadasFiltered.filter(obj => {
+          return obj.tipo_base_vendas !== 'B';
+        });
       }
     });
 
@@ -228,8 +226,8 @@ export class CondicionComponent implements OnInit, DoCheck {
       this.condicionService.getCamadas().then(result => this.camadas = result),
       this.condicionService.getCondicaos().then(result => this.condicaos = result)
     ]).then(() => {
-      const checkVenda: any = document.getElementById('checkVenda');
-      checkVenda.click();
+/*       const checkVenda: any = document.getElementById('checkVenda');
+      checkVenda.click(); */
       callback(true);
     });
   }
@@ -326,14 +324,7 @@ export class CondicionComponent implements OnInit, DoCheck {
     Input: Object, Array
     Output: Return true if exists in the array or false if doesn't exist
   */
-  public elemExist(obj, list) {
-    for (const row of list) {
-      if (row === obj) {
-        return true;
-      }
-    }
-    return false;
-  }
+  c
 
   /*
     Iván Lynch 08/03/2020
@@ -354,6 +345,15 @@ export class CondicionComponent implements OnInit, DoCheck {
         }
       }
     });
+  }
+
+  public elemExist(obj, list) {
+    for (const row of list) {
+      if (row === obj) {
+        return true;
+      }
+    }
+    return false;
   }
 
   /*

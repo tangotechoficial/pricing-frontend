@@ -26,6 +26,8 @@ export class PrecioTechnical {
   public globalIndex = 0;
   public tipoValor: Array<any>;
 
+  public condicaosShow: Array<any> = [];
+
   constructor( private condicionService: CondicionService) {}
 
   // tslint:disable-next-line: use-lifecycle-interface
@@ -44,6 +46,8 @@ export class PrecioTechnical {
     });
     this.condicaos = condicaos;
 
+    this.condicaosShow = this.condicaosAllow.filter(i => !(this.condicaos.map(j => j.cod_condicao).some(k => k == i.cod_condicao)))
+    console.log({condicaos: this.condicaos, condicaosAllow: this.condicaosAllow,condicaosShow:this.condicaosShow})
   }
 
   add() {
@@ -53,6 +57,9 @@ export class PrecioTechnical {
     this.condicaos.push(this.modelCondicao);
     this.camadaU.condicaos = new Array<any>();
     this.camadaU.condicaos = this.condicaos;
+
+    this.condicaosShow = this.condicaosAllow.filter(i => !(this.condicaos.map(j => j.cod_condicao).some(k => k == i.cod_condicao)))
+    console.log({condicaos: this.condicaos, condicaosAllow: this.condicaosAllow,condicaosShow:this.condicaosShow})
   }
 
   remove(val: any) {
@@ -62,6 +69,11 @@ export class PrecioTechnical {
         this.selectedObject.emit({action: 'REMOVE', camada: this.camadaU, condicaos: elem});
       }
     });
+    
+    this.condicaosShow = this.condicaosAllow.filter(i => !(this.condicaos.map(j => j.cod_condicao).some(k => k == i.cod_condicao)))
+    console.log({condicaos: this.condicaos, condicaosAllow: this.condicaosAllow,condicaosShow:this.condicaosShow})
+
+    this.isEditNew = false
   }
 
   
@@ -92,6 +104,8 @@ export class PrecioTechnical {
     this.condicaos[this.condicaos.length - 1].set(modelcondicao)
     this.selectedObject.emit({action: 'ADD', camada: this.camadaU, condicaos: modelcondicao});
     this.isEditNew = false;
+    
+    this.condicaosAllow = this.condicaosAllow.filter(e => e.cod_condicao != val.cod_condicao)
   }
 
   

@@ -1,0 +1,25 @@
+<h4 class="subtitlab darkgr">Preencher condições</h4>
+
+<div class="compliance border rounded martins-scrollbar px-3 py-2">
+
+    <div class="myTable table-responsive table-hover p-">
+        <table class="table table-striped ">
+            <thead>
+                <tr>
+                    <th *ngFor="let campo of currentSelectedCampos"
+                        class="p-1 text-center border-top-0 color-martins-blue font-weight-bold" scope="col">
+                        {{campo.nome_campo}}</th>
+                </tr>
+            </thead>
+
+            <tbody class="">
+                <tr class="">
+                    <td (blur)="currVal(campo)" contenteditable="true"
+                        *ngFor="let campo of currentSelectedCampos; let i = index" id="{{campo.nome_campo}}"
+                        class="p-1 text-center font-weight-bold ">{{campo.value}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>

@@ -12,6 +12,7 @@ declare var $: any;
   styleUrls: ['../../precio/precio.component.scss'],
   providers: [CondicionService, NgxSpinnerService, EsquemasService]
 })
+
 export class PrecioBaseComponent implements OnInit {
   sCurrentUser = JSON.parse(localStorage.getItem('User'));
   camadasUpdate = { ADD: {}, UPDATE: {}, REMOVE: {}};
@@ -43,10 +44,6 @@ export class PrecioBaseComponent implements OnInit {
     this.checkTypeBaseVendas();
     this.fetchData();
   }
-
-  // checkTypeUser() {
-  //   this.bBusiness = this.sCurrentUser.type !== "technical" ? true : false
-  // }
 
   checkTypeUser() {
     // console.log({sCurrentUser: this.sCurrentUser})
@@ -105,9 +102,9 @@ export class PrecioBaseComponent implements OnInit {
 
     let promisesRemoveCondCamadaEsq: Array<any> = Object.keys(this.camadasUpdate['REMOVE']).map(codCamada => {
       return this.camadasUpdate['REMOVE'][codCamada].map(cond => {
-        
+
          return this.esquemasService.removeEsquema({id: cond.idCondicaoCamadaEsquema})
-        
+
       })
     })
 
@@ -116,7 +113,7 @@ export class PrecioBaseComponent implements OnInit {
         cond.mandatoria = cond.mandatoria ? 1 : 0
         cond.estatistica = cond.estatistica ? 1 : 0
         return this.esquemasService.updateCondicao(cond)
-        
+
       })
     })
 
@@ -138,7 +135,7 @@ export class PrecioBaseComponent implements OnInit {
   }
 
   verifyErrorFetchData(data) {
-    
+
     const error = data[0][0].__zone_symbol__value ? data[0][0].__zone_symbol__value : false
     console.log({error})
     if (error) {

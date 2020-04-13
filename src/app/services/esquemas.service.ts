@@ -12,6 +12,7 @@ import { environment } from '@env/environment';
 
 @Injectable()
 export class EsquemasService {
+
   public url: string;
   public condicion: Array<any>;
   constructor(
@@ -28,6 +29,39 @@ export class EsquemasService {
       .then((result: any) => {
         return result.results;
       });
+  }
+
+  formatObjDateValues(obj) {
+    const dateRegexp: RegExp = /^\d{2}-\d{2}-\d{4}/;
+    for (const key in obj) {
+      if (obj[key].toString().match(dateRegexp)) {
+        const aDate = obj[key].toString().split('-');
+        const nDate = aDate[2] + '-' + aDate[1] + '-' + aDate[0];
+        obj[key] = nDate;
+      }
+    }
+    return obj;
+  }
+
+  postUpdatedSequenciaValues(val: any, finished) {
+    console.log('Estoy en el servicio', val);
+    val.map(sequencias => {
+      console.log(sequencias);
+      sequencias.data.map((elem, index) => {
+        console.log(elem);
+        if (elem.isNew) {
+          this.http
+            // tslint:disable-next-line: max-line-length
+            .post(this.url + '/' + sequencias.sequencia + '/', this.formatObjDateValues(elem), { headers: { 'Content-type': 'application/json' } })
+            .toPromise()
+            .then(res => console.log(res))
+            .catch(err => { console.log(err); });
+        }
+        if ((sequencias.data.length - 1) === index) {
+          finished(true);
+        }
+      });
+    });
   }
 
   getChavePrecificao(id: string): Promise<ChavePrecificao> {
@@ -93,6 +127,7 @@ export class EsquemasService {
 
       });
   }
+
   getPreco(): Promise<any> {
     return this.http
       .get(this.url + '/preco/', { headers: { 'Content-type': 'application/json' } })
