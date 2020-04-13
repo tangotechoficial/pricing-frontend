@@ -92,18 +92,27 @@ describe("Services", () => {
 
   it("PostCampo", done => {
     inject([SaccesoService], (saccesoService: SaccesoService) => {
-      // spyOn(saccesoService, 'header').andReturn("{ headers: { 'Content-type': 'application/json' } }");
-      let testCampo = new Campo();
-      testCampo = { cod_campo: "cod", nome_campo: "nombre campotest"};
+      
+      let testCampo = new Campo("xxx", "xxx");
+      console.log({testCampo})
       saccesoService
         .postCampo(testCampo)
         .then(data => {
-          console.log("campo" , data)
-          const props = ["cod_sequencia", "campos" , "nome_sequencia" ];
-          const propsData = Object.keys(data[0]);
-          // expect(props).toEqual(propsData)
-          // expect(data.length).toBeGreaterThan(1);
-          done();
+          console.log({data})
+
+          expect(data.cod_campo).toEqual(testCampo.cod_campo)
+
+          fetch(saccesoService.url + '/campo/' + testCampo.cod_campo, 
+            { method: 'DELETE', 
+            headers: {
+              'Authorization': 'JWT ' + localStorage['token'].replace(`"`, ``).replace(`"`, ``)
+              }
+            })
+            .then(data => {
+              console.log({delete:data})
+              done();
+            })
+          
         })
         .catch(err => {
           console.log("error");

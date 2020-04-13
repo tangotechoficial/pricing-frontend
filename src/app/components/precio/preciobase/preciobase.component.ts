@@ -61,7 +61,6 @@ export class PrecioBaseComponent implements OnInit {
   }
 
   fetchData() {
-    console.log("fetchData------------------------")
     this.esquemasService
       .fetchCondicaoCamadaEsquema(this.typeBaseVendas)
       .then(camadasFullData => {
