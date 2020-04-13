@@ -8,6 +8,7 @@ import { PurchasePlanningService } from "./purchasePlanning.service";
 import { EsquemasService } from "./esquemas.service";
 import { CondicionService } from './condicion.service';
 import { Campo } from 'app/models/campo';
+import { Sequencia } from 'app/models/sequencia';
 
 
 // Setea el tiempo de espera de la peticion
@@ -90,15 +91,60 @@ describe("Services", () => {
   });
 
 
-  it("PostCampo", done => {
+  it(" Check PostCampo", done => {
     inject([SaccesoService], (saccesoService: SaccesoService) => {
-      // spyOn(saccesoService, 'header').andReturn("{ headers: { 'Content-type': 'application/json' } }");
-      let testCampo = new Campo("charTest", "destest33");
-         saccesoService
+
+      let testCampo = new Campo("xxx", "xxx");
+      console.log({testCampo})
+      saccesoService
         .postCampo(testCampo)
         .then(data => {
-          expect(testCampo.cod_campo ).toEqual(data.cod_campo);
+          console.log({data})
+
+          expect(data.cod_campo).toEqual(testCampo.cod_campo)
+          expect(data.nome_campo ).toEqual(testCampo.nome_campo)
+
+          fetch(saccesoService.url + '/campo/' + testCampo.cod_campo,
+            { method: 'DELETE',
+            headers: {
+              'Authorization': 'JWT ' + localStorage['token'].replace(`"`, ``).replace(`"`, ``)
+              }
+            })
+            .then(data => {
+              console.log({delete:data})
+              done();
+            })
+
+        })
+        .catch(err => {
+          console.log("error");
+          console.log(JSON.stringify(err));
           done();
+        });
+    })();
+  });
+
+  it(" Check postSequencia", done => {
+    inject([SaccesoService], (saccesoService: SaccesoService) => {
+
+      let testSeq = new Sequencia("xxx", "xxx");
+      console.log({testSeq})
+      saccesoService
+        .postSequencia(testSeq)
+        .then(data => {
+          console.log({data})
+          expect(data.cod_sequencia).toEqual(testSeq.cod_sequencia)
+          fetch(saccesoService.url + '/sequencia/' + testSeq.cod_sequencia ,
+            { method: 'DELETE',
+            headers: {
+              'Authorization': 'JWT ' + localStorage['token'].replace(`"`, ``).replace(`"`, ``)
+              }
+            })
+            .then(data => {
+              console.log({delete:data})
+              done();
+            })
+
         })
         .catch(err => {
           console.log("error");
