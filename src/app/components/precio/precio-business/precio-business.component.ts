@@ -115,6 +115,10 @@ export class PrecioBusiness implements OnInit {
     $('.' + cam).eq(item).addClass('selectedTextItem');
   }
 
+  onEnter($event) {
+    $event.preventDefault();
+  }
+
   onSalvarEsquema() {
     console.log('Estoy aca');
     if (this.sequenciasToUpdate.length === 0) {
@@ -349,7 +353,7 @@ export class PrecioBusiness implements OnInit {
   }
 
   checkIfCondicaoWasSelected() {
-    console.log(this.currentCondicao)
+    console.log(this.currentCondicao);
     if (this.currentCondicao === undefined) {
       this.validationTitle = 'Condição';
       this.validationDescription = 'Selecione uma condição';

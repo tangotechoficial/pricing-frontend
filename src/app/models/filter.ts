@@ -5,12 +5,12 @@ export class Filter implements Deserializable{
   // descgrpprd: string = null;
   // desctgprd: string = null;
   desdrtcllatu: string = null;
-  codgrpmer: number = null;
-  codfmlmer: number = null;
-  codclsmer: number = null;
-  coddivfrn: number = null;
+  codgrpmer: string = null;
+  codfmlmer: string = null;
+  codclsmer: string = null;
+  coddivfrn: string = null;
   codfilfat: string = null;
-  codfilepd: number = null;
+  codfilepd: string = null;
   codestuni: string = null;
   codprd: string = null;
 
