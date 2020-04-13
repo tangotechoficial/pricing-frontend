@@ -212,7 +212,7 @@
                             </thead>
                             <tbody class="">
                                 <tr class="" *ngFor="let row of currentSequenciaData; let i = index" id="row{{i}}">
-                                    <td contenteditable (blur)="checkIfRowHasChanges(row)" class="p-1 text-center font-weight-bold" scope="col" *ngFor="let col of row.data; let i = index" [innerHTML]="col"></td>
+                                    <td contenteditable (keydown.enter)="onEnter($event)" (blur)="checkIfRowHasChanges(row)" class="p-1 text-center font-weight-bold" scope="col" *ngFor="let col of row.data; let i = index" [innerHTML]="col"></td>
                                 </tr>
                             </tbody>
                         </table>
