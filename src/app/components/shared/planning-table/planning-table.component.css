@@ -5,15 +5,13 @@
   font-size: 0.9rem;
 }
 
-
-
 .mirrorInput {
   outline: 1px solid #4270C1;
   box-sizing: border-box;
   padding: .4em
 }
 
-.w-50.ng-star-inserted {
+.w-50 {
   width: 50px
 }
 
