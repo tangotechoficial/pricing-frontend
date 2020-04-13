@@ -93,16 +93,11 @@ describe("Services", () => {
   it("PostCampo", done => {
     inject([SaccesoService], (saccesoService: SaccesoService) => {
       // spyOn(saccesoService, 'header').andReturn("{ headers: { 'Content-type': 'application/json' } }");
-      let testCampo = new Campo();
-      testCampo = { cod_campo: "cod", nome_campo: "nombre campotest"};
-      saccesoService
+      let testCampo = new Campo("charTest", "destest33");
+         saccesoService
         .postCampo(testCampo)
         .then(data => {
-          console.log("campo" , data)
-          const props = ["cod_sequencia", "campos" , "nome_sequencia" ];
-          const propsData = Object.keys(data[0]);
-          // expect(props).toEqual(propsData)
-          // expect(data.length).toBeGreaterThan(1);
+          expect(testCampo.cod_campo ).toEqual(data.cod_campo);
           done();
         })
         .catch(err => {
