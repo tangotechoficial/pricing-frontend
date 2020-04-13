@@ -51,7 +51,7 @@ describe("Services", () => {
   /*
   Test sacceso service
   */
-  it("sacceso getCampos()", done => {
+  it("check Sacceso-getCampos properties", done => {
     inject([SaccesoService], (saccesoService: SaccesoService) => {
       saccesoService
         .getCampos()
@@ -69,17 +69,19 @@ describe("Services", () => {
     })();
   });
 
+
     /*
   Test condicion service
   */
- it("condicion getCamadas()", done => {
+ it("check Condicion-camadas data & properties", done => {
   inject([CondicionService], (condicionService: CondicionService) => {
     condicionService
       .getCamadas()
       .then(data => {
-        const props = ["cod_camada", "nnome_camada" , "tipo_base_vendas"];
-        verifyKey({ props, data: data[0], expect });
-        console.log(data);
+        const props = ["cod_camada", "nome_camada" , "tipo_base_vendas"];
+        const propsData = Object.keys(data[0]);
+        expect(props).toEqual(propsData)
+        expect(data.length).toBeGreaterThan(1);
         done();
       })
       .catch(err => {
@@ -90,6 +92,86 @@ describe("Services", () => {
   })();
 });
 
+
+it("check Condicion-chavecontas data & properties", done => {
+  inject([CondicionService], (condicionService: CondicionService) => {
+    condicionService
+      .getChaveContas()
+      .then(data => {
+        const props = ["cod_chavecontas", "desc_chavecontas"];
+        const propsData = Object.keys(data[0]);
+        expect(props).toEqual(propsData)
+        expect(data.length).toBeGreaterThan(1);
+        done();
+      })
+      .catch(err => {
+        console.log("error");
+        console.log(JSON.stringify(err));
+        done();
+      });
+  })();
+});
+
+
+it("check Condicion-tipoValor data & properties", done => {
+  inject([CondicionService], (condicionService: CondicionService) => {
+    condicionService
+      .getTiposValor()
+      .then(data => {
+        const props = ["cod_tipovalor", "desc_tipovalor"];
+        const propsData = Object.keys(data[0]);
+        expect(props).toEqual(propsData)
+        expect(data.length).toBeGreaterThan(1);
+        done();
+      })
+      .catch(err => {
+        console.log("error");
+        console.log(JSON.stringify(err));
+        done();
+      });
+  })();
+});
+
+it("check Condicion-SecuenciaAcceso data & properties", done => {
+  inject([CondicionService], (condicionService: CondicionService) => {
+    condicionService
+      .getSequenciasAcesso()
+      .then(data => {
+        const props = ["cod_sequencia", "campos" , "nome_sequencia" ];
+        const propsData = Object.keys(data[0]);
+        console.log(props,propsData);
+        expect(props).toEqual(propsData);
+        expect(data.length).toBeGreaterThan(1);
+        done();
+      })
+      .catch(err => {
+        console.log("error");
+        console.log(JSON.stringify(err));
+        done();
+      });
+  })();
+});
+
+
+it("check Condicion-SecuenciaAcceso data & properties", done => {
+  inject([CondicionService], (condicionService: CondicionService) => {
+    condicionService
+      .getSequenciasAcesso()
+      .then(data => {
+        const props = ["cod_sequencia", "campos" , "nome_sequencia" ];
+        const propsData = Object.keys(data[0]);
+        console.log(props,propsData);
+        expect(props).toEqual(propsData);
+        expect(data.length).toBeGreaterThan(1);
+        done();
+      })
+      .catch(err => {
+        console.log("error");
+        console.log(JSON.stringify(err));
+        done();
+      });
+  })();
+});
 
 
   // it("sacceso postSecuencia()", done => {

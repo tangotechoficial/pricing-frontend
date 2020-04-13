@@ -61,16 +61,18 @@ export class PrecioBaseComponent implements OnInit {
   }
 
   fetchData() {
+    console.log("fetchData------------------------")
     this.esquemasService
       .fetchCondicaoCamadaEsquema(this.typeBaseVendas)
       .then(camadasFullData => {
         this.stopLoading();
+        console.log(camadasFullData)
         this.camadasFullData = camadasFullData;
         console.log(this.camadasFullData)
       })
       .catch(err => {
         this.stopLoading();
-        console.log(err);
+        console.log(JSON.stringify(err));
       });
   }
 

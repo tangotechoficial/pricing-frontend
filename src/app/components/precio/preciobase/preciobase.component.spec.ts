@@ -1,18 +1,22 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { PrecioBaseComponent } from './preciobase.component';
-import { CondicionService } from 'app/services/condicion.service';
-import { NgxSpinnerService } from 'ngx-spinner';
-import { EsquemasService } from 'app/services/esquemas.service';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import {
+  ComponentFixture,
+  TestBed,
+  inject
+} from "@angular/core/testing";
+import { PrecioBaseComponent } from "./preciobase.component";
+import { CondicionService } from "app/services/condicion.service";
+import { NgxSpinnerService } from "ngx-spinner";
+import { EsquemasService } from "app/services/esquemas.service";
+import { NO_ERRORS_SCHEMA } from "@angular/core";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
+import { AuthenticationService } from "@app/services/authentication.service";
+import { JWTInterceptorHelper } from '@app/helpers/jwt.interceptor';
 
-
-
-describe('PrecioBaseComponent', () => {
+describe("PrecioBaseComponent", () => {
   let component: PrecioBaseComponent;
   let fixture: ComponentFixture<PrecioBaseComponent>;
 
-  localStorage['User'] = `{
+  localStorage["User"] = `{
     "id":4,
     "is_superuser":false,
     "username":"alice",
@@ -26,32 +30,53 @@ describe('PrecioBaseComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ PrecioBaseComponent ],
-      providers: [ CondicionService, NgxSpinnerService, EsquemasService],
-      schemas: [ NO_ERRORS_SCHEMA ],
-      imports: [ HttpClientModule ],
-    })
-    .compileComponents();
+      declarations: [PrecioBaseComponent],
+      providers: [
+        {
+          provide: HTTP_INTERCEPTORS,
+          useClass: JWTInterceptorHelper,
+          multi: true
+        },
+        CondicionService,
+        NgxSpinnerService,
+        EsquemasService
+      ],
+      schemas: [NO_ERRORS_SCHEMA],
+      imports: [HttpClientModule]
+    }).compileComponents();
+
+    inject(
+      [AuthenticationService],
+      (authenticationService: AuthenticationService) => {
+        const email = "tester";
+        const password = "@t@ng0@t3ch";
+        authenticationService.login(email, password).subscribe();
+      }
+    )();
   });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(PrecioBaseComponent);
     component = fixture.componentInstance;
-    component.fetchData = () => {}
-    fixture.detectChanges()
+    fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 
+  it("Check technical user", () => {
+    component.checkTypeUser();
+    expect(component.bBusiness).toBeFalsy();
+  });
 
-  describe("ngOnInit", () => {
-    it('Check technical user', () => {
-      component.checkTypeUser()
-      expect(component.bBusiness).toBeFalsy();
-    })
-  })
-
+  it("check fetching data", done => {
+    component.fetchData();
+    setTimeout(() => {
+      console.log(component.camadasFullData);
+      expect(component.camadasFullData.length).toBeGreaterThan(1);
+      done();
+    }, 3000);
+  });
 
 });
