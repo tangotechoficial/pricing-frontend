@@ -142,15 +142,16 @@ export class DiretrizEstrategicaComponent implements OnInit, OnChanges,OnDestroy
     });
   }
 
-  loadFornecedor(value) {
+  loadFornecedor(subCat, category) {
+    console.log(subCat, category);
     this.spinner.show();
-    return this.diretrixService.getFornecedores(value.currentTarget.value).
+    return this.diretrixService.getFornecedores(subCat.currentTarget.value, category ).
     then(fornecedores => {this.fornecedores = fornecedores; this.spinner.hide();
     });
   }
-  loadUF(value) {
+  loadUF(frn, cat, subcat) {
     this.spinner.show();
-    return this.diretrixService.getFiliais(value.currentTarget.value).then(filial => {this.filial = filial;this.spinner.hide(); })
+    return this.diretrixService.getFiliais(frn.currentTarget.value, cat, subcat).then(filial => {this.filial = filial; this.spinner.hide(); })
   }
 
   setFilter() {

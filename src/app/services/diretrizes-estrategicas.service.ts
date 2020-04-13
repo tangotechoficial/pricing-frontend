@@ -9,6 +9,7 @@ import { Category } from '@app/models/category';
 import { SubCategory } from '@app/models/subcategory';
 import { Fornecedor } from '@app/models/fornecedor';
 import { Filial } from '@app/models/filial';
+import { Filter } from '@app/models/filter';
 
 @Injectable({
   providedIn: 'root'
@@ -82,8 +83,13 @@ export class DiretrizesEstrategicasService {
 
   }
 
-  getFornecedores(param: any): Promise<Fornecedor[]> {
-    const options = param ? { params: new HttpParams().set('CODCLSMER', param) } : {};
+  getFornecedores(subCat: any, category: any): Promise<Fornecedor[]> {
+    const options = {
+      params: {
+        CODCLSMER: subCat,
+        CODFMLMER: category
+      }
+    };
     const result =  this.http.get(this.fornecedorURL, options).toPromise();
     return result.then(
       (response: any) => {
@@ -93,8 +99,14 @@ export class DiretrizesEstrategicasService {
 
   }
 
-  getFiliais(param: any): Promise<Filial[]> {
-    const options = param ? { params: new HttpParams().set('CODDIVFRN', param) } : {};
+  getFiliais(frn, cat, subCat): Promise<Filial[]> {
+    const options = {
+      params: {
+        CODDIVFRN: frn,
+        CODCLSMER: subCat,
+        CODFMLMER: cat
+      }
+    };
     const result =  this.http.get(this.filialURL, options).toPromise();
     return result.then(
       (response: any) => {
@@ -114,7 +126,9 @@ export class DiretrizesEstrategicasService {
           if(key !== 'desdrtcllatu') {
             connectr = '&';
           }
-          url = url + connectr + key.toUpperCase() + '=' + params[key];
+          if(params[key] !== null){
+            url = url + connectr + key.toUpperCase() + '=' + params[key];
+          }
         }
     });
     const result =  this.http.get(url).toPromise();
