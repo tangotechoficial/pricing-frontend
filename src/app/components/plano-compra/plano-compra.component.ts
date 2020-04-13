@@ -50,7 +50,7 @@ export class PlanoCompraComponent implements OnInit, OnDestroy, DoCheck {
     this.planningDataManager.actualPlanData
     .pipe(untilDestroyed(this))
     .subscribe(
-      diretrixes => this.planningData = diretrixes
+      planningData => this.planningData = planningData
     );
 
   }
