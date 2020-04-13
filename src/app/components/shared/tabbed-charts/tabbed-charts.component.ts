@@ -22,10 +22,10 @@ export class TabbedChartsComponent implements OnInit, OnDestroy{
   competitivityData = competitivityData;
   sellingData = sellingData;
 
-  marginIndicator = 0
-  competitivityIndicator = 0
-  sellingIndicator = 0
-
+  marginIndicator = 0;
+  competitivityIndicator = 0;
+  sellingIndicator = 0;
+  dataLoaded = false;
   planningData: PurchasePlan[];
 
   public chartOptions: ChartOptions = {
@@ -82,39 +82,22 @@ export class TabbedChartsComponent implements OnInit, OnDestroy{
   */
 
   ngOnInit(): void {
-
+    console.log('init')
     this.planningDataManager.actualPlanData
-    .pipe(untilDestroyed(this))
     .subscribe(
       planningData => {
-        planningData.map((row, idx, arr) => {
-            let val = 0;
-            Object.keys(row).forEach((key, idx) => {
-              switch (key) {
-                case 'VLRVNDPRVCTR':
-                  this.sellingChartData[0].data.push(row[key]);
-                  break;
-                case 'VLRVNDLIQOCD':
-                  this.sellingChartData[1].data.push(row[key]);
-                  break;
-                case 'VLRMCDCAL':
-                  this.competitivityChartData[0].data.push(row[key]);
-                  break;
-                case 'VLRMCDOCD':
-                  this.competitivityChartData[1].data.push(row[key]);
-                  break;
-                case 'VLRMRGBRTCAL':
-                  val = row.VLRMRGBRTCAL * row.VLRVNDPRVCTR / row.VLRPCOVNDLIQCAL;
-                  this.marginChartData[0].data.push(val);
-                  break;
-                case 'VLRMRGBRTOCD':
-                  val = row.VLRMRGBRTOCD * row.VLRVNDLIQOCD / row.VLRPCOVNDLIQOCD;
-                  this.marginChartData[1].data.push(val);
-                  break;
-              }
-            });
+        planningData.map((row, i, arr) => {
+          let val = row.VLRMRGBRTCAL * row.VLRVNDPRVCTR / row.VLRPCOVNDLIQCAL;
+          this.marginChartData[0].data.push(val);
+
+          val = row.VLRMRGBRTOCD * row.VLRVNDLIQOCD / row.VLRPCOVNDLIQOCD;
+          this.marginChartData[1].data.push(val);
+
+          this.sellingChartData[0].data.push(row.VLRVNDPRVCTR);
+          this.sellingChartData[1].data.push(row.VLRVNDLIQOCD);
+          this.competitivityChartData[0].data.push(row.VLRMCDCAL);
+          this.competitivityChartData[1].data.push(row.VLRMCDOCD);
         });
-      }
-    );
+      });
   }
 }
