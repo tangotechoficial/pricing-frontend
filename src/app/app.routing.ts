@@ -17,6 +17,8 @@ import { SelectCondicionComponent } from './components/select-condicion/select-c
 import { PlanoCompraComponent } from './components/plano-compra/plano-compra.component';
 import { ExecucaoComponent } from './components/execucao/execucao.component';
 import { SimuladorComponent } from './components/simulador/simulador.component';
+import {SimuladorVendasComponent} from './components/simulador-vendas/simulador-vendas.component'
+
 /* Routes Array */
 const appRoutes: Routes = [
     { path: 'login', component: LoginComponent},
@@ -24,6 +26,7 @@ const appRoutes: Routes = [
 //    { path: 'pbaseseleccion', component: PbaseseleccionComponent},
     { path: 'preciobase', component: PrecioBaseComponent, canActivate: [AuthenticationGuard]},
     { path: 'precioventa', component: PrecioBaseComponent, canActivate: [AuthenticationGuard]},
+    { path: 'simuladorvendas', component: SimuladorVendasComponent, canActivate: [AuthenticationGuard]},
     { path: 'sacceso', component: SaccesoComponent, canActivate: [AuthenticationGuard]},
     { path: 'selectcondicao', component: SelectCondicionComponent},
     { path: 'condicion/:param', component: CondicionComponent, runGuardsAndResolvers: 'always'},
