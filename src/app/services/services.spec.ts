@@ -7,6 +7,7 @@ import { JWTInterceptorHelper } from "@helpers/jwt.interceptor";
 import { PurchasePlanningService } from "./purchasePlanning.service";
 import { EsquemasService } from "./esquemas.service";
 import { CondicionService } from './condicion.service';
+import { Campo } from 'app/models/campo';
 
 
 // Setea el tiempo de espera de la peticion
@@ -69,10 +70,53 @@ describe("Services", () => {
     })();
   });
 
+  it("check Sacceso-sequencias data & properties", done => {
+    inject([SaccesoService], (saccesoService: SaccesoService) => {
+      saccesoService
+        .getSequencias()
+        .then(data => {
+          const props = ["cod_sequencia", "campos" , "nome_sequencia" ];
+          const propsData = Object.keys(data[0]);
+          expect(props).toEqual(propsData)
+          expect(data.length).toBeGreaterThan(1);
+          done();
+        })
+        .catch(err => {
+          console.log("error");
+          console.log(JSON.stringify(err));
+          done();
+        });
+    })();
+  });
+
+
+  it("PostCampo", done => {
+    inject([SaccesoService], (saccesoService: SaccesoService) => {
+      // spyOn(saccesoService, 'header').andReturn("{ headers: { 'Content-type': 'application/json' } }");
+      let testCampo = new Campo();
+      testCampo = { cod_campo: "cod", nome_campo: "nombre campotest"};
+      saccesoService
+        .postCampo(testCampo)
+        .then(data => {
+          console.log("campo" , data)
+          const props = ["cod_sequencia", "campos" , "nome_sequencia" ];
+          const propsData = Object.keys(data[0]);
+          // expect(props).toEqual(propsData)
+          // expect(data.length).toBeGreaterThan(1);
+          done();
+        })
+        .catch(err => {
+          console.log("error");
+          console.log(JSON.stringify(err));
+          done();
+        });
+    })();
+  });
 
     /*
   Test condicion service
   */
+
  it("check Condicion-camadas data & properties", done => {
   inject([CondicionService], (condicionService: CondicionService) => {
     condicionService

@@ -22,6 +22,18 @@ describe("MenuComponent", () => {
   let component: MenuComponent;
   let fixture: ComponentFixture<MenuComponent>;
 
+  localStorage["User"] = `{
+    "id":4,
+    "is_superuser":false,
+    "username":"alice",
+    "first_name":"Alice",
+    "last_name":"",
+    "email":"",
+    "groups": [
+      {"name":"tecnico"}
+    ]
+  }`
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
