@@ -1,22 +1,32 @@
-import { Component } from '@angular/core'
-import { marginData } from '@helpers/marginData'
-import { competitivityData } from '@helpers/competitivity'
-import { sellingData } from '@helpers/selling'
+import { PurchasePlan } from './../../../models/purchaseplan';
+import { PlanningDataManagerService } from './../../../services/planning-data.service';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { marginData } from '@helpers/marginData';
+import { competitivityData } from '@helpers/competitivity';
+import { sellingData } from '@helpers/selling';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
+import { untilDestroyed } from 'ngx-take-until-destroy';
 
 @Component({
+  // tslint:disable-next-line: component-selector
   selector: 'tabbed-charts',
   templateUrl: './tabbed-charts.component.html',
   styleUrls: ['./tabbed-charts.component.css'],
   providers: [NgxSpinnerService]
 })
 
-export class TabbedChartsComponent {
-  marginData = marginData
-  competitivityData = competitivityData
-  sellingData = sellingData
+export class TabbedChartsComponent implements OnInit, OnDestroy{
+  marginData = marginData;
+  competitivityData = competitivityData;
+  sellingData = sellingData;
+
+  marginIndicator = 0
+  competitivityIndicator = 0
+  sellingIndicator = 0
+
+  planningData: PurchasePlan[];
 
   public chartOptions: ChartOptions = {
     responsive: true,
@@ -34,17 +44,77 @@ export class TabbedChartsComponent {
   public chartPlugins = [];
 
   public marginChartData: ChartDataSets[] = [
-    { data: Array.from({length: 5}, () => Math.floor(Math.random() * 100)), label: 'Sugerido', backgroundColor: '#6289CF' },
-    { data: Array.from({length: 5}, () => Math.floor(Math.random() * 100)), label: 'Planjedo', backgroundColor: '#FF6F50'}
+    { data: [], label: 'Sugerido', backgroundColor: '#6289CF' },
+    { data: [], label: 'Planjedo', backgroundColor: '#FF6F50'}
   ];
 
   public competitivityChartData: ChartDataSets[] = [
-    { data: Array.from({length: 5}, () => Math.floor(Math.random() * 100)), label: 'Sugerido', backgroundColor: '#6289CF'},
-    { data: Array.from({length: 5}, () => Math.floor(Math.random() * 100)), label: 'Planjedo', backgroundColor: '#FF6F50'}
+    { data: [], label: 'Sugerido', backgroundColor: '#6289CF'},
+    { data: [], label: 'Planjedo', backgroundColor: '#FF6F50'}
   ];
 
   public sellingChartData: ChartDataSets[] = [
-    { data: Array.from({length: 5}, () => Math.floor(Math.random() * 100)), label: 'Sugerido', backgroundColor: '#6289CF'},
-    { data: Array.from({length: 5}, () => Math.floor(Math.random() * 100)), label: 'Planjedo', backgroundColor: '#FF6F50'}
+    { data: [] , label: 'Sugerido', backgroundColor: '#6289CF'},
+    { data: [], label: 'Planjedo', backgroundColor: '#FF6F50'}
   ];
+
+  constructor(private planningDataManager: PlanningDataManagerService) {
+  }
+
+  ngOnDestroy(): void {
+
+  }
+
+  // Vendas
+ //VLRVNDPRVCTR - Sugerido -> idx 0
+ //VLRVNDLIQOCD - Planejado -> idx 1
+
+ // Competitividade
+ /**
+  * VLRMCDCAL - Sugerido
+  * VLRMCDOCD - Planejado
+  */
+
+ //Margem
+ /**
+  * VLRMRGBRTCAL * VLRVNDPRVCTR / VLRPCOVNDLIQCAL (Sugerido)
+  * VLRMRGBRTOCD * VLRVNDLIQOCD / VLRPCOVNDLIQOCD (Planejado)
+  */
+
+  ngOnInit(): void {
+
+    this.planningDataManager.actualPlanData
+    .pipe(untilDestroyed(this))
+    .subscribe(
+      planningData => {
+        planningData.map((row, idx, arr) => {
+            let val = 0;
+            Object.keys(row).forEach((key, idx) => {
+              switch (key) {
+                case 'VLRVNDPRVCTR':
+                  this.sellingChartData[0].data.push(row[key]);
+                  break;
+                case 'VLRVNDLIQOCD':
+                  this.sellingChartData[1].data.push(row[key]);
+                  break;
+                case 'VLRMCDCAL':
+                  this.competitivityChartData[0].data.push(row[key]);
+                  break;
+                case 'VLRMCDOCD':
+                  this.competitivityChartData[1].data.push(row[key]);
+                  break;
+                case 'VLRMRGBRTCAL':
+                  val = row.VLRMRGBRTCAL * row.VLRVNDPRVCTR / row.VLRPCOVNDLIQCAL;
+                  this.marginChartData[0].data.push(val);
+                  break;
+                case 'VLRMRGBRTOCD':
+                  val = row.VLRMRGBRTOCD * row.VLRVNDLIQOCD / row.VLRPCOVNDLIQOCD;
+                  this.marginChartData[1].data.push(val);
+                  break;
+              }
+            });
+        });
+      }
+    );
+  }
 }
