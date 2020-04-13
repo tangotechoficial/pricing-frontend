@@ -126,7 +126,7 @@
                               <th></th>
                           </tr>
                           <tr *ngFor="let items of diretrizesEstrategicas">
-                              <td>{{items.DATREFPOD.split(" ")[0]}}</td>
+                              <td>{{items.DATREFPOD.split(" ")[0].split("-").reverse().join("/")}}</td>
                               <td></td>
                               <td>{{items.NOMMES}}</td>
                               <td></td>
