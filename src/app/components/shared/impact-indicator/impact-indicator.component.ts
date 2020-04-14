@@ -1,24 +1,33 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'impact-indicator',
   templateUrl: './impact-indicator.component.html',
   styleUrls: ['./impact-indicator.component.css']
 })
-export class ImpactIndicatorComponent implements OnInit {
+export class ImpactIndicatorComponent implements OnChanges{
 
-  @Input() title
-  @Input() indicatorValue
-  @Input() symbol
-
-  outputValue: string;
+  title$: string;
+  symbol$: string;
+  indicatorValue$: number;
 
   constructor() { }
+  ngOnChanges(changes: SimpleChanges): void {
+    this.indicatorValue$ = changes.indicatorValue.currentValue;
+  }
 
-  ngOnInit() {
 
-    this.outputValue = `${this.indicatorValue}` + `${this.symbol}`
 
+  @Input() set indicatorValue(value) {
+    this.indicatorValue$ = value;
+  }
+
+  @Input() set symbol(value) {
+    this.symbol$ = value;
+  }
+
+  @Input() set title(value) {
+    this.title$ = value;
   }
 
 
