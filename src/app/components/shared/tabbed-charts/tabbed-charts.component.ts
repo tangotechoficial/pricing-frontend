@@ -22,6 +22,9 @@ export class TabbedChartsComponent implements OnInit, OnDestroy{
   competitivityData = competitivityData;
   sellingData = sellingData;
 
+  somaVendasPlanejadas = 0;
+  somaVendasSugerido: 0;
+
   marginIndicator = 0;
   competitivityIndicator = 0;
   sellingIndicator = 0;
@@ -94,9 +97,15 @@ export class TabbedChartsComponent implements OnInit, OnDestroy{
           this.marginChartData[1].data.push(val);
 
           this.sellingChartData[0].data.push(row.VLRVNDPRVCTR);
+          this.somaVendasSugerido = (this.sellingChartData[0].data).reduce((acc, item) => acc + item)
+          console.log(this.sellingChartData[0].data)
+          console.log(this.somaVendasSugerido)
           this.sellingChartData[1].data.push(row.VLRVNDLIQOCD);
           this.competitivityChartData[0].data.push(row.VLRMCDCAL);
           this.competitivityChartData[1].data.push(row.VLRMCDOCD);
+
+
+
         });
       });
   }
