@@ -1,6 +1,6 @@
 import { PurchasePlan } from './../../../models/purchaseplan';
 import { PlanningDataManagerService } from './../../../services/planning-data.service';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, DoCheck, Input } from '@angular/core';
 import { marginData } from '@helpers/marginData';
 import { competitivityData } from '@helpers/competitivity';
 import { sellingData } from '@helpers/selling';
@@ -17,7 +17,7 @@ import { untilDestroyed } from 'ngx-take-until-destroy';
   providers: [NgxSpinnerService]
 })
 
-export class TabbedChartsComponent implements OnInit, OnDestroy{
+export class TabbedChartsComponent{
   marginData = marginData;
   competitivityData = competitivityData;
   sellingData = sellingData;
@@ -28,7 +28,6 @@ export class TabbedChartsComponent implements OnInit, OnDestroy{
 
   marginIndicator = 0;
   competitivityIndicator = 0;
-  dataLoaded = false;
   planningData: PurchasePlan[];
 
   public chartOptions: ChartOptions = {
@@ -47,81 +46,60 @@ export class TabbedChartsComponent implements OnInit, OnDestroy{
   public chartPlugins = [];
 
   public marginChartData: ChartDataSets[] = [
-    { data: [], label: 'Sugerido', backgroundColor: '#6289CF' },
-    { data: [], label: 'Planjedo', backgroundColor: '#FF6F50'}
+    { data: null, label: 'Sugerido', backgroundColor: '#6289CF' },
+    { data: null, label: 'Planjedo', backgroundColor: '#FF6F50'}
   ];
 
   public competitivityChartData: ChartDataSets[] = [
-    { data: [], label: 'Sugerido', backgroundColor: '#6289CF'},
-    { data: [], label: 'Planjedo', backgroundColor: '#FF6F50'}
+    { data: null, label: 'Sugerido', backgroundColor: '#6289CF'},
+    { data: null, label: 'Planjedo', backgroundColor: '#FF6F50'}
   ];
 
   public sellingChartData: ChartDataSets[] = [
-    { data: [] , label: 'Sugerido', backgroundColor: '#6289CF'},
-    { data: [], label: 'Planjedo', backgroundColor: '#FF6F50'}
+    { data: null , label: 'Sugerido', backgroundColor: '#6289CF'},
+    { data: null, label: 'Planjedo', backgroundColor: '#FF6F50'}
   ];
 
-  constructor(private planningDataManager: PlanningDataManagerService) {
+  constructor(private planningDataManager: PlanningDataManagerService) { }
+
+  updateChartsData() {
+
+    this.marginChartData[0].data = [];
+    this.marginChartData[1].data = [];
+    this.sellingChartData[0].data = [];
+    this.sellingChartData[1].data = [];
+    this.competitivityChartData[0].data = [];
+    this.competitivityChartData[1].data = [];
+    this.somaVendasSugerido = 0;
+    this.somaVendasPlanejado = 0;
+    this.sellingIndicator = 0;
+
+    this.planningData.map((row, i, arr) => {
+      let val = row.VLRMRGBRTCAL * row.VLRVNDPRVCTR / row.VLRPCOVNDLIQCAL;
+      this.marginChartData[0].data.push(val);
+      val = row.VLRMRGBRTOCD * row.VLRVNDLIQOCD / row.VLRPCOVNDLIQOCD;
+      this.marginChartData[1].data.push(val);
+      this.sellingChartData[0].data.push(row.VLRVNDPRVCTR);
+      this.sellingChartData[1].data.push(row.VLRVNDLIQOCD);
+      this.competitivityChartData[0].data.push(row.VLRMCDCAL);
+      this.competitivityChartData[1].data.push(row.VLRMCDOCD);
+
+    });
+
+    this.sellingChartData[0].data.forEach(element => {
+      this.somaVendasSugerido = this.somaVendasSugerido + Number(element);
+    });
+    this.sellingChartData[1].data.forEach(element => {
+      this.somaVendasPlanejado = this.somaVendasPlanejado + Number(element);
+    });
+    this.sellingIndicator = this.somaVendasSugerido - this.somaVendasPlanejado;
   }
 
-  ngOnDestroy(): void {
 
-  }
-
-  // Vendas
- //VLRVNDPRVCTR - Sugerido -> idx 0
- //VLRVNDLIQOCD - Planejado -> idx 1
-
- // Competitividade
- /**
-  * VLRMCDCAL - Sugerido
-  * VLRMCDOCD - Planejado
-  */
-
- //Margem
- /**
-  * VLRMRGBRTCAL * VLRVNDPRVCTR / VLRPCOVNDLIQCAL (Sugerido)
-  * VLRMRGBRTOCD * VLRVNDLIQOCD / VLRPCOVNDLIQOCD (Planejado)
-  */
-
-  ngOnInit(): void {
-    console.log('init')
-    this.planningDataManager.actualPlanData
-    .subscribe(
-      planningData => {
-        planningData.map((row, i, arr) => {
-          let val = row.VLRMRGBRTCAL * row.VLRVNDPRVCTR / row.VLRPCOVNDLIQCAL;
-          this.marginChartData[0].data.push(val);
-
-          val = row.VLRMRGBRTOCD * row.VLRVNDLIQOCD / row.VLRPCOVNDLIQOCD;
-          this.marginChartData[1].data.push(val);
-
-          this.sellingChartData[0].data.push(row.VLRVNDPRVCTR);
-          this.sellingChartData[1].data.push(row.VLRVNDLIQOCD);
-          this.competitivityChartData[0].data.push(row.VLRMCDCAL);
-          this.competitivityChartData[1].data.push(row.VLRMCDOCD);
-
-
-
-        });
-      });
-
-      //calcula soma de vendas alcançadas sugerida
-      this.sellingChartData[0].data.forEach(element => {
-              this.somaVendasSugerido = this.somaVendasSugerido + Number(element)
-      })
-      //calcula soma de vendas alcançadas sugerida
-      this.sellingChartData[1].data.forEach(element => {
-              this.somaVendasPlanejado = this.somaVendasPlanejado + Number(element)
-      })
-
-      console.log(this.sellingChartData[0].data)
-      console.log(this.somaVendasSugerido)
-      console.log(this.sellingChartData[1].data)
-      console.log(this.somaVendasPlanejado)
-      this.sellingIndicator = this.somaVendasSugerido - this.somaVendasPlanejado
-      console.log(this.sellingIndicator)
-
-
+  @Input() set data(data: any) {
+    if (data) {
+      this.planningData = data;
+      this.updateChartsData();
+    }
   }
 }
