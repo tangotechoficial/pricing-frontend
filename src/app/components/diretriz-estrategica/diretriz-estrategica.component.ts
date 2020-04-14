@@ -114,7 +114,6 @@ export class DiretrizEstrategicaComponent implements OnInit, OnChanges,OnDestroy
   resetFilter() {
     this.filterForm.reset();
     this.spinner.show();
-        this.spinner.show()
     this.sumVLRVNDFATLIQ = 0
     this.sumVLRRCTLIQAPU= 0
     this.MRGBRT = 0
@@ -174,6 +173,7 @@ export class DiretrizEstrategicaComponent implements OnInit, OnChanges,OnDestroy
     this.MRGCRB = 0
     this.sumVLRMRGCRB = 0
     this.sumVLRMRGBRT = 0
+    this.spinner.show()
     this.diretrixService.getFilteredData(this.filterForm.value)
       .then((result) => {
         this.diretrixDataManager.setData(result)
