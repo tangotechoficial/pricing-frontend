@@ -17,6 +17,9 @@
 }
 
 .box-indicator {
-  padding-top: 3.5rem;
+  padding-top: 4.5rem;
 }
-
+.chart {
+  display: block;
+  max-width: 80%;
+  max-height: 18.5rem;}

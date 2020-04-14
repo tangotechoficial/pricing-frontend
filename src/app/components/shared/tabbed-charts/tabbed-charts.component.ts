@@ -37,6 +37,7 @@ export class TabbedChartsComponent{
   planningData: PurchasePlan[];
 
   public chartOptions: ChartOptions = {
+
     responsive: true,
     animation: {
       animateScale: true,
@@ -46,6 +47,21 @@ export class TabbedChartsComponent{
       display: true,
       position: 'bottom'
     },
+    layout: {
+      padding: {
+          left: 10,
+          right: 10,
+          top: 10,
+          bottom: 10
+      }
+    },
+    scales: {
+      yAxes: [{
+          ticks: {
+              beginAtZero: true
+          }
+      }]
+    }
   };
   public chartLabels: Label[] = ['S1', 'S2', 'S3', 'S4', 'S5'];
   public chartType: ChartType = 'bar';
