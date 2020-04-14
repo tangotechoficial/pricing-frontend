@@ -11,7 +11,7 @@
       aria-labelledby="nav-margin">
       <div class="row">
         <div class="col-3 box-indicator">
-          <impact-indicator title="Impacto Mensal" [indicatorValue]="marginIndicator" symbol="%"></impact-indicator>
+          <impact-indicator title="Impacto Mensal" [indicatorValue]="marginIndicator.toFixed(2)" symbol="%"></impact-indicator>
         </div>
         <div class="col-9">
           <span class="chart-title"><strong>Margem</strong> Sugerida vs Planejada</span>
@@ -27,7 +27,7 @@
       aria-labelledby="nav-competitividade">
       <div class="row">
         <div class="col-3 box-indicator">
-          <impact-indicator title="Impacto Mensal" [indicatorValue]="competitivityIndicator" symbol="%"></impact-indicator>
+          <impact-indicator title="Impacto Mensal" [indicatorValue]="competitivityIndicator.toFixed(2)" symbol="%"></impact-indicator>
         </div>
         <div class="col-9">
           <span class="chart-title"><strong>Competitividade</strong> Sugerida vs Planejada</span>
@@ -43,7 +43,7 @@
       aria-labelledby="nav-vendas">
       <div class="row">
         <div class="col-3 box-indicator">
-          <impact-indicator title="Impacto Mensal" [indicatorValue]="sellingIndicator" symbol="k"></impact-indicator>
+          <impact-indicator title="Impacto Mensal" [indicatorValue]="sellingIndicator.toFixed(2)" symbol="k"></impact-indicator>
         </div>
         <div class="col-9">
           <span class="chart-title"><strong>Vendas</strong> Sugerida vs Planejada</span>

@@ -25,9 +25,16 @@ export class TabbedChartsComponent implements OnInit, OnDestroy{
   somaVendasPlanejado = 0;
   somaVendasSugerido = 0;
   sellingIndicator = 0;
+  sellPercent = 0;
 
+  somaMargemPlanejada = 0
+  somaMargemSugerida = 0
   marginIndicator = 0;
+
+  somaCompetitividadePlanejada = 0
+  somaCompetitividadeSugerida = 0
   competitivityIndicator = 0;
+
   dataLoaded = false;
   planningData: PurchasePlan[];
 
@@ -110,18 +117,39 @@ export class TabbedChartsComponent implements OnInit, OnDestroy{
       this.sellingChartData[0].data.forEach(element => {
               this.somaVendasSugerido = this.somaVendasSugerido + Number(element)
       })
-      //calcula soma de vendas alcançadas sugerida
+      //calcula soma de vendas alcançadas planejada
       this.sellingChartData[1].data.forEach(element => {
               this.somaVendasPlanejado = this.somaVendasPlanejado + Number(element)
       })
+      //calcula margem sugerida
+      this.marginChartData[0].data.forEach(element => {
+              this.somaMargemPlanejada = this.somaMargemPlanejada + Number(element)
+      })
+      //calcula margem planejada
+      this.marginChartData[1].data.forEach(element => {
+              this.somaMargemSugerida = this.somaMargemSugerida + Number(element)
+      })
 
-      console.log(this.sellingChartData[0].data)
-      console.log(this.somaVendasSugerido)
-      console.log(this.sellingChartData[1].data)
-      console.log(this.somaVendasPlanejado)
+      //calcula competitividade sugerida
+      this.competitivityChartData[0].data.forEach(element => {
+              this.somaMargemPlanejada = this.somaMargemPlanejada + Number(element)
+      })
+      //calcula competitividade planejada
+      this.marginChartData[1].data.forEach(element => {
+              this.somaCompetitividadeSugerida = this.somaCompetitividadePlanejada + Number(element)
+      })
+
+
       this.sellingIndicator = this.somaVendasSugerido - this.somaVendasPlanejado
-      console.log(this.sellingIndicator)
-
-
+      this.sellPercent = this.sellingIndicator / (this.somaVendasPlanejado/this.sellingChartData.length)
+      this.marginIndicator = this.somaMargemSugerida - this.somaMargemPlanejada
+      this.competitivityIndicator = this.somaCompetitividadeSugerida - this.somaCompetitividadePlanejada
+      console.log(this.competitivityChartData[0].data)
+      console.log(this.competitivityChartData[1].data)
+      console.log(this.competitivityIndicator)
+      console.log(this.marginChartData[0].data)
+      console.log(this.marginChartData[1].data)
+      console.log(this.marginIndicator)
+      console.log(this.sellPercent)
   }
 }
