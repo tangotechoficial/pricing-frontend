@@ -25,8 +25,14 @@ export class TabbedChartsComponent{
   somaVendasPlanejado = 0;
   somaVendasSugerido = 0;
   sellingIndicator = 0;
+  sellPercent = 0;
 
+  somaMargemPlanejada = 0
+  somaMargemSugerida = 0
   marginIndicator = 0;
+
+  somaCompetitividadePlanejada = 0
+  somaCompetitividadeSugerida = 0
   competitivityIndicator = 0;
   planningData: PurchasePlan[];
 
@@ -86,13 +92,37 @@ export class TabbedChartsComponent{
 
     });
 
+    //calcula soma de vendas alcançadas sugerida
     this.sellingChartData[0].data.forEach(element => {
-      this.somaVendasSugerido = this.somaVendasSugerido + Number(element);
-    });
+          this.somaVendasSugerido = this.somaVendasSugerido + Number(element)
+    })
+    //calcula soma de vendas alcançadas planejada
     this.sellingChartData[1].data.forEach(element => {
-      this.somaVendasPlanejado = this.somaVendasPlanejado + Number(element);
-    });
+          this.somaVendasPlanejado = this.somaVendasPlanejado + Number(element)
+    })
+    //calcula margem sugerida
+    this.marginChartData[0].data.forEach(element => {
+          this.somaMargemPlanejada = this.somaMargemPlanejada + Number(element)
+    })
+    //calcula margem planejada
+    this.marginChartData[1].data.forEach(element => {
+          this.somaMargemSugerida = this.somaMargemSugerida + Number(element)
+    })
+
+    //calcula competitividade sugerida
+    this.competitivityChartData[0].data.forEach(element => {
+          this.somaMargemPlanejada = this.somaMargemPlanejada + Number(element)
+    })
+    //calcula competitividade planejada
+    this.marginChartData[1].data.forEach(element => {
+          this.somaCompetitividadeSugerida = this.somaCompetitividadePlanejada + Number(element)
+    })
+
+
     this.sellingIndicator = this.somaVendasSugerido - this.somaVendasPlanejado;
+    this.sellPercent = this.sellingIndicator / (this.somaVendasPlanejado/this.sellingChartData.length);
+    this.marginIndicator = this.somaMargemSugerida - this.somaMargemPlanejada;
+    this.competitivityIndicator = this.somaCompetitividadeSugerida - this.somaCompetitividadePlanejada;
   }
 
 
