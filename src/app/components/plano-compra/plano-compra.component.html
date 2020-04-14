@@ -8,7 +8,7 @@
       <div class="container col-12 p-4 d-flex justify-content-start">
           <button type="button" class="btn bg-standard btn-filter-color" (click)="modal()"><i
                   class="fas fa-filter btn-filter-color"></i>&nbsp;Filtro</button>
-          <div class="applied-filters"></div>
+          <filter-tag [filter]="filter" [closeable]="false"></filter-tag>
       </div>
     </div>
     <tabbed-charts *ngIf="planningData" class="row shaded charts"></tabbed-charts>
