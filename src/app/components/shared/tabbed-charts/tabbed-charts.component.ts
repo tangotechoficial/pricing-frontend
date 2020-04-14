@@ -135,10 +135,10 @@ export class TabbedChartsComponent{
     })
 
 
-    this.sellingIndicator = this.somaVendasSugerido - this.somaVendasPlanejado;
-    this.sellPercent = this.sellingIndicator / (this.somaVendasPlanejado/this.sellingChartData.length);
-    this.marginIndicator = this.somaMargemSugerida - this.somaMargemPlanejada;
-    this.competitivityIndicator = this.somaCompetitividadeSugerida - this.somaCompetitividadePlanejada;
+      this.sellingIndicator = this.somaVendasPlanejado - this.somaVendasSugerido
+      this.sellPercent = (((this.somaVendasPlanejado/this.somaVendasSugerido) - 1.0) * 100)
+      this.marginIndicator = this.somaMargemPlanejada - this.somaMargemSugerida
+      this.competitivityIndicator = this.somaCompetitividadePlanejada - this.somaCompetitividadeSugerida
   }
 
 
