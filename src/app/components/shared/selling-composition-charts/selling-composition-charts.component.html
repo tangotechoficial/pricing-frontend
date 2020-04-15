@@ -13,42 +13,44 @@
             <a class="nav-item nav-link" data-toggle="tab" id="nav-week5" href="#tab-week5" role="tab">Semana 5</a>
         </div>
       </nav>
-      <div class="col-12 tab-content">
-        <div class="tab-pane fade show active" id="tab-week1" role="tabpanel"
+      <div class="col-12  tab-content">
+        <div class="tab-pane show active" id="tab-week1" role="tabpanel"
         aria-labelledby="nav-week1">
-          <div class="col-6 d-flex">
+          <div class="col-6">
             <canvas baseChart [datasets]="volumeCompositionChartData" [chartType]="volumeCompositionType"
             [plugins]="chartPlugins" chart-dataset-override="datasetOverride">
             </canvas>
           </div>
-          <div class="col-6 d-flex">
+          <div class="col-6">
             <canvas baseChart [datasets]="volumeCompositionChartData" [chartType]="volumeCompositionType"
             [plugins]="chartPlugins" chart-dataset-override="datasetOverride">
             </canvas>
           </div>
         </div>
         <div class="tab-pane fade" id="tab-week2" role="tabpanel" aria-labelledby="nav-week2">
-          <div class="col-6 row">
+          <div class="col-6">
             <canvas baseChart [datasets]="volumeCompositionChartData" [chartType]="volumeCompositionType"
             [plugins]="chartPlugins" chart-dataset-override="datasetOverride">
             </canvas>
           </div>
-          <div class="col-6 d-flex">
+          <div class="col-6">
             <canvas baseChart [datasets]="volumeCompositionChartData" [chartType]="volumeCompositionType"
             [plugins]="chartPlugins" chart-dataset-override="datasetOverride">
             </canvas>
           </div>
+        </div>
         <div class="tab-pane fade" id="tab-week3" role="tabpanel" aria-labelledby="nav-week3">
-          <div class="col-6 d-flex">
+          <div class="col-6">
             <canvas baseChart [datasets]="volumeCompositionChartData" [chartType]="volumeCompositionType"
             [plugins]="chartPlugins" chart-dataset-override="datasetOverride">
             </canvas>
           </div>
-          <div class="col-6 d-flex">
+          <div class="col-6">
             <canvas baseChart [datasets]="volumeCompositionChartData" [chartType]="volumeCompositionType"
             [plugins]="chartPlugins" chart-dataset-override="datasetOverride">
             </canvas>
           </div>
+        </div>
         <div class="tab-pane fade" id="tab-week4" role="tabpanel" aria-labelledby="nav-week4">
           <div class="col-6 d-flex">
             <canvas baseChart [datasets]="volumeCompositionChartData" [chartType]="volumeCompositionType"
@@ -60,16 +62,17 @@
             [plugins]="chartPlugins" chart-dataset-override="datasetOverride">
             </canvas>
           </div>
+        </div>
         <div class="tab-pane fade" id="tab-week5" role="tabpanel" aria-labelledby="nav-week5">
-          <div class="col-6 d-flex">
+          <div class="col-6">
             <canvas baseChart [datasets]="volumeCompositionChartData" [chartType]="volumeCompositionType"
             [plugins]="chartPlugins" chart-dataset-override="datasetOverride">
             </canvas>
           </div>
-          <div class="col-6 d-flex">
-            <!-- <canvas baseChart [datasets]="volumeCompositionChartData" [chartType]="volumeCompositionType"
+          <div class="col-6">
+            <canvas baseChart [datasets]="volumeCompositionChartData" [chartType]="volumeCompositionType"
             [plugins]="chartPlugins" chart-dataset-override="datasetOverride">
-            </canvas> -->
+            </canvas>
           </div>
         </div>
       </div>
