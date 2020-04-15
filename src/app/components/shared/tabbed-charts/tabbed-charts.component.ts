@@ -53,17 +53,17 @@ export class TabbedChartsComponent{
 
   public marginChartData: ChartDataSets[] = [
     { data: null, label: 'Sugerido', backgroundColor: '#6289CF' },
-    { data: null, label: 'Planjedo', backgroundColor: '#FF6F50'}
+    { data: null, label: 'Planejado', backgroundColor: '#FF6F50'}
   ];
 
   public competitivityChartData: ChartDataSets[] = [
     { data: null, label: 'Sugerido', backgroundColor: '#6289CF'},
-    { data: null, label: 'Planjedo', backgroundColor: '#FF6F50'}
+    { data: null, label: 'Planejado', backgroundColor: '#FF6F50'}
   ];
 
   public sellingChartData: ChartDataSets[] = [
     { data: null , label: 'Sugerido', backgroundColor: '#6289CF'},
-    { data: null, label: 'Planjedo', backgroundColor: '#FF6F50'}
+    { data: null, label: 'Planejado', backgroundColor: '#FF6F50'}
   ];
 
   constructor(private planningDataManager: PlanningDataManagerService) { }

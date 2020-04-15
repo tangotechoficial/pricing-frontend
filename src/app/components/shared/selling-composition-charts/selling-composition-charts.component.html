@@ -5,20 +5,16 @@
         <h4>Composição do volume de vendas</h4>
       </div>
       <div class="col-12 d-flex">
-        <ng-container *ngFor="let data of sellingData">
+        <ng-container>
           <div class="col-6 d-flex">
-            <ngx-charts-bar-vertical
-              [view]="view"
-              [results]="data.series"
-              [gradient]="gradient"
-              [xAxis]="showXAxis"
-              [yAxis]="showYAxis"
-              [showXAxisLabel]="showXAxisLabel"
-              [showYAxisLabel]="showYAxisLabel"
-              [xAxisLabel]="data.name"
-              [yAxisLabel]="yAxisLabel"
-              (select)="onSelect($event)">
-            </ngx-charts-bar-vertical>
+            <canvas baseChart [datasets]="volumeCompositionChartData" [chartType]="volumeCompositionType"
+            [plugins]="chartPlugins" chart-dataset-override="datasetOverride">
+            </canvas>
+          </div>
+          <div class="col-6 d-flex">
+            <canvas baseChart [datasets]="volumeCompositionChartData" [chartType]="volumeCompositionType"
+            [plugins]="chartPlugins" chart-dataset-override="datasetOverride">
+            </canvas>
           </div>
         </ng-container>
       </div>

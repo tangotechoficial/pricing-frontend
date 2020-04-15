@@ -17,11 +17,11 @@
         <planning-table *ngIf="planningData" [data]="planningData"></planning-table>
       </div>
     </div>
-    <!-- <div class="row shaded">
-        <div class="chart-placeholder">
-          <selling-composition-charts data="planningData"></selling-composition-charts>
+    <div class="row shaded">
+        <div *ngIf="planningData" class="chart-placeholder">
+          <selling-composition-charts [data]="planningData"></selling-composition-charts>
         </div>
-    </div> -->
+    </div>
     <!-- <div class="row shaded">
       Workflow de aprovação
       <div class="chart-placeholder">
