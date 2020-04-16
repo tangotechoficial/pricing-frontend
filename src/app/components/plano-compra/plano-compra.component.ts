@@ -52,7 +52,6 @@ export class PlanoCompraComponent implements OnInit, OnDestroy, DoCheck {
     this.modal();
     this.filterService.filterCurrent.pipe(untilDestroyed(this)).subscribe(filter => { this.filter = filter; });
     this.planningDataManager.actualPlanData
-    .pipe(untilDestroyed(this))
     .subscribe(
       planningData => this.planningData = planningData
     );
@@ -61,7 +60,6 @@ export class PlanoCompraComponent implements OnInit, OnDestroy, DoCheck {
 
   @Input() isSubmitted(value) {
     this._submitted = value;
-
   }
 
   modal() {

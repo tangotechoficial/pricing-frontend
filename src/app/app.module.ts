@@ -62,6 +62,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { ImpactIndicatorComponent } from './components/shared/impact-indicator/impact-indicator.component';
 import { PlanningFilterModalComponent } from './components/filter-modal-plano/filter-modal-plano.component';
 import { ChartsModule } from 'ng2-charts';
+import { PlanningPopupComponent } from './components/shared/planning-popup/planning-popup.component';
 
 registerLocaleData(localePt, 'pt');
 @NgModule({
@@ -110,7 +111,8 @@ registerLocaleData(localePt, 'pt');
     ModalDetailingComponent,
     ConfirmationModalComponent,
     ImpactIndicatorComponent,
-    PlanningFilterModalComponent
+    PlanningFilterModalComponent,
+    PlanningPopupComponent
   ],
   imports: [
     BrowserModule,
