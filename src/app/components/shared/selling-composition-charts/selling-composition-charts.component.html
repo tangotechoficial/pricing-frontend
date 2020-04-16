@@ -14,67 +14,22 @@
         </div>
       </nav>
       <div class="col-12  tab-content">
-        <div class="tab-pane show active" id="tab-week1" role="tabpanel"
-        aria-labelledby="nav-week1">
+      <ng-container *ngFor="sug of volumeCompositionChartDataSugerido; plf of  volumeCompositionChartDataPlanejado; index as idx">
+        <div class="tab-pane fade" id="tab-week" + (idx + 1) role="tabpanel" aria-labelledby="nav-week" + (idx + 1)>
+          <div class="graphic-chart">
           <div class="col-6">
-            <canvas baseChart [datasets]="volumeCompositionChartData" [chartType]="volumeCompositionType"
+          <canvas baseChart [datasets]="sug.data" [chartType]="volumeCompositionType"
             [plugins]="chartPlugins" chart-dataset-override="datasetOverride">
-            </canvas>
-          </div>
-          <div class="col-6">
-            <canvas baseChart [datasets]="volumeCompositionChartData" [chartType]="volumeCompositionType"
+          </canvas>
+        </div>
+        <div class="col-6">
+          <canvas baseChart [datasets]="plan.data" [chartType]="volumeCompositionType"
             [plugins]="chartPlugins" chart-dataset-override="datasetOverride">
-            </canvas>
+          </canvas>
           </div>
         </div>
-        <div class="tab-pane fade" id="tab-week2" role="tabpanel" aria-labelledby="nav-week2">
-          <div class="col-6">
-            <canvas baseChart [datasets]="volumeCompositionChartData" [chartType]="volumeCompositionType"
-            [plugins]="chartPlugins" chart-dataset-override="datasetOverride">
-            </canvas>
-          </div>
-          <div class="col-6">
-            <canvas baseChart [datasets]="volumeCompositionChartData" [chartType]="volumeCompositionType"
-            [plugins]="chartPlugins" chart-dataset-override="datasetOverride">
-            </canvas>
-          </div>
-        </div>
-        <div class="tab-pane fade" id="tab-week3" role="tabpanel" aria-labelledby="nav-week3">
-          <div class="col-6">
-            <canvas baseChart [datasets]="volumeCompositionChartData" [chartType]="volumeCompositionType"
-            [plugins]="chartPlugins" chart-dataset-override="datasetOverride">
-            </canvas>
-          </div>
-          <div class="col-6">
-            <canvas baseChart [datasets]="volumeCompositionChartData" [chartType]="volumeCompositionType"
-            [plugins]="chartPlugins" chart-dataset-override="datasetOverride">
-            </canvas>
-          </div>
-        </div>
-        <div class="tab-pane fade" id="tab-week4" role="tabpanel" aria-labelledby="nav-week4">
-          <div class="col-6 d-flex">
-            <canvas baseChart [datasets]="volumeCompositionChartData" [chartType]="volumeCompositionType"
-            [plugins]="chartPlugins" chart-dataset-override="datasetOverride">
-            </canvas>
-          </div>
-          <div class="col-6 d-flex">
-            <canvas baseChart [datasets]="volumeCompositionChartData" [chartType]="volumeCompositionType"
-            [plugins]="chartPlugins" chart-dataset-override="datasetOverride">
-            </canvas>
-          </div>
-        </div>
-        <div class="tab-pane fade" id="tab-week5" role="tabpanel" aria-labelledby="nav-week5">
-          <div class="col-6">
-            <canvas baseChart [datasets]="volumeCompositionChartData" [chartType]="volumeCompositionType"
-            [plugins]="chartPlugins" chart-dataset-override="datasetOverride">
-            </canvas>
-          </div>
-          <div class="col-6">
-            <canvas baseChart [datasets]="volumeCompositionChartData" [chartType]="volumeCompositionType"
-            [plugins]="chartPlugins" chart-dataset-override="datasetOverride">
-            </canvas>
-          </div>
-        </div>
+      </div>
+    </ng-container>
       </div>
     </div>
 
