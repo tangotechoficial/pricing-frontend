@@ -1,4 +1,3 @@
-
 <div class="row d-flex flex-row badges">
   <!-- <div>
   <span class="badge badge-secondary p-2">11/03/2020</span>
@@ -9,185 +8,190 @@
 
 <div class="row with-overflow custom-scrollbar-css">
   <planning-popup></planning-popup>
-    <table class="table">
-      <col>
-      <colgroup span=3></colgroup>
-      <tr>
-        <td rowspan="2"></td>
-        <th scope="colgroup" *ngFor="let item of data; let weekCount=index" class="text-center" colspan="3">Semana {{weekCount +1 }}</th>
-      </tr>
-      <tr>
-        <ng-container *ngFor="let item of data;">
-          <th scope="col">Sugerido</th>
-          <th scope="col">Planejado</th>
-          <th scope="col"><span *ngIf="hasRealized">Realizado</span></th>
-        </ng-container>
-      </tr>
-      <tr>
-        <th scope="row">Vendas (OMR)</th>
-        <ng-container *ngFor="let item of data; let field of plannedData">
-          <td>{{ item.VLRVNDLIQCAL|currency:'BRL'}}</td>
-          <!-- <td>{{ item.VLRVNDLIQCAL|currency:'BRL' }}</td> -->
-          <td><input class="form-field w-100" type="text" disabled  [(ngModel)]="field.VLRVNDLIQCAL" [value]="field.VLRVNDLIQCAL"></td>
-          <td></td>
-        </ng-container>
-      </tr>
-      <tr>
-        <th scope="row">Vendas Alcançadas </th>
-        <ng-container *ngFor="let item of data; let field of plannedData;">
-          <td>{{ item.VLRVNDPRVCTR|currency:'BRL'}}</td>
-          <!-- <td>{{ item.VLRVNDLIQOCD|currency:'BRL'}}</td> -->
-          <td><input class="form-field w-100" type="text" disabled [(ngModel)]="field.VLRVNDLIQOCD" [value]="field.VLRVNDLIQOCD" /></td>
-          <td></td>
-        </ng-container>
-      </tr>
-      <tr>
-        <th scope="row">Competitividade </th>
-        <ng-container *ngFor="let item of data; let field of plannedData;">
-          <td>{{ item.VLRMCDCAL|number:'1.2-2'}}%</td>
-          <!-- <td>{{ item.VLRMCDOCD|number:'1.2-2'}}%</td> -->
-          <td><input class="form-field w-100" type="text" disabled [(ngModel)]="field.VLRMCDOCD" [value]="field.VLRMCDOCD" /></td>
-          <td></td>
-        </ng-container>
-      </tr>
-      <tr>
-        <th scope="row"> - Preço Mercado </th> <!-- child from competitividade row -->
-        <ng-container *ngFor="let item of data; let field of plannedData;">
-          <td>{{ item.VLRPCOMEDMCD|currency:'BRL'}}</td>
-          <!-- <td>{{ item.VLRPCOMEDMCD|currency:'BRL'}}</td> -->
-          <td><input class="form-field w-100" type="text" disabled [(ngModel)]="field.VLRPCOMEDMCD" [value]="field.VLRPCOMEDMCD" /></td>
-          <td></td>
-        </ng-container>
-      </tr>
-      <tr>
-        <th scope="row">Margem Bruta </th>
-        <ng-container *ngFor="let item of data; let field of plannedData;">
-        <td>{{ ((item.MRGBRTOCD/item.VLRRCTLIQOCD)*100).toFixed(2)}}%</td>
-        <!-- <td>{{ ((item.MRGBRTOCD/item.VLRRCTLIQOCD)*100).toFixed(2)}}%</td> -->
-        <td><input class="form-field w-100" type="text" disabled [(ngModel)]="field.MRGBRTOCD" [value]="field.MRGBRTOCD" /></td>
-        <td></td>
-        </ng-container>
-      </tr>
-      <tr>
-        <th scope="row">Preço Venda </th>
-        <ng-container *ngFor="let item of data; let field of plannedData;">
-          <td>{{ item.VLRPCOVNDLIQCAL|currency:'BRL'}}</td>
-          <!-- <td>{{ item.VLRPCOVNDLIQOCD|currency:'BRL'}}</td> -->
-          <td><input class="form-field w-100" type="text" disabled [(ngModel)]="field.VLRPCOVNDLIQOCD" [value]="field.VLRPCOVNDLIQOCD" /></td>
-          <td></td>
-        </ng-container>
-      </tr>
-      <tr>
-        <th scope="row">Preço Base </th>
-        <ng-container *ngFor="let item of data; let field of plannedData;">
-          <td>{{ item.VLRPCOBSECAL|currency:'BRL'}}</td>
-          <!-- <td>{{ item.VLRPCOBSEOCD|currency:'BRL'}}</td> -->
-          <td><input class="form-field w-100" type="text" disabled [(ngModel)]="field.VLRPCOBSEOCD" [value]="field.VLRPCOBSEOCD" /></td>
-          <td></td>
-        </ng-container>
-      </tr>
-      <tr>
-        <th scope="row">(+) Impostos </th>
-        <ng-container *ngFor="let item of data; let field of plannedData;">
-        <td>{{ item.VLRIMPTOTCAL|currency:'BRL'}}</td>
-        <!-- <td>{{ item.VLRIMPTOTOCD|currency:'BRL'}}</td> -->
-        <td><input class="form-field w-100" type="text" disabled [(ngModel)]="field.VLRIMPTOTOCD" [value]="field.VLRIMPTOTOCD" /></td>
-        <td></td>
-        </ng-container>
-      </tr>
-      <tr>
-        <th scope="row"> - ICMS </th>
-        <ng-container *ngFor="let item of data; let field of plannedData;">
-        <td>{{ item.VLRICMCAL|currency:'BRL'}}</td>
-        <!-- <td>{{ item.VLRICMOCD|currency:'BRL'}}</td> -->
-        <td><input class="form-field w-100" type="text" disabled [(ngModel)]="field.VLRICMOCD" [value]="field.VLRICMOCD" /></td>
-        <td></td>
-        </ng-container>
-      </tr>
-      <tr>
-        <th scope="row"> - PIS/COFINS </th>
-        <ng-container *ngFor="let item of data; let field of plannedData;">
-        <td>{{ item.VLRPISCAL|currency:'BRL'}}</td>
-        <!-- <td>{{ item.VLRPISOCD|currency:'BRL'}}</td> -->
-        <td><input class="form-field w-100" type="text" disabled [(ngModel)]="field.VLRPISOCD" [value]="field.VLRPISOCD" /></td>
-        <td></td>
-        </ng-container>
-      </tr>
-      <tr>
-        <th scope="row">Devolução </th> <!-- Operacional's child -->
-        <ng-container *ngFor="let item of data; let field of plannedData;">
-        <td>{{ item.VLRDVLCAL|currency:'BRL'}}</td>
-        <!-- <td>{{ item.VLRDVLOCD|currency:'BRL'}}</td> -->
-        <td><input class="form-field w-100" type="text" disabled [(ngModel)]="field.VLRDVLOCD" [value]="field.VLRDVLOCD" /></td>
-        <td></td>
-        </ng-container>
-      </tr>
-      <tr>
-        <th scope="row">Flexível </th>
-        <ng-container *ngFor="let item of data; let field of plannedData;">
-        <td>{{ item.VLRPISCAL|currency:'BRL'}}</td>
-        <td><input class="form-field w-100" type="text" disabled [(ngModel)]="field.VLRPISOCD" [value]="field.VLRPISOCD" /></td>
-        <td></td>
-        </ng-container>
-      </tr>
-      <tr>
-        <th scope="row">Margem Bruta Unitária</th>
-        <ng-container *ngFor="let item of data; let field of plannedData;">
-          <td>{{ item.VLRMRGBRTCAL|currency:'BRL'}}</td>
-          <!-- <td>{{ item.VLRMRGBRTOCD|currency:'BRL'}}</td> -->
-          <td><input class="form-field w-100" type="text" disabled [(ngModel)]="field.VLRMRGBRTOCD" [value]="field.VLRMRGBRTOCD" /></td>
-          <td></td>
-        </ng-container>
-      </tr>
-      <tr>
-        <th scope="row">Verba Sugerida </th>
-        <ng-container *ngFor="let item of data; let field of plannedData; index as index">
-        <td>{{ item.VLRRBTOCD|currency:'BRL'}}</td>
-        <!-- <td>{{ item.VLRRBTCAL|currency:'BRL'}}</td> -->
-        <td><input class="form-field w-100" type="text" disabled [(ngModel)]="field.VLRRBTCAL" [value]="field.VLRRBTCAL" /></td>
-        <td></td>
-        </ng-container>
-      </tr>
-      <tr>
-        <th scope="row">Verba Planejada </th>
-        <ng-container *ngFor="let item of data; let field of plannedData;index as index">
-        <td>{{ item.VLRVBAOCD || '-' }}</td>
-        <!-- <td>{{ item.VLRVBAOCD|currency:'BRL'}}
-        </td> -->
-        <td><input class="form-field w-100" type="text" [(ngModel)]="field.VLRVBAOCD" [value]="field.VLRVBAOCD" (click)="triggerModalFor(item)" /></td>
-        <td></td>
-        </ng-container>
-      </tr>
-      <tr>
-        <th scope="row">CMV Preço Sugerido </th>
-        <ng-container *ngFor="let item of data; let field of plannedData; index as idx">
-        <td>{{ item.VLRCMVCAL|currency:'BRL'}}</td>
-        <!-- <td>{{ item.VLRCMVOCD|currency:'BRL'}}</td> -->
-        <td><input class="form-field w-100" type="text" disabled [(ngModel)]="field.VLRCMVOCD" [value]="field.VLRCMVOCD" /></td>
-        <td></td>
-        </ng-container>
-      </tr>
-      <tr>
-        <th scope="row">CMV Preço Atual </th>
-        <ng-container *ngFor="let item of data; let field of plannedData;index as idx">
-        <td>{{ item.VLRCMVPCOATU|currency:'BRL'}}</td>
-        <!-- <td>{{ item.VLRCMVPCOATU|currency:'BRL'}}</td> -->
-        <td><input class="form-field w-100" type="text" disabled [(ngModel)]="field.VLRCMVPCOATU" [value]="field.VLRCMVPCOATU" /></td>
-        <td></td>
-        </ng-container>
-      </tr>
-      <tr>
-        <th scope="row">CMV Compra Estoque </th>
-        <ng-container *ngFor="let item of data; let field of plannedData;index as idx">
-        <td>{{ item.VLRCSTCMPMER|currency:'BRL'}}</td>
-        <!-- <td>{{ item.VLRCSTCMPIDL|currency:'BRL'}}
-        </td> -->
-        <td><input class="form-field w-100" type="text" required [(ngModel)]="field.VLRCSTCMPIDL" [value]="field.VLRCSTCMPIDL" (click)="triggerModalFor(item)"></td>
-        <td></td>
-        </ng-container>
-      </tr>
+  <form [formGroup]="fullForm">
+    <div formGroupName="weeks">
+      <table class="table">
+        <col>
+        <colgroup span=3></colgroup>
+        <tr>
+          <td rowspan="2"></td>
+          <th scope="colgroup" *ngFor="let item of data; let weekCount=index" class="text-center" colspan="3">Semana {{weekCount +1 }}</th>
+        </tr>
+        <tr>
+          <ng-container *ngFor="let item of data;">
+            <th scope="col">Sugerido</th>
+            <th scope="col">Planejado</th>
+            <th scope="col"><span *ngIf="hasRealized">Realizado</span></th>
+          </ng-container>
+        </tr>
+
+        <tr>
+          <th scope="row">Vendas (OMR)</th>
+          <ng-container *ngFor="let item of data; let idx=index">
+            <td>{{ item.VLRVNDLIQCAL|currency:'BRL'}}</td>
+            <!-- <td>{{ item.VLRVNDLIQCAL|currency:'BRL' }}</td> -->
+            <td formGroupName="week{{idx}}"><input class="form-field w-100" formControlName="VLRVNDLIQCAL" type="text" readonly></td>
+            <td></td>
+          </ng-container>
+        </tr>
+        <tr>
+          <th scope="row">Vendas Alcançadas </th>
+          <ng-container *ngFor="let item of data; let idx=index">
+            <td>{{ item.VLRVNDPRVCTR|currency:'BRL'}}</td>
+            <!-- <td>{{ item.VLRVNDLIQOCD|currency:'BRL'}}</td> -->
+            <td formGroupName="week{{idx}}"><input class="form-field w-100" type="text" formControlName="VLRVNDLIQOCD" readonly /></td>
+            <td></td>
+          </ng-container>
+        </tr>
+        <tr>
+          <th scope="row">Competitividade </th>
+          <ng-container *ngFor="let item of data; let idx=index">
+            <td>{{ item.VLRMCDCAL|number:'1.2-2'}}%</td>
+            <!-- <td>{{ item.VLRMCDOCD|number:'1.2-2'}}%</td> -->
+            <td formGroupName="week{{idx}}"><input class="form-field w-100" type="text" formControlName="VLRMCDOCD" readonly></td>
+            <td></td>
+          </ng-container>
+        </tr>
+        <tr>
+          <th scope="row"> - Preço Mercado </th> <!-- child from competitividade row -->
+          <ng-container *ngFor="let item of data; let idx=index">
+            <td>{{ item.VLRPCOMEDMCD|currency:'BRL'}}</td>
+            <!-- <td>{{ item.VLRPCOMEDMCD|currency:'BRL'}}</td> -->
+            <td formGroupName="week{{idx}}"><input class="form-field w-100" type="text" formControlName="VLRPCOMEDMCD" readonly /></td>
+            <td></td>
+          </ng-container>
+        </tr>
+        <tr>
+          <th scope="row">Margem Bruta </th>
+          <ng-container *ngFor="let item of data; let idx=index">
+            <td>{{ ((item.MRGBRTOCD/item.VLRRCTLIQOCD)*100).toFixed(2)}}%</td>
+            <!-- <td>{{ ((item.MRGBRTOCD/item.VLRRCTLIQOCD)*100).toFixed(2)}}%</td> -->
+            <td formGroupName="week{{idx}}"><input class="form-field w-100" type="text" formControlName="MRGBRTOCD" readonly></td>
+            <td></td>
+          </ng-container>
+        </tr>
+        <tr>
+          <th scope="row">Preço Venda </th>
+          <ng-container *ngFor="let item of data; let idx=index">
+            <td>{{ item.VLRPCOVNDLIQCAL|currency:'BRL'}}</td>
+            <!-- <td>{{ item.VLRPCOVNDLIQOCD|currency:'BRL'}}</td> -->
+            <td formGroupName="week{{idx}}"><input class="form-field w-100" type="text" formControlName="VLRPCOVNDLIQOCD" readonly /></td>
+            <td></td>
+          </ng-container>
+        </tr>
+        <tr>
+          <th scope="row">Preço Base </th>
+          <ng-container *ngFor="let item of data; let idx=index">
+            <td>{{ item.VLRPCOBSECAL|currency:'BRL'}}</td>
+            <!-- <td>{{ item.VLRPCOBSEOCD|currency:'BRL'}}</td> -->
+            <td formGroupName="week{{idx}}"><input class="form-field w-100" type="text" formControlName="VLRPCOBSEOCD" readonly /></td>
+            <td></td>
+          </ng-container>
+        </tr>
+        <tr>
+          <th scope="row">(+) Impostos </th>
+          <ng-container *ngFor="let item of data; let idx=index">
+            <td>{{ item.VLRIMPTOTCAL|currency:'BRL'}}</td>
+            <!-- <td>{{ item.VLRIMPTOTOCD|currency:'BRL'}}</td> -->
+            <td formGroupName="week{{idx}}"><input class="form-field w-100" type="text" formControlName="VLRIMPTOTOCD" readonly /></td>
+            <td></td>
+          </ng-container>
+        </tr>
+        <tr>
+          <th scope="row"> - ICMS </th>
+          <ng-container *ngFor="let item of data; let idx=index">
+            <td>{{ item.VLRICMCAL|currency:'BRL'}}</td>
+            <!-- <td>{{ item.VLRICMOCD|currency:'BRL'}}</td> -->
+            <td formGroupName="week{{idx}}"><input class="form-field w-100" type="text" formControlName="VLRICMOCD" readonly /></td>
+            <td></td>
+          </ng-container>
+        </tr>
+        <tr>
+          <th scope="row"> - PIS/COFINS </th>
+          <ng-container *ngFor="let item of data; let idx=index">
+            <td>{{ item.VLRPISCAL|currency:'BRL'}}</td>
+            <!-- <td>{{ item.VLRPISOCD|currency:'BRL'}}</td> -->
+            <td formGroupName="week{{idx}}"><input class="form-field w-100" type="text" formControlName="VLRPISOCD" readonly /></td>
+            <td></td>
+          </ng-container>
+        </tr>
+        <tr>
+          <th scope="row">Devolução </th> <!-- Operacional's child -->
+          <ng-container *ngFor="let item of data; let idx=index">
+            <td>{{ item.VLRDVLCAL|currency:'BRL'}}</td>
+            <!-- <td>{{ item.VLRDVLOCD|currency:'BRL'}}</td> -->
+            <td formGroupName="week{{idx}}"><input class="form-field w-100" type="text" formControlName="VLRDVLOCD" readonly /></td>
+            <td></td>
+          </ng-container>
+        </tr>
+        <tr>
+          <th scope="row">Flexível </th>
+          <ng-container *ngFor="let item of data; let idx=index">
+            <td>{{ item.VLRPISCAL|currency:'BRL'}}</td>
+            <td formGroupName="week{{idx}}"><input class="form-field w-100" type="text" formControlName="VLRPISOCD" readonly /></td>
+            <td></td>
+          </ng-container>
+        </tr>
+        <tr>
+          <th scope="row">Margem Bruta Unitária</th>
+          <ng-container *ngFor="let item of data; let idx=index">
+            <td>{{ item.VLRMRGBRTCAL|currency:'BRL'}}</td>
+            <!-- <td>{{ item.VLRMRGBRTOCD|currency:'BRL'}}</td> -->
+            <td formGroupName="week{{idx}}"><input class="form-field w-100" type="text" formControlName="VLRMRGBRTOCD" readonly /></td>
+            <td></td>
+          </ng-container>
+        </tr>
+        <tr>
+          <th scope="row">Verba Sugerida </th>
+          <ng-container *ngFor="let item of data; let idx=index">
+            <td>{{ item.VLRRBTOCD|currency:'BRL'}}</td>
+            <!-- <td>{{ item.VLRRBTCAL|currency:'BRL'}}</td> -->
+            <td formGroupName="week{{idx}}"><input class="form-field w-100" type="text" formControlName="VLRRBTCAL" readonly /></td>
+            <td></td>
+          </ng-container>
+        </tr>
+        <tr>
+          <th scope="row">Verba Planejada </th>
+          <ng-container *ngFor="let item of data; let idx=index">
+            <td>{{ item.VLRVBAOCD|number:'1.2-2' || '-' }}</td>
+            <!-- <td>{{ item.VLRVBAOCD|currency:'BRL'}}
+          </td> -->
+            <td formGroupName="week{{idx}}"><input class="form-field w-100" type="text" formControlName="VLRVBAOCD" readonly (click)="triggerModalFor(item)" /></td>
+            <td></td>
+          </ng-container>
+        </tr>
+        <tr>
+          <th scope="row">CMV Preço Sugerido </th>
+          <ng-container *ngFor="let item of data; let idx=index">
+            <td>{{ item.VLRCMVCAL|currency:'BRL'}}</td>
+            <!-- <td>{{ item.VLRCMVOCD|currency:'BRL'}}</td> -->
+            <td formGroupName="week{{idx}}"><input class="form-field w-100" type="text" readonly /></td>
+            <td></td>
+          </ng-container>
+        </tr>
+        <tr>
+          <th scope="row">CMV Preço Atual </th>
+          <ng-container *ngFor="let item of data; let idx=index">
+            <td>{{ item.VLRCMVPCOATU|currency:'BRL'}}</td>
+            <!-- <td>{{ item.VLRCMVPCOATU|currency:'BRL'}}</td> -->
+            <td formGroupName="week{{idx}}"><input class="form-field w-100" type="text" formControlName="VLRCMVPCOATU" readonly /></td>
+            <td></td>
+          </ng-container>
+        </tr>
+        <tr>
+          <th scope="row">CMV Compra Estoque </th>
+          <ng-container *ngFor="let item of data; let idx=index">
+            <td>{{ item.VLRCSTCMPMER|currency:'BRL'}}</td>
+            <!-- <td>{{ item.VLRCSTCMPIDL|currency:'BRL'}}
+          </td> -->
+            <td formGroupName="week{{idx}}"><input class="form-field w-100" type="text" formControlName="VLRCSTCMPIDL" readonly (click)="triggerModalFor(item)"></td>
+            <td></td>
+          </ng-container>
+        </tr>
     </table>
-    <div class="col-12 d-flex align-items-end">
-      <button type="button" >Submeter para aprovação</button>
-    </div>
+</div>
+<div class="col-12 d-flex align-items-end">
+  <button type="button">Submeter para aprovação</button>
+</div>
+</form>
 </div>
