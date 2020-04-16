@@ -5,3 +5,8 @@
   background-image: url('/assets/img/placeholders/price-comp.png');
   background-size: cover;
 }
+
+.graphic-chart {
+  display: flex;
+  flex-direction: row;
+}

@@ -20,8 +20,20 @@ export class SellingCompositionChartsComponent {
   public chartLabels: Label[] = ['S1', 'S2', 'S3', 'S4', 'S5'];
   public chartPlugins = [];
   public volumeCompositionType: ChartType = 'pie';
-  public volumeCompositionChartData: ChartDataSets[] = [
-    { data: null, label: 'Sugerido', backgroundColor: ['#6289CF', '#FF6F50', '#E6DE4C', '#E66C43', '#79F09F', '#4270C1'] },
+  public volumeCompositionChartDataSugerido: ChartDataSets[] = [
+    { data: [], label: 'Sugerido', backgroundColor: ['#6289CF', '#FF6F50', '#E6DE4C', '#E66C43', '#79F09F', '#4270C1'] },
+    { data: [], label: 'Sugerido', backgroundColor: ['#6289CF', '#FF6F50', '#E6DE4C', '#E66C43', '#79F09F', '#4270C1'] },
+    { data: [], label: 'Sugerido', backgroundColor: ['#6289CF', '#FF6F50', '#E6DE4C', '#E66C43', '#79F09F', '#4270C1'] },
+    { data: [], label: 'Sugerido', backgroundColor: ['#6289CF', '#FF6F50', '#E6DE4C', '#E66C43', '#79F09F', '#4270C1'] },
+    { data: [], label: 'Sugerido', backgroundColor: ['#6289CF', '#FF6F50', '#E6DE4C', '#E66C43', '#79F09F', '#4270C1'] },
+  ];
+  public volumeCompositionChartDataPlanejado: ChartDataSets[] = [
+      { data: [], label: 'Planejado', backgroundColor: ['#6289CF', '#FF6F50', '#E6DE4C', '#E66C43', '#79F09F', '#4270C1'] },
+      { data: [], label: 'Planejado', backgroundColor: ['#6289CF', '#FF6F50', '#E6DE4C', '#E66C43', '#79F09F', '#4270C1'] },
+      { data: [], label: 'Planejado', backgroundColor: ['#6289CF', '#FF6F50', '#E6DE4C', '#E66C43', '#79F09F', '#4270C1'] },
+      { data: [], label: 'Planejado', backgroundColor: ['#6289CF', '#FF6F50', '#E6DE4C', '#E66C43', '#79F09F', '#4270C1'] },
+      { data: [], label: 'Planejado', backgroundColor: ['#6289CF', '#FF6F50', '#E6DE4C', '#E66C43', '#79F09F', '#4270C1'] },
+
   ];
   planningData: PurchasePlan[];
 
@@ -29,17 +41,26 @@ export class SellingCompositionChartsComponent {
   constructor(private planningDataManager: PlanningDataManagerService) {}
 
   updateChartsData() {
-      this.volumeCompositionChartData[0].data = []
-      this.volumeCompositionChartData[0].data.push(1,2,3,4,5,6)
-      // this.planningData.map((row, i, arr) => {
-      // let val = row.VLRMRGBRTCAL * row.VLRVNDPRVCTR / row.VLRPCOVNDLIQCAL;
-      // this.marginChartData[0].data.push(val);
-      // val = row.VLRMRGBRTOCD * row.VLRVNDLIQOCD / row.VLRPCOVNDLIQOCD;
-      // this.marginChartData[1].data.push(val);
-      // this.sellingChartData[0].data.push(row.VLRVNDPRVCTR);
-      // this.sellingChartData[1].data.push(row.VLRVNDLIQOCD);
-      // this.competitivityChartData[0].data.push(row.VLRMCDCAL);
-      // this.competitivityChartData[1].data.push(row.VLRMCDOCD);
+      this.planningData.map((item, index) => {
+              let impostos = Number(item.VLRIMPTOTCAL);
+              let devolucao = Number(item.VLRDVLCAL);
+              let margemBrutaUnitaria = Number(item.VLRMRGBRTCAL);
+              let verbaSugerida = Number(item.VLRRBTOCD);
+              let verbaPlanejada = Number(item.VLRVBAOCD);
+              let cmvPrecoSugerido = Number(item.VLRCMVCAL)
+        console.log(this.volumeCompositionChartDataSugerido[index].data.push(impostos, devolucao, margemBrutaUnitaria, verbaSugerida, verbaPlanejada, cmvPrecoSugerido))
+      })
+      this.planningData.map((item, index) => {
+              let impostos = Number(item.VLRIMPTOTOCD);
+              let devolucao = Number(item.VLRDVLOCD);
+              let margemBrutaUnitaria = Number(item.VLRMRGBRTOCD);
+              let verbaSugerida = Number(item.VLRRBTCAL);
+              let verbaPlanejada = Number(item.VLRVBAOCD);
+              let cmvPrecoSugerido = Number(item.VLRCMVOCD);
+        console.log(this.volumeCompositionChartDataPlanejado[index].data.push(impostos, devolucao, margemBrutaUnitaria, verbaSugerida, verbaPlanejada, cmvPrecoSugerido))
+      })
+      console.log(this.volumeCompositionChartDataSugerido)
+      console.log(this.volumeCompositionChartDataPlanejado)
   }
 
   @Input() set data(data: any) {
