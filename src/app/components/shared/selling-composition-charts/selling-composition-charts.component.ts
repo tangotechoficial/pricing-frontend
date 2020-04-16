@@ -18,7 +18,7 @@ export class SellingCompositionChartsComponent {
   public chartOptions: ChartOptions = {
     responsive: true,
     legend: {
-      position: 'bottom',
+      position: 'right',
     },
     plugins: {
       datalabels: {
@@ -27,16 +27,20 @@ export class SellingCompositionChartsComponent {
           return label;
         },
       },
-    }
+    },
+    events: [
+      'click'
+    ]
   };
 
   public ariaLabels: string[] = [];
   public volumeCompositionType: ChartType = 'pie';
   public volumeCompositionChartDataSugerido: ChartDataSets[] = [];
-  public sugeridoLabels: Label[] = [];
+  public sugeridoLabels: Label[] = ['Impostos', 'Devolução', 'Margem Bruta Unitária', 'Verba Sugerida', 'Verba Planejada', 'CMV Sugerido'];
   public volumeCompositionChartDataPlanejado: ChartDataSets[] = [];
-  public planejadoLabels: Label[] = [];
+  public planejadoLabels: Label[] = ['Impostos', 'Devolução', 'Margem Bruta Unitária', 'Verba Sugerida', 'Verba Planejada', 'CMV Planejado'];
   public plugins = [pluginDataLabels];
+  public chartLegend = true
 
   planningData: PurchasePlan[];
 
@@ -46,18 +50,17 @@ export class SellingCompositionChartsComponent {
   updateChartsData() {
       this.planningData.forEach((item, index) => {
         this.ariaLabels.push(`nav-week${index + 1}`);
-        const impostos = Number(item.VLRIMPTOTCAL).toFixed(2).toString();
-        const devolucao = Number(item.VLRDVLCAL).toFixed(2).toString();
-        const margemBrutaUnitaria = Number(item.VLRMRGBRTCAL).toFixed(2).toString();
-        const verbaSugerida = Number(item.VLRRBTOCD).toFixed(2).toString();
-        const verbaPlanejada = Number(item.VLRVBAOCD).toFixed(2).toString();
-        const cmvPrecoSugerido = Number(item.VLRCMVCAL).toFixed(2).toString();
+        const impostos = Number(item.VLRIMPTOTCAL).toFixed(2);
+        const devolucao = Number(item.VLRDVLCAL).toFixed(2);
+        const margemBrutaUnitaria = Number(item.VLRMRGBRTCAL).toFixed(2);
+        const verbaSugerida = Number(item.VLRRBTOCD).toFixed(2);
+        const verbaPlanejada = Number(item.VLRVBAOCD).toFixed(2);
+        const cmvPrecoSugerido = Number(item.VLRCMVCAL).toFixed(2);
         this.volumeCompositionChartDataSugerido[index] = {
           data: [],
           label: 'Sugerido',
           backgroundColor: ['#6289CF', '#FF6F50', '#E6DE4C', '#E66C43', '#79F09F', '#4270C1']
         };
-        this.sugeridoLabels.push('Impostos', 'Devolução', 'Margem Bruta Unitária', 'Verba Sugerida', 'Verba Planejada', 'CMV Sugerido')
         this.volumeCompositionChartDataSugerido[index].data.push(
           impostos, devolucao, margemBrutaUnitaria, verbaSugerida, verbaPlanejada, cmvPrecoSugerido
         );
@@ -68,15 +71,14 @@ export class SellingCompositionChartsComponent {
           label: 'Planejado',
           backgroundColor: ['#6289CF', '#FF6F50', '#E6DE4C', '#E66C43', '#79F09F', '#4270C1']
         };
-        const impostos = Number(item.VLRIMPTOTOCD).toFixed(2).toString();
-        const devolucao = Number(item.VLRDVLOCD).toFixed(2).toString();
-        const margemBrutaUnitaria = Number(item.VLRMRGBRTOCD).toFixed(2).toString();
-        const verbaSugerida = Number(item.VLRRBTCAL).toFixed(2).toString();
-        const verbaPlanejada = Number(item.VLRVBAOCD).toFixed(2).toString();
-        const cmvPrecoSugerido = Number(item.VLRCMVOCD).toFixed(2).toString();
+        const impostos = Number(item.VLRIMPTOTOCD).toFixed(2);
+        const devolucao = Number(item.VLRDVLOCD).toFixed(2);
+        const margemBrutaUnitaria = Number(item.VLRMRGBRTOCD).toFixed(2);
+        const verbaSugerida = Number(item.VLRRBTCAL).toFixed(2);
+        const verbaPlanejada = Number(item.VLRVBAOCD).toFixed(2);
+        const cmvPrecoSugerido = Number(item.VLRCMVOCD).toFixed(2);
         this.volumeCompositionChartDataPlanejado[index].data.push(
             impostos, devolucao, margemBrutaUnitaria, verbaSugerida, verbaPlanejada, cmvPrecoSugerido);
-        this.planejadoLabels.push('Impostos', 'Devolução', 'Margem Bruta Unitária', 'Verba Sugerida', 'Verba Planejada', 'CMV Sugerido')
       });
   }
 
