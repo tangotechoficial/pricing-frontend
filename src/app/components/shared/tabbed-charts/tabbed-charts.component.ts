@@ -37,7 +37,6 @@ export class TabbedChartsComponent{
   planningData: PurchasePlan[];
 
   public chartOptions: ChartOptions = {
-
     responsive: true,
     animation: {
       animateScale: true,
@@ -49,10 +48,10 @@ export class TabbedChartsComponent{
     },
     layout: {
       padding: {
-          left: 10,
-          right: 10,
-          top: 10,
-          bottom: 10
+          left: 5,
+          right: 5,
+          top: 5,
+          bottom: 5
       }
     },
     scales: {
@@ -64,14 +63,37 @@ export class TabbedChartsComponent{
     },
     tooltips: {
       callbacks: {
-          label: tooltipItem => `${tooltipItem.yLabel}: ${tooltipItem.xLabel}`,
-          title: () => null,
+          label: function(tooltipItem, data) {
+              var label = data.datasets[tooltipItem.datasetIndex].label || '';
+
+              if (label) {
+                  label += ': ';
+              }
+              label += Math.round( tooltipItem.yLabel * 100) / 100;
+              return label;
+          }
       }
-    }
+    },
+    plugins: {
+      datalabels: {
+          display: 'auto',
+          anchor: 'end',
+          align: 'start',
+          color: '#fafafa',
+          formatter: (value, context) => {
+            return Math.round(value * 100) / 100;
+          },
+          font: {
+            weight: 'bolder',
+            size: 14
+          }
+      }
+  }
   };
   public chartLabels: Label[] = ['S1', 'S2', 'S3', 'S4', 'S5'];
   public chartType: ChartType = 'bar';
   public chartPlugins = [];
+  public chartLegend = true;
 
   public marginChartData: ChartDataSets[] = [
     { data: null, label: 'Sugerido', backgroundColor: '#6289CF' },
