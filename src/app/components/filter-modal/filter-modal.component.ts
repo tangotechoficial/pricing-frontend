@@ -92,7 +92,6 @@ export class FilterModalComponent implements OnInit, AfterViewInit {
   reset() {
     this.filterForm.reset()
     this.filterData.emit(new Filter())
-    $('#modalFilter').modal('hide')
   }
 
 
