@@ -9,6 +9,8 @@
     margin-right: auto;
  }
 
+
+
 // CONTAINER BUSINESS
 .businessContainer{
 	height: 100%;
@@ -95,3 +97,30 @@
  	}
 
  }
+
+.logo-martins-expandido {
+  background-image: url('/assets/img/martins.svg');
+  background-size: cover;
+  min-height: 224px;
+  max-width: 280px;
+
+}
+
+.pricing-types {
+  padding: 10px;
+  border: 1px solid transparent;
+  color: #FEFACE;
+}
+
+.type-wrappers {
+  display: flex;
+  justify-content: space-between;
+  .analitica {
+    background-color: #F0A001;
+    border-radius: 10px;
+  }
+  .dinamica {
+    border-radius: 10px;
+    background-color: #00AFEC;
+  }
+}
