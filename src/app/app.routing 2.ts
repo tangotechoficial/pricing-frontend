@@ -26,13 +26,13 @@ const appRoutes: Routes = [
 //    { path: 'pbaseseleccion', component: PbaseseleccionComponent},
     { path: 'preciobase', component: PrecioBaseComponent, canActivate: [AuthenticationGuard]},
     { path: 'precioventa', component: PrecioBaseComponent, canActivate: [AuthenticationGuard]},
-    
+
     { path: 'sacceso', component: SaccesoComponent, canActivate: [AuthenticationGuard]},
     { path: 'selectcondicao', component: SelectCondicionComponent, canActivate: [AuthenticationGuard]},
     { path: 'condicion/:param', component: CondicionComponent, runGuardsAndResolvers: 'always'},
     { path: 'plano-compra', component: PlanoCompraComponent,  canActivate: [AuthenticationGuard]},
-    { path: 'simulador', component: SimuladorComponent,  canActivate: [AuthenticationGuard]},
-    { path: 'execucao', component: ExecucaoComponent,  canActivate: [AuthenticationGuard]},
+    // { path: 'simulador', component: SimuladorComponent,  canActivate: [AuthenticationGuard]},
+    // { path: 'execucao', component: ExecucaoComponent,  canActivate: [AuthenticationGuard]},
     { path: 'diretriz-estrategica', component: DiretrizEstrategicaComponent,  canActivate: [AuthenticationGuard]},
     { path: 'dados-mestre', component: DadosMestreComponent,  canActivate: [AuthenticationGuard]},
     { path: '', redirectTo: '/login', pathMatch: 'full'},
