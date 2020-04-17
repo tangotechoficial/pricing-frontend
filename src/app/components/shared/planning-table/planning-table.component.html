@@ -6,7 +6,7 @@
 <button class="btn btn-outline-primary p-1">Elasticidade</button> -->
 </div>
 
-<div class="row with-overflow custom-scrollbar-css">
+<div class="row">
   <planning-popup (result)="updatePlan($event)"></planning-popup>
   <form [formGroup]="fullForm">
     <div formGroupName="weeks">
@@ -192,7 +192,7 @@
 </div>
 <div class="row">
   <div class="col-12 d-flex flex-row justify-content-end">
-      <button class='btn bg-standard btn-filter-color align-right pr-5 mr-5' type="button" [disabled]="!isComplete() && submitted" (click)="submitForm()">Submeter para aprovação</button>
+      <button class='btn bg-standard btn-filter-color align-right pr-5 mr-5' type="button" [disabled]="!isComplete() && !submitted" (click)="submitForm()">Submeter para aprovação</button>
   </div>
 </div>
 </form>

@@ -1,6 +1,5 @@
 import { NgxSpinnerService } from 'ngx-spinner';
 import { PurchasePlanningService } from '@services/purchasePlanning.service';
-import { weeks } from '@datasources/plano-de-compras.json';
 import { PlanningDataManagerService } from '@app/services/planning-data.service';
 import { Group } from '@app/models/group';
 import { Input, Component, AfterViewInit, Output, EventEmitter } from '@angular/core';
@@ -101,7 +100,8 @@ export class PlanningTableComponent implements AfterViewInit {
   }
 
   isComplete() {
-    return Object.keys(this.fullForm.get('weeks').controls).every(form => {return this.fullForm.controls.weeks.get(form).dirty})
+    // tslint:disable-next-line: no-string-literal
+    return Object.keys(this.fullForm.get('weeks')['controls']).every(form =>  this.fullForm.controls.weeks.get(form).dirty);
   }
   updatePlan($event) {
     const weeksData = {};
@@ -124,7 +124,7 @@ export class PlanningTableComponent implements AfterViewInit {
       this.spinner.hide();
       this.dataUpdated.emit(true);
       this.submitted = true;
-    })
+    });
   }
 
 
