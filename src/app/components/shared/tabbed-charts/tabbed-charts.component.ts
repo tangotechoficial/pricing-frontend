@@ -17,7 +17,7 @@ import { untilDestroyed } from 'ngx-take-until-destroy';
   providers: [NgxSpinnerService]
 })
 
-export class TabbedChartsComponent{
+export class TabbedChartsComponent {
   marginData = marginData;
   competitivityData = competitivityData;
   sellingData = sellingData;
@@ -63,13 +63,13 @@ export class TabbedChartsComponent{
     },
     tooltips: {
       callbacks: {
-          label: function(tooltipItem, data) {
-              var label = data.datasets[tooltipItem.datasetIndex].label || '';
+          label:(tooltipItem, data) => {
+              let label = data.datasets[tooltipItem.datasetIndex].label || '';
 
               if (label) {
                   label += ': ';
               }
-              label += Math.round( tooltipItem.yLabel * 100) / 100;
+              label += Math.round( Number(tooltipItem.yLabel) * 100) / 100;
               return label;
           }
       }
@@ -136,37 +136,37 @@ export class TabbedChartsComponent{
 
     });
 
-    //calcula soma de vendas alcançadas sugerida
+    // calcula soma de vendas alcançadas sugerida
     this.sellingChartData[0].data.forEach(element => {
           this.somaVendasSugerido = this.somaVendasSugerido + Number(element)
     })
-    //calcula soma de vendas alcançadas planejada
+    // calcula soma de vendas alcançadas planejada
     this.sellingChartData[1].data.forEach(element => {
           this.somaVendasPlanejado = this.somaVendasPlanejado + Number(element)
     })
-    //calcula margem sugerida
+    // calcula margem sugerida
     this.marginChartData[0].data.forEach(element => {
           this.somaMargemPlanejada = this.somaMargemPlanejada + Number(element)
     })
-    //calcula margem planejada
+    // calcula margem planejada
     this.marginChartData[1].data.forEach(element => {
           this.somaMargemSugerida = this.somaMargemSugerida + Number(element)
     })
 
-    //calcula competitividade sugerida
+    // calcula competitividade sugerida
     this.competitivityChartData[0].data.forEach(element => {
           this.somaMargemPlanejada = this.somaMargemPlanejada + Number(element)
     })
-    //calcula competitividade planejada
+    // calcula competitividade planejada
     this.marginChartData[1].data.forEach(element => {
           this.somaCompetitividadeSugerida = this.somaCompetitividadePlanejada + Number(element)
     })
 
 
-      this.sellingIndicator = this.somaVendasPlanejado - this.somaVendasSugerido
-      this.sellPercent = (((this.somaVendasPlanejado/this.somaVendasSugerido) - 1.0) * 100)
-      this.marginIndicator = this.somaMargemPlanejada - this.somaMargemSugerida
-      this.competitivityIndicator = this.somaCompetitividadePlanejada - this.somaCompetitividadeSugerida
+    this.sellingIndicator = this.somaVendasPlanejado - this.somaVendasSugerido
+    this.sellPercent = (((this.somaVendasPlanejado/this.somaVendasSugerido) - 1.0) * 100)
+    this.marginIndicator = this.somaMargemPlanejada - this.somaMargemSugerida
+    this.competitivityIndicator = this.somaCompetitividadePlanejada - this.somaCompetitividadeSugerida
   }
 
 
