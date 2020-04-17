@@ -53,6 +53,7 @@ export class PlanningFilterModalComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.filterService.unsetFilter()
     this.spinner.show();
     this.filterForm = this.formBuilder.group({
       codfilfat: [Validators.required],
@@ -70,26 +71,34 @@ export class PlanningFilterModalComponent implements OnInit, OnDestroy {
   }
 
   loadBillingBranches(evt: any) {
+    if (!this.billBranches) {
     this.spinner.show();
     return this.planningService.getBillingBranches(evt.currentTarget.value)
     .then( billBranches => { this.billBranches = billBranches; this.spinner.hide(); } );
+    }
   }
 
   loadStates(evt: any) {
-    this.spinner.show();
-    return this.planningService.getStates(evt.currentTarget.value)
-    .then( uf => { this.uf = uf; this.spinner.hide(); } );
+    if (!this.uf) {
+      this.spinner.show();
+      return this.planningService.getStates(evt.currentTarget.value)
+      .then( uf => { this.uf = uf; this.spinner.hide(); } );
+    }
   }
 
   loadProducts(evt: any) {
-    this.spinner.show();
-    return this.planningService.getProducts(evt.currentTarget.value)
-    .then( materials => { this.materials = materials; this.spinner.hide(); } );
+    if (!this.materials) {
+      this.spinner.show();
+      return this.planningService.getProducts(evt.currentTarget.value)
+      .then( materials => { this.materials = materials; this.spinner.hide(); } );
+    }
   }
 
   reset() {
     this.filterForm.reset();
-    this.spinner.show();
+    this.planningDataManager.setData(undefined);
+    this.filterService.unsetFilter();
+    this.disabled = true;
   }
 
   setFilter() {

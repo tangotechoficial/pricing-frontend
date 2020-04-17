@@ -1,7 +1,5 @@
-#placeholder {
-  box-sizing: content-box;
-  width: 74vw;
-  min-height: 29vh;
-  background-image: url('/assets/img/placeholders/price-comp.png');
-  background-size: cover;
+
+.graphic-chart {
+  display: flex;
+  flex-direction: row;
 }

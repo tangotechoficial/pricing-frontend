@@ -20,9 +20,8 @@ export class MenuComponent implements OnInit {
 
   private setUserInfo() {
     try {
-       console.log(this.authenticationService.currentUserValue);
-       return JSON.parse(this.authenticationService.currentUserValue);
-    } catch ( Error ) {
+      return this.authenticationService.currentUserValue;
+    } catch (e) {
         return {
           username: 'Guest'
         };
@@ -32,8 +31,7 @@ export class MenuComponent implements OnInit {
   ngOnInit() {
     this.token = this.authenticationService.currentTokenValue;
     this.sCurrentUser = this.setUserInfo();
-    this.bBusiness = this.sCurrentUser.groups[0].name === 'business' ? true : false;
-    console.log(this.bBusiness);
+    this.bBusiness = this.sCurrentUser.groups.some( group => group.name === 'tecnico');
 
     setTimeout(() => {
       $('.alert').hide();

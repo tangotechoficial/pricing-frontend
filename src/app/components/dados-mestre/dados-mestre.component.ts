@@ -25,6 +25,11 @@ export class DadosMestreComponent implements OnInit{
   loading = true;
   materials: Material[] = [];
   billBranches: any[] = [];
+  nextVerbaUrl: string;
+  previousVerbaUrl: string;
+  nextCompUrl: string;
+  previousCompUrl: string;
+
 
   constructor(
     private priceCompositionService: DadosMestresComposicaoPrecoService,
@@ -34,10 +39,20 @@ export class DadosMestreComponent implements OnInit{
   ) {
 
     this.filter = this.filterService.currentFilterValue;
+
+    this.nextVerbaUrl = this.moneyService.nextUrlValue;
+    this.previousVerbaUrl = this.moneyService.previousUrlValue;
+    this.moneyService.nextUrlObservable.subscribe(url => this.nextVerbaUrl = url);
+    this.moneyService.previousUrlObservable.subscribe(url => this.previousVerbaUrl = url);
+
+    this.nextCompUrl = this.priceCompositionService.nextUrlValue;
+    this.previousCompUrl = this.priceCompositionService.previousUrlValue;
+    this.priceCompositionService.nextUrlObservable.subscribe(url => this.nextCompUrl = url);
+    this.priceCompositionService.previousUrlObservable.subscribe(url => this.previousCompUrl = url);
   }
 
   ngOnInit() {
-    this.spinner.show()
+    this.spinner.show();
     this.filterService.unsetFilter();
     this.masterDataPriceComposition = new Array<PriceComposition>();
     this.masterDataMoney = new Array<MasterDataMoney>();
@@ -67,6 +82,34 @@ export class DadosMestreComponent implements OnInit{
       }
     )
 
+  }
+
+  scroll() {
+    this.spinner.show();
+    Promise.all([
+      this.priceCompositionService.loadNext(this.nextCompUrl).then(
+        data =>
+          data.map(
+            row => {
+              this.masterDataPriceComposition.push(new PriceComposition().deserialize(row));
+            }
+          )
+      ),
+      this.moneyService.loadNext(this.nextVerbaUrl).then(
+        data =>
+        data.map(
+          row => {
+            this.masterDataMoney.push(new MasterDataMoney().deserialize(row));
+          }
+        ),
+        err => console.log(err)
+      ),
+    ]).then(
+      result => {
+        this.loading = false;
+        this.spinner.hide();
+      }
+    )
   }
 
   @Input() isSubmitted(value) {

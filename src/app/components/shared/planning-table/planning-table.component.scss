@@ -1,3 +1,6 @@
+@import "assets/styles/global.scss";
+@import "assets/styles/condicion-sacceso.scss";
+
 .table td {
   text-align: right;
   width: 115px;
@@ -10,7 +13,9 @@
   box-sizing: border-box;
   padding: .4em
 }
-
+.form-field {
+  text-align: end;
+}
 .w-50 {
   width: 50px
 }
@@ -42,3 +47,4 @@
     border-radius: 1rem;
     background-color: #384461;
   }
+

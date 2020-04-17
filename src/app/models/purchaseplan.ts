@@ -1,6 +1,9 @@
 import { Deserializable } from '@app/interfaces';
 
 export class PurchasePlan implements Deserializable {
+  week: number;
+  year: number;
+  month: number;
   CODESTUNI: string;
   CODFILEPD: number;
   CODFILFAT: number;

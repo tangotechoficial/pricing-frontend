@@ -1,0 +1,40 @@
+<div class="modal" id="planningPopup" tabindex="-1" aria-labelledby="modalTitle" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalTitle">
+          Planejamento: Verba e CMV de compra
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="close()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-12">
+            Informe valores correspondentes `a semana {{ planningRequest.week }} do mes {{ planningRequest.plan_month }}/{{ planningRequest.plan_year}}
+            <form class="form" [formGroup]="planningPopForm">
+              <input type="hidden" formControlName="week" [(ngModel)]="planningRequest.week" [value]="planningRequest.week">
+              <input type="hidden" formControlName="plan_month" [(ngModel)]="planningRequest.plan_month" [value]="planningRequest.plan_month">
+              <input type="hidden" formControlName="plan_year" [(ngModel)]="planningRequest.plan_year" [value]="planningRequest.plan_year">
+              <input type="hidden" formControlName="prd" [(ngModel)]="planningRequest.prd" [value]="planningRequest.prd">
+              <input type="hidden" formControlName="est" [(ngModel)]="planningRequest.est" [value]="planningRequest.est">
+              <div class="form-group">
+                <label for="vrbpln">Verba Planejada</label>
+                <input type="number" step="any" class="form-control w-100" pattern="^\d*(\.\d{0,2})?$" formControlName="vrbpln" [(ngModel)]="planningRequest.vrbpln" placeholder="Verba" [value]="planningRequest.vrbpln">
+              </div>
+              <div class="form-group">
+                <label for="cmvcmp">CMV de compra planejado</label>
+                <input type="number" step="any" class="form-control w-100" pattern="^\d*(\.\d{0,2})?$" formControlName="cmvcmp" [(ngModel)]="planningRequest.cmvcmp" placeholder="CMV" [value]="planningRequest.cmvcmp">
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="submit()">Enviar</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="close()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
