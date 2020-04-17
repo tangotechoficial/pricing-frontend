@@ -64,6 +64,11 @@ import { PlanningFilterModalComponent } from './components/filter-modal-plano/fi
 import { ChartsModule } from 'ng2-charts';
 import { PlanningPopupComponent } from './components/shared/planning-popup/planning-popup.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { DinamicTableComponent } from './components/precio/precio-business/dinamic-table/dinamic-table.component';
+import { PrecioElement } from './components/precio/precioelement/precioelement.component';
+import { PrecioSeleccion } from './components/precio/precioseleccion/precioseleccion.component';
+import { PrecioBaseBusinessComponent } from './components/precio/preciobase/business/preciobase.component';
+import { RegisterComponent } from './components/register/register.component';
 
 registerLocaleData(localePt, 'pt');
 @NgModule({
@@ -77,6 +82,10 @@ registerLocaleData(localePt, 'pt');
     PrecioVentaComponent,
     PrecioTechnical,
     PrecioBusiness,
+    DinamicTableComponent,
+    PrecioElement,
+    PrecioSeleccion,
+    PrecioBaseBusinessComponent,
     SaccesoComponent,
     CondicionComponent,
     AutocompleteInputComponent,
@@ -113,7 +122,8 @@ registerLocaleData(localePt, 'pt');
     ConfirmationModalComponent,
     ImpactIndicatorComponent,
     PlanningFilterModalComponent,
-    PlanningPopupComponent
+    PlanningPopupComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
