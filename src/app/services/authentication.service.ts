@@ -26,8 +26,8 @@ export class AuthenticationService {
     ).pipe(map(response => {
       localStorage.setItem('token', JSON.stringify(response.token));
       this.currentTokenSubject.next(JSON.stringify(response.token));
-      localStorage.setItem('User', response.user);
-      this.currentUserSubject.next(response.user);
+      localStorage.setItem('User', JSON.stringify(response.user));
+      this.currentUserSubject.next(JSON.stringify(response.user));
       return response.token;
     }))
   }
@@ -40,7 +40,11 @@ export class AuthenticationService {
     return token;
   }
   public get currentUserValue() {
-    return this.currentUserSubject.value;
+    const value = this.currentUserSubject.value;
+    if ( typeof value === 'string')  {
+      return JSON.parse(value);
+    }
+    return value;
   }
 
   logout(){
