@@ -1,7 +1,10 @@
 <!-- Navigation Bar -->
 <navegacion></navegacion>
 <ngx-spinner></ngx-spinner>
-<div class="background">
+<div class="background" infiniteScroll
+[infiniteScrollDistance]="2"
+[infiniteScrollThrottle]="50"
+(scrolled)="scroll()">
   <div class="row">
     <div class="col-12">
       <div class="row">
