@@ -14,23 +14,26 @@
       </div>
     </nav>
   </div>
-  <div class="col-12  tab-content pb-4">
-    <ng-container *ngFor="let sug of volumeCompositionChartDataSugerido; let idx=index;" >
-      <div [ngClass]="{'show active': idx == 0}" class="tab-pane fade" id="tab-week{{ idx + 1 }}" role="tabpanel" [attr.aria-labelledby]="ariaLabels[idx]">
-        <div class="graphic-chart">
-          <div class="col-6">
-          <canvas baseChart [data]="sug.data" [options]="chartOptions" [labels]="sugeridoLabels" [chartType]="volumeCompositionType"
-              [plugins]="plugins" [legend]="chartLegend">
-          </canvas>
-          </div>
-          <div class="col-6">
-          <canvas baseChart [data]="volumeCompositionChartDataPlanejado[idx].data" [options]="chartOptions" [labels]="planejadoLabels" [chartType]="volumeCompositionType"
-          [plugins]="plugins" [legend]="true">
-          </canvas>
-          </div>
-
+</div>
+<div class="row">
+  <div class="col-12 pb-4 pt-5">
+    <div class="tab-content">
+      <ng-container *ngFor="let sug of volumeCompositionChartDataSugerido; let idx=index;" >
+        <div [ngClass]="{'show active': idx == 0}" class="tab-pane fade" id="tab-week{{ idx + 1 }}" role="tabpanel" [attr.aria-labelledby]="ariaLabels[idx]">
+          <div class="graphic-chart">
+            <div class="col-6">
+            <canvas baseChart [data]="sug.data" [options]="options" [labels]="sugeridoLabels" [chartType]="volumeCompositionType"
+                [plugins]="plugins" [legend]="chartLegend">
+            </canvas>
+            </div>
+            <div class="col-6">
+            <canvas baseChart [data]="volumeCompositionChartDataPlanejado[idx].data" [options]="options" [labels]="planejadoLabels" [chartType]="volumeCompositionType"
+            [plugins]="plugins" [legend]="true">
+            </canvas>
+            </div>
+        </div>
       </div>
+      </ng-container>
     </div>
-    </ng-container>
   </div>
 </div>
