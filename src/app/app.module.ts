@@ -68,6 +68,7 @@ import { DinamicTableComponent } from './components/precio/precio-business/dinam
 import { PrecioElement } from './components/precio/precioelement/precioelement.component';
 import { PrecioSeleccion } from './components/precio/precioseleccion/precioseleccion.component';
 import { PrecioBaseBusinessComponent } from './components/precio/preciobase/business/preciobase.component';
+import { RegisterComponent } from './components/register/register.component';
 
 registerLocaleData(localePt, 'pt');
 @NgModule({
@@ -121,7 +122,8 @@ registerLocaleData(localePt, 'pt');
     ConfirmationModalComponent,
     ImpactIndicatorComponent,
     PlanningFilterModalComponent,
-    PlanningPopupComponent
+    PlanningPopupComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
