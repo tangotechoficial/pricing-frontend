@@ -1,7 +1,7 @@
 .indicator {
-  font-size: 6em
+  font-size: 3em
 }
 .indicator  .fas.fa-arrow-down {
-  font-size: .5em !important;
+  font-size: .2em !important;
   color: rgb(181, 49, 49)
 }

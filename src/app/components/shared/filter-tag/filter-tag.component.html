@@ -3,7 +3,7 @@
     <ng-container *ngFor="let prop of item|keyvalue">
       <div *ngIf="prop.value" [attr.data-field]="prop.key" [attr.id]="prop.key" [attr.data-value]="prop.value" class="badge badge-filter">
         <span>{{ prop.key }}:{{ prop.value }}</span>
-        <a class="close" aria-label="close" [attr.data-dismiss]="prop.key" (click)="remove($event)">&times;</a>
+        <a *ngIf="closeable"  class="close" aria-label="close" [attr.data-dismiss]="prop.key" (click)="remove($event)">&times;</a>
       </div>
     </ng-container>
   </ng-container>
