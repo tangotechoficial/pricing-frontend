@@ -63,6 +63,7 @@ import { ImpactIndicatorComponent } from './components/shared/impact-indicator/i
 import { PlanningFilterModalComponent } from './components/filter-modal-plano/filter-modal-plano.component';
 import { ChartsModule } from 'ng2-charts';
 import { PlanningPopupComponent } from './components/shared/planning-popup/planning-popup.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 registerLocaleData(localePt, 'pt');
 @NgModule({
@@ -116,6 +117,7 @@ registerLocaleData(localePt, 'pt');
   ],
   imports: [
     BrowserModule,
+    InfiniteScrollModule,
     routing,
     HttpClientModule,
     ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
