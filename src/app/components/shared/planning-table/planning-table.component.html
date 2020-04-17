@@ -6,7 +6,7 @@
 <button class="btn btn-outline-primary p-1">Elasticidade</button> -->
 </div>
 
-<div class="row">
+<div class="row with-overflow custom-scrollbar-css">
   <planning-popup (result)="updatePlan($event)"></planning-popup>
   <form [formGroup]="fullForm">
     <div formGroupName="weeks">
