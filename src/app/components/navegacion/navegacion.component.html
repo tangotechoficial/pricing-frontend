@@ -1,9 +1,9 @@
 <div class="barWidth">
   <div class="row justify-content-between">
 
-    <div class="col-4">
+    <div class="col-5">
 
-      <ul *ngIf="isLoggedIn" class="nav mt-2 mb-2 col">
+      <ul *ngIf="isLoggedIn" class="nav mt-2 mb-2">
         <li class="nav-item">
           <app-technical-menu *ngIf="userTechnical"></app-technical-menu>
           <app-business-menu *ngIf="!userTechnical"></app-business-menu>
