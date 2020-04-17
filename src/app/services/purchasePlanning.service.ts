@@ -20,10 +20,15 @@ export class PurchasePlanningService {
   private statesUrl = `${this.baseEndPointPath}/planocomprasestado/`;
   private productshUrl = `${this.baseEndPointPath}/planocomprasproduto/`;
 
+  filterParams: BehaviorSubject<any>;
+  currentFilterParams: Observable<any>;
 
   constructor(
     private http$: HttpClient
-  ) {}
+  ) {
+    this.filterParams = new BehaviorSubject<any>({});
+    this.currentFilterParams = this.filterParams.asObservable();
+  }
 
   public get planningData(): Promise<PurchasePlan[]> {
       return this.http$.get(this.planningDataurl).toPromise()
@@ -75,10 +80,19 @@ export class PurchasePlanningService {
 
   }
 
+  get currentFilterParamsValue() {
+    return this.filterParams.value;
+  }
+
+  setFilterParams(params) {
+    this.filterParams.next(params);
+  }
+
   getFilteredData(params: any): Promise<PurchasePlan[]> {
     // tslint:disable-next-line: max-line-length
     const url = this.planningDataurl;
     const options = {params: {}};
+    this.setFilterParams(params);
     Object.keys(params).map(key => {
         if (params[key] !== null && params[key] !== undefined && params[key] !== '') {
           let value = params[key]
@@ -88,6 +102,7 @@ export class PurchasePlanningService {
           options.params[key.toUpperCase()] = value;
         }
     });
+
     const result =  this.http$.get(url, options).toPromise();
     return result.then(
       (response: any) => {
@@ -95,5 +110,7 @@ export class PurchasePlanningService {
       }
     ).catch(error => {throw new Error(error); });
   }
+
+
 
 }

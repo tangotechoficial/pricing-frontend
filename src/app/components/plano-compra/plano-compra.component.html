@@ -8,13 +8,13 @@
       <div class="container col-12 p-4 d-flex justify-content-start">
           <button type="button" class="btn bg-standard btn-filter-color" (click)="modal()">
             <i class="fas fa-filter btn-filter-color"></i>&nbsp;Filtro</button>
-          <filter-tag [filter]="filter" [closeable]="false  "></filter-tag>
+          <filter-tag [filter]="filter" [closeable]="false"></filter-tag>
       </div>
     </div>
     <tabbed-charts *ngIf="planningData" [data]="planningData" class="row shaded charts"></tabbed-charts>
     <div class="row shaded">
       <div class="container col-12 p-4">
-        <planning-table *ngIf="planningData" [data]="planningData"></planning-table>
+        <planning-table *ngIf="planningData" (dataUpdated)="isSubmitted($event)" [data]="planningData"></planning-table>
       </div>
     </div>
     <div class="row shaded">

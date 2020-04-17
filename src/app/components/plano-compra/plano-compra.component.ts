@@ -60,6 +60,7 @@ export class PlanoCompraComponent implements OnInit, OnDestroy, DoCheck {
 
   @Input() isSubmitted(value) {
     this._submitted = value;
+    this.done = !value;
   }
 
   modal() {

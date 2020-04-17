@@ -61,6 +61,12 @@ export class TabbedChartsComponent{
               beginAtZero: true
           }
       }]
+    },
+    tooltips: {
+      callbacks: {
+          label: tooltipItem => `${tooltipItem.yLabel}: ${tooltipItem.xLabel}`,
+          title: () => null,
+      }
     }
   };
   public chartLabels: Label[] = ['S1', 'S2', 'S3', 'S4', 'S5'];

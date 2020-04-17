@@ -7,7 +7,7 @@
 </nav>
 <div class="col-12">
   <div class="tab-content">
-    <div class="tab-pane container-tab custom-scrollbar-css fade show active" id="tab-margin" role="tabpanel"
+    <div class="tab-pane container-tab custom-scrollbar-css fade" id="tab-margin" role="tabpanel"
       aria-labelledby="nav-margin">
       <div class="row">
         <div class="col-3 box-indicator">
@@ -17,7 +17,7 @@
           <span class="chart-title"><strong>Margem</strong> Sugerida vs Planejada</span>
           <div class="row">
             <canvas class="chart" baseChart [datasets]="marginChartData" [labels]="chartLabels" [options]="chartOptions"
-              [plugins]="chartPlugins" [legend]="chartLegend" [chartType]="chartType">
+               [legend]="chartLegend" [chartType]="chartType">
             </canvas>
           </div>
         </div>
@@ -33,13 +33,13 @@
           <span class="chart-title"><strong>Competitividade</strong> Sugerida vs Planejada</span>
           <div class="row">
             <canvas class="chart" baseChart [datasets]="competitivityChartData" [labels]="chartLabels" [options]="chartOptions"
-              [plugins]="chartPlugins" [legend]="chartLegend" [chartType]="chartType">
+               [legend]="chartLegend" [chartType]="chartType">
             </canvas>
           </div>
         </div>
       </div>
     </div>
-    <div class="tab-pane container-tab custom-scrollbar-css fade" id="tab-vendas" role="tabpanel"
+    <div class="tab-pane container-tab custom-scrollbar-css fade show active" id="tab-vendas" role="tabpanel"
       aria-labelledby="nav-vendas">
       <div class="row">
         <div class="col-3 box-indicator">
@@ -49,7 +49,7 @@
           <span class="chart-title"><strong>Vendas</strong> Sugerida vs Planejada</span>
           <div class="row">
             <canvas class="chart" baseChart [datasets]="sellingChartData" [labels]="chartLabels" [options]="chartOptions"
-              [plugins]="chartPlugins" [legend]="chartLegend" [chartType]="chartType">
+               [legend]="chartLegend" [chartType]="chartType">
             </canvas>
           </div>
         </div>

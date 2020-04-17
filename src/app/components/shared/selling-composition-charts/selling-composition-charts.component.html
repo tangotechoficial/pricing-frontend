@@ -16,7 +16,7 @@
   </div>
   <div class="col-12  tab-content pb-4">
     <ng-container *ngFor="let sug of volumeCompositionChartDataSugerido; let idx=index;" >
-      <div class="tab-pane fade" id="tab-week{{ idx + 1 }}" role="tabpanel" [attr.aria-labelledby]="ariaLabels[idx]">
+      <div [ngClass]="{'show active': idx == 0}" class="tab-pane fade" id="tab-week{{ idx + 1 }}" role="tabpanel" [attr.aria-labelledby]="ariaLabels[idx]">
         <div class="graphic-chart">
           <div class="col-6">
           <canvas baseChart [data]="sug.data" [options]="chartOptions" [labels]="sugeridoLabels" [chartType]="volumeCompositionType"

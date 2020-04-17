@@ -1,6 +1,9 @@
+import { NgxSpinnerService } from 'ngx-spinner';
+import { PurchasePlanningService } from '@services/purchasePlanning.service';
+import { weeks } from '@datasources/plano-de-compras.json';
 import { PlanningDataManagerService } from '@app/services/planning-data.service';
 import { Group } from '@app/models/group';
-import { Input, Component, AfterViewInit } from '@angular/core';
+import { Input, Component, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import {FormGroup, FormControl, Validators, FormArray, FormBuilder } from '@angular/forms';
 import { PlannedData } from '@models/plannedData';
 import { PlanningPopupDataManagerService } from '@app/services/planning-popup.service';
@@ -11,7 +14,7 @@ declare var $: any;
   // tslint:disable-next-line: component-selector
   selector: 'planning-table',
   templateUrl: './planning-table.component.html',
-  styleUrls: ['./planning-table.component.css']
+  styleUrls: ['./planning-table.component.scss']
 })
 export class PlanningTableComponent implements AfterViewInit {
   // tslint:disable-next-line: variable-name
@@ -19,21 +22,28 @@ export class PlanningTableComponent implements AfterViewInit {
   @Input() hasRealized;
   fullForm: FormGroup;
   plannedData: PlannedData[];
+  modalMessage: string;
+  @Output() dataUpdated: EventEmitter<boolean>;
+  submitted = false;
 
-
+  private filterParams$: any;
   constructor(
     private formBuilder: FormBuilder,
     private popupService: PlanningPopupDataManagerService,
-    private planningDataManager: PlanningDataManagerService
+    private planningDataManager: PlanningDataManagerService,
+    private purchasePlanningService: PurchasePlanningService,
+    private spinner: NgxSpinnerService
     ) {
       this.plannedData = []
       this.fullForm = new FormGroup({});
       this._data = this.planningDataManager.currentPlanValue;
-      this.planningDataManager.actualPlanData.subscribe(planningData => this._data = planningData)
+      this.planningDataManager.actualPlanData.subscribe(planningData => this._data = planningData);
+      this.filterParams$ = this.purchasePlanningService.currentFilterParamsValue;
+      this.purchasePlanningService.currentFilterParams.subscribe(params => this.filterParams$ = params);
+      this.dataUpdated = new EventEmitter<boolean>(false)
   }
 
   buildGroups() {
-    debugger;
     const weeksGroup = new FormGroup({});
     this._data.map( (row, index) => {
       const str = row.NUMANOMESSMN;
@@ -86,8 +96,35 @@ export class PlanningTableComponent implements AfterViewInit {
   }
   ngAfterViewInit() {
     this.popupService.actualPlanData.subscribe(data => this.plannedData.push(data));
-    this.planningDataManager.actualPlanData.subscribe(planningData => this._data = planningData)
-    this.buildGroups()
+    this.planningDataManager.actualPlanData.subscribe(planningData => this._data = planningData);
+    this.buildGroups();
+  }
+
+  isComplete() {
+    return Object.keys(this.fullForm.get('weeks').controls).every(form => {return this.fullForm.controls.weeks.get(form).dirty})
+  }
+  updatePlan($event) {
+    const weeksData = {};
+    const week = 'week' + (Number($event.NUMANOMESSMN.slice(-1)) - 1).toString();
+    weeksData[week] = {...$event};
+    this.fullForm.patchValue({weeks: weeksData});
+    this.fullForm.get('weeks').get(week).markAsDirty()
+  }
+
+  submitForm() {
+    this.spinner.show()
+    const result = this.planningDataManager.submitPlan(this.fullForm, this.filterParams$)
+    result.then( results => {
+      const success = results.every(res => res === true);
+      if (success) {
+        alert('As informações foram salvas com sucesso!');
+      } else {
+        alert('Houve um problema ao salvar os dados! Comunique a um administrador');
+      }
+      this.spinner.hide();
+      this.dataUpdated.emit(true);
+      this.submitted = true;
+    })
   }
 
 
