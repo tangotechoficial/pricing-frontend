@@ -78,8 +78,8 @@ export class NavegacionComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    const user = JSON.parse(localStorage.getItem('User'));
-    this.userTechnical =  user.groups[0].name === 'tecnico' ? true : false;
+    const user = this.authService.currentUserValue;
+    this.userTechnical = user.groups.some( group => group.name === 'tecnico');
     this._route.url.subscribe(url => {
       this.section = this.mapUrlToSection[location.pathname];
       if (location.pathname !== '/login') {

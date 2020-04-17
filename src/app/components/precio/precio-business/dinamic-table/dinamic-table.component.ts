@@ -6,10 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['../../../precio/precio.component.scss']
 })
 export class DinamicTableComponent implements OnInit {
-
+  currentSelectedCampos: any;
   constructor() { }
 
   ngOnInit() {
+  }
+
+  currVal(value) {
+    return;
   }
 
 }
