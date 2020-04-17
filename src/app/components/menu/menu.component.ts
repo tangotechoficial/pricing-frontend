@@ -20,8 +20,8 @@ export class MenuComponent implements OnInit {
 
   private setUserInfo() {
     try {
-       return this.authenticationService.currentUserValue;
-    } catch ( Error ) {
+      return this.authenticationService.currentUserValue;
+    } catch (e) {
         return {
           username: 'Guest'
         };
