@@ -14,7 +14,7 @@ import {untilDestroyed} from 'ngx-take-until-destroy';
   styleUrls: ['./diretriz-estrategica.component.scss'],
   providers: [ DiretrizesEstrategicasService ]
 })
-export class DiretrizEstrategicaComponent implements OnInit, OnChanges,OnDestroy {
+export class DiretrizEstrategicaComponent implements OnInit, OnChanges, OnDestroy {
 
   filterForm: FormGroup;
   filter: Filter = new Filter();
@@ -26,6 +26,7 @@ export class DiretrizEstrategicaComponent implements OnInit, OnChanges,OnDestroy
   public subCategories: any;
   public fornecedores: any;
   public filial: any;
+  public nextUrl: string;
 
   public sumVLRVNDFATLIQ = 0;
   public sumVLRMRGCRB = 0;
@@ -48,15 +49,16 @@ export class DiretrizEstrategicaComponent implements OnInit, OnChanges,OnDestroy
     private cdr: ChangeDetectorRef
 
   ) {
-
     this.filter = this.filterService.currentFilterValue;
     this.diretrizesEstrategicas = this.diretrixDataManager.currentDiretrixValue;
+    this.nextUrl = this.diretrixService.nextUrlValue;
+    this.diretrixService.nextUrlObservable.subscribe(url => this.nextUrl = url);
   }
 
 
   ngOnInit() {
 
-    this.filterService.unsetFilter()
+    this.filterService.unsetFilter();
     this.filterForm = this.formBuilder.group({
       desdrtcllatu: [''],
       codgrpmer: [''],
@@ -64,21 +66,21 @@ export class DiretrizEstrategicaComponent implements OnInit, OnChanges,OnDestroy
       codclsmer: [''],
       coddivfrn: [''],
       codestuni: [''],
-    })
+    });
     this.spinner.show();
-    this.filterService.filterCurrent.pipe(untilDestroyed(this)).subscribe(filter => {this.filter = filter;});
+    this.filterService.filterCurrent.pipe(untilDestroyed(this)).subscribe(filter => {this.filter = filter; });
     this.diretrixDataManager.actualDiretrixData
     .pipe(untilDestroyed(this))
     .subscribe(
       diretrixes => this.diretrizesEstrategicas = diretrixes
     );
     const dataArray: Diretrix[] = [];
-    this.sumVLRVNDFATLIQ = 0
-    this.sumVLRRCTLIQAPU= 0
-    this.MRGBRT = 0
-    this.MRGCRB = 0
-    this.sumVLRMRGCRB = 0
-    this.sumVLRMRGBRT = 0
+    this.sumVLRVNDFATLIQ = 0;
+    this.sumVLRRCTLIQAPU = 0;
+    this.MRGBRT = 0;
+    this.MRGCRB = 0;
+    this.sumVLRMRGCRB = 0;
+    this.sumVLRMRGBRT = 0;
     Promise.all([
       this.diretrixService.diretrizesEstrategicas.then(
         data => data.map(
@@ -102,8 +104,38 @@ export class DiretrizEstrategicaComponent implements OnInit, OnChanges,OnDestroy
     });
   }
 
+  scroll() {
+    const dataArray: Diretrix[] = this.diretrizesEstrategicas;
+    this.sumVLRVNDFATLIQ = 0;
+    this.sumVLRRCTLIQAPU = 0;
+    this.MRGBRT = 0;
+    this.MRGCRB = 0;
+    this.sumVLRMRGCRB = 0;
+    this.sumVLRMRGBRT = 0;
+    Promise.all([
+      this.diretrixService.loadNext(this.nextUrl).then(
+        data => data.map(
+          row => {
+            dataArray.push(row);
+            this.sumVLRVNDFATLIQ = (Number(this.sumVLRVNDFATLIQ) + Number(row.VLRVNDFATLIQ));
+            this.sumVLRMRGCRB = (Number(this.sumVLRMRGCRB) + Number(row.VLRMRGCRB));
+            this.sumVLRMRGBRT = (Number(this.sumVLRMRGBRT) + Number(row.VLRMRGBRT));
+            this.sumVLRRCTLIQAPU = (Number(this.sumVLRRCTLIQAPU) + Number(row.VLRRCTLIQAPU));
+            this.MRGCRB =  (Number(this.sumVLRMRGCRB)  / Number(this.sumVLRRCTLIQAPU)) * 100;
+            this.MRGBRT =  (Number(this.sumVLRMRGBRT) / Number(this.sumVLRRCTLIQAPU)) * 100;
+          }
+        )
+      )
+      .catch(error => console.error(error))
+    ]).then( result => {
+      this.diretrixDataManager.setData(dataArray);
+      this.cdr.markForCheck();
+      this.spinner.hide();
+    });
+  }
+
   ngOnChanges(changes: SimpleChanges) {
-    this.cdr.detectChanges()
+    this.cdr.detectChanges();
   }
 
   ngOnDestroy() {
@@ -111,15 +143,16 @@ export class DiretrizEstrategicaComponent implements OnInit, OnChanges,OnDestroy
   }
 
   resetFilter() {
+    this.diretrixService.unsetNextUrl();
     this.filterForm.reset();
     this.filterService.unsetFilter();
     this.spinner.show();
-    this.sumVLRVNDFATLIQ = 0
-    this.sumVLRRCTLIQAPU= 0
-    this.MRGBRT = 0
-    this.MRGCRB = 0
-    this.sumVLRMRGCRB = 0
-    this.sumVLRMRGBRT =0
+    this.sumVLRVNDFATLIQ = 0;
+    this.sumVLRRCTLIQAPU = 0;
+    this.MRGBRT = 0;
+    this.MRGCRB = 0;
+    this.sumVLRMRGCRB = 0;
+    this.sumVLRMRGBRT = 0;
     this.diretrixService.diretrizesEstrategicas
     .then((result) => {
         this.diretrixDataManager.setData(result);
@@ -136,11 +169,12 @@ export class DiretrizEstrategicaComponent implements OnInit, OnChanges,OnDestroy
 
   }
 
-  loadGroups(value){
-    this.spinner.show()
+  loadGroups(value) {
+    this.spinner.show();
     return this.diretrixService.getGroups(value.currentTarget.value)
     .then( groups => { this.groups = groups; this.spinner.hide(); } );
   }
+
   loadCategories(value) {
     this.spinner.show();
     return this.diretrixService.getCategories(value.currentTarget.value)
@@ -169,16 +203,17 @@ export class DiretrizEstrategicaComponent implements OnInit, OnChanges,OnDestroy
   }
 
   setFilter() {
-    this.spinner.show()
-    this.sumVLRVNDFATLIQ = 0
-    this.sumVLRRCTLIQAPU= 0
-    this.MRGBRT = 0
-    this.MRGCRB = 0
-    this.sumVLRMRGCRB = 0
-    this.sumVLRMRGBRT = 0
+    this.diretrixService.unsetNextUrl();
+    this.spinner.show();
+    this.sumVLRVNDFATLIQ = 0;
+    this.sumVLRRCTLIQAPU = 0;
+    this.MRGBRT = 0;
+    this.MRGCRB = 0;
+    this.sumVLRMRGCRB = 0;
+    this.sumVLRMRGBRT = 0;
     this.diretrixService.getFilteredData(this.filterForm.value)
       .then((result) => {
-        this.diretrixDataManager.setData(result)
+        this.diretrixDataManager.setData(result);
         result.map(row => {
           this.sumVLRVNDFATLIQ = (Number(this.sumVLRVNDFATLIQ) + Number(row.VLRVNDFATLIQ));
           this.sumVLRMRGCRB = (Number(this.sumVLRMRGCRB) + Number(row.VLRMRGCRB));
@@ -186,7 +221,6 @@ export class DiretrizEstrategicaComponent implements OnInit, OnChanges,OnDestroy
           this.sumVLRRCTLIQAPU = (Number(this.sumVLRRCTLIQAPU) + Number(row.VLRRCTLIQAPU));
           this.MRGCRB =  (Number(this.sumVLRMRGCRB)  / Number(this.sumVLRRCTLIQAPU)) * 100;
           this.MRGBRT =  (Number(this.sumVLRMRGBRT) / Number(this.sumVLRRCTLIQAPU)) * 100;
-          console.log(this.sumVLRMRGCRB)
         });
 
         this.spinner.hide();
