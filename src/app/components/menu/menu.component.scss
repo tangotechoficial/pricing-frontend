@@ -98,29 +98,52 @@
 
  }
 
-.logo-martins-expandido {
-  background-image: url('/assets/img/martins.svg');
-  background-size: cover;
-  min-height: 224px;
-  max-width: 280px;
-
-}
-
-.pricing-types {
-  padding: 10px;
-  border: 1px solid transparent;
-  color: #FEFACE;
-}
-
-.type-wrappers {
+ .pricing-presentation {
   display: flex;
-  justify-content: space-between;
-  .analitica {
-    background-color: #F0A001;
-    border-radius: 10px;
-  }
-  .dinamica {
-    border-radius: 10px;
-    background-color: #00AFEC;
-  }
-}
+  flex-flow: column;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 20px;
+   .logo-martins-expandido {
+     background-image: url('/assets/img/martins.svg');
+     background-size: cover;
+     min-height: 200px;
+     min-width: 260px;
+     max-height: 360px;
+     max-width: 450px;
+   }
+   .main-title {
+     margin-top: 10%;
+     .pricing-welcome {
+       color:black;
+     }
+   }
+   .pricing-types {
+     padding: 10px;
+     border: 1px solid transparent;
+     color: #FEFACE;
+     margin-top: 30px;
+   }
+
+   .wrapper-subtitle {
+     .pricing-subtitle {
+       color:black;
+     }
+   }
+
+   .type-wrappers {
+     display: flex;
+     justify-content: space-between;
+     width: 50%;
+     margin: 20px;
+     .analitica {
+       background-color: #F0A001;
+       border-radius: 10px;
+     }
+     .dinamica {
+       border-radius: 10px;
+       background-color: #00AFEC;
+     }
+   }
+
+ }

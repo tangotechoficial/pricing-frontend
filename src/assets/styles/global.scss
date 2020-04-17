@@ -4,7 +4,7 @@
     font-family: 'Raleway', sans-serif;
 }
 
-*:not(input){
+*:not(input):not(.prcing-welcome):not(.pricing-subtitle){
     color: $martinsTextGrey;
 }
 
