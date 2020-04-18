@@ -5,18 +5,19 @@ import { Routes, RouterModule } from '@angular/router';
 import {AuthenticationGuard} from '@helpers/auth.guard';
 
 /* Components */
-import { MenuComponent } from './components/menu/menu.component';
-import { LoginComponent } from './components/login/login.component';
-import { ErrorComponent } from './components/error/error.component';
-import { PrecioBaseComponent } from './components/precio/preciobase/preciobase.component';
-import { SaccesoComponent } from './components/sacceso/sacceso.component';
-import { CondicionComponent } from './components/condicion/condicion.component';
-import { DadosMestreComponent } from './components/dados-mestre/dados-mestre.component';
-import { DiretrizEstrategicaComponent } from './components/diretriz-estrategica/diretriz-estrategica.component';
-import { SelectCondicionComponent } from './components/select-condicion/select-condicion.component';
-import { PlanoCompraComponent } from './components/plano-compra/plano-compra.component';
-import { ExecucaoComponent } from './components/execucao/execucao.component';
-import { SimuladorComponent } from './components/simulador/simulador.component';
+import { MenuComponent } from '@app/components/menu/menu.component';
+import { LoginComponent } from '@app/components/login/login.component';
+import { ErrorComponent } from '@app/components/error/error.component';
+import { PrecioBaseComponent } from '@app/components/precio/preciobase/preciobase.component';
+import { SaccesoComponent } from '@app/components/sacceso/sacceso.component';
+import { CondicionComponent } from '@app/components/condicion/condicion.component';
+import { DadosMestreComponent } from '@app/components/dados-mestre/dados-mestre.component';
+import { DiretrizEstrategicaComponent } from '@app/components/diretriz-estrategica/diretriz-estrategica.component';
+import { SelectCondicionComponent } from '@app/components/select-condicion/select-condicion.component';
+import { PlanoCompraComponent } from '@app/components/plano-compra/plano-compra.component';
+import { ExecucaoComponent } from '@app/components/execucao/execucao.component';
+import { SimuladorComponent } from '@app/components/simulador/simulador.component';
+import { RegisterComponent } from '@app/components/register/register.component';
 /* Routes Array */
 const appRoutes: Routes = [
     { path: 'login', component: LoginComponent},
@@ -32,6 +33,7 @@ const appRoutes: Routes = [
     { path: 'datalab/execucao', component: ExecucaoComponent,  canActivate: [AuthenticationGuard]},
     { path: 'datalab/diretriz-estrategica', component: DiretrizEstrategicaComponent,  canActivate: [AuthenticationGuard]},
     { path: 'datalab/dados-mestre', component: DadosMestreComponent,  canActivate: [AuthenticationGuard]},
+    { path: 'register', component: RegisterComponent},
     { path: '', redirectTo: '/login', pathMatch: 'full'},
     { path: '**', component: ErrorComponent},
 

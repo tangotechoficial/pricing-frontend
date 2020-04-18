@@ -1,1 +1,61 @@
-<p>register works!</p>
+<navegacion></navegacion>
+<ngx-spinner></ngx-spinner>
+<div class="background">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <form class="form pt-4 pb-4">
+          <fieldset>
+            <legend>Novo usuário</legend>
+          <div class="row  d-flex justify-content-between">
+            <div class="col-6">
+              <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" tabindex="1" class="form-control" id="username">
+              </div>
+              <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="text" tabindex="2"  class="form-control" id="email">
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                <label for="password">Senha:</label>
+                <input type="password" tabindex="3" id="password" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="password2">Confirme a senha:</label>
+                <input type="password" tabindex="4" class="form-control" />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6 d-flex justify-content-between">
+              <ul class="list-group list-group-horizontal">
+                <li class="list-group-item border-0 bg-transparent">
+                  Tem uma conta? <a class="text-primary" tabindex="7"  href="/login" >Faça login</a>
+                </li>
+                <li class="list-group-item border-0 bg-transparent">
+                  Esqueceu a senha? <a class="text-danger" tabindex="8"  href="/recoveraccount">Recuperar senha</a>
+                </li>
+              </ul>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                <ul class="list-group b-0 list-group-horizontal d-flex justify-content-between">
+                  <li class="list-group-item border-0 bg-transparent">
+                    <button type="reset" tabindex="5"  class="btn btn-warning text-white font-weight-bolder">Limpar campos <i class="fas fa-undo-alt"></i></button>
+                  </li>
+                  <li class="list-group-item border-0 bg-transparent">
+                    <button type="button" tabindex="6"  class="btn btn-primary bg-standard text-white font-weight-bolder">Registrar <i class="fas fa-arrow-right"></i></button>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
