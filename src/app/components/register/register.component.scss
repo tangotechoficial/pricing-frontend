@@ -1,0 +1,12 @@
+@import 'assets/styles/global.scss';
+@import 'assets/styles/condicion-sacceso.scss';
+
+
+.form {
+  fieldset {
+    font-family: 'Raleway', sans-serif;
+  }
+  input.error {
+    outline: 1px
+  }
+}
