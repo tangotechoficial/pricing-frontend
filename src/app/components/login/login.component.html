@@ -33,14 +33,11 @@
                                 </button>
                             </div>
                         </div>
-                        <!-- <div *ngIf="_BL" class="col-md-8 alert alert-danger" role="alert">
-                            Erro de credencial 
-                        </div>
-                        <div *ngIf="_SE" class="col-md-8 alert alert-danger" role="alert">
-                            Erro no servidor
-                        </div> -->
                         <div class="col-md-8 d-flex justify-content-center mt-4">
-                            <a href="#" class="login-link font-weight-bold">Esqueci minha senha</a>
+                          <a href="#" class="login-link font-weight-bold">Esqueci minha senha</a>
+                        </div>
+                        <div *ngIf="hasMessage" class="col-md-8 alert alert-danger m-4 text-center" role="alert">
+                            {{message}}
                         </div>
                     </div>
                 </form>

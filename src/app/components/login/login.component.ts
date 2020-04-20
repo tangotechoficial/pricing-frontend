@@ -17,6 +17,8 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   returnUrl: string;
   submitted: boolean = false;
+  hasMessage: boolean = false;
+  message: string = '';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -55,6 +57,9 @@ export class LoginComponent implements OnInit {
      },
      error => {
        console.log(error);
+       this.hasMessage = true;
+       this.message = "Usuário ou senha inválida"
+
      }
    )
   }
