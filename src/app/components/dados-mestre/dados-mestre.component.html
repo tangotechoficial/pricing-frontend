@@ -5,13 +5,17 @@
 [infiniteScrollDistance]="2"
 [infiniteScrollThrottle]="50"
 (scrolled)="scroll()">
-    <div class="container col-9 main-container">
-        <div class="container row col-12 p-4">
+    <div class="container col-10 main-container">
+      <div class="container-header col-12">
+        <div class="row col-9 p-4">
           <button type="button" class="btn bg-standard" (click)="showFilterModal()" ><i
                   class="fas fa-filter btn-filter-color"></i>&nbsp;Filtro</button>
           <filter-tag [filter]="filter" (updateFilter)="setFilter($event)"></filter-tag>
-
         </div>
+        <div class="container col-3 page-tittle">
+          <h2>Dados Mestres</h2>
+        </div>
+      </div>
         <nav>
           <div class="nav nav-tabs" id="tabs" role="tablist">
               <a class="nav-item nav-link active" data-toggle="tab" id="nav-composcao-preco" href="#tab-composicao-preco" role="tab">Composição de Preço</a>
@@ -25,9 +29,9 @@
                       <tr class="table-head">
                           <th class="th-center table-head-row">Cód. Produto</th>
                           <th></th>
-                          <th class="th-center table-head-row">Cód. Filial Expedição</th>
+                          <th class="th-center table-head-row">Cód. Filial Exp.</th>
                           <th></th>
-                          <th class="table-head-row" scope="col">Cód. Filial Faturamento</th>
+                          <th class="table-head-row" scope="col">Cód. Filial Fat.</th>
                           <th></th>
                           <th class="table-head-row" scope="col">Data</th>
                           <th></th>
