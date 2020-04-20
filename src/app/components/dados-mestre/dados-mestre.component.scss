@@ -222,3 +222,19 @@ table {
       text-align: center;
     }
 }
+
+.container-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px !important;
+  .page-tittle {
+    display: flex;
+    justify-content: end;
+    h2 {
+      width:100%;
+      margin-left: 10px;
+      text-align: right;
+    }
+  }
+}
