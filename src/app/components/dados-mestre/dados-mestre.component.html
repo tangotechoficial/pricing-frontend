@@ -7,12 +7,12 @@
 (scrolled)="scroll()">
     <div class="container col-10 main-container">
       <div class="container-header col-12">
-        <div class="row col-9 p-4">
+        <div class="row col-8 p-4">
           <button type="button" class="btn bg-standard" (click)="showFilterModal()" ><i
                   class="fas fa-filter btn-filter-color"></i>&nbsp;Filtro</button>
           <filter-tag [filter]="filter" (updateFilter)="setFilter($event)"></filter-tag>
         </div>
-        <div class="container col-3 page-tittle">
+        <div class="container col-4 page-tittle">
           <h2>DADOS MESTRES</h2>
         </div>
       </div>
