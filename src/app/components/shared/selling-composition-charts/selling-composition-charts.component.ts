@@ -74,7 +74,7 @@ export class SellingCompositionChartsComponent {
         this.volumeCompositionChartDataSugerido[index] = {
           data: [],
           label: 'Sugerido',
-          backgroundColor: ['#6289CF', '#FF6F50', '#E6DE4C', '#E66C43', '#79F09F', '#4270C1']
+          backgroundColor: ['#6289CF', '#FF6F50', '#E6DE4C', '#E66C43', '#6389CF', '#4270C1']
         };
         this.volumeCompositionChartDataSugerido[index].data.push(
           impostos, devolucao, margemBrutaUnitaria, verbaSugerida, verbaPlanejada, cmvPrecoSugerido
@@ -84,7 +84,7 @@ export class SellingCompositionChartsComponent {
         this.volumeCompositionChartDataPlanejado[index] = {
           data: [],
           label: 'Planejado',
-          backgroundColor: ['#6289CF', '#FF6F50', '#E6DE4C', '#E66C43', '#79F09F', '#4270C1']
+          backgroundColor: ['#6289CF', '#FF6F50', '#E6DE4C', '#E66C43', '#6389CF', '#4270C1']
         };
         const impostos = Number(Number(item.VLRIMPTOTOCD).toFixed(2));
         const devolucao = Number(Number(item.VLRDVLOCD).toFixed(2));
