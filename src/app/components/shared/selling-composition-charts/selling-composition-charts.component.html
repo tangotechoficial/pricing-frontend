@@ -23,12 +23,12 @@
           <div class="graphic-chart">
             <div class="col-6">
             <canvas baseChart [data]="sug.data" [options]="options" [labels]="sugeridoLabels" [chartType]="volumeCompositionType"
-                [plugins]="plugins" [legend]="chartLegend">
+                [plugins]="plugins" [legend]="chartLegend" [colors]="suggestedBgColors">
             </canvas>
             </div>
             <div class="col-6">
             <canvas baseChart [data]="volumeCompositionChartDataPlanejado[idx].data" [options]="options" [labels]="planejadoLabels" [chartType]="volumeCompositionType"
-            [plugins]="plugins" [legend]="true">
+            [plugins]="plugins" [legend]="true" [colors]="plannedColors">
             </canvas>
             </div>
         </div>

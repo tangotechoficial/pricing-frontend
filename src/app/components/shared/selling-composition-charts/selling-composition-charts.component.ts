@@ -56,7 +56,16 @@ export class SellingCompositionChartsComponent {
     'Verba Sugerida', 'Verba Planejada', 'CMV Planejado'];
   public plugins = [pluginDataLabels];
   public chartLegend = true;
-
+  public suggestedBgColors = [
+    {
+      backgroundColor: ['#6188CF', '#FF6F50', '#E6DE4C', '#BDADEA', '#E66C43', '#A5CEE3']
+    }
+  ];
+  public plannedColors = [
+    {
+      backgroundColor: ['#6188CF', '#FF6F50', '#E6DE4C', '#BDADEA', '#E66C43', '#A5CEE3']
+    }
+  ];
   planningData: PurchasePlan[];
 
 
@@ -73,8 +82,7 @@ export class SellingCompositionChartsComponent {
         const cmvPrecoSugerido = Number(Number(item.VLRCMVCAL).toFixed(2));
         this.volumeCompositionChartDataSugerido[index] = {
           data: [],
-          label: 'Sugerido',
-          backgroundColor: ['#6289CF', '#FF6F50', '#E6DE4C', '#E66C43', '#79F09F', '#4270C1']
+          label: 'Sugerido'
         };
         this.volumeCompositionChartDataSugerido[index].data.push(
           impostos, devolucao, margemBrutaUnitaria, verbaSugerida, verbaPlanejada, cmvPrecoSugerido
@@ -83,8 +91,7 @@ export class SellingCompositionChartsComponent {
       this.planningData.forEach((item, index) => {
         this.volumeCompositionChartDataPlanejado[index] = {
           data: [],
-          label: 'Planejado',
-          backgroundColor: ['#6289CF', '#FF6F50', '#E6DE4C', '#E66C43', '#79F09F', '#4270C1']
+          label: 'Planejado'
         };
         const impostos = Number(Number(item.VLRIMPTOTOCD).toFixed(2));
         const devolucao = Number(Number(item.VLRDVLOCD).toFixed(2));
