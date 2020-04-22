@@ -20,7 +20,6 @@ import { CondicionComponent } from './components/condicion/condicion.component';
 import { PlanoCompraComponent } from './components/plano-compra/plano-compra.component';
 import { ExecucaoComponent } from './components/execucao/execucao.component';
 import { SimuladorComponent } from './components/simulador/simulador.component';
-
 import { AutocompleteInputComponent } from './components/autocomplete-input/autocomplete-input.component';
 import { FilterPipeSeqAcceso } from './pipes/filterseqacceso.pipe';
 import { FilterPipeSeqSearch } from './pipes/filterseqsearch';
@@ -40,8 +39,7 @@ import { InlineEditComponent } from './components/shared/inline-edit/inline-edit
 import { ViewModeDirective } from './components/shared/viewmode.directive';
 import { EditModeDirective } from './components/shared/editmode.directive';
 import { EditableOnEnterDirective } from './components/shared/editableonenter.directive';
-import { GenericDadaFilterPipe } from '@app/pipes/generic-data-filter.pipe'
-
+import { GenericDadaFilterPipe } from '@app/pipes/generic-data-filter.pipe';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { PopupmenuComponent } from './components/popupmenu/popupmenu.component';
 import { SelectCondicionComponent } from './components/select-condicion/select-condicion.component';
@@ -62,6 +60,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { ImpactIndicatorComponent } from './components/shared/impact-indicator/impact-indicator.component';
 import { PlanningFilterModalComponent } from './components/filter-modal-plano/filter-modal-plano.component';
 import { ChartsModule } from 'ng2-charts';
+import { SimuladorVendasComponent } from './components/simulador-vendas/simulador-vendas.component';
 
 registerLocaleData(localePt, 'pt');
 @NgModule({
@@ -110,7 +109,8 @@ registerLocaleData(localePt, 'pt');
     ModalDetailingComponent,
     ConfirmationModalComponent,
     ImpactIndicatorComponent,
-    PlanningFilterModalComponent
+    PlanningFilterModalComponent,
+    SimuladorVendasComponent,
   ],
   imports: [
     BrowserModule,

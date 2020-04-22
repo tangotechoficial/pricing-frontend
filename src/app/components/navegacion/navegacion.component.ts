@@ -62,6 +62,7 @@ export class NavegacionComponent implements OnInit {
     '/menu': 'Inicio',
     '/preciobase': 'Esquema de Cálculo / Preço Base',
     '/precioventa': 'Esquema de Cálculo / Preço Venda',
+    '/simuladorvendas': 'Esquema de Calculo / Simulador vendas',
     '/sacceso': 'Sequência de acesso',
     '/condicion': 'Criar nova condição',
     '/datalab/dados-mestre': 'Growth Data Lab / Dados Mestre',

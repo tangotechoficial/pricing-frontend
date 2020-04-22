@@ -20,8 +20,11 @@ export class MenuComponent implements OnInit {
 
   private setUserInfo() {
     try {
-       console.log(this.authenticationService.currentUserValue);
-       return JSON.parse(this.authenticationService.currentUserValue);
+       if (typeof this.authenticationService.currentUserValue == "string") {
+        return JSON.parse(this.authenticationService.currentUserValue);
+       } else {
+        return this.authenticationService.currentUserValue
+       }
     } catch ( Error ) {
         return {
           username: 'Guest'

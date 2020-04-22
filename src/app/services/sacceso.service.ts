@@ -29,6 +29,7 @@ export class SaccesoService {
   }
 
   getSequencias(): Promise<Sequencia[]> {
+    console.log("headerapp" , this.header)
     return this.http.get(this.url + '/sequencia/', this.header)
       .toPromise()
       .then((result: any) => {
