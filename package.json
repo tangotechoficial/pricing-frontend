@@ -11,7 +11,7 @@
     "test:preciobase": "ng test --include src/app/components/precio/preciobase/*.spec.ts",
     "test:menu": "ng test --include src/app/components/menu/*.spec.ts",
     "test:services": "ng test --include src/app/services/services.spec.ts",
-    "test:condicion":"ng test --include src/app/componentes/condicion/*.spec.ts"
+    "test:condicion": "ng test --include src/app/componentes/condicion/*.spec.ts"
   },
   "private": true,
   "dependencies": {
