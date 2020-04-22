@@ -25,7 +25,7 @@ export class PlanningFilterModalService {
   }
 
   unsetFilter() {
-    this.filterSubject.next(null);
+    this.filterSubject.next(new Filter());
   }
 
   setFilter(value) {

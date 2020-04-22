@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./technical-menu.component.scss']
 })
 export class TechnicalMenuComponent implements OnInit {
-
+  checkIfReloadIsNeeded: any;
   constructor() { }
 
   ngOnInit() {

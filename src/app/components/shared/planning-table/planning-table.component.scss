@@ -1,3 +1,6 @@
+@import "assets/styles/global.scss";
+@import "assets/styles/condicion-sacceso.scss";
+
 .table td {
   text-align: right;
   width: 115px;
@@ -5,15 +8,15 @@
   font-size: 0.9rem;
 }
 
-
-
 .mirrorInput {
   outline: 1px solid #4270C1;
   box-sizing: border-box;
   padding: .4em
 }
-
-.w-50.ng-star-inserted {
+.form-field {
+  text-align: end;
+}
+.w-50 {
   width: 50px
 }
 
@@ -44,3 +47,4 @@
     border-radius: 1rem;
     background-color: #384461;
   }
+

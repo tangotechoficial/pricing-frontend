@@ -1,28 +1,39 @@
-<div class="row">
-  <div class="col-12">
-    <div class="row">
-      <div class="col-12">
-        <h4>Composição do volume de vendas</h4>
-      </div>
-      <div class="col-12 d-flex">
-        <ng-container *ngFor="let data of sellingData">
-          <div class="col-6 d-flex">
-            <ngx-charts-bar-vertical
-              [view]="view"
-              [results]="data.series"
-              [gradient]="gradient"
-              [xAxis]="showXAxis"
-              [yAxis]="showYAxis"
-              [showXAxisLabel]="showXAxisLabel"
-              [showYAxisLabel]="showYAxisLabel"
-              [xAxisLabel]="data.name"
-              [yAxisLabel]="yAxisLabel"
-              (select)="onSelect($event)">
-            </ngx-charts-bar-vertical>
-          </div>
-        </ng-container>
-      </div>
-    </div>
 
+<div class="row">
+  <div class="col-4">
+    <h5>Composição do volume de vendas</h5>
+  </div>
+  <div class="col-8 d-flex justify-content-end">
+    <nav class="nav-chart">
+      <div class="nav nav-pills" id="tabs" role="tablist">
+          <a class="nav-item nav-link active" data-toggle="tab" id="nav-week1" href="#tab-week1" role="tab">Semana 1</a>
+          <a class="nav-item nav-link" data-toggle="tab" id="nav-week2" href="#tab-week2" role="tab">Semana 2</a>
+          <a class="nav-item nav-link" data-toggle="tab" id="nav-week3" href="#tab-week3" role="tab">Semana 3</a>
+          <a class="nav-item nav-link" data-toggle="tab" id="nav-week4" href="#tab-week4" role="tab">Semana 4</a>
+          <a class="nav-item nav-link" data-toggle="tab" id="nav-week5" href="#tab-week5" role="tab">Semana 5</a>
+      </div>
+    </nav>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12 pb-4 pt-5">
+    <div class="tab-content">
+      <ng-container *ngFor="let sug of volumeCompositionChartDataSugerido; let idx=index;" >
+        <div [ngClass]="{'show active': idx == 0}" class="tab-pane fade" id="tab-week{{ idx + 1 }}" role="tabpanel" [attr.aria-labelledby]="ariaLabels[idx]">
+          <div class="graphic-chart">
+            <div class="col-6">
+            <canvas baseChart [data]="sug.data" [options]="options" [labels]="sugeridoLabels" [chartType]="volumeCompositionType"
+                [plugins]="plugins" [legend]="chartLegend" [colors]="suggestedBgColors">
+            </canvas>
+            </div>
+            <div class="col-6">
+            <canvas baseChart [data]="volumeCompositionChartDataPlanejado[idx].data" [options]="options" [labels]="planejadoLabels" [chartType]="volumeCompositionType"
+            [plugins]="plugins" [legend]="true" [colors]="plannedColors">
+            </canvas>
+            </div>
+        </div>
+      </div>
+      </ng-container>
+    </div>
   </div>
 </div>

@@ -1,7 +1,10 @@
 <!-- Navigation Bar -->
 <navegacion></navegacion>
 <ngx-spinner></ngx-spinner>
-<div class="background">
+<div class="background" infiniteScroll
+[infiniteScrollDistance]="2"
+[infiniteScrollThrottle]="50"
+(scrolled)="scroll()">
   <div class="row">
     <div class="col-12">
       <div class="row">
@@ -33,14 +36,14 @@
                       </div>
                       <div class="form-group">
                       <label for="diretoria">SubCategorias</label>
-                        <select name="diretoria"  formControlName="codclsmer" [(ngModel)]="filter.codclsmer" id="diretoria" class="form-control" (change)="loadFornecedor($event)">
+                        <select name="diretoria"  formControlName="codclsmer" [(ngModel)]="filter.codclsmer" id="diretoria" class="form-control" (change)="loadFornecedor($event, filter.codfmlmer)">
                           <option value="null">Selecione um item</option>
                           <option *ngFor="let opt of subCategories"  value="{{opt.CODCLSMER}}">{{ opt.DESCLSMER }} </option>
                         </select>
                       </div>
                       <div class="form-group">
                         <label for="diretoria">Fornecedor</label>
-                        <select name="diretoria"  formControlName="coddivfrn" [(ngModel)]="filter.coddivfrn" id="diretoria" class="form-control" (change)="loadUF($event)">
+                        <select name="diretoria"  formControlName="coddivfrn" [(ngModel)]="filter.coddivfrn" id="diretoria" class="form-control" (change)="loadUF($event, filter.codfmlmer, filter.codclsmer)">
                           <option value="null">Selecione um item</option>
                           <option *ngFor="let opt of fornecedores"  value="{{opt.CODDIVFRN}}">{{ opt.NOMFRN }} </option>
                         </select>
@@ -126,7 +129,7 @@
                               <th></th>
                           </tr>
                           <tr *ngFor="let items of diretrizesEstrategicas">
-                              <td>{{items.DATREFPOD.split(" ")[0]}}</td>
+                              <td>{{items.DATREFPOD.split(" ")[0].split("-").reverse().join("/")}}</td>
                               <td></td>
                               <td>{{items.NOMMES}}</td>
                               <td></td>

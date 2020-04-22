@@ -1,23 +1,23 @@
-<nav>
+<nav class="nav-chart">
   <div class="nav nav-pills" id="tabs" role="tablist">
-      <a class="nav-item nav-link active" data-toggle="tab" id="nav-margin" href="#tab-margin" role="tab">Margem</a>
+      <a class="nav-item nav-link active" data-toggle="tab" id="nav-vendas" href="#tab-vendas" role="tab">Vendas</a>
+      <a class="nav-item nav-link" data-toggle="tab" id="nav-margin" href="#tab-margin" role="tab">Margem</a>
       <a class="nav-item nav-link" data-toggle="tab" id="nav-competitividade" href="#tab-competitividade" role="tab">Competitividade</a>
-      <a class="nav-item nav-link" data-toggle="tab" id="nav-vendas" href="#tab-vendas" role="tab">Vendas</a>
   </div>
 </nav>
 <div class="col-12">
   <div class="tab-content">
-    <div class="tab-pane container-tab custom-scrollbar-css fade show active" id="tab-margin" role="tabpanel"
+    <div class="tab-pane container-tab custom-scrollbar-css fade" id="tab-margin" role="tabpanel"
       aria-labelledby="nav-margin">
       <div class="row">
         <div class="col-3 box-indicator">
-          <impact-indicator title="Impacto Mensal" indicatorValue="1,0" symbol="%"></impact-indicator>
+          <impact-indicator title="Impacto Mensal" [indicatorValue]="marginIndicator.toFixed(2)" symbol="%"></impact-indicator>
         </div>
         <div class="col-9">
           <span class="chart-title"><strong>Margem</strong> Sugerida vs Planejada</span>
           <div class="row">
-            <canvas baseChart [datasets]="marginChartData" [labels]="chartLabels" [options]="chartOptions"
-              [plugins]="chartPlugins" [legend]="chartLegend" [chartType]="chartType">
+            <canvas class="chart" baseChart [datasets]="marginChartData" [labels]="chartLabels" [options]="chartOptions"
+               [legend]="chartLegend" [chartType]="chartType">
             </canvas>
           </div>
         </div>
@@ -27,29 +27,29 @@
       aria-labelledby="nav-competitividade">
       <div class="row">
         <div class="col-3 box-indicator">
-          <impact-indicator title="Impacto Mensal" indicatorValue="1,0" symbol="%"></impact-indicator>
+          <impact-indicator title="Impacto Mensal" [indicatorValue]="competitivityIndicator.toFixed(2)" symbol="%"></impact-indicator>
         </div>
         <div class="col-9">
           <span class="chart-title"><strong>Competitividade</strong> Sugerida vs Planejada</span>
           <div class="row">
-            <canvas baseChart [datasets]="competitivityChartData" [labels]="chartLabels" [options]="chartOptions"
-              [plugins]="chartPlugins" [legend]="chartLegend" [chartType]="chartType">
+            <canvas class="chart" baseChart [datasets]="competitivityChartData" [labels]="chartLabels" [options]="chartOptions"
+               [legend]="chartLegend" [chartType]="chartType">
             </canvas>
           </div>
         </div>
       </div>
     </div>
-    <div class="tab-pane container-tab custom-scrollbar-css fade" id="tab-vendas" role="tabpanel"
+    <div class="tab-pane container-tab custom-scrollbar-css fade show active" id="tab-vendas" role="tabpanel"
       aria-labelledby="nav-vendas">
       <div class="row">
         <div class="col-3 box-indicator">
-          <impact-indicator title="Impacto Mensal" indicatorValue="2.0" symbol="k"></impact-indicator>
+          <impact-indicator title="Impacto Mensal" [indicatorValue]="sellingIndicator.toFixed(2)" symbol=""></impact-indicator>
         </div>
         <div class="col-9">
           <span class="chart-title"><strong>Vendas</strong> Sugerida vs Planejada</span>
           <div class="row">
-            <canvas baseChart [datasets]="sellingChartData" [labels]="chartLabels" [options]="chartOptions"
-              [plugins]="chartPlugins" [legend]="chartLegend" [chartType]="chartType">
+            <canvas class="chart" baseChart [datasets]="sellingChartData" [labels]="chartLabels" [options]="chartOptions"
+               [legend]="chartLegend" [chartType]="chartType">
             </canvas>
           </div>
         </div>

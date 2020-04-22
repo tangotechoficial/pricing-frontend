@@ -17,8 +17,8 @@ import { SelectCondicionComponent } from './components/select-condicion/select-c
 import { PlanoCompraComponent } from './components/plano-compra/plano-compra.component';
 import { ExecucaoComponent } from './components/execucao/execucao.component';
 import { SimuladorComponent } from './components/simulador/simulador.component';
-import {SimuladorVendasComponent} from './components/simulador-vendas/simulador-vendas.component'
-
+import {SimuladorVendasComponent} from './components/simulador-vendas/simulador-vendas.component';
+import { RegisterComponent } from '@app/components/register/register.component';
 /* Routes Array */
 const appRoutes: Routes = [
     { path: 'login', component: LoginComponent},
@@ -35,6 +35,7 @@ const appRoutes: Routes = [
     { path: 'datalab/execucao', component: ExecucaoComponent,  canActivate: [AuthenticationGuard]},
     { path: 'datalab/diretriz-estrategica', component: DiretrizEstrategicaComponent,  canActivate: [AuthenticationGuard]},
     { path: 'datalab/dados-mestre', component: DadosMestreComponent,  canActivate: [AuthenticationGuard]},
+    { path: 'register', component: RegisterComponent},
     { path: '', redirectTo: '/login', pathMatch: 'full'},
     { path: '**', component: ErrorComponent},
 

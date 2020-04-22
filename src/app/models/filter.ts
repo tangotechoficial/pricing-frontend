@@ -4,15 +4,15 @@ export class Filter implements Deserializable{
   // linha_negocio: string = null;
   // descgrpprd: string = null;
   // desctgprd: string = null;
-  desdrtcllatu: string;
-  codgrpmer: number;
-  codfmlmer: number;
-  codclsmer: number;
-  coddivfrn: number;
-  codfilfat: string;
-  codfilepd: number;
-  codestuni: string;
-  codprd: string;
+  desdrtcllatu: string = null;
+  codgrpmer: string = null;
+  codfmlmer: string = null;
+  codclsmer: string = null;
+  coddivfrn: string = null;
+  codfilfat: string = null;
+  codfilepd: string = null;
+  codestuni: string = null;
+  codprd: string = null;
 
   deserialize(data: any) {
     Object.assign(this, data);

@@ -59,13 +59,13 @@ export class NavegacionComponent implements OnInit {
 
   @Output() navOutput = new EventEmitter<boolean>();
   private mapUrlToSection = {
-    '/menu': 'Inicio',
+    '/menu': 'Início',
     '/preciobase': 'Esquema de Cálculo / Preço Base',
     '/precioventa': 'Esquema de Cálculo / Preço Venda',
     '/simuladorvendas': 'Esquema de Calculo / Simulador vendas',
     '/sacceso': 'Sequência de acesso',
     '/condicion': 'Criar nova condição',
-    '/datalab/dados-mestre': 'Growth Data Lab / Dados Mestre',
+    '/datalab/dados-mestre': 'Growth Data Lab / Dados Mestres',
     '/datalab/diretriz-estrategica': 'Growth Data Lab / Diretriz Estratégica',
     '/datalab/plano-compras': 'Growth Data Lab / Plano de Compras',
     '/datalab/execucao': 'Growth Data Lab / Execução',
@@ -79,8 +79,8 @@ export class NavegacionComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    const user = JSON.parse(localStorage.getItem('User'));
-    this.userTechnical =  user.groups[0].name === 'tecnico' ? true : false;
+    const user = this.authService.currentUserValue;
+    this.userTechnical = user.groups.some( group => group.name === 'tecnico');
     this._route.url.subscribe(url => {
       this.section = this.mapUrlToSection[location.pathname];
       if (location.pathname !== '/login') {
