@@ -1,0 +1,89 @@
+@import '../../../assets/styles/global.scss';
+@import '../../../assets/styles/condicion-sacceso.scss';
+@import '../../../assets/styles/mixins-var.scss';
+
+
+.fa-search {
+    color: $martinsTextGrey;
+    font-size: 1.2rem;
+}
+
+.fa-search.enabled::before {
+    color: $martinsBlue;
+    font-size: 1.2rem;
+}
+
+/*--button with 'x'--*/
+.btn-secondary {
+	width: 1rem;
+	height: 1rem;
+    &:hover {
+        background-color: $martinsRed;
+        border-color: $martinsRed;
+      }
+}
+
+/*---precioventa styles---*/
+
+hr{
+	background-color:$navMenuIconGrey;
+	margin:5px 0px;
+}
+
+.menu-background{
+    &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+
+
+
+.simuladorWrapper{
+
+	.modGeneral{
+		height: 100%;
+	}
+  .whiteWrapper{
+    background:white !important;
+  }
+  .inputWidth{
+    width: 12.5% ;
+  }
+	.modCond{
+		box-shadow: 0px 0px 6px 0px rgba(9, 9, 10, 0.1);
+    height: 25rem;
+    overflow: scroll;
+		i {
+			font-size:20px;
+		}
+    .total{
+      background-color: $backgroundGrey;
+    }
+    .condicionSel{
+      cursor:pointer;
+    }
+
+	}
+	.modCondSelect{
+		box-shadow: 0px 0px 6px 0px rgba(9, 9, 10, 0.1);
+		width: 99%;
+		margin:0 auto;
+    height: 25rem;
+
+
+		.compliance{
+			height: 50%;
+			border-color: $navMenuIconGrey !important;
+      		height: 10rem;
+      		table{
+				tr{
+					cursor: pointer;
+				}
+				th, td{
+					font-size:0.85rem;
+				}
+      		}
+		}
+	}
+}

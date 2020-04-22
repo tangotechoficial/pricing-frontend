@@ -4,6 +4,6 @@ export class Campo {
         public cod_campo = '',
         // tslint:disable-next-line: variable-name
         public nome_campo = '',
-        public value = ''
+        // public value = ''
     ) {}
 }

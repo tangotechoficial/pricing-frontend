@@ -8,7 +8,10 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "test:precio": "ng test --include src/app/components/precio/preciobase/*.spec.ts"
+    "test:preciobase": "ng test --include src/app/components/precio/preciobase/*.spec.ts",
+    "test:menu": "ng test --include src/app/components/menu/*.spec.ts",
+    "test:services": "ng test --include src/app/services/services.spec.ts",
+    "test:condicion": "ng test --include src/app/componentes/condicion/*.spec.ts"
   },
   "private": true,
   "dependencies": {

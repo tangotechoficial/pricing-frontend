@@ -9,7 +9,7 @@
     <div *ngIf="bBusiness">
         <div *ngIf="!typeBase">
            <!-- 0 venta -->
-            <precio-business [isVenta]="0"></precio-business>
+              <precio-business [isVenta]="0"></precio-business>
         </div>
         <div *ngIf="typeBase">
             <!-- 1 base -->
@@ -22,13 +22,13 @@
                     <div class="modal-dialog modal-dialog-centered" role="document">
                       <div class="modal-content">
                         <div class="modal-header bg-light border-bottom-0">
-                          <h5 class="modal-title" id="exampleModalLabel">Precio {{typeBaseVendasDesc}}</h5>
+                          <h5 class="modal-title" id="exampleModalLabel">Preço {{typeBaseVendasDesc}}</h5>
                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                           </button>
                         </div>
                         <div class="modal-body">
-                            Precio {{typeBaseVendasDesc}} salva com sucesso!
+                            Preço {{typeBaseVendasDesc}} salva com sucesso!
                         </div>
                         <div class="modal-footer d-flex justify-content-center border-top-0">
                           <button type="button" class="btn bg-standard" (click)="closePopUp()">Ok</button>

@@ -1,6 +1,10 @@
 @import "../../../assets/styles/global.scss";
 @import "../../../assets/styles/condicion-sacceso.scss";
 
+table.table tr.table-head {
+  font-family: 'Arial';
+}
+
 .background {
   overflow-x: hidden;
 }

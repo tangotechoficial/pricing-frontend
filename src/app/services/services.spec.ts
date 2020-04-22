@@ -1,15 +1,20 @@
-import { SaccesoService } from './sacceso.service';
-import { AuthenticationService } from './authentication.service';
-import { TestBed, async, inject } from '@angular/core/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { JWTInterceptorHelper } from '@helpers/jwt.interceptor';
-import { PurchasePlanningService } from './purchasePlanning.service';
-import { EsquemasService } from './esquemas.service';
+import { SaccesoService } from "./sacceso.service";
+import { AuthenticationService } from "./authentication.service";
+import { TestBed, async, inject } from "@angular/core/testing";
+import { NO_ERRORS_SCHEMA } from "@angular/core";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
+import { JWTInterceptorHelper } from "@helpers/jwt.interceptor";
+import { PurchasePlanningService } from "./purchasePlanning.service";
+import { EsquemasService } from "./esquemas.service";
+import { CondicionService } from './condicion.service';
+import { Campo } from 'app/models/campo';
+import { Sequencia } from 'app/models/sequencia';
 
-//jasmine.DEFAULT_TIMEOUT_INTERVAL = 1000 * 10;
 
-/* const verifyKey = ({ props, data, expect }) => {
+// Setea el tiempo de espera de la peticion
+jasmine.DEFAULT_TIMEOUT_INTERVAL = 1000 * 10;
+
+const verifyKey = ({ props, data, expect }) => {
   const keys = Object.keys(data);
   props.forEach(prop => {
     const exist = keys.some(key => key == prop);
@@ -17,7 +22,7 @@ import { EsquemasService } from './esquemas.service';
   });
 };
 
-describe('Services', () => {
+describe("Services", () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [],
@@ -26,7 +31,8 @@ describe('Services', () => {
           provide: HTTP_INTERCEPTORS,
           useClass: JWTInterceptorHelper,
           multi: true
-        }
+        },
+        CondicionService
       ],
       imports: [HttpClientModule],
       schemas: [NO_ERRORS_SCHEMA]
@@ -35,51 +41,240 @@ describe('Services', () => {
     inject(
       [AuthenticationService],
       (authenticationService: AuthenticationService) => {
-        const email = 'tester';
-        const password = '@t@ng0@t3ch';
+        const email = "tester";
+        const password = "@t@ng0@t3ch";
         authenticationService.login(email, password).subscribe(event => {
           console.log({ event });
         });
       }
     )();
-  })); */
+  }));
 
   /*
   Test sacceso service
   */
-/*   it('sacceso getCampos()', done => {
+  it("check Sacceso-getCampos properties", done => {
     inject([SaccesoService], (saccesoService: SaccesoService) => {
       saccesoService
         .getCampos()
         .then(data => {
-          const props = ['Cod_Campo', 'Nome_Campo'];
+          const props = ["cod_campo", "nome_campo"];
           verifyKey({ props, data: data[0], expect });
           console.log(data);
           done();
         })
         .catch(err => {
-          console.log('error');
+          console.log("error");
           console.log(JSON.stringify(err));
           done();
         });
     })();
   });
 
-  it('sacceso postSecuencia()', done => {
+  it("check Sacceso-sequencias data & properties", done => {
     inject([SaccesoService], (saccesoService: SaccesoService) => {
-      // const component = new SaccesoComponent(saccesoService, new NgxSpinnerService);
-      // console.log({saveSuccess: component.saveSuccess})
-      const mock = spyOn(saccesoService, 'postSequencia').and.returnValue(
-        new Promise((resolve, reject) => {
-          resolve();
+      saccesoService
+        .getSequencias()
+        .then(data => {
+          const props = ["cod_sequencia", "campos" , "nome_sequencia" ];
+          const propsData = Object.keys(data[0]);
+          expect(props).toEqual(propsData)
+          expect(data.length).toBeGreaterThan(1);
+          done();
         })
-      );
+        .catch(err => {
+          console.log("error");
+          console.log(JSON.stringify(err));
+          done();
+        });
+    })();
+  });
 
-      mock().then(data => {
+
+  it(" Check PostCampo", done => {
+    inject([SaccesoService], (saccesoService: SaccesoService) => {
+
+      let testCampo = new Campo("xxx", "xxx");
+      console.log({testCampo})
+      saccesoService
+        .postCampo(testCampo)
+        .then(data => {
+          console.log({data})
+
+          expect(data.cod_campo).toEqual(testCampo.cod_campo)
+          expect(data.nome_campo ).toEqual(testCampo.nome_campo)
+
+          fetch(saccesoService.url + '/campo/' + testCampo.cod_campo,
+            { method: 'DELETE',
+            headers: {
+              'Authorization': 'JWT ' + localStorage['token'].replace(`"`, ``).replace(`"`, ``)
+              }
+            })
+            .then(data => {
+              console.log({delete:data})
+              done();
+            })
+
+        })
+        .catch(err => {
+          console.log("error");
+          console.log(JSON.stringify(err));
+          done();
+        });
+    })();
+  });
+
+  it(" Check postSequencia", done => {
+    inject([SaccesoService], (saccesoService: SaccesoService) => {
+
+      let testSeq = new Sequencia("xxx", "xxx");
+      console.log({testSeq})
+      saccesoService
+        .postSequencia(testSeq)
+        .then(data => {
+          console.log({data})
+          expect(data.cod_sequencia).toEqual(testSeq.cod_sequencia)
+          fetch(saccesoService.url + '/sequencia/' + testSeq.cod_sequencia ,
+            { method: 'DELETE',
+            headers: {
+              'Authorization': 'JWT ' + localStorage['token'].replace(`"`, ``).replace(`"`, ``)
+              }
+            })
+            .then(data => {
+              console.log({delete:data})
+              done();
+            })
+
+        })
+        .catch(err => {
+          console.log("error");
+          console.log(JSON.stringify(err));
+          done();
+        });
+    })();
+  });
+
+    /*
+  Test condicion service
+  */
+
+ it("check Condicion-camadas data & properties", done => {
+  inject([CondicionService], (condicionService: CondicionService) => {
+    condicionService
+      .getCamadas()
+      .then(data => {
+        const props = ["cod_camada", "nome_camada" , "tipo_base_vendas"];
+        const propsData = Object.keys(data[0]);
+        expect(props).toEqual(propsData)
+        expect(data.length).toBeGreaterThan(1);
+        done();
+      })
+      .catch(err => {
+        console.log("error");
+        console.log(JSON.stringify(err));
         done();
       });
-    })();
-  }); */
+  })();
+});
+
+
+it("check Condicion-chavecontas data & properties", done => {
+  inject([CondicionService], (condicionService: CondicionService) => {
+    condicionService
+      .getChaveContas()
+      .then(data => {
+        const props = ["cod_chavecontas", "desc_chavecontas"];
+        const propsData = Object.keys(data[0]);
+        expect(props).toEqual(propsData)
+        expect(data.length).toBeGreaterThan(1);
+        done();
+      })
+      .catch(err => {
+        console.log("error");
+        console.log(JSON.stringify(err));
+        done();
+      });
+  })();
+});
+
+
+it("check Condicion-tipoValor data & properties", done => {
+  inject([CondicionService], (condicionService: CondicionService) => {
+    condicionService
+      .getTiposValor()
+      .then(data => {
+        const props = ["cod_tipovalor", "desc_tipovalor"];
+        const propsData = Object.keys(data[0]);
+        expect(props).toEqual(propsData)
+        expect(data.length).toBeGreaterThan(1);
+        done();
+      })
+      .catch(err => {
+        console.log("error");
+        console.log(JSON.stringify(err));
+        done();
+      });
+  })();
+});
+
+it("check Condicion-SecuenciaAcceso data & properties", done => {
+  inject([CondicionService], (condicionService: CondicionService) => {
+    condicionService
+      .getSequenciasAcesso()
+      .then(data => {
+        const props = ["cod_sequencia", "campos" , "nome_sequencia" ];
+        const propsData = Object.keys(data[0]);
+        console.log(props,propsData);
+        expect(props).toEqual(propsData);
+        expect(data.length).toBeGreaterThan(1);
+        done();
+      })
+      .catch(err => {
+        console.log("error");
+        console.log(JSON.stringify(err));
+        done();
+      });
+  })();
+});
+
+
+it("check Condicion-SecuenciaAcceso data & properties", done => {
+  inject([CondicionService], (condicionService: CondicionService) => {
+    condicionService
+      .getSequenciasAcesso()
+      .then(data => {
+        const props = ["cod_sequencia", "campos" , "nome_sequencia" ];
+        const propsData = Object.keys(data[0]);
+        console.log(props,propsData);
+        expect(props).toEqual(propsData);
+        expect(data.length).toBeGreaterThan(1);
+        done();
+      })
+      .catch(err => {
+        console.log("error");
+        console.log(JSON.stringify(err));
+        done();
+      });
+  })();
+});
+
+
+  // it("sacceso postSecuencia()", done => {
+  //   inject([SaccesoService], (saccesoService: SaccesoService) => {
+  //     // const component = new SaccesoComponent(saccesoService, new NgxSpinnerService);
+  //     // console.log({saveSuccess: component.saveSuccess})
+  //     const mock = spyOn(saccesoService, "postSequencia").and.returnValue(
+  //       new Promise((resolve, reject) => {
+  //         resolve();
+  //       })
+  //     );
+
+  //     mock().then(data => {
+  //       done();
+  //     });
+  //   })();
+  // });
+});
 
 /*   it('sacceso postCampo()', done => {
     inject([SaccesoService], (saccesoService: SaccesoService) => {
@@ -119,7 +314,7 @@ describe('Services', () => {
     })();
   }); */
 
-  /*
+/*
   Test purchasePlanning service
   */
 
@@ -134,7 +329,7 @@ describe('Services', () => {
     )();
   }); */
 
-  /*
+/*
   Test esquema service
   */
 
@@ -210,8 +405,7 @@ describe('Services', () => {
     })();
   }); */
 
-  //
-  //
-  //
-  //
-
+//
+//
+//
+//
